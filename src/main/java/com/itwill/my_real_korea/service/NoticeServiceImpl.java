@@ -73,7 +73,7 @@ public class NoticeServiceImpl implements NoticeService{
 	 */
 	public String getTitleString(Notice notice) {
 		StringBuilder title = new StringBuilder(128);
-		String t = notice.getN_title();
+		String t = notice.getNTitle();
 		if (t.length() > 15) {
 			t = String.format("%s...", t.substring(0, 15));
 		}

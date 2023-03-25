@@ -26,9 +26,13 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 public class Notice {
-	private int n_no;
-	private String n_title;
-	private String n_content;
+	private int nNo;
+	private String nTitle;
+	private String nContent;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date n_date;
+	private Date nDate;
+	private int nReadcount;
+	private String nImg;
+	/* FK */
+	private String userId;
 }

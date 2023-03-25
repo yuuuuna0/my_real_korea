@@ -210,7 +210,7 @@ CREATE SEQUENCE tour_wishlist_to_wish_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 CREATE TABLE user_add_info(
 		introduce                     		VARCHAR2(1000)		 NULL ,
 		alcohol                       		NUMBER		 NULL ,
-		smoking                       		INTEGER(10)		 NULL ,
+		smoking                       		NUMBER		 NULL ,
 		user_id                       		VARCHAR2(50)		 NULL 
 );
 

@@ -10,6 +10,25 @@ N_READCOUNT          NUMBER
 N_IMG                VARCHAR2(500)  
 USER_ID              VARCHAR2(50)   
  */
-public class Notice {
 
+
+import java.util.Date;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
+public class Notice {
+	private int n_no;
+	private String n_title;
+	private String n_content;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date n_date;
 }

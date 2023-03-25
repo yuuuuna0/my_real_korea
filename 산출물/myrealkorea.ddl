@@ -5,7 +5,7 @@ DROP TABLE ticket_review CASCADE CONSTRAINTS;
 DROP TABLE payment CASCADE CONSTRAINTS;
 DROP TABLE ticket_reserve CASCADE CONSTRAINTS;
 DROP TABLE ticket CASCADE CONSTRAINTS;
-DROP TABLE notice_board CASCADE CONSTRAINTS;
+DROP TABLE notice CASCADE CONSTRAINTS;
 DROP TABLE chat_msg CASCADE CONSTRAINTS;
 DROP TABLE chat_user CASCADE CONSTRAINTS;
 DROP TABLE chat_room CASCADE CONSTRAINTS;
@@ -264,7 +264,7 @@ CREATE SEQUENCE chat_msg_msg_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
 
 
-CREATE TABLE notice_board(
+CREATE TABLE notice(
 		n_no                          		NUMBER		 NULL ,
 		n_title                       		VARCHAR2(1000)		 NOT NULL,
 		n_content                     		VARCHAR2(2000)		 NOT NULL,
@@ -274,9 +274,9 @@ CREATE TABLE notice_board(
 		user_id                       		VARCHAR2(50)		 NULL 
 );
 
-DROP SEQUENCE notice_board_n_no_SEQ;
+DROP SEQUENCE notice_n_no_SEQ;
 
-CREATE SEQUENCE notice_board_n_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
+CREATE SEQUENCE notice_n_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
 
 
@@ -442,8 +442,8 @@ ALTER TABLE chat_msg ADD CONSTRAINT IDX_chat_msg_PK PRIMARY KEY (msg_no);
 ALTER TABLE chat_msg ADD CONSTRAINT IDX_chat_msg_FK0 FOREIGN KEY (room_no) REFERENCES chat_room (room_no) on delete cascade;
 ALTER TABLE chat_msg ADD CONSTRAINT IDX_chat_msg_FK1 FOREIGN KEY (c_user_no) REFERENCES chat_user (c_user_no) on delete cascade;
 
-ALTER TABLE notice_board ADD CONSTRAINT IDX_notice_board_PK PRIMARY KEY (n_no);
-ALTER TABLE notice_board ADD CONSTRAINT IDX_notice_board_FK0 FOREIGN KEY (user_id) REFERENCES user_info (user_id) on delete cascade;
+ALTER TABLE notice ADD CONSTRAINT IDX_notice_PK PRIMARY KEY (n_no);
+ALTER TABLE notice ADD CONSTRAINT IDX_notice_FK0 FOREIGN KEY (user_id) REFERENCES user_info (user_id) on delete cascade;
 
 ALTER TABLE ticket ADD CONSTRAINT IDX_ticket_PK PRIMARY KEY (ti_no);
 ALTER TABLE ticket ADD CONSTRAINT IDX_ticket_FK0 FOREIGN KEY (city_no) REFERENCES city (city_no) on delete cascade;

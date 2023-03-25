@@ -2653,8 +2653,8 @@
                               <targetConnections/>
                               <error></error>
                               <linkedPath></linkedPath>
-                              <tableName>notice_board</tableName>
-                              <logicalName>notice_board</logicalName>
+                              <tableName>notice</tableName>
+                              <logicalName>notice</logicalName>
                               <description></description>
                               <columns>
                                 <net.java.amateras.db.visual.model.ColumnModel>

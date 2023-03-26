@@ -1,1 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itwill.my_real_korea.mapper.TourMapper">
+	<!-- 1. 투어상품 후기 추가 -->
+	<insert id="insertTourReview" parameterType="com.itwill.my_real_korea.dto.TourReview">
+		<selectKey resultType="java.lang.Integer" keyProperty="to_review_no" order="BEFORE">
+			select tour_review_to_review_no.seq.nextval from dual
+		</selectKey>
+		insert into tour_review(to_review_no,to_review_date,to_review_title,to_review_content,to_review_img,to_review_star,to_no,user_id)
+		values(#{to_review_no},#{to_review_date},#{to_review_title},#{to_review_content},#{to_review_img},#{to_review_star},#{to_no},#{user_id})
+	</insert>
+	<!-- 2. 투어상품번호로 후기 전체보기 -->
+	<select id="selectByToNo" parameterType="java.lang.Integer" resultType="com.itwill.my_real_korea.dto.TourReview">
+		select * from tour_review where to_no=#{to_no}
+	</select>
+	<!-- 3. 투어후기 수정 -->
+	<update id="updateTourReview" parameterType="com.itwill.my_real_korea.dto.TourReview">
+		update tour_review set to_review_title=#{to_review_title}, to_review_content=#{to_review_content}, to_review_img=#{to_review_img}, to_reveiw_star=#{to_reveiw_star} where to_no=#{to_no}
+	</update>
+	<!-- 4. 투어후기번호로 후기 삭제 -->
+	<delete id="deleteTourReview">
+		delete * from tour_review where to_review_no=#{to_review_no}
+	</delete>
+	<!-- 5. 사용자가 작성한 후기 전체보기 -->
+	<select id="selectByUserId" parameterType="java.lang.String" resultType="com.itwill.my_real_korea.dto.TourReview">
+		select * from tour_review where user_id=#{user_id}
+	</select>
+</mapper>

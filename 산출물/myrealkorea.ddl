@@ -7,7 +7,6 @@ DROP TABLE ticket_reserve CASCADE CONSTRAINTS;
 DROP TABLE ticket CASCADE CONSTRAINTS;
 DROP TABLE notice CASCADE CONSTRAINTS;
 DROP TABLE chat_msg CASCADE CONSTRAINTS;
-DROP TABLE chat_user CASCADE CONSTRAINTS;
 DROP TABLE chat_room CASCADE CONSTRAINTS;
 DROP TABLE user_img CASCADE CONSTRAINTS;
 DROP TABLE user_add_info CASCADE CONSTRAINTS;
@@ -72,6 +71,7 @@ CREATE TABLE trip_board(
 DROP SEQUENCE trip_board_t_bo_no_SEQ;
 
 CREATE SEQUENCE trip_board_t_bo_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
+
 
 
 CREATE TABLE trip_board_comment(
@@ -229,7 +229,9 @@ CREATE SEQUENCE user_img_user_img_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
 CREATE TABLE chat_room(
 		room_no                       		NUMBER		 NULL ,
-		room_name                     		VARCHAR2(100)		 NOT NULL
+		room_name                     		VARCHAR2(100)		 NOT NULL,
+		from_id                       		VARCHAR2(50)		 NULL ,
+		to_id                         		VARCHAR2(50)		 NULL 
 );
 
 DROP SEQUENCE chat_room_room_no_SEQ;
@@ -238,24 +240,13 @@ CREATE SEQUENCE chat_room_room_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
 
 
-CREATE TABLE chat_user(
-		c_user_no                     		NUMBER		 NULL ,
-		user_id                       		VARCHAR2(50)		 NULL ,
-		room_no                       		NUMBER		 NULL 
-);
-
-DROP SEQUENCE chat_user_c_user_no_SEQ;
-
-CREATE SEQUENCE chat_user_c_user_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
-
-
-
 CREATE TABLE chat_msg(
 		msg_no                        		NUMBER		 NULL ,
 		msg_content                   		VARCHAR2(500)		 NOT NULL,
 		msg_send_time                 		DATE		 DEFAULT sysdate		 NULL ,
+		msg_read                      		NUMBER		 NULL ,
 		room_no                       		NUMBER		 NULL ,
-		c_user_no                     		NUMBER		 NULL 
+		user_id                       		VARCHAR2(50)		 NULL 
 );
 
 DROP SEQUENCE chat_msg_msg_no_SEQ;
@@ -330,7 +321,6 @@ DROP SEQUENCE payment_p_no_SEQ;
 CREATE SEQUENCE payment_p_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
 
-
 CREATE TABLE ticket_review(
 		ti_review_no                  		NUMBER		 NULL ,
 		ti_review_date                		DATE		 DEFAULT sysdate		 NULL ,
@@ -398,7 +388,7 @@ ALTER TABLE trip_board_comment ADD CONSTRAINT IDX_trip_board_comment_FK0 FOREIGN
 ALTER TABLE trip_board_comment ADD CONSTRAINT IDX_trip_board_comment_FK1 FOREIGN KEY (user_id) REFERENCES user_info (user_id) on delete cascade;
 
 ALTER TABLE free_board ADD CONSTRAINT IDX_free_board_PK PRIMARY KEY (f_bo_no);
-ALTER TABLE free_board ADD CONSTRAINT IDX_free_board_FK0 FOREIGN KEY (city_no) REFERENCES city (city_no);
+ALTER TABLE free_board ADD CONSTRAINT IDX_free_board_FK0 FOREIGN KEY (city_no) REFERENCES city (city_no) on delete cascade;
 ALTER TABLE free_board ADD CONSTRAINT IDX_free_board_FK1 FOREIGN KEY (user_id) REFERENCES user_info (user_id) on delete cascade;
 
 ALTER TABLE free_board_comment ADD CONSTRAINT IDX_free_board_comment_PK PRIMARY KEY (f_comment_no);
@@ -406,7 +396,7 @@ ALTER TABLE free_board_comment ADD CONSTRAINT IDX_free_board_comment_FK0 FOREIGN
 ALTER TABLE free_board_comment ADD CONSTRAINT IDX_free_board_comment_FK1 FOREIGN KEY (user_id) REFERENCES user_info (user_id) on delete cascade;
 
 ALTER TABLE tour ADD CONSTRAINT IDX_tour_PK PRIMARY KEY (to_no);
-ALTER TABLE tour ADD CONSTRAINT IDX_tour_FK0 FOREIGN KEY (city_no) REFERENCES city (city_no);
+ALTER TABLE tour ADD CONSTRAINT IDX_tour_FK0 FOREIGN KEY (city_no) REFERENCES city (city_no) on delete cascade;
 
 ALTER TABLE tour_img ADD CONSTRAINT IDX_tour_img_PK PRIMARY KEY (to_img_no);
 ALTER TABLE tour_img ADD CONSTRAINT IDX_tour_img_FK0 FOREIGN KEY (to_no) REFERENCES tour (to_no) on delete cascade;
@@ -433,14 +423,12 @@ ALTER TABLE user_img ADD CONSTRAINT IDX_user_img_PK PRIMARY KEY (user_img_no);
 ALTER TABLE user_img ADD CONSTRAINT IDX_user_img_FK0 FOREIGN KEY (user_id) REFERENCES user_info (user_id) on delete cascade;
 
 ALTER TABLE chat_room ADD CONSTRAINT IDX_chat_room_PK PRIMARY KEY (room_no);
-
-ALTER TABLE chat_user ADD CONSTRAINT IDX_chat_user_PK PRIMARY KEY (c_user_no);
-ALTER TABLE chat_user ADD CONSTRAINT IDX_chat_user_FK0 FOREIGN KEY (user_id) REFERENCES user_info (user_id) on delete cascade;
-ALTER TABLE chat_user ADD CONSTRAINT IDX_chat_user_FK1 FOREIGN KEY (room_no) REFERENCES chat_room (room_no) on delete cascade;
+ALTER TABLE chat_room ADD CONSTRAINT IDX_chat_room_FK0 FOREIGN KEY (from_id) REFERENCES user_info (user_id) on delete cascade;
+ALTER TABLE chat_room ADD CONSTRAINT IDX_chat_room_FK1 FOREIGN KEY (to_id) REFERENCES user_info (user_id) on delete cascade;
 
 ALTER TABLE chat_msg ADD CONSTRAINT IDX_chat_msg_PK PRIMARY KEY (msg_no);
 ALTER TABLE chat_msg ADD CONSTRAINT IDX_chat_msg_FK0 FOREIGN KEY (room_no) REFERENCES chat_room (room_no) on delete cascade;
-ALTER TABLE chat_msg ADD CONSTRAINT IDX_chat_msg_FK1 FOREIGN KEY (c_user_no) REFERENCES chat_user (c_user_no) on delete cascade;
+ALTER TABLE chat_msg ADD CONSTRAINT IDX_chat_msg_FK1 FOREIGN KEY (user_id) REFERENCES user_info (user_id) on delete cascade;
 
 ALTER TABLE notice ADD CONSTRAINT IDX_notice_PK PRIMARY KEY (n_no);
 ALTER TABLE notice ADD CONSTRAINT IDX_notice_FK0 FOREIGN KEY (user_id) REFERENCES user_info (user_id) on delete cascade;

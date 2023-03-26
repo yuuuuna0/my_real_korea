@@ -35,4 +35,7 @@ public class Notice {
 	private String nImg;
 	/* FK */
 	private String userId;
+
+
+	
 }

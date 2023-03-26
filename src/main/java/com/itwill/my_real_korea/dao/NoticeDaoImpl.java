@@ -1,6 +1,8 @@
 package com.itwill.my_real_korea.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -13,6 +15,7 @@ public class NoticeDaoImpl implements NoticeDao{
 
 	@Autowired
 	private NoticeMapper noticeMapper;
+	
 	
 	public NoticeDaoImpl() {
 		System.out.println("NoticeDaoImpl 기본생성자 호출");
@@ -37,7 +40,11 @@ public class NoticeDaoImpl implements NoticeDao{
 
 	@Override
 	public List<Notice> selectAll(int pageStart, int pageEnd) throws Exception {
-		return noticeMapper.selectAll(pageStart, pageEnd);
+		Map<String, Object> pageMap = new HashMap<>();
+		pageMap.put("pageStart", pageStart);
+		pageMap.put("pageEnd", pageEnd);
+		
+		return noticeMapper.selectAll(pageMap);
 	}
 
 	@Override
@@ -67,7 +74,12 @@ public class NoticeDaoImpl implements NoticeDao{
 
 	@Override
 	public List<Notice> selectSearchNoticeList(int pageStart, int pageEnd, String keyword) throws Exception {
-		return noticeMapper.selectSearchNoticeList(pageStart, pageEnd, keyword);
+		Map<String, Object> pageMap = new HashMap<>();
+		pageMap.put("pageStart", pageStart);
+		pageMap.put("pageEnd", pageEnd);
+		pageMap.put("keyword", keyword);
+		
+		return noticeMapper.selectSearchNoticeList(pageMap);
 	}
 
 }

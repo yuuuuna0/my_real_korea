@@ -36,4 +36,7 @@ public class Tour {
 	private int toCount;
 	private City city;		//FK
 	private TourImg tourImg;	//FK
+	private TourReview tourReview;	//FK
+	private TourReserve tourReserve;	//FK
+	private TourWishlist tourWishlist;	//FK
 }

@@ -12,12 +12,12 @@ import lombok.ToString;
 @ToString
 
 public class FreeBoard {
-	private int f_bo_no;
-	private String f_bo_title;
-	private String f_bo_content;
-	private String f_ba_img;
-	private Date f_bo_date;
-	private int f_bo_count;
+	private int fBoNo;
+	private String fBoTitle;
+	private String fBoContent;
+	private String fBoImg;
+	private Date fBoDate;
+	private int fBoCount;
 	private int city_no;
 	private String user_id;
 }

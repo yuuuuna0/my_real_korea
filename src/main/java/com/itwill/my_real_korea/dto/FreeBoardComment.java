@@ -12,9 +12,9 @@ import lombok.ToString;
 @ToString
 
 public class FreeBoardComment {
-	private int f_comment_no;
-	private String f_comment_content;
-	private Date f_comment_date;
-	private int f_bo_no;
+	private int fCommentNo;
+	private String fCommentContent;
+	private Date fCommentDate;
+	private int fBoNo;
 	private String user_id;
 }

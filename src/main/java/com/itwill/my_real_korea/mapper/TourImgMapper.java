@@ -2,8 +2,11 @@ package com.itwill.my_real_korea.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Mapper;
+
 import com.itwill.my_real_korea.dto.TourImg;
 
+@Mapper
 public interface TourImgMapper {
 	//1. 투어이미지 추가
 	public int insertTourImg(TourImg tourImg);

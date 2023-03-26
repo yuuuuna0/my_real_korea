@@ -8,7 +8,7 @@ public interface TourDao {
 	//1. 투어상품 추가
 	int insertTour(Tour tour) throws Exception;
 	//2. 투어상품 수정
-	int updateTour(Tour tour) throws Exception;
+	public int updateTour(Tour tour) throws Exception;
 	//3. 투어상품 리스트 전체 출력
 	List<Tour> selectAll() throws Exception;
 	//4. 투어상품 상품번호로 상세보기

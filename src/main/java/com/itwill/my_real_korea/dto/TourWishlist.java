@@ -19,5 +19,5 @@ public class TourWishlist {
 	private int toWishNo;
 	private int toNo;
 	private String userId;
-	private Wishlist wishlist;
+	private int wish_no;
 }

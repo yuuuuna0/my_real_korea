@@ -2,8 +2,11 @@ package com.itwill.my_real_korea.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Mapper;
+
 import com.itwill.my_real_korea.dto.TourReview;
 
+@Mapper
 public interface TourReviewMapper {
 	//1. 투어상품 후기 추가
 	public int insertTourReview(TourReview tourRiview) throws Exception;

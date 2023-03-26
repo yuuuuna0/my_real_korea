@@ -13,7 +13,6 @@ public class TourDaoImpl implements TourDao{
 	@Autowired
 	private TourMapper tourMapper;
 	
-	@Autowired
 	public TourDaoImpl() {
 		System.out.println("TourDaoImp 기본생성자 호출");
 	}

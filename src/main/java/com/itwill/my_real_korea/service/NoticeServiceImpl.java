@@ -1,6 +1,8 @@
 package com.itwill.my_real_korea.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,12 +40,17 @@ public class NoticeServiceImpl implements NoticeService{
 	/*
 	 * 게시글 리스트 보기
 	*/
+	@Override
 	public NoticeListPageMakerDto selectAll(int currentPage) throws Exception{
 		// 전체 글의 수
 		int totalRecordCount = noticeDao.selectNoticeCount();
 		// paging 계산 (PageMaker)
 		PageMaker pageMaker = new PageMaker(totalRecordCount, currentPage);
 		// 게시글 데이터 얻기
+		//Map<String, Integer> pageMap = new HashMap<>();
+		//pageMap.put("pageStart", pageMaker.getPageBegin());
+		//pageMap.put("pageEnd", pageMaker.getPageEnd());
+		
 		List<Notice> noticeList = noticeDao.selectAll(pageMaker.getPageBegin(), pageMaker.getPageEnd());
 		NoticeListPageMakerDto pageMakerBoardList = new NoticeListPageMakerDto();
 		pageMakerBoardList.itemList = noticeList;
@@ -55,6 +62,7 @@ public class NoticeServiceImpl implements NoticeService{
 	/*
 	 * 키워드로 검색된 게시글 리스트 보기
 	 */
+	@Override
 	public NoticeListPageMakerDto selectSearchNoticeList(int currentPage, String keyword) throws Exception{
 		// 전체 글의 수
 		int totalRecordCount = noticeDao.selectSearchCount(keyword);
@@ -71,6 +79,7 @@ public class NoticeServiceImpl implements NoticeService{
 	/*
 	 * 게시글 title 출력 설정
 	 */
+	@Override
 	public String getTitleString(Notice notice) {
 		StringBuilder title = new StringBuilder(128);
 		String t = notice.getNTitle();

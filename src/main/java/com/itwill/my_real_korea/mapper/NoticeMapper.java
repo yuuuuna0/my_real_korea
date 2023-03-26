@@ -1,6 +1,7 @@
 package com.itwill.my_real_korea.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -19,7 +20,7 @@ public interface NoticeMapper {
 	/*
 	 * 공지사항 리스트 보기 (게시글 시작번호, 게시글 끝번호) - 페이징 처리
 	 */
-	List<Notice> selectAll(int pageStart, int pageEnd) throws Exception;
+	List<Notice> selectAll(Map<String, Object> pageMap) throws Exception;
 	/*
 	 * 공지사항 게시글 삭제
 	 */
@@ -45,5 +46,5 @@ public interface NoticeMapper {
 	/*
 	 * 공지사항 게시판 title 키워드로 검색
 	 */
-	List<Notice> selectSearchNoticeList(int pageStart, int pageEnd, String keyword) throws Exception;
+	List<Notice> selectSearchNoticeList(Map<String, Object> keywordPageMap) throws Exception;
 }

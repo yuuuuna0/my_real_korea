@@ -1,6 +1,7 @@
 package com.itwill.my_real_korea.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.itwill.my_real_korea.dto.Notice;
 

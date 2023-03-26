@@ -24,7 +24,6 @@ CITY_NO            NUMBER
 @AllArgsConstructor
 @NoArgsConstructor
 public class Tour {
-	//PK
 	private int toNo;
 	private String toName;
 	private int toType;
@@ -35,7 +34,9 @@ public class Tour {
 	private String toInfo;
 	private String toNotice;
 	private int toCount;
-	//FK
-	private int cityNo;
-	private TourImg tourImg;
+	private City city;		//FK
+	private TourImg tourImg;	//FK
+	private TourReview tourReview;	//FK
+	private TourReserve tourReserve;	//FK
+	private TourWishlist tourWishlist;	//FK
 }

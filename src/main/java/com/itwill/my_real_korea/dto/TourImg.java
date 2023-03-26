@@ -17,5 +17,5 @@ TO_NO               NUMBER
 public class TourImg {
 	private int toImgNo;
 	private String toImgUrl;
-	private int toNo;
+	private int toNo;	//FK
 }

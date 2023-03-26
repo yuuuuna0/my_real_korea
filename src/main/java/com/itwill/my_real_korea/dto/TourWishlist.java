@@ -16,10 +16,8 @@ WISH_NO             NUMBER
 @AllArgsConstructor
 @NoArgsConstructor
 public class TourWishlist {
-	//PK
 	private int toWishNo;
-	//FK
 	private Tour tour;
 	private UserInfo userinfo;
-	private Wishlist wishNo;
+	private Wishlist wishlist;
 }

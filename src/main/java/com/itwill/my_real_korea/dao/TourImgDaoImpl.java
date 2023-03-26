@@ -12,7 +12,6 @@ public class TourImgDaoImpl implements TourImgDao {
 	@Autowired
 	private TourImgMapper tourImgMapper;
 	
-	@Autowired
 	private TourImgDaoImpl() {
 		System.out.println("TourImgDaoImp 기본생성자 호출");
 	}
@@ -25,7 +24,7 @@ public class TourImgDaoImpl implements TourImgDao {
 
 	@Override
 	public int deleteTourImg(int toImgNo) {
-		// 투어이미지 삭제
+		// 투어이미지번호로 투어 이미지 하나 삭제
 		return tourImgMapper.deleteTourImg(toImgNo);
 	}
 
@@ -33,6 +32,12 @@ public class TourImgDaoImpl implements TourImgDao {
 	public List<TourImg> selectTourImgList(int to_no) {
 		// 투어번호로 해당 투어이미지 전체출력
 		return tourImgMapper.selectTourImgList(to_no);
+	}
+
+	@Override
+	public int deleteTourAllImg(int toNo) {
+		//투어번호로 해당 투어이미지 전체 삭제
+		return tourImgMapper.deleteTourAllImg(toNo);
 	}
 
 }

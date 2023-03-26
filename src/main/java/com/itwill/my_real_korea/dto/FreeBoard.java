@@ -18,6 +18,6 @@ public class FreeBoard {
 	private String fBoImg;
 	private Date fBoDate;
 	private int fBoCount;
-	private int city_no;
-	private String user_id;
+	private int cityNo;
+	private String userId;
 }

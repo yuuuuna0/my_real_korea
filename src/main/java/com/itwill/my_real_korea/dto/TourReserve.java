@@ -27,6 +27,6 @@ public class TourReserve {
 	private int toRsPerson;
 	private String toRsMsg;
 	private Tour tour;	//FK
-	private UserInfo userInfo;	//FK
+	private String userId;	//FK
 
 }

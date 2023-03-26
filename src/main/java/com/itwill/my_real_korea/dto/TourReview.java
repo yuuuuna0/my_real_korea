@@ -29,6 +29,6 @@ public class TourReview {
 	private String toReviewContent;
 	private String toReviewImg;
 	private int toReviewStar;
-	private Tour Tour;	//FK
-	private UserInfo userinfo;	//FK
+	private int toNo;	//FK
+	private String userId;	//FK
 }

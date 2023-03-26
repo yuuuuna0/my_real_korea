@@ -34,8 +34,8 @@ public class NoticeDaoImpl implements NoticeDao{
 	}
 
 	@Override
-	public Notice selectByNo(int n_no) throws Exception {
-		return noticeMapper.selectByNo(n_no);
+	public Notice selectByNo(int nNo) throws Exception {
+		return noticeMapper.selectByNo(nNo);
 	}
 
 	@Override
@@ -48,8 +48,8 @@ public class NoticeDaoImpl implements NoticeDao{
 	}
 
 	@Override
-	public int deleteNotice(int n_no) throws Exception {
-		return noticeMapper.deleteNotice(n_no);
+	public int deleteNotice(int nNo) throws Exception {
+		return noticeMapper.deleteNotice(nNo);
 	}
 
 	@Override
@@ -58,8 +58,8 @@ public class NoticeDaoImpl implements NoticeDao{
 	}
 
 	@Override
-	public int increaseReadCount(int n_no) throws Exception {
-		return noticeMapper.increaseReadCount(n_no);
+	public int increaseReadCount(int nNo) throws Exception {
+		return noticeMapper.increaseReadCount(nNo);
 	}
 
 	@Override

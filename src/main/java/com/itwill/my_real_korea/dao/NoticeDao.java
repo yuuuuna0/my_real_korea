@@ -15,7 +15,7 @@ public interface NoticeDao {
 		/*
 		 * 공지사항 게시글 번호(boardno)로 해당 게시글 보기 
 		 */
-		Notice selectByNo(int n_no) throws Exception;
+		Notice selectByNo(int nNo) throws Exception;
 		/*
 		 * 공지사항 리스트 보기 (게시글 시작번호, 게시글 끝번호) - 페이징 처리
 		 */
@@ -23,7 +23,7 @@ public interface NoticeDao {
 		/*
 		 * 공지사항 게시글 삭제
 		 */
-		int deleteNotice(int n_no) throws Exception;
+		int deleteNotice(int nNo) throws Exception;
 		/*
 		 * 공지사항 게시글 내용 수정
 		 */
@@ -31,7 +31,7 @@ public interface NoticeDao {
 		/*
 		 * 공지사항 게시글 조회수 1 증가
 		 */
-		int increaseReadCount(int n_no) throws Exception;
+		int increaseReadCount(int nNo) throws Exception;
 		/*
 		 * 공지사항 게시글 총 개수 조회
 		 */

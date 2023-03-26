@@ -12,9 +12,11 @@ import lombok.ToString;
 @ToString
 
 public class FreeBoardComment {
-	private int f_comment_no;
-	private String f_comment_content;
-	private Date f_comment_date;
-	private int f_bo_no;
-	private String user_id;
+	private int fCommentNo;
+	private String fCommentContent;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date fCommentDate;
+	private int fBoNo;
+	/* FK */
+	private String UserId;
 }

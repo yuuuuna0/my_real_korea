@@ -32,8 +32,8 @@ public class NoticeServiceImpl implements NoticeService{
 	}
 
 	@Override
-	public Notice selectByNo(int n_no) throws Exception {
-		return noticeDao.selectByNo(n_no);
+	public Notice selectByNo(int nNo) throws Exception {
+		return noticeDao.selectByNo(nNo);
 	}
 
 	
@@ -98,8 +98,8 @@ public class NoticeServiceImpl implements NoticeService{
 	}
 
 	@Override
-	public int deleteNotice(int n_no) throws Exception {
-		return noticeDao.deleteNotice(n_no);
+	public int deleteNotice(int nNo) throws Exception {
+		return noticeDao.deleteNotice(nNo);
 	}
 
 	@Override
@@ -108,8 +108,8 @@ public class NoticeServiceImpl implements NoticeService{
 	}
 
 	@Override
-	public int increaseReadCount(int n_no) throws Exception {
-		return noticeDao.increaseReadCount(n_no);
+	public int increaseReadCount(int nNo) throws Exception {
+		return noticeDao.increaseReadCount(nNo);
 	}
 
 	@Override

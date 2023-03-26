@@ -16,5 +16,5 @@ public class FreeBoardComment {
 	private String fCommentContent;
 	private Date fCommentDate;
 	private int fBoNo;
-	private String user_id;
+	private String UserId;
 }

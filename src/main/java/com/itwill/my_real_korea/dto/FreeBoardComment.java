@@ -14,7 +14,9 @@ import lombok.ToString;
 public class FreeBoardComment {
 	private int fCommentNo;
 	private String fCommentContent;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date fCommentDate;
 	private int fBoNo;
+	/* FK */
 	private String UserId;
 }

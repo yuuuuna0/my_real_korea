@@ -17,7 +17,7 @@ WISH_NO             NUMBER
 @NoArgsConstructor
 public class TourWishlist {
 	private int toWishNo;
-	private Tour tour;
-	private UserInfo userinfo;
+	private int toNo;
+	private String userId;
 	private Wishlist wishlist;
 }

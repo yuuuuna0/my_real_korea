@@ -26,7 +26,7 @@ public class TourReserve {
 	private Date toRsStartDay;
 	private int toRsPerson;
 	private String toRsMsg;
-	private int toNo;
-	private UserInfo userInfo;
+	private Tour tour;	//FK
+	private UserInfo userInfo;	//FK
 
 }

@@ -2,8 +2,11 @@ package com.itwill.my_real_korea.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Mapper;
+
 import com.itwill.my_real_korea.dto.ChatRoom;
 
+@Mapper
 public interface ChatRoomMapper {
 
 	// 채팅방 목록 보기

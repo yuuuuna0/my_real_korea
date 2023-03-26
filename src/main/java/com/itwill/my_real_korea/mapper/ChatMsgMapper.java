@@ -2,8 +2,11 @@ package com.itwill.my_real_korea.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Mapper;
+
 import com.itwill.my_real_korea.dto.ChatMsg;
 
+@Mapper
 public interface ChatMsgMapper {
 
 	// 채팅방 1개의 전체 대화보기

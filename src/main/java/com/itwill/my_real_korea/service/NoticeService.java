@@ -1,8 +1,10 @@
 package com.itwill.my_real_korea.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.itwill.my_real_korea.dto.Notice;
+import com.itwill.my_real_korea.dto.NoticeListPageMakerDto;
 
 public interface NoticeService {
 	/*
@@ -17,6 +19,13 @@ public interface NoticeService {
 	 * 공지사항 리스트 보기 (게시글 시작번호, 게시글 끝번호) - 페이징 처리
 	 */
 	List<Notice> selectAll(int pageStart, int pageEnd) throws Exception;
+	
+	NoticeListPageMakerDto selectAll(int currentPage) throws Exception;
+	/*
+	 * 게시글 title 출력 설정
+	 */
+	String getTitleString(Notice notice) throws Exception;
+	
 	/*
 	 * 공지사항 게시글 삭제
 	 */
@@ -44,4 +53,6 @@ public interface NoticeService {
 	 */
 	List<Notice> selectSearchNoticeList(int pageStart, int pageEnd, String keyword) throws Exception;
 
+	NoticeListPageMakerDto selectSearchNoticeList(int currentPage, String keyword) throws Exception;
+	
 }

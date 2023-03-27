@@ -18,7 +18,7 @@
 		select * from tour_wishlist where user_id=#{userId}
 	</select>
 	<!-- 4. 투어위시리스트 중 하나 상세보기 -->
-		<select id="selectAllWishlistByUserId" parameterType="java.lang.Integer" resultType="com.itwill.my_real_korea.dto.tour.TourWishlist">
+		<select id="selectWishlistByToWishNo" parameterType="java.lang.Integer" resultType="com.itwill.my_real_korea.dto.tour.TourWishlist">
 		select * from tour_wishlist where to_wish_no=#{toWishNo}
 	</select>
 </mapper>

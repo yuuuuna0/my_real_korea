@@ -7,22 +7,22 @@
 			select tour_review_to_review_no.seq.nextval from dual
 		</selectKey>
 		insert into tour_review(to_review_no,to_review_date,to_review_title,to_review_content,to_review_img,to_review_star,to_no,user_id)
-		values(#{to_review_no},#{to_review_date},#{to_review_title},#{to_review_content},#{to_review_img},#{to_review_star},#{to_no},#{user_id})
+		values(#{toReviewNo},#{toReviewDate},#{toReviewTitle},#{toReviewContent},#{toReviewImg},#{toReviewStar},#{toNo},#{userId})
 	</insert>
 	<!-- 2. 투어상품번호로 후기 전체보기 -->
 	<select id="selectByToNo" parameterType="java.lang.Integer" resultType="com.itwill.my_real_korea.dto.TourReview">
-		select * from tour_review where to_no=#{to_no}
+		select * from tour_review where to_no=#{toNo}
 	</select>
 	<!-- 3. 투어후기 수정 -->
 	<update id="updateTourReview" parameterType="com.itwill.my_real_korea.dto.TourReview">
-		update tour_review set to_review_title=#{to_review_title}, to_review_content=#{to_review_content}, to_review_img=#{to_review_img}, to_reveiw_star=#{to_reveiw_star} where to_no=#{to_no}
+		update tour_review set to_review_title=#{toReviewTitle}, to_review_content=#{toReviewContent}, to_review_img=#{toReviewImg}, to_reveiw_star=#{toReviewStar} where to_no=#{toNo}
 	</update>
 	<!-- 4. 투어후기번호로 후기 삭제 -->
 	<delete id="deleteTourReview">
-		delete * from tour_review where to_review_no=#{to_review_no}
+		delete * from tour_review where to_review_no=#{toReviewNo}
 	</delete>
 	<!-- 5. 사용자가 작성한 후기 전체보기 -->
 	<select id="selectByUserId" parameterType="java.lang.String" resultType="com.itwill.my_real_korea.dto.TourReview">
-		select * from tour_review where user_id=#{user_id}
+		select * from tour_review where user_id=#{userId}
 	</select>
 </mapper>

@@ -3,18 +3,18 @@
 <mapper namespace="com.itwill.my_real_korea.mapper.TourImgMapper">
 	<!-- 1. 투어이미지 추가 -->
 	<insert id="insertTourImg" parameterType="com.itwill.my_real_korea.dto.TourImg">
-		<selectKey resultType="java.lang.Integer" keyProperty="to_img_no" order="BEFORE">
+		<selectKey resultType="java.lang.Integer" keyProperty="toImgNo" order="BEFORE">
 			select tour_img_to_img_no.seq.nextval from dual
 		</selectKey>
 		insert into tour_img(to_img_no,to_img_url,to_no)
-		values(#{to_img_no},#{to_img_url},#{to_no})
+		values(#{toImgNo},#{toImgUrl},#{toNo})
 	</insert>
 	<!-- 2. 투어이미지번호로 투어 이미지 하나 삭제 -->
 	<delete id="deleteTourImg" parameterType="java.lang.Integer">
-		delete tour_img where to_img_no=#{to_img_no}
+		delete tour_img where to_img_no=#{toNo}
 	</delete>
 	<!-- 3. 투어번호로 투어이미지 전체 출력 -->
 	<select id="selectTourImgList" parameterType="java.lang.Integer" resultType="com.itwill.my_real_korea.dto.TourImg">
-		select * from tour_img where to_no=#{to_no}
+		select * from tour_img where to_no=#{toNo}
 	</select>
 </mapper>

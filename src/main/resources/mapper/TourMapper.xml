@@ -11,8 +11,8 @@
 		values(#{toNo},#{toName},#{toType},#{toTime},#{toPerson},#{toMeet},#{toPrice},#{toInfo},#{toNotice},#{toCount},#{cityNo})
 	</insert>
 	<!-- 2. 투어상품 수정 -->
-	<update id="updateTour" parameterType="java.lang.Integer">
-		update tour set to_name=#{to_name},to_type=#{to_type},to_time=#{to_time},to_person=#{to_person},to_meet=#{to_meet},to_price=#{to_price},to_info=#{to_info},to_notice=#{to_notice},city_no=#{city_no} where to_no=#{to_no}
+	<update id="updateTour" parameterType="com.itwill.my_real_korea.dto.Tour">
+		update tour set to_name=#{toName},to_type=#{toType},to_time=#{toTime},to_person=#{toPerson},to_meet=#{toMeet},to_price=#{toPrice},to_info=#{toInfo},to_notice=#{toNotice},city_no=#{cityNo} where to_no=#{toNo}
 	</update>
 	<!-- 3. 투어상품 리스트 전체 출력 -->
 	<select id="selectAll" resultType="com.itwill.my_real_korea.dto.Tour">

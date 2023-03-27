@@ -5,8 +5,9 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.itwill.my_real_korea.service.FreeBoard;
-import com.itwill.my_real_korea.service.FreeBoardListPageMakerDto;
+import com.itwill.my_real_korea.dto.FreeBoard;
+import com.itwill.my_real_korea.dto.FreeBoardCommentListPageMakerDto;
+
 
 @Mapper
 public interface FreeBoardMapper {
@@ -18,13 +19,13 @@ int insertContent(FreeBoard freeBoard) throws Exception;
 /*
  * 자유게시판 게시글,댓글 번호(boardno)로 해당 게시글 보기 
  */
- selectByNo(int fBoNo) throws Exception;
+ int selectByNo(int fBoNo) throws Exception;
 /*
  * 자유게시판 리스트 보기 (게시글 시작번호, 게시글 끝번호) - 페이징 처리
  */
 List<FreeBoard> selectAll(int pageStart, int pageEnd) throws Exception;
 
-FreeBoardListPageMakerDto selectAll(int currentPage) throws Exception;
+FreeBoardCommentListPageMakerDto selectAll(int currentPage) throws Exception;
 
 /*
  * 게시글,댓글 title 출력 설정
@@ -58,5 +59,5 @@ int selectSearchCount(String keyword) throws Exception;
  */
 List<FreeBoard> selectSearchNoticeList(int pageStart, int pageEnd, String keyword) throws Exception;
 
-FreeBoardListPageMakerDto selectSearchFreeBoardList(int currentPage, String keyword) throws Exception;
+FreeBoardCommentListPageMakerDto selectSearchFreeBoardList(int currentPage, String keyword) throws Exception;
 }

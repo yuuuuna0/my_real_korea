@@ -67,4 +67,39 @@ public class FreeBoardDaoImpl implements FreeBoardDao{
 		
 		return freeBoardMapper.selectSearchFreeBoardList(pageMap);
 	}
+	@Override
+	public FreeBoard selectByNo(int fBoNo) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public List<FreeBoard> selectAll(int pageStart, int pageEnd) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public String getTitleString(FreeBoard freeBoard) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public int deleteContent(int fBoNo) throws Exception {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	@Override
+	public int increaseContentReadCount(int fBoNo) throws Exception {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	@Override
+	public int selectContentCount() throws Exception {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	@Override
+	public List<FreeBoard> selectSearchNoticeList(int pageStart, int pageEnd, String keyword) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

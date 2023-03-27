@@ -1,0 +1,57 @@
+
+package com.itwill.my_real_korea.dao.freeboard;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import com.itwill.my_real_korea.dto.freeboard.FreeBoardComment;
+import com.itwill.my_real_korea.mapper.FreeBoardCommentMapper;
+
+@Repository
+public class FreeBoardCommentDaoImpl implements FreeBoardCommentDao{
+	
+	@Autowired
+	private FreeBoardCommentMapper freeBoardCommentMapper;
+	
+	public FreeBoardCommentDaoImpl() {
+		System.out.println("FreeBoardCommentImpl 기본생성자 호출");
+	}
+
+	@Override
+	public int insertComment(FreeBoardComment freeBoardComment) throws Exception {
+		return freeBoardCommentMapper.insertComment(freeBoardComment);
+	}
+	@Override
+	public int selectByNo(int fCommentNo) throws Exception {
+		return freeBoardCommentMapper.selectByNo(fCommentNo);
+	}
+  	@Override
+	public int selectByContentNo(int fBoNo) throws Exception {
+		return freeBoardCommentMapper.selectByContentNo(fBoNo);
+	}
+	@Override
+	public List<FreeBoardComment> selectAll(int pageStart, int pageEnd) throws Exception {
+		return freeBoardCommentMapper.selectAll(pageStart, pageEnd);
+	}
+	@Override
+	public int deleteComment(int fCommentNo) throws Exception {
+		return freeBoardCommentMapper.deleteComment(fCommentNo);
+	}
+	@Override
+	public int updateComment(FreeBoardComment freeBoardComment) throws Exception {
+		return freeBoardCommentMapper.updateComment(freeBoardComment);
+	}
+	@Override
+	public int increaseCommentReadCount(int fCommentCount) throws Exception {
+		return freeBoardCommentMapper.increaseCommentReadCount(fCommentCount);
+	}
+	@Override
+	public int selectCommentCount() throws Exception {
+		return freeBoardCommentMapper.selectCommentCount();
+	}
+
+
+	
+}

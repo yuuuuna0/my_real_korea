@@ -21,8 +21,8 @@ TO_COUNT           NUMBER
 CITY_NO            NUMBER     
  */
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class Tour {
 	private int toNo;
 	private String toName;
@@ -39,4 +39,23 @@ public class Tour {
 	private TourReview tourReview;	//FK
 	private TourReserve tourReserve;	//FK
 	private TourWishlist tourWishlist;	//FK
+	public Tour(int toNo, String toName, int toType, int toTime, int toPerson, String toMeet, int toPrice,
+			String toInfo, String toNotice, int toCount, City city, TourImg tourImg) {
+		super();
+		this.toNo = toNo;
+		this.toName = toName;
+		this.toType = toType;
+		this.toTime = toTime;
+		this.toPerson = toPerson;
+		this.toMeet = toMeet;
+		this.toPrice = toPrice;
+		this.toInfo = toInfo;
+		this.toNotice = toNotice;
+		this.toCount = toCount;
+		this.city = city;
+		this.tourImg = tourImg;
+	}
+
+	
+	
 }

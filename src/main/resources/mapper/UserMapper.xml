@@ -10,6 +10,7 @@ user_id,user_password,user_name,user_nickname,user_phone,user_email,user_birth,u
 		values(#{userId},#{password},#{name},#{nickname},#{phone},#{email},#{birth},#{address},#{gender},#{point},#{isAdmin})
 	</insert>
 	<update id="update" parameterType="com.itwill.my_real_korea.dto.user.User">
+	
 		update  user_info 
 		set password = #{password}, nickname = #{nickname}, phone = #{phone}, email = #{email}
 		where user_id = #{userId}

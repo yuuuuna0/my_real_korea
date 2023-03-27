@@ -1,18 +1,18 @@
 /*********** select ***************/
-	--1. Åõ¾î»óÇ° ¸®½ºÆ® ÀüÃ¼ Ãâ·Â
+	--1. íˆ¬ì–´ìƒí’ˆ ë¦¬ìŠ¤íŠ¸ ì „ì²´ ì¶œë ¥
 	select * from tour;
-	--2. Åõ¾î»óÇ° »óÇ°¹øÈ£·Î »ó¼¼º¸±â
+	--2. íˆ¬ì–´ìƒí’ˆ ìƒí’ˆë²ˆí˜¸ë¡œ ìƒì„¸ë³´ê¸°
 	select * from tour where to_no=1;
-	--3. Å°¿öµå·Î Åõ¾î»óÇ° °Ë»ö
-	select * from tour where to_name like '%¿©Çà%';
-	--4. Áö¿ªÀ¸·Î Åõ¾î»óÇ° °Ë»ö
+	--3. í‚¤ì›Œë“œë¡œ íˆ¬ì–´ìƒí’ˆ ê²€ìƒ‰
+	select * from tour where to_name like '%ì—¬í–‰%';
+	--4. ì§€ì—­ìœ¼ë¡œ íˆ¬ì–´ìƒí’ˆ ê²€ìƒ‰
 	select t.*,c.* from tour t join city c on t.city_no=c.city_no where t.city_no=2;
-	--5. ¿©ÇàÅ¸ÀÔÀ¸·Î Åõ¾î»óÇ° °Ë»ö
+	--5. ì—¬í–‰íƒ€ì…ìœ¼ë¡œ íˆ¬ì–´ìƒí’ˆ ê²€ìƒ‰
 	select * from tour where to_type=1;
-	--6. Åõ¾î¹øÈ£·Î Åõ¾îÀÌ¹ÌÁö ÀüÃ¼Ãâ·Â
+	--6. íˆ¬ì–´ë²ˆí˜¸ë¡œ íˆ¬ì–´ì´ë¯¸ì§€ ì „ì²´ì¶œë ¥
 	select ti.* from tour_img ti join tour t on ti.to_no=t.to_no where ti.to_no=1;
-	--7. À¯ÀúÀÇ Åõ¾î¿¹¾à¸®½ºÆ® ÀüÃ¼ º¸¿©ÁÖ±â
+	--7. ìœ ì €ì˜ íˆ¬ì–´ì˜ˆì•½ë¦¬ìŠ¤íŠ¸ ì „ì²´ ë³´ì—¬ì£¼ê¸°
 	select * from tour_reserve where user_id='admin';
-	--8. Åõ¾î¿¹¾à¹øÈ£·Î ¿¹¾à »ó¼¼º¸±â
-	select * from tour_reserve where to_rs_no=2;
+	--8. íˆ¬ì–´ì˜ˆì•½ë²ˆí˜¸ë¡œ ì˜ˆì•½ ìƒì„¸ë³´ê¸°
+	select * from tour_reserve tr join tour t on tr.to_no=t.to_no where tr.to_rs_no=2;
 	

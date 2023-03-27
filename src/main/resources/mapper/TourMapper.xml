@@ -8,7 +8,7 @@
 			select tour_to_no.seq.nextval from dual
 		</selectKey>
 		insert into tour(to_no,to_name,to_type,to_time,to_person,to_meet,to_price,to_info,to_notice,to_count,city_no)
-		values(#{to_no},#{to_name},#{to_type},#{to_time},#{to_person},#{to_meet},#{to_price},#{to_info},#{to_notice},#{to_count},#{city_no})
+		values(#{toNo},#{toName},#{toType},#{toTime},#{toPerson},#{toMeet},#{toPrice},#{toInfo},#{toNotice},#{toCount},#{cityNo})
 	</insert>
 	<!-- 2. 투어상품 수정 -->
 	<update id="updateTour" parameterType="java.lang.Integer">

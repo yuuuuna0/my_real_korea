@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itwill.my_real_korea.mapper.TicketMapper">
+ <!-- 티켓 생성 -->
+	<insert id="insertTicket" parameterType="com.itwill.my_real_korea.dto.ticket.Ticket">
+		<selectKey resultType="java.lang.Integer" keyProperty="ti_no" order="BEFORE">
+                SELECT TICKET_TI_NO_SEQ.nextval from dual;
+		</selectKey>
+            INSERT INTO TICKET VALUES (#{TI_NO},#{TI_TITLE},SYSDATE,#{TI_PRICE},#{TI_INFO},#{TI_NOTICE},#{TI_COUNT},#{CITY_NO})
+        </insert>
+
+  <!-- 전체 티켓 상품 보기 -->
+     <select id="selectAll" resultType="com.itwill.my_real_korea.dto.ticket.Ticket">
+              SELECT * FROM TICKET;
+      </select>
+		<!-- 상품 번호로 검색 -->
+            <select id="selectTicketNo"  parameterType="java.lang.Integer" resultType="com.itwill.my_real_korea.dto.ticket.Ticket">
+                  SELECT * FROM TICKET WHERE TI_NO=#{TI_NO}
+            </select>
+        <!-- 상품명으로 검색 -->
+            <select id="selectByTiciketTitle" parameterType="java.lang.String" resultType="com.itwill.my_real_korea.dto.ticket.Ticket">
+                  SELECT * FROM TICKET 
+            </select>
+        <!-- 상품 가격 순으로 검색 -->
+            <select id="selectTicketPrice" parameterType="java.lang.String" resultType="com.itwill.my_real_korea.dto.ticket.Ticket">
+            	  SELECT * FROM TICKET 
+            	  <if test="sortOrder == 'asc'"/>
+            	  ORDER BY TI_PRICE ASC
+            	  <if test="sortOrder == 'desc'"/>	
+            	  ORDER BY TI_PRICE DESC
+            </select>
+
+    	<!-- 상품 번호로 수정 -->
+	        <update id ="updateTicket" parameterType="com.itwill.my_real_korea.dto.ticket.Ticket">
+	            UPDATE TICKET SET TI_TITLE=#{TI_TITLE}, TI_PRICE=#{TI_PRICE}, TI_INFO={TI_INFO}, TI_NOTICE={#TI_NOTICE},
+	                              TI_COUNT=#{TI_COUNT}, CITY_NO={#CITY_NO}
+	            WHERE TI_NO=#{TI_NO}
+	        </update>
+
+		<!-- 상품 1개 삭제-->
+	        <delete id="deleteTicket" parameterType="java.lang.Integer">
+	            DELETE FROM TICKET WHERE TI_NO=#{TI_NO}
+	        </delete>
+
+
+
+
+
+
+
+
+
+
+</mapper>

@@ -36,7 +36,6 @@ public class NoticeServiceImpl implements NoticeService{
 		return noticeDao.selectByNo(nNo);
 	}
 
-	
 	/*
 	 * 게시글 리스트 보기
 	*/

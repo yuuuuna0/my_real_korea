@@ -40,7 +40,7 @@ int updateContent(FreeBoard freeBoard) throws Exception;
 /*
  * 게시글 조회수 1 증가
  */
-int increaseContentReadCount(int fBoNo) throws Exception;
+int increaseContentReadCount(int fBoCount) throws Exception;
   
 /*
  * 게시글 총 개수 조회

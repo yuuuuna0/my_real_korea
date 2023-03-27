@@ -7,6 +7,7 @@ import com.itwill.my_real_korea.dto.chat.ChatRoom;
 
 public interface ChatMsgDao {
 
+	
 		// 채팅방 1개의 전체 대화보기
 		public List<ChatMsg> selectByRoomNo(int roomNo);
 		
@@ -14,7 +15,7 @@ public interface ChatMsgDao {
 		public ChatMsg selectByMsgNo(int msgNo);
 		
 		// 채팅방 1개의 읽지 않은 메세지 보기
-		public ChatMsg selectNotReadMsg(int roomNo, String userId);
+		public List<ChatMsg> selectNotReadMsg(int roomNo, String userId);
 		
 		// 채팅방 1개의 읽지 않은 메세지 수
 		public int countNotReadMsg(int roomNo, String userId);

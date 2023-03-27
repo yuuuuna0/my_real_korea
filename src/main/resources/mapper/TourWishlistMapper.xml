@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.itwill.my_real_korea.mapper.TourMapper">
 	<!-- 1. 투어위시리스트 추가하기 -->
-	<insert id="insertTourWishlist" parameterType="com.itwill.my_real_korea.dto.TourWishlist">
-		<selectKey resultType="java.lang.Integer" keyProperty="to_wish_no" order="BEFORE">
+	<insert id="insertTourWishlist" parameterType="com.itwill.my_real_korea.dto.tour.TourWishlist">
+		<selectKey resultType="java.lang.Integer" keyProperty="toWishNo" order="BEFORE">
 			select tour_wishlist_to_wish_no.seq.nextval from dual
 		</selectKey>
 		insert into tour_wishlist(to_wish_no,to_no,user_id,wish_no)
@@ -14,11 +14,11 @@
 		delete * from tour_wishlist where to_wish_no=${toWishNo}
 	</delete>
 	<!-- 3. 유저의 투어위시리스트 전체보기 -->
-	<select id="selectAllWishlistByUserId" parameterType="java.lang.String" resultType="com.itwill.my_real_korea.dto.TourWishlist">
+	<select id="selectAllWishlistByUserId" parameterType="java.lang.String" resultType="com.itwill.my_real_korea.dto.tour.TourWishlist">
 		select * from tour_wishlist where user_id=#{userId}
 	</select>
 	<!-- 4. 투어위시리스트 중 하나 상세보기 -->
-		<select id="selectAllWishlistByUserId" parameterType="java.lang.Integer" resultType="com.itwill.my_real_korea.dto.TourWishlist">
+		<select id="selectWishlistByToWishNo" parameterType="java.lang.Integer" resultType="com.itwill.my_real_korea.dto.tour.TourWishlist">
 		select * from tour_wishlist where to_wish_no=#{toWishNo}
 	</select>
 </mapper>

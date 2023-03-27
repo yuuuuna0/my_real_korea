@@ -12,7 +12,7 @@ public class TourImgDaoImpl implements TourImgDao {
 	@Autowired
 	private TourImgMapper tourImgMapper;
 	
-	private TourImgDaoImpl() {
+	public TourImgDaoImpl() {
 		System.out.println("TourImgDaoImp 기본생성자 호출");
 	}
 	

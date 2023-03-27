@@ -3,8 +3,8 @@
 <mapper namespace="com.itwill.my_real_korea.mapper.TourMapper">
 
 	<!-- 1. 투어상품 추가 -->
-	<insert id="insertTour" parameterType="com.itwill.my_real_korea.dto.Tour">
-		<selectKey resultType="java.lang.Integer" keyProperty="to_no" order="BEFORE">
+	<insert id="insertTour" parameterType="com.itwill.my_real_korea.dto.tour.Tour">
+		<selectKey resultType="java.lang.Integer" keyProperty="toNo" order="BEFORE">
 			select tour_to_no.seq.nextval from dual
 		</selectKey>
 		insert into tour(to_no,to_name,to_type,to_time,to_person,to_meet,to_price,to_info,to_notice,to_count,city_no)
@@ -15,28 +15,28 @@
 		update tour set to_name=#{toName},to_type=#{toType},to_time=#{toTime},to_person=#{toPerson},to_meet=#{toMeet},to_price=#{toPrice},to_info=#{to_info},to_notice=#{to_notice},city_no=#{city_no} where to_no=#{to_no}
 	</update>
 	<!-- 3. 투어상품 리스트 전체 출력 -->
-	<select id="selectAll" resultType="com.itwill.my_real_korea.dto.Tour">
+	<select id="selectAll" resultType="com.itwill.my_real_korea.dto.tour.Tour">
 		select * from tour
 	</select>
 	<!-- 4. 투어상품 상품번호로 상세보기 -->
-	<select id="seletByToNo" parameterType="java.lang.Integer" resultType="com.itwill.my_real_korea.dto.Tour">
-		select * from tour where to_no=#{to_no}
+	<select id="seletByToNo" parameterType="java.lang.Integer" resultType="com.itwill.my_real_korea.dto.tour.Tour">
+		select * from tour where to_no=#{toNo}
 	</select>
 	<!-- 5. 키워드로 투어상품 검색 -->
-	<select id="selectByKeyword" parameterType="java.lang.String" resultType="com.itwill.my_real_korea.dto.Tour">
+	<select id="selectByKeyword" parameterType="java.lang.String" resultType="com.itwill.my_real_korea.dto.tour.Tour">
 		select * from tour where to_name like #{keyword} order by to_no desc
 	</select>
 	<!-- 6. 지역으로 투어상품 검색 -->
-	<select id="selectByCityNo" parameterType="java.lang.Integer" resultType="com.itwill.my_real_korea.dto.Tour">
-		select * from tour where to_type=#{to_type}
+	<select id="selectByCityNo" parameterType="java.lang.Integer" resultType="com.itwill.my_real_korea.dto.tour.Tour">
+		select * from tour where city_no=#{cityNo}
 	</select>
 	<!-- 7. 여행타입으로 투어상품 검색 -->
-	<select id="selectByToType" parameterType="java.lang.Integer" resultType="com.itwill.my_real_korea.dto.Tour">
-		select * from tour where to_type=#{to_type}
+	<select id="selectByToType" parameterType="java.lang.Integer" resultType="com.itwill.my_real_korea.dto.tour.Tour">
+		select * from tour where to_type=#{toType}
 	</select>
 	<!-- 8. 투어상품 삭제 -->
 	<delete id="deleteTour" parameterType="java.lang.Integer">
-		delete tour where to_no=#{to_no}
+		delete tour where to_no=#{toNo}
 	</delete>
 
 </mapper>

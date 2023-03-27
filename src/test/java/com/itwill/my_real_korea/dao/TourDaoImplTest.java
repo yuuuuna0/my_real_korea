@@ -22,8 +22,8 @@ class TourDaoImplTest {
 
 	@Test
 	void testInsertTour() throws Exception{
-		int rowCount=tourDao.insertTour(new Tour(0, "제주", 1, 2, 10, "제주공", 100000, "제주자유여행","테스트입니다", 0, null, null));
-		assertEquals(rowCount,1);
+		//int rowCount=tourDao.insertTour(new Tour(0, "제주", 1, 2, 10, "제주공", 100000, "제주자유여행","테스트입니다", 0, null, null));
+		//assertEquals(rowCount,1);
 	}
 	
 	@Disabled

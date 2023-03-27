@@ -1,4 +1,4 @@
-package com.itwill.dto;
+package com.itwill.my_real_korea.dto;
 
 import java.util.Date;
 import lombok.AllArgsConstructor;

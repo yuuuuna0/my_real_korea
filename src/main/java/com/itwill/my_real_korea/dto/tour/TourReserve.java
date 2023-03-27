@@ -22,7 +22,6 @@ USER_ID                  VARCHAR2(50)
 @NoArgsConstructor
 public class TourReserve {
 	private int toRsNo;
-	private String toRsDesc;
 	private Date toRsStartDay;
 	private int toRsPerson;
 	private String toRsMsg;

@@ -37,7 +37,7 @@ public class ChatMsgDaoImpl implements ChatMsgDao{
 		return chatMsgMapper.selectByMsgNo(msgNo);
 	}
 	@Override
-	public ChatMsg selectNotReadMsg(int roomNo, String userId) {
+	public List<ChatMsg> selectNotReadMsg(int roomNo, String userId) {
 		Map<String, Object> msgMap = new HashMap<>();
 		msgMap.put("roomNo", roomNo);
 		msgMap.put("userId", userId);

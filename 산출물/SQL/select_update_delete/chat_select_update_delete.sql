@@ -20,7 +20,7 @@ select count(*) from chat_msg where room_no=1 and msg_read=0 and user_id!='kms1'
 select room_no, from_id as you_id from chat_room where to_id='kms2';
 
 -- 채팅방 삭제
-delete from chat_room where room_no=2;
+delete from chat_room where room_no=1;
 
 
 /************ chat_msg *************/

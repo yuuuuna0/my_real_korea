@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.itwill.my_real_korea.dto.FreeBoard;
-import com.itwill.my_real_korea.dto.Notice;
 import com.itwill.my_real_korea.mapper.FreeBoardMapper;
 
 @Repository

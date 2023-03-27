@@ -106,3 +106,47 @@ insert into free_board values (free_board_f_bo_no_seq.nextval,'서울 맛집 추
 insert into free_board values (free_board_f_bo_no_seq.nextval,'경기 맛집 추천','추천받습니다',sysdate,0,2,'user2');
 insert into free_board values (free_board_f_bo_no_seq.nextval,'강원 맛집 추천','추천받습니다',sysdate,0,3,'user3');
 
+/*************** ticket ***********************/
+--TICKET 티켓 상품
+INSERT INTO TICKET (TI_NO, TI_TITLE,TI_DATE,TI_PRICE,TI_INFO,TI_NOTICE,TI_COUNT,CITY_NO)
+VALUES (TICKET_TI_NO_SEQ.NEXTVAL,'서울로 가보 자고', SYSDATE, 10000, '이 티켓은 서울로 가는 티켓', '눈 뜨고 코 베이지 않게 주의 하세요.',default,1);
+INSERT INTO TICKET (TI_NO, TI_TITLE,TI_DATE,TI_PRICE,TI_INFO,TI_NOTICE,TI_COUNT,CITY_NO)
+VALUES (TICKET_TI_NO_SEQ.NEXTVAL,'부산으로 가보 자고', SYSDATE, 20000, '이 티켓은 부산으로 가는 티켓', '갈매기를 주의 하세요.',default,2);
+INSERT INTO TICKET (TI_NO, TI_TITLE,TI_DATE,TI_PRICE,TI_INFO,TI_NOTICE,TI_COUNT,CITY_NO)
+VALUES (TICKET_TI_NO_SEQ.NEXTVAL,'제주도로 가보 자고', SYSDATE, 40000, '이 티켓은 제주도로 가는 티켓 ', '돌아 오기 싫을 수 있으니 주의 하세요.',default,3);
+INSERT INTO TICKET (TI_NO, TI_TITLE,TI_DATE,TI_PRICE,TI_INFO,TI_NOTICE,TI_COUNT,CITY_NO)
+VALUES (TICKET_TI_NO_SEQ.NEXTVAL,'어디 든지 가보 자고', SYSDATE, 99999, '이 티켓은 어디든 가는 티켓', '어디로 갈지 모르니 주의 하세요.',default,4);
+--TICKET_RESERVE 티켓 예약
+INSERT INTO TICKET_RESERVE (TI_RS_NO, TI_RS_DATE, TI_RS_QTY, TI_RS_MSG, TI_NO, USER_ID) VALUES (TICKET_RESERVE_TI_RS_NO_SEQ.NEXTVAL,'2023-03-26', 1,'요청사항입니다....',1,'user1');
+INSERT INTO TICKET_RESERVE (TI_RS_NO, TI_RS_DATE, TI_RS_QTY, TI_RS_MSG, TI_NO, USER_ID) VALUES (TICKET_RESERVE_TI_RS_NO_SEQ.NEXTVAL,'2023-04-26', 3,'요청사항입니다....2',2,'user2');
+INSERT INTO TICKET_RESERVE (TI_RS_NO, TI_RS_DATE, TI_RS_QTY, TI_RS_MSG, TI_NO, USER_ID) VALUES (TICKET_RESERVE_TI_RS_NO_SEQ.NEXTVAL,'2023-03-31', 4,'요청사항입니다....3',3,'user3');
+--TICKET_REVIEW 티켓 리뷰
+INSERT INTO TICKET_REVIEW (TI_REVIEW_NO, TI_REVIEW_DATE, TI_REVIEW_TITLE, TI_REVIEW_CONTENT, TI_NO, USER_ID) VALUES (TICKET_REVIEW_TI_REVIEW_NO_SEQ.NEXTVAL,'2023-03-27','티켓예약1번후기작성', '서울로 가보자고는 짱이다.',1,'user1');
+INSERT INTO TICKET_REVIEW (TI_REVIEW_NO, TI_REVIEW_DATE, TI_REVIEW_TITLE, TI_REVIEW_CONTENT, TI_NO, USER_ID) VALUES (TICKET_REVIEW_TI_REVIEW_NO_SEQ.NEXTVAL, '2023-04-27','티켓2번후기작성','부산으로 가보자고 후기입니다.',2,'user2');
+--TICKET_WISHLIST 티켓 위시리스트
+INSERT INTO TICKET_WISHLIST (TI_WISH_NO, USER_ID, WISH_NO, TI_NO) VALUES(TICKET_WISHLIST_TI_WISH_NO_SEQ.NEXTVAL,'user1',1,1);
+INSERT INTO TICKET_WISHLIST (TI_WISH_NO, USER_ID, WISH_NO, TI_NO) VALUES(TICKET_WISHLIST_TI_WISH_NO_SEQ.NEXTVAL,'user1',2,4);
+INSERT INTO TICKET_WISHLIST (TI_WISH_NO, USER_ID, WISH_NO, TI_NO) VALUES(TICKET_WISHLIST_TI_WISH_NO_SEQ.NEXTVAL,'user2',3,2);
+INSERT INTO TICKET_WISHLIST (TI_WISH_NO, USER_ID, WISH_NO, TI_NO) VALUES(TICKET_WISHLIST_TI_WISH_NO_SEQ.NEXTVAL,'user1',4,1);
+INSERT INTO TICKET_WISHLIST (TI_WISH_NO, USER_ID, WISH_NO, TI_NO) VALUES(TICKET_WISHLIST_TI_WISH_NO_SEQ.NEXTVAL,'user3',5,3);
+--TICKET_IMG 티켓 사진
+INSERT INTO TICKET_IMG (TI_RV_IMG_NO, TI_REVIEW_IMG_URL,TI_REVIEW_NO) VALUES(TOUR_IMG_TO_IMG_NO_SEQ.NEXTVAL,'DEFAULT.JPG',1);
+INSERT INTO TICKET_IMG (TI_RV_IMG_NO, TI_REVIEW_IMG_URL,TI_REVIEW_NO) VALUES(TOUR_IMG_TO_IMG_NO_SEQ.NEXTVAL,'DEFAULT.JPG',2);
+
+/*************** tripBoard ***********************/
+-- 동행게시판 trip_board insert
+insert into trip_board(t_bo_no,t_bo_title,t_bo_content,t_bo_date,t_bo_readcount,t_bo_status,t_bo_person,
+                    t_bo_img,t_bo_start_date,t_bo_end_date,t_bo_style,hashtag,city_no,user_id) 
+            values (trip_board_t_bo_no_seq.nextval,'동행게시판제목1','동행게시판내용1',sysdate,0,0,1,
+                    'img1.png','2023-05-01','2023-05-10','무계획','아무나다좋아',1,'user1'); 
+                    
+insert into trip_board(t_bo_no,t_bo_title,t_bo_content,t_bo_date,t_bo_readcount,t_bo_status,t_bo_person,
+                    t_bo_img,t_bo_start_date,t_bo_end_date,t_bo_style,hashtag,city_no,user_id) 
+            values (trip_board_t_bo_no_seq.nextval,'동행게시판제목2','동행게시판내용2',sysdate,0,0,2,
+                    'img2.png','2023-06-01','2023-06-10','계획형','인싸만',2,'user2');
+                    
+insert into trip_board(t_bo_no,t_bo_title,t_bo_content,t_bo_date,t_bo_readcount,t_bo_status,t_bo_person,
+                    t_bo_img,t_bo_start_date,t_bo_end_date,t_bo_style,hashtag,city_no,user_id) 
+            values (trip_board_t_bo_no_seq.nextval,'동행게시판제목3','동행게시판내용3',sysdate,0,0,1,
+                    'img3.png','2023-07-01','2023-07-10','맛집투어','맛있는거좋아하는사람',3,'user3'); 
+

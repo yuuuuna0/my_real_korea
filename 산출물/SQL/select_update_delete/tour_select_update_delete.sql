@@ -14,5 +14,5 @@
 	--7. 유저의 투어예약리스트 전체 보여주기
 	select * from tour_reserve where user_id='admin';
 	--8. 투어예약번호로 예약 상세보기
-	select * from tour_reserve tr join tour t on tr.to_no=t.to_no where tr.to_rs_no=2;
+	select tr.*, t.* from tour_reserve tr join tour t on tr.to_no=t.to_no where tr.to_rs_no=2;
 	

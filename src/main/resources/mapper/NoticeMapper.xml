@@ -3,7 +3,7 @@
 <mapper namespace="com.itwill.my_real_korea.mapper.NoticeMapper">
 
 <!--  공지사항 게시글 추가 -->
-<insert id="insertNotice" parameterType="com.itwill.my_real_korea.dto.Notice" >
+<insert id="insertNotice" parameterType="com.itwill.my_real_korea.dto.notice.Notice" >
 	<selectKey resultType="java.lang.Integer" keyProperty="nNo" order="BEFORE">
 		select notice_n_no_seq.nextval from dual
 	</selectKey>
@@ -12,12 +12,12 @@
 </insert>
 
 <!--  공지사항 게시글 번호(boardno)로 해당 게시글 보기  -->
-<select id="selectByNo" parameterType="java.lang.Integer" resultType="com.itwill.my_real_korea.dto.Notice">
+<select id="selectByNo" parameterType="java.lang.Integer" resultType="com.itwill.my_real_korea.dto.notice.Notice">
 	select * from notice where n_no=#{nNo}
 </select>
 
 <!--  공지사항 리스트 보기 (게시글 시작번호, 게시글 끝번호) - 페이징 처리 -->
-<select id="selectAll" parameterType="java.util.Map" resultType="com.itwill.my_real_korea.dto.Notice">
+<select id="selectAll" parameterType="java.util.Map" resultType="com.itwill.my_real_korea.dto.notice.Notice">
 	select * from
     (select rownum idx, s.* from
         (select n_no, n_title, n_content, n_date, n_readcount, n_img, user_id from notice
@@ -32,7 +32,7 @@
 </delete>
 
 <!--  공지사항 게시글 내용 수정 -->
-<update id="updateNotice" parameterType="com.itwill.my_real_korea.dto.Notice">
+<update id="updateNotice" parameterType="com.itwill.my_real_korea.dto.notice.Notice">
 	update notice set n_title=#{nTitle},n_content=#{nContent},n_img=#{nImg} where n_no=#{nNo}
 </update>
 <!--  공지사항 게시글 조회수 1 증가 -->
@@ -51,7 +51,7 @@
 </select>
 
 <!--  공지사항 게시판 title 키워드로 검색 -->
-<select id="selectSearchNoticeList" parameterType="map" resultType="com.itwill.my_real_korea.dto.Notice">
+<select id="selectSearchNoticeList" parameterType="map" resultType="com.itwill.my_real_korea.dto.notice.Notice">
 	select * from
     (select rownum idx, s.* from
         (select n_no, n_title, n_content, n_date, n_readcount, n_img, user_id from notice

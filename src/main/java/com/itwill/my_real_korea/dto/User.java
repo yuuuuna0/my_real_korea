@@ -12,7 +12,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 public class User {
-	
+
 /*
 user_id  NOT NULL VARCHAR2(50)  
 password NOT NULL VARCHAR2(100) 
@@ -39,19 +39,9 @@ is_admin          NUMBER
 	private int point;
 	private int isAdmin;
 	
-	//패스워드 일치 여부 확인
-	public boolean isMatchPassword(String password){
-		boolean isMatch = false;
-		if(this.password.equals(password)){
-			isMatch = true;
-		}
-		return isMatch;
-	}
 	
 }
 
-	
-	
 	
 	
 	

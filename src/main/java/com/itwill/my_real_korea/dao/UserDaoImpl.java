@@ -1,6 +1,8 @@
 package com.itwill.my_real_korea.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -61,20 +63,17 @@ public class UserDaoImpl implements UserDao {
 		return isExist;
 	}
 	
-	/*
-	 * 	0: 패스워드 일치 안함
-	 * 	1: 패스워드 일치
-	 */
-	//패스워드 일치 여부 확인
-//	반대로 동작함...... 패스워드 일치하는데 왜 false가 반환되는지 모를..
-//	public boolean isMatchPassword(String password){
-//		int matchPassword = userMapper.isMatchPassword(password);
-//		//패스워드 일치함 => 로그인
-//		if(matchPassword == 1){
-//			return true;
-//		}
-//		//패스워드 일치 안함
-//		return false;
-//	}
+	public boolean isMatchPassword(String userId, String password){
+		Map<String,Object> map = new HashMap();
+		map.put("userId", userId);
+		map.put("password", password);
+		int matchPassword = userMapper.isMatchPassword(map);
+		//패스워드 일치함 => 로그인
+		if(matchPassword == 1){
+			return true;
+		}
+		//패스워드 일치 안함
+		return false;
+	}
 
 }

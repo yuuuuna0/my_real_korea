@@ -39,4 +39,6 @@ public class Tour {
 	private TourReview tourReview;	//FK
 	private TourReserve tourReserve;	//FK
 	private TourWishlist tourWishlist;	//FK
+	
+	
 }

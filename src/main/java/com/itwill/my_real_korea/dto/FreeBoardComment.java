@@ -17,7 +17,7 @@ public class FreeBoardComment {
 	private String fCommentContent;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date fCommentDate;
-	private int fBoNo;
 	/* FK */
+	private int fBoNo;
 	private String UserId;
 }

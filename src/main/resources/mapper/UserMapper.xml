@@ -1,37 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.itwill.user.mapper.UserMapper">
+<mapper namespace="com.itwill.my_real_korea.mapper.UserMapper">
 <!-- 
 user_id,user_password,user_name,user_nickname,user_phone,user_email,user_birth,user_address,
 	user_gender,user_point,user_kakao_no,user_auth_no,user_photo_no
  -->
-	<insert id="create" parameterType="com.itwill.my_real_korea.dto.User">
-			insert into user_info(user_id, password, name, nickname, phone, email, birth, address, gender, point, is_admin) 
-			values(#{user_id},#{password},#{name},#{nickname},#{phone},#{email},#{birth},#{address},#{gender},#{point},#{is_admin})
+	<insert id="create" parameterType="com.itwill.my_real_korea.dto.user.User">
+		insert into user_info(user_id, password, name, nickname, phone, email, birth, address, gender, point, is_admin) 
+		values(#{userId},#{password},#{name},#{nickname},#{phone},#{email},#{birth},#{address},#{gender},#{point},#{isAdmin})
 	</insert>
-	<update id="update" parameterType="com.itwill.my_real_korea.dto.User">
+	<update id="update" parameterType="com.itwill.my_real_korea.dto.user.User">
+	
 		update  user_info 
 		set password = #{password}, nickname = #{nickname}, phone = #{phone}, email = #{email}
-		where user_id = #{user_id}
+		where user_id = #{userId}
 	</update>
 	<delete id="remove" parameterType="java.lang.String">
 		delete user_info 
-		where user_id = #{user_id}
+		where user_id = #{userId}
 	</delete>
-	<select id="findUser" parameterType="java.lang.String" resultType="com.itwill.my_real_korea.dto.User">
+	<select id="findUser" parameterType="java.lang.String" resultType="com.itwill.my_real_korea.dto.user.User">
 		select user_id, password, nickname, phone, email, birth, address, gender, point, is_admin 
 		from user_info 
-		where user_id = #{user_id}
+		where user_id = #{userId}
 	</select>
-	<select id="findUserList" resultType="com.itwill.my_real_korea.dto.User">
+	<select id="findUserList" resultType="com.itwill.my_real_korea.dto.user.User">
 		select user_id, nickname, phone, email, birth, address, gender, point, is_admin
 		from user_info
-		<!-- password는 안나오게 해야 되지 않나 ? -->
 	</select>
-	<select id="login" resultType="com.itwill.my_real_korea.dto.User">
-		select user_id
-	</select>
-	
 	<select id="isExistUser" parameterType="java.lang.String" resultType="java.lang.Integer">
 		select count(*) from user_info where user_id = #{userId}
 	</select>

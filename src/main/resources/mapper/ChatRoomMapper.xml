@@ -3,8 +3,7 @@
 <mapper namespace="com.itwill.my_real_korea.mapper.ChatRoomMapper">
 
 
-
-<select id="selectAll" parameterType="String" resultType="com.itwill.my_real_korea.dto.ChatRoom">
+<select id="selectAll" parameterType="String" resultType="com.itwill.my_real_korea.dto.chat.ChatRoom">
 	select a.room_no, a.room_name, msg_send_time, msg_content
 	from (select room_no, room_name from chat_room where from_id=#{userId} or to_id=#{userId}) a
 	inner join (select aa.msg_send_time, aa.room_no, aa.msg_content from chat_msg aa
@@ -13,19 +12,19 @@
 	order by msg_send_time desc
 </select>
 
-<select id="selectCheckByRoomNo" parameterType="java.lang.Integer" resultType="com.itwill.my_real_korea.dto.ChatRoom">
+<select id="selectCheckByRoomNo" parameterType="java.lang.Integer" resultType="com.itwill.my_real_korea.dto.chat.ChatRoom">
 	select * from chat_room where room_no=#{roomNo}
 </select>
 
-<select id="selectById" parameterType="java.util.Map" resultType="com.itwill.my_real_korea.dto.ChatRoom">
+<select id="selectById" parameterType="java.util.Map" resultType="com.itwill.my_real_korea.dto.chat.ChatRoom">
 	select * from chat_room where from_id=#{fromId} and to_id=#{toId}
 </select>
 
-<select id="selectExist" parameterType="java.util.Map" resultType="com.itwill.my_real_korea.dto.ChatRoom">
+<select id="selectExist" parameterType="java.util.Map" resultType="com.itwill.my_real_korea.dto.chat.ChatRoom">
 	select * from chat_room where from_id=#{fromId} and to_id=#{toId}
 </select>
 
-<insert id="insertChatRoom" parameterType="com.itwill.my_real_korea.dto.ChatRoom">
+<insert id="insertChatRoom" parameterType="com.itwill.my_real_korea.dto.chat.ChatRoom">
 	<selectKey resultType="java.lang.Integer" keyProperty="roomNo" order="BEFORE">
 		select chat_room_room_no_seq.nextval from dual
 	</selectKey>

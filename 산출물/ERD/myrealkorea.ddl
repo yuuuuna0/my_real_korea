@@ -439,7 +439,6 @@ ALTER TABLE ticket_reserve ADD CONSTRAINT IDX_ticket_reserve_PK PRIMARY KEY (ti_
 ALTER TABLE ticket_reserve ADD CONSTRAINT IDX_ticket_reserve_FK0 FOREIGN KEY (ti_no) REFERENCES ticket (ti_no) on delete cascade;
 ALTER TABLE ticket_reserve ADD CONSTRAINT IDX_ticket_reserve_FK1 FOREIGN KEY (user_id) REFERENCES user_info (user_id) on delete cascade;
 
-
 ALTER TABLE payment ADD CONSTRAINT IDX_payment_PK PRIMARY KEY (p_no);
 ALTER TABLE payment ADD CONSTRAINT IDX_payment_FK0 FOREIGN KEY (ti_rs_no) REFERENCES ticket_reserve (ti_rs_no) on delete cascade;
 ALTER TABLE payment ADD CONSTRAINT IDX_payment_FK1 FOREIGN KEY (to_rs_no) REFERENCES tour_reserve (to_rs_no) on delete cascade;

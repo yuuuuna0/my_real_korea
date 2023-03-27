@@ -41,7 +41,6 @@ public class FreeBoardDaoImpl implements FreeBoardDao{
 	}
 	@Override
 	public String getTitleString(FreeBoard freeBoard) throws Exception {
-		// TODO Auto-generated method stub
 		return freeBoardMapper.getTitleString(freeBoard);
 	}
 	@Override

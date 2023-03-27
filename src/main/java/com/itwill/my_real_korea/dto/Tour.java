@@ -35,30 +35,6 @@ public class Tour {
 	private String toNotice;
 	private int toCount;
 	private City city;		//FK
-	private TourImg tourImg;	//FK
-	private TourReview tourReview;	//FK
-	private TourReserve tourReserve;	//FK
-	private TourWishlist tourWishlist;	//FK
-<<<<<<< HEAD
-=======
-	public Tour(int toNo, String toName, int toType, int toTime, int toPerson, String toMeet, int toPrice,
-			String toInfo, String toNotice, int toCount, City city, TourImg tourImg) {
-		super();
-		this.toNo = toNo;
-		this.toName = toName;
-		this.toType = toType;
-		this.toTime = toTime;
-		this.toPerson = toPerson;
-		this.toMeet = toMeet;
-		this.toPrice = toPrice;
-		this.toInfo = toInfo;
-		this.toNotice = toNotice;
-		this.toCount = toCount;
-		this.city = city;
-		this.tourImg = tourImg;
-	}
-
->>>>>>> branch 'master' of https://github.com/2022-11-JAVA-DEVELOPER/final-project-team2-my-real-korea.git
 	
 	
 }

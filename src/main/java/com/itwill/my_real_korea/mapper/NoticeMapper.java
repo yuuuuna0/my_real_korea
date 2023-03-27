@@ -1,4 +1,4 @@
-package com.itwill.my_real_korea.mapper.notice;
+package com.itwill.my_real_korea.mapper;
 
 import java.util.List;
 import java.util.Map;

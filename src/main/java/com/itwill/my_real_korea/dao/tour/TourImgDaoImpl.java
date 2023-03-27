@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.itwill.my_real_korea.dto.tour.TourImg;
-import com.itwill.my_real_korea.mapper.tour.TourImgMapper;
+import com.itwill.my_real_korea.mapper.TourImgMapper;
 @Repository
 public class TourImgDaoImpl implements TourImgDao {
 	@Autowired

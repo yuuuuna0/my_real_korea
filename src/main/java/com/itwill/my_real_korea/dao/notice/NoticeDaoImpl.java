@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.itwill.my_real_korea.dto.notice.Notice;
-import com.itwill.my_real_korea.mapper.notice.NoticeMapper;
+import com.itwill.my_real_korea.mapper.NoticeMapper;
 
 @Repository
 public class NoticeDaoImpl implements NoticeDao{

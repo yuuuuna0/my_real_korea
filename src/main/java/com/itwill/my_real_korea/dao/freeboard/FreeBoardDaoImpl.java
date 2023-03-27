@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.itwill.my_real_korea.dto.freeboard.FreeBoard;
-import com.itwill.my_real_korea.mapper.freeboard.FreeBoardMapper;
+import com.itwill.my_real_korea.mapper.FreeBoardMapper;
 
 @Repository
 public class FreeBoardDaoImpl implements FreeBoardDao{

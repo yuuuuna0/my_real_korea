@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.itwill.my_real_korea.dto.user.User;
-import com.itwill.my_real_korea.mapper.user.UserMapper;
+import com.itwill.my_real_korea.mapper.UserMapper;
 @Repository(value = "userDaoImplMyBatisMapperInterface")
 public class UserDaoImpl implements UserDao {
 	

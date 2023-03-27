@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.itwill.my_real_korea.dto.Tour;
+import com.itwill.my_real_korea.dto.tour.Tour;
 
 @Mapper
 public interface TourMapper {

@@ -5,7 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.itwill.my_real_korea.dto.Notice;
+import com.itwill.my_real_korea.dto.notice.Notice;
 
 @Mapper
 public interface NoticeMapper {

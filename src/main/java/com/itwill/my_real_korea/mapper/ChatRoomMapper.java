@@ -5,7 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.itwill.my_real_korea.dto.ChatRoom;
+import com.itwill.my_real_korea.dto.chat.ChatRoom;
 
 @Mapper
 public interface ChatRoomMapper {
@@ -14,7 +14,7 @@ public interface ChatRoomMapper {
 	public List<ChatRoom> selectAll(String userId);
 	
 	// 채팅방 목록 선택 기능
-	public ChatRoom selectByRoomNo(int roomNo);
+	public ChatRoom selectCheckByRoomNo(int roomNo);
 	
 	// from_id, to_id로 채팅방 찾기
 	public ChatRoom selectById(Map<String, Object> idMap);

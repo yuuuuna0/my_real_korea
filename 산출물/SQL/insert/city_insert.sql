@@ -1,7 +1,7 @@
 
--- insert
-insert into city(city_no,city_name,latitude,longitude) values(1,'¼­¿ï',1,1);
-insert into city(city_no,city_name,latitude,longitude) values(2,'°æ±â',2,2);
-insert into city(city_no,city_name,latitude,longitude) values(3,'°­¿ø',3,3);
-insert into city(city_no,city_name,latitude,longitude) values(4,'ºÎ»ê',4,4);
-insert into city(city_no,city_name,latitude,longitude) values(5,'´ëÀü',5,5);
+-- city
+insert into city(city_no,city_name,latitude,longitude) values(city_city_no_seq.nextval,'ì„œìš¸',1,1);
+insert into city(city_no,city_name,latitude,longitude) values(city_city_no_seq.nextval,'ê²½ê¸°',2,2);
+insert into city(city_no,city_name,latitude,longitude) values(city_city_no_seq.nextval,'ê°•ì›',3,3);
+insert into city(city_no,city_name,latitude,longitude) values(city_city_no_seq.nextval,'ë¶€ì‚°',4,4);
+insert into city(city_no,city_name,latitude,longitude) values(city_city_no_seq.nextval,'ëŒ€ì „',5,5);

@@ -5,8 +5,8 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.itwill.my_real_korea.dto.FreeBoardComment;
-import com.itwill.my_real_korea.dto.FreeBoardCommentListPageMakerDto;
+import com.itwill.my_real_korea.dto.freeboard.FreeBoardComment;
+import com.itwill.my_real_korea.dto.freeboard.FreeBoardCommentListPageMakerDto;
 
 @Mapper
 public interface FreeBoardCommentMapper {

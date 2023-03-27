@@ -7,18 +7,18 @@
 			select tour_wishlist_to_wish_no.seq.nextval from dual
 		</selectKey>
 		insert into tour_wishlist(to_wish_no,to_no,user_id,wish_no)
-		values(#{to_wish_no},#{to_no},#{user_id},#{wish_no})
+		values(#{toWishNo},#{toNo},#{userId},#{wishNo})
 	</insert>
 	<!-- 2. 투어위시리스트 삭제하기 -->
 	<delete id="deleteTourWishlist" parameterType="java.lang.Integer">
-		delete * from tour_wishlist where to_wish_no=${to_wish_list}
+		delete * from tour_wishlist where to_wish_no=${toWishNo}
 	</delete>
 	<!-- 3. 유저의 투어위시리스트 전체보기 -->
 	<select id="selectAllWishlistByUserId" parameterType="java.lang.String" resultType="com.itwill.my_real_korea.dto.TourWishlist">
-		select * from tour_wishlist where user_id=#{user_id}
+		select * from tour_wishlist where user_id=#{userId}
 	</select>
 	<!-- 4. 투어위시리스트 중 하나 상세보기 -->
 		<select id="selectAllWishlistByUserId" parameterType="java.lang.Integer" resultType="com.itwill.my_real_korea.dto.TourWishlist">
-		select * from tour_wishlist where to_wish_no=#{to_wish_no}
+		select * from tour_wishlist where to_wish_no=#{toWishNo}
 	</select>
 </mapper>

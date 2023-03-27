@@ -19,7 +19,7 @@ public interface UserDao {
 	//회원 존재 여부 확인
 	boolean isExistUser(String userId) throws Exception;
 	
-//	boolean isMatchPassword(String passwrod) throws Exception;
+	boolean isMatchPassword(String userId, String password) throws Exception;
 	
 	
 

@@ -36,11 +36,11 @@ int deleteContent(int fBoNo) throws Exception;
  */
 int updateContent(FreeBoard freeBoard) throws Exception;
 /*
- * 공지사항 게시글 조회수 1 증가
+ * 게시글 조회수 1 증가
  */
 int increaseContentReadCount(int fBoNo) throws Exception;
 /*
- * 공지사항 게시글 총 개수 조회
+ * 게시글 총 개수 조회
  */
 int selectContentCount() throws Exception;
 

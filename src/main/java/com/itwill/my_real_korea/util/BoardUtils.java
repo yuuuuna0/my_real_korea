@@ -2,7 +2,7 @@ package com.itwill.my_real_korea.util;
 
 import java.util.Iterator;
 
-import com.itwill.my_real_korea.dto.Notice;
+import com.itwill.my_real_korea.dto.notice.Notice;
 
 
 public class BoardUtils {

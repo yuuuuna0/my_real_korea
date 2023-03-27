@@ -34,8 +34,8 @@ public class ChatRoomDaoImpl implements ChatRoomDao{
 	}
 
 	@Override
-	public ChatRoom selectByRoomNo(int roomNo) {
-		return chatRoomMapper.selectByRoomNo(roomNo);
+	public ChatRoom selectCheckByRoomNo(int roomNo) {
+		return chatRoomMapper.selectCheckByRoomNo(roomNo);
 	}
 
 	@Override

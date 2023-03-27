@@ -2,6 +2,10 @@ package com.itwill.my_real_korea.dao;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.mybatis.spring.annotation.MapperScan;
@@ -25,46 +29,55 @@ class NoticeDaoImplTest {
 		int rowCount = noticeDao.insertNotice(new Notice(0, "공지테스트1", "내용테스트1", null, 0, "이미지1.png","kms1"));
 		assertEquals(rowCount, 1);
 	}
-
 	@Disabled
 	@Test
 	void testSelectByNo() throws Exception {
-		noticeDao.selectByNo(1);
+		assertNotNull(noticeDao.selectByNo(1));
+		System.out.println(noticeDao.selectByNo(1));
+	}
+	 
+	@Disabled
+	@Test
+	void testSelectAll() throws Exception {
+		assertNotNull(noticeDao.selectAll(1,10));
+		List<Notice> noticeList = noticeDao.selectAll(1,10);
+		System.out.println(noticeList);
+	}
+	@Disabled
+	@Test
+	void testDeleteNotice() throws Exception {
+		int rowCount = noticeDao.deleteNotice(4);
+		assertEquals(rowCount, 1);
+	}
+	@Disabled
+	@Test
+	void testUpdateNotice() throws Exception {
+		int rowCount = noticeDao.updateNotice(new Notice(4, "공지수정1", "내용수정1", null, 0, "이미지수정.png","kms1"));
+		assertEquals(rowCount, 1);
+	}
+	@Disabled
+	@Test
+	void testIncreaseReadCount() throws Exception {
+		int rowCount = noticeDao.increaseReadCount(3);
+		assertEquals(rowCount, 1);
 	}
 
 	@Disabled
-	void testSelectAll() {
-		fail("Not yet implemented");
+	void testSelectNoticeCount() throws Exception {
+		assertNotNull(noticeDao.selectNoticeCount());
 	}
-
 	@Disabled
-	void testDeleteNotice() {
-		fail("Not yet implemented");
+	@Test
+	void testSelectSearchCount() throws Exception {
+		assertNotNull(noticeDao.selectSearchCount("공지"));
+		System.out.println(noticeDao.selectSearchCount("공지"));
 	}
-
-	@Disabled
-	void testUpdateNotice() {
-		fail("Not yet implemented");
-	}
-
-	@Disabled
-	void testIncreaseReadCount() {
-		fail("Not yet implemented");
-	}
-
-	@Disabled
-	void testSelectNoticeCount() {
-		fail("Not yet implemented");
-	}
-
-	@Disabled
-	void testSelectSearchCount() {
-		fail("Not yet implemented");
-	}
-
-	@Disabled
-	void testSelectSearchNoticeList() {
-		fail("Not yet implemented");
+	
+	@Test
+	void testSelectSearchNoticeList() throws Exception {
+		assertNotNull(noticeDao.selectSearchNoticeList(1, 10, "공지"));
+		List<Notice> noticeList = noticeDao.selectSearchNoticeList(1, 10, "공지");
+		System.out.println(noticeList);
 	}
 
 }

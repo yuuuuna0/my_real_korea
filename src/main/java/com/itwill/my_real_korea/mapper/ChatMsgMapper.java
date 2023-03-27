@@ -32,7 +32,7 @@ public interface ChatMsgMapper {
 	
 	
 	// 메세지 읽음으로 변경
-	public int updateReadMsg(int roomNo);
+	public int updateReadMsg(int roomNo, String userId);
 	
 	// 채팅 메세지 1개 삭제
 	public int deleteChatMsg(int msgNo);

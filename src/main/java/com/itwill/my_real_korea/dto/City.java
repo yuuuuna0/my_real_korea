@@ -18,6 +18,6 @@ LONGITUDE NOT NULL NUMBER
 public class City {
 	private int cityNo;
 	private String cityName;
-	private int latitude;
-	private int longtitude;
+	private long latitude;
+	private long longtitude;
 }

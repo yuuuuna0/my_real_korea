@@ -8,7 +8,6 @@ import lombok.ToString;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
 @ToString
 

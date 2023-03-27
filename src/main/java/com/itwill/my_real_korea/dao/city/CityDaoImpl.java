@@ -25,7 +25,7 @@ public class CityDaoImpl implements CityDao {
 	}
 
 	@Override
-	public int selectByCityNo(int cityNo) throws Exception {
+	public City selectByCityNo(int cityNo) throws Exception {
 		//시티번호로 시티찾기
 		return cityMapper.selectByCityNo(cityNo);
 	}

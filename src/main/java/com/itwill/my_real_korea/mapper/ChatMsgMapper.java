@@ -1,6 +1,7 @@
 package com.itwill.my_real_korea.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -15,11 +16,11 @@ public interface ChatMsgMapper {
 	// 채팅 메세지 1개 보기
 	public ChatMsg selectByMsgNo(int msgNo);
 	
-	// 채팅방 1개의 읽지 않은 메세지 보기
-	public ChatMsg selectNotReadMsg(int roomNo, String userId);
+	// 채팅방 1개의 읽지 않은 메세지 보기 (roomNo, userId)
+	public ChatMsg selectNotReadMsg(Map<String, Object> msgMap);
 	
-	// 채팅방 1개의 읽지 않은 메세지 수
-	public int countNotReadMsg(int roomNo, String userId);
+	// 채팅방 1개의 읽지 않은 메세지 수 (roomNo, userId)
+	public int countNotReadMsg(Map<String, Object> msgMap);
 	
 	// 읽지 않은 메세지 전체 보기
 	public List<ChatMsg> selectAllNotReadMsg(String userId);

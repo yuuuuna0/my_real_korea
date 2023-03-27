@@ -1,6 +1,8 @@
 package com.itwill.my_real_korea.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -28,44 +30,46 @@ public class ChatRoomDaoImpl implements ChatRoomDao{
 	
 	@Override
 	public List<ChatRoom> selectAll(String userId) {
-		// TODO Auto-generated method stub
-		return null;
+		return chatRoomMapper.selectAll(userId);
 	}
 
 	@Override
 	public ChatRoom selectByRoomNo(int roomNo) {
-		// TODO Auto-generated method stub
-		return null;
+		return chatRoomMapper.selectByRoomNo(roomNo);
 	}
 
 	@Override
 	public ChatRoom selectById(String fromId, String toId) {
-		// TODO Auto-generated method stub
-		return null;
+		Map<String, Object> idMap = new HashMap<>();
+		idMap.put("fromId", fromId);
+		idMap.put("toId", toId);
+		return chatRoomMapper.selectById(idMap);
 	}
 
 	@Override
 	public List<ChatRoom> selectExist(String fromId, String toId) {
-		// TODO Auto-generated method stub
-		return null;
+		Map<String, Object> idMap = new HashMap<>();
+		idMap.put("fromId", fromId);
+		idMap.put("toId", toId);
+		return chatRoomMapper.selectExist(idMap);
 	}
 
 	@Override
 	public int insertChatRoom(ChatRoom chatRoom) {
-		// TODO Auto-generated method stub
-		return 0;
+		return chatRoomMapper.insertChatRoom(chatRoom);
 	}
 
 	@Override
 	public int deleteChatRoom(int roomNo) {
-		// TODO Auto-generated method stub
-		return 0;
+		return chatRoomMapper.deleteChatRoom(roomNo);
 	}
 
 	@Override
 	public int countNotReadInChatRoom(int roomNo, String userId) {
-		// TODO Auto-generated method stub
-		return 0;
+		Map<String, Object> chatMap = new HashMap<>();
+		chatMap.put("roomNo", roomNo);
+		chatMap.put("userId", userId);
+		return chatRoomMapper.countNotReadInChatRoom(chatMap);
 	}
 
 }

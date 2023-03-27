@@ -1,10 +1,13 @@
 package com.itwill.my_real_korea.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.itwill.my_real_korea.dto.ChatMsg;
 import com.itwill.my_real_korea.dto.ChatRoom;
 import com.itwill.my_real_korea.mapper.ChatMsgMapper;
 import com.itwill.my_real_korea.mapper.NoticeMapper;
@@ -25,47 +28,51 @@ public class ChatMsgDaoImpl implements ChatMsgDao{
 		System.out.println(">>> ChatMsgDaoImpl():setChatMsgMapper()호출");
 		this.chatMsgMapper = chatMsgMapper;
 	}
+	@Override
+	public List<ChatMsg> selectByRoomNo(int roomNo) {
+		return chatMsgMapper.selectByRoomNo(roomNo);
+	}
+	@Override
+	public ChatMsg selectByMsgNo(int msgNo) {
+		return chatMsgMapper.selectByMsgNo(msgNo);
+	}
+	@Override
+	public ChatMsg selectNotReadMsg(int roomNo, String userId) {
+		Map<String, Object> msgMap = new HashMap<>();
+		msgMap.put("roomNo", roomNo);
+		msgMap.put("userId", userId);
+		return chatMsgMapper.selectNotReadMsg(msgMap);
+	}
+	@Override
+	public int countNotReadMsg(int roomNo, String userId) {
+		Map<String, Object> msgMap = new HashMap<>();
+		msgMap.put("roomNo", roomNo);
+		msgMap.put("userId", userId);
+		return chatMsgMapper.countNotReadMsg(msgMap);
+	}
+	@Override
+	public List<ChatMsg> selectAllNotReadMsg(String userId) {
+		return chatMsgMapper.selectAllNotReadMsg(userId);
+	}
+	@Override
+	public int countAllNotReadMsg(String userId) {
+		return chatMsgMapper.countAllNotReadMsg(userId);
+	}
+	@Override
+	public int updateReadMsg(int roomNo) {
+		return chatMsgMapper.updateReadMsg(roomNo);
+	}
+	@Override
+	public int deleteChatMsg(int msgNo) {
+		return chatMsgMapper.deleteChatMsg(msgNo);
+	}
+	@Override
+	public int updateDeletedMsg(int msgNo) {
+		return chatMsgMapper.updateDeletedMsg(msgNo);
+	}
+	@Override
+	public int insertChatMsg(ChatMsg chatMsg) {
+		return chatMsgMapper.insertChatMsg(chatMsg);
+	}
 	
-	@Override
-	public List<ChatRoom> selectAll(String userId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ChatRoom selectByRoomNo(int roomNo) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ChatRoom selectById(String fromId, String toId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<ChatRoom> selectExist(String fromId, String toId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public int insertChatRoom(ChatRoom chatRoom) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int deleteChatRoom(int roomNo) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int countNotReadInChatRoom(int roomNo, String userId) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
 }

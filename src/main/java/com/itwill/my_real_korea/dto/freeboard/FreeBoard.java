@@ -16,11 +16,10 @@ public class FreeBoard {
 	private int fBoNo;
 	private String fBoTitle;
 	private String fBoContent;
-	private String fBoImg;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date fBoDate;
 	private int fBoCount;
+		/* FK */
 	private int cityNo;
-	/* FK */
 	private String userId;
 }

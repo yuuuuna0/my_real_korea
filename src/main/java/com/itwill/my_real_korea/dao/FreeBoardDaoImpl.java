@@ -1,3 +1,4 @@
+
 package com.itwill.my_real_korea.dao;
 
 import java.util.HashMap;
@@ -13,7 +14,7 @@ import com.itwill.my_real_korea.mapper.FreeBoardMapper;
 
 @Repository
 public class FreeBoardDaoImpl implements FreeBoardDao{
-
+	
 	@Autowired
 	private FreeBoardMapper freeBoardMapper;
 	
@@ -27,79 +28,67 @@ public class FreeBoardDaoImpl implements FreeBoardDao{
 		System.out.println(">>> freeBoardDaoImpl():setFreeBoardMapper()호출 ");
 		this.freeBoardMapper = freeBoardMapper;
 	}
-	
 	@Override
-	public int insertContent(FreeBoard freeBoard) throws Exception{
+	public int insertContent(FreeBoard freeBoard) throws Exception {
 		return freeBoardMapper.insertContent(freeBoard);
 	}
 	@Override
-	public int updateContent(FreeBoard freeBoard) throws Exception{
-		return freeBoardMapper.updateContent(freeBoard);
-	}
-	@Override
-	public int deleteContent(FreeBoard freeBoard) throws Exception{
-		return freeBoardMapper.deleteContent(freeBoard);
-	}
-	@Override
-	public int selectByNo(int fBoNo) throws Exception{
+	public int selectByNo(int fBoNo) throws Exception {
 		return freeBoardMapper.selectByNo(fBoNo);
 	}
 	@Override
-	public int increaseReadCount(int fBoNo) throwsException{
-		return freeBoardMapper.increaseReadCount(fBoNo);
-	}
-	@Override
-	public int selectCount() throws Exception {
-		return freeBoardMapper.selectCount();
-	}
-
-	@Override
-	public int selectSearchCount(String keyword) throws Exception {
-		return freeBoardMapper.selectSearchCount(keyword);
-	}
-
-	@Override
-	public List<FreeBoard> selectSearchFreeBoardList(int pageStart, int pageEnd, String keyword) throws Exception {
-		Map<String, Object> pageMap = new HashMap<>();
-		pageMap.put("pageStart", pageStart);
-		pageMap.put("pageEnd", pageEnd);
-		pageMap.put("keyword", keyword);
-		
-		return freeBoardMapper.selectSearchFreeBoardList(pageMap);
-	}
-	@Override
-	public FreeBoard selectByNo(int fBoNo) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
 	public List<FreeBoard> selectAll(int pageStart, int pageEnd) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return freeBoardMapper.selectAll(pageStart, pageEnd);
 	}
 	@Override
 	public String getTitleString(FreeBoard freeBoard) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		return freeBoardMapper.getTitleString(freeBoard);
 	}
 	@Override
 	public int deleteContent(int fBoNo) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+		return freeBoardMapper.deleteContent(fBoNo);
 	}
 	@Override
-	public int increaseContentReadCount(int fBoNo) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+	public int updateContent(FreeBoard freeBoard) throws Exception {
+		return freeBoardMapper.updateContent(freeBoard);
+	}
+	@Override
+	public int increaseContentReadCount(int fBoCount) throws Exception {
+		return freeBoardMapper.increaseContentReadCount(fBoCount);
 	}
 	@Override
 	public int selectContentCount() throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+		return freeBoardMapper.selectContentCount();
+	}
+	@Override
+	public int selectSearchCount(String keyword) throws Exception {
+		return freeBoardMapper.selectSearchCount(keyword);
 	}
 	@Override
 	public List<FreeBoard> selectSearchNoticeList(int pageStart, int pageEnd, String keyword) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return freeBoardMapper.selectSearchNoticeList(pageStart, pageEnd, keyword);
 	}
+	
+//	@Override
+//	public int insertContent(FreeBoard freeBoard) throws Exception{
+//		return freeBoardMapper.insertContent(freeBoard);
+//	}
+//	@Override
+//	public int updateContent(FreeBoard freeBoard) throws Exception{
+//		return freeBoardMapper.updateContent(freeBoard);
+//	}
+//	@Override
+//	public int deleteContent(FreeBoard freeBoard) throws Exception{
+//		return freeBoardMapper.deleteContent(freeBoard);
+//	}
+//	@Override
+//	public int selectSearchCount(String keyword) throws Exception {
+//		return freeBoardMapper.selectSearchCount(keyword);
+//	}
+//	@Override
+//	public FreeBoard selectByNo(int fBoNo) throws Exception {
+//		return freeBoardMapper.selectByNo(fBoNo);
+//	}
+
 }

@@ -7,7 +7,7 @@ import com.itwill.my_real_korea.dto.ChatRoom;
 
 public interface ChatMsgDao {
 
-	// 채팅방 1개의 전체 대화보기
+		// 채팅방 1개의 전체 대화보기
 		public List<ChatMsg> selectByRoomNo(int roomNo);
 		
 		// 채팅 메세지 1개 보기
@@ -29,7 +29,7 @@ public interface ChatMsgDao {
 		
 		
 		// 메세지 읽음으로 변경
-		public int updateReadMsg(int roomNo);
+		public int updateReadMsg(int roomNo, String userId);
 		
 		// 채팅 메세지 1개 삭제
 		public int deleteChatMsg(int msgNo);

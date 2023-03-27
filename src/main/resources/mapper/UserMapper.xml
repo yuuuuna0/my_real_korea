@@ -7,21 +7,21 @@ user_id,user_password,user_name,user_nickname,user_phone,user_email,user_birth,u
  -->
 	<insert id="create" parameterType="com.itwill.my_real_korea.dto.User">
 			insert into user_info(user_id, password, name, nickname, phone, email, birth, address, gender, point, is_admin) 
-			values(#{user_id},#{password},#{name},#{nickname},#{phone},#{email},#{birth},#{address},#{gender},#{point},#{is_admin})
+			values(#{userId},#{password},#{name},#{nickname},#{phone},#{email},#{birth},#{address},#{gender},#{point},#{isAdmin})
 	</insert>
 	<update id="update" parameterType="com.itwill.my_real_korea.dto.User">
 		update  user_info 
 		set password = #{password}, nickname = #{nickname}, phone = #{phone}, email = #{email}
-		where user_id = #{user_id}
+		where user_id = #{userId}
 	</update>
 	<delete id="remove" parameterType="java.lang.String">
 		delete user_info 
-		where user_id = #{user_id}
+		where user_id = #{userId}
 	</delete>
 	<select id="findUser" parameterType="java.lang.String" resultType="com.itwill.my_real_korea.dto.User">
 		select user_id, password, nickname, phone, email, birth, address, gender, point, is_admin 
 		from user_info 
-		where user_id = #{user_id}
+		where user_id = #{userId}
 	</select>
 	<select id="findUserList" resultType="com.itwill.my_real_korea.dto.User">
 		select user_id, nickname, phone, email, birth, address, gender, point, is_admin
@@ -34,16 +34,16 @@ user_id,user_password,user_name,user_nickname,user_phone,user_email,user_birth,u
 	
 	<!-- 
 	<select id="isExistUser" parameterType="java.lang.String" resultType="java.lang.Boolean">
-    	select case when count(*) > 0 then true else false end as result from user_info where user_id = #{user_id}
+    	select case when count(*) > 0 then true else false end as result from user_info where user_id = #{userId}
 	</select>
 	 -->
 	<select id="isExistUser" parameterType="java.lang.String" resultType="java.lang.Integer">
-		select count(*) from user_info where user_id = #{user_id}
+		select count(*) from user_info where user_id = #{userId}
 	</select>
 	
 	<!-- 
 	<select id="isMatchPassword" parameterType="java.lang.String" resultType="java.lang.Integer">
-		SELECT COUNT(*) FROM USER_INFO WHERE USER_ID = #{userId} AND PASSWORD = #{password}
+		select count(*) from user_info where user_id = #{userId} and password = #{password}
 	</select>
 	 -->
 	

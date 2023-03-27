@@ -2,15 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.itwill.my_real_korea.mapper.ChatMsgMapper">
 
-<select id="selectByRoomNo" parameterType="java.lang.Integer" resultType="com.itwill.my_real_korea.dto.ChatMsg">
+<select id="selectByRoomNo" parameterType="java.lang.Integer" resultType="com.itwill.my_real_korea.dto.chat.ChatMsg">
 	select * from chat_msg where room_no=#{roomNo} order by msg_no
 </select>
 
-<select id="selectByMsgNo" parameterType="java.lang.Integer" resultType="com.itwill.my_real_korea.dto.ChatMsg">
+<select id="selectByMsgNo" parameterType="java.lang.Integer" resultType="com.itwill.my_real_korea.dto.chat.ChatMsg">
 	select * from chat_msg where msg_no=#{msgNo}
 </select>
 
-<select id="selectNotReadMsg" parameterType="java.util.Map" resultType="com.itwill.my_real_korea.dto.ChatMsg">
+<select id="selectNotReadMsg" parameterType="java.util.Map" resultType="com.itwill.my_real_korea.dto.chat.ChatMsg">
 	select * from chat_msg where room_no=#{roomNo} and msg_read=0 and user_id!=#{userId}
 </select>
 
@@ -18,7 +18,7 @@
 	select count(*) from chat_msg where room_no=#{roomNo} and msg_read=0 and user_id!=#{userId}
 </select>
 
-<select id="selectAllNotReadMsg" parameterType="String" resultType="com.itwill.my_real_korea.dto.ChatMsg">
+<select id="selectAllNotReadMsg" parameterType="String" resultType="com.itwill.my_real_korea.dto.chat.ChatMsg">
 	select * from (select * from chat_msg 
                         where room_no in
                             (select room_no from chat_room c
@@ -48,7 +48,7 @@
 	update chat_msg set msg_content='삭제된 메세지입니다.' where msg_no=#{msgNo}
 </update>
 
-<insert id="insertChatMsg" parameterType="com.itwill.my_real_korea.dto.ChatMsg">
+<insert id="insertChatMsg" parameterType="com.itwill.my_real_korea.dto.chat.ChatMsg">
 	<selectKey resultType="java.lang.Integer" keyProperty="msgNo" order="BEFORE">
 		select chat_msg_msg_no_seq.nextval from dual
 	</selectKey>

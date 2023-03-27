@@ -31,7 +31,7 @@ String getTitleString(FreeBoard freeBoard) throws Exception;
 /*
  *  게시글 삭제
  */
-int deleteContent(FreeBoard freeBoard) throws Exception;
+int deleteContent(int fBoNo) throws Exception;
   
 /*
  *  게시글 내용 수정

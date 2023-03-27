@@ -20,6 +20,7 @@ public class UserServiceImpl implements UserService{
 	public UserServiceImpl() throws Exception {
 		
 	}
+	
 	//회원 가입
 	@Override
 	public int create(User user)throws ExistedUserException, Exception{
@@ -39,14 +40,17 @@ public class UserServiceImpl implements UserService{
 	 */
 	@Override
 	public int login(String userId, String password) throws Exception, UserNotFoundException, PasswordMismatchException {
-		User user = userDao.findUser(userId);
-		if(user == null) {
-			throw new UserNotFoundException(userId + " 는 존재하지않는 아이디입니다.");
-		}
-		if(!user.isMatchPassword(password)){
-			throw new PasswordMismatchException("패스워드가 일치하지않습니다.");
-		}
-		return 2;
+	    User user = userDao.findUser(userId);
+	    if (user == null) {
+	        //아이디 존재 안함
+	        throw new UserNotFoundException(userId + " 는 존재하지 않는 아이디입니다.");
+	    }
+	    boolean rightPasswordCount = userDao.isMatchPassword(userId,password);
+	    if (!rightPasswordCount) {
+	        //패스워드 일치 안함
+	        throw new PasswordMismatchException("패스워드가 일치하지 않습니다.");
+	    }
+	    return 2;
 	}
 
 	//회원 정보 수정

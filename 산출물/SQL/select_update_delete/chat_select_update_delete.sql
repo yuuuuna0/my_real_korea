@@ -60,7 +60,7 @@ and msg_read=0 and user_id!='kms2'
 group by room_no;
 
 -- 메세지 읽음 수 1로 변경
-update chat_msg set msg_read=1 where room_no=1 and msg_send_time < sysdate;
+update chat_msg set msg_read=1 where room_no=1 and user_id='kms1';
 
 -- 채팅 메세지 1개 삭제
 delete chat_msg where msg_no=3;

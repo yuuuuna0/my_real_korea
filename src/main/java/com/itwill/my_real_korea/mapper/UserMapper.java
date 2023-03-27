@@ -1,6 +1,7 @@
 package com.itwill.my_real_korea.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -21,7 +22,7 @@ public interface UserMapper {
 	
 	public int isExistUser(String userId);
 	
-	public int isMatchPassword(String password);
+	public int isMatchPassword(Map<String,Object> map);
 
 	
 }

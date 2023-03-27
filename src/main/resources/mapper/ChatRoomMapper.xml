@@ -13,7 +13,7 @@
 	order by msg_send_time desc
 </select>
 
-<select id="selectByRoomNo" parameterType="java.lang.Integer" resultType="com.itwill.my_real_korea.dto.ChatRoom">
+<select id="selectCheckByRoomNo" parameterType="java.lang.Integer" resultType="com.itwill.my_real_korea.dto.ChatRoom">
 	select * from chat_room where room_no=#{roomNo}
 </select>
 

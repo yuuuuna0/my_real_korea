@@ -1,3 +1,4 @@
+
 package com.itwill.my_real_korea.dao;
 
 import java.util.List;
@@ -15,7 +16,7 @@ int insertContent(FreeBoard freeBoard) throws Exception;
 /*
  * 자유게시판 게시글번호(boardno)로 해당 게시글 보기 
  */
-FreeBoard selectByNo(int fBoNo) throws Exception;
+int selectByNo(int fBoNo) throws Exception;
   
 /*
  * 자유게시판 리스트 보기 (게시글 시작번호, 게시글 끝번호) - 페이징 처리
@@ -30,7 +31,7 @@ String getTitleString(FreeBoard freeBoard) throws Exception;
 /*
  *  게시글 삭제
  */
-int deleteContent(FreeBoard freeBoard) throws Exception;
+int deleteContent(int fBoNo) throws Exception;
   
 /*
  *  게시글 내용 수정

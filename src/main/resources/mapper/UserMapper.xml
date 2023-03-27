@@ -32,19 +32,11 @@ user_id,user_password,user_name,user_nickname,user_phone,user_email,user_birth,u
 		select user_id
 	</select>
 	
-	<!-- 
-	<select id="isExistUser" parameterType="java.lang.String" resultType="java.lang.Boolean">
-    	select case when count(*) > 0 then true else false end as result from user_info where user_id = #{user_id}
-	</select>
-	 -->
 	<select id="isExistUser" parameterType="java.lang.String" resultType="java.lang.Integer">
-		select count(*) from user_info where user_id = #{user_id}
+		select count(*) from user_info where user_id = #{userId}
 	</select>
-	
-	<!-- 
-	<select id="isMatchPassword" parameterType="java.lang.String" resultType="java.lang.Integer">
-		SELECT COUNT(*) FROM USER_INFO WHERE USER_ID = #{userId} AND PASSWORD = #{password}
+	<select id="isMatchPassword" parameterType="java.util.Map" resultType="java.lang.Integer">
+		select count(*) from user_info where user_id = #{userId} and password = #{password}
 	</select>
-	 -->
 	
 </mapper>

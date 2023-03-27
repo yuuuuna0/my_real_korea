@@ -59,8 +59,8 @@ public class ChatMsgDaoImpl implements ChatMsgDao{
 		return chatMsgMapper.countAllNotReadMsg(userId);
 	}
 	@Override
-	public int updateReadMsg(int roomNo) {
-		return chatMsgMapper.updateReadMsg(roomNo);
+	public int updateReadMsg(int roomNo, String userId) {
+		return chatMsgMapper.updateReadMsg(roomNo, userId);
 	}
 	@Override
 	public int deleteChatMsg(int msgNo) {

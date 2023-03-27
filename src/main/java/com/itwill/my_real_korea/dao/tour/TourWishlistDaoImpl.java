@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.itwill.my_real_korea.dto.tour.TourWishlist;
-import com.itwill.my_real_korea.mapper.tour.TourWishlistMapper;
+import com.itwill.my_real_korea.mapper.TourWishlistMapper;
 @Repository
 public class TourWishlistDaoImpl implements TourWishlistDao {
 	@Autowired

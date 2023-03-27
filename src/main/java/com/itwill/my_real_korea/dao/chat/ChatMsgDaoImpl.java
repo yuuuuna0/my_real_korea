@@ -9,8 +9,8 @@ import org.springframework.stereotype.Repository;
 
 import com.itwill.my_real_korea.dto.chat.ChatMsg;
 import com.itwill.my_real_korea.dto.chat.ChatRoom;
-import com.itwill.my_real_korea.mapper.chat.ChatMsgMapper;
-import com.itwill.my_real_korea.mapper.notice.NoticeMapper;
+import com.itwill.my_real_korea.mapper.ChatMsgMapper;
+import com.itwill.my_real_korea.mapper.NoticeMapper;
 
 @Repository
 public class ChatMsgDaoImpl implements ChatMsgDao{

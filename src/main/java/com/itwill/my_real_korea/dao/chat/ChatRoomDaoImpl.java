@@ -8,8 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.itwill.my_real_korea.dto.chat.ChatRoom;
-import com.itwill.my_real_korea.mapper.chat.ChatMsgMapper;
-import com.itwill.my_real_korea.mapper.chat.ChatRoomMapper;
+import com.itwill.my_real_korea.mapper.ChatMsgMapper;
+import com.itwill.my_real_korea.mapper.ChatRoomMapper;
 
 @Repository
 public class ChatRoomDaoImpl implements ChatRoomDao{

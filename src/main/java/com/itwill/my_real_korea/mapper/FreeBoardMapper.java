@@ -1,5 +1,5 @@
 
-package com.itwill.my_real_korea.mapper.freeboard;
+package com.itwill.my_real_korea.mapper;
 
 import java.util.List;
 import java.util.Map;

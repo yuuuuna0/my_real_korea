@@ -1,5 +1,8 @@
 package com.itwill.my_real_korea.dto.tour;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.itwill.my_real_korea.dto.City;
 
 import lombok.AllArgsConstructor;
@@ -24,7 +27,6 @@ CITY_NO            NUMBER
  */
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 public class Tour {
 	private int toNo;
 	private String toName;
@@ -37,6 +39,28 @@ public class Tour {
 	private String toNotice;
 	private int toCount;
 	private City city;		//FK
+	
+	private List<TourImg> tourImgList;
+	private List<TourReview> tourReviewList;
+	
+	public Tour(int toNo, String toName, int toType, int toTime, int toPerson, String toMeet, int toPrice,
+			String toInfo, String toNotice, int toCount, City city) {
+		super();
+		this.toNo = toNo;
+		this.toName = toName;
+		this.toType = toType;
+		this.toTime = toTime;
+		this.toPerson = toPerson;
+		this.toMeet = toMeet;
+		this.toPrice = toPrice;
+		this.toInfo = toInfo;
+		this.toNotice = toNotice;
+		this.toCount = toCount;
+		this.city = city;
+		this.tourImgList=new ArrayList<TourImg>();
+		this.tourReviewList=new ArrayList<TourReview>();
+	}
+	
 	
 	
 }

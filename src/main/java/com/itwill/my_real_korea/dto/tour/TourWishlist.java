@@ -1,5 +1,7 @@
 package com.itwill.my_real_korea.dto.tour;
 
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,7 +19,7 @@ WISH_NO             NUMBER
 @NoArgsConstructor
 public class TourWishlist {
 	private int toWishNo;
-	private Tour tour;
+	private List<Tour> tour;
 	private String userId;
 	private int wishNo;
 }

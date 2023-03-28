@@ -44,9 +44,6 @@ public interface ChatService {
 	// 채팅방 1개의 읽지 않은 메세지 보기
 	public List<ChatMsg> selectNotReadMsg(int roomNo, String userId);
 	
-	// 채팅방 1개의 읽지 않은 메세지 중 가장 최근 메세지 1개 보기
-	public ChatMsg selectLastNotReadMsg(int roomNo, String userId);
-	
 	// 채팅방 1개의 읽지 않은 메세지 수 
 	public int countNotReadMsg(int roomNo, String userId);
 	
@@ -65,7 +62,7 @@ public interface ChatService {
 	// 채팅 메세지 삭제 시 메세지 대체 
 	public int updateDeletedMsg(int msgNo);
 	
-	// 채팅 생성 
+	// 채팅 메세지 생성 
 	public int insertChatMsg(ChatMsg chatMsg);
 
 	

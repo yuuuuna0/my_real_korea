@@ -7,7 +7,6 @@ import com.itwill.my_real_korea.dto.chat.ChatRoom;
 
 public interface ChatMsgDao {
 
-	
 		// 채팅방 1개의 전체 대화보기
 		public List<ChatMsg> selectByRoomNo(int roomNo);
 		

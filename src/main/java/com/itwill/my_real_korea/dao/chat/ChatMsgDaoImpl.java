@@ -60,7 +60,10 @@ public class ChatMsgDaoImpl implements ChatMsgDao{
 	}
 	@Override
 	public int updateReadMsg(int roomNo, String userId) {
-		return chatMsgMapper.updateReadMsg(roomNo, userId);
+		Map<String, Object> msgMap = new HashMap<>();
+		msgMap.put("roomNo", roomNo);
+		msgMap.put("userId", userId);
+		return chatMsgMapper.updateReadMsg(msgMap);
 	}
 	@Override
 	public int deleteChatMsg(int msgNo) {

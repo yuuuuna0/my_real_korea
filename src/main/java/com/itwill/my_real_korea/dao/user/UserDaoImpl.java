@@ -63,6 +63,7 @@ public class UserDaoImpl implements UserDao {
 		return isExist;
 	}
 	
+	@Override
 	public boolean isMatchPassword(String userId, String password){
 		Map<String,Object> map = new HashMap();
 		map.put("userId", userId);

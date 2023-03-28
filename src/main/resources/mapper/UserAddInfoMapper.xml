@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itwill.my_real_korea.mapper.UserAddInfoMapper">
+
+	<insert id="createUserAddInfo" parameterType="com.itwill.my_real_korea.dto.user.UserAddInfo">
+		insert into user_add_info(introduce, alcohol, smoking, user_id) 
+		values (#{introduce}, #{alcohol}, #{smoking}, #{userId})
+	</insert>
+	<update id="updateUserAddInfo" parameterType="com.itwill.my_real_korea.dto.user.UserAddInfo">
+		update  user_add_info 
+		set introduce = #{introduce}, alcohol = #{alcohol}, smoking = #{smoking}
+		where user_id = #{userId}
+	</update>
+	<delete id="removeUserAddInfo" parameterType="java.lang.String">
+		delete user_add_info 
+		where user_id = #{userId}
+	</delete>
+	<select id="findUserAddInfo" parameterType="java.lang.String" resultType="com.itwill.my_real_korea.dto.user.UserAddInfo">
+		select introduce, alcohol, smoking, user_id
+		from user_add_info 
+		where user_id = #{userId}
+	</select>
+
+</mapper>

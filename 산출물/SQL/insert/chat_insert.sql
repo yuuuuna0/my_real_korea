@@ -6,9 +6,9 @@ insert into user_info(user_id,password,name,nickname,phone,email,birth,address,g
 
 /******** chat_room ***********/
 desc chat_room;
-insert into chat_room(room_no,room_name,from_id,to_id) values (chat_room_room_no_seq.nextval,'채팅방1','kms1','kms2');
-insert into chat_room(room_no,room_name,from_id,to_id) values (chat_room_room_no_seq.nextval,'채팅방2','kms3','kms2');
-insert into chat_room(room_no,room_name,from_id,to_id) values (chat_room_room_no_seq.nextval,'채팅방3','kms2','kms3');
+insert into chat_room(room_no,room_name,send_time,not_read,from_id,to_id) values (chat_room_room_no_seq.nextval,'채팅방1',sysdate,0,'kms1','kms2');
+insert into chat_room(room_no,room_name,send_time,not_read,from_id,to_id) values (chat_room_room_no_seq.nextval,'채팅방2',sysdate,0,'kms3','kms2');
+insert into chat_room(room_no,room_name,send_time,not_read,from_id,to_id) values (chat_room_room_no_seq.nextval,'채팅방3',sysdate,0,'kms2','kms3');
 
 /******** chat_msg ***********/
 desc chat_msg;

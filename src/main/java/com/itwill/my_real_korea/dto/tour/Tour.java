@@ -27,6 +27,7 @@ CITY_NO            NUMBER
  */
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class Tour {
 	private int toNo;
 	private String toName;
@@ -39,7 +40,5 @@ public class Tour {
 	private String toNotice;
 	private int toCount;
 	private City city;		//FK
-	
-
 	
 }

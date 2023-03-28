@@ -1,9 +1,9 @@
 package com.itwill.my_real_korea.dao.freeboard;
 
-import static org.junit.Assert.assertEquals;
+//import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
-import org.junit.Test;
+//import org.junit.Test;
 import org.junit.jupiter.api.Disabled;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

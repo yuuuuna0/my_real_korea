@@ -40,12 +40,13 @@ class TourDaoImplTest {
 			System.out.println(tour.getToName());
 		}		
 	}
-	//왜 null 나오지? ==> 얘만 안나옴
+
 	void testSelectByToNo() throws Exception{
 		Tour tour=tourDao.selectByToNo(4);
 		System.out.println(tour);
 	}
 	
+	@Test
 	void testSelectByKeyword() throws Exception{
 		List<Tour> tourList=tourDao.selectByKeyword("투어");
 		System.out.println(tourList.size());
@@ -59,7 +60,6 @@ class TourDaoImplTest {
 		System.out.println(tourList.size());
 	}
 
-	@Test
 	void testSelectByToType() throws Exception{
 		List<Tour> tourList=tourDao.selectByToType(2);
 		System.out.println(tourList.size());

@@ -19,9 +19,8 @@
 		select * from tour
 	</select>
 	<!-- 4. 투어상품 상품번호로 상세보기 -->
-	<select id="seletByToNo" parameterType="java.lang.Integer" resultType="com.itwill.my_real_korea.dto.tour.Tour">
-		select * from tour where to_no=#
-		{toNo}
+	<select id="selectByToNo" parameterType="java.lang.Integer" resultType="com.itwill.my_real_korea.dto.tour.Tour">
+		select * from tour where to_no=#{toNo}
 	</select>
 	<!-- 5. 키워드로 투어상품 검색 -->
 	<select id="selectByKeyword" parameterType="java.lang.String" resultType="com.itwill.my_real_korea.dto.tour.Tour">

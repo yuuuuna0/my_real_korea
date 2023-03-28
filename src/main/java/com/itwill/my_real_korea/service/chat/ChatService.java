@@ -8,7 +8,7 @@ import com.itwill.my_real_korea.dto.chat.ChatRoom;
 public interface ChatService {
 
 	/*
-	 * chatRoom
+	 *  chatRoom
 	 */
 	
 	// 채팅방 목록 보기 

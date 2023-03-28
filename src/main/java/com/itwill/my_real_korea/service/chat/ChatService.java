@@ -14,7 +14,7 @@ public interface ChatService {
 	// 채팅방 목록 보기 
 	public List<ChatRoom> selectAll(String userId);
 	
-	// 채팅방 목록 선택 기능 
+	// 채팅방 목록 선택
 	public ChatRoom selectCheckByRoomNo(int roomNo);
 	
 	// from_id, to_id로 채팅방 번호 찾기

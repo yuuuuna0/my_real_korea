@@ -11,7 +11,7 @@
 	</insert>
 	<!-- 2. 투어이미지번호로 투어 이미지 하나 삭제 -->
 	<delete id="deleteTourImg" parameterType="java.lang.Integer">
-		delete tour_img where to_img_no=#{toImgNo}
+		delete from tour_img where to_img_no=#{toImgNo}
 	</delete>
 	<!-- 3. 투어번호로 투어이미지 전체 출력 -->
 	<select id="selectTourImgList" parameterType="java.lang.Integer" resultType="com.itwill.my_real_korea.dto.tour.TourImg">

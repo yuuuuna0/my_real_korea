@@ -19,7 +19,7 @@
 	</delete>
 	<!-- 4. 투어예약번호로 예약 상세보기 -->
 	<select id="selectByToRsNo" parameterType="java.lang.Integer" resultType="com.itwill.my_real_korea.dto.tour.TourReserve">
-		select * from tour_reserve where to_rs_no=#{toRsNo}
+		select tr.*, t.* from tour_reserve tr join tour t on tr.to_no=t.to_no where tr.to_rs_no=#{toRsNo}
 	</select>
 	<!-- 5. 유저의 투어예약 리스트 전체 보여주기 -->
 	<select id="selectAllTourReserveByUserId" parameterType="java.lang.String" resultType="com.itwill.my_real_korea.dto.tour.TourReserve">

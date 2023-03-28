@@ -18,7 +18,13 @@
 		select * from tour_wishlist where user_id=#{userId}
 	</select>
 	<!-- 4. 투어위시리스트 중 하나 상세보기 -->
-	<select id="selectWishlistWithTourByToWishNo" parameterType="java.lang.Integer" resultType="com.itwill.my_real_korea.dto.tour.TourWishlist">
+	<resultMap id="TourWithTourWishlistResultMap" type="com.itwill.my_real_korea.dto.tour.TourWishlist">
+	  	<association property="tour" javaType="com.itwill.my_real_korea.dto.tour.Tour" autoMapping="true">
+	  	</association>
+	  </resultMap>
+	<select id="selectWishlistWithTourByToWishNo" 
+	parameterType="java.lang.Integer" 
+	resultType="TourWithTourWishlistResultMap">
 		select t.*, tw.* from tour t join tour_wishlist tw on t.to_no=tw.to_no where to_wish_no=#{toWishNo}
 	</select>
 </mapper>

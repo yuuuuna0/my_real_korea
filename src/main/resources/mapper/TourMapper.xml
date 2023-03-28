@@ -24,7 +24,7 @@
 	</select>
 	<!-- 5. 키워드로 투어상품 검색 -->
 	<select id="selectByKeyword" parameterType="java.lang.String" resultType="com.itwill.my_real_korea.dto.tour.Tour">
-		select * from tour where to_name like '%'||#{keyword}||'%' order by to_no desc
+		select * from tour where to_name like '%'||#{keyword}||'%'
 	</select>
 	<!-- 6. 지역으로 투어상품 검색 -->
 	<select id="selectByCityNo" parameterType="java.lang.Integer" resultType="com.itwill.my_real_korea.dto.tour.Tour">

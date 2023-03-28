@@ -11,14 +11,14 @@
 
   <!-- 전체 티켓 상품 보기 -->
      <select id="selectAll" resultType="com.itwill.my_real_korea.dto.ticket.Ticket">
-              SELECT * FROM TICKET;
+              SELECT * FROM TICKET
       </select>
 		<!-- 상품 번호로 검색 -->
             <select id="selectTicketNo"  parameterType="java.lang.Integer" resultType="com.itwill.my_real_korea.dto.ticket.Ticket">
                   SELECT * FROM TICKET WHERE TI_NO=#{TI_NO}
             </select>
         <!-- 상품명으로 검색 -->
-            <select id="selectByTiciketTitle" parameterType="java.lang.String" resultType="com.itwill.my_real_korea.dto.ticket.Ticket">
+            <select id="selectByTicketTitle" parameterType="java.lang.String" resultType="com.itwill.my_real_korea.dto.ticket.Ticket">
                   SELECT * FROM TICKET 
             </select>
         <!-- 상품 가격 순으로 검색 -->

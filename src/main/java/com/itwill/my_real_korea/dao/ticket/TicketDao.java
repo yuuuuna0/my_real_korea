@@ -10,7 +10,7 @@ public interface TicketDao {
     int insertTicket(Ticket ticket) throws Exception;
 
     // 티켓 번호로 찾기
-    Ticket selectByNo(int tiNo) throws Exception;
+    Ticket selectTicketNo(int tiNo) throws Exception;
 
     // 티켓 리스트
     List<Ticket> selectAll() throws Exception;

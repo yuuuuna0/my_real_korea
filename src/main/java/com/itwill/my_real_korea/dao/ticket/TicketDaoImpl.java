@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.itwill.my_real_korea.dto.ticket.Ticket;
 import com.itwill.my_real_korea.mapper.TicketMapper;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class TicketDaoImpl implements TicketDao{
 	
 	private final TicketMapper ticketMapper;
@@ -24,7 +26,7 @@ public class TicketDaoImpl implements TicketDao{
 	}
 
 	@Override
-	public Ticket selectByNo(int tiNo) throws Exception {
+	public Ticket selectTicketNo(int tiNo) throws Exception {
 		return ticketMapper.selectByNo(tiNo);
 	}
 	

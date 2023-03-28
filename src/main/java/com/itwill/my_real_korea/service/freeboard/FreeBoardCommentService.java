@@ -13,7 +13,9 @@ public interface FreeBoardCommentService {
 	/*
 	 * 자유게시판 게시글,댓글 번호(boardno)로 해당 게시글 보기 
 	 */
-	FreeBoardComment selectByNo(int fCommentNo) throws Exception;
+	int selectByNo(int fCommentNo) throws Exception;
+	
+	int selectByContentNo(int fBoNo) throws Exception;
 	/*
 	 * 자유게시판 리스트 보기 (게시글 시작번호, 게시글 끝번호) - 페이징 처리
 	 */

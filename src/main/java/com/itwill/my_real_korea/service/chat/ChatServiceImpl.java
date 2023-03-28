@@ -22,12 +22,15 @@ public class ChatServiceImpl implements ChatService{
 
 	public ChatServiceImpl() {
 	}
+	/************* ChatRoom **************/
 	
+	// 채팅방 목록 보기 
 	@Override
 	public List<ChatRoom> selectAll(String userId) {
 		return chatRoomDao.selectAll(userId);
 	}
 
+	// 채팅방 목록 선택 기능 
 	@Override
 	public ChatRoom selectCheckByRoomNo(int roomNo) {
 		return chatRoomDao.selectCheckByRoomNo(roomNo);
@@ -50,8 +53,7 @@ public class ChatServiceImpl implements ChatService{
 	}
 
 	/*
-	 * 0 : 채팅방 중복
-	 * 1 : 채팅방 중복X
+	채팅방 중복 체크
 	 */
 	@Override
 	public boolean duplicateCheck(String fromId, String toId) {
@@ -64,77 +66,85 @@ public class ChatServiceImpl implements ChatService{
 		}
 	}
 
+	// 채팅방 생성 
 	@Override
 	public int insertChatRoom(ChatRoom chatRoom) {
 		return chatRoomDao.insertChatRoom(chatRoom);
 	}
 
+	// 채팅방 삭제 
 	@Override
 	public int deleteChatRoom(int roomNo) {
 		return chatRoomDao.deleteChatRoom(roomNo);
 	}
 
+	// 1개의 채팅방 안 읽은 메세지 수
 	@Override
 	public int countNotReadInChatRoom(int roomNo, String userId) {
 		return chatRoomDao.countNotReadInChatRoom(roomNo, userId);
 	}
 
+	/************* ChatRoom **************/
+	
+	// 채팅방 1개의 전체 대화보기 
 	@Override
 	public List<ChatMsg> selectByRoomNo(int roomNo) {
 		return chatMsgDao.selectByRoomNo(roomNo);
 	}
 
+	// 채팅 메세지 1개 보기 
 	@Override
 	public ChatMsg selectByMsgNo(int msgNo) {
 		return chatMsgDao.selectByMsgNo(msgNo);
 	}
 
+	// 채팅방 1개의 읽지 않은 메세지 보기
 	@Override
 	public List<ChatMsg> selectNotReadMsg(int roomNo, String userId) {
 		return chatMsgDao.selectNotReadMsg(roomNo, userId);
 	}
 
+	// 채팅방 1개의 읽지 않은 메세지 수 
 	@Override
 	public int countNotReadMsg(int roomNo, String userId) {
 		return chatMsgDao.countNotReadMsg(roomNo, userId);
 	}
 
+	// 읽지 않은 메세지 전체 보기
 	@Override
 	public List<ChatMsg> selectAllNotReadMsg(String userId) {
 		return chatMsgDao.selectAllNotReadMsg(userId);
 	}
 
+	// 읽지 않은 메세지 총 개수 
 	@Override
 	public int countAllNotReadMsg(String userId) {
 		return chatMsgDao.countAllNotReadMsg(userId);
 	}
 
+	// 메세지 읽음으로 변경 
 	@Override
 	public int updateReadMsg(int roomNo, String userId) {
 		return chatMsgDao.updateReadMsg(roomNo, userId);
 	}
 
+	// 채팅 메세지 1개 삭제
 	@Override
 	public int deleteChatMsg(int msgNo) {
 		return chatMsgDao.deleteChatMsg(msgNo);
 	}
-
+	
+	// 채팅 메세지 삭제 시 메세지 대체
 	@Override
 	public int updateDeletedMsg(int msgNo) {
 		return chatMsgDao.updateDeletedMsg(msgNo);
 	}
 
+	// 채팅 메세지 생성 
 	@Override
 	public int insertChatMsg(ChatMsg chatMsg) {
 		return chatMsgDao.insertChatMsg(chatMsg);
 	}
 
-	@Override
-	public ChatMsg selectLastNotReadMsg(int roomNo, String userId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-	
 	
 }

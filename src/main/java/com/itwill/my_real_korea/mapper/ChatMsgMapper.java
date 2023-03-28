@@ -30,8 +30,8 @@ public interface ChatMsgMapper {
 
 	// 읽지 않은 메세지가 있는 채팅방 번호와 메세지 수 보기
 
-	// 메세지 읽음으로 변경
-	public int updateReadMsg(int roomNo, String userId);
+	// 메세지 읽음으로 변경(roomNo, userId)
+	public int updateReadMsg(Map<String, Object> msgMap);
 
 	// 채팅 메세지 1개 삭제
 	public int deleteChatMsg(int msgNo);

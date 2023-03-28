@@ -15,7 +15,7 @@ public interface ChatRoomMapper {
 	
 	// 채팅방 목록 선택 기능
 	public ChatRoom selectCheckByRoomNo(int roomNo);
-	
+
 	// from_id, to_id로 채팅방 찾기
 	public ChatRoom selectById(Map<String, Object> idMap);
 	

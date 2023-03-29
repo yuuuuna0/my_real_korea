@@ -46,6 +46,27 @@ class NoticeDaoImplTest {
 	}
 	@Disabled
 	@Test
+	void testselectAllOrderByDateDesc() throws Exception {
+		assertNotNull(noticeDao.selectAll(1,10));
+		List<Notice> noticeList = noticeDao.selectAllOrderByDateDesc(1,10);
+		System.out.println(noticeList);
+	}
+	@Disabled
+	@Test
+	void testselectAllOrderByDateAsc() throws Exception {
+		assertNotNull(noticeDao.selectAll(1,10));
+		List<Notice> noticeList = noticeDao.selectAllOrderByDateAsc(1,10);
+		System.out.println(noticeList);
+	}
+	
+	@Test
+	void testselectAllOrderByReadcount() throws Exception {
+		assertNotNull(noticeDao.selectAll(1,10));
+		List<Notice> noticeList = noticeDao.selectAllOrderByReadcount(1,10);
+		System.out.println(noticeList);
+	}
+	@Disabled
+	@Test
 	void testDeleteNotice() throws Exception {
 		int rowCount = noticeDao.deleteNotice(4);
 		assertEquals(rowCount, 1);
@@ -73,7 +94,7 @@ class NoticeDaoImplTest {
 		assertNotNull(noticeDao.selectSearchCount("공지"));
 		System.out.println(noticeDao.selectSearchCount("공지"));
 	}
-	
+	@Disabled
 	@Test
 	void testSelectSearchNoticeList() throws Exception {
 		assertNotNull(noticeDao.selectSearchNoticeList(1, 10, "공지"));

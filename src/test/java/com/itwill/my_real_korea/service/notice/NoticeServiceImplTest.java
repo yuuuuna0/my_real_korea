@@ -34,11 +34,33 @@ class NoticeServiceImplTest {
 		assertNotNull(noticeService.selectByNo(3));
 		System.out.println(noticeService.selectByNo(3));
 	}
+	/********공지사항 리스트 정렬**********/
 	@Disabled
 	@Test
 	void testSelectAllInt() throws Exception {
 		assertNotNull(noticeService.selectAll(1));
 		System.out.println(noticeService.selectAll(1));
+	}
+	
+	@Disabled
+	@Test
+	void testselectAllOrderByDateDescInt() throws Exception {
+		assertNotNull(noticeService.selectAllOrderByDateDesc(1));
+		System.out.println(noticeService.selectAllOrderByDateDesc(1));
+	}
+	
+	@Disabled
+	@Test
+	void testselectAllOrderByDateAscInt() throws Exception {
+		assertNotNull(noticeService.selectAllOrderByDateAsc(1));
+		System.out.println(noticeService.selectAllOrderByDateAsc(1));
+	}
+	
+	@Disabled
+	@Test
+	void testselectAllOrderByReadcountInt() throws Exception {
+		assertNotNull(noticeService.selectAllOrderByReadcount(1));
+		System.out.println(noticeService.selectAllOrderByReadcount(1));
 	}
 	@Disabled
 	@Test
@@ -52,11 +74,33 @@ class NoticeServiceImplTest {
 		assertNotNull(noticeService.getTitleString(noticeService.selectByNo(2)));
 		System.out.println(noticeService.getTitleString(noticeService.selectByNo(2)));
 	}
+	/******* 공지사항 리스트 페이징만 (정렬X)*******/
 	@Disabled
 	@Test
 	void testSelectAllIntInt() throws Exception {
 		assertNotNull(noticeService.selectAll(1,10));
 		System.out.println(noticeService.selectAll(1,10));
+	}
+	
+	@Disabled
+	@Test
+	void testselectAllOrderByDateDescIntInt() throws Exception {
+		assertNotNull(noticeService.selectAllOrderByDateDesc(1,10));
+		System.out.println(noticeService.selectAllOrderByDateDesc(1,10));
+	}
+	
+	@Disabled
+	@Test
+	void testselectAllOrderByDateAscIntInt() throws Exception {
+		assertNotNull(noticeService.selectAllOrderByDateAsc(1,10));
+		System.out.println(noticeService.selectAllOrderByDateAsc(1,10));
+	}
+	
+	
+	@Test
+	void testselectAllOrderByReadcountIntInt() throws Exception {
+		assertNotNull(noticeService.selectAllOrderByReadcount(1,10));
+		System.out.println(noticeService.selectAllOrderByReadcount(1,10));
 	}
 	@Disabled
 	@Test
@@ -85,7 +129,7 @@ class NoticeServiceImplTest {
 		assertNotNull(noticeService.selectSearchCount("수정"));
 		System.out.println(noticeService.selectSearchCount("수정"));
 	}
-	
+	@Disabled
 	@Test
 	void testSelectSearchNoticeListIntIntString() throws Exception {
 		assertNotNull(noticeService.selectSearchNoticeList(1,10,"수정"));

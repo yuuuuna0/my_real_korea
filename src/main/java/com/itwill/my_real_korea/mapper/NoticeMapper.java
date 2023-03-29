@@ -22,6 +22,18 @@ public interface NoticeMapper {
 	 */
 	List<Notice> selectAll(Map<String, Object> pageMap) throws Exception;
 	/*
+	 * 최신순 정렬 : 공지사항 리스트 보기 (게시글 시작번호, 게시글 끝번호) - 페이징 처리
+	 */
+	List<Notice> selectAllOrderByDateDesc(Map<String, Object> pageMap) throws Exception;
+	/*
+	 * 오래된순 정렬 : 공지사항 리스트 보기 (게시글 시작번호, 게시글 끝번호) - 페이징 처리
+	 */
+	List<Notice> selectAllOrderByDateAsc(Map<String, Object> pageMap) throws Exception;
+	/*
+	 * 조회수 높은순 정렬 : 공지사항 리스트 보기 (게시글 시작번호, 게시글 끝번호) - 페이징 처리
+	 */
+	List<Notice> selectAllOrderByReadcount(Map<String, Object> pageMap) throws Exception;
+	/*
 	 * 공지사항 게시글 삭제
 	 */
 	int deleteNotice(int nNo) throws Exception;

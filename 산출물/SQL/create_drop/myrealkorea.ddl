@@ -1,17 +1,15 @@
 DROP TABLE kakao_info CASCADE CONSTRAINTS;
-DROP TABLE ticket_wishlist CASCADE CONSTRAINTS;
 DROP TABLE ticket_img CASCADE CONSTRAINTS;
 DROP TABLE ticket_review CASCADE CONSTRAINTS;
 DROP TABLE payment CASCADE CONSTRAINTS;
 DROP TABLE ticket_reserve CASCADE CONSTRAINTS;
-DROP TABLE ticket CASCADE CONSTRAINTS;
 DROP TABLE notice CASCADE CONSTRAINTS;
 DROP TABLE chat_msg CASCADE CONSTRAINTS;
 DROP TABLE chat_room CASCADE CONSTRAINTS;
+DROP TABLE wishlist CASCADE CONSTRAINTS;
+DROP TABLE ticket CASCADE CONSTRAINTS;
 DROP TABLE user_img CASCADE CONSTRAINTS;
 DROP TABLE user_add_info CASCADE CONSTRAINTS;
-DROP TABLE tour_wishlist CASCADE CONSTRAINTS;
-DROP TABLE wishlist CASCADE CONSTRAINTS;
 DROP TABLE tour_review CASCADE CONSTRAINTS;
 DROP TABLE tour_reserve CASCADE CONSTRAINTS;
 DROP TABLE tour_img CASCADE CONSTRAINTS;
@@ -84,6 +82,7 @@ CREATE TABLE trip_board_comment(
 DROP SEQUENCE trip_board_comment_t_co_no_SEQ;
 
 CREATE SEQUENCE trip_board_comment_t_co_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
+
 
 
 CREATE TABLE free_board(
@@ -180,30 +179,6 @@ CREATE SEQUENCE tour_review_to_review_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
 
 
-CREATE TABLE wishlist(
-		wish_no                       		NUMBER		 NULL ,
-		user_id                       		VARCHAR2(50)		 NULL 
-);
-
-DROP SEQUENCE wishlist_wish_no_SEQ;
-
-CREATE SEQUENCE wishlist_wish_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
-
-
-
-CREATE TABLE tour_wishlist(
-		to_wish_no                    		NUMBER		 NULL ,
-		to_no                         		NUMBER		 NULL ,
-		user_id                       		VARCHAR2(50)		 NULL ,
-		wish_no                       		NUMBER		 NULL 
-);
-
-DROP SEQUENCE tour_wishlist_to_wish_no_SEQ;
-
-CREATE SEQUENCE tour_wishlist_to_wish_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
-
-
-
 CREATE TABLE user_add_info(
 		introduce                     		VARCHAR2(1000)		 NULL ,
 		alcohol                       		NUMBER		 NULL ,
@@ -221,6 +196,36 @@ CREATE TABLE user_img(
 DROP SEQUENCE user_img_user_img_no_SEQ;
 
 CREATE SEQUENCE user_img_user_img_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
+
+
+
+CREATE TABLE ticket(
+		ti_no                         		NUMBER		 NULL ,
+		ti_title                      		VARCHAR2(1000)		 NOT NULL,
+		ti_date                       		DATE		 DEFAULT sysdate		 NULL ,
+		ti_price                      		NUMBER		 NOT NULL,
+		ti_info                       		VARCHAR2(4000)		 NOT NULL,
+		ti_notice                     		VARCHAR2(1000)		 NOT NULL,
+		ti_count                      		NUMBER		 DEFAULT 0		 NULL ,
+		city_no                       		NUMBER		 NULL 
+);
+
+DROP SEQUENCE ticket_ti_no_SEQ;
+
+CREATE SEQUENCE ticket_ti_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
+
+
+
+CREATE TABLE wishlist(
+		wish_no                       		NUMBER		 NULL ,
+		user_id                       		VARCHAR2(50)		 NULL ,
+		ti_no                         		NUMBER		 NULL ,
+		to_no                         		NUMBER		 NULL 
+);
+
+DROP SEQUENCE wishlist_wish_no_SEQ;
+
+CREATE SEQUENCE wishlist_wish_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
 
 
@@ -270,23 +275,6 @@ CREATE SEQUENCE notice_n_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
 
 
-CREATE TABLE ticket(
-		ti_no                         		NUMBER		 NULL ,
-		ti_title                      		VARCHAR2(1000)		 NOT NULL,
-		ti_date                       		DATE		 DEFAULT sysdate		 NULL ,
-		ti_price                      		NUMBER		 NOT NULL,
-		ti_info                       		VARCHAR2(4000)		 NOT NULL,
-		ti_notice                     		VARCHAR2(1000)		 NOT NULL,
-		ti_count                      		NUMBER		 DEFAULT 0		 NULL ,
-		city_no                       		NUMBER		 NULL 
-);
-
-DROP SEQUENCE ticket_ti_no_SEQ;
-
-CREATE SEQUENCE ticket_ti_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
-
-
-
 CREATE TABLE ticket_reserve(
 		ti_rs_no                      		NUMBER		 NULL ,
 		ti_rs_date                    		DATE		 NOT NULL,
@@ -325,6 +313,7 @@ CREATE TABLE ticket_review(
 		ti_review_date                		DATE		 DEFAULT sysdate		 NULL ,
 		ti_review_title               		VARCHAR2(1000)		 NOT NULL,
 		ti_review_content             		VARCHAR2(2000)		 NOT NULL,
+		ti_review_img                 		VARCHAR2(500)		 NULL ,
 		ti_no                         		NUMBER		 NULL ,
 		user_id                       		VARCHAR2(50)		 NULL 
 );
@@ -336,27 +325,15 @@ CREATE SEQUENCE ticket_review_ti_review_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCL
 
 
 CREATE TABLE ticket_img(
-		ti_rv_img_no                  		NUMBER		 NULL ,
-		ti_review_img_url             		VARCHAR2(500)		 NOT NULL,
-		ti_review_no                  		NUMBER		 NULL 
-);
-
-DROP SEQUENCE ticket_img_ti_rv_img_no_SEQ;
-
-CREATE SEQUENCE ticket_img_ti_rv_img_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
-
-
-
-CREATE TABLE ticket_wishlist(
-		ti_wish_no                    		NUMBER		 NULL ,
-		user_id                       		VARCHAR2(50)		 NULL ,
-		wish_no                       		NUMBER		 NULL ,
+		ti_img_no                     		NUMBER		 NULL ,
+		ti_img_url                    		VARCHAR2(500)		 NOT NULL,
 		ti_no                         		NUMBER		 NULL 
 );
 
-DROP SEQUENCE ticket_wishlist_ti_wish_no_SEQ;
+DROP SEQUENCE ticket_img_ti_img_no_SEQ;
 
-CREATE SEQUENCE ticket_wishlist_ti_wish_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
+CREATE SEQUENCE ticket_img_ti_img_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
+
 
 
 
@@ -408,18 +385,18 @@ ALTER TABLE tour_review ADD CONSTRAINT IDX_tour_review_PK PRIMARY KEY (to_review
 ALTER TABLE tour_review ADD CONSTRAINT IDX_tour_review_FK0 FOREIGN KEY (to_no) REFERENCES tour (to_no) on delete cascade;
 ALTER TABLE tour_review ADD CONSTRAINT IDX_tour_review_FK1 FOREIGN KEY (user_id) REFERENCES user_info (user_id) on delete cascade;
 
-ALTER TABLE wishlist ADD CONSTRAINT IDX_wishlist_PK PRIMARY KEY (wish_no);
-ALTER TABLE wishlist ADD CONSTRAINT IDX_wishlist_FK0 FOREIGN KEY (user_id) REFERENCES user_info (user_id) on delete cascade;
-
-ALTER TABLE tour_wishlist ADD CONSTRAINT IDX_tour_wishlist_PK PRIMARY KEY (to_wish_no);
-ALTER TABLE tour_wishlist ADD CONSTRAINT IDX_tour_wishlist_FK0 FOREIGN KEY (to_no) REFERENCES tour (to_no) on delete cascade;
-ALTER TABLE tour_wishlist ADD CONSTRAINT IDX_tour_wishlist_FK1 FOREIGN KEY (user_id) REFERENCES user_info (user_id) on delete cascade;
-ALTER TABLE tour_wishlist ADD CONSTRAINT IDX_tour_wishlist_FK2 FOREIGN KEY (wish_no) REFERENCES wishlist (wish_no) on delete cascade;
-
 ALTER TABLE user_add_info ADD CONSTRAINT IDX_user_add_info_FK0 FOREIGN KEY (user_id) REFERENCES user_info (user_id) on delete cascade;
 
 ALTER TABLE user_img ADD CONSTRAINT IDX_user_img_PK PRIMARY KEY (user_img_no);
 ALTER TABLE user_img ADD CONSTRAINT IDX_user_img_FK0 FOREIGN KEY (user_id) REFERENCES user_info (user_id) on delete cascade;
+
+ALTER TABLE ticket ADD CONSTRAINT IDX_ticket_PK PRIMARY KEY (ti_no);
+ALTER TABLE ticket ADD CONSTRAINT IDX_ticket_FK0 FOREIGN KEY (city_no) REFERENCES city (city_no) on delete cascade;
+
+ALTER TABLE wishlist ADD CONSTRAINT IDX_wishlist_PK PRIMARY KEY (wish_no);
+ALTER TABLE wishlist ADD CONSTRAINT IDX_wishlist_FK0 FOREIGN KEY (user_id) REFERENCES user_info (user_id) on delete cascade;
+ALTER TABLE wishlist ADD CONSTRAINT IDX_wishlist_FK1 FOREIGN KEY (ti_no) REFERENCES ticket (ti_no) on delete cascade;
+ALTER TABLE wishlist ADD CONSTRAINT IDX_wishlist_FK2 FOREIGN KEY (to_no) REFERENCES tour (to_no) on delete cascade;
 
 ALTER TABLE chat_room ADD CONSTRAINT IDX_chat_room_PK PRIMARY KEY (room_no);
 ALTER TABLE chat_room ADD CONSTRAINT IDX_chat_room_FK0 FOREIGN KEY (from_id) REFERENCES user_info (user_id) on delete cascade;
@@ -431,9 +408,6 @@ ALTER TABLE chat_msg ADD CONSTRAINT IDX_chat_msg_FK1 FOREIGN KEY (user_id) REFER
 
 ALTER TABLE notice ADD CONSTRAINT IDX_notice_PK PRIMARY KEY (n_no);
 ALTER TABLE notice ADD CONSTRAINT IDX_notice_FK0 FOREIGN KEY (user_id) REFERENCES user_info (user_id) on delete cascade;
-
-ALTER TABLE ticket ADD CONSTRAINT IDX_ticket_PK PRIMARY KEY (ti_no);
-ALTER TABLE ticket ADD CONSTRAINT IDX_ticket_FK0 FOREIGN KEY (city_no) REFERENCES city (city_no) on delete cascade;
 
 ALTER TABLE ticket_reserve ADD CONSTRAINT IDX_ticket_reserve_PK PRIMARY KEY (ti_rs_no);
 ALTER TABLE ticket_reserve ADD CONSTRAINT IDX_ticket_reserve_FK0 FOREIGN KEY (ti_no) REFERENCES ticket (ti_no) on delete cascade;
@@ -448,13 +422,8 @@ ALTER TABLE ticket_review ADD CONSTRAINT IDX_ticket_review_PK PRIMARY KEY (ti_re
 ALTER TABLE ticket_review ADD CONSTRAINT IDX_ticket_review_FK0 FOREIGN KEY (ti_no) REFERENCES ticket (ti_no) on delete cascade;
 ALTER TABLE ticket_review ADD CONSTRAINT IDX_ticket_review_FK1 FOREIGN KEY (user_id) REFERENCES user_info (user_id) on delete cascade;
 
-ALTER TABLE ticket_img ADD CONSTRAINT IDX_ticket_img_PK PRIMARY KEY (ti_rv_img_no);
-ALTER TABLE ticket_img ADD CONSTRAINT IDX_ticket_img_FK0 FOREIGN KEY (ti_review_no) REFERENCES ticket_review (ti_review_no) on delete cascade;
-
-ALTER TABLE ticket_wishlist ADD CONSTRAINT IDX_ticket_wishlist_PK PRIMARY KEY (ti_wish_no);
-ALTER TABLE ticket_wishlist ADD CONSTRAINT IDX_ticket_wishlist_FK0 FOREIGN KEY (user_id) REFERENCES user_info (user_id) on delete cascade;
-ALTER TABLE ticket_wishlist ADD CONSTRAINT IDX_ticket_wishlist_FK1 FOREIGN KEY (wish_no) REFERENCES wishlist (wish_no) on delete cascade;
-ALTER TABLE ticket_wishlist ADD CONSTRAINT IDX_ticket_wishlist_FK2 FOREIGN KEY (ti_no) REFERENCES ticket (ti_no) on delete cascade;
+ALTER TABLE ticket_img ADD CONSTRAINT IDX_ticket_img_PK PRIMARY KEY (ti_img_no);
+ALTER TABLE ticket_img ADD CONSTRAINT IDX_ticket_img_FK0 FOREIGN KEY (ti_no) REFERENCES ticket (ti_no) on delete cascade;
 
 ALTER TABLE kakao_info ADD CONSTRAINT IDX_kakao_info_PK PRIMARY KEY (kakao_no);
 ALTER TABLE kakao_info ADD CONSTRAINT IDX_kakao_info_FK0 FOREIGN KEY (user_id) REFERENCES user_info (user_id) on delete cascade;

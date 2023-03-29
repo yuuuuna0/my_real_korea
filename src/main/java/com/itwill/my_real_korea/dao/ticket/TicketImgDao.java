@@ -10,7 +10,7 @@ public interface TicketImgDao {
     int insertTicketImg (TicketImg ticketImg) throws Exception;
 
     //이미지 출력
-    List<TicketImg> selectAll(int tiNo);
+    List<TicketImg> selectByTicketImg(int tiNo);
 
     //이미지 수정
     int updateTicketImg(TicketImg ticketImg);

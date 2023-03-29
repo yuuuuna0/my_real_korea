@@ -23,8 +23,8 @@ public class TicketImgDaoImpl implements TicketImgDao{
     }
     //이미지 출력
     @Override
-    public List<TicketImg> selectAll(int tiNo) {
-        return ticketImgMapper.selectAll(tiNo);
+    public List<TicketImg> selectByTicketImg(int tiNo) {
+        return ticketImgMapper.selectByTicketImg(tiNo);
     }
     //이미지 수정
     @Override

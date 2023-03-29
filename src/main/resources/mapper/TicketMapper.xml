@@ -18,11 +18,11 @@
             <select id="selectByTicketNo"  parameterType="java.lang.Integer" resultType="com.itwill.my_real_korea.dto.ticket.Ticket">
                   SELECT * FROM TICKET WHERE TI_NO=#{tiNo} </select> -->
 
-		<!-- 상품 상세보기 - 지역 + 사진 -->
-			<resultMap id="ticketMap" type="com.itwill.my_real_korea.dto.ticket.Ticket">
-				<!--city-->
-				<association property="city" javaType="com.itwill.my_real_korea.dto.City" autoMapping="true"/>
-				<collection property="ticketImgList" resultMap="ticketImgList"/>
+		<!-- 상품 상세보기 - 지역 + 사진  collection?
+			<resultMap id="ticketMap" type="com.itwill.my_real_korea.dto.City" autoMapping="true">
+				<collection property="ticketImgList" javaType="java.util.List"
+							ofType="com.itwill.my_real_korea.dto.ticket.TicketImg"
+							autoMapping="true"/>
 			</resultMap>
 			<select id="selectByTicketNoCity" parameterType="java.lang.Integer" resultMap="ticketMap">
 					SELECT  TI_TITLE, TI_DATE, TI_PRICE, TI_INFO, TI_NOTICE, TI_COUNT,
@@ -33,24 +33,24 @@
 								  ON T.TI_NO = TI.TI_NO
 							 JOIN CITY C
 								  ON T.CITY_NO = C.CITY_NO
-					WHERE T.TI_NO=#{tiNo};
+				WHERE T.TI_NO=#{ticket.tiNo};-->
 			</select>
 		<!-- 상품 지역별 검색 -->
 			<select id="selectByTicketCity" parameterType="java.lang.Integer" resultType="com.itwill.my_real_korea.dto.ticket.Ticket">
-					SELECT * FROM TICKET WHERE CITY_NO={city.cityNo};
+					SELECT * FROM TICKET WHERE CITY_NO=#{city.cityNo}
 			</select>
 		<!-- 상품 키워드로 검색 -->
-			<select id="selectByKeywordTicket" parameterType="java.lang.String">
-				   SELECT * FROM TICKET WHERE TI_TITLE LIKE '%'||keyword||'%'
+			<select id="selectByKeywordTicket" parameterType="java.lang.String" resultType="com.itwill.my_real_korea.dto.ticket.Ticket">
+				   SELECT * FROM TICKET WHERE TI_TITLE LIKE '%'||#{keyword}||'%'
  			</select>
         <!-- 상품 가격 순으로 검색 -->
             <select id="selectByTicketPrice" parameterType="java.lang.String" resultType="com.itwill.my_real_korea.dto.ticket.Ticket">
-            	  SELECT * FROM TICKET 
-            	  <if test="sortOrder == 'asc'"/>
-            	  ORDER BY TI_PRICE ASC
-            	  <if test="sortOrder == 'desc'"/>	
-            	  ORDER BY TI_PRICE DESC
-            </select>
+            	  SELECT * FROM TICKET ORDER BY TI_PRICE {sortOrder};
+				<trim prefix="ORDER BY">
+					<if test="sortOrder == 'asc'"/>
+					<if test="sortOrder == 'desc'"/>
+				</trim>
+			</select>
     	<!-- 상품 번호로 수정 -->
 	        <update id ="updateTicket" parameterType="com.itwill.my_real_korea.dto.ticket.Ticket">
 	            UPDATE TICKET SET TI_TITLE=#{tiTitle}, TI_PRICE=#{tiPrice}, TI_INFO={tiInfo}, TI_NOTICE={tiNotice},

@@ -19,7 +19,7 @@ public interface TicketDao {
     List<Ticket> selectByKeywordTicket (String keyword) throws Exception;
 
     //상품 상세보기 - 지역
-    List<Ticket> selectByTicketNoCity(int cityNo) throws Exception;
+    List<Ticket> selectByTicketNoCity(int tiNo) throws Exception;
 
     // 상품 번호로 수정
     int updateTicket(Ticket ticket) throws Exception;

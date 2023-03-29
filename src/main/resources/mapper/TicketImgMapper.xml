@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itwill.my_real_korea.mapper.TicketImgMapper">
+
+
+    <!--티켓 이미지생성-->
+    <insert id="insertTicketImg" parameterType="com.itwill.my_real_korea.dto.ticket.TicketImg">
+        <selectKey resultType="java.lang.Integer" keyProperty="tiImgNo" order="BEFORE">
+            SELECT TICKET_IMG_TI_IMG_NO_SEQ.NEXTVAL FROM DUAL
+        </selectKey>
+            INSERT INTO TICKET_IMG (TI_IMG_NO,TI_IMG_URL,TI_NO) VALUES (#{tiImgNo}, #{tiImgUrl}, #{tiNo})
+    </insert>
+
+
+
+
+
+
+
+</mapper>

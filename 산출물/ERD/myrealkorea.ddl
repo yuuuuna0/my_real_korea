@@ -334,14 +334,6 @@ DROP SEQUENCE ticket_img_ti_img_no_SEQ;
 
 CREATE SEQUENCE ticket_img_ti_img_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
-CREATE TRIGGER ticket_img_ti_img_no_TRG
-BEFORE INSERT ON ticket_img
-FOR EACH ROW
-BEGIN
-IF :NEW.ti_img_no IS NOT NULL THEN
-  SELECT ticket_img_ti_img_no_SEQ.NEXTVAL INTO :NEW.ti_img_no FROM DUAL;
-END IF;
-END;
 
 
 CREATE TABLE kakao_info(

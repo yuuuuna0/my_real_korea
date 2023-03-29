@@ -24,7 +24,7 @@
 	  </resultMap>
 	<select id="selectWishlistWithTourByToWishNo" 
 	parameterType="java.lang.Integer" 
-	resultType="TourWithTourWishlistResultMap">
+	resultMap="TourWithTourWishlistResultMap">
 		select t.*, tw.* from tour t join tour_wishlist tw on t.to_no=tw.to_no where to_wish_no=#{toWishNo}
 	</select>
 </mapper>

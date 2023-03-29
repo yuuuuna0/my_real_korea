@@ -24,7 +24,7 @@
 	  </resultMap>
 	<select id="selectTourReserveWithTourByToRsNo" 
 			parameterType="java.lang.Integer" 
-			resultType="TourWithTourReserveResultMap">
+			resultMap="TourWithTourReserveResultMap">
 		select tr.*, t.* from tour_reserve tr join tour t on tr.to_no=t.to_no where tr.to_rs_no=#{toRsNo}
 	</select>
 	<!-- 5. 유저의 투어예약 리스트 전체 보여주기 -->

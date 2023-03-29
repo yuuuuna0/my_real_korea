@@ -1,7 +1,8 @@
 package com.itwill.my_real_korea.mapper;
 
-import com.itwill.my_real_korea.dao.ticket.TicketReview;
 import org.apache.ibatis.annotations.Mapper;
+
+import com.itwill.my_real_korea.dto.ticket.TicketReview;
 
 import java.util.List;
 

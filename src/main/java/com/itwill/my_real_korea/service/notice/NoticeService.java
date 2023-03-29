@@ -19,8 +19,29 @@ public interface NoticeService {
 	 * 공지사항 리스트 보기 (게시글 시작번호, 게시글 끝번호) - 페이징 처리
 	 */
 	List<Notice> selectAll(int pageStart, int pageEnd) throws Exception;
+	/*
+	 * 최신순 정렬 : 공지사항 리스트 보기 (게시글 시작번호, 게시글 끝번호) - 페이징 처리
+	 */
+	List<Notice> selectAllOrderByDateDesc(int pageStart, int pageEnd) throws Exception;
+	/*
+	 * 오래된순 정렬 : 공지사항 리스트 보기 (게시글 시작번호, 게시글 끝번호) - 페이징 처리
+	 */
+	List<Notice> selectAllOrderByDateAsc(int pageStart, int pageEnd) throws Exception;
+	/*
+	 * 조회수 높은순 정렬 : 공지사항 리스트 보기 (게시글 시작번호, 게시글 끝번호) - 페이징 처리
+	 */
+	List<Notice> selectAllOrderByReadcount(int pageStart, int pageEnd) throws Exception;
+	
+	// 공지사항 리스트 (페이지메이커 사용)
 	
 	NoticeListPageMakerDto selectAll(int currentPage) throws Exception;
+	
+	NoticeListPageMakerDto selectAllOrderByDateDesc(int currentPage) throws Exception;
+	
+	NoticeListPageMakerDto selectAllOrderByDateAsc(int currentPage) throws Exception;
+	
+	NoticeListPageMakerDto selectAllOrderByReadcount(int currentPage) throws Exception;
+	
 	/*
 	 * 게시글 title 출력 설정
 	 */

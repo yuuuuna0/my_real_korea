@@ -30,14 +30,6 @@ insert into city(city_no,city_name,latitude,longitude) values(city_city_no_seq.n
 insert into city(city_no,city_name,latitude,longitude) values(city_city_no_seq.nextval,'부산',4,4);
 insert into city(city_no,city_name,latitude,longitude) values(city_city_no_seq.nextval,'대전',5,5);
 
-/*************** wishlist ***********************/
---wishlist
-insert into wishlist(wish_no,user_id) values(WISHLIST_WISH_NO_SEQ.nextval,'admin');
-insert into wishlist(wish_no,user_id) values(WISHLIST_WISH_NO_SEQ.nextval,'user1');
-insert into wishlist(wish_no,user_id) values(WISHLIST_WISH_NO_SEQ.nextval,'user2');
-insert into wishlist(wish_no,user_id) values(WISHLIST_WISH_NO_SEQ.nextval,'user3');
-insert into wishlist(wish_no,user_id) values(WISHLIST_WISH_NO_SEQ.nextval,'user1');
-
 /*************** notice ***********************/
 -- 공지사항 notice insert
 insert into notice(n_no,n_title,n_content,n_img,user_id) values (notice_n_no_seq.nextval,'공지사항1','공지사항내용1','img.png','user1'); 
@@ -72,11 +64,6 @@ insert into tour_reserve(to_rs_no,to_rs_start_day,to_rs_person,to_rs_msg,to_no,u
 insert into tour_review(to_review_no,to_review_date,to_review_title,to_review_content,to_review_img,to_review_star,to_no,user_id) values(TOUR_REVIEW_TO_REVIEW_NO_SEQ.nextval,sysdate,'리뷰1','테스트1',null,3,1,'admin');
 insert into tour_review(to_review_no,to_review_date,to_review_title,to_review_content,to_review_img,to_review_star,to_no,user_id) values(TOUR_REVIEW_TO_REVIEW_NO_SEQ.nextval,sysdate,'리뷰2','테스트2',null,5,2,'user2');
 insert into tour_review(to_review_no,to_review_date,to_review_title,to_review_content,to_review_img,to_review_star,to_no,user_id) values(TOUR_REVIEW_TO_REVIEW_NO_SEQ.nextval,sysdate,'리뷰3','테스트3',null,4,3,'admin');
---insert tourWishlist
-insert into tour_wishlist(to_wish_no,to_no,user_id,wish_no) values(TOUR_WISHLIST_TO_WISH_NO_SEQ.nextval,1,'admin',1);
-insert into tour_wishlist(to_wish_no,to_no,user_id,wish_no) values(TOUR_WISHLIST_TO_WISH_NO_SEQ.nextval,4,'admin',1);
-insert into tour_wishlist(to_wish_no,to_no,user_id,wish_no) values(TOUR_WISHLIST_TO_WISH_NO_SEQ.nextval,2,'user1',2);
-insert into tour_wishlist(to_wish_no,to_no,user_id,wish_no) values(TOUR_WISHLIST_TO_WISH_NO_SEQ.nextval,1,'user2',3);
 
 /*************** chat ***********************/
 --chat_room
@@ -132,12 +119,6 @@ INSERT INTO TICKET_RESERVE (TI_RS_NO, TI_RS_DATE, TI_RS_QTY, TI_RS_MSG, TI_NO, U
 --TICKET_REVIEW 티켓 리뷰
 INSERT INTO TICKET_REVIEW (TI_REVIEW_NO, TI_REVIEW_DATE, TI_REVIEW_TITLE, TI_REVIEW_CONTENT, TI_NO, USER_ID) VALUES (TICKET_REVIEW_TI_REVIEW_NO_SEQ.NEXTVAL,'2023-03-27','티켓예약1번후기작성', '서울로 가보자고는 짱이다.',1,'user1');
 INSERT INTO TICKET_REVIEW (TI_REVIEW_NO, TI_REVIEW_DATE, TI_REVIEW_TITLE, TI_REVIEW_CONTENT, TI_NO, USER_ID) VALUES (TICKET_REVIEW_TI_REVIEW_NO_SEQ.NEXTVAL, '2023-04-27','티켓2번후기작성','부산으로 가보자고 후기입니다.',2,'user2');
---TICKET_WISHLIST 티켓 위시리스트
-INSERT INTO TICKET_WISHLIST (TI_WISH_NO, USER_ID, WISH_NO, TI_NO) VALUES(TICKET_WISHLIST_TI_WISH_NO_SEQ.NEXTVAL,'user1',1,1);
-INSERT INTO TICKET_WISHLIST (TI_WISH_NO, USER_ID, WISH_NO, TI_NO) VALUES(TICKET_WISHLIST_TI_WISH_NO_SEQ.NEXTVAL,'user1',2,4);
-INSERT INTO TICKET_WISHLIST (TI_WISH_NO, USER_ID, WISH_NO, TI_NO) VALUES(TICKET_WISHLIST_TI_WISH_NO_SEQ.NEXTVAL,'user2',3,2);
-INSERT INTO TICKET_WISHLIST (TI_WISH_NO, USER_ID, WISH_NO, TI_NO) VALUES(TICKET_WISHLIST_TI_WISH_NO_SEQ.NEXTVAL,'user1',4,1);
-INSERT INTO TICKET_WISHLIST (TI_WISH_NO, USER_ID, WISH_NO, TI_NO) VALUES(TICKET_WISHLIST_TI_WISH_NO_SEQ.NEXTVAL,'user3',5,3);
 --TICKET_IMG 티켓 사진
 INSERT INTO TICKET_IMG (TI_IMG_NO, TI_IMG_URL,TI_NO) VALUES(TICKET_IMG_TI_IMG_NO_SEQ.NEXTVAL,'DEFAULT.JPG',1);
 INSERT INTO TICKET_IMG (TI_IMG_NO, TI_IMG_URL,TI_NO) VALUES(TICKET_IMG_TI_IMG_NO_SEQ.NEXTVAL,'DEFAULT.JPG',2);
@@ -158,5 +139,15 @@ insert into trip_board(t_bo_no,t_bo_title,t_bo_content,t_bo_date,t_bo_readcount,
                     t_bo_img,t_bo_start_date,t_bo_end_date,t_bo_style,hashtag,city_no,user_id) 
             values (trip_board_t_bo_no_seq.nextval,'동행게시판제목3','동행게시판내용3',sysdate,0,0,1,
                     'img3.png','2023-07-01','2023-07-10','맛집투어','맛있는거좋아하는사람',3,'user3'); 
+                    
+
+/*************** wishlist ***********************/
+--wishlist
+insert into wishlist(wish_no,user_id,ti_no,to_no) values(WISHLIST_WISH_NO_SEQ.nextval,'admin',1,null);
+insert into wishlist(wish_no,user_id,ti_no,to_no) values(WISHLIST_WISH_NO_SEQ.nextval,'user1',null,3);
+insert into wishlist(wish_no,user_id,ti_no,to_no) values(WISHLIST_WISH_NO_SEQ.nextval,'user2',2,null);
+insert into wishlist(wish_no,user_id,ti_no,to_no) values(WISHLIST_WISH_NO_SEQ.nextval,'user3',4,null);
+insert into wishlist(wish_no,user_id,ti_no,to_no) values(WISHLIST_WISH_NO_SEQ.nextval,'user1',1,null);
+
 
 commit;

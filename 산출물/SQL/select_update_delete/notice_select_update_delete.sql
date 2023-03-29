@@ -9,6 +9,32 @@ select * from
     )
 where idx >= 1 and idx <= 10;
 
+/******** 공지사항 리스트 정렬 **********/
+-- rownum 공지사항 게시판 리스트 페이지  (게시물 시작번호~끝번호) (최신순)
+select * from
+    (select rownum idx, s.* from
+        (select n_no, n_title, n_content, n_date, n_readcount, n_img, user_id from notice
+        order by n_date desc) s
+    )
+where idx >= 1 and idx <= 10;
+
+-- rownum 공지사항 게시판 리스트 페이지  (게시물 시작번호~끝번호) (오래된순)
+select * from
+    (select rownum idx, s.* from
+        (select n_no, n_title, n_content, n_date, n_readcount, n_img, user_id from notice
+        order by n_date asc) s
+    )
+where idx >= 1 and idx <= 10;
+
+-- rownum 공지사항 게시판 리스트 페이지  (게시물 시작번호~끝번호) (조회수 높은순)
+select * from
+    (select rownum idx, s.* from
+        (select n_no, n_title, n_content, n_date, n_readcount, n_img, user_id from notice
+        order by n_readcount desc) s
+    )
+where idx >= 1 and idx <= 10;
+
+
 -- 공지사항 게시판 리스트 보기
 select n_no, n_title, n_content, n_date, n_readcount, n_img, user_id from notice 
 order by n_no desc;

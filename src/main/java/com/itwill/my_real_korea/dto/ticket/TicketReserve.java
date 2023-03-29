@@ -18,7 +18,6 @@ public class TicketReserve {
     private Date tiRsDate;
     private int tiRsQty;
     private String tiRsMsg;
-
-    private Ticket ticket;
+    private int tiNo;
     private String userId;
 }

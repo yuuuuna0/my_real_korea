@@ -9,9 +9,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class TicketImg {
 
-    private int tiReviewImgNo;
-    private String tiReviewImgUrl;
-    private TicketReview ticketReview;
+    private int tiImgNo;
+    private String tiImgUrl;
+    private int tiNo;
 
 
 }

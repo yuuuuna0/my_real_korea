@@ -48,6 +48,30 @@ public class NoticeDaoImpl implements NoticeDao{
 	}
 
 	@Override
+	public List<Notice> selectAllOrderByDateDesc(int pageStart, int pageEnd) throws Exception {
+		Map<String, Object> pageMap = new HashMap<>();
+		pageMap.put("pageStart", pageStart);
+		pageMap.put("pageEnd", pageEnd);
+		return noticeMapper.selectAllOrderByDateDesc(pageMap);
+	}
+	
+	@Override
+	public List<Notice> selectAllOrderByDateAsc(int pageStart, int pageEnd) throws Exception {
+		Map<String, Object> pageMap = new HashMap<>();
+		pageMap.put("pageStart", pageStart);
+		pageMap.put("pageEnd", pageEnd);
+		return noticeMapper.selectAllOrderByDateAsc(pageMap);
+	}
+	
+	@Override
+	public List<Notice> selectAllOrderByReadcount(int pageStart, int pageEnd) throws Exception {
+		Map<String, Object> pageMap = new HashMap<>();
+		pageMap.put("pageStart", pageStart);
+		pageMap.put("pageEnd", pageEnd);
+		return noticeMapper.selectAllOrderByReadcount(pageMap);
+	}
+	
+	@Override
 	public int deleteNotice(int nNo) throws Exception {
 		return noticeMapper.deleteNotice(nNo);
 	}

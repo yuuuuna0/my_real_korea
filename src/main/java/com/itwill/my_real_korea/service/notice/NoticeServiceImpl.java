@@ -36,6 +36,7 @@ public class NoticeServiceImpl implements NoticeService{
 		return noticeDao.selectByNo(nNo);
 	}
 
+	
 	/*
 	 * 게시글 리스트 보기
 	*/
@@ -56,6 +57,70 @@ public class NoticeServiceImpl implements NoticeService{
 		pageMakerBoardList.pageMaker = pageMaker;
 		return pageMakerBoardList;
 	}
+	
+	/*
+	 * 최신순 정렬 : 공지사항 리스트 보기
+	*/
+	@Override
+	public NoticeListPageMakerDto selectAllOrderByDateDesc(int currentPage) throws Exception{
+		// 전체 글의 수
+		int totalRecordCount = noticeDao.selectNoticeCount();
+		// paging 계산 (PageMaker)
+		PageMaker pageMaker = new PageMaker(totalRecordCount, currentPage);
+		// 게시글 데이터 얻기
+		//Map<String, Integer> pageMap = new HashMap<>();
+		//pageMap.put("pageStart", pageMaker.getPageBegin());
+		//pageMap.put("pageEnd", pageMaker.getPageEnd());
+		
+		List<Notice> noticeList = noticeDao.selectAllOrderByDateDesc(pageMaker.getPageBegin(), pageMaker.getPageEnd());
+		NoticeListPageMakerDto pageMakerBoardList = new NoticeListPageMakerDto();
+		pageMakerBoardList.itemList = noticeList;
+		pageMakerBoardList.pageMaker = pageMaker;
+		return pageMakerBoardList;
+	}
+	
+	/*
+	 * 오래된순 정렬 : 공지사항 리스트 보기
+	*/
+	@Override
+	public NoticeListPageMakerDto selectAllOrderByDateAsc(int currentPage) throws Exception{
+		// 전체 글의 수
+		int totalRecordCount = noticeDao.selectNoticeCount();
+		// paging 계산 (PageMaker)
+		PageMaker pageMaker = new PageMaker(totalRecordCount, currentPage);
+		// 게시글 데이터 얻기
+		//Map<String, Integer> pageMap = new HashMap<>();
+		//pageMap.put("pageStart", pageMaker.getPageBegin());
+		//pageMap.put("pageEnd", pageMaker.getPageEnd());
+		
+		List<Notice> noticeList = noticeDao.selectAllOrderByDateAsc(pageMaker.getPageBegin(), pageMaker.getPageEnd());
+		NoticeListPageMakerDto pageMakerBoardList = new NoticeListPageMakerDto();
+		pageMakerBoardList.itemList = noticeList;
+		pageMakerBoardList.pageMaker = pageMaker;
+		return pageMakerBoardList;
+	}
+	
+	/*
+	 * 조회수 높은순 정렬 : 공지사항 리스트 보기
+	*/
+	@Override
+	public NoticeListPageMakerDto selectAllOrderByReadcount(int currentPage) throws Exception{
+		// 전체 글의 수
+		int totalRecordCount = noticeDao.selectNoticeCount();
+		// paging 계산 (PageMaker)
+		PageMaker pageMaker = new PageMaker(totalRecordCount, currentPage);
+		// 게시글 데이터 얻기
+		//Map<String, Integer> pageMap = new HashMap<>();
+		//pageMap.put("pageStart", pageMaker.getPageBegin());
+		//pageMap.put("pageEnd", pageMaker.getPageEnd());
+		
+		List<Notice> noticeList = noticeDao.selectAllOrderByReadcount(pageMaker.getPageBegin(), pageMaker.getPageEnd());
+		NoticeListPageMakerDto pageMakerBoardList = new NoticeListPageMakerDto();
+		pageMakerBoardList.itemList = noticeList;
+		pageMakerBoardList.pageMaker = pageMaker;
+		return pageMakerBoardList;
+	}
+	
 	
 	 
 	/*
@@ -95,6 +160,19 @@ public class NoticeServiceImpl implements NoticeService{
 	public List<Notice> selectAll(int pageStart, int pageEnd) throws Exception {
 		return noticeDao.selectAll(pageStart, pageEnd);
 	}
+	@Override
+	public List<Notice> selectAllOrderByDateDesc(int pageStart, int pageEnd) throws Exception {
+		return noticeDao.selectAllOrderByDateDesc(pageStart, pageEnd);
+	}
+	@Override
+	public List<Notice> selectAllOrderByDateAsc(int pageStart, int pageEnd) throws Exception {
+		return noticeDao.selectAllOrderByDateAsc(pageStart, pageEnd);
+	}
+	@Override
+	public List<Notice> selectAllOrderByReadcount(int pageStart, int pageEnd) throws Exception {
+		return noticeDao.selectAllOrderByReadcount(pageStart, pageEnd);
+	}
+
 
 	@Override
 	public int deleteNotice(int nNo) throws Exception {

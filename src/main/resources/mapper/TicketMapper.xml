@@ -3,43 +3,63 @@
 <mapper namespace="com.itwill.my_real_korea.mapper.TicketMapper">
  <!-- 티켓 생성 -->
 	<insert id="insertTicket" parameterType="com.itwill.my_real_korea.dto.ticket.Ticket">
-		<selectKey resultType="java.lang.Integer" keyProperty="ti_no" order="BEFORE">
-                SELECT TICKET_TI_NO_SEQ.nextval from dual;
+		<selectKey resultType="java.lang.Integer" keyProperty="tiNo" order="BEFORE">
+                SELECT TICKET_TI_NO_SEQ.nextval FROM DUAL
 		</selectKey>
-            INSERT INTO TICKET VALUES (#{TI_NO},#{TI_TITLE},SYSDATE,#{TI_PRICE},#{TI_INFO},#{TI_NOTICE},#{TI_COUNT},#{CITY_NO})
+            INSERT INTO TICKET (TI_NO, TI_TITLE, TI_DATE, TI_PRICE, TI_INFO, TI_NOTICE, TI_COUNT, CITY_NO)
+            VALUES (#{tiNo},#{tiTitle},SYSDATE,#{tiPrice},#{tiInfo},#{tiNotice},#{tiCount},#{city.cityNo})
         </insert>
 
   <!-- 전체 티켓 상품 보기 -->
      <select id="selectAll" resultType="com.itwill.my_real_korea.dto.ticket.Ticket">
-              SELECT * FROM TICKET
+				SELECT * FROM TICKET
       </select>
-		<!-- 상품 번호로 검색 -->
-            <select id="selectTicketNo"  parameterType="java.lang.Integer" resultType="com.itwill.my_real_korea.dto.ticket.Ticket">
-                  SELECT * FROM TICKET WHERE TI_NO=#{TI_NO}
-            </select>
-        <!-- 상품명으로 검색 -->
-            <select id="selectByTicketTitle" parameterType="java.lang.String" resultType="com.itwill.my_real_korea.dto.ticket.Ticket">
-                  SELECT * FROM TICKET 
-            </select>
+		<!-- 상품 상세보기
+            <select id="selectByTicketNo"  parameterType="java.lang.Integer" resultType="com.itwill.my_real_korea.dto.ticket.Ticket">
+                  SELECT * FROM TICKET WHERE TI_NO=#{tiNo} </select> -->
+
+		<!-- 상품 상세보기 - 지역 + 사진 -->
+			<resultMap id="ticketMap" type="com.itwill.my_real_korea.dto.ticket.Ticket">
+				<!--city-->
+				<association property="city" javaType="com.itwill.my_real_korea.dto.City" autoMapping="true"/>
+				<collection property="ticketImgList" resultMap="ticketImgList"/>
+			</resultMap>
+			<select id="selectByTicketNoCity" parameterType="java.lang.Integer" resultMap="ticketMap">
+					SELECT  TI_TITLE, TI_DATE, TI_PRICE, TI_INFO, TI_NOTICE, TI_COUNT,
+							T.CITY_NO, CITY_NAME, LATITUDE, LONGITUDE,
+							TI_IMG_NO, TI_IMG_URL
+					FROM TICKET T
+							 JOIN TICKET_IMG TI
+								  ON T.TI_NO = TI.TI_NO
+							 JOIN CITY C
+								  ON T.CITY_NO = C.CITY_NO
+					WHERE T.TI_NO=#{tiNo};
+			</select>
+		<!-- 상품 지역별 검색 -->
+			<select id="selectByTicketCity" parameterType="java.lang.Integer" resultType="com.itwill.my_real_korea.dto.ticket.Ticket">
+					SELECT * FROM TICKET WHERE CITY_NO={city.cityNo};
+			</select>
+		<!-- 상품 키워드로 검색 -->
+			<select id="selectByKeywordTicket" parameterType="java.lang.String">
+				   SELECT * FROM TICKET WHERE TI_TITLE LIKE '%'||keyword||'%'
+ 			</select>
         <!-- 상품 가격 순으로 검색 -->
-            <select id="selectTicketPrice" parameterType="java.lang.String" resultType="com.itwill.my_real_korea.dto.ticket.Ticket">
+            <select id="selectByTicketPrice" parameterType="java.lang.String" resultType="com.itwill.my_real_korea.dto.ticket.Ticket">
             	  SELECT * FROM TICKET 
             	  <if test="sortOrder == 'asc'"/>
             	  ORDER BY TI_PRICE ASC
             	  <if test="sortOrder == 'desc'"/>	
             	  ORDER BY TI_PRICE DESC
             </select>
-
     	<!-- 상품 번호로 수정 -->
 	        <update id ="updateTicket" parameterType="com.itwill.my_real_korea.dto.ticket.Ticket">
-	            UPDATE TICKET SET TI_TITLE=#{TI_TITLE}, TI_PRICE=#{TI_PRICE}, TI_INFO={TI_INFO}, TI_NOTICE={#TI_NOTICE},
-	                              TI_COUNT=#{TI_COUNT}, CITY_NO={#CITY_NO}
+	            UPDATE TICKET SET TI_TITLE=#{tiTitle}, TI_PRICE=#{tiPrice}, TI_INFO={tiInfo}, TI_NOTICE={tiNotice},
+	                              TI_COUNT=#{tiCount}, CITY_NO={#cityNo}
 	            WHERE TI_NO=#{TI_NO}
 	        </update>
-
 		<!-- 상품 1개 삭제-->
 	        <delete id="deleteTicket" parameterType="java.lang.Integer">
-	            DELETE FROM TICKET WHERE TI_NO=#{TI_NO}
+	            DELETE FROM TICKET WHERE TI_NO=#{tiNo}
 	        </delete>
 
 

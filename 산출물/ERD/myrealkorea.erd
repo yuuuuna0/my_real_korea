@@ -1463,8 +1463,8 @@
                                           <description></description>
                                           <columns>
                                             <net.java.amateras.db.visual.model.ColumnModel>
-                                              <columnName>ti_rv_img_no</columnName>
-                                              <logicalName>후기사진번호</logicalName>
+                                              <columnName>ti_img_no</columnName>
+                                              <logicalName>티켓사진번호</logicalName>
                                               <columnType class="net.java.amateras.db.dialect.ColumnType">
                                                 <name>NUMBER</name>
                                                 <logicalName>Numeric</logicalName>
@@ -1479,8 +1479,8 @@
                                               <defaultValue></defaultValue>
                                             </net.java.amateras.db.visual.model.ColumnModel>
                                             <net.java.amateras.db.visual.model.ColumnModel>
-                                              <columnName>ti_review_img_url</columnName>
-                                              <logicalName>후기사진URL</logicalName>
+                                              <columnName>ti_img_url</columnName>
+                                              <logicalName>티켓사진URL</logicalName>
                                               <columnType class="net.java.amateras.db.dialect.ColumnType">
                                                 <name>VARCHAR2</name>
                                                 <logicalName>String</logicalName>
@@ -1767,7 +1767,12 @@
                                 <net.java.amateras.db.visual.model.ColumnModel>
                                   <columnName>f_co_no</columnName>
                                   <logicalName>자유게시판댓글번호</logicalName>
-                                  <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../../../../net.java.amateras.db.visual.model.ForeignKeyModel[2]/source/sourceConnections/net.java.amateras.db.visual.model.ForeignKeyModel[2]/target/targetConnections/net.java.amateras.db.visual.model.ForeignKeyModel[3]/source/columns/net.java.amateras.db.visual.model.ColumnModel/columnType"/>
+                                  <columnType class="net.java.amateras.db.dialect.ColumnType">
+                                    <name>NUMBER</name>
+                                    <logicalName>Numeric</logicalName>
+                                    <supportSize>true</supportSize>
+                                    <type>2</type>
+                                  </columnType>
                                   <size></size>
                                   <notNull>false</notNull>
                                   <primaryKey>true</primaryKey>
@@ -1916,7 +1921,7 @@
                                 <net.java.amateras.db.visual.model.ColumnModel>
                                   <columnName>t_co_no</columnName>
                                   <logicalName>동행게시판댓글번호</logicalName>
-                                  <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../../../../net.java.amateras.db.visual.model.ForeignKeyModel[2]/source/sourceConnections/net.java.amateras.db.visual.model.ForeignKeyModel[2]/target/targetConnections/net.java.amateras.db.visual.model.ForeignKeyModel[3]/source/columns/net.java.amateras.db.visual.model.ColumnModel/columnType"/>
+                                  <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../../../../net.java.amateras.db.visual.model.ForeignKeyModel[4]/source/columns/net.java.amateras.db.visual.model.ColumnModel/columnType"/>
                                   <size></size>
                                   <notNull>false</notNull>
                                   <primaryKey>true</primaryKey>

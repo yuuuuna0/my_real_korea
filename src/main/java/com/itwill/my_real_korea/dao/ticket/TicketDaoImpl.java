@@ -11,51 +11,53 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class TicketDaoImpl implements TicketDao{
 	
-	private final TicketMapper ticketMapper;
+	private TicketMapper ticketMapper;
 	
 	@Autowired
-	public TicketDaoImpl(TicketMapper tikcetMapper) {
-			
-		this.ticketMapper = tikcetMapper;
-	
+	public TicketDaoImpl(TicketMapper ticketMapper) {
+		this.ticketMapper = ticketMapper;
 	}
 
+	//티켓생성
 	@Override
 	public int insertTicket(Ticket ticket) throws Exception {
 		return ticketMapper.insertTicket(ticket);
 	}
 
-	@Override
-	public Ticket selectTicketNo(int tiNo) throws Exception {
-		return ticketMapper.selectByNo(tiNo);
+	//상품 상세보기 - 지역 + 사진
+	public List<Ticket> selectByTicketNoCity(int tiNo) throws Exception{
+		return ticketMapper.selectByTicketNoCity(tiNo);
 	}
-	
+
 	// 전체 리스트
 	@Override
 	public List<Ticket> selectAll() throws Exception {
 		return ticketMapper.selectAll();
 	}
+	// 상품 키워드로 검색
+	public List<Ticket> selectByKeywordTicket(String keyword) throws Exception{
+		return ticketMapper.selectByKeywordTicket(keyword);
+	}
 
-	// 검색으로 정렬
-	
-	public List<Ticket> keywordTicket(String keyword) throws Exception{
-		
-		return ticketMapper.keywordTicket(keyword);
-	}
-	
-	
-	// 가격순으로 정렬
+	// 상품 가격 순으로 검색
 	@Override 
-	public List<Ticket> selectTicketPrice(String sortOrder) throws Exception {
-		// view에서 처리 - 가격 낮은 순 : asc 가격 높은 순 : desc
-		return ticketMapper.selectTicketPrice(sortOrder);
+	public List<Ticket> selectByTicketPrice(String sortOrder) throws Exception {
+		// 가격 낮은 순 : asc 가격 높은 순 : desc
+		return ticketMapper.selectByTicketPrice(sortOrder);
 	}
-	
+
+	// 상품 지역별 검색
+	@Override
+	public List<Ticket> selectByTicketCity(int cityNo) throws Exception {
+		return ticketMapper.selectByTicketCity(cityNo);
+	}
+
+	//티켓 수정
 	@Override
 	public int updateTicket(Ticket ticket) throws Exception {
 		return ticketMapper.updateTicket(ticket);
 	}
-
+	//티켓 삭제
 	@Override
 	public int deleteTicket(int tiNo) throws Exception {
 		return ticketMapper.deleteTicket(tiNo);

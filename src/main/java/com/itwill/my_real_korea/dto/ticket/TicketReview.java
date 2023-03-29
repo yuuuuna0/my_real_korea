@@ -13,11 +13,14 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class TicketReview {
 
-    private int TiReviewNo;
-    private Date TiReviewDate;
-    private String TiReviewTitle;
-    private String TiReviewContent;
-    private Ticket ticket;
-    private String userinfo;
+    private int tiReviewNo;
+    private Date tiReviewDate;
+    private String tiReviewTitle;
+    private String tiReviewContent;
+    private String tiReviewImg;
+    private String userId;
+
+
+
     
 }

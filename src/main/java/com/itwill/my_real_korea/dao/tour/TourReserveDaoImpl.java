@@ -35,9 +35,9 @@ public class TourReserveDaoImpl implements TourReserveDao {
 	}
 
 	@Override
-	public TourReserve selectByToRsNo(int toRsNo) throws Exception {
+	public TourReserve selectTourReserveWithTourByToRsNo(int toRsNo) throws Exception {
 		//투어예약번호로 예약 상세보기
-		return tourReserveMapper.selectByToRsNo(toRsNo);
+		return tourReserveMapper.selectTourReserveWithTourByToRsNo(toRsNo);
 	}
 
 	@Override

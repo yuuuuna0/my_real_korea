@@ -35,8 +35,8 @@ class TourReserveDaoImplTest {
 		assertEquals(rowCount, 1);
 	}
 
-	void testSelectByToRsNo() throws Exception{
-		TourReserve tourReserve=tourReserveDao.selectByToRsNo(2);
+	void testSelectTourReserveWithTourByToRsNo() throws Exception{
+		TourReserve tourReserve=tourReserveDao.selectTourReserveWithTourByToRsNo(2);
 		System.out.println(tourReserve);
 	}
 

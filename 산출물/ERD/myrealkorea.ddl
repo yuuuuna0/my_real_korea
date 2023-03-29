@@ -33,7 +33,6 @@ DROP SEQUENCE city_city_no_SEQ;
 CREATE SEQUENCE city_city_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
 
-
 CREATE TABLE user_info(
 		user_id                       		VARCHAR2(50)		 NOT NULL,
 		password                      		VARCHAR2(100)		 NOT NULL,
@@ -69,7 +68,6 @@ CREATE TABLE trip_board(
 DROP SEQUENCE trip_board_t_bo_no_SEQ;
 
 CREATE SEQUENCE trip_board_t_bo_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
-
 
 
 
@@ -114,7 +112,6 @@ CREATE TABLE free_board_comment(
 DROP SEQUENCE free_board_comment_f_co_no_SEQ;
 
 CREATE SEQUENCE free_board_comment_f_co_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
-
 
 
 
@@ -328,15 +325,23 @@ CREATE SEQUENCE ticket_review_ti_review_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCL
 
 
 CREATE TABLE ticket_img(
-		ti_rv_img_no                  		NUMBER		 NULL ,
-		ti_review_img_url             		VARCHAR2(500)		 NOT NULL,
+		ti_img_no                     		NUMBER		 NULL ,
+		ti_img_url                    		VARCHAR2(500)		 NOT NULL,
 		ti_no                         		NUMBER		 NULL 
 );
 
-DROP SEQUENCE ticket_img_ti_rv_img_no_SEQ;
+DROP SEQUENCE ticket_img_ti_img_no_SEQ;
 
-CREATE SEQUENCE ticket_img_ti_rv_img_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
+CREATE SEQUENCE ticket_img_ti_img_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
+CREATE TRIGGER ticket_img_ti_img_no_TRG
+BEFORE INSERT ON ticket_img
+FOR EACH ROW
+BEGIN
+IF :NEW.ti_img_no IS NOT NULL THEN
+  SELECT ticket_img_ti_img_no_SEQ.NEXTVAL INTO :NEW.ti_img_no FROM DUAL;
+END IF;
+END;
 
 
 CREATE TABLE kakao_info(
@@ -424,7 +429,7 @@ ALTER TABLE ticket_review ADD CONSTRAINT IDX_ticket_review_PK PRIMARY KEY (ti_re
 ALTER TABLE ticket_review ADD CONSTRAINT IDX_ticket_review_FK0 FOREIGN KEY (ti_no) REFERENCES ticket (ti_no) on delete cascade;
 ALTER TABLE ticket_review ADD CONSTRAINT IDX_ticket_review_FK1 FOREIGN KEY (user_id) REFERENCES user_info (user_id) on delete cascade;
 
-ALTER TABLE ticket_img ADD CONSTRAINT IDX_ticket_img_PK PRIMARY KEY (ti_rv_img_no);
+ALTER TABLE ticket_img ADD CONSTRAINT IDX_ticket_img_PK PRIMARY KEY (ti_img_no);
 ALTER TABLE ticket_img ADD CONSTRAINT IDX_ticket_img_FK0 FOREIGN KEY (ti_no) REFERENCES ticket (ti_no) on delete cascade;
 
 ALTER TABLE kakao_info ADD CONSTRAINT IDX_kakao_info_PK PRIMARY KEY (kakao_no);

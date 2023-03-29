@@ -335,7 +335,6 @@ DROP SEQUENCE ticket_img_ti_img_no_SEQ;
 CREATE SEQUENCE ticket_img_ti_img_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
 
-
 CREATE TABLE kakao_info(
 		kakao_no                      		NUMBER		 NULL ,
 		kakao_email                   		VARCHAR2(100)		 NULL ,

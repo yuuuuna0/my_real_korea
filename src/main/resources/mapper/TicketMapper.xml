@@ -67,14 +67,4 @@
 	        <delete id="deleteTicket" parameterType="java.lang.Integer">
 	            DELETE FROM TICKET WHERE TI_NO=#{tiNo}
 	        </delete>
-
-
-
-
-
-
-
-
-
-
 </mapper>

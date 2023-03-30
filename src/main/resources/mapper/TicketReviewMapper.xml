@@ -33,4 +33,4 @@
             DELETE FROM TICKET_REVIEW WHERE TI_REVIEW_NO = {tiReviewNo}
     </delete>
 
-
+</mapper>

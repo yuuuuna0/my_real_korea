@@ -9,10 +9,10 @@ import org.springframework.stereotype.Repository;
 
 import com.itwill.my_real_korea.dto.user.User;
 import com.itwill.my_real_korea.mapper.UserMapper;
-@Repository(value = "userDaoImplMyBatisMapperInterface")
+@Repository
 public class UserDaoImpl implements UserDao {
 	
-	@Autowired(required = false)
+	@Autowired
 	private UserMapper userMapper;
 
 	public UserDaoImpl() {
@@ -75,6 +75,12 @@ public class UserDaoImpl implements UserDao {
 		}
 		//패스워드 일치 안함
 		return false;
+	}
+	
+	//아이디 찾기
+	@Override
+	public String findIdByEmailName(User user) throws Exception {
+		return userMapper.findIdByEmailName(user);
 	}
 
 }

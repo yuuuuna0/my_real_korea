@@ -13,7 +13,7 @@
 		select * from city where city_no=#{cityNo}
 	</select>
 	<!-- 3. 시티 리스트 전체 출력 -->
-	<select id="selectAllCity" resultType="com.itwill.my_real_korea.dto.City">
+	<select id="findAllCity" resultType="com.itwill.my_real_korea.dto.City">
 		select * from city
 	</select>
 </mapper>

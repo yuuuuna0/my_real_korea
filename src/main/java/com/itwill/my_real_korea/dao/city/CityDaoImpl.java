@@ -31,9 +31,9 @@ public class CityDaoImpl implements CityDao {
 	}
 
 	@Override
-	public List<City> selectAllCity() throws Exception {
+	public List<City> findAllCity() throws Exception {
 		//시티리스트 전체 출력
-		return cityMapper.selectAllCity();
+		return cityMapper.findAllCity();
 	}
 
 }

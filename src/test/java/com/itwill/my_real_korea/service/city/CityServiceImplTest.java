@@ -16,22 +16,22 @@ import com.itwill.my_real_korea.mapper.CityMapper;
 @MapperScan(basePackageClasses = CityMapper.class)
 class CityServiceImplTest {
 	@Autowired
-	private CityDao cityDao;
+	private CityService cityService;
 
 	void testInsertCity() throws Exception{
 		City newCity=new City(0,"인천",10,10);
-		int rowCount=cityDao.insertCity(newCity);
+		int rowCount=cityService.insertCity(newCity);
 		assertEquals(rowCount, 1);
 	}
 
 	void testFindByCityNo() throws Exception{
-		System.out.println("3번 도시:" +cityDao.findByCityNo(3));
-		System.out.println("6번 도시:" +cityDao.findByCityNo(6));
+		System.out.println("3번 도시:" +cityService.findByCityNo(3));
+		System.out.println("6번 도시:" +cityService.findByCityNo(6));
 	}
 
 	@Test
 	void testSelectAllCity() throws Exception{
-		List<City> cityList=cityDao.selectAllCity();
+		List<City> cityList=cityService.findAllCity();
 		for (City city : cityList) {
 			System.out.println(city);
 		}

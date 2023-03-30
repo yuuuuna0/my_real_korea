@@ -7,6 +7,16 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.springframework.format.annotation.DateTimeFormat;
 
+/*
+ 이름                널?       유형             
+----------------- -------- -------------- 
+F_CO_NO           NOT NULL NUMBER         
+F_COMMENT_CONTENT NOT NULL VARCHAR2(1000) 
+F_COMMENT_DATE             DATE           
+F_BO_NO                    NUMBER         
+USER_ID                    VARCHAR2(50)   
+ */
+
 @Data
 @AllArgsConstructor
 @ToString

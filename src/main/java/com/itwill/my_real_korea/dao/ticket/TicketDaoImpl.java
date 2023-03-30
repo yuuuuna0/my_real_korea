@@ -2,6 +2,7 @@ package com.itwill.my_real_korea.dao.ticket;
 
 import java.util.List;
 
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.itwill.my_real_korea.dto.ticket.Ticket;
@@ -25,14 +26,15 @@ public class TicketDaoImpl implements TicketDao{
 	}
 
 	//상품 상세보기 - 지역 + 사진
-	public List<Ticket> selectByTicketNoCity(int tiNo) throws Exception{
-		return ticketMapper.selectByTicketNoCity(tiNo);
+	@Override
+	public List<Ticket> selectByTicketNoCityWithImg(int tiNo) throws Exception{
+		return ticketMapper.selectByTicketNoCityWithImg(tiNo);
 	}
 
-	// 전체 리스트
+	// 전체 리스트 -
 	@Override
-	public List<Ticket> selectAll() throws Exception {
-		return ticketMapper.selectAll();
+	public List<Ticket> selectAllTicket() throws Exception {
+		return ticketMapper.selectAllTicket();
 	}
 	// 상품 키워드로 검색
 	public List<Ticket> selectByKeywordTicket(String keyword) throws Exception{

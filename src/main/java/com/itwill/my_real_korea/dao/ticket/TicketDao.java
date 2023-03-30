@@ -9,7 +9,7 @@ public interface TicketDao {
     // 티켓 생성
     int insertTicket(Ticket ticket) throws Exception;
     // 티켓 리스트
-    List<Ticket> selectAll() throws Exception;
+    List<Ticket> selectAllTicket() throws Exception;
     // 상품 가격 순으로 검색
     List<Ticket> selectByTicketPrice(String sortOrder) throws Exception;
     // 상품 지역별 검색
@@ -19,7 +19,7 @@ public interface TicketDao {
     List<Ticket> selectByKeywordTicket (String keyword) throws Exception;
 
     //상품 상세보기 - 지역
-    List<Ticket> selectByTicketNoCity(int tiNo) throws Exception;
+    List<Ticket> selectByTicketNoCityWithImg(int tiNo) throws Exception;
 
     // 상품 번호로 수정
     int updateTicket(Ticket ticket) throws Exception;

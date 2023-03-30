@@ -90,4 +90,9 @@ public interface TripBoardDao {
 	 * 검색된 게시글 총 개수
 	 */
 	int selectTbSearchCount(String keyword) throws Exception;
+	
+	/*
+	 * 게시글의 지역정보 조회
+	 */
+	TripBoard selectCityInfo(int tBoNo) throws Exception;
 }

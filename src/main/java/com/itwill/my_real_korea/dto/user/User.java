@@ -2,17 +2,17 @@ package com.itwill.my_real_korea.dto.user;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 public class User {
-
+	
 /*
 user_id  NOT NULL VARCHAR2(50)  
 password NOT NULL VARCHAR2(100) 
@@ -33,15 +33,20 @@ is_admin          NUMBER
 	private String nickname;
 	private String phone;
 	private String email;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date birth;
 	private String address;
 	private int gender;
 	private int point;
 	private int isAdmin;
+	private UserAddInfo userAddInfo;
+	private UserImg userImg;
 	
 	
 }
 
+	
+	
 	
 	
 	

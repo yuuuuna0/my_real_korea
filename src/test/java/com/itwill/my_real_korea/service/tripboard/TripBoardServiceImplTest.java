@@ -2,6 +2,7 @@ package com.itwill.my_real_korea.service.tripboard;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.Date;
 import java.util.List;
 
 import org.junit.jupiter.api.Disabled;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.ComponentScan;
 
+import com.itwill.my_real_korea.dto.City;
 import com.itwill.my_real_korea.dto.tripboard.TripBoard;
 
 
@@ -19,6 +21,38 @@ class TripBoardServiceImplTest {
 	
 	@Autowired
 	private TripBoardService tripBoardService;
+	
+	/* 
+	 * 게시글 추가
+	 */
+	//성공
+	@Disabled
+	@Test
+	void testInsertTripBoard() throws Exception {
+		int rowCount = tripBoardService.insertTripBoard(new TripBoard(0, "추추제목", "추추내용", new Date(), 1, 1, 3, "추가사진jpg", new Date(), new Date(), "무계획", "인싸만", new City(3, "강원", 3, 3), "user2"));
+		assertEquals(rowCount, 1);
+	}
+	
+	/*
+	 * 게시글 수정
+	 */
+	//성공
+	@Disabled
+	@Test
+	void testUpdateTripBoard() throws Exception {
+		int rowCount = tripBoardService.insertTripBoard(new TripBoard(3, "제목수정", "내용수정", new Date(), 3, 0, 1, "수정사진1.png", new Date(), new Date(), "무계획", "아무나다좋아", new City(1, "서울", 1, 1), "user1"));
+	}
+	
+	/*
+	 * 게시글 삭제
+	 */
+	//성공
+	@Disabled
+	@Test
+	void testDeleteTripBoard() throws Exception {
+		int rowCount = tripBoardService.deleteTripBoard(25);
+		assertEquals(rowCount, 1);
+	}
 	
 	/*
 	 * 게시글 번호로 게시글 1개 보기

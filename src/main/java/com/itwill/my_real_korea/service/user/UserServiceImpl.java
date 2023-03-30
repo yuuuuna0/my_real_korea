@@ -88,6 +88,12 @@ public class UserServiceImpl implements UserService{
 		}
 	}
 	
+	//이메일, 이름으로 아이디 찾기
+	@Override
+	public String findIdByEmailName(User user) throws Exception {
+		return userDao.findIdByEmailName(user);
+	}
+	
 }
 
 

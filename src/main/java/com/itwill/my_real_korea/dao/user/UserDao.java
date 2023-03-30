@@ -21,6 +21,7 @@ public interface UserDao {
 	
 	boolean isMatchPassword(String userId, String password) throws Exception;
 	
-	
+	//이메일, 이름으로 아이디 찾기
+	String findIdByEmailName(User user) throws Exception;
 
 }

@@ -17,7 +17,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 @SpringBootTest
-@MapperScan(basePackages = "com.itwill.my_real_korea.mapper")
+@MapperScan(basePackageClasses =TicketMapper.class)
 class TicketDaoImplTest {
 
 
@@ -64,5 +64,16 @@ class TicketDaoImplTest {
     void selectByTicketPrice() throws Exception {
         List<Ticket> selectByTicketPrice = ticketDao.selectByTicketPrice("asc");
         System.out.println(selectByTicketPrice);
+    }
+
+    @Test
+    void selectByTicketNoCity() throws Exception{
+        List<Ticket> ticketList = ticketDao.selectByTicketNoCity(1);
+        for(Ticket ticket:ticketList){
+            System.out.println(ticket);
+        }
+
+
+
     }
 }

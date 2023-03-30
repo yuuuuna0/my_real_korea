@@ -1,10 +1,10 @@
-package com.itwill.my_real_korea.dao.city;
+package com.itwill.my_real_korea.service.city;
 
 import java.util.List;
 
 import com.itwill.my_real_korea.dto.City;
 
-public interface CityDao {
+public interface CityService {
 	//1. 시티 새로 추가
 	int insertCity(City city) throws Exception;
 	//2. 시티번호로 시티 찾기

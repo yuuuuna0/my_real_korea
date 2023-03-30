@@ -21,7 +21,7 @@ import com.itwill.my_real_korea.mapper.TourMapper;
 
 @SpringBootApplication
 @SpringBootTest
-@MapperScan(basePackageClasses =TourMapper.class)
+@MapperScan(basePackages = "com.itwill.my_real_korea.mapper")
 class TourDaoImplTest{
 	@Autowired
 	private TourDao tourDao;

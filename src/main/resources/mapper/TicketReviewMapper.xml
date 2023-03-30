@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.itwill.my_real_korea.mapper.TicketMapper">
+<mapper namespace="com.itwill.my_real_korea.mapper.TicketReviewMapper">
 
     <!--티켓 리뷰 작성 -->
     <insert id="insertTicketReview" parameterType="com.itwill.my_real_korea.dto.ticket.TicketReview">
@@ -16,7 +16,7 @@
             SELECT * FROM TICKET_REVIEW WHERE TI_REVIEW_NO=#{tiReviewNo}
     </select>
     <!--내 리뷰 보기-->
-    <select id="selectByTicketReviewUser" parameterType="java.lang.STring" resultType="com.itwill.my_real_korea.dto.ticket.TicketReview">
+    <select id="selectByTicketReviewUser" parameterType="java.lang.String" resultType="com.itwill.my_real_korea.dto.ticket.TicketReview">
             SELECT * FROM TICKET_REVIEW WHERE USER_ID=#{userId}
     </select>
 
@@ -33,4 +33,4 @@
             DELETE FROM TICKET_REVIEW WHERE TI_REVIEW_NO = {tiReviewNo}
     </delete>
 
-
+</mapper>

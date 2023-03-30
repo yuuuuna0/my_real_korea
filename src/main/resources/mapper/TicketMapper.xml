@@ -1,7 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+		<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.itwill.my_real_korea.mapper.TicketMapper">
- <!-- 티켓 생성 -->
+
+	<resultMap id="ticketMap" type="com.itwill.my_real_korea.dto.ticket.Ticket" autoMapping="true">
+		<!--ticketImage List-->
+		<association property="city"
+					 javaType="com.itwill.my_real_korea.dto.City"
+					 column="city_no"
+					 select= "com.itwill.my_real_korea.mapper.CityMapper.selectByCityNo">
+		</association>
+		<collection property="ticketImgList" javaType="java.util.List"
+					ofType="com.itwill.my_real_korea.dto.ticket.TicketImg"
+					autoMapping="true">
+		</collection>
+	</resultMap>
+	<!-- 티켓 생성 -->
 	<insert id="insertTicket" parameterType="com.itwill.my_real_korea.dto.ticket.Ticket">
 		<selectKey resultType="java.lang.Integer" keyProperty="tiNo" order="BEFORE">
                 SELECT TICKET_TI_NO_SEQ.nextval FROM DUAL
@@ -10,30 +23,23 @@
             VALUES (#{tiNo},#{tiTitle},SYSDATE,#{tiPrice},#{tiInfo},#{tiNotice},#{tiCount},#{city.cityNo})
         </insert>
 
-  <!-- 전체 티켓 상품 보기 -->
-     <select id="selectAll" resultType="com.itwill.my_real_korea.dto.ticket.Ticket">
+	<!-- 전체 티켓 상품 보기 -->
+	<select id="selectAll" resultType="com.itwill.my_real_korea.dto.ticket.Ticket">
 				SELECT * FROM TICKET
       </select>
-		<!-- 상품 상세보기
-            <select id="selectByTicketNo"  parameterType="java.lang.Integer" resultType="com.itwill.my_real_korea.dto.ticket.Ticket">
-                  SELECT * FROM TICKET WHERE TI_NO=#{tiNo} </select> -->
+	<!-- 상품 상세보기
+<select id="selectByTicketNo"  parameterType="java.lang.Integer" resultType="com.itwill.my_real_korea.dto.ticket.Ticket">
+    SELECT * FROM TICKET WHERE TI_NO=#{tiNo} </select> -->
 
-		<!-- 상품 상세보기 - 지역 + 사진  collection?
-			<resultMap id="ticketMap" type="com.itwill.my_real_korea.dto.City" autoMapping="true">
-				<collection property="ticketImgList" javaType="java.util.List"
-							ofType="com.itwill.my_real_korea.dto.ticket.TicketImg"
-							autoMapping="true"/>
-			</resultMap>
-			<select id="selectByTicketNoCity" parameterType="java.lang.Integer" resultMap="ticketMap">
-					SELECT  TI_TITLE, TI_DATE, TI_PRICE, TI_INFO, TI_NOTICE, TI_COUNT,
-							T.CITY_NO, CITY_NAME, LATITUDE, LONGITUDE,
-							TI_IMG_NO, TI_IMG_URL
+	<!-- 상품 상세보기 - 지역 + 사진  collection?-->
+	<select id="selectByTicketNoCity" parameterType="java.lang.Integer" resultMap="ticketMap">
+					SELECT *
 					FROM TICKET T
 							 JOIN TICKET_IMG TI
 								  ON T.TI_NO = TI.TI_NO
 							 JOIN CITY C
 								  ON T.CITY_NO = C.CITY_NO
-				WHERE T.TI_NO=#{ticket.tiNo};-->
+				WHERE T.TI_NO=#{tiNo}
 			</select>
 		<!-- 상품 지역별 검색 -->
 			<select id="selectByTicketCity" parameterType="java.lang.Integer" resultType="com.itwill.my_real_korea.dto.ticket.Ticket">
@@ -45,7 +51,7 @@
  			</select>
         <!-- 상품 가격 순으로 검색 -->
             <select id="selectByTicketPrice" parameterType="java.lang.String" resultType="com.itwill.my_real_korea.dto.ticket.Ticket">
-            	  SELECT * FROM TICKET ORDER BY TI_PRICE {sortOrder};
+            	  SELECT * FROM TICKET ORDER BY TI_PRICE ${sortOrder}
 				<trim prefix="ORDER BY">
 					<if test="sortOrder == 'asc'"/>
 					<if test="sortOrder == 'desc'"/>
@@ -61,14 +67,4 @@
 	        <delete id="deleteTicket" parameterType="java.lang.Integer">
 	            DELETE FROM TICKET WHERE TI_NO=#{tiNo}
 	        </delete>
-
-
-
-
-
-
-
-
-
-
 </mapper>

@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.itwill.my_real_korea.mapper.TourMapper">
+	<resultMap id="TourResultMap" type="com.itwill.my_real_korea.dto.tour.Tour" autoMapping="true">
+		<association property="city" javaType="com.itwill.my_real_korea.dto.City" autoMapping="true">
+		</association>
+		<collection property="tourImgList" javaType="java.util.List" ofType="com.itwill.my_real_korea.dto.tour.TourImg" autoMapping="true">
+		</collection>
+	</resultMap>
 
 	<!-- 1. 투어상품 추가 -->
 	<insert id="insertTour" parameterType="com.itwill.my_real_korea.dto.tour.Tour">
@@ -14,25 +20,71 @@
 	<update id="updateTour" parameterType="com.itwill.my_real_korea.dto.tour.Tour">
 		update tour set to_name=#{toName},to_type=#{toType},to_time=#{toTime},to_person=#{toPerson},to_meet=#{toMeet},to_price=#{toPrice},to_info=#{toInfo},to_notice=#{toNotice},city_no=#{city.cityNo} where to_no=#{toNo}
 	</update>
-	<!-- 3. 투어상품 리스트 전체 출력 -->
-	<select id="selectAll" resultType="com.itwill.my_real_korea.dto.tour.Tour">
-		select * from tour
+	<!--                               Select                            -->
+	<!-- 3. 투어상품 전체리스트  -->
+	<select id="findTourAll" resultMap="TourResultMap">
+		select t.to_no,t.to_name,t.to_type,t.to_Time,t.to_price,
+			   c.city_name,
+			   ti.to_img_url
+		from tour t 
+		join city c
+		   on t.city_no=c.city_no
+		left outer join tour_img ti
+		   on t.to_no=ti.to_no
+		order by t.to_no asc
 	</select>
-	<!-- 4. 투어상품 상품번호로 상세보기 -->
-	<select id="selectByToNo" parameterType="java.lang.Integer" resultType="com.itwill.my_real_korea.dto.tour.Tour">
-		select * from tour where to_no=#{toNo}
+	<!-- 4. 투어상품 상세보기 -->
+	<select id="findTourByToNo" parameterType="java.lang.Integer"
+			resultMap="TourResultMap">
+		select t.*,
+			   ti.to_img_url,
+			   c.city_name,c.latitude,c.longitude
+		from tour t
+		left outer join tour_img ti
+		   on t.to_no=ti.to_no
+		join city c
+		   on t.city_no=c.city_no 
+		where t.to_no=#{toNo}
+		order by t.to_no asc
 	</select>
-	<!-- 5. 키워드로 투어상품 검색 -->
-	<select id="selectByKeyword" parameterType="java.lang.String" resultType="com.itwill.my_real_korea.dto.tour.Tour">
-		select * from tour where to_name like '%'||#{keyword}||'%'
+	<!-- 5. 키워드로 필터링 한 투어상품리스트 -->
+	<select id="findTourListByKeyword" parameterType="java.lang.String" resultMap="TourResultMap">
+		select t.to_no,t.to_name,t.to_type,t.to_Time,t.to_price,
+			   c.city_name,
+			   ti.to_img_url
+		from tour t 
+		left outer join tour_img ti 
+		   on t.to_no=ti.to_no 
+		join city c
+		   on t.city_no=c.city_no
+		where to_name like '%'||#{keyword}||'%'
+		order by t.to_no asc
 	</select>
 	<!-- 6. 지역으로 투어상품 검색 -->
-	<select id="selectByCityNo" parameterType="java.lang.Integer" resultType="com.itwill.my_real_korea.dto.tour.Tour">
-		select * from tour where city_no=#{city.cityNo}
+	<select id="findTourListByCityNo" parameterType="java.lang.Integer" resultMap="TourResultMap">
+		select t.to_no,t.to_name,t.to_type,t.to_Time,t.to_price,
+			   c.city_name,
+			   ti.to_img_url
+		from tour t 
+		left outer join tour_img ti 
+		   on t.to_no=ti.to_no 
+		join city c
+		   on t.city_no=c.city_no
+		where c.city_no=#{city.cityNo}
+		order by t.to_no asc 
 	</select>
 	<!-- 7. 여행타입으로 투어상품 검색 -->
-	<select id="selectByToType" parameterType="java.lang.Integer" resultType="com.itwill.my_real_korea.dto.tour.Tour">
-		select * from tour where to_type=#{toType}
+	<select id="findTourListByToType" parameterType="java.lang.Integer" resultMap="TourResultMap">
+		select t.to_no,t.to_name,t.to_type,t.to_Time,t.to_price,
+			   c.city_name,
+			   ti.to_img_url
+		from tour t 
+		left outer join tour_img ti 
+		   on t.to_no=ti.to_no 
+		join city c
+		   on t.city_no=c.city_no
+		where t.to_type=#{toType}
+		order by t.to_no asc
 	</select>
 	<!-- 8. 투어상품 삭제 -->
 	<delete id="deleteTour" parameterType="java.lang.Integer">

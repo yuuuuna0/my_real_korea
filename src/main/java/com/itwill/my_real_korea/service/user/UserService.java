@@ -32,6 +32,8 @@ public interface UserService {
 	//전체 회원 정보 보기 (관리자 페이지)
 	List<User> findUserList() throws Exception;
 
+	//이메일, 이름으로 아이디 찾기
+	String findIdByEmailName(User user) throws Exception;
 
 
 }

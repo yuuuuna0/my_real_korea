@@ -30,33 +30,33 @@ public class TourDaoImpl implements TourDao{
 	}
 
 	@Override
-	public List<Tour> selectAll() throws Exception {
-		// 투어상품 리스트 전체 출
-		return tourMapper.selectAll();
+	public List<Tour> findTourAll() throws Exception {
+		// 투어상품 리스트 전체 출력
+		return tourMapper.findTourAll();
 	}
 
 	@Override
-	public Tour selectByToNo(int toNo) throws Exception {
+	public Tour findTourByToNo(int toNo) throws Exception {
 		// 투어상품 상품번호로 상세보기
-		return tourMapper.selectByToNo(toNo);
+		return tourMapper.findTourByToNo(toNo);
 	}
 
 	@Override
-	public List<Tour> selectByKeyword(String keyword) throws Exception {
+	public List<Tour> findTourListByKeyword(String keyword) throws Exception {
 		// 키워드로 투어상품 검색
-		return tourMapper.selectByKeyword(keyword);
+		return tourMapper.findTourListByKeyword(keyword);
 	}
 
 	@Override
-	public List<Tour> selectByCityNo(int cityNo) throws Exception {
+	public List<Tour> findTourListByCityNo(int cityNo) throws Exception {
 		// 지역으로 투어상품 검색 
-		return tourMapper.selectByCityNo(cityNo);
+		return tourMapper.findTourListByCityNo(cityNo);
 	}
 
 	@Override
-	public List<Tour> selectByToType(int toType) throws Exception {
+	public List<Tour> findTourListByToType(int toType) throws Exception {
 		// 여행타입으로 투어상품 검색
-		return tourMapper.selectByToType(toType);
+		return tourMapper.findTourListByToType(toType);
 	}
 
 	@Override

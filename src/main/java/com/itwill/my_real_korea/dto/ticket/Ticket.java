@@ -6,13 +6,11 @@ import java.util.List;
 
 import com.itwill.my_real_korea.dto.City;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 public class Ticket {
 
     private int tiNo;

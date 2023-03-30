@@ -40,10 +40,10 @@ class TourDaoImplTest{
 		}		
 	}
 	//왜 null 나오지? ==> 얘만 안나옴
-	@Test
 	void testFindTourByToNo() throws Exception{
-		Tour tour=tourDao.findTourByToNo(4);
+		Tour tour=tourDao.findTourByToNo(3);
 		System.out.println(tour);
+		//상품 3번에 이미지 두개 달려있음 그러면 리스트로 받아서 테스트 해봐야하나,,?
 	}
 	void testFindTourListByKeyword() throws Exception{
 		List<Tour> tourList=tourDao.findTourListByKeyword("투어");
@@ -56,12 +56,18 @@ class TourDaoImplTest{
 	void testFindTourListByCityNo() throws Exception{
 		List<Tour> tourList=tourDao.findTourListByCityNo(3);
 		System.out.println(tourList.size());
+		for (Tour tour : tourList) {
+			System.out.println(tour.toString());
+		}
 	}
-
 	
+	@Test
 	void testFindTourListByToType() throws Exception{
 		List<Tour> tourList=tourDao.findTourListByToType(2);
 		System.out.println(tourList.size());
+		for (Tour tour : tourList) {
+			System.out.println(tour.toString());
+		}
 	}
 
 	void testDeleteTour() throws Exception{

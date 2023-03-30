@@ -23,14 +23,15 @@
 	<!--                               Select                            -->
 	<!-- 3. 투어상품 전체리스트  -->
 	<select id="findTourAll" resultMap="TourResultMap">
-		select t.to_name,t.to_type,t.to_Time,t.to_price,
+		select t.to_no,t.to_name,t.to_type,t.to_Time,t.to_price,
 			   c.city_name,
 			   ti.to_img_url
 		from tour t 
 		join city c
 		   on t.city_no=c.city_no
 		left outer join tour_img ti
-		   on t.to_no=ti.to_no 
+		   on t.to_no=ti.to_no
+		order by t.to_no asc
 	</select>
 	<!-- 4. 투어상품 상세보기 -->
 	<select id="findTourByToNo" parameterType="java.lang.Integer"
@@ -39,31 +40,51 @@
 			   ti.to_img_url,
 			   c.city_name,c.latitude,c.longitude
 		from tour t
-		join tour_img ti
+		left outer join tour_img ti
 		   on t.to_no=ti.to_no
 		join city c
 		   on t.city_no=c.city_no 
 		where t.to_no=#{toNo}
+		order by t.to_no asc
 	</select>
 	<!-- 5. 키워드로 필터링 한 투어상품리스트 -->
 	<select id="findTourListByKeyword" parameterType="java.lang.String" resultMap="TourResultMap">
-		select t.to_name, t.to_type,to.to_time,
-			   ti.to_img_url,
-			   c.city_name 
+		select t.to_no,t.to_name,t.to_type,t.to_Time,t.to_price,
+			   c.city_name,
+			   ti.to_img_url
 		from tour t 
-		join tour_img ti 
+		left outer join tour_img ti 
 		   on t.to_no=ti.to_no 
 		join city c
 		   on t.city_no=c.city_no
 		where to_name like '%'||#{keyword}||'%'
+		order by t.to_no asc
 	</select>
 	<!-- 6. 지역으로 투어상품 검색 -->
 	<select id="findTourListByCityNo" parameterType="java.lang.Integer" resultMap="TourResultMap">
-		select * from tour where city_no=#{city.cityNo}
+		select t.to_no,t.to_name,t.to_type,t.to_Time,t.to_price,
+			   c.city_name,
+			   ti.to_img_url
+		from tour t 
+		left outer join tour_img ti 
+		   on t.to_no=ti.to_no 
+		join city c
+		   on t.city_no=c.city_no
+		where c.city_no=#{city.cityNo}
+		order by t.to_no asc 
 	</select>
 	<!-- 7. 여행타입으로 투어상품 검색 -->
 	<select id="findTourListByToType" parameterType="java.lang.Integer" resultMap="TourResultMap">
-		select * from tour where to_type=#{toType}
+		select t.to_no,t.to_name,t.to_type,t.to_Time,t.to_price,
+			   c.city_name,
+			   ti.to_img_url
+		from tour t 
+		left outer join tour_img ti 
+		   on t.to_no=ti.to_no 
+		join city c
+		   on t.city_no=c.city_no
+		where t.to_type=#{toType}
+		order by t.to_no asc
 	</select>
 	<!-- 8. 투어상품 삭제 -->
 	<delete id="deleteTour" parameterType="java.lang.Integer">

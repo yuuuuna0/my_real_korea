@@ -16,6 +16,7 @@ public class TourImgDaoImpl implements TourImgDao {
 		System.out.println("TourImgDaoImp 기본생성자 호출");
 	}
 	
+	
 	@Override
 	public int insertTourImg(TourImg tourImg) {
 		// 투어이미지 추가
@@ -29,9 +30,9 @@ public class TourImgDaoImpl implements TourImgDao {
 	}
 
 	@Override
-	public List<TourImg> selectTourImgList(int to_no) {
+	public List<TourImg> findTourImgList(int to_no) {
 		// 투어번호로 해당 투어이미지 전체출력
-		return tourImgMapper.selectTourImgList(to_no);
+		return tourImgMapper.findTourImgList(to_no);
 	}
 
 	@Override

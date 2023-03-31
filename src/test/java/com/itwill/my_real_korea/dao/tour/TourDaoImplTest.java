@@ -34,14 +34,14 @@ class TourDaoImplTest{
 		assertEquals(rowCount, 1);
 	}
 	void testFindTourAll() throws Exception{
-		List<Tour> tourList=tourDao.findTourAll();
+		List<Tour> tourList=tourDao.findTourWithTourImgWithCityAll();
 		for (Tour tour : tourList) {
 			System.out.println(tour);
 		}		
 	}
 	//왜 null 나오지? ==> 얘만 안나옴
 	void testFindTourByToNo() throws Exception{
-		Tour tour=tourDao.findTourByToNo(3);
+		Tour tour=tourDao.findTourWithCityByToNo(3);
 		System.out.println(tour);
 		//상품 3번에 이미지 두개 달려있음 그러면 리스트로 받아서 테스트 해봐야하나,,?
 	}

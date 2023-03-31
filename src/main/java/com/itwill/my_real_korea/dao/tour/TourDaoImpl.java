@@ -30,15 +30,15 @@ public class TourDaoImpl implements TourDao{
 	}
 
 	@Override
-	public List<Tour> findTourAll() throws Exception {
+	public List<Tour> findTourWithTourImgWithCityAll() throws Exception {
 		// 투어상품 리스트 전체 출력
-		return tourMapper.findTourAll();
+		return tourMapper.findTourWithTourImgWithCityAll();
 	}
 
 	@Override
-	public Tour findTourByToNo(int toNo) throws Exception {
+	public Tour findTourWithCityByToNo(int toNo) throws Exception {
 		// 투어상품 상품번호로 상세보기
-		return tourMapper.findTourByToNo(toNo);
+		return tourMapper.findTourWithCityByToNo(toNo);
 	}
 
 	@Override

@@ -14,7 +14,7 @@
 		delete from tour_img where to_img_no=#{toImgNo}
 	</delete>
 	<!-- 3. 투어번호로 투어이미지 전체 출력 -->
-	<select id="selectTourImgList" parameterType="java.lang.Integer" resultType="com.itwill.my_real_korea.dto.tour.TourImg">
+	<select id="findTourImgList" parameterType="java.lang.Integer" resultType="com.itwill.my_real_korea.dto.tour.TourImg">
 		select * from tour_img where to_no=#{toNo}
 	</select>
 	<!-- 4. 투어번호로 해당 투어번호 이미지 전체 삭제-->

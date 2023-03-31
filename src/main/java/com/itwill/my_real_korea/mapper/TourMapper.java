@@ -13,9 +13,9 @@ public interface TourMapper {
 	//2. 투어상품 수정
 	public int updateTour(Tour tour) throws Exception;
 	//3. 투어상품 리스트 전체 출력
-	public List<Tour> findTourAll() throws Exception;
+	public List<Tour> findTourWithTourImgWithCityAll() throws Exception;
 	//4. 투어상품 상품번호로 상세보기
-	public Tour findTourByToNo(int toNo) throws Exception;
+	public Tour findTourWithCityByToNo(int toNo) throws Exception;
 	//5. 키워드로 투어상품 검색
 	public List<Tour> findTourListByKeyword(String keyword) throws Exception;
 	//6. 지역으로 투어상품 검색

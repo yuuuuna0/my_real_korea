@@ -15,7 +15,7 @@ import com.itwill.my_real_korea.dto.tour.TourImg;
 //@SpringBootApplication
 @SpringBootTest
 @MapperScan(basePackages = "com.itwill.my_real_korea.mapper")
-class TourImgDaoImplTest {
+class TourImgDaoImplTest{
 	
 	@Autowired
 	private TourImgDao tourImgDao;
@@ -31,7 +31,7 @@ class TourImgDaoImplTest {
 	}
 
 	void testSelectTourImgList() throws Exception{
-		List<TourImg> tourImgList=tourImgDao.selectTourImgList(3);
+		List<TourImg> tourImgList=tourImgDao.findTourImgList(3);
 		System.out.println(tourImgList.size());
 		for (TourImg tourImg : tourImgList) {
 			System.out.println(tourImg.toString());

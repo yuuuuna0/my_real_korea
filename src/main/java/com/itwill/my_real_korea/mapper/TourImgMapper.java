@@ -13,7 +13,7 @@ public interface TourImgMapper {
 	//2. 투어이미지번호로 투어 이미지 하나 삭제
 	public int deleteTourImg(int toImgNo);
 	//3. 투어번호로 투어이미지 전체출력
-	public List<TourImg> selectTourImgList(int toNo);
+	public List<TourImg> findTourImgList(int toNo);
 	//4. 투어번호로 해당 투어이미지 전체 삭제
 	public int deleteTourAllImg(int toNo);
 }

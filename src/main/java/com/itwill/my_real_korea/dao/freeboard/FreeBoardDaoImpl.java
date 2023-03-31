@@ -1,15 +1,14 @@
 
 package com.itwill.my_real_korea.dao.freeboard;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
+import com.itwill.my_real_korea.dto.freeboard.FreeBoard;
+import com.itwill.my_real_korea.mapper.FreeBoardMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.itwill.my_real_korea.dto.freeboard.FreeBoard;
-import com.itwill.my_real_korea.mapper.FreeBoardMapper;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Repository
 public class FreeBoardDaoImpl implements FreeBoardDao{
@@ -27,17 +26,34 @@ public class FreeBoardDaoImpl implements FreeBoardDao{
 	}
 
 	@Override
-	public FreeBoard selectByNo(int no) {
-		return freeBoardMapper.selectByNo(no);
+	public FreeBoard selectByNo(int fBoNo) {
+		return freeBoardMapper.selectByNo(fBoNo);
 	}
 
 	@Override
-	public List<FreeBoard> selectAll(int pageStart, int pageEnd) throws Exception {
+	public List<FreeBoard> selectAllFBoNoDesc(int pageStart, int pageEnd) throws Exception {
 		Map<String, Object> pageMap = new HashMap<>();
 		pageMap.put("pageStart", pageStart);
 		pageMap.put("pageEnd", pageEnd);
-		return freeBoardMapper.selectAll(pageMap);
+		return freeBoardMapper.selectAllFBoNoDesc(pageMap);
 	}
+
+	@Override
+	public List<FreeBoard> selectAllReadCountDesc(int pageStart, int pageEnd) {
+		Map<String, Object> pageMap = new HashMap<>();
+		pageMap.put("pageStart", pageStart);
+		pageMap.put("pageEnd", pageEnd);
+		return freeBoardMapper.selectAllReadCountDesc(pageMap);
+	}
+
+
+//	@Override
+//	public List<FreeBoard> selectAllReadCountDesc(int pageStart, int pageEnd) throws Exception {
+//		Map<String, Object> pageMap = new HashMap<>();
+//		pageMap.put("pageStart", pageStart);
+//		pageMap.put("pageEnd", pageEnd);
+//		return freeBoardMapper.selectAllReadCountDesc(pageMap);
+//	}
 
 
 	@Override

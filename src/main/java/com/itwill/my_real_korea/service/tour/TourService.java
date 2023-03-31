@@ -8,7 +8,7 @@ import com.itwill.my_real_korea.dto.tour.TourImg;
 
 public interface TourService {
 	//1. 투어 상품 추가
-	int insertTour(Tour tour/*,List<TourImg> tourImgList*/) throws Exception;
+	int insertTour(Tour tour) throws Exception;
 	//2. 투어 상품 변경
 	int updateTour(Tour tour) throws Exception;
 	//3. 투어 상품 삭제

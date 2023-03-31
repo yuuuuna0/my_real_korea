@@ -41,25 +41,9 @@ public class Tour {
 	private String toNotice;
 	private int toCount;
 	private City city;		//FK
-	
+/*
 	private List<TourImg> tourImgList;
 
-	public Tour(int toNo, String toName, int toType, int toTime, int toPerson, String toMeet, int toPrice,
-			String toInfo, String toNotice, int toCount) {
-		super();
-		this.toNo = toNo;
-		this.toName = toName;
-		this.toType = toType;
-		this.toTime = toTime;
-		this.toPerson = toPerson;
-		this.toMeet = toMeet;
-		this.toPrice = toPrice;
-		this.toInfo = toInfo;
-		this.toNotice = toNotice;
-		this.toCount = toCount;
-		this.city = new City();
-		this.tourImgList=new ArrayList<TourImg>();
-	}
 	public Tour(int toNo, String toName, int toType, int toTime, int toPerson, String toMeet, int toPrice,
 			String toInfo, String toNotice, int toCount,City city) {
 		super();
@@ -76,7 +60,7 @@ public class Tour {
 		this.city = city;
 		this.tourImgList=new ArrayList<TourImg>();
 	}
-	
+*/
 	
 	
 	

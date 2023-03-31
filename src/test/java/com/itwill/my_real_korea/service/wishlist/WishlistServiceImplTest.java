@@ -21,7 +21,7 @@ class WishlistServiceImplTest {
 	@Autowired
 	private WishlistService wishlistService;
 	
-	@Disabled
+	
 	@Test
 	void testSelectAll() {
 		List<Wishlist> wishlistList = wishlistService.selectAll("user1");
@@ -45,7 +45,7 @@ class WishlistServiceImplTest {
 		System.out.println(rowCount);
 	}
 
-	
+	@Disabled
 	@Test
 	void testInsertTicketToWishlist() {
 		

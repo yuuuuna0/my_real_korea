@@ -28,29 +28,21 @@ class TourServiceImplTest {
 	@Autowired
 	private TourImgService tourImgService;
 
-	@Test
 	void testInsertTour() throws Exception{
-		Tour tour=new Tour(0, "잠자기여행", 1, 3, 50, "침대", 50000, "성공해라", "노티스", 0);
-		//insert 이전 키값 조회 어떻게?
+		City city=cityService.findByCityNo(6);
+		Tour tour=new Tour(0, "페이징시러시러", 1, 3, 50,"우러요", 50000, "성공해라", "노티스", 0,city);
+		int rowCount=tourService.insertTour(tour);
 		System.out.println(tour.getToNo());
 		TourImg tourImg1=new TourImg(0, "침.jpg", tour.getToNo());
 		TourImg tourImg2=new TourImg(0, "대.jpg", tour.getToNo());
 		TourImg tourImg3=new TourImg(0, "짱.jpg", tour.getToNo());
-//		List<TourImg> tourImgList=new ArrayList<TourImg>();
-//		tourImgList.add(tourImg1);
-//		tourImgList.add(tourImg2);
-//		tourImgList.add(tourImg3);
 		tourImgService.insertTourImg(tourImg1);
 		tourImgService.insertTourImg(tourImg2);
 		tourImgService.insertTourImg(tourImg3);
-		City city=cityService.findByCityNo(2);
-		List<TourImg> tourImgList=tourImgService.findTourImgList(tour.getToNo());
-		tour.setCity(city);
-		tour.setTourImgList(tourImgList);
-		int rowCount=tourService.insertTour(tour/*,tourImgList*/);
 	}
 
-	void testUpdateTour() {
+	void testUpdateTour() throws Exception{
+		tourService.updateTour(new Tour(12,"변경이다",15,45,34,"어렵쓰",2898,"집","퇴근",0,new City()));
 	}
 
 	void testDeleteTour() throws Exception{
@@ -61,10 +53,10 @@ class TourServiceImplTest {
 	void testFindTourByToNo() throws Exception{
 		List<TourImg> tourImgList=tourImgService.findTourImgList(3);
 		Tour findTour=tourService.findTourWithCityByToNo(3);
-		findTour.setTourImgList(tourImgList);
 		System.out.println(findTour);
 	}
 
+	@Test
 	void testFindTourAll() throws Exception{
 		List<Tour> tourList=tourService.findTourWithTourImgWithCityAll();
 		for (Tour tour : tourList) {

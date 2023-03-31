@@ -17,8 +17,8 @@ import com.itwill.my_real_korea.dto.tripboard.TripBoard;
 
 
 //@SpringBootApplication
-//@SpringBootTest
-//@MapperScan(basePackages = "com.itwill.my_real_korea.mapper")
+@SpringBootTest
+@MapperScan(basePackages = "com.itwill.my_real_korea.mapper")
 class TripBoardDaoImplTest {
 	
 	@Autowired
@@ -208,7 +208,7 @@ class TripBoardDaoImplTest {
 	}
 	 
 	/*
-	* 게시글 1개에 등록된 지역정보 조회
+	* 게시글 1개 조회 + City 정보
 	*/
 	//성공
 	@Disabled
@@ -217,5 +217,15 @@ class TripBoardDaoImplTest {
 		TripBoard tripBoard = tripBoardDao.selectCityInfo(1);
 		System.out.println(tripBoard);
 	}
+	
+	/*
+	 * 게시글리스트 조회 + City 정보
+	 */
+	@Test
+	void testSelectAllByCityNo() throws Exception {
+		List<TripBoard> tripBoardList = tripBoardDao.selectAllByCityNo();
+		System.out.println(tripBoardList);
+	}
+	
 	
 }

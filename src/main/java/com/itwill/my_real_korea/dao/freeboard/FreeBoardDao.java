@@ -1,17 +1,19 @@
 
 package com.itwill.my_real_korea.dao.freeboard;
 
-import java.util.List;
-
 import com.itwill.my_real_korea.dto.freeboard.FreeBoard;
-import com.itwill.my_real_korea.dto.freeboard.FreeBoardListPageMakerDto;
+
+import java.util.List;
 
 public interface FreeBoardDao {
     int insertBoard(FreeBoard freeBoard) throws Exception;
 
     FreeBoard selectByNo(int no) throws Exception;
 
-    List<FreeBoard> selectAll(int pageStart, int pageEnd) throws Exception;
+    List<FreeBoard> selectAllFBoNoDesc(int pageStart, int pageEnd) throws Exception;
+//    List<FreeBoard> selectAll(int pageStart, int pageEnd) throws Exception;
+    List<FreeBoard> selectAllReadCountDesc (int pageStart, int pageEnd) ;
+
 
     int updateBoard(FreeBoard freeBoard) throws Exception;
 

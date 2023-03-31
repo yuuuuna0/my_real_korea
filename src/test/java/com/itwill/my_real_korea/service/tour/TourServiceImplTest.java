@@ -41,7 +41,6 @@ class TourServiceImplTest {
 		tourImgService.insertTourImg(tourImg3);
 	}
 
-	@Test
 	void testUpdateTour() throws Exception{
 		tourService.updateTour(new Tour(12,"변경이다",15,45,34,"어렵쓰",2898,"집","퇴근",0,new City()));
 	}
@@ -57,6 +56,7 @@ class TourServiceImplTest {
 		System.out.println(findTour);
 	}
 
+	@Test
 	void testFindTourAll() throws Exception{
 		List<Tour> tourList=tourService.findTourWithTourImgWithCityAll();
 		for (Tour tour : tourList) {

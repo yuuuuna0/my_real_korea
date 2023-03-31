@@ -41,7 +41,7 @@ public class Tour {
 	private String toNotice;
 	private int toCount;
 	private City city;		//FK
-/*
+
 	private List<TourImg> tourImgList;
 
 	public Tour(int toNo, String toName, int toType, int toTime, int toPerson, String toMeet, int toPrice,
@@ -60,7 +60,7 @@ public class Tour {
 		this.city = city;
 		this.tourImgList=new ArrayList<TourImg>();
 	}
-*/
+
 	
 	
 	

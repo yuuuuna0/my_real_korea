@@ -102,6 +102,6 @@
 	</association>
 </resultMap>
 <select id="selectCityInfo" parameterType="java.lang.Integer" resultMap="CitywithTripBoardResultMap">
-	select c.* from trip_board t join city c on t.city_no =c.city_no where t.t_bo_no = #{tBoNo}
+	select t.*,c.* from trip_board t join city c on t.city_no =c.city_no where t.t_bo_no = #{tBoNo}
 </select>
 </mapper>

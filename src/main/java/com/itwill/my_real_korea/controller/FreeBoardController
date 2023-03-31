@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.ui.Model;
 
 import com.itwill.my_real_korea.dto.City;
-import com.itwill.my_real_korea.dto.util.PageMakerDto;
+import com.itwill.my_real_korea.util.PageMakerDto;
 import com.itwill.my_real_korea.dto.freeboard.FreeBoard;
 import com.itwill.my_real_korea.dto.freeboard.FreeBoardComment;
 import com.itwill.my_real_korea.service.freeboard.FreeBoardService;

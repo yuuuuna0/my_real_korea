@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.itwill.ej_final_project.mapper.TripBoardCommentMapper">
+<mapper namespace="com.itwill.my_real_korea.mapper.TripBoardCommentMapper">
 
 <!--  동행게시판 댓글 추가 -->
 <insert id="insertTripBoardComment" parameterType="com.itwill.ej_final_project.dto.TripBoardComment" >

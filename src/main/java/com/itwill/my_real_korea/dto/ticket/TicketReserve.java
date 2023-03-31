@@ -2,8 +2,6 @@ package com.itwill.my_real_korea.dto.ticket;
 
 import java.util.Date;
 
-import com.itwill.my_real_korea.dto.user.User;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,10 +12,9 @@ import lombok.NoArgsConstructor;
 public class TicketReserve {
 
     private int tiRsNo;
-    private String tiRsDesc;
     private Date tiRsDate;
     private int tiRsQty;
     private String tiRsMsg;
-    private int tiNo;
+    private Ticket ticket;
     private String userId;
 }

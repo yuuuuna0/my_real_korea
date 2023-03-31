@@ -10,8 +10,8 @@ import java.util.List;
 @Repository
 public class TicketReserveDaoImpl implements TicketReserveDao {
 
-    private final TicketReserveMapper ticketReserveMapper;
-    
+    private TicketReserveMapper ticketReserveMapper;
+    @Autowired
     public TicketReserveDaoImpl(TicketReserveMapper ticketReserveMapper) {
     	this.ticketReserveMapper = ticketReserveMapper;
     }
@@ -23,20 +23,17 @@ public class TicketReserveDaoImpl implements TicketReserveDao {
 
 	@Override
 	public List<TicketReserve> selectByTicketReserveUser(String userId) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return ticketReserveMapper.selectByTicketReserveUser(userId);
 	}
 
 	@Override
 	public List<TicketReserve> selectByTicketReserveNo(int tiRsNo) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return ticketReserveMapper.selectByTicketReserveNo(tiRsNo);
 	}
 
 	@Override
 	public int deleteTicketReserve(int tiRsNo) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+		return ticketReserveMapper.deleteTicketReserve(tiRsNo);
 	}
 
     

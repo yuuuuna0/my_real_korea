@@ -7,16 +7,18 @@
         <selectKey resultType="java.lang.Integer" keyProperty="tiRsNo" order="BEFORE">
             SELECT TICKET_RESERVE_TI_RS_NO_SEQ.NEXTVAL FROM DUAL
         </selectKey>
-            INSERT INTO TICKET_RESERVE (TI_RS_NO,TI_RS_DATE,TI_RS_QTY,TI_RS_MSG,TI_NO,USRE_ID)
-            VALUES(#{tiRsNo},#{tiRsDate},#{tiRsQty},#{tiRsMsg},#{tiNo},#{userId})
+            INSERT INTO TICKET_RESERVE (TI_RS_NO,TI_RS_DATE,TI_RS_QTY,TI_RS_MSG,TI_NO,USER_ID)
+            VALUES(#{tiRsNo},#{tiRsDate},#{tiRsQty},#{tiRsMsg},#{ticket.tiNo},#{userId})
     </insert>
     <!--내 예약 조회 -->
-    <select id="selectTicketReserveUser" resultType="com.itwill.my_real_korea.dto.ticket.TicketReserve">
-            SELECT * FROM TICKETRESERVE WHERE USER_ID=#{userId}
+    <select id="selectByTicketReserveUser" resultType="com.itwill.my_real_korea.dto.ticket.TicketReserve">
+            SELECT * FROM TICKET_RESERVE WHERE USER_ID=#{userId}
     </select>
         <!--예약 상세 보기 -->
             <resultMap id="ticketReserveMap" type="com.itwill.my_real_korea.dto.ticket.TicketReserve">
-                <association property="tiNo" javaType="com.itwill.my_real_korea.dto.ticket.Ticket" autoMapping="true">
+                <association property="ticket"
+                             javaType="com.itwill.my_real_korea.dto.ticket.Ticket"
+                             autoMapping="true">
                 </association>
             </resultMap>
             <select id="selectByTicketReserveNo" parameterType="java.lang.Integer" resultMap="ticketReserveMap">

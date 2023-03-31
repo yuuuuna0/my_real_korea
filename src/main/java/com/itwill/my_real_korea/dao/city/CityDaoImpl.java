@@ -25,15 +25,15 @@ public class CityDaoImpl implements CityDao {
 	}
 
 	@Override
-	public City selectByCityNo(int cityNo) throws Exception {
+	public City findByCityNo(int cityNo) throws Exception {
 		//시티번호로 시티찾기
-		return cityMapper.selectByCityNo(cityNo);
+		return cityMapper.findByCityNo(cityNo);
 	}
 
 	@Override
-	public List<City> selectAllCity() throws Exception {
+	public List<City> findAllCity() throws Exception {
 		//시티리스트 전체 출력
-		return cityMapper.selectAllCity();
+		return cityMapper.findAllCity();
 	}
 
 }

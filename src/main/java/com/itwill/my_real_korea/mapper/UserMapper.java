@@ -23,6 +23,9 @@ public interface UserMapper {
 	public int isExistUser(String userId);
 	
 	public int isMatchPassword(Map<String,Object> map);
+	
+	//이메일, 이름으로 아이디 찾기
+	public String findIdByEmailName(User user);
 
 	
 }

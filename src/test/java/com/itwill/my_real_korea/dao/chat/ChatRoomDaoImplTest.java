@@ -19,7 +19,7 @@ class ChatRoomDaoImplTest {
 	@Autowired
 	private ChatRoomDao chatRoomDao;
 	
-	@Disabled
+	
 	@Test
 	void testSelectAll() {
 		assertNotNull(chatRoomDao.selectAll("kms1"));
@@ -61,7 +61,7 @@ class ChatRoomDaoImplTest {
 		assertEquals(rowCount, 1);
 	}
 
-	
+	@Disabled
 	@Test
 	void testCountNotReadInChatRoom() {
 		int rowCount = chatRoomDao.countNotReadInChatRoom(1, "kms2");

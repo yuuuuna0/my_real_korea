@@ -84,12 +84,13 @@ public String free_board_comment_update_form( @RequestParam Integer fCommentNo, 
 }
 //수정 후 게시
 @RequestMapping("/free-board-update-action")
-public String free_board_comment_update_action(@ModelAttribute FreeBoardComment freeBoardComment, HttpSession session) throws Exception{
-    return "redirect:free-board-comment-list";
+	public String free_board_comment_update_action(@ModelAttribute FreeBoardComment freeBoardComment, HttpSession session) throws Exception{
+   	return "redirect:free-board-comment-list";
 }
 //댓글 삭제
 @RequestMapping("/free-board-comment-delete-action")
-public String free_board_comment_delete_action(@ModelAttribute FreeBoardComment freeBoardComment, HttpSession session) throws Exception{
-    return "redirect:free-board-comment-list";
+	public String free_board_comment_delete_action(@ModelAttribute FreeBoardComment freeBoardComment, HttpSession session) throws Exception{
+    	return "redirect:free-board-comment-list";
 }
+	
 }

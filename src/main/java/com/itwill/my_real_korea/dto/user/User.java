@@ -42,6 +42,26 @@ is_admin          NUMBER
 	private UserAddInfo userAddInfo;
 	private UserImg userImg;
 	
+	public User(String userId, String password, String name, String nickname, String phone, String email, Date birth,
+			String address, int gender, int point, int isAdmin) {
+		super();
+		this.userId = userId;
+		this.password = password;
+		this.name = name;
+		this.nickname = nickname;
+		this.phone = phone;
+		this.email = email;
+		this.birth = birth;
+		this.address = address;
+		this.gender = gender;
+		this.point = point;
+		this.isAdmin = isAdmin;
+	}
+	
+	
+	
+	
+	
 	
 }
 

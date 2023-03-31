@@ -21,6 +21,5 @@ private String introduce;
 private int alcohol;
 private int smoking;
 private String userId;
-private UserImg userImg;
 
 }

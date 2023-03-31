@@ -8,8 +8,8 @@
 	</resultMap>
 
 	<insert id="create" parameterType="com.itwill.my_real_korea.dto.user.User">
-		INSERT into user_info(user_id, password, name, nickname, phone, email, birth, address, gender, point, is_admin, userAddInfo, userImg) 
-		VALUES(#{userId},#{password},#{name},#{nickname},#{phone},#{email},#{birth},#{address},#{gender},#{point},#{isAdmin},#{user_add_info},#{user_img})
+		INSERT into user_info(user_id, password, name, nickname, phone, email, birth, address, gender, point, is_admin) 
+		VALUES(#{userId},#{password},#{name},#{nickname},#{phone},#{email},#{birth},#{address},#{gender},#{point},#{isAdmin})
 	</insert>
 	<update id="update" parameterType="com.itwill.my_real_korea.dto.user.User">
 		UPDATE  user_info 

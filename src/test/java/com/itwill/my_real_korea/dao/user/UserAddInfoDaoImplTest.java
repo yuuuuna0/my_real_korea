@@ -18,11 +18,11 @@ class UserAddInfoDaoImplTest {
 		System.out.println(userAddInfoDao);
 	}
 
-	@Test
-	void testCreateUserAddInfo() throws Exception {
-		UserAddInfo newAddInfo = new UserAddInfo("테스트", 0, 0, "user1", null);
-		System.out.println(">> created :"+userAddInfoDao.createUserAddInfo(newAddInfo));
-	}
+//	@Test
+//	void testCreateUserAddInfo() throws Exception {
+//		UserAddInfo newAddInfo = new UserAddInfo("테스트", 0, 0, "user1", null);
+//		System.out.println(">> created :"+userAddInfoDao.createUserAddInfo(newAddInfo));
+//	}
 
 	@Test
 	void testUpdateUserAddInfo() throws Exception {

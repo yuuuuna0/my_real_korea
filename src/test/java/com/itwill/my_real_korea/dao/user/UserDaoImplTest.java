@@ -1,18 +1,18 @@
 package com.itwill.my_real_korea.dao.user;
 
 import org.junit.jupiter.api.Test;
-import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
 @Transactional
 @SpringBootTest
-@MapperScan(basePackages = "com.itwill.my_real_korea.mapper")
+//@MapperScan(basePackages = "com.itwill.my_real_korea.mapper")
 class UserDaoImplTest {
 	
 	@Autowired
 	private UserDao userDao;
+	
 	
 	@Test
 	void init() {

@@ -7,8 +7,8 @@
         <selectKey resultType="java.lang.Integer" keyProperty="tiReviewNo" order="BEFORE">
             SELECT TICKET_REVIEW_TI_REVIEW_NO_SEQ.NEXTVAL FROM DUAL
         </selectKey>
-            INSERT INTO TICKET_REVIEW (TI_REVIEW_NO,TI_REVIEW_DATE,TI_REVIEW_TITLE,TI_REVIEW_CONTENT,TI_REVIEW_IMG)
-            VALUES (#{tiReviewNo}, #{tiReviewDate},#{tiReviewTitle},#{tiReviewContent},#{tiReviewImg},#{userId})
+            INSERT INTO TICKET_REVIEW (TI_REVIEW_NO,TI_REVIEW_DATE,TI_REVIEW_TITLE,TI_REVIEW_CONTENT,TI_REVIEW_IMG,TI_NO,USER_ID)
+            VALUES (#{tiReviewNo}, SYSDATE,#{tiReviewTitle},#{tiReviewContent},#{tiReviewImg},#{tiNo},#{userId})
     </insert>
 
     <!--리뷰 보기 -->
@@ -23,14 +23,14 @@
     <!--리뷰 수정-->
     <update id="updateTicketReview" parameterType="com.itwill.my_real_korea.dto.ticket.TicketReview">
             UPDATE TICKET_REVIEW SET TI_REVIEW_TITLE=#{tiReviewTitle},
-                                    TI_REVIEW_CONTENT={tiReviewContent},
-                                    TI_REVIEW_IMG={tiReviewImg}
-            WHERE TI_REVIEW_NO={tiReviewNo}
+                                     TI_REVIEW_CONTENT=#{tiReviewContent},
+                                     TI_REVIEW_IMG=#{tiReviewImg}
+            WHERE TI_REVIEW_NO=#{tiReviewNo}
     </update>
 
     <!--리뷰 삭제-->
     <delete id="deleteTicketReview" parameterType="com.itwill.my_real_korea.dto.ticket.TicketReview">
-            DELETE FROM TICKET_REVIEW WHERE TI_REVIEW_NO = {tiReviewNo}
+            DELETE FROM TICKET_REVIEW WHERE TI_REVIEW_NO = #{tiReviewNo}
     </delete>
 
 </mapper>

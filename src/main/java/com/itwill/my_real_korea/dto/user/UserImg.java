@@ -3,12 +3,10 @@ package com.itwill.my_real_korea.dto.user;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 public class UserImg {
 	
 	/*
@@ -24,4 +22,4 @@ user_id               VARCHAR2(50)
     private String userId;
     
 }
-            
+            	

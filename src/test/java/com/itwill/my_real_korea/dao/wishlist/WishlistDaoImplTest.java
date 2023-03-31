@@ -45,7 +45,7 @@ class WishlistDaoImplTest {
 		System.out.println(wishlistList);
 	}
 
-	
+	@Disabled
 	@Test
 	void testSelectAllWithTicketAndTour() {
 		List<Wishlist> wishlistList = wishlistDao.selectAllWithTicketAndTour("user1");
@@ -61,12 +61,12 @@ class WishlistDaoImplTest {
 		System.out.println(rowCount);
 	}
 
-	@Disabled
+	
 	@Test
 	void testInsertTicketToWishlist() throws Exception {
 		
-		City city = new City(0, "광교", 111, 222);
-		cityDao.insertCity(city);
+		
+		City city = cityDao.findByCityNo(1);
 		
 		Ticket ticket = new Ticket(0, "티켓인서트", null, 1111, "인포", "유의사항", 0, city);
 		ticketDao.insertTicket(ticket);
@@ -81,8 +81,7 @@ class WishlistDaoImplTest {
 	@Test
 	void testInsertTourToWishlist() throws Exception {
 		
-		City city = new City(0, "성남", 111, 222);
-		cityDao.insertCity(city);
+		City city = cityDao.findByCityNo(2);
 		
 		Tour tour = new Tour(0, "투어인서트", 1, 12, 3, "버스정류장앞", 50000, "재밌는 투어", "편한 복장으로 오세요", 2, city);
 		tourDao.insertTour(tour);

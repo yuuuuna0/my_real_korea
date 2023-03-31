@@ -1,7 +1,6 @@
 package com.itwill.my_real_korea.dao.user;
 
 import org.junit.jupiter.api.Test;
-import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,7 +9,6 @@ import com.itwill.my_real_korea.dto.user.UserAddInfo;
 
 @Transactional
 @SpringBootTest
-@MapperScan(basePackages = "com.itwill.my_real_korea.mapper")
 class UserAddInfoDaoImplTest {
 	@Autowired
 	private UserAddInfoDao userAddInfoDao; 
@@ -22,7 +20,7 @@ class UserAddInfoDaoImplTest {
 
 	@Test
 	void testCreateUserAddInfo() throws Exception {
-		UserAddInfo newAddInfo = new UserAddInfo("change", 1, 1, "user1");
+		UserAddInfo newAddInfo = new UserAddInfo("테스트", 0, 0, "user1", null);
 		System.out.println(">> created :"+userAddInfoDao.createUserAddInfo(newAddInfo));
 	}
 
@@ -35,7 +33,7 @@ class UserAddInfoDaoImplTest {
 		System.out.println(">> updated :"+userAddInfoDao.updateUserAddInfo(updateAddInfo));
 	}
 
-//	@Test
+	@Test
 	void testRemoveUserAddInfo() throws Exception {
 		System.out.println(">> removed :"+userAddInfoDao.removeUserAddInfo("user1"));
 	}

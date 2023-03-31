@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.itwill.my_real_korea.mapper.UserAddInfoMapper">
-
-	<resultMap id="userAddInfoResultMap" type="com.itwill.my_real_korea.dto.user.UserAddInfo" autoMapping="true">
-		<association property="userImg" column="user_img" autoMapping="true"></association>
-	</resultMap>
 	
 	<insert id="createUserAddInfo" parameterType="com.itwill.my_real_korea.dto.user.UserAddInfo">
-		INSERT into user_add_info(introduce, alcohol, smoking, user_id, userImg) 
-		VALUES (#{introduce}, #{alcohol}, #{smoking}, #{userId}, #{userImg})
+		INSERT into user_add_info(introduce, alcohol, smoking, user_id) 
+		VALUES (#{introduce}, #{alcohol}, #{smoking}, #{userId})
 	</insert>
 	<update id="updateUserAddInfo" parameterType="com.itwill.my_real_korea.dto.user.UserAddInfo">
 		UPDATE  user_add_info 
@@ -19,12 +15,10 @@
 		DELETE user_add_info 
 		WHERE user_id = #{userId}
 	</delete>
-	<select id="findUserAddInfo" parameterType="java.lang.String" resultMap="userAddInfoResultMap">
+	<select id="findUserAddInfo" parameterType="java.lang.String" resultType="com.itwill.my_real_korea.dto.user.UserAddInfo">
 		SELECT *
-		FROM user_add_info ua
-			JOIN user_img ui
-				ON ua.user_id = ui.user_id
-		WHERE ua.user_id = #{userId}
+		FROM user_add_info
+		WHERE user_id = #{userId}
 	</select>
 
 </mapper>

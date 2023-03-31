@@ -1,6 +1,7 @@
 package com.itwill.my_real_korea.dao.user;
 
 import org.junit.jupiter.api.Test;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,7 +21,7 @@ class UserAddInfoDaoImplTest {
 
 	@Test
 	void testCreateUserAddInfo() throws Exception {
-		UserAddInfo newAddInfo = new UserAddInfo("테스트", 0, 0, "user1", null);
+		UserAddInfo newAddInfo = new UserAddInfo("테스트", 0, 0, "user1");
 		System.out.println(">> created :"+userAddInfoDao.createUserAddInfo(newAddInfo));
 	}
 

@@ -32,9 +32,18 @@ insert into city(city_no,city_name,latitude,longitude) values(city_city_no_seq.n
 
 /*************** notice ***********************/
 -- 공지사항 notice insert
-insert into notice(n_no,n_title,n_content,n_img,user_id) values (notice_n_no_seq.nextval,'공지사항1','공지사항내용1','img.png','user1'); 
-insert into notice(n_no,n_title,n_content,n_img,user_id) values (notice_n_no_seq.nextval,'공지사항2','공지사항내용2','img.png','user2'); 
-insert into notice(n_no,n_title,n_content,n_img,user_id) values (notice_n_no_seq.nextval,'공지사항3','공지사항내용3','img.png','user3'); 
+insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img,user_id) values (notice_n_no_seq.nextval,'공지사항1','공지사항내용1',sysdate,1,'img.png','user1'); 
+insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img,user_id) values (notice_n_no_seq.nextval,'공지사항2','공지사항내용2',sysdate,2,'img.png','user2'); 
+insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img,user_id) values (notice_n_no_seq.nextval,'공지사항3','공지사항내용3',sysdate,1,'img.png','user3'); 
+
+
+insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img,user_id) values (notice_n_no_seq.nextval,'공지사항4','공지사항내용4','2023/04/02',4,'img.png','user1'); 
+insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img,user_id) values (notice_n_no_seq.nextval,'공지사항5','공지사항내용5','2023/04/03',8,'img.png','user2'); 
+insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img,user_id) values (notice_n_no_seq.nextval,'공지사항6','공지사항내용6','2023/04/05',10,'img.png','user3'); 
+
+insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img,user_id) values (notice_n_no_seq.nextval,'공지사항7','공지사항내용7','2023/05/02',15,'img.png','user1'); 
+insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img,user_id) values (notice_n_no_seq.nextval,'공지사항8','공지사항내용8','2023/06/03',23,'img.png','user2'); 
+insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img,user_id) values (notice_n_no_seq.nextval,'공지사항9','공지사항내용9','2023/07/05',2,'img.png','user3'); 
 
 /*************** tour ***********************/
 --insert tour
@@ -142,12 +151,21 @@ insert into trip_board(t_bo_no,t_bo_title,t_bo_content,t_bo_date,t_bo_readcount,
                     
 
 /*************** wishlist ***********************/
---wishlist
-insert into wishlist(wish_no,user_id,ti_no,to_no) values(WISHLIST_WISH_NO_SEQ.nextval,'admin',1,null);
-insert into wishlist(wish_no,user_id,ti_no,to_no) values(WISHLIST_WISH_NO_SEQ.nextval,'user1',null,3);
-insert into wishlist(wish_no,user_id,ti_no,to_no) values(WISHLIST_WISH_NO_SEQ.nextval,'user2',2,null);
-insert into wishlist(wish_no,user_id,ti_no,to_no) values(WISHLIST_WISH_NO_SEQ.nextval,'user3',4,null);
+-- 티켓 상품 위시리스트에 추가
 insert into wishlist(wish_no,user_id,ti_no,to_no) values(WISHLIST_WISH_NO_SEQ.nextval,'user1',1,null);
+insert into wishlist(wish_no,user_id,ti_no,to_no) values(WISHLIST_WISH_NO_SEQ.nextval,'user1',2,null);
+insert into wishlist(wish_no,user_id,ti_no,to_no) values(WISHLIST_WISH_NO_SEQ.nextval,'user2',3,null);
+insert into wishlist(wish_no,user_id,ti_no,to_no) values(WISHLIST_WISH_NO_SEQ.nextval,'user2',4,null);
+insert into wishlist(wish_no,user_id,ti_no,to_no) values(WISHLIST_WISH_NO_SEQ.nextval,'user3',1,null);
+insert into wishlist(wish_no,user_id,ti_no,to_no) values(WISHLIST_WISH_NO_SEQ.nextval,'user3',2,null);
+
+-- 투어 상품 위시리스트에 추가
+insert into wishlist(wish_no,user_id,ti_no,to_no) values(WISHLIST_WISH_NO_SEQ.nextval,'user1',null,2);
+insert into wishlist(wish_no,user_id,ti_no,to_no) values(WISHLIST_WISH_NO_SEQ.nextval,'user1',null,3);
+insert into wishlist(wish_no,user_id,ti_no,to_no) values(WISHLIST_WISH_NO_SEQ.nextval,'user2',null,1);
+insert into wishlist(wish_no,user_id,ti_no,to_no) values(WISHLIST_WISH_NO_SEQ.nextval,'user2',null,2);
+insert into wishlist(wish_no,user_id,ti_no,to_no) values(WISHLIST_WISH_NO_SEQ.nextval,'user3',null,3);
+insert into wishlist(wish_no,user_id,ti_no,to_no) values(WISHLIST_WISH_NO_SEQ.nextval,'user3',null,4);
 
 
 commit;

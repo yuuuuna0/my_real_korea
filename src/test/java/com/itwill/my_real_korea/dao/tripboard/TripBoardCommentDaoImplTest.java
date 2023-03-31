@@ -16,7 +16,7 @@ import com.itwill.my_real_korea.dto.tripboard.TripBoardComment;
 
 @SpringBootApplication
 @SpringBootTest
-@MapperScan(basePackages = "com.itwill.ej_final_project.mapper")
+@MapperScan(basePackages = "com.itwill.my_real_korea.mapper")
 class TripBoardCommentDaoImplTest {
 	@Autowired
 	private TripBoardCommentDao tripBoardCommentDao;

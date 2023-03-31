@@ -8,11 +8,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Transactional
 @SpringBootTest
-@MapperScan(basePackages = "com.itwill.my_real_korea.mapper")
+//@MapperScan(basePackages = "com.itwill.my_real_korea.mapper")
 class UserDaoImplTest {
 	
 	@Autowired
 	private UserDao userDao;
+	
 	
 	@Test
 	void init() {

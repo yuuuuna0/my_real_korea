@@ -31,10 +31,11 @@ public class FreeBoardController{
         String sUserId = (String)session.getAttribute("sUserId");
         City sCity=(City)session.getAttribute("sCity");
         System.out.println("freeBord_list: sCity"+sCity);
-            PageMakerDto<FreeBoard> freeBoardList = freeBoardService.selectAll(pageStart,pageEnd);
+            PageMakerDto<FreeBoard> freeBoardList = (PageMakerDto<FreeBoard>) freeBoardService.selectAll(pageStart,pageEnd);
             model.addAttribute("freeboardList",freeBoardList);
             model.addAttribute("pageStart",pageStart);
             model.addAttribute("pageEnd",pageEnd);
+			return sUserId;
         }
         //게시판 상세보기
         @RequestMapping(value = "/free-board-view")
@@ -49,12 +50,13 @@ public class FreeBoardController{
             List<FreeBoardComment> freeBoardCommentList = freeBoardCommentService.selectAll();
             model.addAttribute("freeBoardCommentList", freeBoardCommentList);
             System.out.println("freeBoardCommentList"+freeBoardCommentList);
+			return sUserId;
         }
         //게시판 글쓰기
         @GetMapping(value = "/free-board-write-form")
         public String free_board_write_form(HttpSession session) throws Exception {
-                String sUserId = (String)session.getAttribute("sUserId");
-                String forwardPath="";
+            String sUserId = (String)session.getAttribute("sUserId");
+            String forwardPath="";
                 //비회원은 로그인화면으로
                 if(sUserId == null) {
                     forwardPath = "user-login-form";
@@ -85,13 +87,15 @@ public class FreeBoardController{
         @RequestMapping("/free-board-update-form")
         public String free_board_update_form(@RequestParam Integer pageStart, Integer pageEnd, @RequestParam Integer fBoNo, Model model,HttpSession session) throws Exception{
             String sUserId = (String)session.getAttribute("sUserId");
+            String userId = (String)session.getAttribute("userId");
+            
             String forwardPath = "";
             //비회원은 로그인화면으로
             if(sUserId == null) {
             forwardPath = "user-login-form";
             }
             //회원
-            if(sUserId != null) {
+            if(sUserId == userId) {
                 FreeBoard freeBoard = freeBoardService.selectByNo(fBoNo);
                 model.addAttribute("freeBoard",freeBoard);
                 forwardPath = "free-board-update";
@@ -109,7 +113,6 @@ public class FreeBoardController{
             return "redirect:free-board-list";
         }
 }
-
 
 
 

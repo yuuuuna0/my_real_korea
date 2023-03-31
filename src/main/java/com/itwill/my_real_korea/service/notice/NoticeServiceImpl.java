@@ -100,7 +100,7 @@ public class NoticeServiceImpl implements NoticeService{
 	@Override
 	public PageMakerDto<Notice> selectSearchNoticeList(int currentPage, String keyword) throws Exception{
 		// 전체 글의 수
-		int totNoticeCount = noticeDao.selectNoticeCount();
+		int totNoticeCount = noticeDao.selectSearchCount(keyword);
 		// paging 계산 (PageMaker)
 		PageMaker pageMaker = new PageMaker(totNoticeCount, currentPage);
 		// 게시글 데이터 얻기

@@ -55,7 +55,7 @@ class TourServiceImplTest {
 		Tour findTour=tourService.findTourWithCityByToNo(3);
 		System.out.println(findTour);
 	}
-
+	
 	@Test
 	void testFindTourAll() throws Exception{
 		List<Tour> tourList=tourService.findTourWithTourImgWithCityAll();

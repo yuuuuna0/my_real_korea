@@ -15,16 +15,9 @@ import com.itwill.my_real_korea.dto.tour.TourImg;
 public class TourServiceImpl implements TourService {
 	@Autowired
 	private TourDao tourDao;
-//	@Autowired
-//	private TourImgDao tourImgDao;
 	@Override
-	public int insertTour(Tour tour/*,List<TourImg> tourImgList*/) throws Exception {
+	public int insertTour(Tour tour) throws Exception {
 		//투어상품 추가
-
-//		for (TourImg tourImg : tourImgList) {
-//			tourImg.setToNo(tour.getToNo());
-//			tourImgDao.insertTourImg(tourImg);
-//		}
 		return tourDao.insertTour(tour);
 	}
 

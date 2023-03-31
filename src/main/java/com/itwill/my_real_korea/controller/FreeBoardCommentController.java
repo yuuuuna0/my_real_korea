@@ -64,24 +64,24 @@ public String free_board_write_action(@RequestParam Map<String, Object> map, Mod
         }
         return forwardPath;
     }
-//댓글 수정
-@RequestMapping("/free-board-comment-update-form")
-public String free_board_comment_update_form( @RequestParam Integer fCommentNo, Model model,HttpSession session) throws Exception{
-    String sUserId = (String)session.getAttribute("sUserId");
-    String userId = (String)session.getAttribute("userId");
-    String forwardPath = "";
-    //비회원은 로그인화면으로
-    if(sUserId == null) {
-    forwardPath = "user-login-form";
-    }
-    //비회원은 로그인화면으로
-    if(sUserId == userId) {
-        FreeBoardComment freeBoardComment = (FreeBoardComment) freeBoardCommentService.selectAll();
-        model.addAttribute("freeBoardComment",freeBoardComment);
-        forwardPath = "free-board-comment-update";
-    }
-    return forwardPath;
-}
+////댓글 수정
+//@RequestMapping("/free-board-comment-update-form")
+//public String free_board_comment_update_form( @RequestParam Integer fCommentNo, Model model,HttpSession session) throws Exception{
+//    String sUserId = (String)session.getAttribute("sUserId");
+//    String userId = (String)session.getAttribute("userId");
+//    String forwardPath = "";
+//    //비회원은 로그인화면으로
+//    if(sUserId == null) {
+//    forwardPath = "user-login-form";
+//    }
+//    //비회원은 로그인화면으로
+//    if(sUserId == userId) {
+//        FreeBoardComment freeBoardComment = (FreeBoardComment) freeBoardCommentService.selectAll();
+//        model.addAttribute("freeBoardComment",freeBoardComment);
+//        forwardPath = "free-board-comment-update";
+//    }
+//    return forwardPath;
+//}
 //수정 후 게시
 @RequestMapping("/free-board-update-action")
 	public String free_board_comment_update_action(@ModelAttribute FreeBoardComment freeBoardComment, HttpSession session) throws Exception{

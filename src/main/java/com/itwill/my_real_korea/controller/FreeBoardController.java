@@ -103,10 +103,10 @@ public class FreeBoardController{
             return forwardPath;
         }
         //수정 후 게시
-        @RequestMapping("/free-board-update-action")
-        public String free_board_update_action(@ModelAttribute FreeBoard freeBoard, HttpSession session) throws Exception{
-            return "redirect:free-board-list";
-        }
+//        @RequestMapping("/free-board-update-action")
+//        public String free_board_update_action(@ModelAttribute FreeBoard freeBoard, HttpSession session) throws Exception{
+//            return "redirect:free-board-list";
+//        }
         //게시물 삭제
         @RequestMapping("/free-board-delete-action")
         public String free_board_delete_action(@ModelAttribute FreeBoard freeBoard, HttpSession session) throws Exception{

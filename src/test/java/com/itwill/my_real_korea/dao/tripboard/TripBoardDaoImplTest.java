@@ -18,7 +18,7 @@ import com.itwill.my_real_korea.dto.tripboard.TripBoard;
 
 //@SpringBootApplication
 //@SpringBootTest
-//@MapperScan(basePackages = "com.itwill.ej_final_project.mapper")
+//@MapperScan(basePackages = "com.itwill.my_real_korea.mapper")
 class TripBoardDaoImplTest {
 	
 	@Autowired
@@ -208,7 +208,7 @@ class TripBoardDaoImplTest {
 	}
 	 
 	/*
-	* 게시글의 지역정보 조회
+	* 게시글 1개에 등록된 지역정보 조회
 	*/
 	//성공
 	@Disabled

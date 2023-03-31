@@ -3,8 +3,8 @@
 <mapper namespace="com.itwill.my_real_korea.mapper.UserMapper">
 
 	<resultMap id="userResultMap" type="com.itwill.my_real_korea.dto.user.User" autoMapping="true">
-		<association property="userAddInfo" column="user_add_info" autoMapping="true"></association>
-		<association property="userImg" column="user_img" autoMapping="true"></association>
+		<association property="userAddInfo" javaType="com.itwill.my_real_korea.dto.user.UserAddInfo" autoMapping="true"></association>
+		<association property="userImg" javaType="com.itwill.my_real_korea.dto.user.UserImg" autoMapping="true"></association>
 	</resultMap>
 
 	<insert id="create" parameterType="com.itwill.my_real_korea.dto.user.User">

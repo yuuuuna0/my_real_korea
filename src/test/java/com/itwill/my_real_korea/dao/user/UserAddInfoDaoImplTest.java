@@ -20,7 +20,7 @@ class UserAddInfoDaoImplTest {
 
 	@Test
 	void testCreateUserAddInfo() throws Exception {
-		UserAddInfo newAddInfo = new UserAddInfo("테스트", 0, 0, "user1", null);
+		UserAddInfo newAddInfo = new UserAddInfo("테스트", 0, 0, "user1");
 		System.out.println(">> created :"+userAddInfoDao.createUserAddInfo(newAddInfo));
 	}
 

@@ -117,7 +117,7 @@ public class TripBoardDaoImpl implements TripBoardDao{
 	 */
 	@Override
 	public TripBoard selectCityInfo(int tBoNo) throws Exception {
-		return tripBoardMapper.selectCityInfo(tBoNo);
+		return tripBoardMapper.selectByCityInfo(tBoNo);
 	}
 	
 }

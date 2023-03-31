@@ -19,7 +19,7 @@ import com.itwill.my_real_korea.dto.tour.Tour;
 import com.itwill.my_real_korea.mapper.TourMapper;
 
 
-@SpringBootApplication
+//@SpringBootApplication
 @SpringBootTest
 @MapperScan(basePackages = "com.itwill.my_real_korea.mapper")
 class TourDaoImplTest{
@@ -33,6 +33,7 @@ class TourDaoImplTest{
 		int rowCount=tourDao.updateTour(new Tour(9,"변경",2,2,5,"변경",50000,"변경입니다","변경",0,new City(1,null,0,0)));
 		assertEquals(rowCount, 1);
 	}
+	@Test
 	void testFindTourAll() throws Exception{
 		List<Tour> tourList=tourDao.findTourWithTourImgWithCityAll();
 		for (Tour tour : tourList) {

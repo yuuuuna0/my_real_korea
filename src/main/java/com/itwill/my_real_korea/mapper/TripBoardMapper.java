@@ -96,7 +96,13 @@ public interface TripBoardMapper {
 	int selectTbSearchCount(String keyword) throws Exception;
 	
 	/*
-	 * 게시글의 지역정보 조회
+	 * 게시글1개 조회 + City 정보
 	 */
-	TripBoard selectCityInfo(int tBoNo) throws Exception;
+	TripBoard selectByCityInfo(int tBoNo) throws Exception;
+	
+	/*
+	 * 게시글리스트 조회 + City 정보
+	
+	List<TripBoard> selectAllByCityNo();
+	 */
 }

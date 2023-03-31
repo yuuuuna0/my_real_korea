@@ -13,7 +13,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import com.itwill.my_real_korea.dto.tour.Tour;
 import com.itwill.my_real_korea.dto.tour.TourReserve;
-//@SpringBootApplication
 @SpringBootTest
 @MapperScan(basePackages = "com.itwill.my_real_korea.mapper")
 class TourReserveDaoImplTest {
@@ -26,29 +25,24 @@ class TourReserveDaoImplTest {
 	}
 
 	void testUpdateTourReserve() throws Exception{
-		int rowCount=tourReserveDao.updateTourReserve(new TourReserve(2,new Date(),5,"변경",new Tour(2, null, 0, 0, 0, null, 0, null, null, 0, null),"admin")); 
+		int rowCount=tourReserveDao.updateTourReserve(new TourReserve(3,new Date(),5,"변경",new Tour(2, null, 0, 0, 0, null, 0, null, null, 0, null),"admin")); 
 		assertEquals(rowCount, 1);
 	}
-
 	void testDeleteTourReserve() throws Exception{
 		int rowCount=tourReserveDao.deleteTourReserve(1);
 		assertEquals(rowCount, 1);
 	}
-
 	void testSelectTourReserveWithTourByToRsNo() throws Exception{
-		TourReserve tourReserve=tourReserveDao.selectTourReserveWithTourByToRsNo(2);
+		TourReserve tourReserve=tourReserveDao.findTourReserveWithTourByToRsNo(3);
 		System.out.println(tourReserve);
 	}
-
 	void testSelectAllTourReserveByUserId() throws Exception{
-		List<TourReserve> tourReserveList=tourReserveDao.selectAllTourReserveByUserId("user2");
+		List<TourReserve> tourReserveList=tourReserveDao.findAllTourReservewithTourByUserId("admin");
 		System.out.println(tourReserveList.size());
 		for (TourReserve tourReserve : tourReserveList) {
 			System.out.println(tourReserve);
 		}
 	}
-
-	@Test
 	void testDeleteAllTourReserveByUserId() throws Exception{
 		int rowCount=tourReserveDao.deleteAllTourReserveByUserId("user2");
 		System.out.println(rowCount);

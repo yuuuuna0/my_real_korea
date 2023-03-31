@@ -12,7 +12,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import com.itwill.my_real_korea.dto.tour.TourImg;
 
-//@SpringBootApplication
 @SpringBootTest
 @MapperScan(basePackages = "com.itwill.my_real_korea.mapper")
 class TourImgDaoImplTest{

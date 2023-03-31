@@ -12,9 +12,9 @@ public interface TourReserveDao {
 	//3. 투어예약 삭제
 	int deleteTourReserve(int toRsNo) throws Exception;
 	//4. 투어예약번호로 예약 상세보기
-	TourReserve selectTourReserveWithTourByToRsNo(int toRsNo) throws Exception;
+	TourReserve findTourReserveWithTourByToRsNo(int toRsNo) throws Exception;
 	//5. 유저의 투어예약 리스트 전체 보여주기
-	List<TourReserve> selectAllTourReserveByUserId(String userId) throws Exception;
+	List<TourReserve> findAllTourReservewithTourByUserId(String userId) throws Exception;
 	//6. 유저의 투어예약 전체 삭제
 	int deleteAllTourReserveByUserId(String userId) throws Exception;
 

@@ -35,15 +35,15 @@ public class TourReserveDaoImpl implements TourReserveDao {
 	}
 
 	@Override
-	public TourReserve selectTourReserveWithTourByToRsNo(int toRsNo) throws Exception {
+	public TourReserve findTourReserveWithTourByToRsNo(int toRsNo) throws Exception {
 		//투어예약번호로 예약 상세보기
-		return tourReserveMapper.selectTourReserveWithTourByToRsNo(toRsNo);
+		return tourReserveMapper.findTourReserveWithTourByToRsNo(toRsNo);
 	}
 
 	@Override
-	public List<TourReserve> selectAllTourReserveByUserId(String userId) throws Exception {
+	public List<TourReserve> findAllTourReservewithTourByUserId(String userId) throws Exception {
 		//유저의 투어예약 리스트 전체 보여주기
-		return tourReserveMapper.selectAllTourReserveByUserId(userId);
+		return tourReserveMapper.findAllTourReservewithTourByUserId(userId);
 	}
 
 	@Override

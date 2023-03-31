@@ -19,7 +19,6 @@ import com.itwill.my_real_korea.dto.tour.Tour;
 import com.itwill.my_real_korea.mapper.TourMapper;
 
 
-@SpringBootApplication
 @SpringBootTest
 @MapperScan(basePackages = "com.itwill.my_real_korea.mapper")
 class TourDaoImplTest{

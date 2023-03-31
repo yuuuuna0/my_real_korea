@@ -4,7 +4,6 @@ import com.itwill.my_real_korea.dao.freeboard.FreeBoardDao;
 import com.itwill.my_real_korea.dto.freeboard.FreeBoard;
 import com.itwill.my_real_korea.dto.freeboard.FreeBoardListPageMakerDto;
 import com.itwill.my_real_korea.dto.notice.Notice;
-import com.itwill.my_real_korea.dto.notice.NoticeListPageMakerDto;
 import com.itwill.my_real_korea.util.PageMaker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

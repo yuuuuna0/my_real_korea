@@ -5,7 +5,6 @@ import java.util.List;
 import com.itwill.my_real_korea.dto.freeboard.FreeBoard;
 import com.itwill.my_real_korea.dto.freeboard.FreeBoardListPageMakerDto;
 import com.itwill.my_real_korea.dto.notice.Notice;
-import com.itwill.my_real_korea.dto.notice.NoticeListPageMakerDto;
 
 public interface FreeBoardService {
 	int insertBoard(FreeBoard freeBoard) throws Exception;

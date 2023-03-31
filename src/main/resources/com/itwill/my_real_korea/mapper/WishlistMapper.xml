@@ -3,23 +3,9 @@
 <mapper namespace="com.itwill.my_real_korea.mapper.WishlistMapper">
 
 <resultMap type="com.itwill.my_real_korea.dto.wishlist.Wishlist" id="wishlistWithTicketTourResultMap" autoMapping="true">
-	<!-- 
-	<collection property="ticketList" 
-				javaType="java.util.List" 
-				ofType="com.itwill.my_real_korea.dto.ticket.Ticket"
-				autoMapping="true">
-	</collection>
-	<collection property="tourList" 
-				javaType="java.util.List" 
-				ofType="com.itwill.my_real_korea.dto.tour.Tour"
-				autoMapping="true">
-	</collection>
-	 -->
 	 <association property="ticket" javaType="com.itwill.my_real_korea.dto.ticket.Ticket" autoMapping="true">
-	 
 	 </association>
 	 <association property="tour" javaType="com.itwill.my_real_korea.dto.tour.Tour" autoMapping="true">
-	 
 	 </association>
 </resultMap>
 

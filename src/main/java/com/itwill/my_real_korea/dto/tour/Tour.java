@@ -60,6 +60,7 @@ public class Tour {
 		this.city = new City();
 		this.tourImgList=new ArrayList<TourImg>();
 	}
+
 	public Tour(int toNo, String toName, int toType, int toTime, int toPerson, String toMeet, int toPrice,
 			String toInfo, String toNotice, int toCount,City city) {
 		super();

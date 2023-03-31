@@ -10,6 +10,7 @@ import com.itwill.my_real_korea.dto.user.UserAddInfo;
 
 @Transactional
 @SpringBootTest
+@MapperScan(basePackages = "com.itwill.my_real_korea.mapper")
 class UserAddInfoDaoImplTest {
 	@Autowired
 	private UserAddInfoDao userAddInfoDao; 

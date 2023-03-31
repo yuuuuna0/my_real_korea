@@ -3,6 +3,7 @@ package com.itwill.my_real_korea.service.user;
 import java.util.Date;
 
 import org.junit.jupiter.api.Test;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,6 +12,7 @@ import com.itwill.my_real_korea.dto.user.User;
 
 @Transactional
 @SpringBootTest
+@MapperScan(basePackages = "com.itwill.my_real_korea.mapper")
 class UserServiceImplTest {
 	
 	@Autowired
@@ -18,7 +20,7 @@ class UserServiceImplTest {
 	
 	@Test
 	void testCreate() throws Exception {
-		User user = new User("test2", "test1111", "테스트", "테스트", "011-1111-1111", "test1@gmail.com", new Date(), "테스트", 0, 0, 1, null, null);
+		User user = new User("test2", "test1111", "테스트", "테스트", "011-1111-1111", "test1@gmail.com", new Date(), "테스트", 0, 0, 1);
 		System.out.println(">> created :"+userService.create(user));
 	}
 	

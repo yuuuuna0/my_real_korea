@@ -3,10 +3,12 @@ package com.itwill.my_real_korea.dto.user;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class UserAddInfo {
 	/*
 	 * 이름        널? 유형             

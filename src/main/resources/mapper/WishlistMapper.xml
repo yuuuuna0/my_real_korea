@@ -3,6 +3,7 @@
 <mapper namespace="com.itwill.my_real_korea.mapper.WishlistMapper">
 
 <resultMap type="com.itwill.my_real_korea.dto.wishlist.Wishlist" id="wishlistWithTicketTourResultMap" autoMapping="true">
+	<!-- 
 	<collection property="ticketList" 
 				javaType="java.util.List" 
 				ofType="com.itwill.my_real_korea.dto.ticket.Ticket"
@@ -13,6 +14,13 @@
 				ofType="com.itwill.my_real_korea.dto.tour.Tour"
 				autoMapping="true">
 	</collection>
+	 -->
+	 <association property="ticket" javaType="com.itwill.my_real_korea.dto.ticket.Ticket" autoMapping="true">
+	 
+	 </association>
+	 <association property="tour" javaType="com.itwill.my_real_korea.dto.tour.Tour" autoMapping="true">
+	 
+	 </association>
 </resultMap>
 
 
@@ -40,7 +48,7 @@
 		select wishlist_wish_no_seq.nextval from dual
 	</selectKey>
 	insert into wishlist(wish_no,user_id,ti_no,to_no) 
-	values(#{wishNo},#{userId},#{tiNo},null)
+	values(#{wishNo},#{userId},#{ticket.tiNo},null)
 </insert>
 
 <!--투어 상품 위시리스트에 추가 -->
@@ -49,7 +57,7 @@
 		select wishlist_wish_no_seq.nextval from dual
 	</selectKey>
 	insert into wishlist(wish_no,user_id,ti_no,to_no) 
-	values(#{wishNo},#{userId},null,#{toNo})
+	values(#{wishNo},#{userId},null,#{tour.toNo})
 </insert>
 
 <!--  위시리스트 전체 삭제  -->

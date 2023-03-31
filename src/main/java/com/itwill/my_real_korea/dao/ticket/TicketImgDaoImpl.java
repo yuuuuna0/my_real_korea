@@ -18,13 +18,13 @@ public class TicketImgDaoImpl implements TicketImgDao{
     }
     //이미지 생성
     @Override
-    public int insertTicketImg(TicketImg ticketImg) throws Exception {
+    public int insertTicketImg(TicketImg ticketImg) throws Exception{
         return ticketImgMapper.insertTicketImg(ticketImg);
     }
     //이미지 출력
     @Override
-    public List<TicketImg> selectByTicketImg(int tiNo) {
-        return ticketImgMapper.selectByTicketImg(tiNo);
+    public List<TicketImg> selectTicketImgList(int tiNo) {
+        return ticketImgMapper.selectTicketImgList(tiNo);
     }
     //이미지 수정
     @Override

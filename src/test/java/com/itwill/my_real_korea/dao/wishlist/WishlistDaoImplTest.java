@@ -11,16 +11,31 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.itwill.my_real_korea.dao.city.CityDao;
+import com.itwill.my_real_korea.dao.ticket.TicketDao;
+import com.itwill.my_real_korea.dao.tour.TourDao;
+import com.itwill.my_real_korea.dto.City;
 import com.itwill.my_real_korea.dto.ticket.Ticket;
+import com.itwill.my_real_korea.dto.tour.Tour;
 import com.itwill.my_real_korea.dto.wishlist.Wishlist;
+import com.itwill.my_real_korea.mapper.TicketMapper;
+import com.itwill.my_real_korea.mapper.TourMapper;
+import com.itwill.my_real_korea.mapper.WishlistMapper;
 
-@SpringBootApplication
+//@SpringBootApplication
 @SpringBootTest
 @MapperScan(basePackages = "com.itwill.my_real_korea.mapper")
+//@MapperScan(basePackageClasses = {WishlistMapper.class, TicketMapper.class, TourMapper.class})
 class WishlistDaoImplTest {
 
 	@Autowired
 	private WishlistDao wishlistDao;
+	@Autowired
+	private TicketDao ticketDao;
+	@Autowired
+	private TourDao tourDao;
+	@Autowired
+	private CityDao cityDao;
 	
 	@Disabled
 	@Test
@@ -46,10 +61,17 @@ class WishlistDaoImplTest {
 		System.out.println(rowCount);
 	}
 
-	@Disabled
+	
 	@Test
-	void testInsertTicketToWishlist() {
-		Wishlist ticketWishlist = new Wishlist(0, "user1", 2, 0);
+	void testInsertTicketToWishlist() throws Exception {
+		
+		
+		City city = cityDao.findByCityNo(1);
+		
+		Ticket ticket = new Ticket(0, "티켓인서트", null, 1111, "인포", "유의사항", 0, city);
+		ticketDao.insertTicket(ticket);
+		
+		Wishlist ticketWishlist = new Wishlist(0, "user1", ticket, null);
 		int rowCount = wishlistDao.insertTicketToWishlist(ticketWishlist);
 		assertNotEquals(rowCount, 0);
 		System.out.println(rowCount);
@@ -57,9 +79,15 @@ class WishlistDaoImplTest {
 
 	@Disabled
 	@Test
-	void testInsertTourToWishlist() {
-		Wishlist ticketWishlist = new Wishlist(0, "user2", 0, 3);
-		int rowCount = wishlistDao.insertTourToWishlist(ticketWishlist);
+	void testInsertTourToWishlist() throws Exception {
+		
+		City city = cityDao.findByCityNo(2);
+		
+		Tour tour = new Tour(0, "투어인서트", 1, 12, 3, "버스정류장앞", 50000, "재밌는 투어", "편한 복장으로 오세요", 2, city);
+		tourDao.insertTour(tour);
+		
+		Wishlist tourWishlist = new Wishlist(0, "user2", null, tour);
+		int rowCount = wishlistDao.insertTourToWishlist(tourWishlist);
 		assertNotEquals(rowCount, 0);
 		System.out.println(rowCount);
 	}
@@ -72,7 +100,7 @@ class WishlistDaoImplTest {
 		System.out.println(rowCount);
 	}
 
-	
+	@Disabled
 	@Test
 	void testDeleteWishlistByNoAndId() {
 		int rowCount = wishlistDao.deleteWishlistByNoAndId(3,"user2");

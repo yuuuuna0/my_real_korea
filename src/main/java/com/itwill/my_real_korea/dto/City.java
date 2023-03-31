@@ -19,5 +19,5 @@ public class City {
 	private int cityNo;
 	private String cityName;
 	private long latitude;
-	private long longtitude;
+	private long longitude;
 }

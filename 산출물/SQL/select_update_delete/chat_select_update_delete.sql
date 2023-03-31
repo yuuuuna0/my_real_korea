@@ -6,9 +6,9 @@ select * from chat_room where room_no=1;
 select * from chat_room where from_id='kms2' and to_id='kms3';
 
 -- 회원의 채팅방 목록 보기(room_no, room_name, msg_send_time, msg_content)
-select a.room_no, a.room_name, msg_send_time, msg_content
+select a.room_no, a.room_name, msg_no, msg_send_time, msg_content
 from (select room_no, room_name from chat_room where from_id='kms1' or to_id='kms1') a
-inner join (select aa.msg_send_time, aa.room_no, aa.msg_content from chat_msg aa
+inner join (select aa.msg_no, aa.msg_send_time, aa.room_no, aa.msg_content from chat_msg aa
             ) b 
 on a.room_no = b.room_no
 order by msg_send_time desc;

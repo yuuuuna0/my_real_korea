@@ -6,6 +6,7 @@ import java.util.List;
 import com.itwill.my_real_korea.dto.ticket.Ticket;
 import com.itwill.my_real_korea.dto.tour.Tour;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -20,6 +21,7 @@ TO_NO            NUMBER
  */
 
 @Data
+@AllArgsConstructor
 @NoArgsConstructor
 @ToString
 public class Wishlist {
@@ -27,28 +29,10 @@ public class Wishlist {
 	private int wishNo;
 	/* FK */
 	private String userId;
-	/* FK */
-	private int tiNo;
-	/* FK */
-	private int toNo;
-	
-	/* ticket 상품 데이터 가져오기 */
-	private List<Ticket> ticketList;
-	/* tour 상품 데이터 가져오기 */
-	private List<Tour> tourList;
-	
-	public Wishlist(int wishNo, String userId, int tiNo, int toNo) {
-		super();
-		this.wishNo = wishNo;
-		this.userId = userId;
-		this.tiNo = tiNo;
-		this.toNo = toNo;
-		this.ticketList = new ArrayList<>();
-		this.tourList = new ArrayList<>();
-	}
-	
-	
-	
+	/* FK : ticket 상품 데이터 가져오기 */
+	private Ticket ticket;
+	/* FK : tour 상품 데이터 가져오기 */
+	private Tour tour;
 	
 	
 }

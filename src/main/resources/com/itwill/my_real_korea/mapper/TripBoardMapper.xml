@@ -97,7 +97,7 @@
 </select>
 
 <!-- 게시글의 지역 조회 -->
-<resultMap id="CitywithTripBoardResultMap" type="com.itwill.ej_final_project.dto.TripBoard">
+<resultMap id="CitywithTripBoardResultMap" type="com.itwill.my_real_korea.dto.tripboard.TripBoard">
 	<association property="city" javaType="com.itwill.my_real_korea.dto.City" autoMapping="true">
 	</association>
 </resultMap>

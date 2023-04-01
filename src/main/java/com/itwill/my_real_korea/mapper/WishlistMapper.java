@@ -19,6 +19,10 @@ public interface WishlistMapper {
 	 */
 	List<Wishlist> selectAllWithTicketAndTour(String userId);
 	/*
+	 * 위시리스트 1개 보기(wish_no)
+	 */
+	Wishlist selectByWishNo(int wishNo);
+	/*
 	 * 위시리스트 담겨있는 티켓/투어 상품의 수 
 	 */
 	int selectWishlistCount(String userId);

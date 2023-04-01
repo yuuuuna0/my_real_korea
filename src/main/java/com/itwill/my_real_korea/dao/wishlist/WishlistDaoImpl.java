@@ -20,14 +20,11 @@ public class WishlistDaoImpl implements WishlistDao{
 	public WishlistDaoImpl() {
 		System.out.println("WishlistDaoImpl 기본생성자 호출");
 	}
-	public WishlistMapper getWishlistMapper() {
-		return wishlistMapper;
+
+	@Override
+	public Wishlist selectByWishNo(int wishNo) {
+		return wishlistMapper.selectByWishNo(wishNo);
 	}
-	public void setWishlistMapper(WishlistMapper wishlistMapper) {
-		System.out.println(">>> WishlistDaoImpl():setWishlistMapper()호출");
-		this.wishlistMapper = wishlistMapper;
-	}
-	
 	
 	@Override
 	public List<Wishlist> selectAll(String userId) {
@@ -66,5 +63,6 @@ public class WishlistDaoImpl implements WishlistDao{
 		wishMap.put("userId", userId);
 		return wishlistMapper.deleteWishlistByNoAndId(wishMap);
 	}
+
 
 }

@@ -1,76 +1,59 @@
 package com.itwill.my_real_korea.dao.ticket;
 
-import com.itwill.my_real_korea.dto.City;
-import com.itwill.my_real_korea.dto.ticket.Ticket;
-import com.itwill.my_real_korea.dto.tour.Tour;
-import com.itwill.my_real_korea.mapper.TicketMapper;
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.Test;
-import org.mybatis.spring.annotation.MapperScan;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.web.WebAppConfiguration;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import org.junit.jupiter.api.Test;
+import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import com.itwill.my_real_korea.dto.City;
+import com.itwill.my_real_korea.dto.ticket.Ticket;
+
 @SpringBootTest
-@MapperScan(basePackageClasses = TicketMapper.class)
+@MapperScan(basePackages = "com.itwill.my_real_korea.mapper")
 class TicketDaoImplTest {
+	
+	@Autowired
+	private TicketDao ticketDao;
 
-
-    @Autowired
-    private TicketDao ticketDao;
-
-    @Test
-    void insertTicket() throws Exception {
-        int rowCount = ticketDao.insertTicket
-                (new Ticket(0, "인서트", null, 1111, "인포", "유의사항", 0,
-                        new City(1, "이름", 1, 1)));
-        assertEquals(rowCount, 1);
-
-    }
-    /*
-    @Disabled
-    @Test
-    void selectAllTicket(int pageStart, int pageEnd) throws Exception {
-        List<Ticket> ticketList = ticketDao.selectAllTicket(pageStart, pageEnd);
-        assertEquals(ticketList.size(),1);
-    }*/
-    /*
-    @Disabled
-    @Test
-    void selectByTicketCity() throws Exception {
-        List<Ticket> ticketListCityList = ticketDao.selectByTicketCity(1);
-        assertEquals(ticketListCityList.size(),3);
-    }*/
-    /*@Disabled
-    @Test
-    void selectByKeywordTicket() throws Exception {
-        List<Ticket> ticketKeywordList = ticketDao.selectByKeywordTicket("서울");
-        assertEquals(ticketKeywordList.size(), 1);
-    }*/
-    /*
-    @Disabled
-    @Test
-    void selectByTicketPrice() throws Exception {
-        List<Ticket> selectByTicketPrice = ticketDao.selectByTicketPrice("asc");
-        System.out.println(selectByTicketPrice);
-    }*/
-
-    @Disabled
-    @Test
-    void selectByTicketNoCityWithImg() throws Exception{
-        List<Ticket> ticketList = ticketDao.selectByTicketNoCityWithImg(1);
+	//@Test
+	void insertTicket() throws Exception {
+		int rowCount = ticketDao.insertTicket
+				(new Ticket(0, "인서트", null, 1111, "인포", "유의사항", 0,
+	                        new City(1, null, 0, 0)));
+	        assertEquals(rowCount, 1);
+	        System.out.println(rowCount);
+	        
+	    }
+	// 전체 목록 + 정렬 - 페이징
+    //@Test
+    void selectAllTicket() throws Exception {
+        List<Ticket> ticketList = ticketDao.selectAllTicket(1, 10,"DESC");
         System.out.println(ticketList);
     }
-
-    @Test
-    void selectTest() throws Exception{
-        List<Ticket> ticketList = ticketDao.selectTest("서울",1,10,1,"desc");
+    // 키워드, 지역, 가격 + 전체 LIST - 페이징 처리
+    //@Test
+    void selectByTicketAllSort() throws Exception {
+    	//
+        List<Ticket> ticketList = ticketDao.selectByTicketAllSort(1,10,null,0,"DESC");
         System.out.println(ticketList);
     }
+    //상품 상세보기 - 지역 + 사진
+    @Test
+    void selectByTicketNoCityWithImg() throws Exception {
+    	List<Ticket> ticketList = ticketDao.selectByTicketNoCityWithImg(1);
+    	Ticket ticket = ticketList.get(0);
+    	for(int i=1; i<ticketList.size(); i++) {
+    		ticket.getTicketImgList().add(ticketList.get(i).getTicketImgList().get(0));
+    	}
+    	System.out.println(ticket);
+    	
+    }
+    	
+    	
+	
 
 }

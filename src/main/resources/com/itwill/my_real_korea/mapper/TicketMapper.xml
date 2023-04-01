@@ -19,79 +19,78 @@
 					INSERT INTO TICKET (TI_NO, TI_TITLE, TI_DATE, TI_PRICE, TI_INFO, TI_NOTICE, TI_COUNT, CITY_NO)
 					VALUES (#{tiNo},#{tiTitle},SYSDATE,#{tiPrice},#{tiInfo},#{tiNotice},#{tiCount},#{city.cityNo})
         </insert>
-
-	<!-- 상품 상세보기 - 지역 + 사진  -->
-	<select id="selectByTicketPrice"  parameterMap="ticketResultMap">
-			SELECT * FROM
-				(SELECT ROWNUM IDX, TIPRI.* FROM
-					(SELECT T.*, TI_IMG_NO, C.CITY_NAME
-					FROM TICKET T
-						JOIN CITY C
-							ON T.CITY_NO = C.CITY_NO
-					JOIN TICKET_IMG TI
-							ON T.TI_NO = TI.TI_NO
-					<if test="sortOrder == 'asc'"/>
-					<trim prefix="ORDER BY">
-						<if test="sortOrder == 'desc'"/>
-					</trim>
-					ORDER BY TI_PRICE #{sortOrder}) TIPRI
-					)
-			<![CDATA[WHERE IDX>=#{pageStart} AND IDX <=#{pageEnd}]]>
-	</select>
-	<!-- 전체 티켓 상품 보기 지역 + 이미지 리스트 - 페이징 -->
-	<select id="selectByTicketNoCityWithImg" parameterType="java.lang.Integer" resultMap="ticketResultMap">
-		SELECT T.*, TI.*, C.CITY_NAME
-		FROM TICKET T
-				 JOIN CITY C
-					  ON T.CITY_NO=C.CITY_NO
-				 JOIN TICKET_IMG TI
-					  ON T.TI_NO = TI.TI_NO
-		WHERE T.TI_NO=#{tiNo}
-	</select>
-
-	<!-- 상품 키워드로 검색  -  페이징 -->
+	<!-- 전체보기 -->
 	<select id="selectAllTicket" resultMap="ticketResultMap">
 		SELECT * FROM
-		(SELECT ROWNUM IDX, TIALL.*FROM
-		(SELECT T.*, TI.TICKET_IMG, C.CITY_NAME, C.LATITUDE, C.LONGITUDE
-		FROM TICKET T
-		JOIN CITY C
-		ON T.CITY_NO=C.CITY_NO
-		JOIN TICKET_IMG TI
-		ON T.TI_NO = TI.TI_NO
-		ORDER BY T.TI_NO DESC) TIALL
+			(SELECT ROWNUM IDX, TIALL.*FROM
+				(SELECT T.*, TI.TI_IMG_NO, C.CITY_NAME
+				 FROM TICKET T
+						  JOIN CITY C
+							   ON T.CITY_NO=C.CITY_NO
+						  JOIN TICKET_IMG TI
+							   ON T.TI_NO = TI.TI_NO
+			<if test="sortOrder != null">
+				<choose>
+					<when test="sortOrder == 'ASC'">
+						ORDER BY T.TI_NO ASC
+					</when>
+					<when test="sortOrder == 'DESC'">
+						ORDER BY T.TI_NO DESC
+					</when>
+					<otherwise>
+						ORDER BY T.TI_NO ASC
+					</otherwise>
+				</choose>
+			</if>
+			 )TIALL
 		)
 		<![CDATA[WHERE IDX >= #{pageStart} AND IDX <=#{pageEnd}]]>
 	</select>
-	<!-- 상품 가격 순으로 검색  - 페이징 -->
-	<select id="selectByKeywordTicket" parameterMap="ticketResultMap">
-		SELECT *
-		FROM (SELECT ROWNUM IDX, TIKE.*
-			  FROM (SELECT T.*, TI_IMG_NO.C.CITY_NAME
-					FROM TICKET T
-							 JOIN CITY C
-								  ON T.CITY_NO = C.CITY_NO
-							 JOIN TICKET_IMG TI
-								  ON T.TI_NO = TI.TI_NO
-					WHERE TI_TITLE LIKE '%' || #{keyword} || '%') TIKE
-			 )
-					<![CDATA[WHERE IDX>=#{pageStart} AND IDX <=#{pageEnd}]]>
+
+	<!-- 키워드, 지역, 가격 + 정렬 페이징 처리 -->
+	<select id="selectByTicketAllSort" parameterType="java.util.Map" resultMap="ticketResultMap">
+		SELECT * FROM (
+			SELECT ROWNUM IDX, TIKE.* FROM (
+				SELECT T.*, TI_IMG_NO, C.CITY_NAME
+				FROM TICKET T
+					JOIN CITY C
+						ON T.CITY_NO = C.CITY_NO
+					JOIN TICKET_IMG TI
+						ON T.TI_NO = TI.TI_NO
+				WHERE 1=1
+				<if test="keyword != null">
+					AND TI_TITLE LIKE '%' || #{keyword} || '%'
+				</if>
+				<if test="cityNo != 0">
+					AND T.CITY_NO=#{cityNo}
+				</if>
+				<if test="sortOrder != null">
+					<choose>
+						<when test="sortOrder == 'ASC'">
+							ORDER BY TI_PRICE ASC
+						</when>
+						<when test="sortOrder == 'DESC'">
+							ORDER BY TI_PRICE DESC
+						</when>
+						<otherwise>
+							ORDER BY TI_PRICE ASC
+						</otherwise>
+					</choose>
+				</if>
+			) TIKE
+			)
+			<![CDATA[WHERE IDX>=#{pageStart} AND IDX <=#{pageEnd}]]>
 	</select>
-	<!-- 상품 지역별 검색 -->
-	<select id="selectByTicketCity"
-	parameterType="java.lang.Integer" resultType="com.itwill.my_real_korea.dto.ticket.Ticket">
-			SELECT * FROM
-				(SELECT ROWNUM IDX, TICI.* FROM
-					SELECT T.*, TI_IMG_NO, C.CITY_NAME
-					FROM TICKET T
-						JOIN CITY C
-							ON T.CITY_NO = C.CITY_NO
-						JOIN TICKET_IMG TI
-							ON T.TI_NO = TI.TI_NO
-					ORDER BY TI_PRICE #{sortOrder})
-			WHERE CITY_NO=#{city.cityNo}
-				) TICI
-			         <![CDATA[WHERE IDX>=#pageStart} AND IDX<=#{pageEnd}]]>
+
+	<!-- 티켓 상세보기 지역 + 이미지 -->
+			<select id="selectByTicketNoCityWithImg" parameterType="java.lang.Integer" resultMap="ticketResultMap">
+				SELECT T.*, TI.*, C.CITY_NAME, C.LATITUDE, C.LONGITUDE
+				FROM TICKET T
+						 JOIN CITY C
+							  ON T.CITY_NO=C.CITY_NO
+						 JOIN TICKET_IMG TI
+							  ON T.TI_NO = TI.TI_NO
+				WHERE T.TI_NO=#{tiNo}
 			</select>
     	<!-- 상품 번호로 수정 -->
 	        <update id ="updateTicket" parameterType="com.itwill.my_real_korea.dto.ticket.Ticket">
@@ -104,31 +103,53 @@
 	            DELETE FROM TICKET WHERE TI_NO=#{tiNo}
 	        </delete>
 
-	<!-- SELECT 동적-->
-	<select id="selectTest" parameterType="java.util.Map" resultMap="ticketResultMap">
-		SELECT *
-		FROM (
-			SELECT ROWNUM IDX, TIKE.*
-				FROM (
-					SELECT T.*, TI_IMG_NO, C.CITY_NAME
-				FROM TICKET T
-				JOIN CITY C ON T.CITY_NO = C.CITY_NO
-				JOIN TICKET_IMG TI ON T.TI_NO = TI.TI_NO
-				WHERE 1=1
-		<if test="keyword != null">
-			AND TI_TITLE LIKE '%' || #{keyword} || '%'
-		</if>
-		<if test="cityNo != null">
-			AND T.CITY_NO=#{cityNo}
-		</if>
-		<if test="sortOrder != null">
-			ORDER BY TI_PRICE ${sortOrder}
-		</if>
-		) TIKE
-		)
-		<![CDATA[WHERE IDX>=#{pageStart} AND IDX <=#{pageEnd}]]>
-	</select>
-
-
 
 </mapper>
+
+
+<!--
+	상품 키워드로 검색  -  페이징
+<select id="selectAllTicket" resultMap="ticketResultMap">
+SELECT * FROM
+	(SELECT ROWNUM IDX, TIALL.*FROM
+		(SELECT T.*, TI.TICKET_IMG, C.CITY_NAME, C.LATITUDE, C.LONGITUDE
+		 FROM TICKET T
+				  JOIN CITY C
+					   ON T.CITY_NO=C.CITY_NO
+				  JOIN TICKET_IMG TI
+					   ON T.TI_NO = TI.TI_NO
+		 ORDER BY T.TI_NO DESC) TIALL
+	)
+		<![CDATA[WHERE IDX >= #{pageStart} AND IDX <=#{pageEnd}]]>
+</select>
+		상품 가격 순으로 검색  - 페이징
+<select id="selectByKeywordTicket" parameterMap="ticketResultMap">
+SELECT *
+FROM (SELECT ROWNUM IDX, TIKE.*
+	  FROM (SELECT T.*, TI_IMG_NO.C.CITY_NAME
+			FROM TICKET T
+					 JOIN CITY C
+						  ON T.CITY_NO = C.CITY_NO
+					 JOIN TICKET_IMG TI
+						  ON T.TI_NO = TI.TI_NO
+			WHERE TI_TITLE LIKE '%' || #{keyword} || '%') TIKE
+	 )
+					<![CDATA[WHERE IDX>=#{pageStart} AND IDX <=#{pageEnd}]]>
+</select>
+		- 상품 지역별 검색
+<select id="selectByTicketCity"
+		parameterType="java.lang.Integer" resultType="com.itwill.my_real_korea.dto.ticket.Ticket">
+SELECT * FROM
+	(SELECT ROWNUM IDX, TICI.* FROM
+		SELECT T.*, TI_IMG_NO, C.CITY_NAME
+	 FROM TICKET T
+		 JOIN CITY C
+	 ON T.CITY_NO = C.CITY_NO
+		 JOIN TICKET_IMG TI
+		 ON T.TI_NO = TI.TI_NO
+	 ORDER BY TI_PRICE #{sortOrder})
+WHERE CITY_NO=#{city.cityNo}
+	) TICI
+			         <![CDATA[WHERE IDX>=#pageStart} AND IDX<=#{pageEnd}]]>
+</select>
+ -->

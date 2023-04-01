@@ -31,81 +31,6 @@ public class NoticeRestController {
 	private NoticeService noticeService;
 	
 	/*
-	 * 공지사항 게시글 추가
-	 */
-	@ApiOperation(value = "공지사항 글쓰기")
-	@PostMapping(value = "/notice", produces = "application/json;charset=UTF-8")
-	public Map<String, Object> notice_write_action(@RequestBody Notice notice){
-		
-		Map<String, Object> resultMap = new HashMap<>();
-		int code = 1;
-		String msg = "성공";
-		List<Notice> data = new ArrayList<Notice>();
-		
-		try {
-			// 공지사항 글쓰기, 성공시 code 1
-			noticeService.insertNotice(notice);
-			code = 1;
-			msg = "성공";
-			// 공지사항 글쓰기 후 그 공지사항을 찾아서 데이터에 붙여줌
-			notice = noticeService.selectByNo(notice.getNNo());
-			data.add(notice);
-		} catch (Exception e) {
-			// 실패 시 code 2
-			e.printStackTrace();
-			code = 2;
-			msg = "공지사항 글쓰기 실패";
-		}
-		resultMap.put("code", code);
-		resultMap.put("msg", msg);
-		resultMap.put("data", data);
-		
-		return resultMap;
-	}
-	
-	
-
-	/*
-	 * 공지사항 게시글 번호(boardno)로 해당 게시글 보기
-	 */
-	@ApiOperation(value = "공지사항 상세보기")
-	@ApiImplicitParam(name = "nNo", value = "공지사항 번호")
-	@GetMapping(value = "/notice/{nNo}", produces = "application/json;charset=UTF-8")
-	public Map<String, Object> notice_detail(@PathVariable(value = "nNo") int nNo) {
-
-		Map<String, Object> resultMap = new HashMap<>();
-		int code = 1;
-		String msg = "성공";
-		List<Notice> data = new ArrayList<Notice>();
-
-		try {
-			// nNo로 공지사항 1개 찾기, 성공시 code 1
-			Notice notice = noticeService.selectByNo(nNo);
-			if (notice != null) {
-				// 공지사항 게시글 조회수 1 증가
-				noticeService.increaseReadCount(nNo);
-				code = 1;
-				data.add(notice);
-			} else {
-				// 실패 시 code 2
-				code = 2;
-				msg = "해당 공지사항이 존재하지 않습니다.";
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			// 에러 발생 시 code 3
-			code = 3;
-			msg = "관리자에게 문의하세요.";
-		}
-		resultMap.put("code", code);
-		resultMap.put("msg", msg);
-		resultMap.put("data", data);
-
-		return resultMap;
-	}
-	
-
-	/*
 	 * 공지사항 리스트 보기 (게시글 시작번호, 게시글 끝번호) - 페이징 처리
 	 */
 	@ApiOperation(value = "공지사항 리스트")
@@ -132,7 +57,6 @@ public class NoticeRestController {
 		resultMap.put("data", noticeList);
 		return resultMap;
 	}
-	
 	
 	/*
 	 * 최신순 정렬 : 공지사항 리스트 보기 (게시글 시작번호, 게시글 끝번호) - 페이징 처리
@@ -228,14 +152,20 @@ public class NoticeRestController {
 		String msg = "성공";
 		PageMakerDto<Notice> noticeList = null;
 		try {
-			// 페이지 번호(default 값 1)로 공지사항 검색결과 리스트 찾기, 성공시 code 1
+			// 페이지 번호(default 값 1)와 검색 keyword로 공지사항 검색결과 리스트 찾기, 성공시 code 1
 			noticeList = noticeService.selectSearchNoticeList(pageno,keyword);
-			code = 1;
-			msg = "성공";
+			if (noticeList.getTotRecordCount() != 0 && noticeList != null) {
+				code = 1;
+				msg = "성공";
+			} else {
+				// 검색 결과 없을시 code 2
+				code = 2;
+				msg = "해당 키워드에 해당하는 공지사항이 없습니다.";
+			}
 		} catch (Exception e) {
-			// 에러 발생시 code 2
+			// 에러 발생시 code 3
 			e.printStackTrace();
-			code = 2;
+			code = 3;
 			msg = "관리자에게 문의하세요.";
 		}
 		resultMap.put("code", code);
@@ -243,6 +173,82 @@ public class NoticeRestController {
 		resultMap.put("data", noticeList);
 		return resultMap;
 	}
+	/*
+	 * 공지사항 게시글 번호(boardno)로 해당 게시글 보기
+	 */
+	@ApiOperation(value = "공지사항 상세보기")
+	@ApiImplicitParam(name = "nNo", value = "공지사항 번호")
+	@GetMapping(value = "/notice/{nNo}", produces = "application/json;charset=UTF-8")
+	public Map<String, Object> notice_detail(@PathVariable(value = "nNo") int nNo) {
+
+		Map<String, Object> resultMap = new HashMap<>();
+		int code = 1;
+		String msg = "성공";
+		List<Notice> data = new ArrayList<Notice>();
+
+		try {
+			// nNo로 공지사항 1개 찾기, 성공시 code 1
+			Notice notice = noticeService.selectByNo(nNo);
+			if (notice != null) {
+				// 공지사항 게시글 조회수 1 증가
+				noticeService.increaseReadCount(nNo);
+				code = 1;
+				data.add(notice);
+			} else {
+				// 실패 시 code 2
+				code = 2;
+				msg = "해당 공지사항이 존재하지 않습니다.";
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			// 에러 발생 시 code 3
+			code = 3;
+			msg = "관리자에게 문의하세요.";
+		}
+		resultMap.put("code", code);
+		resultMap.put("msg", msg);
+		resultMap.put("data", data);
+
+		return resultMap;
+	}
+	
+
+
+	/*
+	 * 공지사항 게시글 추가
+	 */
+	@ApiOperation(value = "공지사항 글쓰기")
+	@PostMapping(value = "/notice", produces = "application/json;charset=UTF-8")
+	public Map<String, Object> notice_write_action(@RequestBody Notice notice){
+		
+		Map<String, Object> resultMap = new HashMap<>();
+		int code = 1;
+		String msg = "성공";
+		List<Notice> data = new ArrayList<Notice>();
+		
+		try {
+			// 공지사항 글쓰기, 성공시 code 1
+			noticeService.insertNotice(notice);
+			code = 1;
+			msg = "성공";
+			// 공지사항 글쓰기 후 그 공지사항을 찾아서 데이터에 붙여줌
+			notice = noticeService.selectByNo(notice.getNNo());
+			data.add(notice);
+		} catch (Exception e) {
+			// 실패 시 code 2
+			e.printStackTrace();
+			code = 2;
+			msg = "공지사항 글쓰기 실패";
+		}
+		resultMap.put("code", code);
+		resultMap.put("msg", msg);
+		resultMap.put("data", data);
+		
+		return resultMap;
+	}
+	
+	
+	
 	
 	/*
 	 * 공지사항 게시글 삭제

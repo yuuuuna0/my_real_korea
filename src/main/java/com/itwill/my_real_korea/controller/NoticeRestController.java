@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.itwill.my_real_korea.dto.notice.Notice;
+import com.itwill.my_real_korea.exception.IsNotAdminException;
 import com.itwill.my_real_korea.service.notice.NoticeService;
 import com.itwill.my_real_korea.util.PageMaker;
 import com.itwill.my_real_korea.util.PageMakerDto;
@@ -217,6 +220,8 @@ public class NoticeRestController {
 	/*
 	 * 공지사항 게시글 추가
 	 */
+	@AdminCheck
+	@LoginCheck
 	@ApiOperation(value = "공지사항 글쓰기")
 	@PostMapping(value = "/notice", produces = "application/json;charset=UTF-8")
 	public Map<String, Object> notice_write_action(@RequestBody Notice notice){
@@ -247,12 +252,11 @@ public class NoticeRestController {
 		return resultMap;
 	}
 	
-	
-	
-	
 	/*
 	 * 공지사항 게시글 삭제
 	 */
+	@AdminCheck
+	@LoginCheck
 	@ApiOperation(value = "공지사항 삭제")
 	@ApiImplicitParam(name = "nNo", value = "공지사항 번호")
 	@DeleteMapping(value = "/notice/{nNo}", produces = "application/json;charset=UTF-8")
@@ -264,18 +268,24 @@ public class NoticeRestController {
 		List<Notice> data = new ArrayList<Notice>();
 		try {
 			// nNo로 공지사항 삭제, 성공시 code 1
-			noticeService.deleteNotice(nNo);
-			code = 1;
-			msg = "성공";
+			int rowCount = noticeService.deleteNotice(nNo);
+			if (rowCount != 0) {
+				code = 1;
+				msg = "성공";
+			} else {
+				// 실패시 code 2
+				code = 2;
+				msg = "공지사항 삭제 실패";
+				// 삭제 실패한 nNo 데이터에 붙여줌
+				Notice failNotice = noticeService.selectByNo(nNo);
+				data.add(failNotice);
+			}
 		} catch (Exception e) {
-			// 실패시 code 2
+			// 에러시 code 3
 			e.printStackTrace();
-			code = 2;
-			msg = "공지사항 삭제 실패";
-			// 삭제 실패한 nNo 데이터에 붙여줌
-			Notice failNotice = new Notice();
-			failNotice.setNNo(nNo);
-			data.add(failNotice);
+			code = 3;
+			msg = "관리자에게 문의바랍니다.";
+			
 		}
 		resultMap.put("code", code);
 		resultMap.put("msg", msg);
@@ -286,6 +296,8 @@ public class NoticeRestController {
 	/*
 	 * 공지사항 게시글 내용 수정
 	 */
+	@AdminCheck
+	@LoginCheck
 	@ApiOperation(value = "공지사항 수정")
 	@ApiImplicitParam(name = "nNo", value = "공지사항 번호")
 	@PutMapping(value = "/notice/{nNo}", produces = "application/json;charset=UTF-8")
@@ -323,5 +335,28 @@ public class NoticeRestController {
 		return resultMap;
 	}
 	
-	
+	/*
+	 * 관리자인지 확인, 아닐 경우 에러 처리
+	 */
+	@ApiOperation(value = "관리자 에러 처리")
+	@GetMapping("/admin")
+    public Map<String, Object> error(HttpServletRequest request) throws IsNotAdminException {
+		
+		Map<String, Object> resultMap = new HashMap<>();
+		String message = (String) request.getAttribute("message");
+        String exception = (String) request.getAttribute("exception");
+
+        // IsNotAdminException 예외 발생 시 Exception 처리
+        if (exception.equals("IsNotAdminException")) {
+            throw new IsNotAdminException(message);
+        }
+        
+        resultMap.put("code", 5);
+		resultMap.put("msg", "관리자");
+		resultMap.put("data", null);
+        return resultMap;
+        
+        // 원래 void 로 처리 (resultMap 생략)
+        
+    }
 }

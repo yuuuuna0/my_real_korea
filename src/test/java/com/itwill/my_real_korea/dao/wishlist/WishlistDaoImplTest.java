@@ -45,7 +45,7 @@ class WishlistDaoImplTest {
 		System.out.println(wishlistList);
 	}
 
-	@Disabled
+	
 	@Test
 	void testSelectAllWithTicketAndTour() {
 		List<Wishlist> wishlistList = wishlistDao.selectAllWithTicketAndTour("user1");
@@ -61,7 +61,7 @@ class WishlistDaoImplTest {
 		System.out.println(rowCount);
 	}
 
-	
+	@Disabled
 	@Test
 	void testInsertTicketToWishlist() throws Exception {
 		

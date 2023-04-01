@@ -90,7 +90,7 @@ public class TicketDaoImpl implements TicketDao{
 			testQueryMap.put("cityNo", cityNo);
 			testQueryMap.put("sortOrder",sortOrder);
 
-		return ticketMapper.testQuery(testQueryMap);
+		return ticketMapper.selectTest(testQueryMap);
 	}
 
 

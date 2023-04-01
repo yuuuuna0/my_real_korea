@@ -39,6 +39,6 @@ public interface TicketMapper {
     int deleteTicket(int tiNo);
 
     //Query TEST
-    List<Ticket> testQuery(Map<String, Object> testQueryMap);
+    List<Ticket> selectTest(Map<String, Object> testQueryMap);
 
 }

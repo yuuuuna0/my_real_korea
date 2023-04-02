@@ -30,6 +30,6 @@ public class FreeBoard {
 	private Date fBoDate;
 	private int fBoCount;
 		/* FK */
-	private int cityNo;
+	private City city;
 	private String userId;
 }

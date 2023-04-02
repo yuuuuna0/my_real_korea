@@ -93,16 +93,16 @@ public class FreeBoardServiceImpl implements FreeBoardService{
         return title.toString();
     }
 
-    @Override
-    public PageMakerDto selectSearchFreeBoardList(int currentPage, String keyword) throws Exception {
-        int totalRecordCount = freeBoardDao.selectSearchCount(keyword);
-        // paging 계산 (PageMaker)
-        PageMaker pageMaker = new PageMaker(totalRecordCount, currentPage);
-        // 게시글 데이터 얻기
-        List<FreeBoard> freeboareList = freeBoardDao.selectSearchFreeBoardList(pageMaker.getPageBegin(), pageMaker.getPageEnd(),keyword);
-        PageMakerDto pageMakerBoardList = new PageMakerDto();
-        pageMakerBoardList.itemList =freeboareList;
-        pageMakerBoardList.pageMaker = pageMaker;
-        return pageMakerBoardList;
-    }
+//     @Override
+//     public PageMakerDto selectSearchFreeBoardList(int currentPage, String keyword) throws Exception {
+//         int totalRecordCount = freeBoardDao.selectSearchCount(keyword);
+//         // paging 계산 (PageMaker)
+//         PageMaker pageMaker = new PageMaker(totalRecordCount, currentPage);
+//         // 게시글 데이터 얻기
+//         List<FreeBoard> freeboareList = freeBoardDao.selectSearchFreeBoardList(pageMaker.getPageBegin(), pageMaker.getPageEnd(),keyword);
+//         PageMakerDto pageMakerBoardList = new PageMakerDto();
+//         pageMakerBoardList.itemList =freeboareList;
+//         pageMakerBoardList.pageMaker = pageMaker;
+//         return pageMakerBoardList;
+//     }
 }

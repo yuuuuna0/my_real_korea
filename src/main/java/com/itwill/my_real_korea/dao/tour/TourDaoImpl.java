@@ -1,6 +1,8 @@
 package com.itwill.my_real_korea.dao.tour;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -30,17 +32,53 @@ public class TourDaoImpl implements TourDao{
 	}
 
 	@Override
-	public List<Tour> findTourWithTourImgWithCityAll() throws Exception {
-		// 투어상품 리스트 전체 출력
-		return tourMapper.findTourWithTourImgWithCityAll();
-	}
-
-	@Override
 	public Tour findTourWithCityByToNo(int toNo) throws Exception {
 		// 투어상품 상품번호로 상세보기
 		return tourMapper.findTourWithCityByToNo(toNo);
 	}
 
+	@Override
+	public int deleteTour(int toNo) throws Exception {
+		// 투어상품 삭제 
+		return tourMapper.deleteTour(toNo);
+	}
+
+	@Override
+	public List<Tour> findTourWithTourImgWithCityAll(int pageStart, int pageEnd, String sortOrder) throws Exception {
+		// 투어상품 리스트 전체 출력 + 정렬 + 페이징
+		Map<String, Object> tourPageMap=new HashMap<>();
+		tourPageMap.put("pageStart",pageStart);
+		tourPageMap.put("pageEnd",pageEnd);
+		tourPageMap.put("sortOrder", sortOrder);
+		return tourMapper.findTourWithTourImgWithCityAll(tourPageMap);
+	}
+
+	@Override
+	public List<Tour> findTourListByCity(int pageStart, int pageEnd, int cityNo, String sortOrder)
+			throws Exception {
+		// 상품 지역필터링 +정렬 + 페이징
+		Map<String,Object> tourPageMap=new HashMap<>();
+		tourPageMap.put("pageStart",pageStart);
+		tourPageMap.put("pageEnd",pageEnd);
+		tourPageMap.put("cityNo", cityNo);
+		tourPageMap.put("sortOrder", sortOrder);
+		return tourMapper.findTourListByFilter(tourPageMap);
+	}
+
+	@Override
+	public int findTourCount() throws Exception {
+		return tourMapper.findTourCount();
+	}
+}
+
+
+/*
+	@Override
+	public List<Tour> findTourWithTourImgWithCityAll() throws Exception {
+		// 투어상품 리스트 전체 출력
+		return tourMapper.findTourWithTourImgWithCityAll();
+	}
+	
 	@Override
 	public List<Tour> findTourListByKeyword(String keyword) throws Exception {
 		// 키워드로 투어상품 검색
@@ -58,10 +96,4 @@ public class TourDaoImpl implements TourDao{
 		// 여행타입으로 투어상품 검색
 		return tourMapper.findTourListByToType(toType);
 	}
-
-	@Override
-	public int deleteTour(int toNo) throws Exception {
-		// 투어상품 삭제
-		return tourMapper.deleteTour(toNo);
-	}
-}
+ */

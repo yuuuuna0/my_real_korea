@@ -24,6 +24,32 @@
 	</update>
 	<!--                               Select                            -->
 	<!-- 3. 투어상품 전체리스트  -->
+	<select id="findTourWithTourImgWithCityAll" parameterType="java.util.Map" resultMap="TourWithCityWithTourImgMap">
+		select *
+		from (select rownum idx, tourAll.*
+			  from (select t.to_no,t.to_name,t.to_type,t.to_Time,t.to_price,
+			   			   c.city_name,
+			   			   ti.to_img_url
+			   		from tour t 
+						 join city c
+				   			on t.city_no=c.city_no
+						 left outer join tour_img ti
+				   			on t.to_no=ti.to_no
+		   				<if test="sortOrder != null">
+							<choose>
+								<when test="sortOrder == 'DESC'">
+									ORDER BY T.to_no DESC
+								</when>
+								<otherwise>
+									ORDER BY T.to_no ASC
+								</otherwise>
+							</choose>
+						</if>
+					) tourAll
+				)
+		<![CDATA[WHERE IDX >= #{pageStart} AND IDX <=#{pageEnd}]]>
+	</select>
+<!--
 	<select id="findTourWithTourImgWithCityAll" resultMap="TourWithCityWithTourImgMap">
 		select t.to_no,t.to_name,t.to_type,t.to_Time,t.to_price,
 			   c.city_name,
@@ -35,6 +61,7 @@
 		   on t.to_no=ti.to_no
 		order by t.to_no asc
 	</select>
+-->
 	<!-- 4. 투어상품 상세보기 -->
 	<select id="findTourWithCityByToNo" parameterType="java.lang.Integer"
 			resultMap="TourWithCityMap">
@@ -45,20 +72,6 @@
 		where t.to_no=#{to_no}
 		order by t.to_no asc
 	</select>
-<!--	<select id="findTourByToNo" parameterType="java.lang.Integer"
-			resultMap="TourResultMap">
-		select t.*,
-			   ti.to_img_url,
-			   c.city_name,c.latitude,c.longitude
-		from tour t
-		left outer join tour_img ti
-		   on t.to_no=ti.to_no
-		join city c
-		   on t.city_no=c.city_no 
-		where t.to_no=#{toNo}
-		order by t.to_no asc
-	</select>
--->
 	<!-- 5. 키워드로 검색 한 투어상품리스트 -->
 	<select id="findTourListByKeyword" parameterType="java.lang.String" resultMap="TourWithCityWithTourImgMap">
 		select t.to_no,t.to_name,t.to_type,t.to_Time,t.to_price,
@@ -102,5 +115,9 @@
 	<delete id="deleteTour" parameterType="java.lang.Integer">
 		delete from tour where to_no=#{toNo}
 	</delete>
+	<!-- 9. 상품 총 개수 -->
+	<select id="findTourCount" resultType="java.lang.Integer">
+		select count(*) cnt from tour
+	</select>
 
 </mapper>

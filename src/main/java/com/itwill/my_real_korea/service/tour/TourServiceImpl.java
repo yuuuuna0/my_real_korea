@@ -11,14 +11,17 @@ import com.itwill.my_real_korea.dao.tour.TourImgDao;
 import com.itwill.my_real_korea.dto.City;
 import com.itwill.my_real_korea.dto.tour.Tour;
 import com.itwill.my_real_korea.dto.tour.TourImg;
+import com.itwill.my_real_korea.util.PageMaker;
+import com.itwill.my_real_korea.util.PageMakerDto;
 @Service
 public class TourServiceImpl implements TourService {
 	@Autowired
 	private TourDao tourDao;
+	@Autowired
+	private TourImgDao tourImgDao;
 	@Override
-	public int insertTour(Tour tour/*,List<TourImg> tourImgList*/) throws Exception {
+	public int insertTour(Tour tour) throws Exception {
 		//투어상품 추가
-
 		return tourDao.insertTour(tour);
 	}
 
@@ -37,10 +40,37 @@ public class TourServiceImpl implements TourService {
 	@Override
 	public Tour findTourWithCityByToNo(int toNo) throws Exception {
 		//투어 상세보기
+		List<TourImg> tourImgList=tourImgDao.findTourImgList(toNo);
 		Tour findTour=tourDao.findTourWithCityByToNo(toNo);
+		findTour.setTourImgList(tourImgList);
 		return findTour;
 	}
 
+	@Override
+	public PageMakerDto<Tour> findAll(int currentPage, String sortOrder) throws Exception {
+		// 투어 전체 리스트 보기 + 정렬 + 페이징
+		int totTourCount=tourDao.findTourCount();	//전체 글 
+		PageMaker pageMaker= new PageMaker(totTourCount,currentPage);	//page 계산 (PageMaker)
+		//게시글 데이터 얻기
+		List<Tour> tourList=tourDao.findTourWithTourImgWithCityAll(pageMaker.getPageBegin(), pageMaker.getPageEnd(), sortOrder);
+		PageMakerDto<Tour> pageMakerTourList=new PageMakerDto<Tour>(tourList,pageMaker,totTourCount);;
+		
+		return pageMakerTourList;
+	}
+
+	@Override
+	public PageMakerDto<Tour> findAllByFilter(int currentPage, int cityNo, String sortOrder)
+			throws Exception {
+		int totTourCount=tourDao.findTourCount();	//전체 글 
+		PageMaker pageMaker= new PageMaker(totTourCount,currentPage);	//page 계산 (PageMaker)
+		//게시글 데이터 얻기
+		List<Tour> tourList=tourDao.findTourListByCity(pageMaker.getPageBegin(), pageMaker.getPageEnd(), cityNo, sortOrder);
+		PageMakerDto<Tour> pageMakerTourList=new PageMakerDto<Tour>(tourList,pageMaker,totTourCount);
+		return null;
+	}
+}
+
+/*
 	@Override
 	public List<Tour> findTourWithTourImgWithCityAll() throws Exception {
 		//투어 전체 리스트 보기
@@ -64,8 +94,4 @@ public class TourServiceImpl implements TourService {
 		//여행타입으로 투어상품 검색
 		return tourDao.findTourListByToType(toType);
 	}
-	
-	
-
-
-}
+ */	

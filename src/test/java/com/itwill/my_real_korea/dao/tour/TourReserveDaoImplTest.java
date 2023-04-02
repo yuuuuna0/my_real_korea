@@ -8,7 +8,6 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.itwill.my_real_korea.dto.tour.Tour;
@@ -20,20 +19,21 @@ class TourReserveDaoImplTest {
 	private TourReserveDao tourReserveDao;
 	
 	void testInsertTourReserve() throws Exception{
-		int rowCount=tourReserveDao.insertTourReserve(new TourReserve(0, new Date(), 3,"날짜 어케", new Tour(3, null, 0, 0, 0, null, 0, null, null, 0, null),"user2"));
+		int rowCount=tourReserveDao.insertTourReserve(new TourReserve(0, new Date(), 3,"yn", new Tour(10, null, 0, 0, 0, null, 0, null, null, 0, null),"user1"));
 		assertEquals(rowCount, 1);
 	}
 
 	void testUpdateTourReserve() throws Exception{
-		int rowCount=tourReserveDao.updateTourReserve(new TourReserve(3,new Date(),5,"변경",new Tour(2, null, 0, 0, 0, null, 0, null, null, 0, null),"admin")); 
+		int rowCount=tourReserveDao.updateTourReserve(new TourReserve(13,new Date(),5,"변경",new Tour(10, null, 0, 0, 0, null, 0, null, null, 0, null),"user1")); 
 		assertEquals(rowCount, 1);
 	}
 	void testDeleteTourReserve() throws Exception{
 		int rowCount=tourReserveDao.deleteTourReserve(1);
 		assertEquals(rowCount, 1);
 	}
+	@Test
 	void testSelectTourReserveWithTourByToRsNo() throws Exception{
-		TourReserve tourReserve=tourReserveDao.findTourReserveWithTourByToRsNo(3);
+		TourReserve tourReserve=tourReserveDao.findTourReserveWithTourByToRsNo(12);
 		System.out.println(tourReserve);
 	}
 	void testSelectAllTourReserveByUserId() throws Exception{

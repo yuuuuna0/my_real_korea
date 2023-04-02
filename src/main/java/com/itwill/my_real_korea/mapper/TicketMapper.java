@@ -29,8 +29,8 @@ public interface TicketMapper {
     //티켓 삭제
     int deleteTicket(int tiNo);
 
-
-
+    //게시글 수 조회
+    int selectAllTicketCount();
 }
 
 

@@ -25,6 +25,9 @@ public interface TicketDao {
     // 티켓 삭제
     int deleteTicket(int tiNo) throws Exception;
     
+    // 티켓 글 조회
+    int selectAllTicketCount() throws Exception;
+    
 
 
     /*

@@ -94,15 +94,18 @@
 			</select>
     	<!-- 상품 번호로 수정 -->
 	        <update id ="updateTicket" parameterType="com.itwill.my_real_korea.dto.ticket.Ticket">
-					UPDATE TICKET SET TI_TITLE=#{tiTitle}, TI_PRICE=#{tiPrice}, TI_INFO={tiInfo}, TI_NOTICE={tiNotice},
-									  TI_COUNT=#{tiCount}, CITY_NO={#cityNo}
+					UPDATE TICKET SET TI_TITLE=#{tiTitle}, TI_PRICE=#{tiPrice}, TI_INFO=#{tiInfo}, TI_NOTICE=#{tiNotice},
+									  TI_COUNT=#{tiCount}, CITY_NO=#{city.cityNo}
 					WHERE TI_NO=#{tiNo}
 	        </update>
 		<!-- 상품 1개 삭제-->
 	        <delete id="deleteTicket" parameterType="java.lang.Integer">
 	            DELETE FROM TICKET WHERE TI_NO=#{tiNo}
 	        </delete>
-
+<!-- 페이징 -->
+	<select id="selectAllTicketCount" resultType="java.lang.Integer">
+		SELECT COUNT(*) CNT FROM TICKET
+	</select>
 
 </mapper>
 

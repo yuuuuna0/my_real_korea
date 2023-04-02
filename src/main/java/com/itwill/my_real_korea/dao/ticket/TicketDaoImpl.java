@@ -13,7 +13,7 @@ import com.itwill.my_real_korea.mapper.TicketMapper;
 @Repository
 public class TicketDaoImpl implements TicketDao{
 	
-	private TicketMapper ticketMapper;
+	private final TicketMapper ticketMapper;
 	
 	@Autowired
 	public TicketDaoImpl(TicketMapper ticketMapper) {
@@ -34,7 +34,6 @@ public class TicketDaoImpl implements TicketDao{
 	// 전체 목록 + 정렬 - 페이징
 	@Override
 	public List<Ticket> selectAllTicket(int pageStart, int pageEnd, String sortOrder) throws Exception {
-
 		Map<String, Object> ticketPageMap = new HashMap<>();
 		ticketPageMap.put("pageStart", pageStart);
 		ticketPageMap.put("pageEnd",pageEnd);
@@ -71,7 +70,11 @@ public class TicketDaoImpl implements TicketDao{
 		return ticketMapper.deleteTicket(tiNo);
 	}
 	
-	
+	//티켓 글 조회
+	@Override
+	public int selectAllTicketCount() throws Exception {
+		return ticketMapper.selectAllTicketCount();
+	}
 
 
 }

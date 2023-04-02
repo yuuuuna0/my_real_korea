@@ -21,8 +21,6 @@ import lombok.ToString;
 --------- -------- ------------- 
 ROOM_NO   NOT NULL NUMBER        
 ROOM_NAME NOT NULL VARCHAR2(100) 
-SEND_TIME          DATE          
-NOT_READ           NUMBER        
 FROM_ID            VARCHAR2(50)  
 TO_ID              VARCHAR2(50)  
 

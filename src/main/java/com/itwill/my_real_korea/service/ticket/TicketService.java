@@ -28,6 +28,9 @@ public interface TicketService {
     int deleteTicket(int tiNo) throws Exception;
 
     int selectTicketCount() throws Exception;
+
+    
+	Ticket selectTicketNo(int tiNo) throws Exception;
 	
 
 }

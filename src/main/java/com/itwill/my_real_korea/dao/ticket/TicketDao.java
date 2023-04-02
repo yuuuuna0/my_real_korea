@@ -28,6 +28,9 @@ public interface TicketDao {
     // 티켓 글 조회
     int selectAllTicketCount() throws Exception;
     
+    // 티켓 번호로 찾기
+	Ticket selectTicketNo(int tiNo);
+    
 
 
     /*

@@ -63,6 +63,11 @@ public class TicketServiceImpl implements TicketService{
     public int selectTicketCount() throws Exception {
         return ticketDao.selectAllTicketCount();
     }
+    
+	@Override
+    public Ticket selectTicketNo(int tiNo) throws Exception{
+    	return ticketDao.selectTicketNo(tiNo);
+    }
 
 
 }

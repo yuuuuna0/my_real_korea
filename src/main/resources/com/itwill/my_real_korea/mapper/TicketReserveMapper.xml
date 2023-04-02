@@ -12,7 +12,8 @@
     </insert>
     <!--내 예약 조회 -->
     <select id="selectByTicketReserveUser" resultType="com.itwill.my_real_korea.dto.ticket.TicketReserve">
-            SELECT * FROM TICKET_RESERVE WHERE USER_ID=#{userId}
+            SELECT TR.* FROM TICKET_RESERVE  TR
+                        WHERE USER_ID=#{userId}
     </select>
         <!--예약 상세 보기 -->
             <resultMap id="ticketReserveMap" type="com.itwill.my_real_korea.dto.ticket.TicketReserve">
@@ -27,7 +28,13 @@
                 FROM TICKET_RESERVE TR
                          JOIN TICKET T
                               ON TR.TI_NO = T.TI_NO
-                where TI_RS_NO=#{tiRsNo}
+                WHERE 1=1
+                <if test="tiRsNo != null">
+                    AND T_RS_NO=#{tiRsNo}
+                </if>
+                <if test="userId != null">
+                    AND USER_ID=#{userId}
+                </if>
             </select>
     <!--예약 삭제 -->
     <delete id="deleteTicketReserve" parameterType="java.lang.Integer">

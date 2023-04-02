@@ -76,6 +76,11 @@ public class TicketDaoImpl implements TicketDao{
 		return ticketMapper.selectAllTicketCount();
 	}
 
+	@Override
+	public Ticket selectTicketNo(int tiNo) {
+		return ticketMapper.selectTicketNo(tiNo);
+	}
+
 
 }
 

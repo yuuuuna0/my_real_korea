@@ -31,6 +31,9 @@ public interface TicketMapper {
 
     //게시글 수 조회
     int selectAllTicketCount();
+    
+    //번호로 찾기
+	Ticket selectTicketNo(int tiNo);
 }
 
 

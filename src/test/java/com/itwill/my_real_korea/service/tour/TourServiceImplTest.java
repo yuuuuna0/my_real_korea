@@ -62,7 +62,7 @@ class TourServiceImplTest {
 	@Test
 	void testFindTourAll() throws Exception{
 		PageMakerDto<Tour> tourList=tourService.findAll(1, "desc");
-			System.out.println(tourList);
+		System.out.println(tourList);
 	}
 /*
 	void testFindTourListByKeyword() throws Exception{

@@ -62,6 +62,7 @@
 	<delete id="deleteAllTourReserveByUserId" parameterType="java.lang.String">
 		delete from tour_reserve where user_id=#{userId}
 	</delete>
+	<!-- 7. 유저의 투어예약 갯수 -->
 	<select id="findTourReserveCountByUserId" parameterType="java.lang.String" resultType="java.lang.Integer">
 		select count(*) cnt from tour_reserve where user_id=#{userId}
 	</select>

@@ -45,7 +45,7 @@ class TourReserveServiceImplTest {
 	@Test
 	void testFindAllTourReservewithTourByUserId() throws Exception{
 		PageMakerDto<TourReserve> tourReserveList=tourReserveService.findAll(1, "desc", "user1");
-			System.out.println(tourReserveList);
+		System.out.println(tourReserveList);
 	}
 	void testDeleteAllTourReserveByUserId() throws Exception{
 		tourReserveService.deleteAllTourReserveByUserId("admin");

@@ -53,8 +53,7 @@ public class TourServiceImpl implements TourService {
 		PageMaker pageMaker= new PageMaker(totTourCount,currentPage);	//page 계산 (PageMaker)
 		//게시글 데이터 얻기
 		List<Tour> tourList=tourDao.findTourWithTourImgWithCityAll(pageMaker.getPageBegin(), pageMaker.getPageEnd(), sortOrder);
-		PageMakerDto<Tour> pageMakerTourList=new PageMakerDto<Tour>(tourList,pageMaker,totTourCount);;
-		
+		PageMakerDto<Tour> pageMakerTourList=new PageMakerDto<Tour>(tourList,pageMaker,totTourCount);
 		return pageMakerTourList;
 	}
 

@@ -7,7 +7,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.itwill.my_real_korea.dto.freeboard.FreeBoard;
-import com.itwill.my_real_korea.dto.freeboard.FreeBoardCommentListPageMakerDto;
+import com.itwill.my_real_korea.dto.util.PageMakerDto;
 
 
 @Mapper

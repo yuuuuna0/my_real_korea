@@ -10,6 +10,8 @@ import java.util.UUID;
 
 import org.springframework.web.socket.WebSocketSession;
 
+import com.itwill.my_real_korea.service.chat.ChatService;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -40,12 +42,8 @@ public class ChatRoom {
 	/* list<ChatMsg>  - ChatMsg 의 정보를 가져오기 위함 (1:N)*/
 	private List<ChatMsg> chatMsgList;
 	
-	// 입장한 채팅 유저들의 세션 정보 리스트
+	// 해당 채팅방에 입장한 채팅 유저들의 세션 정보 리스트
 	private Set<WebSocketSession> sessions = new HashSet<>();
-	
-	/* 웹소켓 stomp 
-	private HashMap<String, String> userlist = new HashMap<String, String>();
-	*/
 	
 	public ChatRoom(int roomNo, String roomName, String fromId, String toId) {
 		super();
@@ -55,6 +53,28 @@ public class ChatRoom {
 		this.toId = toId;
 		this.chatMsgList = new ArrayList<>();
 	}
+	
+	public void handleAction(WebSocketSession session, ChatMsg chatMsg, ChatService chatService) {
+		if (chatMsg.getMsgContent() != null) {
+			// 채팅방에 세션 추가
+	        sessions.add(session);
+			chatMsg.setMsgContent(chatMsg.getUserId() + "님이 입장하셨습니다.");
+			// 다른 채팅유저들에게 알리기
+			sendChatmsg(chatMsg, chatService);
+		}
+	}
+	
+	/*
+	 * 현재 채팅방에 접속한 모든 유저들의 WebSocketSession 을 sessions에서 가져와
+	 * 채팅 메세지를 DB에 저장
+	 * => 채팅방에 접속한 모든 유저들에게 새로운 채팅 내용 실시간 전달
+	 * 
+	 * parallelStream() : 병렬처리 -> 대량 데이터 처리할 때 속도 빠름
+	 */
+	public void sendChatmsg(ChatMsg chatMsg, ChatService chatService) {
+		sessions.parallelStream().forEach(session -> chatService.insertChatMsg(chatMsg));
+	}
+	
 	
 
 }

@@ -24,18 +24,12 @@ public interface FreeBoardMapper {
  int deleteBoard(int no) ;
 
  int increaseReadCount(int no);
- /*
-  * 공지사항 게시글 총 개수 조회
-  */
+
  int selectFreeBoardCount() throws Exception;
 
- /*
-  * 검색된 게시글 총 개수 조회
-  */
+
  int selectSearchCount(String keyword) throws Exception;
 
- /*
-  * 공지사항 게시판 title 키워드로 검색
-  */
+
  List<FreeBoard> selectSearchFreeBoardList(Map<String, Object> keywordPageMap) throws Exception;
 }

@@ -5,6 +5,8 @@ import com.itwill.my_real_korea.dto.freeboard.FreeBoard;
 import com.itwill.my_real_korea.dto.freeboard.FreeBoardListPageMakerDto;
 import com.itwill.my_real_korea.dto.notice.Notice;
 import com.itwill.my_real_korea.util.PageMaker;
+import com.itwill.my_real_korea.util.PageMakerDto;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -64,22 +66,20 @@ public class FreeBoardServiceImpl implements FreeBoardService{
         return freeBoardDao.selectSearchFreeBoardList(pageStart,pageEnd,keyword);
     }
 
+    /*
+     * selectAll 수정 - 김민선
+     */
     @Override
-    public FreeBoardListPageMakerDto selectAll(int currentPage) throws Exception {
-// 전체 글의 수
+    public PageMakerDto<FreeBoard> selectAll(int currentPage) throws Exception {
+    	// 전체 글의 수
         int totalRecordCount = freeBoardDao.selectFreeBoardCount();
         // paging 계산 (PageMaker)
         PageMaker pageMaker = new PageMaker(totalRecordCount, currentPage);
         // 게시글 데이터 얻기
-        //Map<String, Integer> pageMap = new HashMap<>();
-        //pageMap.put("pageStart", pageMaker.getPageBegin());
-        //pageMap.put("pageEnd", pageMaker.getPageEnd());
-
         List<FreeBoard> freeBoardList = freeBoardDao.selectAll(pageMaker.getPageBegin(), pageMaker.getPageEnd());
-        FreeBoardListPageMakerDto pageMakerBoardList = new FreeBoardListPageMakerDto();
-        pageMakerBoardList.itemList = freeBoardList;
-        pageMakerBoardList.pageMaker = pageMaker;
-        return pageMakerBoardList;
+        PageMakerDto<FreeBoard> pageMakerFreeBoardList = new PageMakerDto<FreeBoard>(freeBoardList, pageMaker, totalRecordCount);
+        
+        return pageMakerFreeBoardList;
     }
 
     @Override

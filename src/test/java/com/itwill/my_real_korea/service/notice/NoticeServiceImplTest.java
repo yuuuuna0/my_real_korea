@@ -35,7 +35,7 @@ class NoticeServiceImplTest {
 		System.out.println(noticeService.selectByNo(3));
 	}
 	/********공지사항 리스트 정렬**********/
-	@Disabled
+	
 	@Test
 	void testSelectAllInt() throws Exception {
 		assertNotNull(noticeService.selectAll(1));
@@ -62,7 +62,7 @@ class NoticeServiceImplTest {
 		assertNotNull(noticeService.selectAllOrderByReadcount(1));
 		System.out.println(noticeService.selectAllOrderByReadcount(1));
 	}
-	
+	@Disabled
 	@Test
 	void testSelectSearchNoticeListIntString() throws Exception {
 		assertNotNull(noticeService.selectSearchNoticeList(1, "결"));

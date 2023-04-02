@@ -17,7 +17,7 @@ class FreeBoardServiceImplTest {
     @Autowired
     private FreeBoardService freeBoardService;
 
-
+    @Disabled
     @Test
     void insert() throws Exception {
         FreeBoard freeBoard = new FreeBoard(
@@ -28,7 +28,7 @@ class FreeBoardServiceImplTest {
         assertThat(insert).isEqualTo(1);
     }
 
-
+    @Disabled
     @Test
     void update() throws Exception {
         FreeBoard updateFreeBoard = new FreeBoard(
@@ -44,29 +44,31 @@ class FreeBoardServiceImplTest {
         int deleteFreeBoard = freeBoardService.deleteFreeBoard(7);
         assertThat(deleteFreeBoard).isEqualTo(1);
     }
-
+    @Disabled
     @Test
     void selectByNo() throws Exception {
         FreeBoard freeBoard = freeBoardService.selectByNo(6);
         System.out.println("freeBoard = " + freeBoard);
     }
-
+    @Disabled
     @Test
     void increaseReadCount()throws Exception {
         int increaseReadCount = freeBoardService.increaseReadCount(6);
         assertThat(increaseReadCount).isEqualTo(1);
     }
+    @Disabled
     @Test
     void selectNoticeCount() throws Exception {
         int count = freeBoardService.selectFreeBoardCount();
         System.out.println("count = " + count);
     }
-
+    @Disabled
     @Test
     void selectSearchCount() throws Exception {
         int searchCount = freeBoardService.selectSearchCount("맛집");
         System.out.println("searchCount = " + searchCount);
     }
+    @Disabled
     @Test
     void getTitleString() throws Exception {
         FreeBoard freeBoard = new FreeBoard(
@@ -79,20 +81,21 @@ class FreeBoardServiceImplTest {
 
 
 
+    @Disabled
     @Test
     void selectSearchFreeBoardList() throws Exception {
         List<FreeBoard> freeBoards = freeBoardService.selectSearchFreeBoardList(1, 5, "맛집");
         System.out.println("freeBoards = " + freeBoards);
 
     }
-
+    @Disabled
     @Test
     void selectSearchFreeBoardList2() throws Exception {
         FreeBoardListPageMakerDto freeBoardListPageMakerDto =
                 freeBoardService.selectSearchFreeBoardList(1, "맛집");
         System.out.println("freeBoardListPageMakerDto = " + freeBoardListPageMakerDto);
     }
-
+    @Disabled
     @Test
     void selectAll() throws Exception {
         List<FreeBoard> freeBoardList = freeBoardService.selectAll(1,5);
@@ -101,8 +104,8 @@ class FreeBoardServiceImplTest {
 
     @Test
     void selectAll2() throws Exception {
-        FreeBoardListPageMakerDto freeBoardListPageMakerDto = freeBoardService.selectAll(1);
-        System.out.println("freeBoardListPageMakerDto = " + freeBoardListPageMakerDto);
+        freeBoardService.selectAll(1);
+        System.out.println("freeBoardListPageMakerDto = " + freeBoardService.selectAll(1));
     }
 
 

@@ -12,6 +12,9 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import lombok.extern.log4j.Log4j2;
 
+/*
+ * Client로부터 받은 메세지를 Log출력하고 클라이언트에게 메세지를 보내는 역할
+ */
 @Component
 @Log4j2 //log 변수를 사용하여 로그 기록 가능
 public class ChatHandler extends TextWebSocketHandler{

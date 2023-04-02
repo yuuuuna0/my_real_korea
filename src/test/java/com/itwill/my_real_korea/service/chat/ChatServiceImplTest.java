@@ -9,6 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.ComponentScan;
 
+import com.itwill.my_real_korea.dao.chat.ChatRoomDao;
 import com.itwill.my_real_korea.dto.chat.ChatMsg;
 import com.itwill.my_real_korea.dto.chat.ChatRoom;
 
@@ -23,8 +24,8 @@ class ChatServiceImplTest {
 	@Disabled
 	@Test
 	void testSelectAll() {
-		assertNotNull(chatService.selectAll("kms1")); 
-		System.out.println(chatService.selectAll("kms1"));
+		assertNotNull(chatService.selectAll("user1")); 
+		System.out.println(chatService.selectAll("user1"));
 	}
 
 	@Disabled
@@ -37,22 +38,22 @@ class ChatServiceImplTest {
 	@Disabled
 	@Test
 	void testChatRoomNoSearchById() {
-		int roomNo = chatService.chatRoomNoSearchById("kms1", "kms2");
+		int roomNo = chatService.chatRoomNoSearchById("user1", "user2");
 		System.out.println(roomNo);
 	}
 
 	@Disabled
 	@Test
 	void testDuplicateCheck() {
-		boolean isDuplicate = chatService.duplicateCheck("kms1", "kms2");
+		boolean isDuplicate = chatService.duplicateCheck("user1", "user2");
 		assertTrue(isDuplicate);
 		System.out.println(isDuplicate);
 	}
 
-	@Disabled
+	
 	@Test
 	void testInsertChatRoom() {
-		int rowCount = chatService.insertChatRoom(new ChatRoom(0, "챗이름추가2", null, 0, "kms2", "kms1"));
+		int rowCount = chatService.insertChatRoom(new ChatRoom(0, "챗이름추가2", "user2", "user1"));
 		assertEquals(rowCount, 1);
 	}
 
@@ -66,7 +67,7 @@ class ChatServiceImplTest {
 	@Disabled
 	@Test
 	void testCountNotReadInChatRoom() {
-		int rowCount = chatService.countNotReadInChatRoom(1, "kms2");
+		int rowCount = chatService.countNotReadInChatRoom(1, "user2");
 		assertNotEquals(rowCount, 0);
 		System.out.println(rowCount);
 	}
@@ -88,14 +89,14 @@ class ChatServiceImplTest {
 	@Disabled
 	@Test
 	void testSelectNotReadMsg() {
-		assertNotNull(chatService.selectNotReadMsg(1, "kms2"));
-		System.out.println(chatService.selectNotReadMsg(1, "kms2"));
+		assertNotNull(chatService.selectNotReadMsg(1, "user2"));
+		System.out.println(chatService.selectNotReadMsg(1, "user2"));
 	}
 
 	@Disabled
 	@Test
 	void testCountNotReadMsg() {
-		int countNo = chatService.countNotReadMsg(1, "kms2");
+		int countNo = chatService.countNotReadMsg(1, "user2");
 		assertNotEquals(countNo, 0);
 		System.out.println(countNo);
 	}
@@ -103,14 +104,14 @@ class ChatServiceImplTest {
 	@Disabled
 	@Test
 	void testSelectAllNotReadMsg() {
-		assertNotNull(chatService.selectAllNotReadMsg("kms2"));
-		System.out.println(chatService.selectAllNotReadMsg("kms2"));
+		assertNotNull(chatService.selectAllNotReadMsg("user2"));
+		System.out.println(chatService.selectAllNotReadMsg("user2"));
 	}
 
 	@Disabled
 	@Test
 	void testCountAllNotReadMsg() {
-		int countNo = chatService.countAllNotReadMsg("kms2");
+		int countNo = chatService.countAllNotReadMsg("user2");
 		assertNotEquals(countNo, 0);
 		System.out.println(countNo);
 	}
@@ -118,7 +119,7 @@ class ChatServiceImplTest {
 	@Disabled
 	@Test
 	void testUpdateReadMsg() {
-		int rowCount = chatService.updateReadMsg(1, "kms2");
+		int rowCount = chatService.updateReadMsg(1, "user2");
 		assertNotEquals(rowCount, 0);
 		System.out.println(rowCount);
 	}
@@ -139,10 +140,10 @@ class ChatServiceImplTest {
 		System.out.println(rowCount);
 	}
 
-	
+	@Disabled
 	@Test
 	void testInsertChatMsg() {
-		int rowCount = chatService.insertChatMsg(new ChatMsg(0, "하이하이", null, 0, 1, "kms1"));
+		int rowCount = chatService.insertChatMsg(new ChatMsg(0, "하이하이", null, 0, 1, "user1"));
 		assertEquals(rowCount, 1);
 	}
 

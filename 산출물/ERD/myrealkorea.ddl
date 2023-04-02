@@ -232,8 +232,6 @@ CREATE SEQUENCE wishlist_wish_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 CREATE TABLE chat_room(
 		room_no                       		NUMBER		 NULL ,
 		room_name                     		VARCHAR2(100)		 NOT NULL,
-		send_time                     		DATE		 NULL ,
-		not_read                      		NUMBER		 NULL ,
 		from_id                       		VARCHAR2(50)		 NULL ,
 		to_id                         		VARCHAR2(50)		 NULL 
 );

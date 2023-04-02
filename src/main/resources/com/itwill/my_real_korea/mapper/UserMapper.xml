@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itwill.my_real_korea.mapper.UserMapper">
+
+	<resultMap id="userResultMap" type="com.itwill.my_real_korea.dto.user.User" autoMapping="true">
+		<association property="userAddInfo" column="user_add_info" autoMapping="true"></association>
+		<association property="userImg" column="user_img" autoMapping="true"></association>
+	</resultMap>
+
+	<insert id="create" parameterType="com.itwill.my_real_korea.dto.user.User">
+		INSERT into user_info(user_id, password, name, nickname, phone, email, birth, address, gender, point, is_admin) 
+		VALUES(#{userId},#{password},#{name},#{nickname},#{phone},#{email},#{birth},#{address},#{gender},#{point},#{isAdmin})
+	</insert>
+	<update id="update" parameterType="com.itwill.my_real_korea.dto.user.User">
+		UPDATE  user_info 
+		SET password = #{password}, nickname = #{nickname}, phone = #{phone}, email = #{email}
+		WHERE user_id = #{userId}
+	</update>
+	<delete id="remove" parameterType="java.lang.String">
+		DELETE user_info 
+		WHERE user_id = #{userId}
+	</delete>
+	<select id="findUser" parameterType="java.lang.String" resultMap="userResultMap">
+		SELECT * 
+		FROM user_info u 
+			JOIN user_add_info ua
+				ON u.user_id = ua.user_id
+			JOIN user_img ui
+				ON u.user_id = ui.user_id
+		WHERE u.user_id = #{userId}
+	</select>
+	<select id="findUserList" parameterType="java.lang.String" resultMap="userResultMap">
+        SELECT *
+        FROM user_info u
+			JOIN user_add_info ua
+				ON u.user_id = ua.user_id
+			JOIN user_img ui
+				ON u.user_id = ui.user_id
+	</select>
+	<select id="isExistUser" parameterType="java.lang.String" resultType="java.lang.Integer">
+		SELECT count(*) 
+		FROM user_info 
+		WHERE user_id = #{userId}
+	</select>
+	<select id="isMatchPassword" parameterType="java.util.Map" resultType="java.lang.Integer">
+		SELECT count(*) 
+		FROM user_info 
+		WHERE user_id = #{userId} AND password = #{password}
+	</select>
+	<!-- 아이디 찾기 (이메일, 이름 )-->
+	<select id="findIdByEmailName" parameterType="com.itwill.my_real_korea.dto.user.User" resultType="java.lang.String">
+		SELECT RPAD(substr(user_id, 8, 4), lengthb(user_id), '*') 
+		FROM user_info 
+		WHERE email = #{email} AND name = #{name}
+	</select>
+	
+
+	
+</mapper>

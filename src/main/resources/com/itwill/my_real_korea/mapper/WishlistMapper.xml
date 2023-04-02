@@ -27,7 +27,7 @@
 	select * from wishlist where user_id=#{userId}
 </select>
 
-<!--  위시리스트 리스트 보기 + 티켓상품 + 투어상품  (user_id)  -->
+<!--  위시리스트 리스트 보기 + 티켓상품 + 티켓이미지 + 투어상품+투어이미지+city  (user_id)  -->
 <select id="selectAllWithTicketAndTour" parameterType="String" resultMap="wishlistWithTicketTourResultMap">
 	select * from wishlist w 
 	left join ticket ti on w.ti_no=ti.ti_no

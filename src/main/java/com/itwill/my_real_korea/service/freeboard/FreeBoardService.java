@@ -1,54 +1,38 @@
 package com.itwill.my_real_korea.service.freeboard;
 
-import java.util.List;
-
 import com.itwill.my_real_korea.dto.freeboard.FreeBoard;
-import com.itwill.my_real_korea.dto.notice.Notice;
-import com.itwill.my_real_korea.util.PageMakerDto;
+import com.itwill.my_real_korea.dto.freeboard.FreeBoardListPageMakerDto;
 
 public interface FreeBoardService {
-	int insertBoard(FreeBoard freeBoard) throws Exception;
+    int insertBoard(FreeBoard freeBoard) throws Exception;
+
+    FreeBoard selectByNo(int fBoNo) throws Exception;
+
+    int updateFreeBoard(FreeBoard freeBoard) throws Exception;
 
 
-	/*
-	 * Read
-	 */
-	FreeBoard selectByNo(int no) throws Exception;
+    int deleteFreeBoard(int no) throws Exception;
 
-	List<FreeBoard> selectAll(int pageStart, int pageEnd) throws Exception;
+    int increaseReadCount(int no) throws Exception;
 
-	/*
-	 * Update
-	 */
-	int updateFreeBoard(FreeBoard freeBoard) throws Exception;
+    int selectFreeBoardCount() throws Exception;
 
-	/*
-	 * Delete
-	 */
-	int deleteFreeBoard(int no) throws Exception;
+    // 검색된 게시글 총 개수 조회
+    int selectSearchCount(String keyword) throws Exception;
 
-	int increaseReadCount(int no) throws Exception;
+    //최신순 정렬
+    FreeBoardListPageMakerDto selectAllOrderByFBoNoDesc(int currentPage) throws Exception;
 
-	int selectFreeBoardCount() throws Exception;
+    FreeBoardListPageMakerDto selectAllOrderByFBoNoAsc(int currentPage) throws Exception;
 
-	/*
-	 * 검색된 게시글 총 개수 조회
-	 */
-	int selectSearchCount(String keyword) throws Exception;
+    //조회수 내림차순 정렬
+    FreeBoardListPageMakerDto selectAllOrderByReadCountDesc(int currentPage) throws Exception;
 
-	/*
-	 * 공지사항 게시판 title 키워드로 검색
-	 */
-	List<FreeBoard> selectSearchFreeBoardList(int pageStart, int pageEnd, String keyword) throws Exception;
+    //title 키워드로 검색
+    FreeBoardListPageMakerDto selectSearchFreeBoardList(int currentPage, String keyword) throws Exception;
 
-	/*
-	 * 자유게시판 리스트 보기 (게시글 시작번호, 게시글 끝번호) - 페이징 처리 - 수정 김민선
-	 */
-	PageMakerDto<FreeBoard> selectAll(int currentPage) throws Exception;
-	
-	String getTitleString(FreeBoard freeBoard) throws Exception;
-	
-	PageMakerDto selectSearchFreeBoardList(int currentPage, String keyword) throws Exception;
+    String getTitleString(FreeBoard freeBoard) throws Exception;
+
 
 }
 

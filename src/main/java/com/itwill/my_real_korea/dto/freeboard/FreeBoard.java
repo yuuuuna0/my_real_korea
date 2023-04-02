@@ -23,6 +23,7 @@ USER_ID                 VARCHAR2(50)
 @Data
 @AllArgsConstructor
 @ToString
+@NoArgsConstructor
 
 public class FreeBoard {
 	private int fBoNo;
@@ -31,7 +32,7 @@ public class FreeBoard {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date fBoDate;
 	private int fBoCount;
-		/* FK */
+	/* FK */
 	private City city;
 	private String userId;
 }

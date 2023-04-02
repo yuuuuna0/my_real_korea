@@ -11,7 +11,11 @@ public interface FreeBoardDao {
 
     FreeBoard selectByNo(int no) throws Exception;
 
-    List<FreeBoard> selectAll(int pageStart, int pageEnd) throws Exception;
+    List<FreeBoard> selectAllOrderByFBoNoDesc(int pageStart, int pageEnd) throws Exception;
+
+    List<FreeBoard> selectAllOrderByFBoNoAsc(int pageStart, int pageEnd) throws Exception;
+    List<FreeBoard> selectAllOrderByReadCountDesc (int pageStart, int pageEnd) ;
+
 
     int updateBoard(FreeBoard freeBoard) throws Exception;
 

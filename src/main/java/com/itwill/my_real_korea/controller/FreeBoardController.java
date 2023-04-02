@@ -26,17 +26,17 @@ public class FreeBoardController{
     private FreeBoardService freeBoardService;
     private FreeBoardCommentService freeBoardCommentService;
         //게시판리스트
-        @RequestMapping(value = "/free-board-list")
-        public String freeBoard_list(@RequestParam City city, Model model, @RequestParam int pageStart, int pageEnd, HttpSession session) throws Exception{
-        String sUserId = (String)session.getAttribute("sUserId");
-        City sCity=(City)session.getAttribute("sCity");
-        System.out.println("freeBord_list: sCity"+sCity);
-            PageMakerDto<FreeBoard> freeBoardList = (PageMakerDto<FreeBoard>) freeBoardService.selectAll(pageStart,pageEnd);
-            model.addAttribute("freeboardList",freeBoardList);
-            model.addAttribute("pageStart",pageStart);
-            model.addAttribute("pageEnd",pageEnd);
-			return sUserId;
-        }
+//        @RequestMapping(value = "/free-board-list")
+//        public String freeBoard_list(@RequestParam City city, Model model, @RequestParam int pageStart, int pageEnd, HttpSession session) throws Exception{
+//        String sUserId = (String)session.getAttribute("sUserId");
+//        City sCity=(City)session.getAttribute("sCity");
+//        System.out.println("freeBord_list: sCity"+sCity);
+//            PageMakerDto<FreeBoard> freeBoardList = (PageMakerDto<FreeBoard>) freeBoardService.selectAll(pageStart,pageEnd);
+//            model.addAttribute("freeboardList",freeBoardList);
+//            model.addAttribute("pageStart",pageStart);
+//            model.addAttribute("pageEnd",pageEnd);
+//			return sUserId;
+//        }
         //게시판 상세보기
         @RequestMapping(value = "/free-board-view")
         public String freeBoard_view(@RequestParam int fBoNo,@RequestParam int pageStart, int pageEnd,Model model, HttpSession session, @ModelAttribute FreeBoardComment freeBoardComment ) throws Exception{

@@ -3,7 +3,6 @@ package com.itwill.my_real_korea.service.freeboard;
 import java.util.List;
 
 import com.itwill.my_real_korea.dto.freeboard.FreeBoard;
-import com.itwill.my_real_korea.dto.freeboard.FreeBoardListPageMakerDto;
 import com.itwill.my_real_korea.dto.notice.Notice;
 import com.itwill.my_real_korea.util.PageMakerDto;
 
@@ -49,7 +48,7 @@ public interface FreeBoardService {
 	
 	String getTitleString(FreeBoard freeBoard) throws Exception;
 	
-	FreeBoardListPageMakerDto selectSearchFreeBoardList(int currentPage, String keyword) throws Exception;
+	PageMakerDto selectSearchFreeBoardList(int currentPage, String keyword) throws Exception;
 
 }
 

@@ -1,11 +1,16 @@
 package com.itwill.my_real_korea.service.chat;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.socket.TextMessage;
+import org.springframework.web.socket.WebSocketSession;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.itwill.my_real_korea.dao.chat.ChatMsgDao;
 import com.itwill.my_real_korea.dao.chat.ChatRoomDao;
 import com.itwill.my_real_korea.dto.chat.ChatMsg;
@@ -14,6 +19,8 @@ import com.itwill.my_real_korea.dto.chat.ChatRoom;
 @Service
 public class ChatServiceImpl implements ChatService{
 
+	private ObjectMapper objectMapper;
+	
 	@Autowired
 	private ChatRoomDao chatRoomDao;
 	
@@ -30,7 +37,7 @@ public class ChatServiceImpl implements ChatService{
 		return chatRoomDao.selectAll(userId);
 	}
 
-	// 채팅방 목록 선택 기능 
+	// 채팅방 목록 선택 기능 (roomNo로 채팅방 1개 보기)
 	@Override
 	public ChatRoom selectCheckByRoomNo(int roomNo) {
 		return chatRoomDao.selectCheckByRoomNo(roomNo);
@@ -71,7 +78,7 @@ public class ChatServiceImpl implements ChatService{
 	public int insertChatRoom(ChatRoom chatRoom) {
 		return chatRoomDao.insertChatRoom(chatRoom);
 	}
-
+	
 	// 채팅방 삭제 
 	@Override
 	public int deleteChatRoom(int roomNo) {
@@ -83,8 +90,21 @@ public class ChatServiceImpl implements ChatService{
 	public int countNotReadInChatRoom(int roomNo, String userId) {
 		return chatRoomDao.countNotReadInChatRoom(roomNo, userId);
 	}
+	
+	// 지정한 웹소켓(세션)에 메세지 전송
+	public void sendChatMsg(WebSocketSession session, ChatMsg chatMsg) {
+		try {
+			// chatMsg 객체를 JSON 형태로 변경해서 세션에 전송
+			session.sendMessage(new TextMessage(objectMapper.writeValueAsBytes(chatMsg)));
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
 
-	/************* ChatRoom **************/
+	/************* ChatMsg **************/
 	
 	// 채팅방 1개의 전체 대화보기 
 	@Override

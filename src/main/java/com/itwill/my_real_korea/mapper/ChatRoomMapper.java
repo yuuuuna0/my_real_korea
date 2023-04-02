@@ -13,7 +13,7 @@ public interface ChatRoomMapper {
 	// 채팅방 목록 보기
 	public List<ChatRoom> selectAll(String userId);
 	
-	// 채팅방 목록 선택 기능
+	// 채팅방 목록 선택 기능 (roomNo로 채팅방 1개 보기)
 	public ChatRoom selectCheckByRoomNo(int roomNo);
 
 	// from_id, to_id로 채팅방 찾기

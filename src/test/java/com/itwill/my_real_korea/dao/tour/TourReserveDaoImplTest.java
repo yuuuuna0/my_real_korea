@@ -31,13 +31,13 @@ class TourReserveDaoImplTest {
 		int rowCount=tourReserveDao.deleteTourReserve(1);
 		assertEquals(rowCount, 1);
 	}
-	@Test
 	void testSelectTourReserveWithTourByToRsNo() throws Exception{
 		TourReserve tourReserve=tourReserveDao.findTourReserveWithTourByToRsNo(12);
 		System.out.println(tourReserve);
 	}
+	@Test
 	void testSelectAllTourReserveByUserId() throws Exception{
-		List<TourReserve> tourReserveList=tourReserveDao.findAllTourReservewithTourByUserId("admin");
+		List<TourReserve> tourReserveList=tourReserveDao.findAllTourReservewithTourByUserId(1, 10, "desc", "user1");
 		System.out.println(tourReserveList.size());
 		for (TourReserve tourReserve : tourReserveList) {
 			System.out.println(tourReserve);

@@ -61,7 +61,7 @@ public class TourServiceImpl implements TourService {
 	@Override
 	public PageMakerDto<Tour> findAllByFilter(int currentPage, int cityNo, String sortOrder)
 			throws Exception {
-		int totTourCount=tourDao.findTourCount();	//전체 글 
+		int totTourCount=tourDao.findTourCount();	//전체 글 개수 
 		PageMaker pageMaker= new PageMaker(totTourCount,currentPage);	//page 계산 (PageMaker)
 		//게시글 데이터 얻기
 		List<Tour> tourList=tourDao.findTourListByCity(pageMaker.getPageBegin(), pageMaker.getPageEnd(), cityNo, sortOrder);

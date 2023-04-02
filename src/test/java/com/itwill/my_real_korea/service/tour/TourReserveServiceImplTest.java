@@ -12,6 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import com.itwill.my_real_korea.dto.tour.Tour;
 import com.itwill.my_real_korea.dto.tour.TourImg;
 import com.itwill.my_real_korea.dto.tour.TourReserve;
+import com.itwill.my_real_korea.util.PageMakerDto;
 @SpringBootTest
 class TourReserveServiceImplTest {
 	@Autowired
@@ -41,14 +42,11 @@ class TourReserveServiceImplTest {
 		System.out.println(tourReserve);
 	}
 
-	void testFindAllTourReservewithTourByUserId() throws Exception{
-		List<TourReserve> tourReserveList=tourReserveService.findAllTourReservewithTourByUserId("user1");
-		for (TourReserve tourReserve : tourReserveList) {
-			System.out.println(tourReserve);
-		}
-	}
-
 	@Test
+	void testFindAllTourReservewithTourByUserId() throws Exception{
+		PageMakerDto<TourReserve> tourReserveList=tourReserveService.findAll(1, "desc", "user1");
+			System.out.println(tourReserveList);
+	}
 	void testDeleteAllTourReserveByUserId() throws Exception{
 		tourReserveService.deleteAllTourReserveByUserId("admin");
 	}

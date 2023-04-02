@@ -34,16 +34,35 @@
 	</select>
 	<!-- 5. 유저의 투어예약 리스트 전체 보여주기 -->
 	<select id="findAllTourReservewithTourByUserId" 
-			parameterType="java.lang.String" 
+			parameterType="java.util.Map" 
 			resultMap="TourWithTourReserveResultMap">
-		select tr.*,t.* 
-		from tour_reserve tr
-		join tour t
-			on tr.to_no=t.to_no 
-		where tr.user_id=#{userId}
+		select *
+		from (select rownum idx, trAll.*
+			from (select tr.to_rs_start_day,tr.to_rs_person,tr.user_id,
+                         t.to_name, t.to_type, t.to_price
+				  from tour_reserve tr
+				  join tour t
+				  	on tr.to_no=t.to_no 
+				  where tr.user_id=#{userId}
+				  	<if test="sortOrder != null">
+						<choose>
+							<when test="sortOrder == 'DESC'">
+								ORDER BY tr.to_rs_no DESC
+							</when>
+							<otherwise>
+								ORDER BY tr.to_rs_no ASC
+							</otherwise>
+						</choose>
+					</if>
+				) trAll
+			)
+		<![CDATA[WHERE IDX >= #{pageStart} AND IDX <=#{pageEnd}]]>
 	</select>
 	<!-- 6. 유저의 투어예약 전체 삭제 -->
 	<delete id="deleteAllTourReserveByUserId" parameterType="java.lang.String">
 		delete from tour_reserve where user_id=#{userId}
 	</delete>
+	<select id="findTourReserveCountByUserId" parameterType="java.lang.String" resultType="java.lang.Integer">
+		select count(*) cnt from tour_reserve where user_id=#{userId}
+	</select>
 </mapper>

@@ -88,13 +88,13 @@ class FreeBoardServiceImplTest {
         System.out.println("freeBoards = " + freeBoards);
 
     }
-    @Disabled
-    @Test
-    void selectSearchFreeBoardList2() throws Exception {
-        FreeBoardListPageMakerDto freeBoardListPageMakerDto =
-                freeBoardService.selectSearchFreeBoardList(1, "맛집");
-        System.out.println("freeBoardListPageMakerDto = " + freeBoardListPageMakerDto);
-    }
+//    @Disabled
+//    @Test
+//    void selectSearchFreeBoardList2() throws Exception {
+//        FreeBoardListPageMakerDto freeBoardListPageMakerDto =
+//                freeBoardService.selectSearchFreeBoardList(1, "맛집");
+//        System.out.println("freeBoardListPageMakerDto = " + freeBoardListPageMakerDto);
+//    }
     @Disabled
     @Test
     void selectAll() throws Exception {

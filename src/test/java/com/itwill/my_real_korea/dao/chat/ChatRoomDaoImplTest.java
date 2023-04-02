@@ -10,10 +10,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.itwill.my_real_korea.dto.chat.ChatRoom;
+import com.itwill.my_real_korea.mapper.ChatRoomMapper;
 
-@SpringBootApplication
+//@SpringBootApplication
 @SpringBootTest
-@MapperScan(basePackages = "com.itwill.my_real_korea.mapper")
+//@MapperScan(basePackages = "com.itwill.my_real_korea.mapper")
+@MapperScan(basePackageClasses = ChatRoomMapper.class)
 class ChatRoomDaoImplTest {
 
 	@Autowired
@@ -22,8 +24,8 @@ class ChatRoomDaoImplTest {
 	
 	@Test
 	void testSelectAll() {
-		assertNotNull(chatRoomDao.selectAll("kms1"));
-		System.out.println(chatRoomDao.selectAll("kms1"));
+		assertNotNull(chatRoomDao.selectAll("user1"));
+		System.out.println(chatRoomDao.selectAll("user1"));
 	}
 
 	@Disabled
@@ -36,21 +38,21 @@ class ChatRoomDaoImplTest {
 	@Disabled
 	@Test
 	void testSelectById() {
-		assertNotNull(chatRoomDao.selectById("kms1", "kms2"));
-		System.out.println(chatRoomDao.selectById("kms1", "kms2"));
+		assertNotNull(chatRoomDao.selectById("user1", "user2"));
+		System.out.println(chatRoomDao.selectById("user1", "user2"));
 	}
 
 	@Disabled
 	@Test
 	void testSelectExist() {
-		assertNotNull(chatRoomDao.selectExist("kms1", "kms2"));
-		System.out.println(chatRoomDao.selectExist("kms1", "kms2"));
+		assertNotNull(chatRoomDao.selectExist("user1", "user2"));
+		System.out.println(chatRoomDao.selectExist("user1", "user2"));
 	}
 
-	@Disabled
+	
 	@Test
 	void testInsertChatRoom() {
-		int rowCount = chatRoomDao.insertChatRoom(new ChatRoom(0, "챗이름추가1", null, 0, "kms2", "kms1"));
+		int rowCount = chatRoomDao.insertChatRoom(new ChatRoom(0, "챗이름추가1","user2", "user1"));
 		assertEquals(rowCount, 1);
 	}
 
@@ -64,7 +66,7 @@ class ChatRoomDaoImplTest {
 	@Disabled
 	@Test
 	void testCountNotReadInChatRoom() {
-		int rowCount = chatRoomDao.countNotReadInChatRoom(1, "kms2");
+		int rowCount = chatRoomDao.countNotReadInChatRoom(1, "user2");
 		assertNotEquals(rowCount, 0);
 		System.out.println(rowCount);
 	}

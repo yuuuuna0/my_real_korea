@@ -2,7 +2,6 @@ package com.itwill.my_real_korea.service.freeboard;
 
 import com.itwill.my_real_korea.dao.freeboard.FreeBoardDao;
 import com.itwill.my_real_korea.dto.freeboard.FreeBoard;
-import com.itwill.my_real_korea.dto.freeboard.FreeBoardListPageMakerDto;
 import com.itwill.my_real_korea.dto.notice.Notice;
 import com.itwill.my_real_korea.util.PageMaker;
 import com.itwill.my_real_korea.util.PageMakerDto;
@@ -95,13 +94,13 @@ public class FreeBoardServiceImpl implements FreeBoardService{
     }
 
     @Override
-    public FreeBoardListPageMakerDto selectSearchFreeBoardList(int currentPage, String keyword) throws Exception {
+    public PageMakerDto selectSearchFreeBoardList(int currentPage, String keyword) throws Exception {
         int totalRecordCount = freeBoardDao.selectSearchCount(keyword);
         // paging 계산 (PageMaker)
         PageMaker pageMaker = new PageMaker(totalRecordCount, currentPage);
         // 게시글 데이터 얻기
         List<FreeBoard> freeboareList = freeBoardDao.selectSearchFreeBoardList(pageMaker.getPageBegin(), pageMaker.getPageEnd(),keyword);
-        FreeBoardListPageMakerDto pageMakerBoardList = new FreeBoardListPageMakerDto();
+        PageMakerDto pageMakerBoardList = new PageMakerDto();
         pageMakerBoardList.itemList =freeboareList;
         pageMakerBoardList.pageMaker = pageMaker;
         return pageMakerBoardList;

@@ -18,8 +18,8 @@ public class FreeBoardDaoImplTest {
 //	
 //	@Disabled
 //	@Test
-//	void testInsertContent() {
-//		int rowCount = freeBoardDao.insertContent(new FreeBoard(0,"자유1","자유내용1","2023-03-26",0,1,"aaa"));
+//	void testInsertBoard() {
+//		int rowCount = freeBoardDao.insertBoard(new FreeBoard(0,"자유1","자유내용1",sysdate,0,1,"user1"));
 //		assertEquals(rowCount, 1);
 //	}
 //	
@@ -30,28 +30,28 @@ public class FreeBoardDaoImplTest {
 //	}
 //	
 //	@Disabled
-//	void testDeleteContent() {
+//	void testDeleteBoard() {
 //		fail("Not yet implemented");
 //	}
 //	
 //	@Disabled
-//	void testUpdateContent() {
+//	void testUpdateBoard() {
 //		fail("Not yet implemented");
 //	}
 //	@Disabled
-//	void testIncreaseContentReadCount() {
+//	void testIncreaseBoardReadCount() {
 //		fail("Not yet implemented");
 //	}
 //	@Disabled
-//	void testSelectContentCount() {
+//	void testSelectBoardCount() {
 //		fail("Not yet implemented");
 //	}
 //	@Disabled
-//	void testSelectSearchContent() {
+//	void testSelectSearch() {
 //		fail("Not yet implemented");
 //	}
 //	@Disabled
-//	void testSelectSearchContentList() {
+//	void testSelectSearchList() {
 //		fail("Not yet implemented");
 //	}
 	

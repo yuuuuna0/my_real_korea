@@ -15,16 +15,15 @@ import com.itwill.my_real_korea.dto.freeboard.FreeBoard;
 public class FreeBoardDaoImplTest {
 	@Autowired
 	private FreeBoardDao freeBoardDao;
+//	
+//	@Disabled
+//	@Test
+//	void testInsertBoard() {
+//		int rowCount = freeBoardDao.insertBoard(new FreeBoard(0,"자유1","자유내용1",sysdate,0,1,"user1"));
+//		assertEquals(rowCount, 1);
+//	}
 	
 	@Disabled
-	@Test
-	void testInsertBoard() {
-		int rowCount = freeBoardDao.insertBoard(new FreeBoard(0,"자유1","자유내용1",sysdate,0,1,"user1"));
-		assertEquals(rowCount, 1);
-	}
-	
-	@Disabled
-	@Test
 	void testSelectAll() {
 		fail("Not yet implemented");
 	}

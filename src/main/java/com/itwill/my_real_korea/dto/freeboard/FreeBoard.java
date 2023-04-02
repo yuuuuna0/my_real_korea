@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.itwill.my_real_korea.dto.City;
+
 /*
  이름             널?       유형             
 -------------- -------- -------------- 

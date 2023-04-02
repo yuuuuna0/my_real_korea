@@ -17,26 +17,26 @@ class FreeBoardServiceImplTest {
     @Autowired
     private FreeBoardService freeBoardService;
 
-    @Disabled
-    @Test
-    void insert() throws Exception {
-        FreeBoard freeBoard = new FreeBoard(
-                2,"질문있습니다"
-                ,"어디로가야하나요",null
-                ,0,1,"id2");
-        int insert = freeBoardService.insertBoard(freeBoard);
-        assertThat(insert).isEqualTo(1);
-    }
-
-    @Disabled
-    @Test
-    void update() throws Exception {
-        FreeBoard updateFreeBoard = new FreeBoard(
-                2,"수정테스트"
-                ,"유럽여행 어디로 갈까요",null
-                ,0,1,"id2");
-        freeBoardService.updateFreeBoard(updateFreeBoard);
-    }
+//    @Disabled
+//    @Test
+//    void insert() throws Exception {
+//        FreeBoard freeBoard = new FreeBoard(
+//                2,"질문있습니다"
+//                ,"어디로가야하나요",null
+//                ,0,1,"id2");
+//        int insert = freeBoardService.insertBoard(freeBoard);
+//        assertThat(insert).isEqualTo(1);
+//    }
+//
+//    @Disabled
+//    @Test
+//    void update() throws Exception {
+//        FreeBoard updateFreeBoard = new FreeBoard(
+//                2,"수정테스트"
+//                ,"유럽여행 어디로 갈까요",null
+//                ,0,1,"id2");
+//        freeBoardService.updateFreeBoard(updateFreeBoard);
+//    }
 
     @Test
     @Disabled
@@ -68,16 +68,16 @@ class FreeBoardServiceImplTest {
         int searchCount = freeBoardService.selectSearchCount("맛집");
         System.out.println("searchCount = " + searchCount);
     }
-    @Disabled
-    @Test
-    void getTitleString() throws Exception {
-        FreeBoard freeBoard = new FreeBoard(
-                2,"12345678901234567"
-                ,"유럽여행 어디로 갈까요",null
-                ,0,1,"id2");
-        String titleString = freeBoardService.getTitleString(freeBoard);
-        System.out.println("titleString = " + titleString);
-    }
+//    @Disabled
+//    @Test
+//    void getTitleString() throws Exception {
+//        FreeBoard freeBoard = new FreeBoard(
+//                2,"12345678901234567"
+//                ,"유럽여행 어디로 갈까요",null
+//                ,0,1,"id2");
+//        String titleString = freeBoardService.getTitleString(freeBoard);
+//        System.out.println("titleString = " + titleString);
+//    }
 
 
 

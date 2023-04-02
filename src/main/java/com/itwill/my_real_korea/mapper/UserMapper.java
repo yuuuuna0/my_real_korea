@@ -9,22 +9,23 @@ import com.itwill.my_real_korea.dto.user.User;
 
 @Mapper
 public interface UserMapper {
-	
-	public int create(User user);
-	
-	public int update(User user);
 
+	//1. 회원 가입
+	public int create(User user);
+	//2. 회원 정보 보기
+	public User findUser(String userId);
+	//3. 전체 회원 정보 보기
+	public List<User> findUserList();
+	//4. 회원 정보 수정
+	public int update(User user);
+	//5. 회원 탈퇴
 	public int remove(String userId);
 	
-	public User findUser(String userId);
-	
-	public List<User> findUserList();
-	
+	//11. 회원 존재 여부 확인
 	public int isExistUser(String userId);
-	
+	//12. 비밀번호 일치 여부 확인
 	public int isMatchPassword(Map<String,Object> map);
-	
-	//이메일, 이름으로 아이디 찾기
+	//13. 이메일, 이름으로 아이디 찾기
 	public String findIdByEmailName(User user);
 
 	

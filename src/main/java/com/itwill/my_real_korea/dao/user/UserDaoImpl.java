@@ -18,41 +18,37 @@ public class UserDaoImpl implements UserDao {
 	public UserDaoImpl() {
 	}
 	
-	//회원 가입
+	//1. 회원 가입
 	@Override
 	public int create(User user) throws Exception {
 		return userMapper.create(user);
 	}
 
-	//회원 정보 수정
-	@Override
-	public int update(User user) throws Exception {
-		return userMapper.update(user);
-	}
-
-	//회원 탈퇴
-	@Override
-	public int remove(String userId) throws Exception {
-		return userMapper.remove(userId);
-	}
-
-	//회원 정보 보기 (마이페이지)
+	//2. 회원 정보 보기 (마이페이지)
 	@Override
 	public User findUser(String userId) throws Exception {
 		return userMapper.findUser(userId);
 	}
 
-	//전체 회원 정보 보기 (관리자 페이지)
+	//3. 전체 회원 정보 보기 (관리자 페이지)
 	@Override
 	public List<User> findUserList() throws Exception {
 		return userMapper.findUserList();
 	}
 	
-	/*
-	 * 	0: 회원 존재
-	 * 	1: 회원 존재 안함
-	 */
-	//회원 존재 여부 확인
+	//4. 회원 정보 수정
+	@Override
+	public int update(User user) throws Exception {
+		return userMapper.update(user);
+	}
+
+	//5. 회원 탈퇴
+	@Override
+	public int remove(String userId) throws Exception {
+		return userMapper.remove(userId);
+	}
+
+	//11. 회원 존재 여부 확인
 	@Override
 	public boolean isExistUser(String userId) throws Exception {
 		boolean isExist = false;
@@ -63,6 +59,7 @@ public class UserDaoImpl implements UserDao {
 		return isExist;
 	}
 	
+	//12. 비밀번호 일치 여부 확인
 	@Override
 	public boolean isMatchPassword(String userId, String password){
 		Map<String,Object> map = new HashMap();
@@ -77,7 +74,7 @@ public class UserDaoImpl implements UserDao {
 		return false;
 	}
 	
-	//아이디 찾기
+	//13. 이메일, 이름으로 아이디 찾기
 	@Override
 	public String findIdByEmailName(User user) throws Exception {
 		return userMapper.findIdByEmailName(user);

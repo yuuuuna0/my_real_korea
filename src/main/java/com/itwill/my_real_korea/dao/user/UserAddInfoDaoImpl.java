@@ -14,26 +14,29 @@ public class UserAddInfoDaoImpl implements UserAddInfoDao {
 	public UserAddInfoDaoImpl() {
 	}
 	
+	//1. 회원 추가 정보 등록
 	@Override
 	public int createUserAddInfo(UserAddInfo userAddInfo) throws Exception {
 		return userAddInfoMapper.createUserAddInfo(userAddInfo);
 	}
 
-	@Override
-	public int updateUserAddInfo(UserAddInfo userAddInfo) throws Exception {
-		return userAddInfoMapper.updateUserAddInfo(userAddInfo);
-	}
-
-	@Override
-	public int removeUserAddInfo(String userId) throws Exception {
-		return userAddInfoMapper.removeUserAddInfo(userId);
-	}
-
+	//2. 회원 추가 정보 보기
 	@Override
 	public UserAddInfo findUserAddInfo(String userId) throws Exception {
 		return userAddInfoMapper.findUserAddInfo(userId);
 	}
 
+	//3. 회원 추가 정보 수정
+	@Override
+	public int updateUserAddInfo(UserAddInfo userAddInfo) throws Exception {
+		return userAddInfoMapper.updateUserAddInfo(userAddInfo);
+	}
+
+	//4. 회원 추가 정보 삭제
+	@Override
+	public int removeUserAddInfo(String userId) throws Exception {
+		return userAddInfoMapper.removeUserAddInfo(userId);
+	}
 
 
 }

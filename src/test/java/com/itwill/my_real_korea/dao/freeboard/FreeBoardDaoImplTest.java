@@ -39,11 +39,11 @@ public class FreeBoardDaoImplTest {
 //		fail("Not yet implemented");
 //	}
 //	@Disabled
-//	void testIncreaseBoardReadCount() {
+//	void testIncreaseReadCount() {
 //		fail("Not yet implemented");
 //	}
 //	@Disabled
-//	void testSelectBoardCount() {
+//	void testSelectFreeBoardCount() {
 //		fail("Not yet implemented");
 //	}
 //	@Disabled

@@ -12,6 +12,7 @@
 <!--</selectKey>-->
 insert into FREE_BOARD_COMMENT (f_co_no,f_comment_content,f_comment_date,f_bo_no,user_id)
 values( #{fCommentNo},#{fCommentContent},sysdate,#{fBoNo},#{userId})
+
 </insert>
 
 
@@ -32,7 +33,7 @@ values( #{fCommentNo},#{fCommentContent},sysdate,#{fBoNo},#{userId})
                   f_comment_date=sysdate,
                   f_bo_no=#{fBoNo},
                   user_id=#{userId}
-              where f_comment_no = #{fCoNo}
+              where f_co_no = #{fCommentNo}
        </update>
 
        <select id="selectCommentCount" resultType="java.lang.Integer">

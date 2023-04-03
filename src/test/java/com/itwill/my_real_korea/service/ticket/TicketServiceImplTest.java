@@ -53,11 +53,10 @@ class TicketServiceImplTest {
         System.out.println(ticketService.selectByTicketAllSort(1,"가보 자고",0,"DESC"));
     }
 
-    @Disabled
     @Test
     void selectByTicketNoCityWithImg() throws Exception{
         //assertNotNull(ticketService.selectByTicketNoCityWithImg(1));
-        System.out.print(ticketService.selectByTicketNoCityWithImg(4));
+        System.out.print(ticketService.selectByTicketNoCityWithImg(1));
     }
     
     @Test
@@ -66,7 +65,6 @@ class TicketServiceImplTest {
     	assertEquals (ticketService.updateTicket(
                 new Ticket(11,"수정이지롱",null,3333,"인포","어어어",0,city)),1);
     }
-    @Disabled
     @Test
     void deleteTicket() throws Exception{
 	   int rowCount = ticketService.deleteTicket(10);

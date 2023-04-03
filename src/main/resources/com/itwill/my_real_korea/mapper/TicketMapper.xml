@@ -59,23 +59,24 @@
 					JOIN TICKET_IMG TI
 						ON T.TI_NO = TI.TI_NO
 				WHERE 1=1
+				  <!--키워드-->
 				<if test="keyword != null">
 					AND TI_TITLE LIKE '%' || #{keyword} || '%'
 				</if>
+				<!--지역별-->
 				<if test="cityNo != 0">
 					AND T.CITY_NO=#{cityNo}
 				</if>
-				<if test="sortOrder != null">
+				<if test="sortOrder!=null">
+				<!--TI_NO 최신순, TI_PIRCE 가격순 정렬-->
+				<!--구매 순 추가해야함 -->
 					<choose>
-						<when test="sortOrder == 'ASC'">
-							ORDER BY TI_PRICE ASC
-						</when>
-						<when test="sortOrder == 'DESC'">
-							ORDER BY TI_PRICE DESC
-						</when>
-						<otherwise>
-							ORDER BY TI_PRICE ASC
-						</otherwise>
+						<when test="sortOrder == 'tiPriASC'">ORDER BY TI_PRICE ASC</when>	<!--티켓 가격 순-->
+						<when test="sortOrder == 'tiPriDESC'">ORDER BY TI_PRICE DESC</when>
+						<when test="sortOrder == 'tiCountASC'">ORDER BY TI_COUNT ASC</when> <!--티켓 구매 순-->
+						<when test="sortOrder == 'tiCountDESC'">ORDER BY TI_COUNT DESC</when>
+						<when test="sortOrder == 'tiNoDESC'">ORDER BY TI_NO DESC </when> <!-- 오래된 순 -->
+						<otherwise>ORDER BY TI_NO ASC</otherwise>
 					</choose>
 				</if>
 			) TIKE

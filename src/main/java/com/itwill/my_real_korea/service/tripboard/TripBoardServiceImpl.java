@@ -147,11 +147,19 @@ public class TripBoardServiceImpl implements TripBoardService {
 	}
 	
 	/*
-	 * 게시글의 지역정보 조회
+	 * 게시글 1개 조회 + City 정보
 	 */
 	@Override
 	public TripBoard selectCityInfo(int tBoNo) throws Exception {
 		return tripBoardDao.selectCityInfo(tBoNo);
+	}
+	
+	/*
+	 * 게시글리스트 조회 + City 정보
+	 */
+	@Override
+	public List<TripBoard> selectAllByCityNo() throws Exception {
+		return tripBoardDao.selectAllByCityNo();
 	}
 	
 }

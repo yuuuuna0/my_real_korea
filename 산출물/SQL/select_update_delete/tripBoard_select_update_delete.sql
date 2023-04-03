@@ -98,7 +98,7 @@ where idx >= 1 and idx <= 10;
 select count(*) cnt from trip_board where t_bo_title like '%추추%' or t_bo_content like '%추추%';
 
 -- 게시글 1개 조회 + City 정보
-select t.*,c.* from trip_board t join city c on t.city_no =c.city_no where t.t_bo_no = 21;
+select t.*, c.city_name, c.latitude, c.longitude from trip_board t join city c on t.city_no =c.city_no where t.t_bo_no = 21;
 
 -- 게시글리스트 조회 + City 정보 - 페이징 처리
 select * from

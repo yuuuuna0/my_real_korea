@@ -23,8 +23,10 @@ public class FreeBoardServiceImpl implements FreeBoardService {
         return freeBoardDao.insertBoard(freeBoard);
     }
 
+
     @Override
     public FreeBoard selectByNo(int fBoNo) throws Exception {
+        freeBoardDao.increaseReadCount(fBoNo);
         return freeBoardDao.selectByNo(fBoNo);
     }
 
@@ -38,21 +40,22 @@ public class FreeBoardServiceImpl implements FreeBoardService {
         return freeBoardDao.deleteBoard(no);
     }
 
+    //조회수 증가
     @Override
     public int increaseReadCount(int no) throws Exception {
         return freeBoardDao.increaseReadCount(no);
     }
-
+    //자유게시판 게시글 수
     @Override
     public int selectFreeBoardCount() throws Exception {
         return freeBoardDao.selectFreeBoardCount();
     }
-
+    //키워드로 검색시 게시글수 조회
     @Override
     public int selectSearchCount(String keyword) throws Exception {
         return freeBoardDao.selectSearchCount(keyword);
     }
-
+    //자유게시판 최신순 정렬
     @Override
     public FreeBoardListPageMakerDto selectAllOrderByFBoNoDesc(int currentPage) throws Exception {
         int totalRecordCount = freeBoardDao.selectFreeBoardCount();
@@ -67,7 +70,7 @@ public class FreeBoardServiceImpl implements FreeBoardService {
         pageMakerBoardList.setPageMaker(pageMaker);
         return pageMakerBoardList;
     }
-
+    //자유게시판 오래된순 정렬
     @Override
     public FreeBoardListPageMakerDto selectAllOrderByFBoNoAsc(int currentPage) throws Exception {
         int totalRecordCount = freeBoardDao.selectFreeBoardCount();
@@ -82,7 +85,7 @@ public class FreeBoardServiceImpl implements FreeBoardService {
         pageMakerBoardList.setPageMaker(pageMaker);
         return pageMakerBoardList;
     }
-
+    //자유게시판 조회수 정렬
     @Override
     public FreeBoardListPageMakerDto selectAllOrderByReadCountDesc(int currentPage) throws Exception {
         int totalRecordCount = freeBoardDao.selectFreeBoardCount();
@@ -96,7 +99,7 @@ public class FreeBoardServiceImpl implements FreeBoardService {
         return pageMakerBoardList;
     }
 
-
+    //자유게시판 타이틀 14글자 제한
     @Override
     public String getTitleString(FreeBoard freeBoard) throws Exception {
         StringBuilder title = new StringBuilder(128);
@@ -108,6 +111,7 @@ public class FreeBoardServiceImpl implements FreeBoardService {
         return title.toString();
     }
 
+    //자유게시판 키워드 검색으로 게시글 리스트 보기
     @Override
     public FreeBoardListPageMakerDto selectSearchFreeBoardList(int currentPage, String keyword) throws Exception {
         int totalRecordCount = freeBoardDao.selectSearchCount(keyword);

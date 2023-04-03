@@ -1,4 +1,23 @@
 --insert
-insert into free_board values (free_board_f_bo_no_seq.nextval,'서울 맛집 추천','추천받습니다',sysdate,0,1,'user1');
-insert into free_board values (free_board_f_bo_no_seq.nextval,'경기 맛집 추천','추천받습니다',sysdate,0,2,'user2');
-insert into free_board values (free_board_f_bo_no_seq.nextval,'강원 맛집 추천','추천받습니다',sysdate,0,3,'user3');
+insert into free_board values (free_board_f_bo_no_seq.nextval,'서울 맛집 추천','위생깔끔한곳 선호합니다','2023-01-11',0,1,'user1');
+insert into free_board values (free_board_f_bo_no_seq.nextval,'경기 맛집 추천','클린한 음식으로 추천부탁합니다','2023-01-19',3,2,'user2');
+insert into free_board values (free_board_f_bo_no_seq.nextval,'강원 맛집 추천','면류 좋아합니다','2023-01-22',0,3,'user3');
+insert into free_board values (free_board_f_bo_no_seq.nextval,'부산 해운대 1박2일 추천','자연보는거 좋아합니다','2022-01-19',7,4,'user1');
+insert into free_board values (free_board_f_bo_no_seq.nextval,'대전 여행코스 추천해주세요','2박 3일 코스로 여행 예정입니다','2023-02-12',1,5,'user2');
+insert into free_board values (free_board_f_bo_no_seq.nextval,'서울 핫플 추천받습니다','사람많은곳 선호합니다','2023-03-19',9,1,'user3');
+insert into free_board values (free_board_f_bo_no_seq.nextval,'경기도 풍경 좋은곳 추천해주세요','1박2일 여행가려고요','2022-01-03',6,2,'user1');
+insert into free_board values (free_board_f_bo_no_seq.nextval,'경기도 파주쪽 어죽맛집 추천해주세요','파주여행갑니다','2022-07-03',6,2,'user1');
+insert into free_board values (free_board_f_bo_no_seq.nextval,'강원도 벚꽃축제 하나요?','벚꽃좀 보고 싶네요','2022-09-03',13,3,'user2');
+insert into free_board values (free_board_f_bo_no_seq.nextval,'부산 국밥집 어디가 잘하나요','근본있는곳으로 추천부탁합니다','2022-11-03',11,4,'user3');
+insert into free_board values (free_board_f_bo_no_seq.nextval,'대전 유성온천 어떤가요','가보신분 후기좀 남겨주세요',sysdate,4,5,'user1');
+insert into free_board values (free_board_f_bo_no_seq.nextval,'자유게시판12','2박3일 여행 가려는데 명소 추천좀 해주세요',sysdate,4,5,'user1');
+insert into free_board values (free_board_f_bo_no_seq.nextval,'자유게시판13','2박3일 여행 가려는데 명소 추천좀 해주세요',sysdate,4,13,'user2');
+insert into free_board values (free_board_f_bo_no_seq.nextval,'자유게시판14','2박3일 여행 가려는데 명소 추천좀 해주세요',sysdate,4,1,'user3');
+insert into free_board values (free_board_f_bo_no_seq.nextval,'자유게시판15','2박3일 여행 가려는데 명소 추천좀 해주세요',sysdate,4,12,'user1');
+insert into free_board values (free_board_f_bo_no_seq.nextval,'자유게시판16','2박3일 여행 가려는데 명소 추천좀 해주세요',sysdate,4,3,'user2');
+insert into free_board values (free_board_f_bo_no_seq.nextval,'자유게시판17','2박3일 여행 가려는데 명소 추천좀 해주세요',sysdate,4,5,'user3');
+insert into free_board values (free_board_f_bo_no_seq.nextval,'자유게시판18','2박3일 여행 가려는데 명소 추천좀 해주세요',sysdate,4,5,'user1');
+insert into free_board values (free_board_f_bo_no_seq.nextval,'자유게시판19','2박3일 여행 가려는데 명소 추천좀 해주세요',sysdate,4,6,'user2');
+insert into free_board values (free_board_f_bo_no_seq.nextval,'자유게시판20','2박3일 여행 가려는데 명소 추천좀 해주세요',sysdate,4,8,'user2');
+insert into free_board values (free_board_f_bo_no_seq.nextval,'자유게시판21','2박3일 여행 가려는데 명소 추천좀 해주세요',sysdate,4,9,'user3');
+insert into free_board values (free_board_f_bo_no_seq.nextval,'자유게시판22','2박3일 여행 가려는데 명소 추천좀 해주세요',sysdate,4,2,'user3');

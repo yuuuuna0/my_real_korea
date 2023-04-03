@@ -10,15 +10,15 @@
 	<!-- 1. 회원 가입 -->
 	<insert id="create" parameterType="com.itwill.my_real_korea.dto.user.User">
 		INSERT into user_info(user_id, password, name, nickname, phone, email, birth, address, gender, point, is_admin, mail_auth, mail_key) 
-		VALUES(#{userId},#{password},#{name},#{nickname},#{phone},#{email},#{birth},#{address},#{gender},#{point},#{isAdmin},#{mailAuth},#{mailKey})
+		VALUES(#{userId},#{password},#{name},#{nickname},#{phone},#{email},#{birth},#{address},#{gender},#{point},1,0,#{mailKey})
 	</insert>
 	<!-- 2. 회원 정보 보기 -->
 	<select id="findUser" parameterType="java.lang.String" resultMap="userResultMap">
 		SELECT * 
 		FROM user_info u 
-			JOIN user_add_info ua
+			LEFT OUTER JOIN user_add_info ua
 				ON u.user_id = ua.user_id
-			JOIN user_img ui
+			LEFT OUTER JOIN user_img ui
 				ON u.user_id = ui.user_id
 		WHERE u.user_id = #{userId}
 	</select>
@@ -26,9 +26,9 @@
 	<select id="findUserList" parameterType="java.lang.String" resultMap="userResultMap">
         SELECT *
         FROM user_info u
-			JOIN user_add_info ua
+			LEFT OUTER JOIN user_add_info ua
 				ON u.user_id = ua.user_id
-			JOIN user_img ui
+			LEFT OUTER JOIN user_img ui
 				ON u.user_id = ui.user_id
 	</select>
 	<!-- 4. 회원 정보 수정 -->	

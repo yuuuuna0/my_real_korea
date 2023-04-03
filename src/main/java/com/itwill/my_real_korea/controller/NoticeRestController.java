@@ -35,10 +35,11 @@ public class NoticeRestController {
 	
 	/*
 	 * 공지사항 리스트 보기 (게시글 시작번호, 게시글 끝번호) - 페이징 처리
-	 */
+	 * => 공지사항 첫 화면은 Controller 로 처리 (페이지기반)
+	
 	@ApiOperation(value = "공지사항 리스트")
 	@GetMapping(value = "/notice", produces = "application/json;charset=UTF-8")
-	public Map<String, Object> notice_list(@RequestParam(required = false, defaultValue = "1") int pageno) {
+	public Map<String, Object> notice_list(@RequestParam(required = false, defaultValue = "1") int pageNo) {
 
 		Map<String, Object> resultMap = new HashMap<>();
 		int code = 1;
@@ -46,7 +47,7 @@ public class NoticeRestController {
 		PageMakerDto<Notice> noticeList = null;
 		try {
 			// 페이지 번호(default 값 1)로 공지사항 리스트 찾기, 성공시 code 1
-			noticeList = noticeService.selectAll(pageno);
+			noticeList = noticeService.selectAll(pageNo);
 			code = 1;
 			msg = "성공";
 		} catch (Exception e) {
@@ -60,13 +61,14 @@ public class NoticeRestController {
 		resultMap.put("data", noticeList);
 		return resultMap;
 	}
+	 */
 	
 	/*
 	 * 최신순 정렬 : 공지사항 리스트 보기 (게시글 시작번호, 게시글 끝번호) - 페이징 처리
 	 */
 	@ApiOperation(value = "공지사항 리스트 최신순")
 	@GetMapping(value = "/notice-date-desc", produces = "application/json;charset=UTF-8")
-	public Map<String, Object> notice_list_date_desc(@RequestParam(required = false, defaultValue = "1") int pageno) {
+	public Map<String, Object> notice_list_date_desc(@RequestParam(required = false, defaultValue = "1") int pageNo) {
 
 		Map<String, Object> resultMap = new HashMap<>();
 		int code = 1;
@@ -74,7 +76,7 @@ public class NoticeRestController {
 		PageMakerDto<Notice> noticeList = null;
 		try {
 			// 페이지 번호(default 값 1)로 공지사항 리스트 최신순 찾기, 성공시 code 1
-			noticeList = noticeService.selectAllOrderByDateDesc(pageno);
+			noticeList = noticeService.selectAllOrderByDateDesc(pageNo);
 			code = 1;
 			msg = "성공";
 		} catch (Exception e) {
@@ -93,7 +95,7 @@ public class NoticeRestController {
 	 */
 	@ApiOperation(value = "공지사항 리스트 오래된순")
 	@GetMapping(value = "/notice-date-asc", produces = "application/json;charset=UTF-8")
-	public Map<String, Object> notice_list_date_asc(@RequestParam(required = false, defaultValue = "1") int pageno) {
+	public Map<String, Object> notice_list_date_asc(@RequestParam(required = false, defaultValue = "1") int pageNo) {
 
 		Map<String, Object> resultMap = new HashMap<>();
 		int code = 1;
@@ -101,7 +103,7 @@ public class NoticeRestController {
 		PageMakerDto<Notice> noticeList = null;
 		try {
 			// 페이지 번호(default 값 1)로 공지사항 리스트 오래된순 찾기, 성공시 code 1
-			noticeList = noticeService.selectAllOrderByDateAsc(pageno);
+			noticeList = noticeService.selectAllOrderByDateAsc(pageNo);
 			code = 1;
 			msg = "성공";
 		} catch (Exception e) {
@@ -120,7 +122,7 @@ public class NoticeRestController {
 	 */
 	@ApiOperation(value = "공지사항 리스트 조회순")
 	@GetMapping(value = "/notice-readcount", produces = "application/json;charset=UTF-8")
-	public Map<String, Object> notice_list_readcount(@RequestParam(required = false, defaultValue = "1") int pageno) {
+	public Map<String, Object> notice_list_readcount(@RequestParam(required = false, defaultValue = "1") int pageNo) {
 
 		Map<String, Object> resultMap = new HashMap<>();
 		int code = 1;
@@ -128,7 +130,7 @@ public class NoticeRestController {
 		PageMakerDto<Notice> noticeList = null;
 		try {
 			// 페이지 번호(default 값 1)로 공지사항 리스트 조회순 찾기, 성공시 code 1
-			noticeList = noticeService.selectAllOrderByReadcount(pageno);
+			noticeList = noticeService.selectAllOrderByReadcount(pageNo);
 			code = 1;
 			msg = "성공";
 		} catch (Exception e) {
@@ -147,7 +149,7 @@ public class NoticeRestController {
 	 */
 	@ApiOperation(value = "공지사항 검색결과 리스트")
 	@GetMapping(value = "/notice-search", produces = "application/json;charset=UTF-8")
-	public Map<String, Object> notice_search_list(@RequestParam(required = false, defaultValue = "1") int pageno,
+	public Map<String, Object> notice_search_list(@RequestParam(required = false, defaultValue = "1") int pageNo,
 												@RequestParam(required = true) String keyword) {
 
 		Map<String, Object> resultMap = new HashMap<>();
@@ -156,7 +158,7 @@ public class NoticeRestController {
 		PageMakerDto<Notice> noticeList = null;
 		try {
 			// 페이지 번호(default 값 1)와 검색 keyword로 공지사항 검색결과 리스트 찾기, 성공시 code 1
-			noticeList = noticeService.selectSearchNoticeList(pageno,keyword);
+			noticeList = noticeService.selectSearchNoticeList(pageNo,keyword);
 			if (noticeList.getTotRecordCount() != 0 && noticeList != null) {
 				code = 1;
 				msg = "성공";
@@ -252,16 +254,16 @@ public class NoticeRestController {
 		return resultMap;
 	}
 	
-	/*
-	 * 공지사항 게시글 삭제
-	 */
+	
+	//공지사항 게시글 삭제 
 	@AdminCheck
 	@LoginCheck
 	@ApiOperation(value = "공지사항 삭제")
 	@ApiImplicitParam(name = "nNo", value = "공지사항 번호")
 	@DeleteMapping(value = "/notice/{nNo}", produces = "application/json;charset=UTF-8")
-	public Map<String, Object> notice_delete_action(@PathVariable(value="nNo") int nNo) {
-
+	public Map<String, Object> notice_delete_action(@PathVariable(value="nNo") int nNo,
+													HttpServletRequest request) {
+		
 		Map<String, Object> resultMap = new HashMap<>();
 		int code = 1;
 		String msg = "성공";
@@ -292,7 +294,7 @@ public class NoticeRestController {
 		resultMap.put("data", data);
 		return resultMap;
 	}
-	
+
 	/*
 	 * 공지사항 게시글 내용 수정
 	 */
@@ -337,7 +339,7 @@ public class NoticeRestController {
 	
 	/*
 	 * 관리자인지 확인, 아닐 경우 에러 처리
-	 */
+	
 	@ApiOperation(value = "관리자 에러 처리")
 	@GetMapping("/admin")
     public Map<String, Object> error(HttpServletRequest request) throws IsNotAdminException {
@@ -352,11 +354,12 @@ public class NoticeRestController {
         }
         
         resultMap.put("code", 5);
-		resultMap.put("msg", "관리자");
+		resultMap.put("msg", "관리자가 아닙니다.");
 		resultMap.put("data", null);
         return resultMap;
         
         // 원래 void 로 처리 (resultMap 생략)
         
     }
+     */
 }

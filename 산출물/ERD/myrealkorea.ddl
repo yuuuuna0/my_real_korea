@@ -44,7 +44,9 @@ CREATE TABLE user_info(
 		address                       		VARCHAR2(500)		 NOT NULL,
 		gender                        		NUMBER		 NOT NULL,
 		point                         		NUMBER		 DEFAULT 0		 NULL ,
-		is_admin                      		NUMBER		 DEFAULT 1		 NULL 
+		is_admin                      		NUMBER		 DEFAULT 1		 NULL ,
+		mail_auth                     		NUMBER(10)		 DEFAULT 0		 NULL ,
+		mail_key                      		NUMBER(10)		 DEFAULT 0		 NULL 
 );
 
 

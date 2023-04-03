@@ -6,7 +6,7 @@
 		<selectKey resultType="java.lang.Integer" keyProperty="cityNo" order="BEFORE">
 			select city_city_no_seq.nextval from dual
 		</selectKey>
-		insert into city(city_no,city_name,latitude,longitude) values(#{cityNo},#{cityName},#{latitude},#{longtitude})
+		insert into city(city_no,city_name,latitude,longitude) values(#{cityNo},#{cityName},#{latitude},#{longitude})
 	</insert>
 	<!-- 2. 시티번호로 시티 찾기 -->
 	<select id="findByCityNo" parameterType="java.lang.Integer" resultType="com.itwill.my_real_korea.dto.City">

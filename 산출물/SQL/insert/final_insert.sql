@@ -36,7 +36,6 @@ insert into city(city_no,city_name,latitude,longitude) values(city_city_no_seq.n
 insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img,user_id) values (notice_n_no_seq.nextval,'공지사항은1','공지사항내용1',sysdate,1,'img.png','user1'); 
 insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img,user_id) values (notice_n_no_seq.nextval,'공지사항은2','공지사항내용2',sysdate,2,'img.png','user2'); 
 insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img,user_id) values (notice_n_no_seq.nextval,'공지사항삼3','공지사항내용3',sysdate,3,'img.png','user3'); 
-
 insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img,user_id) values (notice_n_no_seq.nextval,'공지사항이다4','공지사항내용4','2023/04/02',4,'img.png','user1'); 
 insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img,user_id) values (notice_n_no_seq.nextval,'공지사항이야5','공지사항내용5','2023/04/03',8,'img.png','user2'); 
 insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img,user_id) values (notice_n_no_seq.nextval,'공지사항안내6','공지사항내용6','2023/04/05',10,'img.png','user3'); 
@@ -124,6 +123,12 @@ insert into free_board values (free_board_f_bo_no_seq.nextval,'서울 맛집 추
 insert into free_board values (free_board_f_bo_no_seq.nextval,'경기 맛집 추천','추천받습니다',sysdate,0,2,'user2');
 insert into free_board values (free_board_f_bo_no_seq.nextval,'강원 맛집 추천','추천받습니다',sysdate,0,3,'user3');
 
+-- freeboard comment
+insert into free_board_comment values (FREE_BOARD_COMMENT_F_CO_NO_SEQ.nextval,'명동교자 칼국수 맛있어요',sysdate,1,'user3');
+insert into free_board_comment values (FREE_BOARD_COMMENT_F_CO_NO_SEQ.nextval,'카페는 어떠신가요.',sysdate,2,'user1');
+insert into free_board_comment values (FREE_BOARD_COMMENT_F_CO_NO_SEQ.nextval,'강원 맛집 저도 궁금하군요.',sysdate,3,'user2');
+
+
 /*************** ticket ***********************/
 --TICKET 티켓 상품
 INSERT INTO TICKET (TI_NO, TI_TITLE,TI_DATE,TI_PRICE,TI_INFO,TI_NOTICE,TI_COUNT,CITY_NO)
@@ -161,7 +166,14 @@ insert into trip_board(t_bo_no,t_bo_title,t_bo_content,t_bo_date,t_bo_readcount,
                     t_bo_img,t_bo_start_date,t_bo_end_date,t_bo_style,hashtag,city_no,user_id) 
             values (trip_board_t_bo_no_seq.nextval,'동행게시판제목3','동행게시판내용3',sysdate,0,0,1,
                     'img3.png','2023-07-01','2023-07-10','맛집투어','맛있는거좋아하는사람',3,'user3'); 
-                    
+
+-- 동행게시판 댓글 insert
+insert into trip_board_comment(t_co_no, t_comment_content, t_comment_date, t_bo_no, user_id) 
+                        values(TRIP_BOARD_COMMENT_T_CO_NO_SEQ.nextval, '댓글1', sysdate, 1, 'user2');
+insert into trip_board_comment(t_co_no, t_comment_content, t_comment_date, t_bo_no, user_id) 
+                        values(TRIP_BOARD_COMMENT_T_CO_NO_SEQ.nextval, '댓글2', sysdate, 2, 'user3');
+insert into trip_board_comment(t_co_no, t_comment_content, t_comment_date, t_bo_no, user_id) 
+                        values(TRIP_BOARD_COMMENT_T_CO_NO_SEQ.nextval, '댓글3', sysdate, 3, 'user1');                   
 
 /*************** wishlist ***********************/
 -- 티켓 상품 위시리스트에 추가

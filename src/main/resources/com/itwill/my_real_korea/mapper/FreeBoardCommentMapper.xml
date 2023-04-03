@@ -11,8 +11,8 @@
 <!--    SELECT free_board_f_bo_no_seq.nextval FROM DUAL-->
 <!--</selectKey>-->
 insert into FREE_BOARD_COMMENT (f_co_no,f_comment_content,f_comment_date,f_bo_no,user_id)
-values( #{fCommentNo},#{fCommentContent},sysdate,
-       #{fBoNo},#{userId})
+values( #{fCommentNo},#{fCommentContent},sysdate,#{fBoNo},#{userId})
+
 </insert>
 
 
@@ -22,7 +22,8 @@ values( #{fCommentNo},#{fCommentContent},sysdate,
        </select>
 
        <delete id="deleteComment" parameterType="java.lang.Integer">
-              delete from free_board_comment where f_co_no = #{fCoNo}
+              delete from free_board_comment where f_co_no = #{fCommentNo}
+
        </delete>
 
 

@@ -27,7 +27,7 @@
 	<select id="findTourWithTourImgWithCityAll" parameterType="java.util.Map" resultMap="TourWithCityWithTourImgMap">
 		select *
 		from (select rownum idx, tourAll.*
-			  from (select t.to_no,t.to_name,t.to_type,t.to_Time,t.to_price,
+			  from (select t.*,
 			   			   c.city_name,
 			   			   ti.to_img_url
 			   		from tour t 
@@ -35,13 +35,38 @@
 				   			on t.city_no=c.city_no
 						 left outer join tour_img ti
 				   			on t.to_no=ti.to_no
+				   	where 1=1
+				   		<if test="keyword !=null">
+				   			and t.to_name like '%'||#{keyword}||'%'
+				   		</if>
+				   		<if test="cityNo !=0">
+				   			and t.city_no=#{cityNo}
+				   		</if>
+				   		<if test="toType !=0">
+				   			and t.to_type=#{toType}
+				   		</if>
 		   				<if test="sortOrder != null">
 							<choose>
-								<when test="sortOrder == 'DESC'">
+								<when test="sortOrder == 'toNoDesc'">
 									ORDER BY T.to_no DESC
 								</when>
+								<when test="sortOrder == 'toNoAsc'">
+									ORDER BY T.to_no Asc
+								</when>
+								<when test="sortOrder == 'toPriceDesc'">
+									ORDER BY T.to_price Desc
+								</when>
+								<when test="sortOrder == 'toPriceAsc'">
+									ORDER BY T.to_price Asc
+								</when>
+								<when test="sortOrder == 'toCountAsc'">
+									ORDER BY T.to_count Asc
+								</when>
+								<when test="sortOrder == 'toCountAsc'">
+									ORDER BY T.to_count Asc
+								</when>
 								<otherwise>
-									ORDER BY T.to_no ASC
+									ORDER BY T.to_no Asc
 								</otherwise>
 							</choose>
 						</if>

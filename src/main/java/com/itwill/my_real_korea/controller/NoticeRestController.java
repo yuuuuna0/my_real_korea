@@ -34,36 +34,6 @@ public class NoticeRestController {
 	private NoticeService noticeService;
 	
 	/*
-	 * 공지사항 리스트 보기 (게시글 시작번호, 게시글 끝번호) - 페이징 처리
-	 * => 공지사항 첫 화면은 Controller 로 처리 (페이지기반)
-	
-	@ApiOperation(value = "공지사항 리스트")
-	@GetMapping(value = "/notice", produces = "application/json;charset=UTF-8")
-	public Map<String, Object> notice_list(@RequestParam(required = false, defaultValue = "1") int pageNo) {
-
-		Map<String, Object> resultMap = new HashMap<>();
-		int code = 1;
-		String msg = "성공";
-		PageMakerDto<Notice> noticeList = null;
-		try {
-			// 페이지 번호(default 값 1)로 공지사항 리스트 찾기, 성공시 code 1
-			noticeList = noticeService.selectAll(pageNo);
-			code = 1;
-			msg = "성공";
-		} catch (Exception e) {
-			// 에러 발생시 code 2
-			e.printStackTrace();
-			code = 2;
-			msg = "관리자에게 문의하세요.";
-		}
-		resultMap.put("code", code);
-		resultMap.put("msg", msg);
-		resultMap.put("data", noticeList);
-		return resultMap;
-	}
-	 */
-	
-	/*
 	 * 최신순 정렬 : 공지사항 리스트 보기 (게시글 시작번호, 게시글 끝번호) - 페이징 처리
 	 */
 	@ApiOperation(value = "공지사항 리스트 최신순")
@@ -336,6 +306,36 @@ public class NoticeRestController {
 		resultMap.put("data", data);
 		return resultMap;
 	}
+	
+	/*
+	 * 공지사항 리스트 보기 (게시글 시작번호, 게시글 끝번호) - 페이징 처리
+	 * => 공지사항 첫 화면은 Controller 로 처리 (페이지기반)
+	
+	@ApiOperation(value = "공지사항 리스트")
+	@GetMapping(value = "/notice", produces = "application/json;charset=UTF-8")
+	public Map<String, Object> notice_list(@RequestParam(required = false, defaultValue = "1") int pageNo) {
+
+		Map<String, Object> resultMap = new HashMap<>();
+		int code = 1;
+		String msg = "성공";
+		PageMakerDto<Notice> noticeList = null;
+		try {
+			// 페이지 번호(default 값 1)로 공지사항 리스트 찾기, 성공시 code 1
+			noticeList = noticeService.selectAll(pageNo);
+			code = 1;
+			msg = "성공";
+		} catch (Exception e) {
+			// 에러 발생시 code 2
+			e.printStackTrace();
+			code = 2;
+			msg = "관리자에게 문의하세요.";
+		}
+		resultMap.put("code", code);
+		resultMap.put("msg", msg);
+		resultMap.put("data", noticeList);
+		return resultMap;
+	}
+	 */
 	
 	/*
 	 * 관리자인지 확인, 아닐 경우 에러 처리

@@ -17,6 +17,9 @@ public interface TicketReserveDao {
     //예약 삭제
     int deleteTicketReserve(int tiRsNo) throws Exception;
 
+    //티켓예약 상세보기 - 번호 + 아이디
+    TicketReserve selectTicketReserveTest(int tiRsNo) throws Exception;
+
 
 
 

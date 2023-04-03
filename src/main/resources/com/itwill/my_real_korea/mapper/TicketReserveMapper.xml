@@ -28,18 +28,28 @@
                 FROM TICKET_RESERVE TR
                          JOIN TICKET T
                               ON TR.TI_NO = T.TI_NO
-                WHERE 1=1
-                <if test="tiRsNo != null">
-                    AND T_RS_NO=#{tiRsNo}
-                </if>
-                <if test="userId != null">
-                    AND USER_ID=#{userId}
-                </if>
+                WHERE TI_RS_NO=#{tiRsNo}
             </select>
     <!--예약 삭제 -->
     <delete id="deleteTicketReserve" parameterType="java.lang.Integer">
             DELETE FROM TICKET_RESERVE WHERE TI_RS_NO = #{tiRsNo}
     </delete>
+
+    <!--TEST -->
+    <select id="selectTicketReserveTest" parameterType="java.lang.Integer" resultMap="ticketReserveMap">
+        SELECT TI_RS_NO, TI_RS_DATE, TI_RS_QTY, TI_RS_MSG, USER_ID, TR.TI_NO,
+        TI_TITLE, TI_DATE, TI_PRICE, TI_INFO, TI_NOTICE, TI_COUNT, CITY_NO
+        FROM TICKET_RESERVE TR
+        JOIN TICKET T
+        ON TR.TI_NO = T.TI_NO
+        WHERE 1=1
+        <if test="tiRsNo != null">
+            AND T_RS_NO=#{tiRsNo}
+        </if>
+        <if test="userId != null">
+            AND USER_ID=#{userId}
+        </if>
+    </select>
 
 
 </mapper>

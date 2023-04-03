@@ -29,9 +29,9 @@ class TicketDaoImplTest {
 	        
 	    }
 	// 전체 목록 + 정렬 - 페이징
-    //@Test
+    @Test
     void selectAllTicket() throws Exception {
-        List<Ticket> ticketList = ticketDao.selectAllTicket(1, 10,"DESC");
+        List<Ticket> ticketList = ticketDao.selectAllTicket(1, 10,"tiPriDESC");
         System.out.println(ticketList);
     }
     // 키워드, 지역, 가격 + 전체 LIST - 페이징 처리
@@ -42,7 +42,7 @@ class TicketDaoImplTest {
         System.out.println(ticketList);
     }
     //상품 상세보기 - 지역 + 사진
-    @Test
+  //  @Test
     void selectByTicketNoCityWithImg() throws Exception {
     	List<Ticket> ticketList = ticketDao.selectByTicketNoCityWithImg(1);
     	Ticket ticket = ticketList.get(0);

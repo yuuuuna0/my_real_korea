@@ -51,8 +51,8 @@ class ChatMsgDaoImplTest {
 	
 	@Test
 	void testSelectAllNotReadMsg() {
-		assertNotNull(chatMsgDao.selectAllNotReadMsg("kms2"));
-		System.out.println(chatMsgDao.selectAllNotReadMsg("kms2"));
+		assertNotNull(chatMsgDao.selectAllNotReadMsg("user2"));
+		System.out.println(chatMsgDao.selectAllNotReadMsg("user2"));
 	}
 	
 	@Disabled
@@ -87,7 +87,7 @@ class ChatMsgDaoImplTest {
 	@Disabled
 	@Test
 	void testInsertChatMsg() {
-		int rowCount = chatMsgDao.insertChatMsg(new ChatMsg(0, "하이이", null, 0, 1, "kms2"));
+		int rowCount = chatMsgDao.insertChatMsg(new ChatMsg(0, "하이이", null, 0, 1, "user2"));
 		assertEquals(rowCount, 1);
 	}
 

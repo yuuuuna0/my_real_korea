@@ -62,7 +62,7 @@ class TicketServiceImplTest {
     @Test
     void updateTicket() throws Exception{
     	City city = cityService.findByCityNo(4);
-    	assertEquals (ticketService.updateTicket(
+    	assertEquals (ticketService.updateTicket (
                 new Ticket(11,"수정이지롱",null,3333,"인포","어어어",0,city)),1);
     }
     @Test

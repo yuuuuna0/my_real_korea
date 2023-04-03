@@ -106,7 +106,7 @@
 </select>
 
 <!-- 게시글리스트 조회 + City 정보 -->
-<select id="selectAllByCityNo" parameterType="map" resultType="com.itwill.ej_final_project.dto.TripBoard">
+<select id="selectAllByCityNo" parameterType="map" resultType="com.itwill.my_real_korea.dto.tripboard.TripBoard">
 	select t.*,c.* from trip_board t join city c on t.city_no = c.city_no
 </select>
 </mapper>

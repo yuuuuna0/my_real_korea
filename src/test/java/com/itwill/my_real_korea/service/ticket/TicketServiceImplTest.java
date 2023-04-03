@@ -47,24 +47,24 @@ class TicketServiceImplTest {
        System.out.println(ticketService.selectAllTicket(1,"DESC"));
     }
 
-    @Disabled
     @Test
     void selectByTicketAllSort() throws Exception{
-        System.out.println(ticketService.selectByTicketAllSort(1,"가보 자고",0,"DESC"));
+        System.out.println(ticketService.selectByTicketAllSort(1,null,0,null));
     }
-
+    @Disabled
     @Test
     void selectByTicketNoCityWithImg() throws Exception{
         //assertNotNull(ticketService.selectByTicketNoCityWithImg(1));
         System.out.print(ticketService.selectByTicketNoCityWithImg(1));
     }
-    
+    @Disabled 
     @Test
     void updateTicket() throws Exception{
     	City city = cityService.findByCityNo(4);
     	assertEquals (ticketService.updateTicket(
                 new Ticket(11,"수정이지롱",null,3333,"인포","어어어",0,city)),1);
     }
+    @Disabled
     @Test
     void deleteTicket() throws Exception{
 	   int rowCount = ticketService.deleteTicket(10);

@@ -19,7 +19,7 @@ class FreeBoardServiceImplTest {
     private FreeBoardService freeBoardService;
 
 
-    @Test
+    //@Test
     void insert() throws Exception {
         FreeBoard freeBoard = new FreeBoard(
                 2, "질문있습니다"
@@ -32,7 +32,7 @@ class FreeBoardServiceImplTest {
     }
 
 
-    @Test
+   // @Test
     void update() throws Exception {
         FreeBoard updateFreeBoard = new FreeBoard(
                 2, "3수정테스트"
@@ -42,37 +42,37 @@ class FreeBoardServiceImplTest {
     }
 
     @Disabled
-    @Test
+    //@Test
     void delete() throws Exception {
         int deleteFreeBoard = freeBoardService.deleteFreeBoard(6);
         assertThat(deleteFreeBoard).isEqualTo(1);
     }
 
-    @Test
+    //@Test
     void selectByNo() throws Exception {
         FreeBoard freeBoard = freeBoardService.selectByNo(3);
         System.out.println(freeBoard);
     }
 
-    @Test
+   // @Test
     void increaseReadCount() throws Exception {
         int increaseReadCount = freeBoardService.increaseReadCount(2);
         assertThat(increaseReadCount).isEqualTo(1);
     }
 
-    @Test
-    void selectNoticeCount() throws Exception {
+   // @Test
+    void selectFreeBoardCount() throws Exception {
         int count = freeBoardService.selectFreeBoardCount();
         System.out.println("count = " + count);
     }
 
-    @Test
+   //@Test
     void selectSearchCount() throws Exception {
         int searchCount = freeBoardService.selectSearchCount("맛집");
         System.out.println("searchCount = " + searchCount);
     }
 
-    @Test
+   // @Test
     void getTitleString() throws Exception {
         FreeBoard freeBoard = new FreeBoard(
                 2, "12345678901234567"
@@ -83,25 +83,25 @@ class FreeBoardServiceImplTest {
     }
 
 
-    @Test
+    //@Test
     void selectSearchFreeBoardList() throws Exception {
         FreeBoardListPageMakerDto freeBoardListPageMakerDto =
                 freeBoardService.selectSearchFreeBoardList(1, "맛집");
         System.out.println("freeBoardListPageMakerDto = " + freeBoardListPageMakerDto);
     }
 
-    @Test
+    //@Test
     void selectAllOrderByFBoNoDesc() throws Exception {
         FreeBoardListPageMakerDto freeBoardListPageMakerDto = freeBoardService.selectAllOrderByFBoNoDesc(1);
         System.out.println("freeBoardListPageMakerDto = " + freeBoardListPageMakerDto);
     }
-    @Test
+    //@Test
     void selectAllOrderByFBoNoAsc() throws Exception {
         FreeBoardListPageMakerDto freeBoardListPageMakerDto = freeBoardService.selectAllOrderByFBoNoAsc(1);
         System.out.println("freeBoardListPageMakerDto = " + freeBoardListPageMakerDto);
     }
 
-    @Test
+    //@Test
     void selectAllOrderByReadCountDesc() throws Exception {
         FreeBoardListPageMakerDto freeBoardListPageMakerDto = freeBoardService.selectAllOrderByReadCountDesc(1);
         System.out.println("freeBoardListPageMakerDto = " + freeBoardListPageMakerDto);

@@ -19,7 +19,7 @@ class UserServiceImplTest {
 	//1. 회원 가입
 	@Test
 	void testCreate() throws Exception {
-		User user = new User("serviceTest1", "test1111", "테스트", "테스트", "011-1111-1111", "test1@gmail.com", new Date(), "테스트", 0, 0, 1);
+		User user = new User("serviceTest1", "test1111", "테스트", "테스트", "011-1111-1111", "test1@gmail.com", new Date(), "테스트", 0, 0, 1, 0, 0);
 		System.out.println(">> created :"+userService.create(user));
 	}
 	

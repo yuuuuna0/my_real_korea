@@ -9,8 +9,8 @@
 	
 	<!-- 1. 회원 가입 -->
 	<insert id="create" parameterType="com.itwill.my_real_korea.dto.user.User">
-		INSERT into user_info(user_id, password, name, nickname, phone, email, birth, address, gender, point, is_admin) 
-		VALUES(#{userId},#{password},#{name},#{nickname},#{phone},#{email},#{birth},#{address},#{gender},#{point},#{isAdmin})
+		INSERT into user_info(user_id, password, name, nickname, phone, email, birth, address, gender, point, is_admin, mail_auth, mail_key) 
+		VALUES(#{userId},#{password},#{name},#{nickname},#{phone},#{email},#{birth},#{address},#{gender},#{point},#{isAdmin},#{mailAuth},#{mailKey})
 	</insert>
 	<!-- 2. 회원 정보 보기 -->
 	<select id="findUser" parameterType="java.lang.String" resultMap="userResultMap">
@@ -61,5 +61,24 @@
 		FROM user_info 
 		WHERE email = #{email} AND name = #{name}
 	</select>
+	
+	<!-- 21. 메일 인증여부 확인 -->
+	<select id="mailAuth" parameterType="java.lang.String" resultType="java.lang.Integer">
+		SELECT count(*)
+		FROM user_info
+		WHERE user_id = #{userId} AND mail_auth = 1
+	</select>
+	<!-- 22. 메일 인증번호 업데이트 -->
+	<update id="mailKeyUpdate" parameterType="com.itwill.my_real_korea.dto.user.User">
+		UPDATE  user_info 
+		SET mail_key = #{mailKey}
+		WHERE user_id = #{userId} AND email = #{email}
+	</update>
+	<!-- 23. 메일 인증여부 업데이트 -->
+	<update id="mailAuthUpdate" parameterType="com.itwill.my_real_korea.dto.user.User">
+		UPDATE  user_info 
+		SET mail_auth = 1
+		WHERE email = #{email} AND mail_key = #{mailKey}
+	</update>
 	
 </mapper>

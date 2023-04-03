@@ -17,4 +17,7 @@ public interface TicketReserveMapper {
     List<TicketReserve> selectByTicketReserveNo(int tiRsNo);
     //예약 삭제
     int deleteTicketReserve(int tiRsNo);
+
+    /* test
+    TicketReserve selectTicketReserveTest (int tiRsNo, String userId);*/
 }

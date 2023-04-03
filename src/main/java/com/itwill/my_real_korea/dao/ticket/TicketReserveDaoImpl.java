@@ -36,10 +36,9 @@ public class TicketReserveDaoImpl implements TicketReserveDao {
 		return ticketReserveMapper.deleteTicketReserve(tiRsNo);
 	}
 
-	@Override
-	public TicketReserve selectTicketReserveTest(int tiRsNo) throws Exception {
-		return null;
-	}
-
-
+	/*@Override TEST
+	public TicketReserve selectTicketReserveTest(int tiRsNo, String userId) throws Exception {
+		return ticketReserveMapper.selectTicketReserveTest(tiRsNo, userId);*/
 }
+
+

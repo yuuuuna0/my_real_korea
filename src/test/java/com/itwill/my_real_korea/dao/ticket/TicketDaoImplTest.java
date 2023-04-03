@@ -29,7 +29,7 @@ class TicketDaoImplTest {
 	        
 	    }
 	// 전체 목록 + 정렬 - 페이징
-    //@Test
+    @Test
     void selectAllTicket() throws Exception {
         List<Ticket> ticketList = ticketDao.selectAllTicket(1, 10,"tiPriDESC");
         System.out.println(ticketList);

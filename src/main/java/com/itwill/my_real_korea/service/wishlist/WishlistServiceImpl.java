@@ -27,6 +27,11 @@ public class WishlistServiceImpl implements WishlistService{
 	public List<Wishlist> selectAllWithTicketAndTour(String userId) {
 		return wishlistDao.selectAllWithTicketAndTour(userId);
 	}
+	
+	@Override
+	public Wishlist selectByWishNo(int wishNo) {
+		return wishlistDao.selectByWishNo(wishNo);
+	}
 
 	@Override
 	public int selectWishlistCount(String userId) {

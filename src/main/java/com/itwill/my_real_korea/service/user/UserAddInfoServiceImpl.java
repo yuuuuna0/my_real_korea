@@ -15,39 +15,31 @@ public class UserAddInfoServiceImpl implements UserAddInfoService {
 	public UserAddInfoServiceImpl() throws Exception {
 	}
 	
+	//1. 회원 추가 정보 등록
 	@Override
 	public int createUserAddInfo(UserAddInfo userAddInfo) throws Exception {
 		return userAddInfoDao.createUserAddInfo(userAddInfo);
 	}
 	
-	@Override
-	public int updateUserAddInfo(UserAddInfo userAddInfo) throws Exception {
-		return userAddInfoDao.updateUserAddInfo(userAddInfo);
-	}
-	
-	@Override
-	public int removeUserAddInfo(String userId) throws Exception {
-		return userAddInfoDao.removeUserAddInfo(userId);
-	}
-	
+	//2. 회원 추가 정보 보기
 	@Override
 	public UserAddInfo findUserAddInfo(String userId) throws Exception {
 		return userAddInfoDao.findUserAddInfo(userId);
 	}
 	
+	//3. 회원 추가 정보 수정
+	@Override
+	public int updateUserAddInfo(UserAddInfo userAddInfo) throws Exception {
+		return userAddInfoDao.updateUserAddInfo(userAddInfo);
+	}
+	
+	//4. 회원 추가 정보 삭제
+	@Override
+	public int removeUserAddInfo(String userId) throws Exception {
+		return userAddInfoDao.removeUserAddInfo(userId);
+	}
+	
+
+	
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

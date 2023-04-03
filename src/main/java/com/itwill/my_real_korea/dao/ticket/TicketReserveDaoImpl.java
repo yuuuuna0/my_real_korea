@@ -10,7 +10,7 @@ import java.util.List;
 @Repository
 public class TicketReserveDaoImpl implements TicketReserveDao {
 
-    private TicketReserveMapper ticketReserveMapper;
+    private final TicketReserveMapper ticketReserveMapper;
     @Autowired
     public TicketReserveDaoImpl(TicketReserveMapper ticketReserveMapper) {
     	this.ticketReserveMapper = ticketReserveMapper;

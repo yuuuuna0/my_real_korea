@@ -11,7 +11,7 @@ import java.util.List;
 public class TicketImgDaoImpl implements TicketImgDao{
 
 
-    private TicketImgMapper ticketImgMapper;
+    private final TicketImgMapper ticketImgMapper;
     @Autowired
     public TicketImgDaoImpl(TicketImgMapper ticketImgMapper) {
         this.ticketImgMapper = ticketImgMapper;

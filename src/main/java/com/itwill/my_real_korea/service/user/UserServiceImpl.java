@@ -21,7 +21,7 @@ public class UserServiceImpl implements UserService{
 		
 	}
 	
-	//회원 가입
+	//1. 회원 가입
 	@Override
 	public int create(User user)throws ExistedUserException, Exception{
 		//아이디 중복 체크
@@ -32,52 +32,32 @@ public class UserServiceImpl implements UserService{
 		return userDao.create(user);
 	}
 	
-	//로그인
-	/*
-	 *	0: 아이디 존재 안함
-	 *	1: 패스워드 일치 안함
-	 *	2: 로그인 성공
-	 */
-	@Override
-	public int login(String userId, String password) throws Exception, UserNotFoundException, PasswordMismatchException {
-	    User user = userDao.findUser(userId);
-	    if (user == null) {
-	        //아이디 존재 안함
-	        throw new UserNotFoundException(userId + " 는 존재하지 않는 아이디입니다.");
-	    }
-	    boolean rightPasswordCount = userDao.isMatchPassword(userId,password);
-	    if (!rightPasswordCount) {
-	        //패스워드 일치 안함
-	        throw new PasswordMismatchException("패스워드가 일치하지 않습니다.");
-	    }
-	    return 2;
-	}
-
-	//회원 정보 수정
-	@Override
-	public int update(User user)throws Exception{
-		return userDao.update(user);
-	}
-	
-	//회원 탈퇴
-	@Override
-	public int remove(String userId) throws Exception{
-		return userDao.remove(userId);
-	}
-	
-	//회원 정보 보기 (마이 페이지)
+	//2. 회원 정보 보기 (마이 페이지)
 	@Override
 	public User findUser(String userId) throws Exception{
 		return userDao.findUser(userId);
 	}
 	
-	//전체 회원 정보 보기 (관리자 페이지)
+	//3. 전체 회원 정보 보기 (관리자 페이지)
 	@Override
 	public List<User> findUserList()throws Exception{
 		return userDao.findUserList();
 	}
-
-	//아이디 중복 확인
+	
+	//4. 회원 정보 수정
+	@Override
+	public int update(User user)throws Exception{
+		return userDao.update(user);
+	}
+	
+	//5. 회원 탈퇴
+	@Override
+	public int remove(String userId) throws Exception{
+		return userDao.remove(userId);
+	}
+	
+	
+	//11. 아이디 중복 체크 (회원 가입(회원 존재 여부 확인))
 	@Override
 	public boolean isDuplicateId(String userId) throws Exception{
 		boolean isExist = userDao.isExistUser(userId);
@@ -88,7 +68,22 @@ public class UserServiceImpl implements UserService{
 		}
 	}
 	
-	//이메일, 이름으로 아이디 찾기
+	//12. 로그인 (비밀번호 일치 여부 확인)
+	//1: 로그인 성공
+	@Override
+	public int login(String userId, String password) throws Exception, UserNotFoundException, PasswordMismatchException {
+		User user = userDao.findUser(userId);
+		if (user == null) {
+			throw new UserNotFoundException(userId + " 는 존재하지 않는 아이디입니다.");
+		}
+		boolean isMatchPassword = userDao.isMatchPassword(userId,password);
+		if (!isMatchPassword) {
+			throw new PasswordMismatchException("패스워드가 일치하지 않습니다.");
+		}
+		return 1;
+	}
+	
+	//13. 이메일, 이름으로 아이디 찾기
 	@Override
 	public String findIdByEmailName(User user) throws Exception {
 		return userDao.findIdByEmailName(user);

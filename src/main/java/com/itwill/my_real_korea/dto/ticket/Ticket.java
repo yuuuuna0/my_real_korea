@@ -8,6 +8,7 @@ import com.itwill.my_real_korea.dto.City;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
 @Data
 @NoArgsConstructor

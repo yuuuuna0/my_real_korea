@@ -1,6 +1,8 @@
 package com.itwill.my_real_korea.dao.tour;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -41,15 +43,25 @@ public class TourReserveDaoImpl implements TourReserveDao {
 	}
 
 	@Override
-	public List<TourReserve> findAllTourReservewithTourByUserId(String userId) throws Exception {
+	public List<TourReserve> findAllTourReservewithTourByUserId(int pageStart,int pageEnd,String sortOrder, String userId) throws Exception {
 		//유저의 투어예약 리스트 전체 보여주기
-		return tourReserveMapper.findAllTourReservewithTourByUserId(userId);
+		Map<String, Object> tourReservePageMap=new HashMap<>();
+		tourReservePageMap.put("pageStart", pageStart);
+		tourReservePageMap.put("pageEnd", pageEnd);
+		tourReservePageMap.put("sortOrder", sortOrder);
+		tourReservePageMap.put("userId",userId);
+		return tourReserveMapper.findAllTourReservewithTourByUserId(tourReservePageMap);
 	}
 
 	@Override
 	public int deleteAllTourReserveByUserId(String userId) throws Exception {
 		//유저의 투어예약 전체 삭제
 		return tourReserveMapper.deleteAllTourReserveByUserId(userId);
+	}
+
+	@Override
+	public int findTourReserveCountByUserId(String userId) throws Exception {
+		return tourReserveMapper.findTourReserveCountByUserId(userId);
 	}
 
 }

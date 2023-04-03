@@ -6,33 +6,22 @@ import com.itwill.my_real_korea.dto.user.User;
 
 public interface UserService {
 
-	//회원 가입
+	//1. 회원 가입
 	int create(User user) throws Exception;
-	
-	//아이디 중복체크
-	boolean isDuplicateId(String userId) throws Exception;
-
-	//로그인
-	/*
-	 *	0: 아이디 존재 안함
-	 *	1: 패스워드 불일치
-	 *	2: 로그인 성공
-	 */
-	int login(String userId, String password) throws Exception;
-
-	//회원 정보 수정
-	int update(User user) throws Exception;
-
-	//회원 탈퇴
-	int remove(String userId) throws Exception;
-
-	//회원 정보 보기 (마이 페이지)
+	//2. 회원 정보 보기 (마이 페이지)
 	User findUser(String userId) throws Exception;
-	
-	//전체 회원 정보 보기 (관리자 페이지)
+	//3. 전체 회원 정보 보기 (관리자 페이지)
 	List<User> findUserList() throws Exception;
-
-	//이메일, 이름으로 아이디 찾기
+	//4. 회원 정보 수정
+	int update(User user) throws Exception;
+	//5. 회원 탈퇴
+	int remove(String userId) throws Exception;
+	
+	//11. 아이디 중복 체크 (회원 가입(회원 존재 여부 확인))
+	boolean isDuplicateId(String userId) throws Exception;
+	//12. 로그인 (비밀번호 일치 여부 확인)
+	int login(String userId, String password) throws Exception;
+	//13. 이메일, 이름으로 아이디 찾기
 	String findIdByEmailName(User user) throws Exception;
 
 

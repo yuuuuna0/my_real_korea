@@ -49,7 +49,7 @@ select * from notice where n_title like '%공지%' order by n_no desc;
 select * from
     (select rownum idx, s.* from
         (select n_no, n_title, n_content, n_date, n_readcount, n_img, user_id from notice
-        where n_title like '%공지%'
+        where n_title like '%공지사항%'
         order by n_no desc) s
     )
 where idx >= 1 and idx <= 10;

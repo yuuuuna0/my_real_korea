@@ -1,13 +1,11 @@
 
 package com.itwill.my_real_korea.mapper;
 
-import java.util.List;
-import java.util.Map;
-
+import com.itwill.my_real_korea.dto.freeboard.FreeBoard;
 import org.apache.ibatis.annotations.Mapper;
 
-import com.itwill.my_real_korea.dto.freeboard.FreeBoard;
-import com.itwill.my_real_korea.dto.freeboard.FreeBoardCommentListPageMakerDto;
+import java.util.List;
+import java.util.Map;
 
 
 @Mapper
@@ -15,9 +13,13 @@ public interface FreeBoardMapper {
 
  public int insertBoard(FreeBoard freeBoard) ;
 
- FreeBoard selectByNo(int no) ;
+ FreeBoard selectByNo(int fBoNo) ;
 
- List<FreeBoard> selectAll(Map<String, Object> pageMap) ;
+ List<FreeBoard> selectAllOrderByFBoNoDesc (Map<String, Object> pageMap) ;
+
+ List<FreeBoard> selectAllOrderByFBoNoAsc (Map<String, Object> pageMap) ;
+
+ List<FreeBoard> selectAllOrderByReadCountDesc (Map<String, Object> pageMap) ;
 
  int updateBoard(FreeBoard freeBoard) ;
 

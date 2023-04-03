@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.itwill.my_real_korea.mapper.TourReserveMapper">
+	<resultMap id="TourWithTourReserveResultMap" type="com.itwill.my_real_korea.dto.tour.TourReserve" autoMapping="true">
+	  	<association property="tour" javaType="com.itwill.my_real_korea.dto.tour.Tour" autoMapping="true">
+	  	</association>
+    </resultMap>
+
 	<!-- 1. 투어예약 추가 -->
 	<insert id="insertTourReserve" parameterType="com.itwill.my_real_korea.dto.tour.TourReserve">
 		<selectKey resultType="java.lang.Integer" keyProperty="toRsNo" order="BEFORE">
@@ -18,21 +23,47 @@
 		delete from tour_reserve where to_rs_no=#{toRsNo}
 	</delete>
 	<!-- 4. 투어예약번호로 예약 상세보기 -->
-	<resultMap id="TourWithTourReserveResultMap" type="com.itwill.my_real_korea.dto.tour.TourReserve">
-	  	<association property="tour" javaType="com.itwill.my_real_korea.dto.tour.Tour" autoMapping="true">
-	  	</association>
-	  </resultMap>
-	<select id="selectTourReserveWithTourByToRsNo" 
+	<select id="findTourReserveWithTourByToRsNo" 
 			parameterType="java.lang.Integer" 
 			resultMap="TourWithTourReserveResultMap">
-		select tr.*, t.* from tour_reserve tr join tour t on tr.to_no=t.to_no where tr.to_rs_no=#{toRsNo}
+		select tr.*, t.* 
+		from tour_reserve tr 
+		join tour t 
+			on tr.to_no=t.to_no 
+		where tr.to_rs_no=#{toRsNo}
 	</select>
 	<!-- 5. 유저의 투어예약 리스트 전체 보여주기 -->
-	<select id="selectAllTourReserveByUserId" parameterType="java.lang.String" resultType="com.itwill.my_real_korea.dto.tour.TourReserve">
-		select * from tour_reserve where user_id=#{userId}
+	<select id="findAllTourReservewithTourByUserId" 
+			parameterType="java.util.Map" 
+			resultMap="TourWithTourReserveResultMap">
+		select *
+		from (select rownum idx, trAll.*
+			from (select tr.to_rs_start_day,tr.to_rs_person,tr.user_id,
+                         t.to_name, t.to_type, t.to_price
+				  from tour_reserve tr
+				  join tour t
+				  	on tr.to_no=t.to_no 
+				  where tr.user_id=#{userId}
+				  	<if test="sortOrder != null">
+						<choose>
+							<when test="sortOrder == 'DESC'">
+								ORDER BY tr.to_rs_no DESC
+							</when>
+							<otherwise>
+								ORDER BY tr.to_rs_no ASC
+							</otherwise>
+						</choose>
+					</if>
+				) trAll
+			)
+		<![CDATA[WHERE IDX >= #{pageStart} AND IDX <=#{pageEnd}]]>
 	</select>
 	<!-- 6. 유저의 투어예약 전체 삭제 -->
 	<delete id="deleteAllTourReserveByUserId" parameterType="java.lang.String">
 		delete from tour_reserve where user_id=#{userId}
 	</delete>
+	<!-- 7. 유저의 투어예약 갯수 -->
+	<select id="findTourReserveCountByUserId" parameterType="java.lang.String" resultType="java.lang.Integer">
+		select count(*) cnt from tour_reserve where user_id=#{userId}
+	</select>
 </mapper>

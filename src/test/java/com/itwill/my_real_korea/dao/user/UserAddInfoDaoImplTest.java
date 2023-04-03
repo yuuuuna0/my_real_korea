@@ -18,12 +18,20 @@ class UserAddInfoDaoImplTest {
 		System.out.println(userAddInfoDao);
 	}
 
-//	@Test
-//	void testCreateUserAddInfo() throws Exception {
-//		UserAddInfo newAddInfo = new UserAddInfo("테스트", 0, 0, "user1", null);
-//		System.out.println(">> created :"+userAddInfoDao.createUserAddInfo(newAddInfo));
-//	}
+	//1. 회원 추가 정보 등록
+	@Test
+	void testCreateUserAddInfo() throws Exception {
+		UserAddInfo newAddInfo = new UserAddInfo("테스트", 0, 0, "user1");
+		System.out.println(">> created :"+userAddInfoDao.createUserAddInfo(newAddInfo));
+	}
 
+	//2. 회원 추가 정보 보기
+	@Test
+	void testFindUserAddInfo() throws Exception {
+		System.out.println(">> find :"+userAddInfoDao.findUserAddInfo("user1"));
+	}
+
+	//3. 회원 추가 정보 수정
 	@Test
 	void testUpdateUserAddInfo() throws Exception {
 		UserAddInfo updateAddInfo = userAddInfoDao.findUserAddInfo("user2");
@@ -33,14 +41,11 @@ class UserAddInfoDaoImplTest {
 		System.out.println(">> updated :"+userAddInfoDao.updateUserAddInfo(updateAddInfo));
 	}
 
+	//4. 회원 추가 정보 삭제
 	@Test
 	void testRemoveUserAddInfo() throws Exception {
-		System.out.println(">> removed :"+userAddInfoDao.removeUserAddInfo("user1"));
+		System.out.println(">> removed :"+userAddInfoDao.removeUserAddInfo("user3"));
 	}
 
-	@Test
-	void testFindUserAddInfo() throws Exception {
-		System.out.println(">> find :"+userAddInfoDao.findUserAddInfo("user1"));
-	}
 
 }

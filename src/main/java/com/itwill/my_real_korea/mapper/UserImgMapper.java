@@ -6,13 +6,13 @@ import com.itwill.my_real_korea.dto.user.UserImg;
 
 @Mapper
 public interface UserImgMapper {
-	//유저 이미지 추가
+	//1. 회원 이미지 등록
 	public int createUserImg(UserImg userImg);
-	//유저 이미지 수정
-	public int updateUserImg(UserImg userImg);
-	//유저 이미지 삭제
-	public int removeUserImg(int userImgNo);
-	//유저 아이디로 유저 이미지 찾기
+	//2. 회원 이미지 찾기
 	public UserImg findUserImg(String userId);
+	//3. 회원 이미지 수정
+	public int updateUserImg(UserImg userImg);
+	//4. 회원 이미지 삭제
+	public int removeUserImg(int userImgNo);
 
 }

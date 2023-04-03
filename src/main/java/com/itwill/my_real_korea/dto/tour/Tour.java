@@ -41,7 +41,7 @@ public class Tour {
 	private String toNotice;
 	private int toCount;
 	private City city;		//FK
-
+	
 	private List<TourImg> tourImgList;
 
 
@@ -61,7 +61,7 @@ public class Tour {
 		this.city = city;
 		this.tourImgList=new ArrayList<TourImg>();
 	}
-
+	
 	
 	
 	

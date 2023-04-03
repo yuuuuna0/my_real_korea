@@ -11,9 +11,9 @@
 </resultMap>
 
 <select id="selectAll" parameterType="String" resultMap="chatRoomListResultMap">
-	select a.room_no, a.room_name, msg_send_time, msg_content
+	select a.room_no, a.room_name, msg_no, msg_send_time, msg_content, msg_read, user_id
 	from (select room_no, room_name from chat_room where from_id=#{userId} or to_id=#{userId}) a
-	inner join (select aa.msg_send_time, aa.room_no, aa.msg_content from chat_msg aa
+	inner join (select aa.msg_no, aa.msg_send_time, aa.room_no, aa.msg_content,aa.msg_read, aa.user_id from chat_msg aa
 	            ) b 
 	on a.room_no = b.room_no
 	order by msg_send_time desc
@@ -35,8 +35,8 @@
 	<selectKey resultType="java.lang.Integer" keyProperty="roomNo" order="BEFORE">
 		select chat_room_room_no_seq.nextval from dual
 	</selectKey>
-	insert into chat_room(room_no,room_name,send_time,not_read,from_id,to_id) 
-	values (#{roomNo},#{roomName},sysdate,#{notRead},#{fromId},#{toId})
+	insert into chat_room(room_no,room_name,from_id,to_id) 
+	values (#{roomNo},#{roomName},#{fromId},#{toId})
 </insert>
 
 <delete id="deleteChatRoom"  parameterType="java.lang.Integer">

@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.itwill.my_real_korea.dto.City;
+
 /*
  이름             널?       유형             
 -------------- -------- -------------- 
@@ -21,6 +23,7 @@ USER_ID                 VARCHAR2(50)
 @Data
 @AllArgsConstructor
 @ToString
+@NoArgsConstructor
 
 public class FreeBoard {
 	private int fBoNo;
@@ -29,7 +32,7 @@ public class FreeBoard {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date fBoDate;
 	private int fBoCount;
-		/* FK */
-	private int cityNo;
+	/* FK */
+	private City city;
 	private String userId;
 }

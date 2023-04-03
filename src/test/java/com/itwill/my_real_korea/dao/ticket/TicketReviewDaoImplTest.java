@@ -14,7 +14,6 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-@Transactional
 @MapperScan(basePackageClasses = TicketReviewMapper.class)
 class TicketReviewDaoImplTest {
 

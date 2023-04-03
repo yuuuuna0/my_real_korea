@@ -80,4 +80,21 @@ public class UserDaoImpl implements UserDao {
 		return userMapper.findIdByEmailName(user);
 	}
 
+	
+	//21. 메일 인증여부 확인
+	public int mailAuth(String userId) throws Exception {
+		return userMapper.mailAuth(userId);
+	}
+	
+	//22. 메일 인증번호 업데이트
+	public int mailKeyUpdate(User user) throws Exception {
+		return userMapper.mailKeyUpdate(user);
+	}
+	
+	//23. 메일 인증여부 업데이트
+	public int mailAuthUpdate(User user) throws Exception {
+		return userMapper.mailAuthUpdate(user);
+		
+	}
+
 }

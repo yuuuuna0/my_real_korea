@@ -10,19 +10,19 @@
 <!--           keyProperty="fCommentNo" order="BEFORE">-->
 <!--    SELECT free_board_f_bo_no_seq.nextval FROM DUAL-->
 <!--</selectKey>-->
-insert into FREE_BOARD_COMMENT (f_comment_no,f_comment_content,f_comment_date,f_bo_no,user_id)
+insert into FREE_BOARD_COMMENT (f_co_no,f_comment_content,f_comment_date,f_bo_no,user_id)
 values( #{fCommentNo},#{fCommentContent},sysdate,
        #{fBoNo},#{userId})
 </insert>
 
 
        <select id="selectAll" parameterType="java.util.Map" resultType="com.itwill.my_real_korea.dto.freeboard.FreeBoardComment">
-              select * from free_board_comment order by f_comment_no asc
+              select * from free_board_comment order by f_co_no asc
 
        </select>
 
        <delete id="deleteComment" parameterType="java.lang.Integer">
-              delete from free_board_comment where f_comment_no = #{fCommentNo}
+              delete from free_board_comment where f_co_no = #{fCoNo}
        </delete>
 
 
@@ -32,7 +32,7 @@ values( #{fCommentNo},#{fCommentContent},sysdate,
                   f_comment_date=sysdate,
                   f_bo_no=#{fBoNo},
                   user_id=#{userId}
-              where f_comment_no = #{fCommentNo}
+              where f_co_no = #{fCommentNo}
        </update>
 
        <select id="selectCommentCount" resultType="java.lang.Integer">

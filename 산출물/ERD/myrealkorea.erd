@@ -152,7 +152,7 @@
                               <columns>
                                 <net.java.amateras.db.visual.model.ColumnModel>
                                   <columnName>introduce</columnName>
-                                  <logicalName>ÏûêÍ∏∞ÏÜåÍ∞ú</logicalName>
+                                  <logicalName>¿⁄±‚º“∞≥</logicalName>
                                   <columnType class="net.java.amateras.db.dialect.ColumnType">
                                     <name>VARCHAR2</name>
                                     <logicalName>String</logicalName>
@@ -168,7 +168,7 @@
                                 </net.java.amateras.db.visual.model.ColumnModel>
                                 <net.java.amateras.db.visual.model.ColumnModel>
                                   <columnName>alcohol</columnName>
-                                  <logicalName>ÏùåÏ£ºÏó¨Î∂Ä</logicalName>
+                                  <logicalName>¿Ω¡÷ø©∫Œ</logicalName>
                                   <columnType class="net.java.amateras.db.dialect.ColumnType">
                                     <name>NUMBER</name>
                                     <logicalName>Numeric</logicalName>
@@ -178,13 +178,13 @@
                                   <size></size>
                                   <notNull>false</notNull>
                                   <primaryKey>false</primaryKey>
-                                  <description>0ÏùåÏ£º 1ÎπÑÏùåÏ£º</description>
+                                  <description>0¿Ω¡÷ 1∫Ò¿Ω¡÷</description>
                                   <autoIncrement>false</autoIncrement>
                                   <defaultValue></defaultValue>
                                 </net.java.amateras.db.visual.model.ColumnModel>
                                 <net.java.amateras.db.visual.model.ColumnModel>
                                   <columnName>smoking</columnName>
-                                  <logicalName>Ìù°Ïó∞Ïó¨Î∂Ä</logicalName>
+                                  <logicalName>»Ìø¨ø©∫Œ</logicalName>
                                   <columnType class="net.java.amateras.db.dialect.ColumnType">
                                     <name>NUMBER</name>
                                     <logicalName>Numeric</logicalName>
@@ -194,13 +194,13 @@
                                   <size></size>
                                   <notNull>false</notNull>
                                   <primaryKey>false</primaryKey>
-                                  <description>0Ìù°Ïó∞ 1ÎπÑÌù°Ïó∞</description>
+                                  <description>0»Ìø¨ 1∫Ò»Ìø¨</description>
                                   <autoIncrement>false</autoIncrement>
                                   <defaultValue></defaultValue>
                                 </net.java.amateras.db.visual.model.ColumnModel>
                                 <net.java.amateras.db.visual.model.ColumnModel>
                                   <columnName>user_id</columnName>
-                                  <logicalName>ÏïÑÏù¥Îîî</logicalName>
+                                  <logicalName>æ∆¿Ãµ</logicalName>
                                   <columnType class="net.java.amateras.db.dialect.ColumnType">
                                     <name>VARCHAR2</name>
                                     <logicalName>String</logicalName>
@@ -353,7 +353,7 @@
                                           <columns>
                                             <net.java.amateras.db.visual.model.ColumnModel>
                                               <columnName>ti_review_no</columnName>
-                                              <logicalName>ÌõÑÍ∏∞Î≤àÌò∏</logicalName>
+                                              <logicalName>»ƒ±‚π¯»£</logicalName>
                                               <columnType class="net.java.amateras.db.dialect.ColumnType">
                                                 <name>NUMBER</name>
                                                 <logicalName>Numeric</logicalName>
@@ -369,7 +369,7 @@
                                             </net.java.amateras.db.visual.model.ColumnModel>
                                             <net.java.amateras.db.visual.model.ColumnModel>
                                               <columnName>ti_review_date</columnName>
-                                              <logicalName>ÏûëÏÑ±ÎÇ†Ïßú</logicalName>
+                                              <logicalName>¿€º∫≥Ø¬•</logicalName>
                                               <columnType class="net.java.amateras.db.dialect.ColumnType">
                                                 <name>DATE</name>
                                                 <logicalName>Date</logicalName>
@@ -385,7 +385,7 @@
                                             </net.java.amateras.db.visual.model.ColumnModel>
                                             <net.java.amateras.db.visual.model.ColumnModel>
                                               <columnName>ti_review_title</columnName>
-                                              <logicalName>ÏûëÏÑ±Ï†úÎ™©</logicalName>
+                                              <logicalName>¿€º∫¡¶∏Ò</logicalName>
                                               <columnType class="net.java.amateras.db.dialect.ColumnType">
                                                 <name>VARCHAR2</name>
                                                 <logicalName>String</logicalName>
@@ -401,7 +401,7 @@
                                             </net.java.amateras.db.visual.model.ColumnModel>
                                             <net.java.amateras.db.visual.model.ColumnModel>
                                               <columnName>ti_review_content</columnName>
-                                              <logicalName>ÏûëÏÑ±ÎÇ¥Ïö©</logicalName>
+                                              <logicalName>¿€º∫≥ªøÎ</logicalName>
                                               <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../net.java.amateras.db.visual.model.ColumnModel[3]/columnType"/>
                                               <size>2000</size>
                                               <notNull>true</notNull>
@@ -412,7 +412,7 @@
                                             </net.java.amateras.db.visual.model.ColumnModel>
                                             <net.java.amateras.db.visual.model.ColumnModel>
                                               <columnName>ti_review_img</columnName>
-                                              <logicalName>Ìã∞ÏºìÏù¥ÎØ∏ÏßÄ</logicalName>
+                                              <logicalName>∆ºƒœ¿ÃπÃ¡ˆ</logicalName>
                                               <columnType class="net.java.amateras.db.dialect.ColumnType">
                                                 <name>VARCHAR2</name>
                                                 <logicalName>String</logicalName>
@@ -428,7 +428,7 @@
                                             </net.java.amateras.db.visual.model.ColumnModel>
                                             <net.java.amateras.db.visual.model.ColumnModel>
                                               <columnName>ti_no</columnName>
-                                              <logicalName>Ìã∞ÏºìÎ≤àÌò∏</logicalName>
+                                              <logicalName>∆ºƒœπ¯»£</logicalName>
                                               <columnType class="net.java.amateras.db.dialect.ColumnType">
                                                 <name>NUMBER</name>
                                                 <logicalName>Numeric</logicalName>
@@ -444,7 +444,7 @@
                                             </net.java.amateras.db.visual.model.ColumnModel>
                                             <net.java.amateras.db.visual.model.ColumnModel>
                                               <columnName>user_id</columnName>
-                                              <logicalName>ÏïÑÏù¥Îîî</logicalName>
+                                              <logicalName>æ∆¿Ãµ</logicalName>
                                               <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../../../../../../../../../../net.java.amateras.db.visual.model.ForeignKeyModel/source/columns/net.java.amateras.db.visual.model.ColumnModel[4]/columnType"/>
                                               <size>50</size>
                                               <notNull>false</notNull>
@@ -650,7 +650,7 @@
                                                                   <columns>
                                                                     <net.java.amateras.db.visual.model.ColumnModel>
                                                                       <columnName>to_img_no</columnName>
-                                                                      <logicalName>Ìà¨Ïñ¥ÏÇ¨ÏßÑÎ≤àÌò∏</logicalName>
+                                                                      <logicalName>≈ıæÓªÁ¡¯π¯»£</logicalName>
                                                                       <columnType class="net.java.amateras.db.dialect.ColumnType">
                                                                         <name>NUMBER</name>
                                                                         <logicalName>Numeric</logicalName>
@@ -666,7 +666,7 @@
                                                                     </net.java.amateras.db.visual.model.ColumnModel>
                                                                     <net.java.amateras.db.visual.model.ColumnModel>
                                                                       <columnName>to_img_url</columnName>
-                                                                      <logicalName>Ìà¨Ïñ¥ÏÇ¨ÏßÑURL</logicalName>
+                                                                      <logicalName>≈ıæÓªÁ¡¯URL</logicalName>
                                                                       <columnType class="net.java.amateras.db.dialect.ColumnType">
                                                                         <name>VARCHAR2</name>
                                                                         <logicalName>String</logicalName>
@@ -682,7 +682,7 @@
                                                                     </net.java.amateras.db.visual.model.ColumnModel>
                                                                     <net.java.amateras.db.visual.model.ColumnModel>
                                                                       <columnName>to_no</columnName>
-                                                                      <logicalName>Ìà¨Ïñ¥Î≤àÌò∏</logicalName>
+                                                                      <logicalName>≈ıæÓπ¯»£</logicalName>
                                                                       <columnType class="net.java.amateras.db.dialect.ColumnType">
                                                                         <name>NUMBER</name>
                                                                         <logicalName>Numeric</logicalName>
@@ -763,7 +763,7 @@
                                                                   <columns>
                                                                     <net.java.amateras.db.visual.model.ColumnModel>
                                                                       <columnName>to_review_no</columnName>
-                                                                      <logicalName>ÌõÑÍ∏∞Î≤àÌò∏</logicalName>
+                                                                      <logicalName>»ƒ±‚π¯»£</logicalName>
                                                                       <columnType class="net.java.amateras.db.dialect.ColumnType">
                                                                         <name>NUMBER</name>
                                                                         <logicalName>Numeric</logicalName>
@@ -779,7 +779,7 @@
                                                                     </net.java.amateras.db.visual.model.ColumnModel>
                                                                     <net.java.amateras.db.visual.model.ColumnModel>
                                                                       <columnName>to_review_date</columnName>
-                                                                      <logicalName>ÏûëÏÑ±ÎÇ†Ïßú</logicalName>
+                                                                      <logicalName>¿€º∫≥Ø¬•</logicalName>
                                                                       <columnType class="net.java.amateras.db.dialect.ColumnType">
                                                                         <name>DATE</name>
                                                                         <logicalName>Date</logicalName>
@@ -795,7 +795,7 @@
                                                                     </net.java.amateras.db.visual.model.ColumnModel>
                                                                     <net.java.amateras.db.visual.model.ColumnModel>
                                                                       <columnName>to_review_title</columnName>
-                                                                      <logicalName>ÏûëÏÑ±Ï†úÎ™©</logicalName>
+                                                                      <logicalName>¿€º∫¡¶∏Ò</logicalName>
                                                                       <columnType class="net.java.amateras.db.dialect.ColumnType">
                                                                         <name>VARCHAR2</name>
                                                                         <logicalName>String</logicalName>
@@ -811,7 +811,7 @@
                                                                     </net.java.amateras.db.visual.model.ColumnModel>
                                                                     <net.java.amateras.db.visual.model.ColumnModel>
                                                                       <columnName>to_review_content</columnName>
-                                                                      <logicalName>ÏûëÏÑ±ÎÇ¥Ïö©</logicalName>
+                                                                      <logicalName>¿€º∫≥ªøÎ</logicalName>
                                                                       <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../net.java.amateras.db.visual.model.ColumnModel[3]/columnType"/>
                                                                       <size>2000</size>
                                                                       <notNull>true</notNull>
@@ -822,7 +822,7 @@
                                                                     </net.java.amateras.db.visual.model.ColumnModel>
                                                                     <net.java.amateras.db.visual.model.ColumnModel>
                                                                       <columnName>to_review_img</columnName>
-                                                                      <logicalName>ÌõÑÍ∏∞ÏÇ¨ÏßÑ</logicalName>
+                                                                      <logicalName>»ƒ±‚ªÁ¡¯</logicalName>
                                                                       <columnType class="net.java.amateras.db.dialect.ColumnType">
                                                                         <name>VARCHAR2</name>
                                                                         <logicalName>String</logicalName>
@@ -838,7 +838,7 @@
                                                                     </net.java.amateras.db.visual.model.ColumnModel>
                                                                     <net.java.amateras.db.visual.model.ColumnModel>
                                                                       <columnName>to_review_star</columnName>
-                                                                      <logicalName>Î≥ÑÏ†ê</logicalName>
+                                                                      <logicalName>∫∞¡°</logicalName>
                                                                       <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../net.java.amateras.db.visual.model.ColumnModel/columnType"/>
                                                                       <size></size>
                                                                       <notNull>true</notNull>
@@ -849,7 +849,7 @@
                                                                     </net.java.amateras.db.visual.model.ColumnModel>
                                                                     <net.java.amateras.db.visual.model.ColumnModel>
                                                                       <columnName>to_no</columnName>
-                                                                      <logicalName>Ìà¨Ïñ¥Î≤àÌò∏</logicalName>
+                                                                      <logicalName>≈ıæÓπ¯»£</logicalName>
                                                                       <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../net.java.amateras.db.visual.model.ColumnModel/columnType"/>
                                                                       <size></size>
                                                                       <notNull>false</notNull>
@@ -860,7 +860,7 @@
                                                                     </net.java.amateras.db.visual.model.ColumnModel>
                                                                     <net.java.amateras.db.visual.model.ColumnModel>
                                                                       <columnName>user_id</columnName>
-                                                                      <logicalName>ÏïÑÏù¥Îîî</logicalName>
+                                                                      <logicalName>æ∆¿Ãµ</logicalName>
                                                                       <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../../../../../../../../../../../../../../../../../../../../../../net.java.amateras.db.visual.model.ForeignKeyModel/source/columns/net.java.amateras.db.visual.model.ColumnModel[4]/columnType"/>
                                                                       <size>50</size>
                                                                       <notNull>false</notNull>
@@ -906,7 +906,7 @@
                                                             <columns>
                                                               <net.java.amateras.db.visual.model.ColumnModel>
                                                                 <columnName>to_no</columnName>
-                                                                <logicalName>Ìà¨Ïñ¥Î≤àÌò∏</logicalName>
+                                                                <logicalName>≈ıæÓπ¯»£</logicalName>
                                                                 <columnType class="net.java.amateras.db.dialect.ColumnType">
                                                                   <name>NUMBER</name>
                                                                   <logicalName>Numeric</logicalName>
@@ -922,7 +922,7 @@
                                                               </net.java.amateras.db.visual.model.ColumnModel>
                                                               <net.java.amateras.db.visual.model.ColumnModel>
                                                                 <columnName>to_name</columnName>
-                                                                <logicalName>Ìà¨Ïñ¥Ïù¥Î¶Ñ</logicalName>
+                                                                <logicalName>≈ıæÓ¿Ã∏ß</logicalName>
                                                                 <columnType class="net.java.amateras.db.dialect.ColumnType">
                                                                   <name>VARCHAR2</name>
                                                                   <logicalName>String</logicalName>
@@ -938,18 +938,18 @@
                                                               </net.java.amateras.db.visual.model.ColumnModel>
                                                               <net.java.amateras.db.visual.model.ColumnModel>
                                                                 <columnName>to_type</columnName>
-                                                                <logicalName>Ìà¨Ïñ¥ÌÉÄÏûÖ</logicalName>
+                                                                <logicalName>≈ıæÓ≈∏¿‘</logicalName>
                                                                 <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../net.java.amateras.db.visual.model.ColumnModel/columnType"/>
                                                                 <size></size>
                                                                 <notNull>true</notNull>
                                                                 <primaryKey>false</primaryKey>
-                                                                <description>0Í∞úÏù∏Ìà¨Ïñ¥, 1Îã®Ï≤¥Ìà¨Ïñ¥</description>
+                                                                <description>0∞≥¿Œ≈ıæÓ, 1¥‹√º≈ıæÓ</description>
                                                                 <autoIncrement>false</autoIncrement>
                                                                 <defaultValue></defaultValue>
                                                               </net.java.amateras.db.visual.model.ColumnModel>
                                                               <net.java.amateras.db.visual.model.ColumnModel>
                                                                 <columnName>to_time</columnName>
-                                                                <logicalName>Ìà¨Ïñ¥ÏÜåÏöîÏãúÍ∞Ñ</logicalName>
+                                                                <logicalName>≈ıæÓº“ø‰Ω√∞£</logicalName>
                                                                 <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../net.java.amateras.db.visual.model.ColumnModel/columnType"/>
                                                                 <size></size>
                                                                 <notNull>true</notNull>
@@ -960,7 +960,7 @@
                                                               </net.java.amateras.db.visual.model.ColumnModel>
                                                               <net.java.amateras.db.visual.model.ColumnModel>
                                                                 <columnName>to_person</columnName>
-                                                                <logicalName>Ìà¨Ïñ¥Ïù∏Ïõê</logicalName>
+                                                                <logicalName>≈ıæÓ¿Œø¯</logicalName>
                                                                 <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../net.java.amateras.db.visual.model.ColumnModel/columnType"/>
                                                                 <size></size>
                                                                 <notNull>true</notNull>
@@ -971,7 +971,7 @@
                                                               </net.java.amateras.db.visual.model.ColumnModel>
                                                               <net.java.amateras.db.visual.model.ColumnModel>
                                                                 <columnName>to_meet</columnName>
-                                                                <logicalName>ÎßåÎÇ®Ïû•ÏÜå</logicalName>
+                                                                <logicalName>∏∏≥≤¿Âº“</logicalName>
                                                                 <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../net.java.amateras.db.visual.model.ColumnModel[2]/columnType"/>
                                                                 <size>100</size>
                                                                 <notNull>true</notNull>
@@ -982,7 +982,7 @@
                                                               </net.java.amateras.db.visual.model.ColumnModel>
                                                               <net.java.amateras.db.visual.model.ColumnModel>
                                                                 <columnName>to_price</columnName>
-                                                                <logicalName>Ìà¨Ïñ¥Í∞ÄÍ≤©</logicalName>
+                                                                <logicalName>≈ıæÓ∞°∞›</logicalName>
                                                                 <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../net.java.amateras.db.visual.model.ColumnModel/columnType"/>
                                                                 <size></size>
                                                                 <notNull>true</notNull>
@@ -993,7 +993,7 @@
                                                               </net.java.amateras.db.visual.model.ColumnModel>
                                                               <net.java.amateras.db.visual.model.ColumnModel>
                                                                 <columnName>to_info</columnName>
-                                                                <logicalName>Ìà¨Ïñ¥Ï†ïÎ≥¥</logicalName>
+                                                                <logicalName>≈ıæÓ¡§∫∏</logicalName>
                                                                 <columnType class="net.java.amateras.db.dialect.ColumnType">
                                                                   <name>VARCHAR2</name>
                                                                   <logicalName>String</logicalName>
@@ -1009,7 +1009,7 @@
                                                               </net.java.amateras.db.visual.model.ColumnModel>
                                                               <net.java.amateras.db.visual.model.ColumnModel>
                                                                 <columnName>to_notice</columnName>
-                                                                <logicalName>Ïú†ÏùòÏÇ¨Ìï≠</logicalName>
+                                                                <logicalName>¿Ø¿«ªÁ«◊</logicalName>
                                                                 <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../net.java.amateras.db.visual.model.ColumnModel[2]/columnType"/>
                                                                 <size>1000</size>
                                                                 <notNull>true</notNull>
@@ -1020,7 +1020,7 @@
                                                               </net.java.amateras.db.visual.model.ColumnModel>
                                                               <net.java.amateras.db.visual.model.ColumnModel>
                                                                 <columnName>to_count</columnName>
-                                                                <logicalName>Ìà¨Ïñ¥ÌåêÎß§Ïàò</logicalName>
+                                                                <logicalName>≈ıæÓ∆«∏≈ºˆ</logicalName>
                                                                 <columnType class="net.java.amateras.db.dialect.ColumnType">
                                                                   <name>NUMBER</name>
                                                                   <logicalName>Numeric</logicalName>
@@ -1036,7 +1036,7 @@
                                                               </net.java.amateras.db.visual.model.ColumnModel>
                                                               <net.java.amateras.db.visual.model.ColumnModel>
                                                                 <columnName>city_no</columnName>
-                                                                <logicalName>Ïó¨ÌñâÏßÄÏó≠Î≤àÌò∏</logicalName>
+                                                                <logicalName>ø©«‡¡ˆø™π¯»£</logicalName>
                                                                 <columnType class="net.java.amateras.db.dialect.ColumnType">
                                                                   <name>NUMBER</name>
                                                                   <logicalName>Numeric</logicalName>
@@ -1089,7 +1089,7 @@
                                                       <columns>
                                                         <net.java.amateras.db.visual.model.ColumnModel>
                                                           <columnName>to_rs_no</columnName>
-                                                          <logicalName>Ìà¨Ïñ¥ÏòàÏïΩÎ≤àÌò∏</logicalName>
+                                                          <logicalName>≈ıæÓøπæ‡π¯»£</logicalName>
                                                           <columnType class="net.java.amateras.db.dialect.ColumnType">
                                                             <name>NUMBER</name>
                                                             <logicalName>Numeric</logicalName>
@@ -1105,7 +1105,7 @@
                                                         </net.java.amateras.db.visual.model.ColumnModel>
                                                         <net.java.amateras.db.visual.model.ColumnModel>
                                                           <columnName>to_rs_start_day</columnName>
-                                                          <logicalName>Ìà¨Ïñ¥ÏãúÏûëÎÇ†Ïßú</logicalName>
+                                                          <logicalName>≈ıæÓΩ√¿€≥Ø¬•</logicalName>
                                                           <columnType class="net.java.amateras.db.dialect.ColumnType">
                                                             <name>DATE</name>
                                                             <logicalName>Date</logicalName>
@@ -1121,7 +1121,7 @@
                                                         </net.java.amateras.db.visual.model.ColumnModel>
                                                         <net.java.amateras.db.visual.model.ColumnModel>
                                                           <columnName>to_rs_person</columnName>
-                                                          <logicalName>ÏòàÏïΩÏù∏Ïõê</logicalName>
+                                                          <logicalName>øπæ‡¿Œø¯</logicalName>
                                                           <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../net.java.amateras.db.visual.model.ColumnModel/columnType"/>
                                                           <size></size>
                                                           <notNull>true</notNull>
@@ -1132,7 +1132,7 @@
                                                         </net.java.amateras.db.visual.model.ColumnModel>
                                                         <net.java.amateras.db.visual.model.ColumnModel>
                                                           <columnName>to_rs_msg</columnName>
-                                                          <logicalName>Ìà¨Ïñ¥ÏòàÏïΩÏöîÏ≤≠ÏÇ¨Ìï≠</logicalName>
+                                                          <logicalName>≈ıæÓøπæ‡ø‰√ªªÁ«◊</logicalName>
                                                           <columnType class="net.java.amateras.db.dialect.ColumnType">
                                                             <name>VARCHAR2</name>
                                                             <logicalName>String</logicalName>
@@ -1148,7 +1148,7 @@
                                                         </net.java.amateras.db.visual.model.ColumnModel>
                                                         <net.java.amateras.db.visual.model.ColumnModel>
                                                           <columnName>to_no</columnName>
-                                                          <logicalName>Ìà¨Ïñ¥Î≤àÌò∏</logicalName>
+                                                          <logicalName>≈ıæÓπ¯»£</logicalName>
                                                           <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../net.java.amateras.db.visual.model.ColumnModel/columnType"/>
                                                           <size></size>
                                                           <notNull>false</notNull>
@@ -1159,7 +1159,7 @@
                                                         </net.java.amateras.db.visual.model.ColumnModel>
                                                         <net.java.amateras.db.visual.model.ColumnModel>
                                                           <columnName>user_id</columnName>
-                                                          <logicalName>ÏïÑÏù¥Îîî</logicalName>
+                                                          <logicalName>æ∆¿Ãµ</logicalName>
                                                           <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../../../../../../../../../../../../../../../../net.java.amateras.db.visual.model.ForeignKeyModel/source/columns/net.java.amateras.db.visual.model.ColumnModel[4]/columnType"/>
                                                           <size>50</size>
                                                           <notNull>false</notNull>
@@ -1205,7 +1205,7 @@
                                                 <columns>
                                                   <net.java.amateras.db.visual.model.ColumnModel>
                                                     <columnName>p_no</columnName>
-                                                    <logicalName>Í≤∞Ï†úÎ≤àÌò∏</logicalName>
+                                                    <logicalName>∞·¡¶π¯»£</logicalName>
                                                     <columnType class="net.java.amateras.db.dialect.ColumnType">
                                                       <name>NUMBER</name>
                                                       <logicalName>Numeric</logicalName>
@@ -1221,7 +1221,7 @@
                                                   </net.java.amateras.db.visual.model.ColumnModel>
                                                   <net.java.amateras.db.visual.model.ColumnModel>
                                                     <columnName>p_price</columnName>
-                                                    <logicalName>Í≤∞Ï†úÍ∏àÏï°</logicalName>
+                                                    <logicalName>∞·¡¶±›æ◊</logicalName>
                                                     <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../net.java.amateras.db.visual.model.ColumnModel/columnType"/>
                                                     <size></size>
                                                     <notNull>true</notNull>
@@ -1232,7 +1232,7 @@
                                                   </net.java.amateras.db.visual.model.ColumnModel>
                                                   <net.java.amateras.db.visual.model.ColumnModel>
                                                     <columnName>p_qty</columnName>
-                                                    <logicalName>Í≤∞Ï†úÏàòÎüâ</logicalName>
+                                                    <logicalName>∞·¡¶ºˆ∑Æ</logicalName>
                                                     <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../net.java.amateras.db.visual.model.ColumnModel/columnType"/>
                                                     <size></size>
                                                     <notNull>true</notNull>
@@ -1243,7 +1243,7 @@
                                                   </net.java.amateras.db.visual.model.ColumnModel>
                                                   <net.java.amateras.db.visual.model.ColumnModel>
                                                     <columnName>p_date</columnName>
-                                                    <logicalName>Í≤∞Ï†úÎÇ†Ïßú</logicalName>
+                                                    <logicalName>∞·¡¶≥Ø¬•</logicalName>
                                                     <columnType class="net.java.amateras.db.dialect.ColumnType">
                                                       <name>DATE</name>
                                                       <logicalName>Date</logicalName>
@@ -1259,7 +1259,7 @@
                                                   </net.java.amateras.db.visual.model.ColumnModel>
                                                   <net.java.amateras.db.visual.model.ColumnModel>
                                                     <columnName>p_point</columnName>
-                                                    <logicalName>Ï†ÅÎ¶ΩÍ∏àÍ∏àÏï°</logicalName>
+                                                    <logicalName>¿˚∏≥±›±›æ◊</logicalName>
                                                     <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../net.java.amateras.db.visual.model.ColumnModel/columnType"/>
                                                     <size></size>
                                                     <notNull>false</notNull>
@@ -1270,18 +1270,18 @@
                                                   </net.java.amateras.db.visual.model.ColumnModel>
                                                   <net.java.amateras.db.visual.model.ColumnModel>
                                                     <columnName>p_method</columnName>
-                                                    <logicalName>Í≤∞Ï†úÎ∞©Î≤ï</logicalName>
+                                                    <logicalName>∞·¡¶πÊπ˝</logicalName>
                                                     <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../net.java.amateras.db.visual.model.ColumnModel/columnType"/>
                                                     <size></size>
                                                     <notNull>true</notNull>
                                                     <primaryKey>false</primaryKey>
-                                                    <description>0Ïπ¥ÎìúÍ≤∞Ï†ú 1Ïπ¥Ïπ¥Ïò§ÌéòÏù¥</description>
+                                                    <description>0ƒ´µÂ∞·¡¶ 1ƒ´ƒ´ø¿∆‰¿Ã</description>
                                                     <autoIncrement>false</autoIncrement>
                                                     <defaultValue></defaultValue>
                                                   </net.java.amateras.db.visual.model.ColumnModel>
                                                   <net.java.amateras.db.visual.model.ColumnModel>
                                                     <columnName>ti_rs_no</columnName>
-                                                    <logicalName>Ìã∞ÏºìÏòàÏïΩÎ≤àÌò∏</logicalName>
+                                                    <logicalName>∆ºƒœøπæ‡π¯»£</logicalName>
                                                     <columnType class="net.java.amateras.db.dialect.ColumnType">
                                                       <name>NUMBER</name>
                                                       <logicalName>Numeric</logicalName>
@@ -1297,7 +1297,7 @@
                                                   </net.java.amateras.db.visual.model.ColumnModel>
                                                   <net.java.amateras.db.visual.model.ColumnModel>
                                                     <columnName>to_rs_no</columnName>
-                                                    <logicalName>Ìà¨Ïñ¥ÏòàÏïΩÎ≤àÌò∏</logicalName>
+                                                    <logicalName>≈ıæÓøπæ‡π¯»£</logicalName>
                                                     <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../../sourceConnections/net.java.amateras.db.visual.model.ForeignKeyModel[2]/target/columns/net.java.amateras.db.visual.model.ColumnModel/columnType"/>
                                                     <size></size>
                                                     <notNull>false</notNull>
@@ -1308,7 +1308,7 @@
                                                   </net.java.amateras.db.visual.model.ColumnModel>
                                                   <net.java.amateras.db.visual.model.ColumnModel>
                                                     <columnName>user_id</columnName>
-                                                    <logicalName>ÏïÑÏù¥Îîî</logicalName>
+                                                    <logicalName>æ∆¿Ãµ</logicalName>
                                                     <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../../../../../../../../../../../../../net.java.amateras.db.visual.model.ForeignKeyModel/source/columns/net.java.amateras.db.visual.model.ColumnModel[4]/columnType"/>
                                                     <size>50</size>
                                                     <notNull>false</notNull>
@@ -1339,7 +1339,7 @@
                                           <columns>
                                             <net.java.amateras.db.visual.model.ColumnModel>
                                               <columnName>ti_rs_no</columnName>
-                                              <logicalName>Ìã∞ÏºìÏòàÏïΩÎ≤àÌò∏</logicalName>
+                                              <logicalName>∆ºƒœøπæ‡π¯»£</logicalName>
                                               <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../../targetConnections/net.java.amateras.db.visual.model.ForeignKeyModel/source/columns/net.java.amateras.db.visual.model.ColumnModel[7]/columnType"/>
                                               <size></size>
                                               <notNull>false</notNull>
@@ -1350,7 +1350,7 @@
                                             </net.java.amateras.db.visual.model.ColumnModel>
                                             <net.java.amateras.db.visual.model.ColumnModel>
                                               <columnName>ti_rs_date</columnName>
-                                              <logicalName>Ìã∞ÏºìÏòàÏïΩÏÑ†ÌÉùÎÇ†Ïßú</logicalName>
+                                              <logicalName>∆ºƒœøπæ‡º±≈√≥Ø¬•</logicalName>
                                               <columnType class="net.java.amateras.db.dialect.ColumnType">
                                                 <name>DATE</name>
                                                 <logicalName>Date</logicalName>
@@ -1366,7 +1366,7 @@
                                             </net.java.amateras.db.visual.model.ColumnModel>
                                             <net.java.amateras.db.visual.model.ColumnModel>
                                               <columnName>ti_rs_qty</columnName>
-                                              <logicalName>ÏòàÏïΩÏàòÎüâ</logicalName>
+                                              <logicalName>øπæ‡ºˆ∑Æ</logicalName>
                                               <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../../targetConnections/net.java.amateras.db.visual.model.ForeignKeyModel/source/columns/net.java.amateras.db.visual.model.ColumnModel[7]/columnType"/>
                                               <size></size>
                                               <notNull>true</notNull>
@@ -1377,7 +1377,7 @@
                                             </net.java.amateras.db.visual.model.ColumnModel>
                                             <net.java.amateras.db.visual.model.ColumnModel>
                                               <columnName>ti_rs_msg</columnName>
-                                              <logicalName>Ìã∞ÏºìÏòàÏïΩÏöîÏ≤≠ÏÇ¨Ìï≠</logicalName>
+                                              <logicalName>∆ºƒœøπæ‡ø‰√ªªÁ«◊</logicalName>
                                               <columnType class="net.java.amateras.db.dialect.ColumnType">
                                                 <name>VARCHAR2</name>
                                                 <logicalName>String</logicalName>
@@ -1393,7 +1393,7 @@
                                             </net.java.amateras.db.visual.model.ColumnModel>
                                             <net.java.amateras.db.visual.model.ColumnModel>
                                               <columnName>ti_no</columnName>
-                                              <logicalName>Ìã∞ÏºìÎ≤àÌò∏</logicalName>
+                                              <logicalName>∆ºƒœπ¯»£</logicalName>
                                               <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../../../../net.java.amateras.db.visual.model.ForeignKeyModel/source/columns/net.java.amateras.db.visual.model.ColumnModel[6]/columnType"/>
                                               <size></size>
                                               <notNull>false</notNull>
@@ -1404,7 +1404,7 @@
                                             </net.java.amateras.db.visual.model.ColumnModel>
                                             <net.java.amateras.db.visual.model.ColumnModel>
                                               <columnName>user_id</columnName>
-                                              <logicalName>ÏïÑÏù¥Îîî</logicalName>
+                                              <logicalName>æ∆¿Ãµ</logicalName>
                                               <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../../../../../../../../../../net.java.amateras.db.visual.model.ForeignKeyModel/source/columns/net.java.amateras.db.visual.model.ColumnModel[4]/columnType"/>
                                               <size>50</size>
                                               <notNull>false</notNull>
@@ -1464,7 +1464,7 @@
                                           <columns>
                                             <net.java.amateras.db.visual.model.ColumnModel>
                                               <columnName>ti_img_no</columnName>
-                                              <logicalName>Ìã∞ÏºìÏÇ¨ÏßÑÎ≤àÌò∏</logicalName>
+                                              <logicalName>∆ºƒœªÁ¡¯π¯»£</logicalName>
                                               <columnType class="net.java.amateras.db.dialect.ColumnType">
                                                 <name>NUMBER</name>
                                                 <logicalName>Numeric</logicalName>
@@ -1480,7 +1480,7 @@
                                             </net.java.amateras.db.visual.model.ColumnModel>
                                             <net.java.amateras.db.visual.model.ColumnModel>
                                               <columnName>ti_img_url</columnName>
-                                              <logicalName>Ìã∞ÏºìÏÇ¨ÏßÑURL</logicalName>
+                                              <logicalName>∆ºƒœªÁ¡¯URL</logicalName>
                                               <columnType class="net.java.amateras.db.dialect.ColumnType">
                                                 <name>VARCHAR2</name>
                                                 <logicalName>String</logicalName>
@@ -1496,7 +1496,7 @@
                                             </net.java.amateras.db.visual.model.ColumnModel>
                                             <net.java.amateras.db.visual.model.ColumnModel>
                                               <columnName>ti_no</columnName>
-                                              <logicalName>Ìã∞ÏºìÎ≤àÌò∏</logicalName>
+                                              <logicalName>∆ºƒœπ¯»£</logicalName>
                                               <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../../../../net.java.amateras.db.visual.model.ForeignKeyModel/source/columns/net.java.amateras.db.visual.model.ColumnModel[6]/columnType"/>
                                               <size></size>
                                               <notNull>false</notNull>
@@ -1528,7 +1528,7 @@
                                     <columns>
                                       <net.java.amateras.db.visual.model.ColumnModel>
                                         <columnName>ti_no</columnName>
-                                        <logicalName>Ìã∞ÏºìÎ≤àÌò∏</logicalName>
+                                        <logicalName>∆ºƒœπ¯»£</logicalName>
                                         <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../../targetConnections/net.java.amateras.db.visual.model.ForeignKeyModel/source/columns/net.java.amateras.db.visual.model.ColumnModel[6]/columnType"/>
                                         <size></size>
                                         <notNull>false</notNull>
@@ -1539,7 +1539,7 @@
                                       </net.java.amateras.db.visual.model.ColumnModel>
                                       <net.java.amateras.db.visual.model.ColumnModel>
                                         <columnName>ti_title</columnName>
-                                        <logicalName>Ìã∞ÏºìÏù¥Î¶Ñ</logicalName>
+                                        <logicalName>∆ºƒœ¿Ã∏ß</logicalName>
                                         <columnType class="net.java.amateras.db.dialect.ColumnType">
                                           <name>VARCHAR2</name>
                                           <logicalName>String</logicalName>
@@ -1555,7 +1555,7 @@
                                       </net.java.amateras.db.visual.model.ColumnModel>
                                       <net.java.amateras.db.visual.model.ColumnModel>
                                         <columnName>ti_date</columnName>
-                                        <logicalName>Ìã∞ÏºìÎÇ†Ïßú</logicalName>
+                                        <logicalName>∆ºƒœ≥Ø¬•</logicalName>
                                         <columnType class="net.java.amateras.db.dialect.ColumnType">
                                           <name>DATE</name>
                                           <logicalName>Date</logicalName>
@@ -1571,7 +1571,7 @@
                                       </net.java.amateras.db.visual.model.ColumnModel>
                                       <net.java.amateras.db.visual.model.ColumnModel>
                                         <columnName>ti_price</columnName>
-                                        <logicalName>Ìã∞ÏºìÍ∞ÄÍ≤©</logicalName>
+                                        <logicalName>∆ºƒœ∞°∞›</logicalName>
                                         <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../../targetConnections/net.java.amateras.db.visual.model.ForeignKeyModel/source/columns/net.java.amateras.db.visual.model.ColumnModel[6]/columnType"/>
                                         <size></size>
                                         <notNull>true</notNull>
@@ -1582,7 +1582,7 @@
                                       </net.java.amateras.db.visual.model.ColumnModel>
                                       <net.java.amateras.db.visual.model.ColumnModel>
                                         <columnName>ti_info</columnName>
-                                        <logicalName>Ìã∞ÏºìÏ†ïÎ≥¥</logicalName>
+                                        <logicalName>∆ºƒœ¡§∫∏</logicalName>
                                         <columnType class="net.java.amateras.db.dialect.ColumnType">
                                           <name>VARCHAR2</name>
                                           <logicalName>String</logicalName>
@@ -1598,7 +1598,7 @@
                                       </net.java.amateras.db.visual.model.ColumnModel>
                                       <net.java.amateras.db.visual.model.ColumnModel>
                                         <columnName>ti_notice</columnName>
-                                        <logicalName>Ïú†ÏùòÏÇ¨Ìï≠</logicalName>
+                                        <logicalName>¿Ø¿«ªÁ«◊</logicalName>
                                         <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../net.java.amateras.db.visual.model.ColumnModel[2]/columnType"/>
                                         <size>1000</size>
                                         <notNull>true</notNull>
@@ -1609,7 +1609,7 @@
                                       </net.java.amateras.db.visual.model.ColumnModel>
                                       <net.java.amateras.db.visual.model.ColumnModel>
                                         <columnName>ti_count</columnName>
-                                        <logicalName>Ìã∞ÏºìÍµ¨Îß§Ïàò</logicalName>
+                                        <logicalName>∆ºƒœ±∏∏≈ºˆ</logicalName>
                                         <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../../targetConnections/net.java.amateras.db.visual.model.ForeignKeyModel[2]/source/targetConnections/net.java.amateras.db.visual.model.ForeignKeyModel/source/sourceConnections/net.java.amateras.db.visual.model.ForeignKeyModel[2]/target/sourceConnections/net.java.amateras.db.visual.model.ForeignKeyModel/target/columns/net.java.amateras.db.visual.model.ColumnModel[10]/columnType"/>
                                         <size></size>
                                         <notNull>false</notNull>
@@ -1620,7 +1620,7 @@
                                       </net.java.amateras.db.visual.model.ColumnModel>
                                       <net.java.amateras.db.visual.model.ColumnModel>
                                         <columnName>city_no</columnName>
-                                        <logicalName>Ïó¨ÌñâÏßÄÏó≠Î≤àÌò∏</logicalName>
+                                        <logicalName>ø©«‡¡ˆø™π¯»£</logicalName>
                                         <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../../targetConnections/net.java.amateras.db.visual.model.ForeignKeyModel[2]/source/targetConnections/net.java.amateras.db.visual.model.ForeignKeyModel/source/sourceConnections/net.java.amateras.db.visual.model.ForeignKeyModel[2]/target/sourceConnections/net.java.amateras.db.visual.model.ForeignKeyModel/target/columns/net.java.amateras.db.visual.model.ColumnModel[11]/columnType"/>
                                         <size></size>
                                         <notNull>false</notNull>
@@ -1652,7 +1652,7 @@
                               <columns>
                                 <net.java.amateras.db.visual.model.ColumnModel>
                                   <columnName>wish_no</columnName>
-                                  <logicalName>ÏúÑÏãúÎ¶¨Ïä§Ìä∏Î≤àÌò∏</logicalName>
+                                  <logicalName>¿ßΩ√∏ÆΩ∫∆Æπ¯»£</logicalName>
                                   <columnType class="net.java.amateras.db.dialect.ColumnType">
                                     <name>NUMBER</name>
                                     <logicalName>Numeric</logicalName>
@@ -1668,7 +1668,7 @@
                                 </net.java.amateras.db.visual.model.ColumnModel>
                                 <net.java.amateras.db.visual.model.ColumnModel>
                                   <columnName>user_id</columnName>
-                                  <logicalName>ÏïÑÏù¥Îîî</logicalName>
+                                  <logicalName>æ∆¿Ãµ</logicalName>
                                   <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../../../../net.java.amateras.db.visual.model.ForeignKeyModel/source/columns/net.java.amateras.db.visual.model.ColumnModel[4]/columnType"/>
                                   <size>50</size>
                                   <notNull>false</notNull>
@@ -1679,7 +1679,7 @@
                                 </net.java.amateras.db.visual.model.ColumnModel>
                                 <net.java.amateras.db.visual.model.ColumnModel>
                                   <columnName>ti_no</columnName>
-                                  <logicalName>Ìã∞ÏºìÎ≤àÌò∏</logicalName>
+                                  <logicalName>∆ºƒœπ¯»£</logicalName>
                                   <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../../sourceConnections/net.java.amateras.db.visual.model.ForeignKeyModel[2]/target/targetConnections/net.java.amateras.db.visual.model.ForeignKeyModel/source/columns/net.java.amateras.db.visual.model.ColumnModel[6]/columnType"/>
                                   <size></size>
                                   <notNull>false</notNull>
@@ -1690,7 +1690,7 @@
                                 </net.java.amateras.db.visual.model.ColumnModel>
                                 <net.java.amateras.db.visual.model.ColumnModel>
                                   <columnName>to_no</columnName>
-                                  <logicalName>Ìà¨Ïñ¥Î≤àÌò∏</logicalName>
+                                  <logicalName>≈ıæÓπ¯»£</logicalName>
                                   <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../../sourceConnections/net.java.amateras.db.visual.model.ForeignKeyModel[2]/target/targetConnections/net.java.amateras.db.visual.model.ForeignKeyModel[2]/source/targetConnections/net.java.amateras.db.visual.model.ForeignKeyModel/source/sourceConnections/net.java.amateras.db.visual.model.ForeignKeyModel[2]/target/sourceConnections/net.java.amateras.db.visual.model.ForeignKeyModel/target/columns/net.java.amateras.db.visual.model.ColumnModel/columnType"/>
                                   <size></size>
                                   <notNull>false</notNull>
@@ -1766,7 +1766,7 @@
                               <columns>
                                 <net.java.amateras.db.visual.model.ColumnModel>
                                   <columnName>f_co_no</columnName>
-                                  <logicalName>ÏûêÏú†Í≤åÏãúÌåêÎåìÍ∏ÄÎ≤àÌò∏</logicalName>
+                                  <logicalName>¿⁄¿Ø∞‘Ω√∆«¥Ò±€π¯»£</logicalName>
                                   <columnType class="net.java.amateras.db.dialect.ColumnType">
                                     <name>NUMBER</name>
                                     <logicalName>Numeric</logicalName>
@@ -1782,7 +1782,7 @@
                                 </net.java.amateras.db.visual.model.ColumnModel>
                                 <net.java.amateras.db.visual.model.ColumnModel>
                                   <columnName>f_comment_content</columnName>
-                                  <logicalName>ÏûêÏú†Í≤åÏãúÌåêÎåìÍ∏ÄÎÇ¥Ïö©</logicalName>
+                                  <logicalName>¿⁄¿Ø∞‘Ω√∆«¥Ò±€≥ªøÎ</logicalName>
                                   <columnType class="net.java.amateras.db.dialect.ColumnType">
                                     <name>VARCHAR2</name>
                                     <logicalName>String</logicalName>
@@ -1798,7 +1798,7 @@
                                 </net.java.amateras.db.visual.model.ColumnModel>
                                 <net.java.amateras.db.visual.model.ColumnModel>
                                   <columnName>f_comment_date</columnName>
-                                  <logicalName>ÏûêÏú†Í≤åÏãúÌåêÎåìÍ∏ÄÏûëÏÑ±Ïùº</logicalName>
+                                  <logicalName>¿⁄¿Ø∞‘Ω√∆«¥Ò±€¿€º∫¿œ</logicalName>
                                   <columnType class="net.java.amateras.db.dialect.ColumnType">
                                     <name>DATE</name>
                                     <logicalName>Date</logicalName>
@@ -1814,7 +1814,7 @@
                                 </net.java.amateras.db.visual.model.ColumnModel>
                                 <net.java.amateras.db.visual.model.ColumnModel>
                                   <columnName>f_bo_no</columnName>
-                                  <logicalName>ÏûêÏú†Í≤åÏãúÌåêÎ≤àÌò∏</logicalName>
+                                  <logicalName>¿⁄¿Ø∞‘Ω√∆«π¯»£</logicalName>
                                   <columnType class="net.java.amateras.db.dialect.ColumnType">
                                     <name>NUMBER</name>
                                     <logicalName>Numeric</logicalName>
@@ -1830,7 +1830,7 @@
                                 </net.java.amateras.db.visual.model.ColumnModel>
                                 <net.java.amateras.db.visual.model.ColumnModel>
                                   <columnName>user_id</columnName>
-                                  <logicalName>ÏïÑÏù¥Îîî</logicalName>
+                                  <logicalName>æ∆¿Ãµ</logicalName>
                                   <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../../../../net.java.amateras.db.visual.model.ForeignKeyModel/source/columns/net.java.amateras.db.visual.model.ColumnModel[4]/columnType"/>
                                   <size>50</size>
                                   <notNull>false</notNull>
@@ -1920,7 +1920,7 @@
                               <columns>
                                 <net.java.amateras.db.visual.model.ColumnModel>
                                   <columnName>t_co_no</columnName>
-                                  <logicalName>ÎèôÌñâÍ≤åÏãúÌåêÎåìÍ∏ÄÎ≤àÌò∏</logicalName>
+                                  <logicalName>µø«‡∞‘Ω√∆«¥Ò±€π¯»£</logicalName>
                                   <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../../../../net.java.amateras.db.visual.model.ForeignKeyModel[4]/source/columns/net.java.amateras.db.visual.model.ColumnModel/columnType"/>
                                   <size></size>
                                   <notNull>false</notNull>
@@ -1931,7 +1931,7 @@
                                 </net.java.amateras.db.visual.model.ColumnModel>
                                 <net.java.amateras.db.visual.model.ColumnModel>
                                   <columnName>t_comment_content</columnName>
-                                  <logicalName>ÎèôÌñâÍ≤åÏãúÌåêÎåìÍ∏ÄÎÇ¥Ïö©</logicalName>
+                                  <logicalName>µø«‡∞‘Ω√∆«¥Ò±€≥ªøÎ</logicalName>
                                   <columnType class="net.java.amateras.db.dialect.ColumnType">
                                     <name>VARCHAR2</name>
                                     <logicalName>String</logicalName>
@@ -1947,7 +1947,7 @@
                                 </net.java.amateras.db.visual.model.ColumnModel>
                                 <net.java.amateras.db.visual.model.ColumnModel>
                                   <columnName>t_comment_date</columnName>
-                                  <logicalName>ÎèôÌñâÍ≤åÏãúÌåêÎåìÍ∏ÄÏûëÏÑ±Ïùº</logicalName>
+                                  <logicalName>µø«‡∞‘Ω√∆«¥Ò±€¿€º∫¿œ</logicalName>
                                   <columnType class="net.java.amateras.db.dialect.ColumnType">
                                     <name>DATE</name>
                                     <logicalName>Date</logicalName>
@@ -1963,7 +1963,7 @@
                                 </net.java.amateras.db.visual.model.ColumnModel>
                                 <net.java.amateras.db.visual.model.ColumnModel>
                                   <columnName>t_bo_no</columnName>
-                                  <logicalName>ÎèôÌñâÍ≤åÏãúÌåêÎ≤àÌò∏</logicalName>
+                                  <logicalName>µø«‡∞‘Ω√∆«π¯»£</logicalName>
                                   <columnType class="net.java.amateras.db.dialect.ColumnType">
                                     <name>NUMBER</name>
                                     <logicalName>Numeric</logicalName>
@@ -1979,7 +1979,7 @@
                                 </net.java.amateras.db.visual.model.ColumnModel>
                                 <net.java.amateras.db.visual.model.ColumnModel>
                                   <columnName>user_id</columnName>
-                                  <logicalName>ÏïÑÏù¥Îîî</logicalName>
+                                  <logicalName>æ∆¿Ãµ</logicalName>
                                   <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../../../../net.java.amateras.db.visual.model.ForeignKeyModel/source/columns/net.java.amateras.db.visual.model.ColumnModel[4]/columnType"/>
                                   <size>50</size>
                                   <notNull>false</notNull>
@@ -2044,7 +2044,7 @@
                               <columns>
                                 <net.java.amateras.db.visual.model.ColumnModel>
                                   <columnName>user_img_no</columnName>
-                                  <logicalName>ÌîÑÎ°úÌïÑÏÇ¨ÏßÑÎ≤àÌò∏</logicalName>
+                                  <logicalName>«¡∑Œ« ªÁ¡¯π¯»£</logicalName>
                                   <columnType class="net.java.amateras.db.dialect.ColumnType">
                                     <name>NUMBER</name>
                                     <logicalName>Numeric</logicalName>
@@ -2060,7 +2060,7 @@
                                 </net.java.amateras.db.visual.model.ColumnModel>
                                 <net.java.amateras.db.visual.model.ColumnModel>
                                   <columnName>user_img_url</columnName>
-                                  <logicalName>ÌîÑÎ°úÌïÑÏÇ¨ÏßÑURL</logicalName>
+                                  <logicalName>«¡∑Œ« ªÁ¡¯URL</logicalName>
                                   <columnType class="net.java.amateras.db.dialect.ColumnType">
                                     <name>VARCHAR2</name>
                                     <logicalName>String</logicalName>
@@ -2076,7 +2076,7 @@
                                 </net.java.amateras.db.visual.model.ColumnModel>
                                 <net.java.amateras.db.visual.model.ColumnModel>
                                   <columnName>user_id</columnName>
-                                  <logicalName>ÏïÑÏù¥Îîî</logicalName>
+                                  <logicalName>æ∆¿Ãµ</logicalName>
                                   <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../../../../net.java.amateras.db.visual.model.ForeignKeyModel/source/columns/net.java.amateras.db.visual.model.ColumnModel[4]/columnType"/>
                                   <size>50</size>
                                   <notNull>false</notNull>
@@ -2136,7 +2136,7 @@
                               <columns>
                                 <net.java.amateras.db.visual.model.ColumnModel>
                                   <columnName>n_no</columnName>
-                                  <logicalName>Í≥µÏßÄÏÇ¨Ìï≠Î≤àÌò∏</logicalName>
+                                  <logicalName>∞¯¡ˆªÁ«◊π¯»£</logicalName>
                                   <columnType class="net.java.amateras.db.dialect.ColumnType">
                                     <name>NUMBER</name>
                                     <logicalName>Numeric</logicalName>
@@ -2152,7 +2152,7 @@
                                 </net.java.amateras.db.visual.model.ColumnModel>
                                 <net.java.amateras.db.visual.model.ColumnModel>
                                   <columnName>n_title</columnName>
-                                  <logicalName>Í≥µÏßÄÏÇ¨Ìï≠Ï†úÎ™©</logicalName>
+                                  <logicalName>∞¯¡ˆªÁ«◊¡¶∏Ò</logicalName>
                                   <columnType class="net.java.amateras.db.dialect.ColumnType">
                                     <name>VARCHAR2</name>
                                     <logicalName>String</logicalName>
@@ -2168,7 +2168,7 @@
                                 </net.java.amateras.db.visual.model.ColumnModel>
                                 <net.java.amateras.db.visual.model.ColumnModel>
                                   <columnName>n_content</columnName>
-                                  <logicalName>Í≥µÏßÄÏÇ¨Ìï≠ÎÇ¥Ïö©</logicalName>
+                                  <logicalName>∞¯¡ˆªÁ«◊≥ªøÎ</logicalName>
                                   <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../net.java.amateras.db.visual.model.ColumnModel[2]/columnType"/>
                                   <size>2000</size>
                                   <notNull>true</notNull>
@@ -2179,7 +2179,7 @@
                                 </net.java.amateras.db.visual.model.ColumnModel>
                                 <net.java.amateras.db.visual.model.ColumnModel>
                                   <columnName>n_date</columnName>
-                                  <logicalName>Í≥µÏßÄÏÇ¨Ìï≠Îì±Î°ùÏùº</logicalName>
+                                  <logicalName>∞¯¡ˆªÁ«◊µÓ∑œ¿œ</logicalName>
                                   <columnType class="net.java.amateras.db.dialect.ColumnType">
                                     <name>DATE</name>
                                     <logicalName>Date</logicalName>
@@ -2195,7 +2195,7 @@
                                 </net.java.amateras.db.visual.model.ColumnModel>
                                 <net.java.amateras.db.visual.model.ColumnModel>
                                   <columnName>n_readcount</columnName>
-                                  <logicalName>Ï°∞ÌöåÏàò</logicalName>
+                                  <logicalName>¡∂»∏ºˆ</logicalName>
                                   <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../net.java.amateras.db.visual.model.ColumnModel/columnType"/>
                                   <size></size>
                                   <notNull>false</notNull>
@@ -2206,7 +2206,7 @@
                                 </net.java.amateras.db.visual.model.ColumnModel>
                                 <net.java.amateras.db.visual.model.ColumnModel>
                                   <columnName>n_img</columnName>
-                                  <logicalName>Í≥µÏßÄÏÇ¨Ìï≠ÏÇ¨ÏßÑ</logicalName>
+                                  <logicalName>∞¯¡ˆªÁ«◊ªÁ¡¯</logicalName>
                                   <columnType class="net.java.amateras.db.dialect.ColumnType">
                                     <name>VARCHAR2</name>
                                     <logicalName>String</logicalName>
@@ -2222,7 +2222,7 @@
                                 </net.java.amateras.db.visual.model.ColumnModel>
                                 <net.java.amateras.db.visual.model.ColumnModel>
                                   <columnName>user_id</columnName>
-                                  <logicalName>ÏïÑÏù¥Îîî</logicalName>
+                                  <logicalName>æ∆¿Ãµ</logicalName>
                                   <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../../../../net.java.amateras.db.visual.model.ForeignKeyModel/source/columns/net.java.amateras.db.visual.model.ColumnModel[4]/columnType"/>
                                   <size>50</size>
                                   <notNull>false</notNull>
@@ -2282,7 +2282,7 @@
                               <columns>
                                 <net.java.amateras.db.visual.model.ColumnModel>
                                   <columnName>kakao_no</columnName>
-                                  <logicalName>Ïπ¥Ïπ¥Ïò§id</logicalName>
+                                  <logicalName>ƒ´ƒ´ø¿id</logicalName>
                                   <columnType class="net.java.amateras.db.dialect.ColumnType">
                                     <name>NUMBER</name>
                                     <logicalName>Numeric</logicalName>
@@ -2298,7 +2298,7 @@
                                 </net.java.amateras.db.visual.model.ColumnModel>
                                 <net.java.amateras.db.visual.model.ColumnModel>
                                   <columnName>kakao_email</columnName>
-                                  <logicalName>Ïπ¥Ïπ¥Ïò§Ïù¥Î©îÏùº</logicalName>
+                                  <logicalName>ƒ´ƒ´ø¿¿Ã∏ﬁ¿œ</logicalName>
                                   <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../../../../net.java.amateras.db.visual.model.ForeignKeyModel[2]/source/sourceConnections/net.java.amateras.db.visual.model.ForeignKeyModel[2]/target/targetConnections/net.java.amateras.db.visual.model.ForeignKeyModel[2]/source/targetConnections/net.java.amateras.db.visual.model.ForeignKeyModel/source/sourceConnections/net.java.amateras.db.visual.model.ForeignKeyModel[2]/target/sourceConnections/net.java.amateras.db.visual.model.ForeignKeyModel/target/columns/net.java.amateras.db.visual.model.ColumnModel[8]/columnType"/>
                                   <size>100</size>
                                   <notNull>false</notNull>
@@ -2309,7 +2309,7 @@
                                 </net.java.amateras.db.visual.model.ColumnModel>
                                 <net.java.amateras.db.visual.model.ColumnModel>
                                   <columnName>kakao_nickname</columnName>
-                                  <logicalName>Ïπ¥Ïπ¥Ïò§ÎãâÎÑ§ÏûÑ</logicalName>
+                                  <logicalName>ƒ´ƒ´ø¿¥–≥◊¿”</logicalName>
                                   <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../../../../net.java.amateras.db.visual.model.ForeignKeyModel[2]/source/sourceConnections/net.java.amateras.db.visual.model.ForeignKeyModel[2]/target/targetConnections/net.java.amateras.db.visual.model.ForeignKeyModel[2]/source/targetConnections/net.java.amateras.db.visual.model.ForeignKeyModel/source/sourceConnections/net.java.amateras.db.visual.model.ForeignKeyModel[2]/target/sourceConnections/net.java.amateras.db.visual.model.ForeignKeyModel/target/columns/net.java.amateras.db.visual.model.ColumnModel[8]/columnType"/>
                                   <size>100</size>
                                   <notNull>false</notNull>
@@ -2320,7 +2320,7 @@
                                 </net.java.amateras.db.visual.model.ColumnModel>
                                 <net.java.amateras.db.visual.model.ColumnModel>
                                   <columnName>user_id</columnName>
-                                  <logicalName>ÏïÑÏù¥Îîî</logicalName>
+                                  <logicalName>æ∆¿Ãµ</logicalName>
                                   <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../../../../net.java.amateras.db.visual.model.ForeignKeyModel/source/columns/net.java.amateras.db.visual.model.ColumnModel[4]/columnType"/>
                                   <size>50</size>
                                   <notNull>false</notNull>
@@ -2414,7 +2414,7 @@
                                           <entry>
                                             <net.java.amateras.db.visual.model.ColumnModel>
                                               <columnName>user_id</columnName>
-                                              <logicalName>ÏïÑÏù¥Îîî</logicalName>
+                                              <logicalName>æ∆¿Ãµ</logicalName>
                                               <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../../../../../../../../../../net.java.amateras.db.visual.model.ForeignKeyModel/source/columns/net.java.amateras.db.visual.model.ColumnModel[4]/columnType"/>
                                               <size>50</size>
                                               <notNull>true</notNull>
@@ -2425,7 +2425,7 @@
                                             </net.java.amateras.db.visual.model.ColumnModel>
                                             <net.java.amateras.db.visual.model.ColumnModel>
                                               <columnName>from_id</columnName>
-                                              <logicalName>Î≥¥ÎÇ∏ÏÇ¨ÎûåÏïÑÏù¥Îîî</logicalName>
+                                              <logicalName>∫∏≥ΩªÁ∂˜æ∆¿Ãµ</logicalName>
                                               <columnType class="net.java.amateras.db.dialect.ColumnType">
                                                 <name>VARCHAR2</name>
                                                 <logicalName>String</logicalName>
@@ -2460,7 +2460,7 @@
                                             <net.java.amateras.db.visual.model.ColumnModel reference="../../../../net.java.amateras.db.visual.model.ForeignKeyModel/references/entry/net.java.amateras.db.visual.model.ColumnModel"/>
                                             <net.java.amateras.db.visual.model.ColumnModel>
                                               <columnName>to_id</columnName>
-                                              <logicalName>Î∞õÎäîÏÇ¨ÎûåÏïÑÏù¥Îîî</logicalName>
+                                              <logicalName>πﬁ¥¬ªÁ∂˜æ∆¿Ãµ</logicalName>
                                               <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../../../../net.java.amateras.db.visual.model.ForeignKeyModel/references/entry/net.java.amateras.db.visual.model.ColumnModel[2]/columnType"/>
                                               <size>50</size>
                                               <notNull>false</notNull>
@@ -2484,7 +2484,7 @@
                                     <columns>
                                       <net.java.amateras.db.visual.model.ColumnModel>
                                         <columnName>room_no</columnName>
-                                        <logicalName>Ï±ÑÌåÖÎ∞©Î≤àÌò∏</logicalName>
+                                        <logicalName>√§∆√πÊπ¯»£</logicalName>
                                         <columnType class="net.java.amateras.db.dialect.ColumnType">
                                           <name>NUMBER</name>
                                           <logicalName>Numeric</logicalName>
@@ -2500,7 +2500,7 @@
                                       </net.java.amateras.db.visual.model.ColumnModel>
                                       <net.java.amateras.db.visual.model.ColumnModel>
                                         <columnName>room_name</columnName>
-                                        <logicalName>Ï±ÑÌåÖÎ∞©Ïù¥Î¶Ñ</logicalName>
+                                        <logicalName>√§∆√πÊ¿Ã∏ß</logicalName>
                                         <columnType class="net.java.amateras.db.dialect.ColumnType">
                                           <name>VARCHAR2</name>
                                           <logicalName>String</logicalName>
@@ -2539,7 +2539,7 @@
                               <columns>
                                 <net.java.amateras.db.visual.model.ColumnModel>
                                   <columnName>msg_no</columnName>
-                                  <logicalName>Î©îÏÑ∏ÏßÄÎ≤àÌò∏</logicalName>
+                                  <logicalName>∏ﬁºº¡ˆπ¯»£</logicalName>
                                   <columnType class="net.java.amateras.db.dialect.ColumnType">
                                     <name>NUMBER</name>
                                     <logicalName>Numeric</logicalName>
@@ -2555,7 +2555,7 @@
                                 </net.java.amateras.db.visual.model.ColumnModel>
                                 <net.java.amateras.db.visual.model.ColumnModel>
                                   <columnName>msg_content</columnName>
-                                  <logicalName>Î©îÏÑ∏ÏßÄÎÇ¥Ïö©</logicalName>
+                                  <logicalName>∏ﬁºº¡ˆ≥ªøÎ</logicalName>
                                   <columnType class="net.java.amateras.db.dialect.ColumnType">
                                     <name>VARCHAR2</name>
                                     <logicalName>String</logicalName>
@@ -2571,7 +2571,7 @@
                                 </net.java.amateras.db.visual.model.ColumnModel>
                                 <net.java.amateras.db.visual.model.ColumnModel>
                                   <columnName>msg_send_time</columnName>
-                                  <logicalName>Î≥¥ÎÇ∏ÏãúÍ∞Ñ</logicalName>
+                                  <logicalName>∫∏≥ΩΩ√∞£</logicalName>
                                   <columnType class="net.java.amateras.db.dialect.ColumnType">
                                     <name>DATE</name>
                                     <logicalName>Date</logicalName>
@@ -2587,7 +2587,7 @@
                                 </net.java.amateras.db.visual.model.ColumnModel>
                                 <net.java.amateras.db.visual.model.ColumnModel>
                                   <columnName>msg_read</columnName>
-                                  <logicalName>Î©îÏÑ∏ÏßÄÏùΩÏùå</logicalName>
+                                  <logicalName>∏ﬁºº¡ˆ¿–¿Ω</logicalName>
                                   <columnType class="net.java.amateras.db.dialect.ColumnType">
                                     <name>NUMBER</name>
                                     <logicalName>Numeric</logicalName>
@@ -2603,7 +2603,7 @@
                                 </net.java.amateras.db.visual.model.ColumnModel>
                                 <net.java.amateras.db.visual.model.ColumnModel>
                                   <columnName>room_no</columnName>
-                                  <logicalName>Ï±ÑÌåÖÎ∞©Î≤àÌò∏</logicalName>
+                                  <logicalName>√§∆√πÊπ¯»£</logicalName>
                                   <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../../sourceConnections/net.java.amateras.db.visual.model.ForeignKeyModel/target/columns/net.java.amateras.db.visual.model.ColumnModel/columnType"/>
                                   <size></size>
                                   <notNull>false</notNull>
@@ -2614,7 +2614,7 @@
                                 </net.java.amateras.db.visual.model.ColumnModel>
                                 <net.java.amateras.db.visual.model.ColumnModel>
                                   <columnName>user_id</columnName>
-                                  <logicalName>ÏïÑÏù¥Îîî</logicalName>
+                                  <logicalName>æ∆¿Ãµ</logicalName>
                                   <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../../../../net.java.amateras.db.visual.model.ForeignKeyModel/source/columns/net.java.amateras.db.visual.model.ColumnModel[4]/columnType"/>
                                   <size>50</size>
                                   <notNull>false</notNull>
@@ -2648,7 +2648,7 @@
                           <net.java.amateras.db.visual.model.ColumnModel reference="../../targetConnections/net.java.amateras.db.visual.model.ForeignKeyModel[15]/source/sourceConnections/net.java.amateras.db.visual.model.ForeignKeyModel/target/sourceConnections/net.java.amateras.db.visual.model.ForeignKeyModel/references/entry/net.java.amateras.db.visual.model.ColumnModel"/>
                           <net.java.amateras.db.visual.model.ColumnModel>
                             <columnName>password</columnName>
-                            <logicalName>ÎπÑÎ∞ÄÎ≤àÌò∏</logicalName>
+                            <logicalName>∫Òπ–π¯»£</logicalName>
                             <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../../targetConnections/net.java.amateras.db.visual.model.ForeignKeyModel[4]/source/columns/net.java.amateras.db.visual.model.ColumnModel[2]/columnType"/>
                             <size>100</size>
                             <notNull>true</notNull>
@@ -2659,7 +2659,7 @@
                           </net.java.amateras.db.visual.model.ColumnModel>
                           <net.java.amateras.db.visual.model.ColumnModel>
                             <columnName>name</columnName>
-                            <logicalName>Ïù¥Î¶Ñ</logicalName>
+                            <logicalName>¿Ã∏ß</logicalName>
                             <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../../targetConnections/net.java.amateras.db.visual.model.ForeignKeyModel[4]/source/columns/net.java.amateras.db.visual.model.ColumnModel[2]/columnType"/>
                             <size>50</size>
                             <notNull>true</notNull>
@@ -2670,7 +2670,7 @@
                           </net.java.amateras.db.visual.model.ColumnModel>
                           <net.java.amateras.db.visual.model.ColumnModel>
                             <columnName>nickname</columnName>
-                            <logicalName>ÎãâÎÑ§ÏûÑ</logicalName>
+                            <logicalName>¥–≥◊¿”</logicalName>
                             <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../../targetConnections/net.java.amateras.db.visual.model.ForeignKeyModel[4]/source/columns/net.java.amateras.db.visual.model.ColumnModel[2]/columnType"/>
                             <size>50</size>
                             <notNull>true</notNull>
@@ -2681,7 +2681,7 @@
                           </net.java.amateras.db.visual.model.ColumnModel>
                           <net.java.amateras.db.visual.model.ColumnModel>
                             <columnName>phone</columnName>
-                            <logicalName>Ìú¥ÎåÄÌè∞Î≤àÌò∏</logicalName>
+                            <logicalName>»ﬁ¥Î∆˘π¯»£</logicalName>
                             <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../../targetConnections/net.java.amateras.db.visual.model.ForeignKeyModel[4]/source/columns/net.java.amateras.db.visual.model.ColumnModel[2]/columnType"/>
                             <size>100</size>
                             <notNull>true</notNull>
@@ -2692,7 +2692,7 @@
                           </net.java.amateras.db.visual.model.ColumnModel>
                           <net.java.amateras.db.visual.model.ColumnModel>
                             <columnName>email</columnName>
-                            <logicalName>Ïù¥Î©îÏùº</logicalName>
+                            <logicalName>¿Ã∏ﬁ¿œ</logicalName>
                             <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../../targetConnections/net.java.amateras.db.visual.model.ForeignKeyModel[4]/source/columns/net.java.amateras.db.visual.model.ColumnModel[2]/columnType"/>
                             <size>100</size>
                             <notNull>true</notNull>
@@ -2703,7 +2703,7 @@
                           </net.java.amateras.db.visual.model.ColumnModel>
                           <net.java.amateras.db.visual.model.ColumnModel>
                             <columnName>birth</columnName>
-                            <logicalName>ÏÉùÎÖÑÏõîÏùº</logicalName>
+                            <logicalName>ª˝≥‚ø˘¿œ</logicalName>
                             <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../../targetConnections/net.java.amateras.db.visual.model.ForeignKeyModel[4]/source/columns/net.java.amateras.db.visual.model.ColumnModel[3]/columnType"/>
                             <size>10</size>
                             <notNull>true</notNull>
@@ -2714,7 +2714,7 @@
                           </net.java.amateras.db.visual.model.ColumnModel>
                           <net.java.amateras.db.visual.model.ColumnModel>
                             <columnName>address</columnName>
-                            <logicalName>Ï£ºÏÜå</logicalName>
+                            <logicalName>¡÷º“</logicalName>
                             <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../../targetConnections/net.java.amateras.db.visual.model.ForeignKeyModel[4]/source/columns/net.java.amateras.db.visual.model.ColumnModel[2]/columnType"/>
                             <size>500</size>
                             <notNull>true</notNull>
@@ -2725,7 +2725,7 @@
                           </net.java.amateras.db.visual.model.ColumnModel>
                           <net.java.amateras.db.visual.model.ColumnModel>
                             <columnName>gender</columnName>
-                            <logicalName>ÏÑ±Î≥Ñ</logicalName>
+                            <logicalName>º∫∫∞</logicalName>
                             <columnType class="net.java.amateras.db.dialect.ColumnType">
                               <name>NUMBER</name>
                               <logicalName>Numeric</logicalName>
@@ -2735,13 +2735,13 @@
                             <size></size>
                             <notNull>true</notNull>
                             <primaryKey>false</primaryKey>
-                            <description>0 Ïó¨ÏÑ± 1 ÎÇ®ÏÑ±</description>
+                            <description>0 ø©º∫ 1 ≥≤º∫</description>
                             <autoIncrement>false</autoIncrement>
                             <defaultValue></defaultValue>
                           </net.java.amateras.db.visual.model.ColumnModel>
                           <net.java.amateras.db.visual.model.ColumnModel>
                             <columnName>point</columnName>
-                            <logicalName>Ï†ÅÎ¶ΩÍ∏à</logicalName>
+                            <logicalName>¿˚∏≥±›</logicalName>
                             <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../net.java.amateras.db.visual.model.ColumnModel[9]/columnType"/>
                             <size></size>
                             <notNull>false</notNull>
@@ -2752,14 +2752,41 @@
                           </net.java.amateras.db.visual.model.ColumnModel>
                           <net.java.amateras.db.visual.model.ColumnModel>
                             <columnName>is_admin</columnName>
-                            <logicalName>ÌöåÏõêÍ∂åÌïú</logicalName>
+                            <logicalName>»∏ø¯±««—</logicalName>
                             <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../net.java.amateras.db.visual.model.ColumnModel[9]/columnType"/>
                             <size></size>
                             <notNull>false</notNull>
                             <primaryKey>false</primaryKey>
-                            <description>0Í¥ÄÎ¶¨Ïûê1ÌöåÏõê</description>
+                            <description>0∞¸∏Æ¿⁄1»∏ø¯</description>
                             <autoIncrement>false</autoIncrement>
                             <defaultValue>1</defaultValue>
+                          </net.java.amateras.db.visual.model.ColumnModel>
+                          <net.java.amateras.db.visual.model.ColumnModel>
+                            <columnName>mail_auth</columnName>
+                            <logicalName>∏ﬁ¿œ¿Œ¡ıø©∫Œ</logicalName>
+                            <columnType class="net.java.amateras.db.dialect.ColumnType">
+                              <name>NUMBER</name>
+                              <logicalName>Numeric</logicalName>
+                              <supportSize>true</supportSize>
+                              <type>2</type>
+                            </columnType>
+                            <size>10</size>
+                            <notNull>false</notNull>
+                            <primaryKey>false</primaryKey>
+                            <description></description>
+                            <autoIncrement>false</autoIncrement>
+                            <defaultValue>0</defaultValue>
+                          </net.java.amateras.db.visual.model.ColumnModel>
+                          <net.java.amateras.db.visual.model.ColumnModel>
+                            <columnName>mail_key</columnName>
+                            <logicalName>∏ﬁ¿œ¿Œ¡ıƒ⁄µÂ</logicalName>
+                            <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../net.java.amateras.db.visual.model.ColumnModel[12]/columnType"/>
+                            <size>10</size>
+                            <notNull>false</notNull>
+                            <primaryKey>false</primaryKey>
+                            <description></description>
+                            <autoIncrement>false</autoIncrement>
+                            <defaultValue>0</defaultValue>
                           </net.java.amateras.db.visual.model.ColumnModel>
                         </columns>
                         <indices/>
@@ -2785,7 +2812,7 @@
                   <columns>
                     <net.java.amateras.db.visual.model.ColumnModel>
                       <columnName>f_bo_no</columnName>
-                      <logicalName>ÏûêÏú†Í≤åÏãúÌåêÎ≤àÌò∏</logicalName>
+                      <logicalName>¿⁄¿Ø∞‘Ω√∆«π¯»£</logicalName>
                       <columnType class="net.java.amateras.db.dialect.ColumnType">
                         <name>NUMBER</name>
                         <logicalName>Numeric</logicalName>
@@ -2801,7 +2828,7 @@
                     </net.java.amateras.db.visual.model.ColumnModel>
                     <net.java.amateras.db.visual.model.ColumnModel>
                       <columnName>f_bo_title</columnName>
-                      <logicalName>ÏûêÏú†Í≤åÏãúÌåêÏ†úÎ™©</logicalName>
+                      <logicalName>¿⁄¿Ø∞‘Ω√∆«¡¶∏Ò</logicalName>
                       <columnType class="net.java.amateras.db.dialect.ColumnType">
                         <name>VARCHAR2</name>
                         <logicalName>String</logicalName>
@@ -2817,7 +2844,7 @@
                     </net.java.amateras.db.visual.model.ColumnModel>
                     <net.java.amateras.db.visual.model.ColumnModel>
                       <columnName>f_bo_content</columnName>
-                      <logicalName>ÏûêÏú†Í≤åÏãúÌåêÎÇ¥Ïö©</logicalName>
+                      <logicalName>¿⁄¿Ø∞‘Ω√∆«≥ªøÎ</logicalName>
                       <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../net.java.amateras.db.visual.model.ColumnModel[2]/columnType"/>
                       <size>1000</size>
                       <notNull>true</notNull>
@@ -2828,7 +2855,7 @@
                     </net.java.amateras.db.visual.model.ColumnModel>
                     <net.java.amateras.db.visual.model.ColumnModel>
                       <columnName>f_bo_date</columnName>
-                      <logicalName>ÏûêÏú†Í≤åÏãúÌåêÏûëÏÑ±Ïùº</logicalName>
+                      <logicalName>¿⁄¿Ø∞‘Ω√∆«¿€º∫¿œ</logicalName>
                       <columnType class="net.java.amateras.db.dialect.ColumnType">
                         <name>DATE</name>
                         <logicalName>Date</logicalName>
@@ -2844,7 +2871,7 @@
                     </net.java.amateras.db.visual.model.ColumnModel>
                     <net.java.amateras.db.visual.model.ColumnModel>
                       <columnName>f_bo_readcount</columnName>
-                      <logicalName>ÏûêÏú†Í≤åÏãúÌåêÏ°∞ÌöåÏàò</logicalName>
+                      <logicalName>¿⁄¿Ø∞‘Ω√∆«¡∂»∏ºˆ</logicalName>
                       <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../net.java.amateras.db.visual.model.ColumnModel/columnType"/>
                       <size></size>
                       <notNull>false</notNull>
@@ -2855,7 +2882,7 @@
                     </net.java.amateras.db.visual.model.ColumnModel>
                     <net.java.amateras.db.visual.model.ColumnModel>
                       <columnName>city_no</columnName>
-                      <logicalName>Ïó¨ÌñâÏßÄÏó≠Î≤àÌò∏</logicalName>
+                      <logicalName>ø©«‡¡ˆø™π¯»£</logicalName>
                       <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../../sourceConnections/net.java.amateras.db.visual.model.ForeignKeyModel[2]/target/targetConnections/net.java.amateras.db.visual.model.ForeignKeyModel[2]/source/sourceConnections/net.java.amateras.db.visual.model.ForeignKeyModel[2]/target/targetConnections/net.java.amateras.db.visual.model.ForeignKeyModel[2]/source/targetConnections/net.java.amateras.db.visual.model.ForeignKeyModel/source/sourceConnections/net.java.amateras.db.visual.model.ForeignKeyModel[2]/target/sourceConnections/net.java.amateras.db.visual.model.ForeignKeyModel/target/columns/net.java.amateras.db.visual.model.ColumnModel[11]/columnType"/>
                       <size></size>
                       <notNull>false</notNull>
@@ -2866,7 +2893,7 @@
                     </net.java.amateras.db.visual.model.ColumnModel>
                     <net.java.amateras.db.visual.model.ColumnModel>
                       <columnName>user_id</columnName>
-                      <logicalName>ÏïÑÏù¥Îîî</logicalName>
+                      <logicalName>æ∆¿Ãµ</logicalName>
                       <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../../sourceConnections/net.java.amateras.db.visual.model.ForeignKeyModel[2]/target/targetConnections/net.java.amateras.db.visual.model.ForeignKeyModel/source/columns/net.java.amateras.db.visual.model.ColumnModel[4]/columnType"/>
                       <size>50</size>
                       <notNull>false</notNull>
@@ -2899,7 +2926,7 @@
             <columns>
               <net.java.amateras.db.visual.model.ColumnModel>
                 <columnName>city_no</columnName>
-                <logicalName>Ïó¨ÌñâÏßÄÏó≠Î≤àÌò∏</logicalName>
+                <logicalName>ø©«‡¡ˆø™π¯»£</logicalName>
                 <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../../targetConnections/net.java.amateras.db.visual.model.ForeignKeyModel[2]/source/sourceConnections/net.java.amateras.db.visual.model.ForeignKeyModel[2]/target/targetConnections/net.java.amateras.db.visual.model.ForeignKeyModel[2]/source/sourceConnections/net.java.amateras.db.visual.model.ForeignKeyModel[2]/target/targetConnections/net.java.amateras.db.visual.model.ForeignKeyModel[2]/source/targetConnections/net.java.amateras.db.visual.model.ForeignKeyModel/source/sourceConnections/net.java.amateras.db.visual.model.ForeignKeyModel[2]/target/sourceConnections/net.java.amateras.db.visual.model.ForeignKeyModel/target/columns/net.java.amateras.db.visual.model.ColumnModel[11]/columnType"/>
                 <size></size>
                 <notNull>false</notNull>
@@ -2910,7 +2937,7 @@
               </net.java.amateras.db.visual.model.ColumnModel>
               <net.java.amateras.db.visual.model.ColumnModel>
                 <columnName>city_name</columnName>
-                <logicalName>Ïó¨ÌñâÏßÄÏó≠Ïù¥Î¶Ñ</logicalName>
+                <logicalName>ø©«‡¡ˆø™¿Ã∏ß</logicalName>
                 <columnType class="net.java.amateras.db.dialect.ColumnType">
                   <name>VARCHAR2</name>
                   <logicalName>String</logicalName>
@@ -2926,23 +2953,23 @@
               </net.java.amateras.db.visual.model.ColumnModel>
               <net.java.amateras.db.visual.model.ColumnModel>
                 <columnName>latitude</columnName>
-                <logicalName>ÏúÑÎèÑ</logicalName>
+                <logicalName>¿ßµµ</logicalName>
                 <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../../targetConnections/net.java.amateras.db.visual.model.ForeignKeyModel[2]/source/sourceConnections/net.java.amateras.db.visual.model.ForeignKeyModel[2]/target/targetConnections/net.java.amateras.db.visual.model.ForeignKeyModel[2]/source/sourceConnections/net.java.amateras.db.visual.model.ForeignKeyModel[2]/target/targetConnections/net.java.amateras.db.visual.model.ForeignKeyModel[2]/source/targetConnections/net.java.amateras.db.visual.model.ForeignKeyModel/source/sourceConnections/net.java.amateras.db.visual.model.ForeignKeyModel[2]/target/sourceConnections/net.java.amateras.db.visual.model.ForeignKeyModel/target/columns/net.java.amateras.db.visual.model.ColumnModel[11]/columnType"/>
                 <size></size>
                 <notNull>true</notNull>
                 <primaryKey>false</primaryKey>
-                <description>yÏ∂ï</description>
+                <description>y√‡</description>
                 <autoIncrement>false</autoIncrement>
                 <defaultValue></defaultValue>
               </net.java.amateras.db.visual.model.ColumnModel>
               <net.java.amateras.db.visual.model.ColumnModel>
                 <columnName>longitude</columnName>
-                <logicalName>Í≤ΩÎèÑ</logicalName>
+                <logicalName>∞Êµµ</logicalName>
                 <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../../targetConnections/net.java.amateras.db.visual.model.ForeignKeyModel[2]/source/sourceConnections/net.java.amateras.db.visual.model.ForeignKeyModel[2]/target/targetConnections/net.java.amateras.db.visual.model.ForeignKeyModel[2]/source/sourceConnections/net.java.amateras.db.visual.model.ForeignKeyModel[2]/target/targetConnections/net.java.amateras.db.visual.model.ForeignKeyModel[2]/source/targetConnections/net.java.amateras.db.visual.model.ForeignKeyModel/source/sourceConnections/net.java.amateras.db.visual.model.ForeignKeyModel[2]/target/sourceConnections/net.java.amateras.db.visual.model.ForeignKeyModel/target/columns/net.java.amateras.db.visual.model.ColumnModel[11]/columnType"/>
                 <size></size>
                 <notNull>true</notNull>
                 <primaryKey>false</primaryKey>
-                <description>xÏ∂ï</description>
+                <description>x√‡</description>
                 <autoIncrement>false</autoIncrement>
                 <defaultValue></defaultValue>
               </net.java.amateras.db.visual.model.ColumnModel>
@@ -2971,7 +2998,7 @@
       <columns>
         <net.java.amateras.db.visual.model.ColumnModel>
           <columnName>t_bo_no</columnName>
-          <logicalName>ÎèôÌñâÍ≤åÏãúÌåêÎ≤àÌò∏</logicalName>
+          <logicalName>µø«‡∞‘Ω√∆«π¯»£</logicalName>
           <columnType class="net.java.amateras.db.dialect.ColumnType">
             <name>NUMBER</name>
             <logicalName>Numeric</logicalName>
@@ -2987,7 +3014,7 @@
         </net.java.amateras.db.visual.model.ColumnModel>
         <net.java.amateras.db.visual.model.ColumnModel>
           <columnName>t_bo_title</columnName>
-          <logicalName>ÎèôÌñâÍ≤åÏãúÌåêÏ†úÎ™©</logicalName>
+          <logicalName>µø«‡∞‘Ω√∆«¡¶∏Ò</logicalName>
           <columnType class="net.java.amateras.db.dialect.ColumnType">
             <name>VARCHAR2</name>
             <logicalName>String</logicalName>
@@ -3003,7 +3030,7 @@
         </net.java.amateras.db.visual.model.ColumnModel>
         <net.java.amateras.db.visual.model.ColumnModel>
           <columnName>t_bo_content</columnName>
-          <logicalName>ÎèôÌñâÍ≤åÏãúÌåêÎÇ¥Ïö©</logicalName>
+          <logicalName>µø«‡∞‘Ω√∆«≥ªøÎ</logicalName>
           <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../net.java.amateras.db.visual.model.ColumnModel[2]/columnType"/>
           <size>2000</size>
           <notNull>true</notNull>
@@ -3014,7 +3041,7 @@
         </net.java.amateras.db.visual.model.ColumnModel>
         <net.java.amateras.db.visual.model.ColumnModel>
           <columnName>t_bo_date</columnName>
-          <logicalName>ÎèôÌñâÍ≤åÏãúÌåêÏûëÏÑ±Ïùº</logicalName>
+          <logicalName>µø«‡∞‘Ω√∆«¿€º∫¿œ</logicalName>
           <columnType class="net.java.amateras.db.dialect.ColumnType">
             <name>DATE</name>
             <logicalName>Date</logicalName>
@@ -3030,7 +3057,7 @@
         </net.java.amateras.db.visual.model.ColumnModel>
         <net.java.amateras.db.visual.model.ColumnModel>
           <columnName>t_bo_readcount</columnName>
-          <logicalName>ÎèôÌñâÍ≤åÏãúÌåêÏ°∞ÌöåÏàò</logicalName>
+          <logicalName>µø«‡∞‘Ω√∆«¡∂»∏ºˆ</logicalName>
           <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../net.java.amateras.db.visual.model.ColumnModel/columnType"/>
           <size></size>
           <notNull>false</notNull>
@@ -3041,18 +3068,18 @@
         </net.java.amateras.db.visual.model.ColumnModel>
         <net.java.amateras.db.visual.model.ColumnModel>
           <columnName>t_bo_status</columnName>
-          <logicalName>Î™®ÏßëÏÉÅÌÉú</logicalName>
+          <logicalName>∏¡˝ªÛ≈¬</logicalName>
           <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../net.java.amateras.db.visual.model.ColumnModel/columnType"/>
           <size></size>
           <notNull>false</notNull>
           <primaryKey>false</primaryKey>
-          <description>0 Î™®ÏßëÏ§ë, 1Î™®ÏßëÎßàÍ∞ê</description>
+          <description>0 ∏¡˝¡ﬂ, 1∏¡˝∏∂∞®</description>
           <autoIncrement>false</autoIncrement>
           <defaultValue>0</defaultValue>
         </net.java.amateras.db.visual.model.ColumnModel>
         <net.java.amateras.db.visual.model.ColumnModel>
           <columnName>t_bo_person</columnName>
-          <logicalName>Î™®ÏßëÏù∏Ïõê</logicalName>
+          <logicalName>∏¡˝¿Œø¯</logicalName>
           <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../net.java.amateras.db.visual.model.ColumnModel/columnType"/>
           <size></size>
           <notNull>true</notNull>
@@ -3063,7 +3090,7 @@
         </net.java.amateras.db.visual.model.ColumnModel>
         <net.java.amateras.db.visual.model.ColumnModel>
           <columnName>t_bo_img</columnName>
-          <logicalName>ÎèôÌñâÍ≤åÏãúÌåêÏÇ¨ÏßÑ</logicalName>
+          <logicalName>µø«‡∞‘Ω√∆«ªÁ¡¯</logicalName>
           <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../../sourceConnections/net.java.amateras.db.visual.model.ForeignKeyModel/target/targetConnections/net.java.amateras.db.visual.model.ForeignKeyModel[2]/source/sourceConnections/net.java.amateras.db.visual.model.ForeignKeyModel[2]/target/targetConnections/net.java.amateras.db.visual.model.ForeignKeyModel[2]/source/sourceConnections/net.java.amateras.db.visual.model.ForeignKeyModel[2]/target/targetConnections/net.java.amateras.db.visual.model.ForeignKeyModel[2]/source/targetConnections/net.java.amateras.db.visual.model.ForeignKeyModel/source/sourceConnections/net.java.amateras.db.visual.model.ForeignKeyModel[2]/target/sourceConnections/net.java.amateras.db.visual.model.ForeignKeyModel/target/targetConnections/net.java.amateras.db.visual.model.ForeignKeyModel[3]/source/columns/net.java.amateras.db.visual.model.ColumnModel[5]/columnType"/>
           <size>500</size>
           <notNull>false</notNull>
@@ -3074,7 +3101,7 @@
         </net.java.amateras.db.visual.model.ColumnModel>
         <net.java.amateras.db.visual.model.ColumnModel>
           <columnName>t_bo_start_date</columnName>
-          <logicalName>Ïó¨ÌñâÏãúÏûëÎÇ†Ïßú</logicalName>
+          <logicalName>ø©«‡Ω√¿€≥Ø¬•</logicalName>
           <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../net.java.amateras.db.visual.model.ColumnModel[4]/columnType"/>
           <size>10</size>
           <notNull>true</notNull>
@@ -3085,7 +3112,7 @@
         </net.java.amateras.db.visual.model.ColumnModel>
         <net.java.amateras.db.visual.model.ColumnModel>
           <columnName>t_bo_end_date</columnName>
-          <logicalName>Ïó¨ÌñâÎÅùÎÇ†Ïßú</logicalName>
+          <logicalName>ø©«‡≥°≥Ø¬•</logicalName>
           <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../net.java.amateras.db.visual.model.ColumnModel[4]/columnType"/>
           <size>10</size>
           <notNull>true</notNull>
@@ -3096,7 +3123,7 @@
         </net.java.amateras.db.visual.model.ColumnModel>
         <net.java.amateras.db.visual.model.ColumnModel>
           <columnName>t_bo_style</columnName>
-          <logicalName>Ïó¨ÌñâÏä§ÌÉÄÏùº</logicalName>
+          <logicalName>ø©«‡Ω∫≈∏¿œ</logicalName>
           <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../net.java.amateras.db.visual.model.ColumnModel[2]/columnType"/>
           <size>1000</size>
           <notNull>true</notNull>
@@ -3107,7 +3134,7 @@
         </net.java.amateras.db.visual.model.ColumnModel>
         <net.java.amateras.db.visual.model.ColumnModel>
           <columnName>hashtag</columnName>
-          <logicalName>Ìï¥ÏãúÌÉúÍ∑∏</logicalName>
+          <logicalName>«ÿΩ√≈¬±◊</logicalName>
           <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../../sourceConnections/net.java.amateras.db.visual.model.ForeignKeyModel/target/targetConnections/net.java.amateras.db.visual.model.ForeignKeyModel[2]/source/sourceConnections/net.java.amateras.db.visual.model.ForeignKeyModel[2]/target/targetConnections/net.java.amateras.db.visual.model.ForeignKeyModel[2]/source/sourceConnections/net.java.amateras.db.visual.model.ForeignKeyModel[2]/target/targetConnections/net.java.amateras.db.visual.model.ForeignKeyModel[2]/source/targetConnections/net.java.amateras.db.visual.model.ForeignKeyModel/source/sourceConnections/net.java.amateras.db.visual.model.ForeignKeyModel[2]/target/sourceConnections/net.java.amateras.db.visual.model.ForeignKeyModel/target/columns/net.java.amateras.db.visual.model.ColumnModel[8]/columnType"/>
           <size>100</size>
           <notNull>false</notNull>
@@ -3118,7 +3145,7 @@
         </net.java.amateras.db.visual.model.ColumnModel>
         <net.java.amateras.db.visual.model.ColumnModel>
           <columnName>city_no</columnName>
-          <logicalName>Ïó¨ÌñâÏßÄÏó≠Î≤àÌò∏</logicalName>
+          <logicalName>ø©«‡¡ˆø™π¯»£</logicalName>
           <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../../sourceConnections/net.java.amateras.db.visual.model.ForeignKeyModel/target/targetConnections/net.java.amateras.db.visual.model.ForeignKeyModel[2]/source/sourceConnections/net.java.amateras.db.visual.model.ForeignKeyModel[2]/target/targetConnections/net.java.amateras.db.visual.model.ForeignKeyModel[2]/source/sourceConnections/net.java.amateras.db.visual.model.ForeignKeyModel[2]/target/targetConnections/net.java.amateras.db.visual.model.ForeignKeyModel[2]/source/targetConnections/net.java.amateras.db.visual.model.ForeignKeyModel/source/sourceConnections/net.java.amateras.db.visual.model.ForeignKeyModel[2]/target/sourceConnections/net.java.amateras.db.visual.model.ForeignKeyModel/target/columns/net.java.amateras.db.visual.model.ColumnModel[11]/columnType"/>
           <size></size>
           <notNull>false</notNull>
@@ -3129,7 +3156,7 @@
         </net.java.amateras.db.visual.model.ColumnModel>
         <net.java.amateras.db.visual.model.ColumnModel>
           <columnName>user_id</columnName>
-          <logicalName>ÏïÑÏù¥Îîî</logicalName>
+          <logicalName>æ∆¿Ãµ</logicalName>
           <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../../sourceConnections/net.java.amateras.db.visual.model.ForeignKeyModel/target/targetConnections/net.java.amateras.db.visual.model.ForeignKeyModel[2]/source/sourceConnections/net.java.amateras.db.visual.model.ForeignKeyModel[2]/target/targetConnections/net.java.amateras.db.visual.model.ForeignKeyModel/source/columns/net.java.amateras.db.visual.model.ColumnModel[4]/columnType"/>
           <size>50</size>
           <notNull>false</notNull>

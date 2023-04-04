@@ -1,16 +1,20 @@
 /*************** user ***********************/
 --user_info
-insert into user_info(user_id,password,name,nickname,phone,email,birth,address,gender,point,is_admin) 
-	values('admin','admin0000','관리자','관리자','010-0000-0000','admin0@gmail.com','2000-01-01','테헤란로0',0,0,0); 
+insert into user_info(user_id,password,name,nickname,phone,email,birth,address,gender,point,is_admin,mail_auth,mail_key) 
+	values('admin','admin0000','관리자','관리자','010-0000-0000','admin0@gmail.com','2000-01-01','테헤란로0',0,0,0,1,0); 
 
-insert into user_info(user_id,password,name,nickname,phone,email,birth,address,gender,point,is_admin) 
-	values('user1','user1111','회원1','마리코1','010-1111-1111','user1@gmail.com','2001-01-01','테헤란로1',0,0,1); 
+insert into user_info(user_id,password,name,nickname,phone,email,birth,address,gender,point,is_admin,mail_auth,mail_key) 
+	values('user1','user1111','회원1','마리코1','010-1111-1111','user1@gmail.com','2001-01-01','테헤란로1',0,0,1,1,0); 
 
-insert into user_info(user_id,password,name,nickname,phone,email,birth,address,gender,point,is_admin) 
-	values('user2','user2222','회원2','마리코2','010-2222-2222','user2@gmail.com','2002-02-02','테헤란로2',1,0,1); 
+insert into user_info(user_id,password,name,nickname,phone,email,birth,address,gender,point,is_admin,mail_auth,mail_key) 
+	values('user2','user2222','회원2','마리코2','010-2222-2222','user2@gmail.com','2002-02-02','테헤란로2',1,0,1,1,0); 
 
-insert into user_info(user_id,password,name,nickname,phone,email,birth,address,gender,point,is_admin) 
-	values('user3','user3333','회원3','마리코3','010-3333-3333','user3@gmail.com','2003-03-03','테헤란로3',1,0,1); 
+insert into user_info(user_id,password,name,nickname,phone,email,birth,address,gender,point,is_admin,mail_auth,mail_key) 
+	values('user3','user3333','회원3','마리코3','010-3333-3333','user3@gmail.com','2003-03-03','테헤란로3',1,0,1,1,0);
+	 
+insert into user_info(user_id,password,name,nickname,phone,email,birth,address,gender,point,is_admin,mail_auth,mail_key) 
+	values('user4','user4444','회원4','마리코4','010-4444-4444','user4@gmail.com','2004-04-04','테헤란로4',1,0,1,0,1234);
+
 --user_photo
 insert into user_img(user_img_no,user_img_url,user_id) values(10,'010.png','admin');
 insert into user_img(user_img_no,user_img_url,user_id) values(11,'011.png','user1');
@@ -119,29 +123,9 @@ values(chat_msg_msg_no_seq.nextval,'안녕하세요3',sysdate,0,3,'user3');
 
 /*************** freeBoard ***********************/
 -- freeboard
---insert
-insert into free_board values (free_board_f_bo_no_seq.nextval,'서울 맛집 추천','위생깔끔한곳 선호합니다','2023-01-11',0,1,'user1');
-insert into free_board values (free_board_f_bo_no_seq.nextval,'경기 맛집 추천','클린한 음식으로 추천부탁합니다','2023-01-19',3,2,'user2');
-insert into free_board values (free_board_f_bo_no_seq.nextval,'강원 맛집 추천','면류 좋아합니다','2023-01-22',0,3,'user3');
-insert into free_board values (free_board_f_bo_no_seq.nextval,'부산 해운대 1박2일 추천','자연보는거 좋아합니다','2022-01-19',7,4,'user1');
-insert into free_board values (free_board_f_bo_no_seq.nextval,'대전 여행코스 추천해주세요','2박 3일 코스로 여행 예정입니다','2023-02-12',1,5,'user2');
-insert into free_board values (free_board_f_bo_no_seq.nextval,'서울 핫플 추천받습니다','사람많은곳 선호합니다','2023-03-19',9,1,'user3');
-insert into free_board values (free_board_f_bo_no_seq.nextval,'경기도 풍경 좋은곳 추천해주세요','1박2일 여행가려고요','2022-01-03',6,2,'user1');
-insert into free_board values (free_board_f_bo_no_seq.nextval,'경기도 파주쪽 어죽맛집 추천해주세요','파주여행갑니다','2022-07-03',6,2,'user1');
-insert into free_board values (free_board_f_bo_no_seq.nextval,'강원도 벚꽃축제 하나요?','벚꽃좀 보고 싶네요','2022-09-03',13,3,'user2');
-insert into free_board values (free_board_f_bo_no_seq.nextval,'부산 국밥집 어디가 잘하나요','근본있는곳으로 추천부탁합니다','2022-11-03',11,4,'user3');
-insert into free_board values (free_board_f_bo_no_seq.nextval,'대전 유성온천 어떤가요','가보신분 후기좀 남겨주세요',sysdate,4,5,'user1');
-insert into free_board values (free_board_f_bo_no_seq.nextval,'자유게시판12','2박3일 여행 가려는데 명소 추천좀 해주세요',sysdate,4,5,'user1');
-insert into free_board values (free_board_f_bo_no_seq.nextval,'자유게시판13','2박3일 여행 가려는데 명소 추천좀 해주세요',sysdate,4,13,'user2');
-insert into free_board values (free_board_f_bo_no_seq.nextval,'자유게시판14','2박3일 여행 가려는데 명소 추천좀 해주세요',sysdate,4,1,'user3');
-insert into free_board values (free_board_f_bo_no_seq.nextval,'자유게시판15','2박3일 여행 가려는데 명소 추천좀 해주세요',sysdate,4,12,'user1');
-insert into free_board values (free_board_f_bo_no_seq.nextval,'자유게시판16','2박3일 여행 가려는데 명소 추천좀 해주세요',sysdate,4,3,'user2');
-insert into free_board values (free_board_f_bo_no_seq.nextval,'자유게시판17','2박3일 여행 가려는데 명소 추천좀 해주세요',sysdate,4,5,'user3');
-insert into free_board values (free_board_f_bo_no_seq.nextval,'자유게시판18','2박3일 여행 가려는데 명소 추천좀 해주세요',sysdate,4,5,'user1');
-insert into free_board values (free_board_f_bo_no_seq.nextval,'자유게시판19','2박3일 여행 가려는데 명소 추천좀 해주세요',sysdate,4,6,'user2');
-insert into free_board values (free_board_f_bo_no_seq.nextval,'자유게시판20','2박3일 여행 가려는데 명소 추천좀 해주세요',sysdate,4,8,'user2');
-insert into free_board values (free_board_f_bo_no_seq.nextval,'자유게시판21','2박3일 여행 가려는데 명소 추천좀 해주세요',sysdate,4,9,'user3');
-insert into free_board values (free_board_f_bo_no_seq.nextval,'자유게시판22','2박3일 여행 가려는데 명소 추천좀 해주세요',sysdate,4,2,'user3');
+insert into free_board values (free_board_f_bo_no_seq.nextval,'서울 맛집 추천','추천받습니다',sysdate,0,1,'user1');
+insert into free_board values (free_board_f_bo_no_seq.nextval,'경기 맛집 추천','추천받습니다',sysdate,0,2,'user2');
+insert into free_board values (free_board_f_bo_no_seq.nextval,'강원 맛집 추천','추천받습니다',sysdate,0,3,'user3');
 
 -- freeboard comment
 insert into free_board_comment values (FREE_BOARD_COMMENT_F_CO_NO_SEQ.nextval,'명동교자 칼국수 맛있어요',sysdate,1,'user3');
@@ -174,58 +158,18 @@ INSERT INTO TICKET_IMG (TI_IMG_NO, TI_IMG_URL,TI_NO) VALUES(TICKET_IMG_TI_IMG_NO
 -- 동행게시판 trip_board insert
 insert into trip_board(t_bo_no,t_bo_title,t_bo_content,t_bo_date,t_bo_readcount,t_bo_status,t_bo_person,
                     t_bo_img,t_bo_start_date,t_bo_end_date,t_bo_style,hashtag,city_no,user_id) 
-            values (trip_board_t_bo_no_seq.nextval,'서울 가자1','서울 가자1',sysdate,342,0,1,
+            values (trip_board_t_bo_no_seq.nextval,'동행게시판제목1','동행게시판내용1',sysdate,0,0,1,
                     'img1.png','2023-05-01','2023-05-10','무계획','아무나다좋아',1,'user1'); 
                     
 insert into trip_board(t_bo_no,t_bo_title,t_bo_content,t_bo_date,t_bo_readcount,t_bo_status,t_bo_person,
                     t_bo_img,t_bo_start_date,t_bo_end_date,t_bo_style,hashtag,city_no,user_id) 
-            values (trip_board_t_bo_no_seq.nextval,'서울 갈래2','서울 갈래2',sysdate,4,1,2,
-                    'img2.png','2023-06-01','2023-06-10','계획형','인싸만',1,'user2');
+            values (trip_board_t_bo_no_seq.nextval,'동행게시판제목2','동행게시판내용2',sysdate,0,0,2,
+                    'img2.png','2023-06-01','2023-06-10','계획형','인싸만',2,'user2');
                     
 insert into trip_board(t_bo_no,t_bo_title,t_bo_content,t_bo_date,t_bo_readcount,t_bo_status,t_bo_person,
                     t_bo_img,t_bo_start_date,t_bo_end_date,t_bo_style,hashtag,city_no,user_id) 
-            values (trip_board_t_bo_no_seq.nextval,'서울 가자3','서울 가자3',sysdate,75,0,6,
-                    'img3.png','2023-07-01','2023-07-10','맛집투어','맛있는거좋아하는사람',1,'user3'); 
-                    
-insert into trip_board(t_bo_no,t_bo_title,t_bo_content,t_bo_date,t_bo_readcount,t_bo_status,t_bo_person,
-                    t_bo_img,t_bo_start_date,t_bo_end_date,t_bo_style,hashtag,city_no,user_id) 
-            values (trip_board_t_bo_no_seq.nextval,'경기도 가볼래4','경기도 가볼래4',sysdate,27,1,3,
-                    'img4.png','2023-08-01','2023-08-10','무계획','드라이브여행',2,'user1'); 
-                    
-insert into trip_board(t_bo_no,t_bo_title,t_bo_content,t_bo_date,t_bo_readcount,t_bo_status,t_bo_person,
-                    t_bo_img,t_bo_start_date,t_bo_end_date,t_bo_style,hashtag,city_no,user_id) 
-            values (trip_board_t_bo_no_seq.nextval,'경기도 갈래5','경기도 갈래5',sysdate,86,0,7,
-                    'img5.png','2023-09-01','2023-09-10','계획형','맛있는거좋아하는사람',2,'user2');
-                    
-insert into trip_board(t_bo_no,t_bo_title,t_bo_content,t_bo_date,t_bo_readcount,t_bo_status,t_bo_person,
-                    t_bo_img,t_bo_start_date,t_bo_end_date,t_bo_style,hashtag,city_no,user_id) 
-            values (trip_board_t_bo_no_seq.nextval,'강원도 가자6','강원도 가자6',sysdate,22,1,10,
-                    'img6.png','2023-10-01','2023-10-10','맛집투어','인싸만',3,'user3');
-                    
-insert into trip_board(t_bo_no,t_bo_title,t_bo_content,t_bo_date,t_bo_readcount,t_bo_status,t_bo_person,
-                    t_bo_img,t_bo_start_date,t_bo_end_date,t_bo_style,hashtag,city_no,user_id) 
-            values (trip_board_t_bo_no_seq.nextval,'강원도 갈래7','강원도 갈래7',sysdate,46,0,3,
-                    'img7.png','2023-11-01','2023-11-10','무계획','아무나다좋아',3,'user1'); 
-                    
-insert into trip_board(t_bo_no,t_bo_title,t_bo_content,t_bo_date,t_bo_readcount,t_bo_status,t_bo_person,
-                    t_bo_img,t_bo_start_date,t_bo_end_date,t_bo_style,hashtag,city_no,user_id) 
-            values (trip_board_t_bo_no_seq.nextval,'부산 가자8','부산 가자8',sysdate,2,0,1,
-                    'img8.png','2023-12-01','2023-12-10','계획형','맛있는거좋아하는사람',4,'user2');
-                    
-insert into trip_board(t_bo_no,t_bo_title,t_bo_content,t_bo_date,t_bo_readcount,t_bo_status,t_bo_person,
-                    t_bo_img,t_bo_start_date,t_bo_end_date,t_bo_style,hashtag,city_no,user_id) 
-            values (trip_board_t_bo_no_seq.nextval,'부산 갈래9','부산 갈래9',sysdate,45,0,3,
-                    'img9.png','2023-05-02','2023-05-10','맛집투어','드라이브여행',4,'user3');
-                    
-insert into trip_board(t_bo_no,t_bo_title,t_bo_content,t_bo_date,t_bo_readcount,t_bo_status,t_bo_person,
-                    t_bo_img,t_bo_start_date,t_bo_end_date,t_bo_style,hashtag,city_no,user_id) 
-            values (trip_board_t_bo_no_seq.nextval,'대전 가자10','대전 가자10',sysdate,12,0,2,
-                    'img10.png','2023-06-02','2023-07-12','무계획','아무나다좋아',5,'user1'); 
-                    
-insert into trip_board(t_bo_no,t_bo_title,t_bo_content,t_bo_date,t_bo_readcount,t_bo_status,t_bo_person,
-                    t_bo_img,t_bo_start_date,t_bo_end_date,t_bo_style,hashtag,city_no,user_id) 
-            values (trip_board_t_bo_no_seq.nextval,'대전 갈래11','대전 갈래11',sysdate,67,1,8,
-                    'img11.png','2023-07-02','2023-07-12','계획형','맛있는거좋아하는사람',5,'user2');
+            values (trip_board_t_bo_no_seq.nextval,'동행게시판제목3','동행게시판내용3',sysdate,0,0,1,
+                    'img3.png','2023-07-01','2023-07-10','맛집투어','맛있는거좋아하는사람',3,'user3'); 
 
 -- 동행게시판 댓글 insert
 insert into trip_board_comment(t_co_no, t_comment_content, t_comment_date, t_bo_no, user_id) 

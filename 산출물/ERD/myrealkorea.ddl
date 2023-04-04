@@ -44,7 +44,9 @@ CREATE TABLE user_info(
 		address                       		VARCHAR2(500)		 NOT NULL,
 		gender                        		NUMBER		 NOT NULL,
 		point                         		NUMBER		 DEFAULT 0		 NULL ,
-		is_admin                      		NUMBER		 DEFAULT 1		 NULL 
+		is_admin                      		NUMBER		 DEFAULT 1		 NULL ,
+		mail_auth                     		NUMBER(10)		 DEFAULT 0		 NULL ,
+		mail_key                      		NUMBER(10)		 DEFAULT 0		 NULL 
 );
 
 
@@ -425,4 +427,3 @@ ALTER TABLE ticket_img ADD CONSTRAINT IDX_ticket_img_FK0 FOREIGN KEY (ti_no) REF
 
 ALTER TABLE kakao_info ADD CONSTRAINT IDX_kakao_info_PK PRIMARY KEY (kakao_no);
 ALTER TABLE kakao_info ADD CONSTRAINT IDX_kakao_info_FK0 FOREIGN KEY (user_id) REFERENCES user_info (user_id) on delete cascade;
-

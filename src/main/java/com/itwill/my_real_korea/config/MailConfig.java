@@ -21,8 +21,8 @@ public class MailConfig {
 		JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
 		mailSender.setHost("smtp.gmail.com");
 		mailSender.setPort(587);
-		mailSender.setUsername("kgee12300@gmail.com");
-		mailSender.setPassword("임시삭제");
+		mailSender.setUsername("myrealkorea.auth@gmail.com");
+		mailSender.setPassword("kwasdvwqsqrunggw");
 		mailSender.setDefaultEncoding("utf-8");
 		mailSender.setJavaMailProperties(properties);
 		

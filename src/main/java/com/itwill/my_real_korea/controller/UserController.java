@@ -47,7 +47,8 @@ public class UserController {
 		try {
 			userService.create(user);
 			userService.mailKeyUpdate(user);
-			forward_path="redirect:user_login_form";
+//			forward_path="redirect:user_login_form";
+			forward_path="user_main";
 		}catch (ExistedUserException e) {
 			model.addAttribute("msg", e.getMessage());
 			forward_path="user_write_form";

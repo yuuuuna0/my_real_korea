@@ -1,4 +1,23 @@
 --insert
-insert into free_board values (free_board_f_bo_no_seq.nextval,'ì„œìš¸ ë§›ì§‘ ì¶”ì²œ','ì¶”ì²œë°›ìŠµë‹ˆë‹¤',sysdate,0,1,'user1');
-insert into free_board values (free_board_f_bo_no_seq.nextval,'ê²½ê¸° ë§›ì§‘ ì¶”ì²œ','ì¶”ì²œë°›ìŠµë‹ˆë‹¤',sysdate,0,2,'user2');
-insert into free_board values (free_board_f_bo_no_seq.nextval,'ê°•ì› ë§›ì§‘ ì¶”ì²œ','ì¶”ì²œë°›ìŠµë‹ˆë‹¤',sysdate,0,3,'user3');
+insert into free_board values (free_board_f_bo_no_seq.nextval,'¼­¿ï ¸ÀÁı ÃßÃµ','À§»ı±ò²ûÇÑ°÷ ¼±È£ÇÕ´Ï´Ù','2023-01-11',0,1,'user1');
+insert into free_board values (free_board_f_bo_no_seq.nextval,'°æ±â ¸ÀÁı ÃßÃµ','Å¬¸°ÇÑ À½½ÄÀ¸·Î ÃßÃµºÎÅ¹ÇÕ´Ï´Ù','2023-01-19',3,2,'user2');
+insert into free_board values (free_board_f_bo_no_seq.nextval,'°­¿ø ¸ÀÁı ÃßÃµ','¸é·ù ÁÁ¾ÆÇÕ´Ï´Ù','2023-01-22',0,3,'user3');
+insert into free_board values (free_board_f_bo_no_seq.nextval,'ºÎ»ê ÇØ¿î´ë 1¹Ú2ÀÏ ÃßÃµ','ÀÚ¿¬º¸´Â°Å ÁÁ¾ÆÇÕ´Ï´Ù','2022-01-19',7,4,'user1');
+insert into free_board values (free_board_f_bo_no_seq.nextval,'´ëÀü ¿©ÇàÄÚ½º ÃßÃµÇØÁÖ¼¼¿ä','2¹Ú 3ÀÏ ÄÚ½º·Î ¿©Çà ¿¹Á¤ÀÔ´Ï´Ù','2023-02-12',1,5,'user2');
+insert into free_board values (free_board_f_bo_no_seq.nextval,'¼­¿ï ÇÖÇÃ ÃßÃµ¹Ş½À´Ï´Ù','»ç¶÷¸¹Àº°÷ ¼±È£ÇÕ´Ï´Ù','2023-03-19',9,1,'user3');
+insert into free_board values (free_board_f_bo_no_seq.nextval,'°æ±âµµ Ç³°æ ÁÁÀº°÷ ÃßÃµÇØÁÖ¼¼¿ä','1¹Ú2ÀÏ ¿©Çà°¡·Á°í¿ä','2022-01-03',6,2,'user1');
+insert into free_board values (free_board_f_bo_no_seq.nextval,'°æ±âµµ ÆÄÁÖÂÊ ¾îÁ×¸ÀÁı ÃßÃµÇØÁÖ¼¼¿ä','ÆÄÁÖ¿©Çà°©´Ï´Ù','2022-07-03',6,2,'user1');
+insert into free_board values (free_board_f_bo_no_seq.nextval,'°­¿øµµ º¢²ÉÃàÁ¦ ÇÏ³ª¿ä?','º¢²ÉÁ» º¸°í ½Í³×¿ä','2022-09-03',13,3,'user2');
+insert into free_board values (free_board_f_bo_no_seq.nextval,'ºÎ»ê ±¹¹äÁı ¾îµğ°¡ ÀßÇÏ³ª¿ä','±Ùº»ÀÖ´Â°÷À¸·Î ÃßÃµºÎÅ¹ÇÕ´Ï´Ù','2022-11-03',11,4,'user3');
+insert into free_board values (free_board_f_bo_no_seq.nextval,'´ëÀü À¯¼º¿ÂÃµ ¾î¶²°¡¿ä','°¡º¸½ÅºĞ ÈÄ±âÁ» ³²°ÜÁÖ¼¼¿ä',sysdate,4,5,'user1');
+insert into free_board values (free_board_f_bo_no_seq.nextval,'ÀÚÀ¯°Ô½ÃÆÇ12','2¹Ú3ÀÏ ¿©Çà °¡·Á´Âµ¥ ¸í¼Ò ÃßÃµÁ» ÇØÁÖ¼¼¿ä',sysdate,4,5,'user1');
+insert into free_board values (free_board_f_bo_no_seq.nextval,'ÀÚÀ¯°Ô½ÃÆÇ13','2¹Ú3ÀÏ ¿©Çà °¡·Á´Âµ¥ ¸í¼Ò ÃßÃµÁ» ÇØÁÖ¼¼¿ä',sysdate,4,13,'user2');
+insert into free_board values (free_board_f_bo_no_seq.nextval,'ÀÚÀ¯°Ô½ÃÆÇ14','2¹Ú3ÀÏ ¿©Çà °¡·Á´Âµ¥ ¸í¼Ò ÃßÃµÁ» ÇØÁÖ¼¼¿ä',sysdate,4,1,'user3');
+insert into free_board values (free_board_f_bo_no_seq.nextval,'ÀÚÀ¯°Ô½ÃÆÇ15','2¹Ú3ÀÏ ¿©Çà °¡·Á´Âµ¥ ¸í¼Ò ÃßÃµÁ» ÇØÁÖ¼¼¿ä',sysdate,4,12,'user1');
+insert into free_board values (free_board_f_bo_no_seq.nextval,'ÀÚÀ¯°Ô½ÃÆÇ16','2¹Ú3ÀÏ ¿©Çà °¡·Á´Âµ¥ ¸í¼Ò ÃßÃµÁ» ÇØÁÖ¼¼¿ä',sysdate,4,3,'user2');
+insert into free_board values (free_board_f_bo_no_seq.nextval,'ÀÚÀ¯°Ô½ÃÆÇ17','2¹Ú3ÀÏ ¿©Çà °¡·Á´Âµ¥ ¸í¼Ò ÃßÃµÁ» ÇØÁÖ¼¼¿ä',sysdate,4,5,'user3');
+insert into free_board values (free_board_f_bo_no_seq.nextval,'ÀÚÀ¯°Ô½ÃÆÇ18','2¹Ú3ÀÏ ¿©Çà °¡·Á´Âµ¥ ¸í¼Ò ÃßÃµÁ» ÇØÁÖ¼¼¿ä',sysdate,4,5,'user1');
+insert into free_board values (free_board_f_bo_no_seq.nextval,'ÀÚÀ¯°Ô½ÃÆÇ19','2¹Ú3ÀÏ ¿©Çà °¡·Á´Âµ¥ ¸í¼Ò ÃßÃµÁ» ÇØÁÖ¼¼¿ä',sysdate,4,6,'user2');
+insert into free_board values (free_board_f_bo_no_seq.nextval,'ÀÚÀ¯°Ô½ÃÆÇ20','2¹Ú3ÀÏ ¿©Çà °¡·Á´Âµ¥ ¸í¼Ò ÃßÃµÁ» ÇØÁÖ¼¼¿ä',sysdate,4,8,'user2');
+insert into free_board values (free_board_f_bo_no_seq.nextval,'ÀÚÀ¯°Ô½ÃÆÇ21','2¹Ú3ÀÏ ¿©Çà °¡·Á´Âµ¥ ¸í¼Ò ÃßÃµÁ» ÇØÁÖ¼¼¿ä',sysdate,4,9,'user3');
+insert into free_board values (free_board_f_bo_no_seq.nextval,'ÀÚÀ¯°Ô½ÃÆÇ22','2¹Ú3ÀÏ ¿©Çà °¡·Á´Âµ¥ ¸í¼Ò ÃßÃµÁ» ÇØÁÖ¼¼¿ä',sysdate,4,2,'user3');

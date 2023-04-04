@@ -66,5 +66,6 @@ public class TicketController {
     }
 
     // 비 로그인, 티켓 예약 페이지 요청 시 로그인 폼 -> (@LoginCheck HttpServletRequest request)
-    // 로그인 , 티켓 예약 페이지로 forwarding -> 예약 페이지는 rest
+    // 로그인 , 티켓 예약 페이지로 forwarding -> 예약 페이지는 rest (수량 변경 등)
+    // 결제 -> 페이지 결제 완료시 -> 메인이나 결제내역으로 redirect
 }

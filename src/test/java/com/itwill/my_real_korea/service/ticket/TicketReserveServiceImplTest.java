@@ -1,5 +1,6 @@
 package com.itwill.my_real_korea.service.ticket;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.Date;
@@ -34,21 +35,22 @@ class TicketReserveServiceImplTest {
 	}
 	@Test
 	void testSelectByTicketReserveUser() throws Exception{
-		List<TicketReserve> tickeList = ticketReserveService.selectByTicketReserveUser("userid");
+		List<TicketReserve> tickeList = ticketReserveService.selectByTicketReserveUser("user1");
 		System.out.println(tickeList);
 		
 		//System.out.println(ticketReserveService.selectByTicketReserveUser("user1"));
 		
 	}
-
-	//@Test
+	@Disabled
+	@Test
 	void testSelectByTicketReserveNo() {
 		fail("Not yet implemented");
 	}
 
-	//@Test
-	void testDeleteTicketReserve() {
-		fail("Not yet implemented");
+	@Disabled
+	@Test
+	void testDeleteTicketReserve() throws Exception{
+		assertEquals(ticketReserveService.deleteTicketReserve(5),1);
 	}
 
 }

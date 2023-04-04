@@ -13,6 +13,20 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class User {
 	
+/*
+user_id  NOT NULL VARCHAR2(50)  
+password NOT NULL VARCHAR2(100) 
+name     NOT NULL VARCHAR2(50)  
+nickname NOT NULL VARCHAR2(50)  
+phone    NOT NULL VARCHAR2(100) 
+email    NOT NULL VARCHAR2(100) 
+birth    NOT NULL DATE          
+address  NOT NULL VARCHAR2(500) 
+gender   NOT NULL NUMBER        
+point             NUMBER        
+is_admin          NUMBER    
+ */
+	
 	private String userId;
 	private String password;
 	private String name;
@@ -25,12 +39,11 @@ public class User {
 	private int gender;
 	private int point;
 	private int isAdmin;
-	private int mailAuth;
-	private int mailKey;
 	private UserAddInfo userAddInfo;
 	private UserImg userImg;
+	
 	public User(String userId, String password, String name, String nickname, String phone, String email, Date birth,
-			String address, int gender, int point, int isAdmin, int mailAuth, int mailKey) {
+			String address, int gender, int point, int isAdmin) {
 		super();
 		this.userId = userId;
 		this.password = password;
@@ -43,9 +56,11 @@ public class User {
 		this.gender = gender;
 		this.point = point;
 		this.isAdmin = isAdmin;
-		this.mailAuth = mailAuth;
-		this.mailKey = mailKey;
 	}
+	
+	
+	
+	
 	
 	
 }

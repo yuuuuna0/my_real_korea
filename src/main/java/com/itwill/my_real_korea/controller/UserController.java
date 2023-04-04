@@ -18,34 +18,31 @@ import com.itwill.my_real_korea.exception.PasswordMismatchException;
 import com.itwill.my_real_korea.exception.UserNotFoundException;
 import com.itwill.my_real_korea.service.user.UserService;
 
-import io.swagger.annotations.ApiOperation;
-
 @Controller
 public class UserController {
 	
 	@Autowired
 	private UserService userService;
 
-	@ApiOperation(value = "메인페이지")
+//	@ApiOperation(value = "메인페이지")
 	@RequestMapping(value = "/user_main", produces = "application/json;charset=UTF-8")
 	public String user_main() {
 		return "user_main";
 	}
 	
-	@ApiOperation(value = "회원가입 폼")
+//	@ApiOperation(value = "회원가입 폼")
 	@GetMapping(value = "/user_write_form", produces = "application/json;charset=UTF-8")
 	public String user_write_form() {
 		String forward_path = "user_write_form";
 		return forward_path;
 	}
 	
-	@ApiOperation(value = "회원가입 액션")
+//	@ApiOperation(value = "회원가입 액션")
 	@PostMapping(value = "user_write_action", produces = "application/json;charset=UTF-8")
 	public String user_write_action(@ModelAttribute("fuser") User user,Model model) throws Exception {
 		String forward_path = "";
 		try {
 			userService.create(user);
-			userService.mailKeyUpdate(user);
 			forward_path="redirect:user_login_form";
 		}catch (ExistedUserException e) {
 			model.addAttribute("msg", e.getMessage());
@@ -54,14 +51,14 @@ public class UserController {
 		return forward_path;
 	}
 	
-	@ApiOperation(value = "로그인 폼")
+//	@ApiOperation(value = "로그인 폼")
 	@GetMapping(value = "/user_login_form", produces = "application/json;charset=UTF-8")
 	public String user_login_form() {
 		String forward_path = "user_login_form";
 		return forward_path;
 	}
 	
-	@ApiOperation(value = "로그인 액션")
+//	@ApiOperation(value = "로그인 액션")
 	@PostMapping(value = "user_login_action", produces = "application/json;charset=UTF-8")
 	public String user_login_action(@ModelAttribute("fuser") User user,Model model,HttpSession session) throws Exception {
 		String forwardPath = "";
@@ -81,16 +78,31 @@ public class UserController {
 		return forwardPath;
 	}
 	
-	@GetMapping(value = "/user_auth_form")
-	public String user_auth_form() {
-		String forward_path = "usr_auth_form";
-		return forward_path;
-		
-	}
 	
+//	@ApiOperation(value = "로그인 액션")
+//	@PostMapping(value = "user_login_action", produces = "application/json;charset=UTF-8")
+//	public String user_login_action(@ModelAttribute("fuser") User user, Model model, HttpSession session, HttpServletRequest request) throws Exception {
+//	    String forwardPath = "";
+//	    try {
+//	        userService.login(user.getUserId(), user.getPassword());
+//	        session.invalidate(); // 기존 세션 무효화
+//	        session = request.getSession(true); // 새로운 세션 생성
+//	        session.setAttribute("sUserId", user.getUserId()); // 새로운 세션에 사용자 정보 저장
+//	        forwardPath = "redirect:user_main";
+//	    } catch (UserNotFoundException e) {
+//	        e.printStackTrace();
+//	        model.addAttribute("msg1", e.getMessage());
+//	        forwardPath = "user_login_form";
+//	    } catch (PasswordMismatchException e) {
+//	        e.printStackTrace();
+//	        model.addAttribute("msg2", e.getMessage());
+//	        forwardPath = "user_login_form";
+//	    }
+//	    return forwardPath;
+//	}
 	
 	@LoginCheck
-	@ApiOperation(value = "회원 정보 보기")
+//	@ApiOperation(value = "회원 정보 보기")
 	@GetMapping(value = "/user_view", produces = "application/json;charset=UTF-8")
 	public String user_view(HttpServletRequest request) throws Exception {
 	    String forwardPath = "";

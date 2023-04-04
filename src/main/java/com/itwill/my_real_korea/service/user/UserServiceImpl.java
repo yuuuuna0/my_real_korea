@@ -1,12 +1,8 @@
 package com.itwill.my_real_korea.service.user;
 
-import java.io.UnsupportedEncodingException;
 import java.util.List;
 
-import javax.mail.MessagingException;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import com.itwill.my_real_korea.dao.user.UserDao;
@@ -20,30 +16,21 @@ public class UserServiceImpl implements UserService{
 	
 	@Autowired
 	private UserDao userDao;
-	@Autowired
-	public EmailService emailService;
-	
+
 	public UserServiceImpl() throws Exception {
 		
 	}
 	
 	//1. 회원 가입
 	@Override
-	public int create(User user)throws ExistedUserException, Exception {
+	public int create(User user)throws ExistedUserException, Exception{
 		//아이디 중복 체크
 		if(userDao.isExistUser(user.getUserId())) {
 			throw new ExistedUserException(user.getUserId() + " 는 이미 존재하는아이디입니다.");
 		}
 		//회원가입
-		userDao.create(user);
-		//mail_key 업데이트
-		userDao.mailKeyUpdate(user);
-		
-//		emailService.sendEmail(user.getEmail());
-//		System.out.println("UserService 이메일 전송");
-		return 1;
+		return userDao.create(user);
 	}
-	
 	
 	//2. 회원 정보 보기 (마이 페이지)
 	@Override
@@ -100,25 +87,6 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public String findIdByEmailName(User user) throws Exception {
 		return userDao.findIdByEmailName(user);
-	}
-	
-	
-	//21. 메일 인증여부 확인
-	public int mailAuth(String userId) throws Exception {
-		return userDao.mailAuth(userId);
-	}
-	
-	//22. 메일 인증번호 업데이트
-    public int mailKeyUpdate(User user) throws Exception {
-        // 이메일 전송 및 인증번호 저장
-        String authNum = emailService.sendEmail(user.getEmail());
-        user.setMailKey(Integer.parseInt(authNum));
-        return userDao.mailKeyUpdate(user);
-    }
-	
-	//23. 메일 인증여부 업데이트
-	public int mailAuthUpdate(User user) throws Exception {
-		return userDao.mailAuthUpdate(user);
 	}
 	
 }

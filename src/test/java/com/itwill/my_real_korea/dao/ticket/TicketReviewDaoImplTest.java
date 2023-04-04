@@ -28,18 +28,17 @@ class TicketReviewDaoImplTest {
         assertEquals(rowCount,1);
     }
 
-    //티켓 리뷰 - 페이징
     @Test
     void selectByTicketReview() {
         List<TicketReview> ticketReviewList
-                = ticketReviewDao.selectByTicketReview(1,10,1);
+                = ticketReviewDao.selectByTicketReview(1);
         System.out.println(ticketReviewList);
     }
-    //내 리뷰 보기 - 페이징
+
     @Test
     void selectByTicketReviewUser() {
         List<TicketReview> ticketReviewUserList
-                = ticketReviewDao.selectByTicketReviewUser(1,10,"user1");
+                = ticketReviewDao.selectByTicketReviewUser("user1");
         System.out.println(ticketReviewUserList);
     }
 

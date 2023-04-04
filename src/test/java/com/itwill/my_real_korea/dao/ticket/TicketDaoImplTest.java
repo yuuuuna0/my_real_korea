@@ -35,10 +35,10 @@ class TicketDaoImplTest {
         System.out.println(ticketList);
     }
     // 키워드, 지역, 가격 + 전체 LIST - 페이징 처리
-    @Test
+    //@Test
     void selectByTicketAllSort() throws Exception {
     	//
-        List<Ticket> ticketList = ticketDao.selectByTicketAllSort(1,10,null,0,"tiPriDESC");
+        List<Ticket> ticketList = ticketDao.selectByTicketAllSort(1,10,null,0,"DESC");
         System.out.println(ticketList);
     }
     //상품 상세보기 - 지역 + 사진

@@ -27,14 +27,6 @@ public interface UserMapper {
 	public int isMatchPassword(Map<String,Object> map);
 	//13. 이메일, 이름으로 아이디 찾기
 	public String findIdByEmailName(User user);
-	
-	//21. 메일 인증여부 확인
-	public int mailAuth(String userId);
-	//22. 메일 인증번호 업데이트
-	public int mailKeyUpdate(User user);
-	//23. 메일 인증여부 업데이트
-	public int mailAuthUpdate(User user);
-	
 
 	
 }

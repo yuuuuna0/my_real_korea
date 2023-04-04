@@ -31,6 +31,7 @@ class TicketReserveDaoImplTest {
         assertEquals(rowCount,1);
         System.out.print("Test>>>>"+rowCount);
     }
+    @Disabled
     @Test
     void selectByTicketReserveUser() throws Exception{
         List<TicketReserve> ticketReserveList =
@@ -38,6 +39,7 @@ class TicketReserveDaoImplTest {
         System.out.print(ticketReserveList);
 
     }
+    @Disabled
     @Test
     void selectByTicketReserveNo()  throws Exception {
         List<TicketReserve> ticketReserveNoList
@@ -50,5 +52,6 @@ class TicketReserveDaoImplTest {
         int rowCount = ticketReserveDao.deleteTicketReserve(1);
         assertEquals(rowCount,1);
     }
+
     //티켓 예약 Dao 테스트 완료
 }

@@ -15,6 +15,7 @@ public interface TicketDao {
     //키워드, 지역, 가격 + 정렬 - 페이징 처리
     List<Ticket> selectByTicketAllSort(int pageStart, int pageEnd, String keyword, 
     									int cityNo, String sortOrder) throws Exception;
+
     //상품 상세보기 - 지역 + 사진
     List <Ticket> selectByTicketNoCityWithImg(int tiNo) throws Exception;
 
@@ -29,6 +30,8 @@ public interface TicketDao {
     
     // 티켓 번호로 찾기
 	Ticket selectTicketNo(int tiNo);
+    
+
 
     /*
      // 티켓 리스트

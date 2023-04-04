@@ -20,8 +20,6 @@ public interface TicketReserveDao {
     //티켓예약 상세보기 - 번호 + 아이디
     TicketReserve selectTicketReserveTest(int tiRsNo) throws Exception;
 
-
-
-
-
+    /* test
+    TicketReserve selectTicketReserveTest(int tiRsNo, String userId) throws Exception;*/
 }

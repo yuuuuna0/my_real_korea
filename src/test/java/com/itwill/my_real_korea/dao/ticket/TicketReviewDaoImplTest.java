@@ -31,14 +31,14 @@ class TicketReviewDaoImplTest {
     @Test
     void selectByTicketReview() {
         List<TicketReview> ticketReviewList
-                = ticketReviewDao.selectByTicketReview(1);
+                = ticketReviewDao.selectByTicketReview(1,10,1);
         System.out.println(ticketReviewList);
     }
 
     @Test
     void selectByTicketReviewUser() {
         List<TicketReview> ticketReviewUserList
-                = ticketReviewDao.selectByTicketReviewUser("user1");
+                = ticketReviewDao.selectByTicketReviewUser(1,10,"user1");
         System.out.println(ticketReviewUserList);
     }
 

@@ -69,7 +69,7 @@ public class UserController {
 	    try {
 	        User loginUser = userService.login(user.getUserId(), user.getPassword());
 	        if (loginUser.getMailAuth() == 0) {
-	        	model.addAttribute("mailKey", loginUser.getMailKey());
+	        	model.addAttribute("authUser", loginUser);
 	            forwardPath = "user_auth_form";
 	        } else {
 	            session.setAttribute("sUserId", loginUser.getUserId());
@@ -87,7 +87,7 @@ public class UserController {
 	    return forwardPath;
 	}
 	
-	
+	/************** 수정중 ****************/
 	@LoginCheck
 	@ApiOperation(value = "메일 인증 폼")
 	@PostMapping(value = "/user_auth_form")
@@ -112,6 +112,8 @@ public class UserController {
 	    }
 	    return "user_auth_form";
 	}
+	
+	/*************************************/
 	
 	
 	@LoginCheck

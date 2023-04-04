@@ -135,15 +135,15 @@ insert into free_board values (free_board_f_bo_no_seq.nextval,'강원도 벚꽃�
 insert into free_board values (free_board_f_bo_no_seq.nextval,'부산 국밥집 어디가 잘하나요','근본있는곳으로 추천부탁합니다','2022-11-03',11,4,'user3');
 insert into free_board values (free_board_f_bo_no_seq.nextval,'대전 유성온천 어떤가요','가보신분 후기좀 남겨주세요',sysdate,4,5,'user1');
 insert into free_board values (free_board_f_bo_no_seq.nextval,'자유게시판12','2박3일 여행 가려는데 명소 추천좀 해주세요',sysdate,4,5,'user1');
-insert into free_board values (free_board_f_bo_no_seq.nextval,'자유게시판13','2박3일 여행 가려는데 명소 추천좀 해주세요',sysdate,4,13,'user2');
+insert into free_board values (free_board_f_bo_no_seq.nextval,'자유게시판13','2박3일 여행 가려는데 명소 추천좀 해주세요',sysdate,4,1,'user2');
 insert into free_board values (free_board_f_bo_no_seq.nextval,'자유게시판14','2박3일 여행 가려는데 명소 추천좀 해주세요',sysdate,4,1,'user3');
-insert into free_board values (free_board_f_bo_no_seq.nextval,'자유게시판15','2박3일 여행 가려는데 명소 추천좀 해주세요',sysdate,4,12,'user1');
+insert into free_board values (free_board_f_bo_no_seq.nextval,'자유게시판15','2박3일 여행 가려는데 명소 추천좀 해주세요',sysdate,4,1,'user1');
 insert into free_board values (free_board_f_bo_no_seq.nextval,'자유게시판16','2박3일 여행 가려는데 명소 추천좀 해주세요',sysdate,4,3,'user2');
 insert into free_board values (free_board_f_bo_no_seq.nextval,'자유게시판17','2박3일 여행 가려는데 명소 추천좀 해주세요',sysdate,4,5,'user3');
 insert into free_board values (free_board_f_bo_no_seq.nextval,'자유게시판18','2박3일 여행 가려는데 명소 추천좀 해주세요',sysdate,4,5,'user1');
-insert into free_board values (free_board_f_bo_no_seq.nextval,'자유게시판19','2박3일 여행 가려는데 명소 추천좀 해주세요',sysdate,4,6,'user2');
-insert into free_board values (free_board_f_bo_no_seq.nextval,'자유게시판20','2박3일 여행 가려는데 명소 추천좀 해주세요',sysdate,4,8,'user2');
-insert into free_board values (free_board_f_bo_no_seq.nextval,'자유게시판21','2박3일 여행 가려는데 명소 추천좀 해주세요',sysdate,4,9,'user3');
+insert into free_board values (free_board_f_bo_no_seq.nextval,'자유게시판19','2박3일 여행 가려는데 명소 추천좀 해주세요',sysdate,4,4,'user2');
+insert into free_board values (free_board_f_bo_no_seq.nextval,'자유게시판20','2박3일 여행 가려는데 명소 추천좀 해주세요',sysdate,4,3,'user2');
+insert into free_board values (free_board_f_bo_no_seq.nextval,'자유게시판21','2박3일 여행 가려는데 명소 추천좀 해주세요',sysdate,4,3,'user3');
 insert into free_board values (free_board_f_bo_no_seq.nextval,'자유게시판22','2박3일 여행 가려는데 명소 추천좀 해주세요',sysdate,4,2,'user3');
 
 -- freeboard comment

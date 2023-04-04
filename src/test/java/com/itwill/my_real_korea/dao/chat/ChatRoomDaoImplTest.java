@@ -31,8 +31,8 @@ class ChatRoomDaoImplTest {
 	@Disabled
 	@Test
 	void testSelectCheckByRoomNo() {
-		assertNotNull(chatRoomDao.selectCheckByRoomNo(2));
-		System.out.println(chatRoomDao.selectCheckByRoomNo(2));
+		assertNotNull(chatRoomDao.selectByRoomNo(2));
+		System.out.println(chatRoomDao.selectByRoomNo(2));
 	}
 
 	@Disabled

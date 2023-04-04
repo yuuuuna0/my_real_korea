@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
@@ -28,7 +29,9 @@ public class ChatHandler extends TextWebSocketHandler{
 	private static List<WebSocketSession> sessionList = new ArrayList<WebSocketSession>();
 	
 	// ObjectMapper : JSON 데이터를 java객체로, java객체를 JSON데이터로 변환
+	@Autowired
 	private ObjectMapper objectMapper;
+	@Autowired
 	private ChatService chatService;
 	
 	
@@ -47,7 +50,7 @@ public class ChatHandler extends TextWebSocketHandler{
 		// 채팅유저가 전송한(request) payload를 chatMsg로 변경
 		ChatMsg chatMsg = objectMapper.readValue(payload, ChatMsg.class);
 		// 채팅 메세지가 가진 roomNo로 채팅방 정보 조회
-		ChatRoom chatRoom = chatService.selectCheckByRoomNo(chatMsg.getRoomNo());
+		ChatRoom chatRoom = chatService.selectRoomByRoomNo(chatMsg.getRoomNo());
 		// 채팅방에 있는 모든 채팅유저들에게 메세지 전달
 		chatRoom.handleAction(session, chatMsg, chatService);
 		

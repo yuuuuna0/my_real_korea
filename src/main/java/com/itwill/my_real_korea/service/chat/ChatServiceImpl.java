@@ -39,8 +39,8 @@ public class ChatServiceImpl implements ChatService{
 
 	// 채팅방 목록 선택 기능 (roomNo로 채팅방 1개 보기)
 	@Override
-	public ChatRoom selectCheckByRoomNo(int roomNo) {
-		return chatRoomDao.selectCheckByRoomNo(roomNo);
+	public ChatRoom selectRoomByRoomNo(int roomNo) {
+		return chatRoomDao.selectByRoomNo(roomNo);
 	}
 
 	/*
@@ -121,6 +121,7 @@ public class ChatServiceImpl implements ChatService{
 	// 채팅방 1개의 읽지 않은 메세지 보기
 	@Override
 	public List<ChatMsg> selectNotReadMsg(int roomNo, String userId) {
+		chatMsgDao.updateReadMsg(roomNo, userId); // 읽음으로 변경
 		return chatMsgDao.selectNotReadMsg(roomNo, userId);
 	}
 

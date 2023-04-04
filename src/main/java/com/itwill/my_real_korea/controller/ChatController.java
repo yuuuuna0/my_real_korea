@@ -30,6 +30,22 @@ public class ChatController {
 		return "chat";
 	}
 	
+	// TEST 용 임시
+	@GetMapping("/chat_room")
+	public String chatRoom() {
+		
+		log.info("@ChatController, chat GET()");
+		return "chat_room";
+	}
+	// TEST 용 임시
+	@GetMapping("/chat_appointment")
+	public String chatApp() {
+		
+		log.info("@ChatController, chat GET()");
+		return "chat_appointment";
+	}
+	
+	
 	// 채팅방 목록 보기 - 페이지로 할 지 rest 로 할 지 ...?
 	@LoginCheck
 	@GetMapping("/chatroom")

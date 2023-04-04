@@ -28,11 +28,11 @@ class ChatServiceImplTest {
 		System.out.println(chatService.selectAll("user1"));
 	}
 
-	@Disabled
+	
 	@Test
-	void testSelectCheckByRoomNo() {
-		assertNotNull(chatService.selectCheckByRoomNo(2)); 
-		System.out.println(chatService.selectCheckByRoomNo(2));
+	void testSelectRoomByRoomNo() {
+		assertNotNull(chatService.selectRoomByRoomNo(2)); 
+		System.out.println(chatService.selectRoomByRoomNo(2));
 	}
 
 	@Disabled
@@ -50,7 +50,7 @@ class ChatServiceImplTest {
 		System.out.println(isDuplicate);
 	}
 
-	
+	@Disabled
 	@Test
 	void testInsertChatRoom() {
 		int rowCount = chatService.insertChatRoom(new ChatRoom(0, "챗이름추가2", "user2", "user1"));

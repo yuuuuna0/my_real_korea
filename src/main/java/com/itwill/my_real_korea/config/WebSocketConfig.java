@@ -1,5 +1,6 @@
 package com.itwill.my_real_korea.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.socket.config.annotation.EnableWebSocket;
 import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
@@ -14,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 @EnableWebSocket // WebSocket 활성화
 public class WebSocketConfig implements WebSocketConfigurer{
 
+	@Autowired
 	private final ChatHandler chatHandler;
 	
 	@Override

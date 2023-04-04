@@ -5975,12 +5975,12 @@ a.social_bt.linkedin:before {
   position: relative;
 }
 #carousel-home .owl-carousel .owl-slide {
-  height: 650px;
+  height: 750px;
   position: relative;
 }
 @media (max-width: 767px) {
   #carousel-home .owl-carousel .owl-slide {
-    height: 460px;
+    height: 750px;
   }
 }
 #carousel-home .owl-carousel .owl-slide-animated {

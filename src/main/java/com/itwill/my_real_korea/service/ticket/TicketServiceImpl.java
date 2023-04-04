@@ -24,17 +24,18 @@ public class TicketServiceImpl implements TicketService{
         return ticketDao.insertTicket(ticket);
     }
     @Override
-    public PageMakerDto<Ticket> selectAllTicket(int currentPage, String sortOrder) throws Exception {
+    public PageMakerDto<Ticket> selectAllTicket(int currentPage/*, String sortOrder*/) throws Exception {
 
         //ticket 전체 글 수
         int totTicketCount = ticketDao.selectAllTicketCount();
         //페이징
         PageMaker pageMaker = new PageMaker(totTicketCount, currentPage);
-        List<Ticket> ticketList = ticketDao.selectAllTicket(pageMaker.getPageBegin(),pageMaker.getPageEnd(),sortOrder);
+        List<Ticket> ticketList = ticketDao.selectAllTicket(pageMaker.getPageBegin(),pageMaker.getPageEnd());
 
         return new PageMakerDto<Ticket>(ticketList, pageMaker, totTicketCount);
     }
 
+    //List
     @Override
     public PageMakerDto<Ticket> selectByTicketAllSort(int currentPage, String keyword, int cityNo, String sortOrder) throws Exception {
         int totTicketCount = ticketDao.selectAllTicketCount(); // 전체 글

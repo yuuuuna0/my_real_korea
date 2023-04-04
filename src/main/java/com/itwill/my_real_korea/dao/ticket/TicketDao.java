@@ -10,7 +10,7 @@ public interface TicketDao {
     int insertTicket(Ticket ticket) throws Exception;
 
     // 티켓 리스트
-    List<Ticket> selectAllTicket(int pageStart, int pageEnd, String sortOrder) throws Exception;
+    List<Ticket> selectAllTicket(int pageStart, int pageEnd/*, String sortOrder*/) throws Exception;
 
     //키워드, 지역, 가격 + 정렬 - 페이징 처리
     List<Ticket> selectByTicketAllSort(int pageStart, int pageEnd, String keyword, 

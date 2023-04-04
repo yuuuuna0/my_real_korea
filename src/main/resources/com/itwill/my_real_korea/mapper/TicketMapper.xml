@@ -30,19 +30,13 @@
 							   ON T.CITY_NO=C.CITY_NO
 						  JOIN TICKET_IMG TI
 							   ON T.TI_NO = TI.TI_NO
-			<if test="sortOrder != null">
+				 ORDER BY T.TI_NO
+			<!--<if test="sortOrder != null">
 				<choose>
-					<when test="sortOrder == 'ASC'">
-						ORDER BY T.TI_NO ASC
-					</when>
-					<when test="sortOrder == 'DESC'">
-						ORDER BY T.TI_NO DESC
-					</when>
-					<otherwise>
-						ORDER BY T.TI_NO ASC
-					</otherwise>
+					<when test="sortOrder == 'ASC'">ORDER BY T.TI_NO ASC</when>
+					<when test="sortOrder == 'DESC'">ORDER BY T.TI_NO DESC</when>
 				</choose>
-			</if>
+			</if>-->
 			 )TIALL
 		)
 		<![CDATA[WHERE IDX >= #{pageStart} AND IDX <=#{pageEnd}]]>

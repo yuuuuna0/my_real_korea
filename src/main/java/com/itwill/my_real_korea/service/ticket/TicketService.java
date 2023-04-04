@@ -11,8 +11,8 @@ public interface TicketService {
     // 티켓 생성
     int insertTicket(Ticket ticket) throws Exception;
 
-    // 티켓 리스트
-    PageMakerDto<Ticket> selectAllTicket(int currentPage, String sortOrder) throws Exception;
+    // 티켓 리스트 -- DESC ALLSORT 에서 ?
+    PageMakerDto<Ticket> selectAllTicket(int currentPage/*, String sortOrder*/) throws Exception;
 
     //키워드, 지역, 가격 + 정렬 - 페이징 처리
     PageMakerDto<Ticket> selectByTicketAllSort(int currentPage, String keyword,

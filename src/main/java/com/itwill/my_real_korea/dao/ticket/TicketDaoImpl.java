@@ -33,11 +33,11 @@ public class TicketDaoImpl implements TicketDao{
 	
 	// 전체 목록 + 정렬 - 페이징
 	@Override
-	public List<Ticket> selectAllTicket(int pageStart, int pageEnd, String sortOrder) throws Exception {
+	public List<Ticket> selectAllTicket(int pageStart, int pageEnd/*, String sortOrder*/) throws Exception {
 		Map<String, Object> ticketPageMap = new HashMap<>();
 		ticketPageMap.put("pageStart", pageStart);
 		ticketPageMap.put("pageEnd",pageEnd);
-		ticketPageMap.put("sortOrder",sortOrder);
+		//ticketPageMap.put("sortOrder",sortOrder);
 		return ticketMapper.selectAllTicket(ticketPageMap);
 	}
 

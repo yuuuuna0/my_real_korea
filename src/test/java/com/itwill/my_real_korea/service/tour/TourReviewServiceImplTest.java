@@ -2,6 +2,8 @@ package com.itwill.my_real_korea.service.tour;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -30,14 +32,14 @@ class TourReviewServiceImplTest {
 		assertEquals(rowCount, 1);
 	}
 
+	@Test
 	void testFindByUserId() throws Exception{
-		PageMakerDto<TourReview> tourReviewList=tourReviewService.findByUserId(1, "desc", "user1");
+		List<TourReview> tourReviewList=tourReviewService.findByUserId("user1");
 		System.out.println(tourReviewList);
 	}
 
-	@Test
 	void testFindByToNo() throws Exception{
-		PageMakerDto<TourReview> tourReviewList=tourReviewService.findByToNo(1, "desc", 5);
+		List<TourReview> tourReviewList=tourReviewService.findByToNo(5);
 		System.out.println(tourReviewList);
 	}
 

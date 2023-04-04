@@ -238,7 +238,7 @@ $('.booking_time').timeDropper({
 	minutesInterval: '15'
 });
 
-/* Modal Sign In */
+/* Modal Sign In 
 $('#access_link').magnificPopup({
 	type: 'inline',
 	fixedContentPos: true,
@@ -250,6 +250,7 @@ $('#access_link').magnificPopup({
 	removalDelay: 300,
 	mainClass: 'my-mfp-zoom-in'
 });
+*/
 
 /* Show Password */
 $('#password').hidePassword('focus', {

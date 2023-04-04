@@ -1,30 +1,31 @@
 /*************** user ***********************/
 --user_info
-insert into user_info(user_id,password,name,nickname,phone,email,birth,address,gender,point,is_admin,mail_auth,mail_key) 
-	values('admin','admin0000','관리자','관리자','010-0000-0000','admin0@gmail.com','2000-01-01','테헤란로0',0,0,0,1,0); 
+insert into user_info(user_id,password,name,nickname,phone,email,birth,address,gender,point,is_admin,mail_auth,mail_key)
+	values('admin','admin0000','관리자','관리자','010-0000-0000','admin0@gmail.com','2000-01-01','테헤란로0',0,0,0,1,0);
 
-insert into user_info(user_id,password,name,nickname,phone,email,birth,address,gender,point,is_admin,mail_auth,mail_key) 
-	values('user1','user1111','회원1','마리코1','010-1111-1111','user1@gmail.com','2001-01-01','테헤란로1',0,0,1,1,0); 
+insert into user_info(user_id,password,name,nickname,phone,email,birth,address,gender,point,is_admin,mail_auth,mail_key)
+	values('user1','user1111','회원1','마리코1','010-1111-1111','user1@gmail.com','2001-01-01','테헤란로1',0,0,1,1,0);
 
-insert into user_info(user_id,password,name,nickname,phone,email,birth,address,gender,point,is_admin,mail_auth,mail_key) 
-	values('user2','user2222','회원2','마리코2','010-2222-2222','user2@gmail.com','2002-02-02','테헤란로2',1,0,1,1,0); 
+insert into user_info(user_id,password,name,nickname,phone,email,birth,address,gender,point,is_admin,mail_auth,mail_key)
+	values('user2','user2222','회원2','마리코2','010-2222-2222','user2@gmail.com','2002-02-02','테헤란로2',1,0,1,1,0);
 
-insert into user_info(user_id,password,name,nickname,phone,email,birth,address,gender,point,is_admin,mail_auth,mail_key) 
+insert into user_info(user_id,password,name,nickname,phone,email,birth,address,gender,point,is_admin,mail_auth,mail_key)
 	values('user3','user3333','회원3','마리코3','010-3333-3333','user3@gmail.com','2003-03-03','테헤란로3',1,0,1,1,0);
-	 
-insert into user_info(user_id,password,name,nickname,phone,email,birth,address,gender,point,is_admin,mail_auth,mail_key) 
+
+insert into user_info(user_id,password,name,nickname,phone,email,birth,address,gender,point,is_admin,mail_auth,mail_key)
 	values('user4','user4444','회원4','마리코4','010-4444-4444','user4@gmail.com','2004-04-04','테헤란로4',1,0,1,0,1234);
 
+select * from user_info;
 --user_photo
 insert into user_img(user_img_no,user_img_url,user_id) values(10,'010.png','admin');
 insert into user_img(user_img_no,user_img_url,user_id) values(11,'011.png','user1');
 insert into user_img(user_img_no,user_img_url,user_id) values(12,'012.png','user2');
 insert into user_img(user_img_no,user_img_url,user_id) values(13,'013.png','user3');
 --user_add_info
-insert into user_add_info(introduce,alcohol,smoking,user_id) values('관리자인사',0,0,'admin'); 
-insert into user_add_info(introduce,alcohol,smoking,user_id) values('안녕1',0,0,'user1'); 
-insert into user_add_info(introduce,alcohol,smoking,user_id) values('안녕2',1,0,'user2'); 
-insert into user_add_info(introduce,alcohol,smoking,user_id) values('안녕3',0,1,'user3'); 
+insert into user_add_info(introduce,alcohol,smoking,user_id) values('관리자인사',0,0,'admin');
+insert into user_add_info(introduce,alcohol,smoking,user_id) values('안녕1',0,0,'user1');
+insert into user_add_info(introduce,alcohol,smoking,user_id) values('안녕2',1,0,'user2');
+insert into user_add_info(introduce,alcohol,smoking,user_id) values('안녕3',0,1,'user3');
 
 /*************** city ***********************/
 -- city
@@ -39,27 +40,27 @@ insert into city(city_no,city_name,latitude,longitude) values(city_city_no_seq.n
 /*************** notice ***********************/
 -- 공지사항 notice insert
 
-insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img,user_id) values (notice_n_no_seq.nextval,'공지사항은1','공지사항내용1',sysdate,1,'img.png','user1'); 
-insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img,user_id) values (notice_n_no_seq.nextval,'공지사항은2','공지사항내용2',sysdate,2,'img.png','user2'); 
-insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img,user_id) values (notice_n_no_seq.nextval,'공지사항삼3','공지사항내용3',sysdate,3,'img.png','user3'); 
-insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img,user_id) values (notice_n_no_seq.nextval,'공지사항이다4','공지사항내용4','2023/04/02',4,'img.png','user1'); 
-insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img,user_id) values (notice_n_no_seq.nextval,'공지사항이야5','공지사항내용5','2023/04/03',8,'img.png','user2'); 
-insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img,user_id) values (notice_n_no_seq.nextval,'공지사항안내6','공지사항내용6','2023/04/05',10,'img.png','user3'); 
-insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img,user_id) values (notice_n_no_seq.nextval,'공지사항안내7','공지사항내용7','2023/05/02',15,'img.png','user1'); 
-insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img,user_id) values (notice_n_no_seq.nextval,'공지사항결제8','공지사항내용8','2023/06/03',23,'img.png','user2'); 
-insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img,user_id) values (notice_n_no_seq.nextval,'공지사항결론9','공지사항내용9','2023/07/05',2,'img.png','user3'); 
-insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img,user_id) values (notice_n_no_seq.nextval,'공지사항이다10','공지사항내용4','2023/04/02',4,'img.png','user1'); 
-insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img,user_id) values (notice_n_no_seq.nextval,'공지사항이야11','공지사항내용5','2023/04/03',8,'img.png','user2'); 
-insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img,user_id) values (notice_n_no_seq.nextval,'공지사항안내12','공지사항내용6','2023/04/05',10,'img.png','user3'); 
-insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img,user_id) values (notice_n_no_seq.nextval,'공지사항안내13','공지사항내용7','2023/05/02',15,'img.png','user1'); 
-insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img,user_id) values (notice_n_no_seq.nextval,'공지사항결제14','공지사항내용8','2023/06/03',23,'img.png','user2'); 
-insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img,user_id) values (notice_n_no_seq.nextval,'공지사항결론15','공지사항내용9','2023/07/05',2,'img.png','user3'); 
-insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img,user_id) values (notice_n_no_seq.nextval,'공지사항이다16','공지사항내용4','2023/04/02',4,'img.png','user1'); 
-insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img,user_id) values (notice_n_no_seq.nextval,'공지사항이야17','공지사항내용5','2023/04/03',8,'img.png','user2'); 
-insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img,user_id) values (notice_n_no_seq.nextval,'공지사항안내18','공지사항내용6','2023/04/05',10,'img.png','user3'); 
-insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img,user_id) values (notice_n_no_seq.nextval,'공지사항안내19','공지사항내용7','2023/05/02',15,'img.png','user1'); 
-insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img,user_id) values (notice_n_no_seq.nextval,'공지사항결제20','공지사항내용8','2023/06/03',23,'img.png','user2'); 
-insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img,user_id) values (notice_n_no_seq.nextval,'공지사항결론21','공지사항내용9','2023/07/05',2,'img.png','user3'); 
+insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img,user_id) values (notice_n_no_seq.nextval,'공지사항은1','공지사항내용1',sysdate,1,'img.png','user1');
+insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img,user_id) values (notice_n_no_seq.nextval,'공지사항은2','공지사항내용2',sysdate,2,'img.png','user2');
+insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img,user_id) values (notice_n_no_seq.nextval,'공지사항삼3','공지사항내용3',sysdate,3,'img.png','user3');
+insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img,user_id) values (notice_n_no_seq.nextval,'공지사항이다4','공지사항내용4','2023/04/02',4,'img.png','user1');
+insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img,user_id) values (notice_n_no_seq.nextval,'공지사항이야5','공지사항내용5','2023/04/03',8,'img.png','user2');
+insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img,user_id) values (notice_n_no_seq.nextval,'공지사항안내6','공지사항내용6','2023/04/05',10,'img.png','user3');
+insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img,user_id) values (notice_n_no_seq.nextval,'공지사항안내7','공지사항내용7','2023/05/02',15,'img.png','user1');
+insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img,user_id) values (notice_n_no_seq.nextval,'공지사항결제8','공지사항내용8','2023/06/03',23,'img.png','user2');
+insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img,user_id) values (notice_n_no_seq.nextval,'공지사항결론9','공지사항내용9','2023/07/05',2,'img.png','user3');
+insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img,user_id) values (notice_n_no_seq.nextval,'공지사항이다10','공지사항내용4','2023/04/02',4,'img.png','user1');
+insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img,user_id) values (notice_n_no_seq.nextval,'공지사항이야11','공지사항내용5','2023/04/03',8,'img.png','user2');
+insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img,user_id) values (notice_n_no_seq.nextval,'공지사항안내12','공지사항내용6','2023/04/05',10,'img.png','user3');
+insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img,user_id) values (notice_n_no_seq.nextval,'공지사항안내13','공지사항내용7','2023/05/02',15,'img.png','user1');
+insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img,user_id) values (notice_n_no_seq.nextval,'공지사항결제14','공지사항내용8','2023/06/03',23,'img.png','user2');
+insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img,user_id) values (notice_n_no_seq.nextval,'공지사항결론15','공지사항내용9','2023/07/05',2,'img.png','user3');
+insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img,user_id) values (notice_n_no_seq.nextval,'공지사항이다16','공지사항내용4','2023/04/02',4,'img.png','user1');
+insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img,user_id) values (notice_n_no_seq.nextval,'공지사항이야17','공지사항내용5','2023/04/03',8,'img.png','user2');
+insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img,user_id) values (notice_n_no_seq.nextval,'공지사항안내18','공지사항내용6','2023/04/05',10,'img.png','user3');
+insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img,user_id) values (notice_n_no_seq.nextval,'공지사항안내19','공지사항내용7','2023/05/02',15,'img.png','user1');
+insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img,user_id) values (notice_n_no_seq.nextval,'공지사항결제20','공지사항내용8','2023/06/03',23,'img.png','user2');
+insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img,user_id) values (notice_n_no_seq.nextval,'공지사항결론21','공지사항내용9','2023/07/05',2,'img.png','user3');
 
 
 /*************** tour ***********************/
@@ -99,28 +100,28 @@ insert into chat_room(room_no,room_name,from_id,to_id) values (chat_room_room_no
 insert into chat_room(room_no,room_name,from_id,to_id) values (chat_room_room_no_seq.nextval,'채팅방3','user2','user3');
 
 --chat_msg
-insert into chat_msg(msg_no,msg_content,msg_send_time,msg_read,room_no,user_id) 
+insert into chat_msg(msg_no,msg_content,msg_send_time,msg_read,room_no,user_id)
 values(chat_msg_msg_no_seq.nextval,'안녕하세요1',sysdate,0,1,'user1');
 
-insert into chat_msg(msg_no,msg_content,msg_send_time,msg_read,room_no,user_id) 
+insert into chat_msg(msg_no,msg_content,msg_send_time,msg_read,room_no,user_id)
 values(chat_msg_msg_no_seq.nextval,'혹시1',sysdate,0,1,'user1');
 
-insert into chat_msg(msg_no,msg_content,msg_send_time,msg_read,room_no,user_id) 
+insert into chat_msg(msg_no,msg_content,msg_send_time,msg_read,room_no,user_id)
 values(chat_msg_msg_no_seq.nextval,'네 안녕하세요2',sysdate,0,1,'user2');
 
-insert into chat_msg(msg_no,msg_content,msg_send_time,msg_read,room_no,user_id) 
+insert into chat_msg(msg_no,msg_content,msg_send_time,msg_read,room_no,user_id)
 values(chat_msg_msg_no_seq.nextval,'말씀하세요2',sysdate,0,1,'user2');
 
-insert into chat_msg(msg_no,msg_content,msg_send_time,msg_read,room_no,user_id) 
+insert into chat_msg(msg_no,msg_content,msg_send_time,msg_read,room_no,user_id)
 values(chat_msg_msg_no_seq.nextval,'반갑습니다3',sysdate,0,2,'user3');
 
-insert into chat_msg(msg_no,msg_content,msg_send_time,msg_read,room_no,user_id) 
+insert into chat_msg(msg_no,msg_content,msg_send_time,msg_read,room_no,user_id)
 values(chat_msg_msg_no_seq.nextval,'하이요2',sysdate,0,2,'user2');
 
-insert into chat_msg(msg_no,msg_content,msg_send_time,msg_read,room_no,user_id) 
+insert into chat_msg(msg_no,msg_content,msg_send_time,msg_read,room_no,user_id)
 values(chat_msg_msg_no_seq.nextval,'저기요2',sysdate,0,3,'user2');
 
-insert into chat_msg(msg_no,msg_content,msg_send_time,msg_read,room_no,user_id) 
+insert into chat_msg(msg_no,msg_content,msg_send_time,msg_read,room_no,user_id)
 values(chat_msg_msg_no_seq.nextval,'안녕하세요3',sysdate,0,3,'user3');
 
 /*************** freeBoard ***********************/
@@ -163,7 +164,7 @@ INSERT INTO TICKET (TI_NO, TI_TITLE,TI_DATE,TI_PRICE,TI_INFO,TI_NOTICE,TI_COUNT,
 INSERT INTO TICKET (TI_NO, TI_TITLE,TI_DATE,TI_PRICE,TI_INFO,TI_NOTICE,TI_COUNT,CITY_NO) VALUES (TICKET_TI_NO_SEQ.NEXTVAL,'대전으로 가보 자고', SYSDATE, 50000, '대전으로 가는 티켓', '빵순이가 될 수 있으니 주의하세요.',default,5);
 INSERT INTO TICKET (TI_NO, TI_TITLE,TI_DATE,TI_PRICE,TI_INFO,TI_NOTICE,TI_COUNT,CITY_NO) VALUES (TICKET_TI_NO_SEQ.NEXTVAL,'전주로 가보 자고', SYSDATE, 60000, '전주로 가는 티켓', '막걸리에 취할 수 있으니 주의하세요',default,6);
 INSERT INTO TICKET (TI_NO, TI_TITLE,TI_DATE,TI_PRICE,TI_INFO,TI_NOTICE,TI_COUNT,CITY_NO) VALUES (TICKET_TI_NO_SEQ.NEXTVAL,'제주도로 가보 자고', SYSDATE, 70000, '제주도로 가는 티켓 ', '돌아 오기 싫을 수 있으니 주의 하세요.',default,7);
-INSERT INTO TICKET (TI_NO, TI_TITLE,TI_DATE,TI_PRICE,TI_INFO,TI_NOTICE,TI_COUNT,CITY_NO) VALUES (TICKET_TI_NO_SEQ.NEXTVAL,'서울 1111111111', SYSDATE, 11111 '서울로 가는 티켓', '눈 뜨고 코 베이지 않게 주의 하세요.',default,1);
+INSERT INTO TICKET (TI_NO, TI_TITLE,TI_DATE,TI_PRICE,TI_INFO,TI_NOTICE,TI_COUNT,CITY_NO) VALUES (TICKET_TI_NO_SEQ.NEXTVAL,'서울 1111111111', SYSDATE, 11111, '서울로 가는 티켓', '눈 뜨고 코 베이지 않게 주의 하세요.',default,1);
 INSERT INTO TICKET (TI_NO, TI_TITLE,TI_DATE,TI_PRICE,TI_INFO,TI_NOTICE,TI_COUNT,CITY_NO) VALUES (TICKET_TI_NO_SEQ.NEXTVAL,'경기도 22222222', SYSDATE, 22222, '경기도 어딘가로 가는 티켓', '어디로 갈지 모르니 주의 하세요.',default,2);
 INSERT INTO TICKET (TI_NO, TI_TITLE,TI_DATE,TI_PRICE,TI_INFO,TI_NOTICE,TI_COUNT,CITY_NO) VALUES (TICKET_TI_NO_SEQ.NEXTVAL,'강원도 33333333', SYSDATE, 33333, '강원도 어딘가로 가는 티켓', '여기가 어디지?',default,3);
 INSERT INTO TICKET (TI_NO, TI_TITLE,TI_DATE,TI_PRICE,TI_INFO,TI_NOTICE,TI_COUNT,CITY_NO) VALUES (TICKET_TI_NO_SEQ.NEXTVAL,'부산  44444444', SYSDATE, 44444, '부산으로 가는 티켓', '갈매기를 주의 하세요.',default,4);
@@ -199,27 +200,27 @@ INSERT INTO TICKET_IMG (TI_IMG_NO, TI_IMG_URL,TI_NO) VALUES(TICKET_IMG_TI_IMG_NO
 /*************** tripBoard ***********************/
 -- 동행게시판 trip_board insert
 insert into trip_board(t_bo_no,t_bo_title,t_bo_content,t_bo_date,t_bo_readcount,t_bo_status,t_bo_person,
-                    t_bo_img,t_bo_start_date,t_bo_end_date,t_bo_style,hashtag,city_no,user_id) 
+                    t_bo_img,t_bo_start_date,t_bo_end_date,t_bo_style,hashtag,city_no,user_id)
             values (trip_board_t_bo_no_seq.nextval,'동행게시판제목1','동행게시판내용1',sysdate,0,0,1,
-                    'img1.png','2023-05-01','2023-05-10','무계획','아무나다좋아',1,'user1'); 
-                    
+                    'img1.png','2023-05-01','2023-05-10','무계획','아무나다좋아',1,'user1');
+
 insert into trip_board(t_bo_no,t_bo_title,t_bo_content,t_bo_date,t_bo_readcount,t_bo_status,t_bo_person,
-                    t_bo_img,t_bo_start_date,t_bo_end_date,t_bo_style,hashtag,city_no,user_id) 
+                    t_bo_img,t_bo_start_date,t_bo_end_date,t_bo_style,hashtag,city_no,user_id)
             values (trip_board_t_bo_no_seq.nextval,'동행게시판제목2','동행게시판내용2',sysdate,0,0,2,
                     'img2.png','2023-06-01','2023-06-10','계획형','인싸만',2,'user2');
-                    
+
 insert into trip_board(t_bo_no,t_bo_title,t_bo_content,t_bo_date,t_bo_readcount,t_bo_status,t_bo_person,
-                    t_bo_img,t_bo_start_date,t_bo_end_date,t_bo_style,hashtag,city_no,user_id) 
+                    t_bo_img,t_bo_start_date,t_bo_end_date,t_bo_style,hashtag,city_no,user_id)
             values (trip_board_t_bo_no_seq.nextval,'동행게시판제목3','동행게시판내용3',sysdate,0,0,1,
-                    'img3.png','2023-07-01','2023-07-10','맛집투어','맛있는거좋아하는사람',3,'user3'); 
+                    'img3.png','2023-07-01','2023-07-10','맛집투어','맛있는거좋아하는사람',3,'user3');
 
 -- 동행게시판 댓글 insert
-insert into trip_board_comment(t_co_no, t_comment_content, t_comment_date, t_bo_no, user_id) 
+insert into trip_board_comment(t_co_no, t_comment_content, t_comment_date, t_bo_no, user_id)
                         values(TRIP_BOARD_COMMENT_T_CO_NO_SEQ.nextval, '댓글1', sysdate, 1, 'user2');
-insert into trip_board_comment(t_co_no, t_comment_content, t_comment_date, t_bo_no, user_id) 
+insert into trip_board_comment(t_co_no, t_comment_content, t_comment_date, t_bo_no, user_id)
                         values(TRIP_BOARD_COMMENT_T_CO_NO_SEQ.nextval, '댓글2', sysdate, 2, 'user3');
-insert into trip_board_comment(t_co_no, t_comment_content, t_comment_date, t_bo_no, user_id) 
-                        values(TRIP_BOARD_COMMENT_T_CO_NO_SEQ.nextval, '댓글3', sysdate, 3, 'user1');                   
+insert into trip_board_comment(t_co_no, t_comment_content, t_comment_date, t_bo_no, user_id)
+                        values(TRIP_BOARD_COMMENT_T_CO_NO_SEQ.nextval, '댓글3', sysdate, 3, 'user1');
 
 /*************** wishlist ***********************/
 -- 티켓 상품 위시리스트에 추가

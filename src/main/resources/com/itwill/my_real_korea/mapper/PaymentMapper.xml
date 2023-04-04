@@ -27,9 +27,9 @@
         <select id="selectPaymentNo" parameterType="java.lang.Integer" resultMap="paymentResultMap">
             SELECT P.*, TI.*, TR.*
             FROM PAYMENT P
-                     JOIN TICKET TI ON TI.TI_NO = P.TI_NO
-                     JOIN TOUR TR ON TR.TO_NO = P.TO_NO
-            WHERE P.P_NO = #{pNo}
+                     LEFT JOIN TICKET TI ON TI.TI_NO = P.TI_NO
+                     LEFT JOIN TOUR TR ON TR.TO_NO = P.TO_NO
+            WHERE P_NO = #{pNo}
         </select>
     <!-- 주문 취소-->
     <delete id="deletePayment" parameterType="java.lang.Integer">

@@ -20,9 +20,14 @@ public interface UserService {
 	//11. 아이디 중복 체크 (회원 가입(회원 존재 여부 확인))
 	boolean isDuplicateId(String userId) throws Exception;
 	//12. 로그인 (비밀번호 일치 여부 확인)
-	int login(String userId, String password) throws Exception;
+	User login(String userId, String password) throws Exception;
 	//13. 이메일, 이름으로 아이디 찾기
 	String findIdByEmailName(User user) throws Exception;
 
-
+	//21. 메일 인증여부 확인
+	int mailAuth(String userId) throws Exception;
+	//22. 메일 인증번호 업데이트
+	int mailKeyUpdate(User user) throws Exception;
+	//23. 메일 인증여부 업데이트
+	int mailAuthUpdate(User user) throws Exception;
 }

@@ -22,7 +22,7 @@ public class MailConfig {
 		mailSender.setHost("smtp.gmail.com");
 		mailSender.setPort(587);
 		mailSender.setUsername("kgee12300@gmail.com");
-		mailSender.setPassword("aptjpsbagiajfvpz");
+		mailSender.setPassword("임시삭제");
 		mailSender.setDefaultEncoding("utf-8");
 		mailSender.setJavaMailProperties(properties);
 		

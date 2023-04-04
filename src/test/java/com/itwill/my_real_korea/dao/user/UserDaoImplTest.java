@@ -3,6 +3,7 @@ package com.itwill.my_real_korea.dao.user;
 import java.util.Date;
 
 import org.junit.jupiter.api.Test;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,7 +12,7 @@ import com.itwill.my_real_korea.dto.user.User;
 
 @Transactional
 @SpringBootTest
-//@MapperScan(basePackages = "com.itwill.my_real_korea.mapper")
+@MapperScan(basePackages = "com.itwill.my_real_korea.mapper")
 class UserDaoImplTest {
 	
 	@Autowired
@@ -25,14 +26,14 @@ class UserDaoImplTest {
 	//1. 회원 가입
 	@Test
 	void testCreate() throws Exception {
-		User user = new User("daoTest1", "test1111", "테스트", "테스트", "011-1111-1111", "test1@gmail.com", new Date(), "테스트", 0, 0, 1);
+		User user = new User("daoTest3", "test1111", "테스트", "테스트", "011-1111-1111", "test1@gmail.com", new Date(), "테스트", 0, 0, 1, 0, 0);
 		System.out.println(">> created : "+userDao.create(user));
 	}
 	
 	//2. 회원 정보 보기 (마이페이지)
 	@Test
 	void testFindUser() throws Exception {
-		System.out.println(">> findUser : "+userDao.findUser("user1"));
+		System.out.println(">> findUser : "+userDao.findUser("test111"));
 	}
 	
 	//3. 전체 회원 정보 보기 (관리자 페이지)
@@ -80,6 +81,27 @@ class UserDaoImplTest {
 		System.out.println(">> ID : "+userDao.findIdByEmailName(user));
 	}
 
+	//21. 메일 인증여부 확인
+	@Test
+	void mailAuth() throws Exception {
+		System.out.println(">> mailAuth : "+userDao.mailAuth("user1"));
+	}
+	
+	//22. 메일 인증번호 업데이트
+	@Test
+	void mailKeyUpdate() throws Exception {
+		User user3 = userDao.findUser("user1");
+		user3.setMailKey(1234);
+		System.out.println(">> mailKeyUpdate : "+userDao.mailKeyUpdate(user3));
+	}
+	
+	//23. 메일 인증여부 업데이트
+	@Test
+	void mailAuthUpdate() throws Exception {
+		User user3 = userDao.findUser("user4");
+		user3.setMailAuth(1);
+		System.out.println(">> mailAuthUpdate : "+userDao.mailAuthUpdate(user3));
+	}
 
 
 

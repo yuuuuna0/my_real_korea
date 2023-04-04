@@ -53,12 +53,14 @@ public class TicketController {
 
     //티켓 -- 상세보기 ? session에 어쩌구
     @GetMapping(value = "/ticketDetail")
-    public String ticketDetail(@PathVariable(value = "tiNo") int tiNo) {
+    public String ticketDetail(@PathVariable(value = "tiNo") int tiNo, Model model) {
+
         try {
-            ticketService.selectByTicketNoCityWithImg(tiNo);
+            Ticket ticket = (Ticket) ticketService.selectByTicketNoCityWithImg(tiNo);
+            System.out.println("ticket");
+            model.addAttribute("ticket", ticket);
         } catch (Exception e) {
             e.printStackTrace();
-
         }
         return "ticketDetail"; //
     }

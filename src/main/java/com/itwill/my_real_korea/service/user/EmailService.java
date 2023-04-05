@@ -4,7 +4,6 @@ import java.io.UnsupportedEncodingException;
 import java.util.Random;
 
 import javax.mail.MessagingException;
-import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 import org.springframework.mail.javamail.JavaMailSender;
@@ -18,14 +17,11 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class EmailService {
 
-	//의존성 주입을 통해서 필요한 객체를 가져온다.
     private final JavaMailSender emailSender;
-    // 타임리프를사용하기 위한 객체를 의존성 주입으로 가져온다
     private final SpringTemplateEngine templateEngine;
     private String authNum; //랜덤 인증 코드
 
-    //랜덤 인증 코드 생성
-    //6자리 숫자
+    //랜덤 인증 코드 생성(6자리 숫자)
     public void createCode() {
         Random random = new Random();
         StringBuilder key = new StringBuilder();
@@ -38,7 +34,7 @@ public class EmailService {
     }
     
     public String sendEmail(String toEmail) throws MessagingException, UnsupportedEncodingException {
-        createCode(); // 인증 코드 생성
+        createCode();
 
         //메일 전송에 필요한 정보 설정 (인증번호 입력하는 방식)
         String setFrom = "myrealkorea.auth@gmail.com";
@@ -52,7 +48,6 @@ public class EmailService {
 
         emailSender.send(emailForm);
         return authNum; // 인증 코드 반환
-    }
         
         
         //메일 전송에 필요한 정보 설정 (링크 클릭으로 인증하는 방식)
@@ -73,7 +68,7 @@ public class EmailService {
 //            e.printStackTrace();
 //        }
 //        
-//        
+    }
 
     //타임리프를 이용한 context 설정
     public String setContext(String code) {

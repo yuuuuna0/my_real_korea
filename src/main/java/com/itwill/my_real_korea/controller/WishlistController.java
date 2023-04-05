@@ -30,7 +30,7 @@ public class WishlistController {
 			model.addAttribute("wishlistList", wishlistList);
 			model.addAttribute("userId", userId);
 		} else {
-			return "user_login_form";
+			return "user-login-form";
 		}
 		
 		

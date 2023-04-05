@@ -39,7 +39,7 @@ public class AuthLoginAnnotationInterceptor implements HandlerInterceptor {
 			// 로그인이 안되어 있는 상태, 로그인 폼으로 다시 돌려보냄
 		    String requestUrl = request.getRequestURL().toString();
 		    session.setAttribute("requestUrl", requestUrl);
-		    response.sendRedirect("user_login_form");
+		    response.sendRedirect("user-login-form");
 		    return false;
 		} else {
 		    String requestUrl = (String) session.getAttribute("requestUrl");

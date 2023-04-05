@@ -32,7 +32,7 @@ public class NoticeController {
 	private NoticeService noticeService;
 	
 	// 공지사항 리스트 보기 (공지사항 첫 화면)
-	@GetMapping(value = "/notice")
+	@GetMapping(value = "/notice-list")
 	public String notice_list(@RequestParam(required = false, defaultValue = "1") int pageNo,
 								Model model) {
 		
@@ -44,7 +44,7 @@ public class NoticeController {
 			e.printStackTrace();
 			return "error";
 		}
-		return "notice";
+		return "notice-list";
 	}
 	
 	// 공지사항 작성 폼
@@ -60,7 +60,7 @@ public class NoticeController {
 		// session 에 요청 보낸 페이지의 URL 저장(관리자 아닐 경우 이전 페이지로 돌려보내기 위해)
 		request.getSession().setAttribute("requestUrl", requestUrl);
 		
-		return "notice_write_form";
+		return "notice-write-form";
 	}
 	
 	// 공지사항 수정 폼
@@ -76,7 +76,7 @@ public class NoticeController {
 		// session 에 요청 보낸 페이지의 URL 저장(관리자 아닐 경우 이전 페이지로 돌려보내기 위해)
 		request.getSession().setAttribute("requestUrl", requestUrl);
 		
-		return "notice_modify_form";
+		return "notice-modify-form";
 	}
 	
 }

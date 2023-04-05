@@ -48,7 +48,7 @@ public class AuthAdminAnnotationInterceptor implements HandlerInterceptor {
 				response.sendRedirect(requestUrl);
 			} else {
 				// 요청 URL 없을 때 메인으로 이동
-				response.sendRedirect("main");
+				response.sendRedirect("myrealkorea");
 			}
 			return false;
 		} 

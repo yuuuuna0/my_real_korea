@@ -20,8 +20,13 @@ public class PaymentServiceImpl implements PaymentService{
 	}
 	
 	@Override
-	public int insertPayment(Payment payment) {
-		return paymentDao.insertPayment(payment);
+	public int insertTicketPayment(Payment payment) {
+		return paymentDao.insertTicketPayment(payment);
+	}
+
+	@Override
+	public int insertTourPayment(Payment payment) {
+		return paymentDao.insertTourPayment(payment);
 	}
 
 	@Override

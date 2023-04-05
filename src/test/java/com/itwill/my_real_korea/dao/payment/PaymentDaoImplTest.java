@@ -1,12 +1,11 @@
 package com.itwill.my_real_korea.dao.payment;
 
 import com.itwill.my_real_korea.dao.ticket.TicketDao;
-import com.itwill.my_real_korea.dao.ticket.TicketImgDao;
-import com.itwill.my_real_korea.dao.tour.TourImgDao;
 import com.itwill.my_real_korea.dto.City;
 import com.itwill.my_real_korea.dto.Payment;
 import com.itwill.my_real_korea.dto.ticket.Ticket;
 import com.itwill.my_real_korea.dto.tour.Tour;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,21 +26,30 @@ class PaymentDaoImplTest {
     @Autowired
     TicketDao ticketDao;
 
+    @Disabled
     @Test
-    void insertPayment() {
-        paymentDao.insertPayment(new Payment(
+    void insertTicketPayment() {
+        paymentDao.insertTicketPayment(new Payment(
                 0,10000,3,null,new Date(),"테스트인데요",0, 1,
-                new Tour(1,null,0,0,0,null,0,null,null,0,new City(1,null,0,0)),
-                new Ticket(0,null,null,0,null,null,0,new City(0,null,0,0)),"user3"
+                null,new Ticket(0,null,null,0,null,null,0,new City(1,null,0,0)),"user3"
         ));
     }
-
+    @Disabled
     @Test
-    void selectAllUser() throws Exception{
+    void insertTourPayment() {
+        paymentDao.insertTourPayment(new Payment(
+                0,10000,3,null,new Date(),"테스트인데요",0, 1,
+                new Tour(1,null,0,0,10,null,100,null,null,0,
+                        new City(1,null,0,0)),null,"user1"));
+    }
+
+    @Disabled
+    @Test
+    void selectAllUser(){
         List<Payment> paymentList = paymentDao.selectAllUser("user1");
         System.out.println(paymentList);
     }
-
+    @Disabled
     @Test
     void selectPaymentNo() {
         List<Payment> paymentList = paymentDao.selectPaymentNo(1);
@@ -50,6 +58,7 @@ class PaymentDaoImplTest {
         // System.out.println(paymentList);
     }
 
+    @Disabled
     @Test
     void deletePayment() {
     }

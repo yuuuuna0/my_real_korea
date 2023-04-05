@@ -17,10 +17,15 @@ public class PaymentDaoImpl implements PaymentDao{
         this.paymentMapper = paymentMapper;
     }
 
-    //결제 생성
+
     @Override
-    public int insertPayment(Payment payment) {
-        return paymentMapper.insertPayment(payment);
+    public int insertTicketPayment(Payment payment) {
+        return paymentMapper.insertTicketPayment(payment);
+    }
+
+    @Override
+    public int insertTourPayment(Payment payment) {
+        return paymentMapper.insertTourPayment(payment);
     }
 
     // 결제 보기

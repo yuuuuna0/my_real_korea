@@ -8,8 +8,10 @@ import java.util.List;
 @Mapper
 public interface PaymentMapper {
 
-    //결제 생성
-    int insertPayment (Payment payment);
+    //티켓 결제 생성
+    int insertTicketPayment (Payment payment);
+    //투어 결제 생성
+    int insertTourPayment(Payment payment);
 
     // 내 결제 전체 보기
     List<Payment> selectAllUser(String userId);

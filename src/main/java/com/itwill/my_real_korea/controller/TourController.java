@@ -1,6 +1,7 @@
 package com.itwill.my_real_korea.controller;
 
 import com.itwill.my_real_korea.dto.Payment;
+import com.itwill.my_real_korea.dto.ticket.Ticket;
 import com.itwill.my_real_korea.dto.tour.Tour;
 import com.itwill.my_real_korea.dto.tour.TourImg;
 import com.itwill.my_real_korea.dto.tour.TourReview;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.itwill.my_real_korea.service.city.CityService;
+import com.itwill.my_real_korea.service.payment.PaymentService;
 import com.itwill.my_real_korea.service.tour.TourImgService;
 import com.itwill.my_real_korea.service.tour.TourReserveService;
 import com.itwill.my_real_korea.service.tour.TourReviewService;
@@ -36,14 +38,16 @@ public class TourController {
 	private CityService cityService;
 	private TourReserveService tourReserveService;
 	private TourReviewService tourReviewService;
+	private PaymentService paymentService;
 
 	@Autowired
-	public TourController(TourService tourService, TourImgService tourImgService, CityService cityService, TourReserveService tourReserveService,TourReviewService tourReviewService) {
+	public TourController(TourService tourService, TourImgService tourImgService, CityService cityService, TourReserveService tourReserveService,TourReviewService tourReviewService,PaymentService paymentService) {
 		this.tourService=tourService;
 		this.tourImgService=tourImgService;
 		this.cityService=cityService;
 		this.tourReserveService=tourReserveService;
 		this.tourReviewService=tourReviewService;
+		this.paymentService=paymentService;
 	}
 
 	//1. 투어상품 전체 리스트 보기
@@ -127,10 +131,10 @@ public class TourController {
 	
 	//3-1. 투어상품 예약하기(구매하기) 액션
 	@PostMapping(value="tour_reserve_action", produces="application/text;charset=UTF-8")
-	public String tour_reserve_form(@ModelAttribute Payment payment) {
+	public String tour_reserve_form(@ModelAttribute Payment payment,HttpSession session) {
 		String forwardPath="";
+		
 		try {
-			
 		}catch (Exception e) {
 		}
 		

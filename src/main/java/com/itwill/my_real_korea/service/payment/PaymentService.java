@@ -6,8 +6,10 @@ import com.itwill.my_real_korea.dto.Payment;
 
 public interface PaymentService {
 	
-	//결제 생성
-    int insertPayment (Payment payment);
+	//1-1. 티켓주문하기 (예약하기)
+	int insertTicketPayment(Payment payment) throws Exception;
+	//1-2. 티켓주문하기 (예약하기)
+	int insertTourPayment(Payment payment) throws Exception;
 
     // 내 결제 전체 보기
     List<Payment> selectAllUser(String userId);

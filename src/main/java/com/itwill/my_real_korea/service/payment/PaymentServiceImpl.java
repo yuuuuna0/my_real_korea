@@ -20,8 +20,15 @@ public class PaymentServiceImpl implements PaymentService{
 	}
 	
 	@Override
-	public int insertPayment(Payment payment) {
-		return paymentDao.insertPayment(payment);
+	public int insertTicketPayment(Payment payment) throws Exception{
+		//티켓주문하기 (예약하기)
+		return paymentDao.insertTicketPayment(payment);
+	}
+	
+	@Override
+	public int insertTourPayment(Payment payment) throws Exception{
+		//티켓주문하기 (예약하기)
+		return paymentDao.insertTourPayment(payment);
 	}
 
 	@Override

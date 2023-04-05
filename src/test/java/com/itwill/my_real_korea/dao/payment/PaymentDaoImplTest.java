@@ -2,6 +2,7 @@ package com.itwill.my_real_korea.dao.payment;
 
 import com.itwill.my_real_korea.dao.ticket.TicketDao;
 import com.itwill.my_real_korea.dao.ticket.TicketImgDao;
+import com.itwill.my_real_korea.dao.tour.TourDao;
 import com.itwill.my_real_korea.dao.tour.TourImgDao;
 import com.itwill.my_real_korea.dto.City;
 import com.itwill.my_real_korea.dto.Payment;
@@ -27,14 +28,19 @@ class PaymentDaoImplTest {
     @Autowired
     TicketDao ticketDao;
 
+    @Autowired
+    TourDao tourDao;
+    
     @Test
-    void insertPayment() {
-        paymentDao.insertPayment(new Payment(
-                0,10000,3,null,new Date(),"테스트인데요",0, 1,
-                new Tour(1,null,0,0,0,null,0,null,null,0,new City(1,null,0,0)),
-                new Ticket(0,null,null,0,null,null,0,new City(0,null,0,0)),"user3"
-        ));
-    }
+    void testInsertPayment() throws Exception{
+    	Ticket ticket=ticketDao.selectTicketNo(1);
+		int rowCount1=paymentDao.insertTicketPayment(new Payment(0, 530000, 2, null, new Date(), "어? 금지", 530, 3,null,ticket,"user1"));
+		Tour tour=tourDao.findTourWithCityByToNo(2);
+		int rowCount2=paymentDao.insertTourPayment(new Payment(0, 59000, 1, null, new Date(), "집", 59, 1, tour, null, "user2"));
+
+		assertEquals(rowCount1,1);
+		assertEquals(rowCount2,1);
+	}
 
     @Test
     void selectAllUser() throws Exception{

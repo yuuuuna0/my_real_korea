@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.itwill.my_real_korea.service.city.CityService;
 import com.itwill.my_real_korea.service.payment.PaymentService;
 import com.itwill.my_real_korea.service.tour.TourImgService;
-import com.itwill.my_real_korea.service.tour.TourReserveService;
 import com.itwill.my_real_korea.service.tour.TourReviewService;
 import com.itwill.my_real_korea.service.tour.TourService;
 import com.itwill.my_real_korea.util.PageMakerDto;
@@ -36,22 +35,20 @@ public class TourController {
 	private TourService tourService;
 	private TourImgService tourImgService;
 	private CityService cityService;
-	private TourReserveService tourReserveService;
 	private TourReviewService tourReviewService;
 	private PaymentService paymentService;
 
 	@Autowired
-	public TourController(TourService tourService, TourImgService tourImgService, CityService cityService, TourReserveService tourReserveService,TourReviewService tourReviewService,PaymentService paymentService) {
+	public TourController(TourService tourService, TourImgService tourImgService, CityService cityService,TourReviewService tourReviewService,PaymentService payService) {
 		this.tourService=tourService;
 		this.tourImgService=tourImgService;
 		this.cityService=cityService;
-		this.tourReserveService=tourReserveService;
 		this.tourReviewService=tourReviewService;
-		this.paymentService=paymentService;
+		this.paymentService=payService;
 	}
 
 	//1. 투어상품 전체 리스트 보기
-	@RequestMapping(value="/tour_list", produces="application/text;charset=UTF-8")
+	@RequestMapping(value="/tour_list")
 	public String tour_list(@RequestParam(required = false, defaultValue = "1") int currentPage,
 							@RequestParam(required = false, defaultValue = "") String keyword,
 							@RequestParam(required = false, defaultValue = "0") int cityNo,
@@ -67,7 +64,7 @@ public class TourController {
 			msg="성공";
 		} catch (Exception e){
 			e.printStackTrace();
-			forwardPath="redirect:my_real_korea_main";
+			forwardPath="redirect:main";
 			msg="관리자에게 문의하세요";
 		}
 		model.addAttribute("msg",msg);
@@ -75,7 +72,7 @@ public class TourController {
 	}
 
 	//2. 투어상품 상세보기
-	@RequestMapping(value="/tour_detail", params = "toNo" , produces="application/text;charset=UTF-8")
+	@RequestMapping(value="/tour_detail", params = "toNo")
 	public String tour_detail(@PathVariable int toNo, Model model) {
 		String forwardPath="";
 		String msg="";
@@ -96,15 +93,15 @@ public class TourController {
 		} catch (Exception e){
 			e.printStackTrace();
 			msg="관리자에게 문의하세요";
-			forwardPath="redirect:my_real_korea_main";
+			forwardPath="redirect:main";
+			model.addAttribute("msg",msg);
 		}
-		model.addAttribute("msg",msg);
 		return forwardPath;
 	}
 	
 	//2-1. 투어상품 상세보기 액션
 	@PostMapping(value="tour_detail_action")
-	public String tour_detail_action(@RequestBody int pStarDate, @RequestBody int pQty, @RequestBody Tour tour,HttpSession session) {
+	public String tour_detail_action(@RequestParam int pStarDate, @RequestParam int pQty, @ModelAttribute Tour tour,HttpSession session) {
 		String forwardPath="";
 		session.setAttribute("pStartDate",pStarDate);
 		session.setAttribute("pQty",pQty);
@@ -114,7 +111,7 @@ public class TourController {
 	}
 	
 	//3. 투어상품 예약하기(구매하기) 폼
-	@RequestMapping(value="/tour_reserve", produces="application/text;charset=UTF-8")
+	@RequestMapping(value="/tour_reserve")
 	public String tour_reserve_form(HttpSession session,Model model) {
 		String forwardPath="";
 		
@@ -130,14 +127,31 @@ public class TourController {
 	}
 	
 	//3-1. 투어상품 예약하기(구매하기) 액션
-	@PostMapping(value="tour_reserve_action", produces="application/text;charset=UTF-8")
-	public String tour_reserve_form(@ModelAttribute Payment payment,HttpSession session) {
+	@PostMapping(value="tour_reserve_action")
+	public String tour_reserve_form(@ModelAttribute Payment payment,HttpSession session,Model model) {
 		String forwardPath="";
-		
+		String msg="";
 		try {
+			Tour tour=(Tour)session.getAttribute("tour");
+			payment.setTour(tour);
+			paymentService.insertTourPayment(payment);
+			session.setAttribute("payment", payment);
+			forwardPath="redirect:tour_confirmation";
 		}catch (Exception e) {
+			e.printStackTrace();
+			msg="관리자에게 문의하세요";
+			forwardPath="redirect:my_real_korea_main";
 		}
-		
+		model.addAttribute(msg);
+		return forwardPath;
+	}
+	
+	//4. 예약한 투어상품 상세 확인
+	@RequestMapping(value="tour_confirmation")
+	public String tour_confirmation(HttpSession session) {
+		String forwardPath="";
+		session.getAttribute("tour");
+		session.getAttribute("payment");
 		return forwardPath;
 	}
 }

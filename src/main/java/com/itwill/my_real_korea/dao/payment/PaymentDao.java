@@ -6,8 +6,10 @@ import java.util.List;
 
 public interface PaymentDao {
 
-    //결제 생성
-    int insertPayment (Payment payment);
+	//1-1. 티켓주문하기 (예약하기)
+	int insertTicketPayment(Payment payment);
+	//1-2. 투어주문하기 (예약하기)
+	int insertTourPayment(Payment payment);
 
     // 내 결제 전체 보기
     List<Payment> selectAllUser(String userId);

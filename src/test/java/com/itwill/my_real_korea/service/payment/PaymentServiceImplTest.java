@@ -38,9 +38,8 @@ class PaymentServiceImplTest {
 		payment.setPPoint(0);
 		payment.setPMethod(1);
 		payment.setPPrice(payment.getTicket().getTiPrice()*payment.getPQty());
-		payment.setTour(new Tour());
 		payment.setUserId("user1");
-		assertEquals(paymentService.insertPayment(payment),1);
+		assertEquals(paymentService.insertTicketPayment(payment),1);
 		System.out.println(payment);
 	}
 

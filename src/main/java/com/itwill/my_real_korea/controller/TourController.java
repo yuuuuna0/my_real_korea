@@ -27,6 +27,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 
+import static org.hamcrest.CoreMatchers.nullValue;
+
 import java.util.Date;
 import java.util.List;
 
@@ -48,19 +50,19 @@ public class TourController {
 	}
 
 	//1. 투어상품 전체 리스트 보기
-	@RequestMapping(value="/tour_list")
+	@RequestMapping(value="/tour-list")
 	public String tour_list(@RequestParam(required = false, defaultValue = "1") int currentPage,
-							@RequestParam(required = false, defaultValue = "") String keyword,
+							@RequestParam(required = false) String keyword,
 							@RequestParam(required = false, defaultValue = "0") int cityNo,
 							@RequestParam(required = false, defaultValue = "0") int toType,
-							@RequestParam(required = false, defaultValue = "") String sortOrder,
+							@RequestParam(required = false) String sortOrder,
 								Model model) {
 		String forwardPath="";
 		String msg="";
 		try{
 			PageMakerDto<Tour> tourList=tourService.findAll(currentPage,keyword,cityNo,toType,sortOrder);
 			model.addAttribute("tourList",tourList);
-			forwardPath="tour_list";
+			forwardPath="tour-list";
 			msg="성공";
 		} catch (Exception e){
 			e.printStackTrace();

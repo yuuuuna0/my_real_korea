@@ -22,6 +22,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import com.itwill.my_real_korea.dto.tour.Tour;
 
 import com.itwill.my_real_korea.service.tour.TourService;
+import com.itwill.my_real_korea.util.PageMaker;
 import com.itwill.my_real_korea.util.PageMakerDto;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
 @AutoConfigureMockMvc
@@ -41,6 +42,8 @@ class TourControllerTest {
 		tourList.add(new Tour(2, null, 0, 0, 0, null, 0, null, null, 0, null));
 
 		tours.setItemList(tourList);
+		tours.setPageMaker(new PageMaker(1, 10));
+		tours.setTotRecordCount(2);
 		
 		given(tourService.findAll(1, null, 0, 0, null)).willReturn(tours);
 		

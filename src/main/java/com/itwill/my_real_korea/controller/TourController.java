@@ -108,13 +108,13 @@ public class TourController {
 		session.setAttribute("pStartDate",pStarDate);
 		session.setAttribute("pQty",pQty);
 		session.setAttribute("Tour", tour);
-		forwardPath="redirect:tour-reserve";
+		forwardPath="redirect:tour-payment";
 		return forwardPath;
 	}
 	
 	//3. 투어상품 예약하기(구매하기) 폼
-	@RequestMapping(value="/tour-reserve")
-	public String tour_reserve_form(HttpSession session,Model model) {
+	@RequestMapping(value="/tour-payment")
+	public String tour_payment_form(HttpSession session,Model model) {
 		String forwardPath="";
 		
 		Tour tour=(Tour)session.getAttribute("tour");
@@ -124,13 +124,13 @@ public class TourController {
 		model.addAttribute("pQty", pQty);
 		model.addAttribute("pStartDate",pStartDate);
 		
-		forwardPath="tour-reserve";
+		forwardPath="tour-payment";
 		return forwardPath;
 	}
 	
 	//3-1. 투어상품 예약하기(구매하기) 액션
-	@PostMapping(value="tour-reserve-action")
-	public String tour_reserve_form(@ModelAttribute Payment payment,HttpSession session,Model model) {
+	@PostMapping(value="tour-payment-action")
+	public String tour_payment_form(@ModelAttribute Payment payment,HttpSession session,Model model) {
 		String forwardPath="";
 		String msg="";
 		try {
@@ -138,7 +138,7 @@ public class TourController {
 			payment.setTour(tour);
 			paymentService.insertTourPayment(payment);
 			session.setAttribute("payment", payment);
-			forwardPath="redirect:tour-confirmation";
+			forwardPath="redirect:tour-payment-confirmation";
 		}catch (Exception e) {
 			e.printStackTrace();
 			msg="관리자에게 문의하세요";
@@ -149,11 +149,12 @@ public class TourController {
 	}
 	
 	//4. 예약한 투어상품 상세 확인
-	@RequestMapping(value="tour-confirmation")
-	public String tour_confirmation(HttpSession session) {
+	@RequestMapping(value="tour-payment-confirmation")
+	public String tour_payment_confirmation(HttpSession session) {
 		String forwardPath="";
 		session.getAttribute("tour");
 		session.getAttribute("payment");
+		forwardPath="tour-payment-confirmation";
 		return forwardPath;
 	}
 }

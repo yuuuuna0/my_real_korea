@@ -148,46 +148,6 @@ public class NoticeRestController {
 		resultMap.put("data", noticeList);
 		return resultMap;
 	}
-	/*
-	 * 공지사항 게시글 번호(boardno)로 해당 게시글 보기
-	 */
-	@ApiOperation(value = "공지사항 상세보기")
-	@ApiImplicitParam(name = "nNo", value = "공지사항 번호")
-	@GetMapping(value = "/notice/{nNo}", produces = "application/json;charset=UTF-8")
-	public Map<String, Object> notice_detail(@PathVariable(value = "nNo") int nNo) {
-
-		Map<String, Object> resultMap = new HashMap<>();
-		int code = 1;
-		String msg = "성공";
-		List<Notice> data = new ArrayList<Notice>();
-
-		try {
-			// nNo로 공지사항 1개 찾기, 성공시 code 1
-			Notice notice = noticeService.selectByNo(nNo);
-			if (notice != null) {
-				// 공지사항 게시글 조회수 1 증가
-				noticeService.increaseReadCount(nNo);
-				code = 1;
-				data.add(notice);
-			} else {
-				// 실패 시 code 2
-				code = 2;
-				msg = "해당 공지사항이 존재하지 않습니다.";
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			// 에러 발생 시 code 3
-			code = 3;
-			msg = "관리자에게 문의하세요.";
-		}
-		resultMap.put("code", code);
-		resultMap.put("msg", msg);
-		resultMap.put("data", data);
-
-		return resultMap;
-	}
-	
-
 
 	/*
 	 * 공지사항 게시글 추가
@@ -336,6 +296,47 @@ public class NoticeRestController {
 		return resultMap;
 	}
 	 */
+	
+	/*
+	 * 공지사항 게시글 번호(boardno)로 해당 게시글 보기 => controller
+	
+	@ApiOperation(value = "공지사항 상세보기")
+	@ApiImplicitParam(name = "nNo", value = "공지사항 번호")
+	@GetMapping(value = "/notice/{nNo}", produces = "application/json;charset=UTF-8")
+	public Map<String, Object> notice_detail(@PathVariable(value = "nNo") int nNo) {
+
+		Map<String, Object> resultMap = new HashMap<>();
+		int code = 1;
+		String msg = "성공";
+		List<Notice> data = new ArrayList<Notice>();
+
+		try {
+			// nNo로 공지사항 1개 찾기, 성공시 code 1
+			Notice notice = noticeService.selectByNo(nNo);
+			if (notice != null) {
+				// 공지사항 게시글 조회수 1 증가
+				noticeService.increaseReadCount(nNo);
+				code = 1;
+				data.add(notice);
+			} else {
+				// 실패 시 code 2
+				code = 2;
+				msg = "해당 공지사항이 존재하지 않습니다.";
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			// 에러 발생 시 code 3
+			code = 3;
+			msg = "관리자에게 문의하세요.";
+		}
+		resultMap.put("code", code);
+		resultMap.put("msg", msg);
+		resultMap.put("data", data);
+
+		return resultMap;
+	}
+	 */
+	
 	
 	/*
 	 * 관리자인지 확인, 아닐 경우 에러 처리

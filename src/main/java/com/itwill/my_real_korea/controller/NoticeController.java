@@ -47,6 +47,21 @@ public class NoticeController {
 		return "notice-list";
 	}
 	
+	// 공지사항 1개 보기
+	@GetMapping(value = "/notice-detail")
+	public String notice_detail(@RequestParam int nNo, Model model) {
+		
+		try {
+			Notice notice = noticeService.selectByNo(nNo);
+			model.addAttribute("notice", notice);
+			model.addAttribute("nNo", nNo);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "error";
+		}
+		return "notice-detail";
+	}
+	
 	// 공지사항 작성 폼
 	@AdminCheck 
 	@LoginCheck

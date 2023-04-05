@@ -29,34 +29,7 @@ public class WishlistRestController {
 	@Autowired
 	private WishlistService wishlistService;
 	
-	/*
-	 * 위시리스트 리스트 보기 + 티켓상품 + 투어상품  (user_id)
-	 */
-	@LoginCheck
-	@ApiOperation(value = "위시리스트(티켓+투어) 리스트")
-	@GetMapping(value = "/wishlist-with", produces = "application/json;charset=UTF-8")
-	public Map<String, Object> wishlist_list_with_ticket_tour(@RequestParam(required = true) String userId) {
 
-		Map<String, Object> resultMap = new HashMap<>();
-		int code = 1;
-		String msg = "성공";
-		List<Wishlist> data = new ArrayList<>();
-		try {
-			// userId로 위시리스트(티켓+투어) 리스트 찾기, 성공시 code 1
-			data = wishlistService.selectAllWithTicketAndTour(userId);
-			code = 1;
-			msg = "성공";
-		} catch (Exception e) {
-			// 에러 발생시 code 2
-			e.printStackTrace();
-			code = 2;
-			msg = "관리자에게 문의하세요.";
-		}
-		resultMap.put("code", code);
-		resultMap.put("msg", msg);
-		resultMap.put("data", data);
-		return resultMap;
-	}
 	
 	/*
 	 * 티켓 상품 위시리스트에 추가
@@ -228,6 +201,37 @@ public class WishlistRestController {
 		return resultMap;
 	}
 	 */
+	
+	/*
+	 * 위시리스트 리스트 보기 + 티켓상품 + 투어상품  (user_id) => controller
+
+	@LoginCheck
+	@ApiOperation(value = "위시리스트(티켓+투어) 리스트")
+	@GetMapping(value = "/wishlist-with", produces = "application/json;charset=UTF-8")
+	public Map<String, Object> wishlist_list_with_ticket_tour(@RequestParam(required = true) String userId) {
+
+		Map<String, Object> resultMap = new HashMap<>();
+		int code = 1;
+		String msg = "성공";
+		List<Wishlist> data = new ArrayList<>();
+		try {
+			// userId로 위시리스트(티켓+투어) 리스트 찾기, 성공시 code 1
+			data = wishlistService.selectAllWithTicketAndTour(userId);
+			code = 1;
+			msg = "성공";
+		} catch (Exception e) {
+			// 에러 발생시 code 2
+			e.printStackTrace();
+			code = 2;
+			msg = "관리자에게 문의하세요.";
+		}
+		resultMap.put("code", code);
+		resultMap.put("msg", msg);
+		resultMap.put("data", data);
+		return resultMap;
+	}
+		 */
+	
 	
 	
 }

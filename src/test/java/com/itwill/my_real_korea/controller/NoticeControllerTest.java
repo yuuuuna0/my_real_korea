@@ -5,6 +5,7 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
@@ -34,7 +35,7 @@ public class NoticeControllerTest {
 	@MockBean
 	NoticeService noticeService;
 
-	@Disabled
+	
 	@Test
 	void testNotice_list() throws Exception{
 		// 임의로 noticeList 만들기
@@ -53,10 +54,30 @@ public class NoticeControllerTest {
 	
 		mockMvc.perform(get("/notice-list")) // get 방식으로 요청
 		.andExpect(status().isOk()) // HTTP 상태코드가 200 OK
+		.andExpect(model().attributeExists("noticeList")) // model 에 setAttribute 한 값이 있는지
+		.andExpect(model().attributeExists("pageNo")) // model 에 setAttribute 한 값이 있는지
 		.andExpect(view().name("notice-list")) // notice-list 뷰를 반환하는지
 		.andDo(print()); // 콘솔에 요청과 응답을 출력
 		
 		verify(noticeService).selectAll(1); // 메소드 호출되는지 검증
+	}
+	
+	@Disabled
+	@Test
+	void testNotice_detail() throws Exception{
+		// 임의로 notice 만들기
+		Notice notice = new Notice(1, null, null, null, 0, null, null);
+		// selectByNo(1) 메소드 실행시 notice 가 return 된다고 가정
+		given(noticeService.selectByNo(1)).willReturn(notice);
+	
+		mockMvc.perform(get("/notice-detail").param("nNo", "1")) 
+		.andExpect(status().isOk()) 
+		.andExpect(model().attributeExists("notice")) 
+		.andExpect(model().attributeExists("nNo")) 
+		.andExpect(view().name("notice-detail")) 
+		.andDo(print()); 
+		
+		verify(noticeService).selectByNo(1); 
 	}
 
 	@Disabled
@@ -68,6 +89,7 @@ public class NoticeControllerTest {
 		.andDo(print());
 	}
 	
+	@Disabled
 	@Test
 	void testNotice_modify_form() throws Exception {
 		mockMvc.perform(get("/notice-modify-form"))

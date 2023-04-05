@@ -29,7 +29,7 @@
   
  <script type="text/javascript">
 	function userCreate() {
-		location.href="user_write_form";
+		location.href="user-write-form";
 	}
 
 	function login() {
@@ -44,7 +44,7 @@
 			return false;
 		}
 
-		document.f.action = "user_login_action";
+		document.f.action = "user-login-action";
 		document.method='POST';
 		document.f.submit();
 	}
@@ -67,7 +67,7 @@
     <!-- Mobile menu overlay mask -->
 
     <!-- Header================================================== -->
-   	<div id="header" th:include="user_common_top::user_common_top"></div>
+   	<div id="header" th:include="user-common-top::user-common-top"></div>
     
 	<main>
     <section id="hero" class="login">

@@ -39,13 +39,13 @@
 <script type="text/javascript">
 
 	function userModify() {
-		document.f.action = "user_modify_form";
+		document.f.action = "user-modify-form";
 		document.f.submit();
 	}
 	
 	function userRemove() {
 		if (confirm("정말 탈퇴하시겠습니까?")) {
-			document.f.action = "user_remove_action";
+			document.f.action = "user-remove-action";
 			document.f.submit();
 		}
 	}
@@ -72,7 +72,7 @@
 	<!-- Mobile menu overlay mask -->
 
 	<!-- Header================================================== -->
-   	<div id="header" th:include="user_common_top::user_common_top"></div>
+   	<div id="header" th:include="user-common-top::user-common-top"></div>
 	<!-- End Header -->
 
 	<section class="parallax-window" data-parallax="scroll" data-image-src="img/admin_top.jpg" data-natural-width="1400" data-natural-height="470">

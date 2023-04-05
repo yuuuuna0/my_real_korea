@@ -35,7 +35,7 @@
 	  const mailAuthKey = form.mailAuthKey.value;
 	  const code = `${authUser.mailKey}`;
 	  if (mailAuthKey === code) {
-	    form.action = "user_auth_action";
+	    form.action = "user-auth-action";
 	    form.method = "POST";
 	    form.submit();
 	  } else {
@@ -64,7 +64,7 @@
     <!-- Mobile menu overlay mask -->
 
     <!-- Header================================================== -->
-   	<div id="header" th:include="user_common_top::user_common_top"></div>
+   	<div id="header" th:include="user-common-top::user-common-top"></div>
     
 	<main>
     <section id="hero" class="login">

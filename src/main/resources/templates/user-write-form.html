@@ -85,7 +85,7 @@
 			f.password.select();
 			return false;
 		}
-		document.f.action = "user_write_action";
+		document.f.action = "user-write-action";
 		document.f.method='POST';
 		document.f.submit();
 	}
@@ -133,7 +133,7 @@ function kakaopost() {
     <!-- Mobile menu overlay mask -->
 
      <!-- Header================================================== -->
-     <div id="header" th:include="user_common_top::user_common_top"></div>
+     <div id="header" th:include="user-common-top::user-common-top"></div>
      
     
 	<main>

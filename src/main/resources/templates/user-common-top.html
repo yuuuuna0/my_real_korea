@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<div th:fragment="user_common_top">
+<div th:fragment="user-common-top">
 
     <header>
         <div id="top_line">
@@ -13,13 +13,13 @@
                             <li><a href="user_login_form" id="access_link">Sign in</a></li>
                              -->
                     	<th:block th:if="${session.sUserId==null}">
-                            <li><a href="user_login_form">Sign in</a></li>
+                            <li><a href="user-login-form">Sign in</a></li>
                         </th:block>
                         <th:block th:unless="${session.sUserId==null}">
-	                        <li><a href="user_logout_action">Sign out</a></li>
+	                        <li><a href="user-logout-action">Sign out</a></li>
                         </th:block>
                             <li><a href="wishlist.html" id="wishlist_link">Wishlist</a></li>
-                            <li><a href="user_view">My Page</a></li>
+                            <li><a href="user-view">My Page</a></li>
                         </ul>
                     </div>
                 </div><!-- End row -->
@@ -30,7 +30,7 @@
             <div class="row">
                 <div class="col-3">
                     <div id="logo_home">
-                    	<h1><a href="user_main" title="City tours travel template">City Tours travel template</a></h1>
+                    	<h1><a href="user-main" title="City tours travel template">City Tours travel template</a></h1>
                     </div>
                 </div>
                 <nav class="col-9">

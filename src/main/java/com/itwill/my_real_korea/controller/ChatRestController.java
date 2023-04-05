@@ -79,7 +79,7 @@ public class ChatRestController {
 
 		try {
 			// roomNo로 채팅방 1개 찾기, 성공시 code 1 
-			ChatRoom chatRoom = chatService.selectCheckByRoomNo(roomNo);
+			ChatRoom chatRoom = chatService.selectRoomByRoomNo(roomNo);
 //			// 요청한 userId : session에서 찾기
 //			String userId = (String)session.getAttribute("sUserId");
 			if (chatRoom != null) {
@@ -138,7 +138,7 @@ public class ChatRestController {
 				code = 1;
 				msg = "성공";
 				// 채팅방 생성 후 그 채팅방 찾아서 데이터에 붙여줌
-				chatRoom = chatService.selectCheckByRoomNo(chatRoom.getRoomNo());
+				chatRoom = chatService.selectRoomByRoomNo(chatRoom.getRoomNo());
 				data.add(chatRoom);
 			}
 		} catch (Exception e) {
@@ -177,7 +177,7 @@ public class ChatRestController {
 				code = 2;
 				msg = "채팅방 삭제 실패";
 				// 삭제 실패한 roomNo 데이터에 붙여줌
-				ChatRoom failChatRoom = chatService.selectCheckByRoomNo(roomNo);
+				ChatRoom failChatRoom = chatService.selectRoomByRoomNo(roomNo);
 				data.add(failChatRoom);
 			}
 		} catch (Exception e) {

@@ -17,7 +17,7 @@ public interface TourReviewService {
 
 	//페이지 메이커 사용
 	//4. 사용자가 작성한 후기 전체 보기
-	public PageMakerDto<TourReview> findByUserId(int currentPage,String sortOrder,String userId) throws Exception;
+	public List<TourReview> findByUserId(String userId) throws Exception;
 	//5. 투어상품번호로 후기 전체 보기
-	public PageMakerDto<TourReview> findByToNo(int currentPage,String sortOrder,int toNo) throws Exception;
+	public List<TourReview> findByToNo(int toNo) throws Exception;
 }

@@ -23,8 +23,9 @@ class TourReviewDaoImplTest {
 		assertEquals(rowCount, 1);
 	}
 
+	@Test
 	void testSelectByToNo() throws Exception{
-		List<TourReview> tourReviewList=tourReviewDao.selectByToNo(1, 10, 3, "desc");
+		List<TourReview> tourReviewList=tourReviewDao.selectByToNo(3);
 		System.out.println(tourReviewList.size());
 		for (TourReview tourReview : tourReviewList) {
 			System.out.println(tourReview);
@@ -42,9 +43,8 @@ class TourReviewDaoImplTest {
 		assertEquals(rowCount, 1);
 	}
 
-	@Test
 	void testSelectByUserId() throws Exception{
-		List<TourReview> tourReviewList=tourReviewDao.selectByUserId(1, 10, "user2", "desc");
+		List<TourReview> tourReviewList=tourReviewDao.selectByUserId("user2");
 		System.out.println(tourReviewList.size());
 		for (TourReview tourReview : tourReviewList) {
 			System.out.println(tourReview);

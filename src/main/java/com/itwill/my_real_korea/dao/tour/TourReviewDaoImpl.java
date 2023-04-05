@@ -26,14 +26,9 @@ public class TourReviewDaoImpl implements TourReviewDao {
 	}
 
 	@Override
-	public List<TourReview> selectByToNo(int pageStart,int pageEnd,int toNo, String sortOrder) throws Exception {
+	public List<TourReview> selectByToNo(int toNo) throws Exception {
 		//투어상품번호로 후기 전체보기
-		Map<String, Object> tourReviewMap=new HashMap<>();
-		tourReviewMap.put("pageStart", pageStart);
-		tourReviewMap.put("pageEnd", pageEnd);
-		tourReviewMap.put("toNo", toNo);
-		tourReviewMap.put("sortOrder", sortOrder);
-		return tourReviewMapper.selectByToNo(tourReviewMap);
+		return tourReviewMapper.selectByToNo(toNo);
 	}
 
 	@Override
@@ -49,14 +44,9 @@ public class TourReviewDaoImpl implements TourReviewDao {
 	}
 
 	@Override
-	public List<TourReview> selectByUserId(int pageStart,int pageEnd,String userId,String sortOrder) throws Exception {
+	public List<TourReview> selectByUserId(String userId) throws Exception {
 		//사용자가 작성한 후기 전체보기
-		Map<String, Object> tourReviewMap=new HashMap<>();
-		tourReviewMap.put("pageStart", pageStart);
-		tourReviewMap.put("pageEnd", pageEnd);
-		tourReviewMap.put("userId", userId);
-		tourReviewMap.put("sortOrder", sortOrder);
-		return tourReviewMapper.selectByUserId(tourReviewMap);
+		return tourReviewMapper.selectByUserId(userId);
 	}
 
 	@Override

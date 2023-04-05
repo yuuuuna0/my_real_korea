@@ -28,34 +28,7 @@ public class WishlistRestController {
 
 	@Autowired
 	private WishlistService wishlistService;
-	/*
-	 * 위시리스트 리스트 전체 보기 (user_id)
-	 */
-	@LoginCheck
-	@ApiOperation(value = "위시리스트 리스트")
-	@GetMapping(value = "/wishlist", produces = "application/json;charset=UTF-8")
-	public Map<String, Object> wishlist_list(@RequestParam(required = true) String userId) {
-
-		Map<String, Object> resultMap = new HashMap<>();
-		int code = 1;
-		String msg = "성공";
-		List<Wishlist> data = new ArrayList<>();
-		try {
-			// userId로 위시리스트 리스트 찾기, 성공시 code 1
-			data = wishlistService.selectAll(userId);
-			code = 1;
-			msg = "성공";
-		} catch (Exception e) {
-			// 에러 발생시 code 2
-			e.printStackTrace();
-			code = 2;
-			msg = "관리자에게 문의하세요.";
-		}
-		resultMap.put("code", code);
-		resultMap.put("msg", msg);
-		resultMap.put("data", data);
-		return resultMap;
-	}
+	
 	/*
 	 * 위시리스트 리스트 보기 + 티켓상품 + 투어상품  (user_id)
 	 */
@@ -225,6 +198,36 @@ public class WishlistRestController {
 		resultMap.put("data", data);
 		return resultMap;
 	}
+	
+	/*
+	 * 위시리스트 리스트 전체 보기 (user_id) => controller 에 구현
+	
+	@LoginCheck
+	@ApiOperation(value = "위시리스트 리스트")
+	@GetMapping(value = "/wishlist", produces = "application/json;charset=UTF-8")
+	public Map<String, Object> wishlist_list(@RequestParam(required = true) String userId) {
+
+		Map<String, Object> resultMap = new HashMap<>();
+		int code = 1;
+		String msg = "성공";
+		List<Wishlist> data = new ArrayList<>();
+		try {
+			// userId로 위시리스트 리스트 찾기, 성공시 code 1
+			data = wishlistService.selectAll(userId);
+			code = 1;
+			msg = "성공";
+		} catch (Exception e) {
+			// 에러 발생시 code 2
+			e.printStackTrace();
+			code = 2;
+			msg = "관리자에게 문의하세요.";
+		}
+		resultMap.put("code", code);
+		resultMap.put("msg", msg);
+		resultMap.put("data", data);
+		return resultMap;
+	}
+	 */
 	
 	
 }

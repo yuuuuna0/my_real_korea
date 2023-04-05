@@ -74,8 +74,8 @@ public class TourController {
 	}
 
 	//2. 투어상품 상세보기
-	@RequestMapping(value="/tour_detail", params = "toNo")
-	public String tour_detail(@PathVariable int toNo, Model model) {
+	@RequestMapping(value="/tour-detail", params = "toNo")
+	public String tour_detail(@RequestParam int toNo, Model model) {
 		String forwardPath="";
 		String msg="";
 		try{
@@ -84,11 +84,11 @@ public class TourController {
 				List<TourImg> tourImgList=tourImgService.findTourImgList(toNo);
 				tour.setTourImgList(tourImgList);
 				model.addAttribute("tour",tour);
-				forwardPath="tour_detail";
+				forwardPath="tour-detail";
 				msg="성공";
 			} else{
 				msg="해당 투어제품은 존재하지 않습니다.";
-				forwardPath="redirect:my_real_korea_main";
+				forwardPath="redirect:myrealkorea";
 			}
 			List<TourReview> tourReviewList=tourReviewService.findByToNo(toNo);
 			model.addAttribute("tourReviewList", tourReviewList);
@@ -102,18 +102,18 @@ public class TourController {
 	}
 	
 	//2-1. 투어상품 상세보기 액션
-	@PostMapping(value="tour_detail_action")
+	@PostMapping(value="tour-detail-action")
 	public String tour_detail_action(@RequestParam int pStarDate, @RequestParam int pQty, @ModelAttribute Tour tour,HttpSession session) {
 		String forwardPath="";
 		session.setAttribute("pStartDate",pStarDate);
 		session.setAttribute("pQty",pQty);
 		session.setAttribute("Tour", tour);
-		forwardPath="redirect:tour_reserve";
+		forwardPath="redirect:tour-reserve";
 		return forwardPath;
 	}
 	
 	//3. 투어상품 예약하기(구매하기) 폼
-	@RequestMapping(value="/tour_reserve")
+	@RequestMapping(value="/tour-reserve")
 	public String tour_reserve_form(HttpSession session,Model model) {
 		String forwardPath="";
 		
@@ -124,12 +124,12 @@ public class TourController {
 		model.addAttribute("pQty", pQty);
 		model.addAttribute("pStartDate",pStartDate);
 		
-		forwardPath="tour_reserve";
+		forwardPath="tour-reserve";
 		return forwardPath;
 	}
 	
 	//3-1. 투어상품 예약하기(구매하기) 액션
-	@PostMapping(value="tour_reserve_action")
+	@PostMapping(value="tour-reserve-action")
 	public String tour_reserve_form(@ModelAttribute Payment payment,HttpSession session,Model model) {
 		String forwardPath="";
 		String msg="";
@@ -138,18 +138,18 @@ public class TourController {
 			payment.setTour(tour);
 			paymentService.insertTourPayment(payment);
 			session.setAttribute("payment", payment);
-			forwardPath="redirect:tour_confirmation";
+			forwardPath="redirect:tour-confirmation";
 		}catch (Exception e) {
 			e.printStackTrace();
 			msg="관리자에게 문의하세요";
-			forwardPath="redirect:my_real_korea_main";
+			forwardPath="redirect:main";
 		}
 		model.addAttribute(msg);
 		return forwardPath;
 	}
 	
 	//4. 예약한 투어상품 상세 확인
-	@RequestMapping(value="tour_confirmation")
+	@RequestMapping(value="tour-confirmation")
 	public String tour_confirmation(HttpSession session) {
 		String forwardPath="";
 		session.getAttribute("tour");

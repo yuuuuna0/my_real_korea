@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
@@ -20,7 +21,8 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 
 import com.itwill.my_real_korea.dto.tour.Tour;
-
+import com.itwill.my_real_korea.dto.tour.TourImg;
+import com.itwill.my_real_korea.service.tour.TourImgService;
 import com.itwill.my_real_korea.service.tour.TourService;
 import com.itwill.my_real_korea.util.PageMaker;
 import com.itwill.my_real_korea.util.PageMakerDto;
@@ -32,8 +34,9 @@ class TourControllerTest {
 	
 	@MockBean
 	TourService tourService;
+	@MockBean
+	TourImgService tourImgService;
 	
-	@Test
 	void testTour_list() throws Exception{
 		PageMakerDto<Tour> tours=new PageMakerDto<>();
 		List<Tour> tourList=new ArrayList<>();
@@ -53,6 +56,26 @@ class TourControllerTest {
 			   .andDo(print());
 		
 		verify(tourService).findAll(1, null, 0, 0, null);
+	}
+	
+	@Test
+	void testTour_Deteil() throws Exception{
+		Tour tour=new Tour(1, null, 0, 0, 0, null, 0, null, null, 0, null);
+		
+		TourImg tourImg1=new TourImg(1, null, 1);
+		TourImg tourImg2=new TourImg(2, null, 1);
+		TourImg tourImg3=new TourImg(3, null, 1);
+		List<TourImg> tourImgList=tourImgService.findTourImgList(1);
+		tour.setTourImgList(tourImgList);
+		given(tourService.findTourWithCityByToNo(1)).willReturn(tour);
+		
+		mockMvc.perform(get("/tour-detail").param("toNo", "1"))
+		   .andExpect(status().isOk())
+		   .andExpect(model().attributeExists("tour"))
+		   .andExpect(view().name("tour-detail"))
+		   .andDo(print());
+		
+		verify(tourService).findTourWithCityByToNo(1);
 	}
 
 }

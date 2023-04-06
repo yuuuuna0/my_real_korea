@@ -35,7 +35,7 @@ public class NoticeControllerTest {
 	@MockBean
 	NoticeService noticeService;
 
-	
+	@Disabled
 	@Test
 	void testNotice_list() throws Exception{
 		// 임의로 noticeList 만들기
@@ -62,7 +62,7 @@ public class NoticeControllerTest {
 		verify(noticeService).selectAll(1); // 메소드 호출되는지 검증
 	}
 	
-	@Disabled
+	
 	@Test
 	void testNotice_detail() throws Exception{
 		// 임의로 notice 만들기

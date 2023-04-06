@@ -57,6 +57,7 @@ public class NoticeController {
 		
 		try {
 			Notice notice = noticeService.selectByNo(nNo);
+			noticeService.increaseReadCount(nNo);
 			model.addAttribute("notice", notice);
 			model.addAttribute("nNo", nNo);
 		} catch (NoticeNotFoundException e) {

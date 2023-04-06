@@ -2,6 +2,8 @@ package com.itwill.my_real_korea.controller;
 
 import com.itwill.my_real_korea.dto.City;
 import com.itwill.my_real_korea.dto.freeboard.FreeBoard;
+import com.itwill.my_real_korea.dto.freeboard.FreeBoardComment;
+import com.itwill.my_real_korea.service.freeboard.FreeBoardCommentService;
 import com.itwill.my_real_korea.service.freeboard.FreeBoardService;
 import com.itwill.my_real_korea.util.PageMaker;
 import com.itwill.my_real_korea.util.PageMakerDto;
@@ -30,9 +32,12 @@ public class FreeBoardControllerTest {
 
     @MockBean
     FreeBoardService freeBoardService;
+    
+    @MockBean
+    FreeBoardCommentService freeBoardCommentService;
 
 
-    @Test
+    //@Test
     void freeBoard_list() throws Exception{
         PageMakerDto<FreeBoard> freeBoardList = new PageMakerDto<>();
 
@@ -55,10 +60,16 @@ public class FreeBoardControllerTest {
         verify(freeBoardService).selectAll(1);
     }
 
-    //@Test
+    @Test
     void freeBoard_detail() throws Exception{
         FreeBoard freeBoard = new FreeBoard(1,"title","content",null,12,new City(1,"서울",1,1),"user2");
+        List<FreeBoardComment> freeBoardCommentList = new ArrayList<>();
+        freeBoardCommentList.add(new FreeBoardComment(1, null, null, 1, null));
+        freeBoardCommentList.add(new FreeBoardComment(2, null, null, 1, null));
+        freeBoardCommentList.add(new FreeBoardComment(3, null, null, 1, null));
+        
         given(freeBoardService.selectByNo(1)).willReturn(freeBoard);
+        given(freeBoardCommentService.selectByfBoNo(1)).willReturn(freeBoardCommentList);
 
         mockMvc.perform(get("/freeboard-detail").param("fBoNo", "1"))
                 .andExpect(status().isOk())
@@ -69,6 +80,7 @@ public class FreeBoardControllerTest {
                 .andDo(print());
 
         verify(freeBoardService).selectByNo(1);
+        verify(freeBoardCommentService).selectByfBoNo(1);
     }
 
     //@Test

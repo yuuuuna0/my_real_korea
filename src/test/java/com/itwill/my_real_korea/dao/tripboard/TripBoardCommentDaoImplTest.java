@@ -9,12 +9,10 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.itwill.my_real_korea.dto.tripboard.TripBoardComment;
 
-@SpringBootApplication
 @SpringBootTest
 @MapperScan(basePackages = "com.itwill.my_real_korea.mapper")
 class TripBoardCommentDaoImplTest {
@@ -57,8 +55,8 @@ class TripBoardCommentDaoImplTest {
 	//성공
 	@Disabled
 	@Test
-	void testSelectAll() throws Exception {
-		List<TripBoardComment> tripBoardCommentList = tripBoardCommentDao.selectAll();
+	void testSelectAllByTBoNo() throws Exception {
+		List<TripBoardComment> tripBoardCommentList = tripBoardCommentDao.selectAllByTBoNo(1);
 		System.out.println(tripBoardCommentList);
 	}
 	

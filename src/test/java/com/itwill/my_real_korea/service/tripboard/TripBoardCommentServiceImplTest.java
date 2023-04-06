@@ -8,15 +8,13 @@ import java.util.List;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.ComponentScan;
 
 import com.itwill.my_real_korea.dto.tripboard.TripBoardComment;
 
 
-//@SpringBootApplication
-//@SpringBootTest
+@SpringBootTest
 //@ComponentScan(basePackages = {"com.itwill.my_real_korea"})
 class TripBoardCommentServiceImplTest {
 	
@@ -68,13 +66,13 @@ class TripBoardCommentServiceImplTest {
 	}
 	
 	/*
-	 * 댓글 리스트
+	 * N번 게시글의 댓글 전체 보기
 	 */
 	//성공
 	@Disabled
 	@Test
-	void testSelectAll() throws Exception {
-		List<TripBoardComment> tripBoardCommentList = tripBoardCommentService.selectAll();
+	void testSelectAllByTBoNo() throws Exception {
+		List<TripBoardComment> tripBoardCommentList = tripBoardCommentService.selectAllByTBoNo(1);
 		System.out.println(tripBoardCommentList);
 	}
 	

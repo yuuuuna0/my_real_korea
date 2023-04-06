@@ -23,8 +23,7 @@ public class EmailController {
     @ApiOperation(value = "이메일 인증번호 (구글)")
     @PostMapping(value = "email_auth_success", produces = "application/json;charset=UTF-8")
     public String mailConfirm(@RequestBody EmailAuthRequest emailDto) throws MessagingException, UnsupportedEncodingException {
-
-        emailService.sendEmail(emailDto.getEmail());
+        emailService.sendAuth(emailDto.getEmail());
         return "email_auth_success";
     }
 

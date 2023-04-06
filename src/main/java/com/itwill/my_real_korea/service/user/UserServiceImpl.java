@@ -103,8 +103,8 @@ public class UserServiceImpl implements UserService{
 	//22. 메일 인증번호 업데이트
     public int mailKeyUpdate(User user) throws Exception {
         // 이메일 전송 및 인증번호 저장
-        String authNum = emailService.sendEmail(user.getEmail());
-        user.setMailKey(Integer.parseInt(authNum));
+        int authNum = emailService.sendAuth(user.getEmail());
+        user.setMailKey(authNum);
         return userDao.mailKeyUpdate(user);
     }
 	

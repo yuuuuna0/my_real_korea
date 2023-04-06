@@ -20,19 +20,18 @@ public class WishlistController {
 	private WishlistService wishlistService;
 	
 	// 위시리스트 리스트 + 티켓상품 + 투어상품 전체 보기 (위시리스트 첫화면) 
-	@LoginCheck
+	//@LoginCheck
 	@GetMapping(value = "/wishlist")
 	public String wishlist(HttpSession session, Model model) {
 		
-		String userId = (String)session.getAttribute("sUserId");
-		if (userId != null) {
-			List<Wishlist> wishlistList = wishlistService.selectAllWithTicketAndTour(userId);
+		String sUserId = (String)session.getAttribute("sUserId");
+		if (sUserId != null) {
+			List<Wishlist> wishlistList = wishlistService.selectAllWithTicketAndTour(sUserId);
 			model.addAttribute("wishlistList", wishlistList);
-			model.addAttribute("userId", userId);
+			model.addAttribute("sUserId", sUserId);
 		} else {
 			return "user-login-form";
 		}
-		
 		
 		return "wishlist";
 	}

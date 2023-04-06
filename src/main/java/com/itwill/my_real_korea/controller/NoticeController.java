@@ -30,13 +30,7 @@ public class NoticeController {
 
 	@Autowired
 	private NoticeService noticeService;
-	
-	// 메인 페이지 
-	@GetMapping("/index")
-	public String index() {
-		return "index";
-	}
-	
+
 	
 	// 공지사항 리스트 보기 (공지사항 첫 화면)
 	@GetMapping(value = "/notice-list")

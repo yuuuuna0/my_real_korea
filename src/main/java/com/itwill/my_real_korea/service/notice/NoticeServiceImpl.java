@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.itwill.my_real_korea.dao.notice.NoticeDao;
 import com.itwill.my_real_korea.dto.notice.Notice;
+import com.itwill.my_real_korea.exception.NoticeNotFoundException;
 import com.itwill.my_real_korea.util.PageMaker;
 import com.itwill.my_real_korea.util.PageMakerDto;
 @Service
@@ -24,7 +25,11 @@ public class NoticeServiceImpl implements NoticeService{
 
 	@Override
 	public Notice selectByNo(int nNo) throws Exception {
-		return noticeDao.selectByNo(nNo);
+		Notice notice = noticeDao.selectByNo(nNo);
+		if (notice == null) {
+			throw new NoticeNotFoundException("공지사항이 존재하지 않습니다.");
+		}
+		return notice;
 	}
 
 	

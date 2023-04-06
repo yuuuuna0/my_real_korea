@@ -48,6 +48,8 @@ class TourControllerTest {
 		tours.setPageMaker(new PageMaker(1, 10));
 		tours.setTotRecordCount(2);
 		
+		
+		
 		given(tourService.findAll(1, null, 0, 0, null)).willReturn(tours);
 		
 		mockMvc.perform(get("/tour-list"))

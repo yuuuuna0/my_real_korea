@@ -8,9 +8,11 @@ import org.springframework.stereotype.Service;
 import com.itwill.my_real_korea.dao.city.CityDao;
 import com.itwill.my_real_korea.dao.tour.TourDao;
 import com.itwill.my_real_korea.dao.tour.TourImgDao;
+import com.itwill.my_real_korea.dao.tour.TourReviewDao;
 import com.itwill.my_real_korea.dto.City;
 import com.itwill.my_real_korea.dto.tour.Tour;
 import com.itwill.my_real_korea.dto.tour.TourImg;
+import com.itwill.my_real_korea.dto.tour.TourReview;
 import com.itwill.my_real_korea.util.PageMaker;
 import com.itwill.my_real_korea.util.PageMakerDto;
 @Service
@@ -19,6 +21,9 @@ public class TourServiceImpl implements TourService {
 	private TourDao tourDao;
 	@Autowired
 	private TourImgDao tourImgDao;
+	@Autowired
+	private TourReviewDao tourReviewDao;
+	
 	@Override
 	public int insertTour(Tour tour) throws Exception {
 		//투어상품 추가
@@ -66,6 +71,23 @@ public class TourServiceImpl implements TourService {
 		List<Tour> tourList=tourDao.findTourListByCity(pageMaker.getPageBegin(), pageMaker.getPageEnd(), cityNo, sortOrder);
 		PageMakerDto<Tour> pageMakerTourList=new PageMakerDto<Tour>(tourList,pageMaker,totTourCount);
 		return null;
+	}
+
+	@Override
+	public int calculateTourScore(int toNo) throws Exception {
+		// 투어 평점 구하기
+		List<TourReview> tourReviewList=tourReviewDao.selectByToNo(toNo);
+		int tourScore=0;
+		int totScore=0;
+		if(tourReviewList.size()!=0) {
+			for (TourReview tourReview : tourReviewList) {
+				totScore+=tourReview.getToReviewStar();
+			}
+			tourScore=totScore/(tourReviewList.size());
+		} else if(tourReviewList.size()==0) {
+			tourScore=0;
+		}
+		return tourScore;
 	}
 }
 

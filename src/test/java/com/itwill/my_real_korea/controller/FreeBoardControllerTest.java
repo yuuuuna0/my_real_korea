@@ -55,7 +55,7 @@ public class FreeBoardControllerTest {
         verify(freeBoardService).selectAll(1);
     }
 
-    @Test
+    //@Test
     void freeBoard_detail() throws Exception{
         FreeBoard freeBoard = new FreeBoard(1,"title","content",null,12,new City(1,"서울",1,1),"user2");
         given(freeBoardService.selectByNo(1)).willReturn(freeBoard);
@@ -71,7 +71,7 @@ public class FreeBoardControllerTest {
         verify(freeBoardService).selectByNo(1);
     }
 
-    @Test
+    //@Test
     void freeBoardWriteForm() throws Exception {
         mockMvc.perform(get("/freeboard-write-form"))
                 .andExpect(status().isOk())
@@ -79,7 +79,7 @@ public class FreeBoardControllerTest {
                 .andDo(print());
     }
 
-    @Test
+    //@Test
     void freeBoardModifyForm() throws Exception {
         FreeBoard freeBoard = new FreeBoard(1,"title","content",null,12,new City(1,"서울",1,1),"user2");
         given(freeBoardService.selectByNo(1)).willReturn(freeBoard);

@@ -1,7 +1,6 @@
 package com.itwill.my_real_korea.service.freeboard;
 
 import com.itwill.my_real_korea.dao.freeboard.FreeBoardCommentDao;
-import com.itwill.my_real_korea.dto.freeboard.FreeBoard;
 import com.itwill.my_real_korea.dto.freeboard.FreeBoardComment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +18,15 @@ public class FreeBoardCommentServiceImpl implements FreeBoardCommentService{
     @Override
     public List<FreeBoardComment> selectAll() throws Exception {
         return freeBoardCommentDao.selectAll();
+    }
+
+    @Override
+    public List<FreeBoardComment> selectByfBoNo(int fBoNo) throws Exception {
+        return freeBoardCommentDao.selectByfBoNo(fBoNo);
+    }
+    @Override
+    public FreeBoardComment selectByfCoNo(int fCoNo) throws Exception {
+        return freeBoardCommentDao.selectByfCoNo(fCoNo);
     }
 
     @Override

@@ -1,6 +1,5 @@
 package com.itwill.my_real_korea.service.freeboard;
 
-import com.itwill.my_real_korea.dto.freeboard.FreeBoard;
 import com.itwill.my_real_korea.dto.freeboard.FreeBoardComment;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +11,9 @@ public interface FreeBoardCommentService {
 
 
     List<FreeBoardComment> selectAll() throws Exception;
+
+    List<FreeBoardComment> selectByfBoNo(int fBoNo) throws Exception;
+    FreeBoardComment selectByfCoNo(int fBoNo) throws Exception;
 
 
     int deleteComment(int fCommentNo) throws Exception;

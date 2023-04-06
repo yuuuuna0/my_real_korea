@@ -5,24 +5,41 @@
 
 
 
+
 <insert id="insertComment" parameterType="com.itwill.my_real_korea.dto.freeboard.FreeBoardComment">
 <!--<selectKey resultType="java.lang.Integer"-->
-<!--           keyProperty="fCommentNo" order="BEFORE">-->
+<!--           keyProperty="fCoNo" order="BEFORE">-->
 <!--    SELECT free_board_f_bo_no_seq.nextval FROM DUAL-->
 <!--</selectKey>-->
-insert into FREE_BOARD_COMMENT (f_comment_no,f_comment_content,f_comment_date,f_bo_no,user_id)
-values( #{fCommentNo},#{fCommentContent},sysdate,
-       #{fBoNo},#{userId})
+insert into FREE_BOARD_COMMENT (f_co_no,f_comment_content,f_comment_date,f_bo_no,user_id)
+values( #{fCoNo},#{fCommentContent},sysdate,#{fBoNo},#{userId})
+
 </insert>
 
+       <select id="selectByfBoNo"
+               parameterType="java.lang.Integer" resultType="com.itwill.my_real_korea.dto.freeboard.FreeBoardComment">
+           select fc.*
+           from free_board_comment fc
+                    join free_board fb
+                         on fc.f_bo_no = fb.f_bo_no
+           where fc.f_bo_no = #{fBoNo}
+       </select>
+
+    <select id="selectByfCoNo"
+            parameterType="java.lang.Integer" resultType="com.itwill.my_real_korea.dto.freeboard.FreeBoardComment">
+        select *
+        from free_board_comment
+                       where f_co_no=#{fCoNo}
+    </select>
 
        <select id="selectAll" parameterType="java.util.Map" resultType="com.itwill.my_real_korea.dto.freeboard.FreeBoardComment">
-              select * from free_board_comment order by f_comment_no asc
+              select * from free_board_comment order by f_co_no asc
 
        </select>
 
        <delete id="deleteComment" parameterType="java.lang.Integer">
-              delete from free_board_comment where f_comment_no = #{fCommentNo}
+              delete from free_board_comment where f_co_no = #{fCoNo}
+
        </delete>
 
 
@@ -32,7 +49,7 @@ values( #{fCommentNo},#{fCommentContent},sysdate,
                   f_comment_date=sysdate,
                   f_bo_no=#{fBoNo},
                   user_id=#{userId}
-              where f_comment_no = #{fCommentNo}
+              where f_co_no = #{fCoNo}
        </update>
 
        <select id="selectCommentCount" resultType="java.lang.Integer">

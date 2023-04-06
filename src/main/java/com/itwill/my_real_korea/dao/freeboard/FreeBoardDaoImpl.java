@@ -92,4 +92,5 @@ public class FreeBoardDaoImpl implements FreeBoardDao {
         pageMap.put("keyword", keyword);
         return freeBoardMapper.selectSearchFreeBoardList(pageMap);
     }
+
 }

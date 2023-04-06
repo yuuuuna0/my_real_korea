@@ -15,6 +15,15 @@ public class FreeBoardCommentDaoImpl implements FreeBoardCommentDao{
         return freeBoardCommentMapper.insertComment(freeBoardComment);
     }
 
+    @Override
+    public List<FreeBoardComment> selectByfBoNo(int fBoNo) {
+        return freeBoardCommentMapper.selectByfBoNo(fBoNo);
+    }
+    @Override
+    public FreeBoardComment selectByfCoNo(int fCoNo) {
+        return freeBoardCommentMapper.selectByfCoNo(fCoNo);
+    }
+
 
     @Override
     public List<FreeBoardComment> selectAll() throws Exception {

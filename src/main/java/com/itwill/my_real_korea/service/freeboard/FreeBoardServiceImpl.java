@@ -2,12 +2,11 @@ package com.itwill.my_real_korea.service.freeboard;
 
 import com.itwill.my_real_korea.dao.freeboard.FreeBoardDao;
 import com.itwill.my_real_korea.dto.freeboard.FreeBoard;
-import com.itwill.my_real_korea.util.PageMakerDto;
 import com.itwill.my_real_korea.util.PageMaker;
+import com.itwill.my_real_korea.util.PageMakerDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -24,9 +23,9 @@ public class FreeBoardServiceImpl implements FreeBoardService {
         return freeBoardDao.insertBoard(freeBoard);
     }
 
+
     @Override
     public FreeBoard selectByNo(int fBoNo) throws Exception {
-        		freeBoardDao.increaseReadCount(fBoNo);
         return freeBoardDao.selectByNo(fBoNo);
     }
 
@@ -39,6 +38,7 @@ public class FreeBoardServiceImpl implements FreeBoardService {
     public int deleteFreeBoard(int no) throws Exception {
         return freeBoardDao.deleteBoard(no);
     }
+
     //조회수 증가
     @Override
     public int increaseReadCount(int no) throws Exception {
@@ -54,16 +54,31 @@ public class FreeBoardServiceImpl implements FreeBoardService {
     public int selectSearchCount(String keyword) throws Exception {
         return freeBoardDao.selectSearchCount(keyword);
     }
+
+    @Override
+    public PageMakerDto<FreeBoard> selectAll(int currentPage) throws Exception {
+        // 전체 글의 수
+        int totFreeBoardCount = freeBoardDao.selectFreeBoardCount();
+        // paging 계산 (PageMaker)
+        PageMaker pageMaker = new PageMaker(totFreeBoardCount, currentPage);
+        // 게시글 데이터 얻기
+        List<FreeBoard> freeBoardList = freeBoardDao.selectAllOrderByFBoNoDesc(pageMaker.getPageBegin(), pageMaker.getPageEnd());
+
+        PageMakerDto<FreeBoard> pageMakerFreeBoardList = new PageMakerDto<FreeBoard>(freeBoardList, pageMaker, totFreeBoardCount);
+
+        return pageMakerFreeBoardList;
+    }
+
     //자유게시판 최신순 정렬
     @Override
     public PageMakerDto<FreeBoard> selectAllOrderByFBoNoDesc(int currentPage) throws Exception {
-        int totalRecordCount = freeBoardDao.selectFreeBoardCount();
+        int totalFreeBoardCount = freeBoardDao.selectFreeBoardCount();
 
-        PageMaker pageMaker = new PageMaker(totalRecordCount, currentPage);
+        PageMaker pageMaker = new PageMaker(totalFreeBoardCount, currentPage);
 
         List<FreeBoard> freeBoardList = freeBoardDao.selectAllOrderByFBoNoDesc(pageMaker.getPageBegin(), pageMaker.getPageEnd());
-        freeBoardList=new ArrayList<>();
-        PageMakerDto<FreeBoard> pageMakerBoardList = new PageMakerDto<FreeBoard>();
+
+        PageMakerDto<FreeBoard> pageMakerBoardList = new PageMakerDto();
 
         pageMakerBoardList.setItemList(freeBoardList);
         pageMakerBoardList.setPageMaker(pageMaker);
@@ -77,8 +92,8 @@ public class FreeBoardServiceImpl implements FreeBoardService {
         PageMaker pageMaker = new PageMaker(totalRecordCount, currentPage);
 
         List<FreeBoard> freeBoardList = freeBoardDao.selectAllOrderByFBoNoAsc(pageMaker.getPageBegin(), pageMaker.getPageEnd());
-        freeBoardList = new ArrayList<>();
-        PageMakerDto<FreeBoard> pageMakerBoardList = new PageMakerDto<FreeBoard>();
+
+        PageMakerDto<FreeBoard> pageMakerBoardList = new PageMakerDto();
 
         pageMakerBoardList.setItemList(freeBoardList);
         pageMakerBoardList.setPageMaker(pageMaker);
@@ -92,7 +107,7 @@ public class FreeBoardServiceImpl implements FreeBoardService {
         PageMaker pageMaker = new PageMaker(totalRecordCount, currentPage);
 
         List<FreeBoard> freeBoardList = freeBoardDao.selectAllOrderByReadCountDesc(pageMaker.getPageBegin(), pageMaker.getPageEnd());
-        PageMakerDto<FreeBoard> pageMakerBoardList = new PageMakerDto<FreeBoard>();
+        PageMakerDto<FreeBoard> pageMakerBoardList = new PageMakerDto();
         pageMakerBoardList.setItemList(freeBoardList);
         pageMakerBoardList.setPageMaker(pageMaker);
         return pageMakerBoardList;
@@ -118,8 +133,7 @@ public class FreeBoardServiceImpl implements FreeBoardService {
         PageMaker pageMaker = new PageMaker(totalRecordCount, currentPage);
         // 게시글 데이터 얻기
         List<FreeBoard> freeboardList = freeBoardDao.selectSearchFreeBoardList(pageMaker.getPageBegin(), pageMaker.getPageEnd(), keyword);
-        freeboardList = new ArrayList<>();
-        PageMakerDto<FreeBoard> pageMakerBoardList = new PageMakerDto<FreeBoard>();
+        PageMakerDto<FreeBoard> pageMakerBoardList = new PageMakerDto();
         pageMakerBoardList.setItemList(freeboardList);
         pageMakerBoardList.setPageMaker(pageMaker);
         return pageMakerBoardList;

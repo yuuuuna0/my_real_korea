@@ -38,7 +38,9 @@ public class NoticeController {
 								Model model) {
 		
 		try {
-			PageMakerDto<Notice> noticeList = noticeService.selectAll(pageNo);
+			PageMakerDto<Notice> noticeListPage = noticeService.selectAll(pageNo);
+			List<Notice> noticeList = noticeListPage.getItemList();
+			model.addAttribute("noticeListPage", noticeListPage);
 			model.addAttribute("noticeList", noticeList);
 			model.addAttribute("pageNo", pageNo);
 		} catch (Exception e) {

@@ -57,8 +57,8 @@
 	<section class="parallax-window" data-parallax="scroll" data-image-src="img/header_bg.jpg" data-natural-width="1400" data-natural-height="470">
 		<div class="parallax-content-1">
 			<div class="animated fadeInDown">
-				<h1>Shop</h1>
-				<p>Ridiculus sociosqu cursus neque cursus curae ante scelerisque vehicula.</p>
+				<h1>공지사항</h1>
+				<p>마이리얼코리아의 공지사항을 둘러보세요.</p>
 			</div>
 		</div>
 	</section>
@@ -86,16 +86,18 @@
 						<div class="items-sorting">
 							<div class="row">
 								<div class="col-6">
-									<div class="results_shop">
-										Showing 1–9 of 15 results
+									<div class="results_shop" th:each="noticePage:${noticeListPage}">
+										Showing <span th:text="${noticePage.pageMaker.curPage}"></span>–<span th:text="${noticePage.pageMaker.PAGE_SCALE}"></span> of 
+										<span th:text="${noticePage.totRecordCount}"></span> results
 									</div>
 								</div>
 								<div class="col-6">
 									<div class="form-group">
 										<select name="sort-by">
 											<option>Sorting by</option>
-											<option>Order</option>
-											<option>Price</option>
+											<option><a th:href="@{notice-date-desc}">최신순</a></option>
+											<option><a th:href="@{notice-date-asc}">오래된순</a></option>
+											<option><a th:href="@{notice-readcount}">조회수높은순</a></option>
 										</select>
 									</div>
 								</div>
@@ -105,236 +107,27 @@
 
 						<div class="row">
 
-							<div class="shop-item col-lg-4 col-md-6 col-sm-6">
+							<div class="shop-item col-lg-4 col-md-6 col-sm-6" th:each="notice:${noticeList}">
+							
 								<div class="inner-box">
 									<div class="image-box">
 										<figure class="image">
-											<a href="shop-single.html"><img src="img/products/image-1.jpg" alt="">
-											</a>
+											<a th:href="@{notice-detail(nNo=${notice.nNo})}" href="shop-single.html"><img src="img/products/image-1.jpg" alt=""></a>
 										</figure>
-										<div class="item-options clearfix">
-											<a href="shopping-cart.html" class="btn_shop"><span class="icon-basket"></span>
-                                            <div class="tool-tip">
-                                                Add to cart
-                                            </div>
-                                            </a>
-											<a href="shop-single.html" class="btn_shop"><span class="icon-heart-8"></span>
-                                            <div class="tool-tip">
-                                                Add to Fav
-                                            </div>
-                                            </a>
-											<a href="shop-single.html" class="btn_shop"><span class="icon-eye"></span>
-                                            <div class="tool-tip">
-                                                View
-                                            </div>
-                                            </a>
-										</div>
 									</div>
 									<div class="product_description">
-										<div class="rating">
-											<i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star-empty"></i>
-										</div>
-										<h3><a href="shop-single.html">Travel Book</a></h3>
+										<h3><a th:text="${notice.nTitle}" th:href="@{notice-detail(nNo=${notice.nNo})}" href="shop-single.html" >Travel Book</a></h3>
 										<div class="price">
-											<span class="offer">$20.00</span> $15.00
+											<span class="notice_readcount" th:text="${#dates.format(notice.nDate, 'yyyy/MM/dd')}">$20.00</span> 
+										</div>
+										<div class="item-options clearfix">
+											<span class="icon-eye"></span>
+											<span th:text=${notice.nReadcount}>$15.00</span>
 										</div>
 									</div>
 								</div>
 							</div>
 							<!--End Shop Item-->
-
-							<div class="shop-item col-lg-4 col-md-6 col-sm-6">
-								<div class="inner-box">
-									<div class="image-box">
-										<figure class="image">
-											<a href="shop-single.html"><img src="img/products/image-2.jpg" alt="">
-											</a>
-										</figure>
-										<div class="item-options clearfix">
-											<a href="shopping-cart.html" class="btn_shop"><span class="icon-basket"></span>
-                                            <div class="tool-tip">
-                                                Add to cart
-                                            </div>
-                                            </a>
-											<a href="shop-single.html" class="btn_shop"><span class="icon-heart-8"></span>
-                                            <div class="tool-tip">
-                                                Add to Fav
-                                            </div>
-                                            </a>
-											<a href="shop-single.html" class="btn_shop"><span class="icon-eye"></span>
-                                            <div class="tool-tip">
-                                                View
-                                            </div>
-                                            </a>
-										</div>
-									</div>
-									<div class="product_description">
-										<div class="rating">
-											<i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star-empty"></i>
-										</div>
-										<h3><a href="shop-single.html">World guide</a></h3>
-										<div class="price">
-											<span class="offer">$10.00</span> $5.00
-										</div>
-									</div>
-								</div>
-							</div>
-							<!--End Shop Item-->
-
-							<div class="shop-item col-lg-4 col-md-6 col-sm-6">
-								<div class="inner-box">
-									<div class="image-box">
-										<figure class="image">
-											<a href="shop-single.html"><img src="img/products/image-3.jpg" alt="">
-											</a>
-										</figure>
-										<div class="item-options clearfix">
-											<a href="shopping-cart.html" class="btn_shop"><span class="icon-basket"></span>
-                                            <div class="tool-tip">
-                                                Add to cart
-                                            </div>
-                                            </a>
-											<a href="shop-single.html" class="btn_shop"><span class="icon-heart-8"></span>
-                                            <div class="tool-tip">
-                                                Add to Fav
-                                            </div>
-                                            </a>
-											<a href="shop-single.html" class="btn_shop"><span class="icon-eye"></span>
-                                            <div class="tool-tip">
-                                                View
-                                            </div>
-                                            </a>
-										</div>
-									</div>
-									<div class="product_description">
-										<div class="rating">
-											<i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star-empty"></i>
-										</div>
-										<h3><a href="shop-single.html">Best places to visit</a></h3>
-										<div class="price">
-											$22.00
-										</div>
-									</div>
-								</div>
-							</div>
-							<!--End Shop Item-->
-
-							<div class="shop-item col-lg-4 col-md-6 col-sm-6">
-								<div class="inner-box">
-									<!--Image Box-->
-									<div class="image-box">
-										<figure class="image">
-											<a href="shop-single.html"><img src="img/products/image-4.jpg" alt="">
-											</a>
-										</figure>
-										<div class="item-options clearfix">
-											<a href="shopping-cart.html" class="btn_shop"><span class="icon-basket"></span>
-                                            <div class="tool-tip">
-                                                Add to cart
-                                            </div>
-                                            </a>
-											<a href="shop-single.html" class="btn_shop"><span class="icon-heart-8"></span>
-                                            <div class="tool-tip">
-                                                Add to Fav
-                                            </div>
-                                            </a>
-											<a href="shop-single.html" class="btn_shop"><span class="icon-eye"></span>
-                                            <div class="tool-tip">
-                                                View
-                                            </div>
-                                            </a>
-										</div>
-									</div>
-									<div class="product_description">
-										<div class="rating">
-											<i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star-empty"></i>
-										</div>
-										<h3><a href="shop-single.html">World Streets</a></h3>
-										<div class="price">
-											$22.00
-										</div>
-									</div>
-								</div>
-							</div>
-							<!--End Shop Item-->
-
-							<div class="shop-item col-lg-4 col-md-6 col-sm-6">
-								<div class="inner-box">
-									<div class="image-box">
-										<figure class="image">
-											<a href="shop-single.html"><img src="img/products/image-5.jpg" alt="">
-											</a>
-										</figure>
-										<div class="item-options clearfix">
-											<a href="shopping-cart.html" class="btn_shop"><span class="icon-basket"></span>
-                                            <div class="tool-tip">
-                                                Add to cart
-                                            </div>
-                                            </a>
-											<a href="shop-single.html" class="btn_shop"><span class="icon-heart-8"></span>
-                                            <div class="tool-tip">
-                                                Add to Fav
-                                            </div>
-                                            </a>
-											<a href="shop-single.html" class="btn_shop"><span class="icon-eye"></span>
-                                            <div class="tool-tip">
-                                                View
-                                            </div>
-                                            </a>
-										</div>
-									</div>
-									<div class="product_description">
-										<div class="rating">
-											<i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star-empty"></i>
-										</div>
-										<h3><a href="shop-single.html">Travel guide V2</a></h3>
-										<div class="price">
-											$15.00
-										</div>
-									</div>
-								</div>
-							</div>
-							<!--End Shop Item-->
-
-							<div class="shop-item col-lg-4 col-md-6 col-sm-6">
-								<div class="inner-box">
-									<!--Image Box-->
-									<div class="image-box">
-										<figure class="image">
-											<a href="shop-single.html"><img src="img/products/image-6.jpg" alt="">
-											</a>
-										</figure>
-										<div class="item-options clearfix">
-											<a href="shopping-cart.html" class="btn_shop"><span class="icon-basket"></span>
-                                            <div class="tool-tip">
-                                                Add to cart
-                                            </div>
-                                            </a>
-											<a href="shop-single.html" class="btn_shop"><span class="icon-heart-8"></span>
-                                            <div class="tool-tip">
-                                                Add to Fav
-                                            </div>
-                                            </a>
-											<a href="shop-single.html" class="btn_shop"><span class="icon-eye"></span>
-                                            <div class="tool-tip">
-                                                View
-                                            </div>
-                                            </a>
-										</div>
-									</div>
-									<div class="product_description">
-										<div class="rating">
-											<i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star-empty"></i>
-										</div>
-										<h3><a href="shop-single.html">Adventures</a></h3>
-										<div class="price">
-											<span class="offer">$20.00</span> $15.00
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<!--End Shop Item-->
 
 						<hr>
 
@@ -346,8 +139,7 @@
 										<span class="sr-only">Previous</span>
 									</a>
 								</li>
-								<li class="page-item active"><span class="page-link">1<span class="sr-only">(current)</span></span>
-								</li>
+								<li class="page-item active"><span class="page-link">1<span class="sr-only">(current)</span></span></li>
 								<li class="page-item"><a class="page-link" href="#">2</a></li>
 								<li class="page-item"><a class="page-link" href="#">3</a></li>
 								<li class="page-item">
@@ -391,13 +183,13 @@
 								</li>
 							</ul>
 						</div>
-						<!-- End widget -->
+						<!-- End widget 
 						<hr>
 						<div class="widget">
 							<h4>Filter</h4>
 							<input type="text" id="range" name="range" value="">
-						</div>
-						<!-- End widget -->
+						</div>-->
+						<!-- End widget 
 						<hr>
 						<div class="widget related-products">
 							<h4>Top Related </h4>
@@ -442,7 +234,7 @@
 							</div>
 						</div>
 					</aside>
-				</div>
+				</div>-->
 				<!--Sidebar-->
 			</div>
 		</div>

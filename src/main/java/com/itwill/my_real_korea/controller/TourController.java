@@ -82,7 +82,7 @@ public class TourController {
 
 	//2. 투어상품 상세보기
 	@RequestMapping(value="/tour-detail", params = "toNo")
-	public String tour_detail(@RequestParam int toNo, Model model) {
+	public String tourDetail(@RequestParam int toNo, Model model) {
 		String forwardPath="";
 		String msg="";
 		try{
@@ -122,7 +122,7 @@ public class TourController {
 	
 	//3. 투어상품 예약하기(구매하기) 폼
 	@RequestMapping(value="/tour-payment")
-	public String tour_payment_form(HttpSession session,Model model) {
+	public String tourPaymentForm(HttpSession session,Model model) {
 		String forwardPath="";
 		
 		Tour tour=(Tour)session.getAttribute("tour");
@@ -160,7 +160,7 @@ public class TourController {
 	
 	//4. 예약한 투어상품 상세 확인
 	@RequestMapping(value="tour-payment-confirmation")
-	public String tour_payment_confirmation(HttpSession session) {
+	public String tourPaymentConfirmation(HttpSession session) {
 		String forwardPath="";
 		session.getAttribute("tour");
 		session.getAttribute("payment");

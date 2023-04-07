@@ -22,7 +22,9 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import com.itwill.my_real_korea.dto.tour.Tour;
 import com.itwill.my_real_korea.dto.tour.TourImg;
+import com.itwill.my_real_korea.dto.tour.TourReview;
 import com.itwill.my_real_korea.service.tour.TourImgService;
+import com.itwill.my_real_korea.service.tour.TourReviewService;
 import com.itwill.my_real_korea.service.tour.TourService;
 import com.itwill.my_real_korea.util.PageMaker;
 import com.itwill.my_real_korea.util.PageMakerDto;
@@ -36,8 +38,10 @@ class TourControllerTest {
 	TourService tourService;
 	@MockBean
 	TourImgService tourImgService;
+	@MockBean
+	TourReviewService tourReviewService; 
 	
-	void testTour_list() throws Exception{
+	void testTourList() throws Exception{
 		PageMakerDto<Tour> tours=new PageMakerDto<>();
 		List<Tour> tourList=new ArrayList<>();
 		
@@ -61,23 +65,47 @@ class TourControllerTest {
 	}
 	
 	@Test
-	void testTour_Deteil() throws Exception{
+	void testTourDetail() throws Exception{
 		Tour tour=new Tour(1, null, 0, 0, 0, null, 0, null, null, 0, null);
-		
 		TourImg tourImg1=new TourImg(1, null, 1);
 		TourImg tourImg2=new TourImg(2, null, 1);
 		TourImg tourImg3=new TourImg(3, null, 1);
+		TourReview tourReview1=new TourReview(1, null, "집", "보내주세요", null, 5, 1, "user1");
+		TourReview tourReview2=new TourReview(2, null, "가", "보내주세요", null, 5, 1, "user2");
+		TourReview tourReview3=new TourReview(3, null, "자", "보내주세요", null, 5, 1, "user3");
+		
 		List<TourImg> tourImgList=tourImgService.findTourImgList(1);
+		tourImgList.add(tourImg1);
+		tourImgList.add(tourImg2);
+		tourImgList.add(tourImg3);
+		List<TourReview> tourReviewList=tourReviewService.findByToNo(1);
+		tourReviewList.add(tourReview1);
+		tourReviewList.add(tourReview2);
+		tourReviewList.add(tourReview3);
+		System.out.println(tour);	
+		
 		tour.setTourImgList(tourImgList);
+		System.out.println(tour);		
+		
+		
 		given(tourService.findTourWithCityByToNo(1)).willReturn(tour);
+	    given(tourImgService.findTourImgList(1)).willReturn(tourImgList);
+	    given(tourReviewService.findByToNo(1)).willReturn(tourReviewList);
+
+	    // when and then
+	    mockMvc.perform(get("/tour-detail").param("toNo", "1"))
+	            .andExpect(status().isOk())
+	            .andExpect(model().attributeExists("tour"))
+	            .andExpect(model().attributeExists("tourReviewList"))
+	            .andExpect(view().name("tour-detail"))
+	            .andDo(print());
+
+	    verify(tourService).findTourWithCityByToNo(1);
+	}
+	
+	@Test
+	void testTourDe() throws Exception{
 		
-		mockMvc.perform(get("/tour-detail").param("toNo", "1"))
-		   .andExpect(status().isOk())
-		   .andExpect(model().attributeExists("tour"))
-		   .andExpect(view().name("tour-detail"))
-		   .andDo(print());
-		
-		verify(tourService).findTourWithCityByToNo(1);
 	}
 
 }

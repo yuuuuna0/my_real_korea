@@ -30,7 +30,7 @@ public class TripBoardCommentRestController {
 	//댓글 추가
 	@LoginCheck
 	@ApiOperation(value = "댓글 추가")
-	@PostMapping(value = "/tripboard_comment", produces = "application/json;charset=UTF-8")
+	@PostMapping(value = "/tripboard-comment-write-action", produces = "application/json;charset=UTF-8")
 	public Map<String, Object> tripBoard_write_action(@RequestBody TripBoardComment tripBoardComment) {
 		
 		Map<String, Object> resultMap = new HashMap<>();
@@ -64,7 +64,7 @@ public class TripBoardCommentRestController {
 	@LoginCheck
 	@ApiOperation(value = "댓글 수정")
 	@ApiImplicitParam(name = "tCoNo", value = "댓글 번호")
-	@PutMapping(value = "/tripboard_comment/{tCoNo}", produces = "application/json;charset=UTF-8")
+	@PutMapping(value = "/tripboard-comment-update-action/{tCoNo}", produces = "application/json;charset=UTF-8")
 	public Map<String, Object> tripBoardComment_update_action(@PathVariable(value="tCoNo") int tCoNo,
 													@RequestBody TripBoardComment tripBoardComment) {
 	
@@ -77,7 +77,7 @@ public class TripBoardCommentRestController {
 		if(findTripBoardComment != null) {
 			//댓글 수정 성공 시 code1
 			tripBoardComment.setTCoNo(tCoNo);
-			tripBoardCommentService.updateTripBoardComment(findTripBoardComment);
+			tripBoardCommentService.updateTripBoardComment(tripBoardComment);
 			code = 1;
 			msg = "성공";
 			data.add(findTripBoardComment);
@@ -105,7 +105,7 @@ public class TripBoardCommentRestController {
 	@LoginCheck
 	@ApiOperation(value = "댓글 삭제")
 	@ApiImplicitParam(name = "tCoNo", value = "댓글 번호")
-	@DeleteMapping(value = "/tripboard_comment/{tCoNo}", produces = "application/json;charset=UTF-8")
+	@DeleteMapping(value = "/tripboard-comment-delete-action/{tCoNo}", produces = "application/json;charset=UTF-8")
 	public Map<String, Object> tripBoardComment_delete_action(@PathVariable(value = "tCoNo") int tCoNo) {
 		
 		Map<String, Object> resultMap = new HashMap<>();

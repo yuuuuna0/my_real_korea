@@ -18,7 +18,9 @@ public class TripBoardCommentController {
 	@Autowired
 	private TripBoardCommentService tripBoardCommentService;
 	
-	//댓글리스트
+	/*
+	 * 댓글리스트
+	 *
 	@GetMapping(value = "/tripboard-detail")
 	public String tripBoardComment_list(@RequestParam int tBoNo, Model model) {
 		try {
@@ -31,6 +33,6 @@ public class TripBoardCommentController {
 		}
 		return "tripboard-detail";
 	}
-	 
+	*/
 	
 }

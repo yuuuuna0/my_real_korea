@@ -28,10 +28,23 @@
 	<link href="css/custom.css" rel="stylesheet">
   
  <script type="text/javascript">
-	function findId(){
-		location.href - "user-find-id-action";
-	}
 	
+	function findId() {
+		if (document.f.name.value == "") {
+			alert("이름을 입력하십시오.");
+			document.f.name.focus();
+			return false;
+		}
+		if (document.f.email.value == "") {
+			alert("이메일을 입력하십시오.");
+			document.f.email.focus();
+			return false;
+		}
+
+		document.f.action = "user-find-id-action";
+		document.method='POST';
+		document.f.submit();
+	}
 
 </script>        
 </head>
@@ -54,7 +67,7 @@
 	<!--======================== Header========================== -->
 	<div id="header" th:include="include-common-top::include-common-top"></div>
 	<!--======================== End Header======================== -->
-    
+	
 	<main>
     <section id="hero" class="login">
     	<div class="container">

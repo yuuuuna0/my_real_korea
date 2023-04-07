@@ -22,16 +22,22 @@ public interface UserDao {
 	//12. 비밀번호 일치 여부 확인
 	boolean isMatchPassword(String userId, String password) throws Exception;
 	//13. 이메일, 이름으로 아이디 찾기
-	String findIdByEmailName(User user) throws Exception;
+	String findIdByEmailName(String email, String name) throws Exception;
+
 	//14. 이메일, 아이디로 회원 존재여부 확인
 	boolean isExistIdMail(String userId, String email) throws Exception;
 	//15. 비밀번호 재설정
 	int updatePassword(User user) throws Exception;
 	
+	
+	
 	//21. 메일 인증여부 확인
-	int mailAuth(String userId) throws Exception;
+	int findMailAuth(String userId) throws Exception;
 	//22. 메일 인증번호 업데이트
-	int mailKeyUpdate(User user) throws Exception;
+	int updateMailKey(User user) throws Exception;
 	//23. 메일 인증여부 업데이트
-	int mailAuthUpdate(User user) throws Exception;
+	int updateMailAuth(User user) throws Exception;
+	
+	//24. 메일 인증여부 업데이트 (map)
+//	int updateMailAuthMap(String email, int authKey) throws Exception;
 }

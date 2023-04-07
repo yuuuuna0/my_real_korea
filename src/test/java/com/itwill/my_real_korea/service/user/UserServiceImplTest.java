@@ -72,17 +72,22 @@ class UserServiceImplTest {
 	//13. 이메일, 이름으로 아이디 찾기
 	@Test
 	void testFindId() throws Exception {
-		User user = new User();
-		user.setEmail("user1@gmail.com");
-		user.setName("회원1");
-		System.out.println(">> ID : "+userService.findIdByEmailName(user));
+		System.out.println(">> ID : "+userService.findIdByEmailName("kgee12300@gmail.com","이름"));
+	}
+	
+	
+	//15. 비밀번호 재설정
+	@Test
+	void updatePassword() throws Exception {
+		User user = userService.findUser("test222");
+		userService.updatePassword(user);
 	}
 	
 	
 	//21. 메일 인증여부 확인
 	@Test
 	void mailAuth() throws Exception {
-		System.out.println(">> mailAuth : "+userService.mailAuth("user1"));
+		System.out.println(">> mailAuth : "+userService.findMailAuth("user1"));
 	}
 	
 	//22. 메일 인증번호 업데이트
@@ -90,7 +95,7 @@ class UserServiceImplTest {
 	void mailKeyUpdate() throws Exception {
 		User user3 = userService.findUser("user1");
 		user3.setMailKey(1234);
-		System.out.println(">> mailKeyUpdate : "+userService.mailKeyUpdate(user3));
+		System.out.println(">> mailKeyUpdate : "+userService.updateMailKey(user3));
 	}
 	
 	//23. 메일 인증여부 업데이트
@@ -98,7 +103,7 @@ class UserServiceImplTest {
 	void mailAuthUpdate() throws Exception {
 		User user3 = userService.findUser("user1");
 		user3.setMailAuth(1);
-		System.out.println(">> mailAuthUpdate : "+userService.mailAuthUpdate(user3));
+		System.out.println(">> mailAuthUpdate : "+userService.updateMailAuth(user3));
 	}
 	
 }

@@ -76,10 +76,15 @@ public class UserDaoImpl implements UserDao {
 	
 	//13. 이메일, 이름으로 아이디 찾기
 	@Override
-	public String findIdByEmailName(User user) throws Exception {
-		return userMapper.findIdByEmailName(user);
+	public String findIdByEmailName(String email, String name) throws Exception {
+		Map<String,Object> map = new HashMap();
+		map.put("email", email);
+		map.put("name", name);
+		String foundId = userMapper.findIdByEmailName(map);
+		return foundId;
 	}
-	
+		
+
 	//14. 이메일, 아이디로 회원 존재여부 확인
 	@Override
 	public boolean isExistIdMail(String userId, String email) {
@@ -98,22 +103,22 @@ public class UserDaoImpl implements UserDao {
 	public int updatePassword(User user) throws Exception {
 		return userMapper.updatePassword(user);
 	}
-
+	
 	
 	//21. 메일 인증여부 확인
-	public int mailAuth(String userId) throws Exception {
-		return userMapper.mailAuth(userId);
+	public int findMailAuth(String userId) throws Exception {
+		return userMapper.findMailAuth(userId);
 	}
 	
 	//22. 메일 인증번호 업데이트
-	public int mailKeyUpdate(User user) throws Exception {
-		return userMapper.mailKeyUpdate(user);
+	public int updateMailKey(User user) throws Exception {
+		return userMapper.updateMailKey(user);
 	}
 	
 	//23. 메일 인증여부 업데이트
-	public int mailAuthUpdate(User user) throws Exception {
-		return userMapper.mailAuthUpdate(user);
-		
+	public int updateMailAuth(User user) throws Exception {
+		return userMapper.updateMailAuth(user);
 	}
+
 
 }

@@ -34,9 +34,12 @@ public class UserServiceImpl implements UserService{
 		//회원가입
 		userDao.create(user);
 		//mail_key 업데이트
-		userDao.mailKeyUpdate(user);
+		userDao.updateMailKey(user);
+//		emailService.sendEmail(user.getEmail());
+//		System.out.println("UserService 이메일 전송");
 		return 1;
 	}
+	
 	
 	//2. 회원 정보 보기 (마이 페이지)
 	@Override
@@ -91,8 +94,8 @@ public class UserServiceImpl implements UserService{
 	
 	//13. 이메일, 이름으로 아이디 찾기
 	@Override
-	public String findIdByEmailName(User user) throws Exception {
-		return userDao.findIdByEmailName(user);
+	public String findIdByEmailName(String email, String name) throws Exception {
+		return userDao.findIdByEmailName(email,name);
 	}
 	
 	//14. 
@@ -117,23 +120,26 @@ public class UserServiceImpl implements UserService{
 	}
 	
 	
+	
 	//21. 메일 인증여부 확인
-	public int mailAuth(String userId) throws Exception {
-		return userDao.mailAuth(userId);
+	public int findMailAuth(String userId) throws Exception {
+		return userDao.findMailAuth(userId);
 	}
 	
 	//22. 메일 인증번호 업데이트
-    public int mailKeyUpdate(User user) throws Exception {
+    public int updateMailKey(User user) throws Exception {
         // 이메일 전송 및 인증번호 저장
         int authNum = emailService.sendAuth(user.getEmail());
         user.setMailKey(authNum);
-        return userDao.mailKeyUpdate(user);
+        return userDao.updateMailKey(user);
     }
 	
 	//23. 메일 인증여부 업데이트
-	public int mailAuthUpdate(User user) throws Exception {
-		return userDao.mailAuthUpdate(user);
+	public int updateMailAuth(User user) throws Exception {
+		return userDao.updateMailAuth(user);
 	}
+
+
 	
 }
 

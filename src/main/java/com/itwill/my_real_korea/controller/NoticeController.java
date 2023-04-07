@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.itwill.my_real_korea.dto.notice.Notice;
+import com.itwill.my_real_korea.exception.NoticeNotFoundException;
 import com.itwill.my_real_korea.service.notice.NoticeService;
 import com.itwill.my_real_korea.util.PageMakerDto;
 
@@ -38,7 +39,9 @@ public class NoticeController {
 								Model model) {
 		
 		try {
-			PageMakerDto<Notice> noticeList = noticeService.selectAll(pageNo);
+			PageMakerDto<Notice> noticeListPage = noticeService.selectAll(pageNo);
+			List<Notice> noticeList = noticeListPage.getItemList();
+			model.addAttribute("noticeListPage", noticeListPage);
 			model.addAttribute("noticeList", noticeList);
 			model.addAttribute("pageNo", pageNo);
 		} catch (Exception e) {
@@ -50,15 +53,16 @@ public class NoticeController {
 	
 	// 공지사항 1개 보기
 	@GetMapping(value = "/notice-detail")
-	public String notice_detail(@RequestParam int nNo, Model model) {
+	public String notice_detail(@RequestParam int nNo, Model model) throws Exception {
 		
 		try {
 			Notice notice = noticeService.selectByNo(nNo);
+			noticeService.increaseReadCount(nNo);
 			model.addAttribute("notice", notice);
 			model.addAttribute("nNo", nNo);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return "error";
+		} catch (NoticeNotFoundException e) {
+			model.addAttribute("msg", e.getMessage());
+			return "notice-list";
 		}
 		return "notice-detail";
 	}

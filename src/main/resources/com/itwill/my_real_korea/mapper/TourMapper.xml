@@ -36,7 +36,7 @@
 						 left outer join tour_img ti
 				   			on t.to_no=ti.to_no
 				   	where 1=1
-				   		<if test="keyword !=null or keyword !=''">
+				   		<if test="keyword !=null">
 				   			and t.to_name like '%'||#{keyword}||'%'
 				   		</if>
 				   		<if test="cityNo !=0">
@@ -45,7 +45,7 @@
 				   		<if test="toType !=0">
 				   			and t.to_type=#{toType}
 				   		</if>
-		   				<if test="sortOrder !=null or sort Order !=''">
+		   				<if test="sortOrder !=null">
 							<choose>
 								<when test="sortOrder == 'toNoDesc'">
 									ORDER BY T.to_no DESC

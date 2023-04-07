@@ -16,6 +16,8 @@ public interface TourService {
 	int deleteTour(int toNo) throws Exception;
 	//4. 투어 상세보기
 	Tour findTourWithCityByToNo(int toNo) throws Exception;
+	//5. 투어 평점 구하기
+	int calculateTourScore(int toNo) throws Exception;
 
 	//페이지메이커 사용
 	//5. 투어 전체 리스트 보기 + 필터 + 정렬 + 페이징

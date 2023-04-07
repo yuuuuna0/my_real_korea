@@ -47,12 +47,16 @@ header.sticky#colored #logo_home h1 a{
 }
 
 
-
 .intro_title.error h1 {
     font-size: 50px;
     color: #fff;
     font-weight: bold;
 }
 
+.shop-item .product_description .price .notice_readcount {
+    color: #999999;
+    padding-right: 5px;
+    text-decoration: none;
+}
 
 

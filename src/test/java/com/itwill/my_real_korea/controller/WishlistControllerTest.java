@@ -56,7 +56,7 @@ class WishlistControllerTest {
 		mockMvc.perform(get("/wishlist").session(session)) // get 방식으로 요청
 		.andExpect(status().isOk()) // HTTP 상태코드가 200 OK
 		.andExpect(model().attributeExists("wishlistList")) // model 에 setAttribute 한 값이 있는지
-		.andExpect(model().attributeExists("userId")) // model 에 setAttribute 한 값이 있는지
+		.andExpect(model().attributeExists("sUserId")) // model 에 setAttribute 한 값이 있는지
 		.andExpect(view().name("wishlist")) // wishlist 뷰를 반환하는지
 		.andDo(print());  // 콘솔에 요청과 응답을 출력
 		

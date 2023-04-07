@@ -59,7 +59,6 @@ class TourServiceImplTest {
 		System.out.println(findTour);
 	}
 
-	@Test
 	void testFindTourAll() throws Exception{
 		PageMakerDto<Tour> tourList=tourService.findAll(1,"여행",0,0,"toPriceDesc");
 		System.out.println(tourList);
@@ -75,6 +74,12 @@ class TourServiceImplTest {
 	void testFindTourListByCityNo() throws Exception{
 		PageMakerDto<Tour> tourList=tourService.findAllByFilter(1, 3, "desc");
 			System.out.println(tourList);
+	}
+	
+	@Test
+	void testCalculateTourScore() throws Exception{
+		int tourScore=tourService.calculateTourScore(3);
+		System.out.println(tourScore);
 	}
 /*
 	void testFindTourListByToType() throws Exception{

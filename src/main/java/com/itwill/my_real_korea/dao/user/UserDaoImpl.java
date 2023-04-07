@@ -79,6 +79,25 @@ public class UserDaoImpl implements UserDao {
 	public String findIdByEmailName(User user) throws Exception {
 		return userMapper.findIdByEmailName(user);
 	}
+	
+	//14. 이메일, 아이디로 회원 존재여부 확인
+	@Override
+	public boolean isExistIdMail(String userId, String email) {
+		Map<String,Object> map = new HashMap();
+		map.put("userId", userId);
+		map.put("email", email);
+		int existIdMail = userMapper.isExistIdMail(map);
+		if(existIdMail == 1) {
+			return true;
+		}
+		return false;
+	}
+
+	//15. 비밀번호 재설정
+	@Override
+	public int updatePassword(User user) throws Exception {
+		return userMapper.updatePassword(user);
+	}
 
 	
 	//21. 메일 인증여부 확인

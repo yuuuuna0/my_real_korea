@@ -23,6 +23,10 @@ public interface UserDao {
 	boolean isMatchPassword(String userId, String password) throws Exception;
 	//13. 이메일, 이름으로 아이디 찾기
 	String findIdByEmailName(User user) throws Exception;
+	//14. 이메일, 아이디로 회원 존재여부 확인
+	boolean isExistIdMail(String userId, String email) throws Exception;
+	//15. 비밀번호 재설정
+	int updatePassword(User user) throws Exception;
 	
 	//21. 메일 인증여부 확인
 	int mailAuth(String userId) throws Exception;

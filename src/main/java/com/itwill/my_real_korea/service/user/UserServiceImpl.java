@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.itwill.my_real_korea.dao.user.UserDao;
 import com.itwill.my_real_korea.dto.user.User;
+import com.itwill.my_real_korea.exception.EmailMismatchException;
 import com.itwill.my_real_korea.exception.ExistedUserException;
 import com.itwill.my_real_korea.exception.PasswordMismatchException;
 import com.itwill.my_real_korea.exception.UserNotFoundException;
@@ -92,6 +93,27 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public String findIdByEmailName(User user) throws Exception {
 		return userDao.findIdByEmailName(user);
+	}
+	
+	//14. 
+	public User sendTempPassword(String userId, String email) throws Exception {
+		User user = userDao.findUser(userId);
+	    if (user == null) {
+	        throw new UserNotFoundException(userId + " 는 존재하지 않는 아이디입니다.");
+	    }
+	    boolean isExistIdMail = userDao.isExistIdMail(userId,email);
+	    if (!isExistIdMail) {
+	        throw new EmailMismatchException("일치하는 회원 정보가 없습니다.");
+	    }
+	    return user;
+	}
+	
+	//15. 비밀번호 재설정
+	@Override
+	public int updatePassword(User user) throws Exception {
+		String tempPassword = emailService.sendTempPassword(user.getEmail());
+		user.setPassword(tempPassword);
+		return userDao.updatePassword(user);
 	}
 	
 	

@@ -62,6 +62,19 @@
 		WHERE email = #{email} AND name = #{name}
 	</select>
 	
+		<!-- 14. 이메일, 아이디로 회원 존재여부 확인 -->
+	<select id="isExistIdMail" parameterType="java.util.Map" resultType="java.lang.Integer">
+		SELECT count(*) 
+		FROM user_info 
+		WHERE user_id = #{userId} AND email = #{email}
+	</select>
+	<!-- 15. 비밀번호 재설정 -->
+	<update id="updatePassword" parameterType="com.itwill.my_real_korea.dto.user.User">
+		UPDATE  user_info 
+		SET password = #{password}
+		WHERE user_id = #{userId} AND email = #{email}
+	</update>
+	
 	<!-- 21. 메일 인증여부 확인 -->
 	<select id="mailAuth" parameterType="java.lang.String" resultType="java.lang.Integer">
 		SELECT count(*)

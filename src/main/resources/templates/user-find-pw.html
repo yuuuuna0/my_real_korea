@@ -27,61 +27,13 @@
 	<!-- CUSTOM CSS -->
 	<link href="css/custom.css" rel="stylesheet">
   
- <script>
- /*
- function submitAuthCode(event) {
-	  event.preventDefault();
-	  const form = event.target;
-	  const mailAuthKey = form.mailAuthKey.value;
-	  const code = `${code}`;
-	  if (mailAuthKey === code) {
-	    form.action = "user_auth_action";
-	    form.method = "POST";
-	    form.submit();
-	  } else {
-	    alert("인증코드가 일치하지 않습니다.");
-	  }
-	}
- 
- function submitAuthCode(event) {
-	  event.preventDefault();
-	  const form = document.getElementsByName('f')[0];
-	  const mailAuthKey = form.mailAuthKey.value;
-	  const code = `${authUser.mailKey}`;
-	  if (mailAuthKey === code) {
-	    form.action = "user_auth_action";
-	    form.method = "POST";
-	    form.submit();
-	  } else {
-	    alert("인증코드가 일치하지 않습니다.");
-	  }
-	}
- 
- 
- function submitAuthCode(event, authUser) {
-	  event.preventDefault();
-	  const form = document.getElementsByName('f')[0];
-	  const mailAuthKey = form.mailAuthKey.value;
-	  const code = `${authUser.mailKey}`;
-	  if (mailAuthKey === code) {
-	    form.action = "user_auth_action";
-	    form.method = "POST";
-	    form.submit();
-	  } else {
-	    alert("인증코드가 일치하지 않습니다.");
-	  }
-	}
- */
- 
-	function submitAuthCode() {
-		document.f.action = "user-auth-action";
-		document.method='POST';
-		document.f.submit();
+ <script type="text/javascript">
+	
+	function findPassword(){
+		location.href - "user-find-pw-action";
 	}
 
- </script>
-  
-  
+</script>        
 </head>
 <body>
 
@@ -112,38 +64,20 @@
 <div id="login">
 	<div class="text-center"><img src="img/logo_sticky.png" alt="Image" data-retina="true" ></div>
 	<hr>
-<form th:object="${fuser!=null? fuser : new com.itwill.my_real_korea.dto.user.User()}" name="f" method="post">
-    <div class="form-group">
-    <!-- 
-<span th:text="${loginUser != null ? (loginUser.email != null ? loginUser.email : '이메일 존재X') : '(mail) 로그인 X'}"></span>
-<span th:text="${fuser != null ? (fuser.userId != null ? fuser.userId : '아이디 존재X') : 'fuser 존재X'}"></span><br/>
-<span th:text="${authUser != null ? (authUser.email != null ? authUser.email : 'email 존재X') : '(email) 로그인 X'}"></span><br/>
-     -->
-<span th:text="${authUser != null ? (authUser.userId != null ? authUser.userId : '아이디 존재X') : '(userId) 로그인 X'}"></span><br/>
-<span th:text="${authUser != null ? (authUser.mailKey != null ? authUser.mailKey : 'mailKey 존재X') : '(userId) 로그인 X'}"></span><br/>
+<form th:object="${fuser!=null ? fuser : new com.itwill.my_real_korea.dto.user.User()}" name="p" method="post">
 
-     
-    	<input type="hidden" th:name="authUser.mailKey" th:value="${authUser.mailKey}" />
-        <input type="text" class=" form-control " placeholder="인증코드" name="mailAuthKey">
-        <!--  
-        <font color="red" th:text="${loginUser.mailKey}"></font>
-        -->
+    <div class="form-group">
+        <label>비밀번호 찾기</label><br/>
+        <label>ID</label>
+        <input type="text" class=" form-control " placeholder="ID" name="userId">
     </div>
-		<p class="small">
-		    <a href="#">Forgot Password?</a>
-		</p>
-	<input type="button" class="btn_full" value="인증 확인" onclick="submitAuthCode();">
-	
-	
+    <div class="form-group">
+        <label>이메일</label>
+        <input type="text" class=" form-control" placeholder="Email" name="email">
+    </div>
+	<a class="btn_full_outline" onclick="findPassword();">비밀번호 찾기</a>
 	
 </form><br/>
-
-<!-- 
-<form id="authForm" onsubmit="submitAuthCode(event)">
-  <input type="text" class="form-control" placeholder="인증코드" name="mailAuthKey">
-  <button type="submit" class="btn btn-primary">인증하기</button>
-</form>
- -->
 </div>
                         
                 </div>

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.itwill.my_real_korea.dto.user.User;
 import com.itwill.my_real_korea.exception.ExistedUserException;
@@ -81,6 +82,44 @@ public class UserController {
 	    }
 	    return forwardPath;
 	}
+	
+/***********************************************************/
+	
+	@GetMapping(value = "/user-find-id", produces = "application/json;charset=UTF-8")
+	public String user_find_id() {
+		String forward_path = "user-find-id";
+		return forward_path;
+	}
+	
+	
+	@ResponseBody
+	@PostMapping("/user-find-id-action")
+	public String user_find_id_action(@RequestParam("name") String name, @RequestParam("email") String email, Model model) throws Exception {
+		String forwardPath = "";
+		User user = new User();
+		user.setName(name);
+		user.setEmail(email);
+		String userId = userService.findIdByEmailName(user);
+		if(userId != null) {
+			model.addAttribute("userId", userId);
+			model.addAttribute("msg1", userId);
+			System.out.println("user"+user);
+		}else {
+			model.addAttribute("msg2", "일치하는 회원 정보가 없습니다.");
+		}
+		forwardPath = "user-login-form";
+		return forwardPath;
+	}
+	
+	@GetMapping(value = "/user-find-pw", produces = "application/json;charset=UTF-8")
+	public String user_find_pw() {
+		String forward_path = "user-find-pw";
+		return forward_path;
+	}
+	
+	
+	/***********************************************************/
+	
 	
 	/************** 수정중 ****************/
 	@LoginCheck

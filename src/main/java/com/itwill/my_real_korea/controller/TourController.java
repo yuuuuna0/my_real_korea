@@ -51,7 +51,7 @@ public class TourController {
 	}
 
 	//1. 투어상품 전체 리스트 보기
-	@RequestMapping(value="/tour-list")
+	@GetMapping(value="/tour-list")
 	public String tour_list(@RequestParam(required = false, defaultValue = "1") int currentPage,
 							@RequestParam(required = false) String keyword,
 							@RequestParam(required = false, defaultValue = "0") int cityNo,
@@ -81,7 +81,7 @@ public class TourController {
 	}
 
 	//2. 투어상품 상세보기
-	@RequestMapping(value="/tour-detail", params = "toNo")
+	@GetMapping(value="/tour-detail", params = "toNo")
 	public String tourDetail(@RequestParam int toNo, Model model) {
 		String forwardPath="";
 		String msg="";
@@ -107,28 +107,24 @@ public class TourController {
 	}
 	
 	//2-1. 투어상품 상세보기 액션
-	@PostMapping(value="tour-detail-action")
-	public String tour_detail_action(@RequestParam int pStarDate, 
+	@PostMapping(value="/tour-detail-action")
+	public String tourDetailAction(@RequestParam int pStarDate, 
 									 @RequestParam int pQty, 
-									 @ModelAttribute Tour tour,
 									 HttpSession session) {
 		String forwardPath="";
 		session.setAttribute("pStartDate",pStarDate);
 		session.setAttribute("pQty",pQty);
-		session.setAttribute("Tour", tour);
 		forwardPath="redirect:tour-payment";
 		return forwardPath;
 	}
 	
 	//3. 투어상품 예약하기(구매하기) 폼
-	@RequestMapping(value="/tour-payment")
-	public String tourPaymentForm(HttpSession session,Model model) {
+	@RequestMapping(value="/tour-payment", params="toNo")
+	public String tourPayment(@RequestParam int toNo,HttpSession session,Model model) {
 		String forwardPath="";
 		
-		Tour tour=(Tour)session.getAttribute("tour");
 		int pQty=(int)session.getAttribute("pQty");
 		Date pStartDate=(Date)session.getAttribute("pStartDate");
-		model.addAttribute("tour", tour);
 		model.addAttribute("pQty", pQty);
 		model.addAttribute("pStartDate",pStartDate);
 		
@@ -137,8 +133,8 @@ public class TourController {
 	}
 	
 	//3-1. 투어상품 예약하기(구매하기) 액션
-	@PostMapping(value="tour-payment-action")
-	public String tour_payment_form(@ModelAttribute Payment payment,
+	@PostMapping(value="/tour-payment-action")
+	public String tourPaymentAction(@ModelAttribute Payment payment,
 									HttpSession session,
 									Model model) {
 		String forwardPath="";
@@ -159,7 +155,7 @@ public class TourController {
 	}
 	
 	//4. 예약한 투어상품 상세 확인
-	@RequestMapping(value="tour-payment-confirmation")
+	@RequestMapping(value="/tour-payment-confirmation")
 	public String tourPaymentConfirmation(HttpSession session) {
 		String forwardPath="";
 		session.getAttribute("tour");

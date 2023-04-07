@@ -60,7 +60,7 @@ public class TourController {
 		String forwardPath="";
 		String msg="";
 		try{
-			PageMakerDto<Tour> tourList=tourService.findAll(currentPage,keyword,cityNo,toType,sortOrder);
+			PageMakerDto<Tour> tourList=tourService.findAll(currentPage,null,0,0,null);
 			model.addAttribute("tourList",tourList);
 			forwardPath="tour-list";
 			msg="성공";
@@ -75,7 +75,7 @@ public class TourController {
 
 	//2. 투어상품 상세보기
 	@RequestMapping(value="/tour-detail", params = "toNo")
-	public String tour_detail(@RequestParam int toNo, Model model) {
+	public String tourDetail(@RequestParam int toNo, Model model) {
 		String forwardPath="";
 		String msg="";
 		try{
@@ -103,7 +103,7 @@ public class TourController {
 	
 	//2-1. 투어상품 상세보기 액션
 	@PostMapping(value="tour-detail-action")
-	public String tour_detail_action(@RequestParam int pStarDate, @RequestParam int pQty, @ModelAttribute Tour tour,HttpSession session) {
+	public String tourDetailAction(@RequestParam int pStarDate, @RequestParam int pQty, @ModelAttribute Tour tour,HttpSession session) {
 		String forwardPath="";
 		session.setAttribute("pStartDate",pStarDate);
 		session.setAttribute("pQty",pQty);
@@ -114,7 +114,7 @@ public class TourController {
 	
 	//3. 투어상품 예약하기(구매하기) 폼
 	@RequestMapping(value="/tour-payment")
-	public String tour_payment_form(HttpSession session,Model model) {
+	public String tourPaymentForm(HttpSession session,Model model) {
 		String forwardPath="";
 		
 		Tour tour=(Tour)session.getAttribute("tour");
@@ -130,7 +130,7 @@ public class TourController {
 	
 	//3-1. 투어상품 예약하기(구매하기) 액션
 	@PostMapping(value="tour-payment-action")
-	public String tour_payment_form(@ModelAttribute Payment payment,HttpSession session,Model model) {
+	public String tourPaymentAction(@ModelAttribute Payment payment,HttpSession session,Model model) {
 		String forwardPath="";
 		String msg="";
 		try {
@@ -150,7 +150,7 @@ public class TourController {
 	
 	//4. 예약한 투어상품 상세 확인
 	@RequestMapping(value="tour-payment-confirmation")
-	public String tour_payment_confirmation(HttpSession session) {
+	public String tourPaymentConfirmation(HttpSession session) {
 		String forwardPath="";
 		session.getAttribute("tour");
 		session.getAttribute("payment");

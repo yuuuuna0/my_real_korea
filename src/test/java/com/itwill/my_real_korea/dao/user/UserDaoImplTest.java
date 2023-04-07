@@ -75,16 +75,22 @@ class UserDaoImplTest {
 	//13. 이메일, 이름으로 아이디 찾기
 	@Test
 	void findId() throws Exception {
-		User user = new User();
-		user.setEmail("user1@gmail.com");
-		user.setName("회원1");
-		System.out.println(">> ID : "+userDao.findIdByEmailName(user));
+		System.out.println(">> ID : "+userDao.findIdByEmailName("kgee12300@gmail.com","이름"));
 	}
+	
+	//14. 이메일, 아이디로 회원 존재여부 확인
+	@Test
+	void isExistIdMail() throws Exception {
+		System.out.println(">> isExistIdMail : "+userDao.isExistIdMail("mailtest2", "kgee12300@gmail.com"));
+		
+	}
+	
+	
 
 	//21. 메일 인증여부 확인
 	@Test
 	void mailAuth() throws Exception {
-		System.out.println(">> mailAuth : "+userDao.mailAuth("user1"));
+		System.out.println(">> mailAuth : "+userDao.findMailAuth("user1"));
 	}
 	
 	//22. 메일 인증번호 업데이트
@@ -92,7 +98,7 @@ class UserDaoImplTest {
 	void mailKeyUpdate() throws Exception {
 		User user3 = userDao.findUser("user1");
 		user3.setMailKey(1234);
-		System.out.println(">> mailKeyUpdate : "+userDao.mailKeyUpdate(user3));
+		System.out.println(">> mailKeyUpdate : "+userDao.updateMailKey(user3));
 	}
 	
 	//23. 메일 인증여부 업데이트
@@ -100,7 +106,7 @@ class UserDaoImplTest {
 	void mailAuthUpdate() throws Exception {
 		User user3 = userDao.findUser("user4");
 		user3.setMailAuth(1);
-		System.out.println(">> mailAuthUpdate : "+userDao.mailAuthUpdate(user3));
+		System.out.println(">> mailAuthUpdate : "+userDao.updateMailAuth(user3));
 	}
 
 

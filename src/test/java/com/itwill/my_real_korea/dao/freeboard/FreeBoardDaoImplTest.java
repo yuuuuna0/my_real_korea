@@ -1,22 +1,16 @@
 package com.itwill.my_real_korea.dao.freeboard;
 
-import static org.assertj.core.api.Assertions.assertThat;
-//import static org.junit.Assert.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
-
-import java.util.Date;
-import java.util.List;
-
-//import org.junit.Test;
-import org.junit.jupiter.api.Disabled;
+import com.itwill.my_real_korea.dto.City;
+import com.itwill.my_real_korea.dto.freeboard.FreeBoard;
 import org.junit.jupiter.api.Test;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.itwill.my_real_korea.dao.freeboard.FreeBoardDao;
-import com.itwill.my_real_korea.dto.City;
-import com.itwill.my_real_korea.dto.freeboard.FreeBoard;
+import java.util.Date;
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
 @MapperScan(basePackages = "com.itwill.my_real_korea.mapper")

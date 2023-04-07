@@ -2,7 +2,7 @@ package com.itwill.my_real_korea.util;
 
 public class PageMaker {
 	// 페이지 당 게시글 수
-	public static final int PAGE_SCALE = 10;
+	public static final int PAGE_SCALE = 9;
 	// 화면 당 페이지 수 
 	public static final int BLOCK_SCALE = 10;
 	// 전체 게시글 수

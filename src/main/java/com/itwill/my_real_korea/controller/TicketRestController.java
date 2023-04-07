@@ -14,23 +14,25 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.HashMap;
 import java.util.Map;
 
-@RestController
+//@RestController
 public class TicketRestController {
 
     private final TicketService ticketService;
     private final CityService cityService;
     private final TicketImgService ticketImgService;
 
-    @Autowired
+    //@Autowired
     public TicketRestController(TicketService ticketService, CityService cityService, TicketImgService ticketImgService) {
         this.ticketService = ticketService;
         this.cityService = cityService;
         this.ticketImgService = ticketImgService;
     }
 
+/*티켓 리스트 - 정렬 -> rest*/
+    
     //키워드, 지역별 - 필터 + 가격순, 날짜별 정렬 - 화면에 어떻게 넘길 지 생각하기 ㅠ
     @ApiOperation(value = "티켓-필터-정렬")
-    @GetMapping(value = "/ticketList", produces = "application/json;charset=UTF-8")
+    @GetMapping(value = "/ticket-list-sort", produces = "application/json;charset=UTF-8")
     public Map<String, Object> ticketList(@RequestParam int currentPage,
                                           String keyword, int cityNo, String sortOrder) {
         Map<String, Object> ticketMap = new HashMap<>();
@@ -61,6 +63,5 @@ public class TicketRestController {
 
         return ticketMap;
     }
-
 
 }

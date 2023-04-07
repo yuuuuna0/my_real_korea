@@ -28,9 +28,6 @@ public class WishlistRestController {
 
 	@Autowired
 	private WishlistService wishlistService;
-	
-
-	
 	/*
 	 * 티켓 상품 위시리스트에 추가
 	 */

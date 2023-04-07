@@ -1,5 +1,6 @@
 @charset "UTF-8";
 /* CSS Document */
+
 /* logo home with h1 */
 #logo_home h1{
 	margin:10px 0 0 0;
@@ -44,4 +45,18 @@ header.sticky#colored #logo_home h1 a{
     background-image: url(../img/logo_sticky_colored_2x.png);
 	background-size: 160px 34px;
 }
+
+
+.intro_title.error h1 {
+    font-size: 50px;
+    color: #fff;
+    font-weight: bold;
+}
+
+.shop-item .product_description .price .notice_readcount {
+    color: #999999;
+    padding-right: 5px;
+    text-decoration: none;
+}
+
 

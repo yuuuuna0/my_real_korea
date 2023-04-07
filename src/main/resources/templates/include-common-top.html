@@ -8,10 +8,19 @@
 					<div class="col-6">
 					</div>
 					<div class="col-6">
-						<ul id="top_links">
-							<li><a href="user-login-form" id="access_link">로그인</a></li>
-							<li><a href="wishlist" id="wishlist_link">위시리스트</a></li>
-						</ul>
+			            <ul id="top_links">
+                            <!-- 
+                            <li><a href="user_login_form" id="access_link">Sign in</a></li>
+                             -->
+	                    	<th:block th:if="${session.sUserId==null}">
+	                            <li><a href="user-login-form">로그인</a></li>
+	                        </th:block>
+	                        <th:block th:unless="${session.sUserId==null}">
+		                        <li><a href="user-logout-action">로그아웃</a></li>
+	                        </th:block>
+	                            <li><a href="wishlist" id="wishlist_link">위시리스트</a></li>
+	                            <li><a href="user-view">마이페이지</a></li>
+                        </ul>
 					</div>
 				</div>
 				<!-- End row -->
@@ -25,7 +34,7 @@
 				<div class="col-3">
 					<div id="logo_home">
 						<h1>
-							<a href="myrealkorea.html" title="City tours travel template">City
+							<a href="index" title="City tours travel template">City
 								Tours travel template</a>
 						</h1>
 					</div>

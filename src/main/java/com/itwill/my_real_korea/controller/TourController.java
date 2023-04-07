@@ -29,6 +29,7 @@ import javax.servlet.http.HttpSession;
 
 import static org.hamcrest.CoreMatchers.nullValue;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -60,16 +61,22 @@ public class TourController {
 		String forwardPath="";
 		String msg="";
 		try{
-			PageMakerDto<Tour> tourList=tourService.findAll(currentPage,null,0,0,null);
-			model.addAttribute("tourList",tourList);
+			PageMakerDto<Tour> tourListPage=tourService.findAll(currentPage,keyword,cityNo,toType,sortOrder);
+			List<Tour> tourList=tourListPage.getItemList();
+			List<Tour> newTourList=new ArrayList<>();
+			//평점 평균 구하기
+			for (Tour tour : tourList) {
+				int tourScore=tourService.calculateTourScore(tour.getToNo());
+				tour.setToScore(tourScore);
+				newTourList.add(tour);
+			}
+			model.addAttribute("tourList",newTourList);
 			forwardPath="tour-list";
 			msg="성공";
 		} catch (Exception e){
 			e.printStackTrace();
-			forwardPath="redirect:main";
-			msg="관리자에게 문의하세요";
+			forwardPath="redirect:error";
 		}
-		model.addAttribute("msg",msg);
 		return forwardPath;
 	}
 
@@ -88,22 +95,23 @@ public class TourController {
 				msg="성공";
 			} else{
 				msg="해당 투어제품은 존재하지 않습니다.";
-				forwardPath="redirect:myrealkorea";
+				forwardPath="redirect:error";
 			}
 			List<TourReview> tourReviewList=tourReviewService.findByToNo(toNo);
 			model.addAttribute("tourReviewList", tourReviewList);
 		} catch (Exception e){
 			e.printStackTrace();
-			msg="관리자에게 문의하세요";
-			forwardPath="redirect:main";
-			model.addAttribute("msg",msg);
+			forwardPath="redirect:error";
 		}
 		return forwardPath;
 	}
 	
 	//2-1. 투어상품 상세보기 액션
 	@PostMapping(value="tour-detail-action")
-	public String tourDetailAction(@RequestParam int pStarDate, @RequestParam int pQty, @ModelAttribute Tour tour,HttpSession session) {
+	public String tour_detail_action(@RequestParam int pStarDate, 
+									 @RequestParam int pQty, 
+									 @ModelAttribute Tour tour,
+									 HttpSession session) {
 		String forwardPath="";
 		session.setAttribute("pStartDate",pStarDate);
 		session.setAttribute("pQty",pQty);
@@ -130,7 +138,9 @@ public class TourController {
 	
 	//3-1. 투어상품 예약하기(구매하기) 액션
 	@PostMapping(value="tour-payment-action")
-	public String tourPaymentAction(@ModelAttribute Payment payment,HttpSession session,Model model) {
+	public String tour_payment_form(@ModelAttribute Payment payment,
+									HttpSession session,
+									Model model) {
 		String forwardPath="";
 		String msg="";
 		try {
@@ -142,7 +152,7 @@ public class TourController {
 		}catch (Exception e) {
 			e.printStackTrace();
 			msg="관리자에게 문의하세요";
-			forwardPath="redirect:main";
+			forwardPath="redirect:error";
 		}
 		model.addAttribute(msg);
 		return forwardPath;

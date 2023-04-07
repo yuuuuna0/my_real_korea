@@ -1,11 +1,11 @@
 package com.itwill.my_real_korea.dto.freeboard;
 
-import java.util.Date;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.springframework.format.annotation.DateTimeFormat;
+
+import java.util.Date;
 
 /*
  이름                널?       유형             
@@ -22,7 +22,7 @@ USER_ID                    VARCHAR2(50)
 @ToString
 
 public class FreeBoardComment {
-	private int fCommentNo;
+	private int fCoNo;
 	private String fCommentContent;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date fCommentDate;

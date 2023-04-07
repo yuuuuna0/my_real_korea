@@ -27,12 +27,6 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
-	@ApiOperation(value = "메인페이지")
-	@RequestMapping(value = "/user-main", produces = "application/json;charset=UTF-8")
-	public String user_main() {
-		return "user-main";
-	}
-	
 	@ApiOperation(value = "회원가입 폼")
 	@GetMapping(value = "/user-write-form", produces = "application/json;charset=UTF-8")
 	public String user_write_form() {
@@ -48,7 +42,7 @@ public class UserController {
 			userService.create(user);
 			userService.mailKeyUpdate(user);
 //			forward_path="redirect:user_login_form";
-			forward_path="user-main";
+			forward_path="index";
 		}catch (ExistedUserException e) {
 			model.addAttribute("msg", e.getMessage());
 			forward_path="user-write-form";
@@ -74,7 +68,7 @@ public class UserController {
 	            forwardPath = "user-auth-form";
 	        } else {
 	            session.setAttribute("sUserId", loginUser.getUserId());
-	            forwardPath = "redirect:user-main";
+	            forwardPath = "redirect:index";
 	        }
 	    } catch (UserNotFoundException e) {
 	        e.printStackTrace();
@@ -109,7 +103,7 @@ public class UserController {
 	    model.addAttribute("mailKey", mailKey);
 	    if(mailKey == mailAuthKey){
 	        userService.mailAuthUpdate(user);
-	        return "user-main";
+	        return "index";
 	    }
 	    return "user-auth-form";
 	}
@@ -168,7 +162,7 @@ public class UserController {
 		userService.remove(sUserId);
 		request.getSession().invalidate();
 		//forwardPath="forward:user_logout_action";
-		forwardPath="redirect:user-main";
+		forwardPath="redirect:index";
 		
 		return forwardPath;
 	}
@@ -179,7 +173,7 @@ public class UserController {
 	public String user_logout_action(HttpServletRequest request) {
 		String forwardPath = "";
 		request.getSession(false).invalidate();
-		forwardPath="redirect:user-main";
+		forwardPath="redirect:index";
 		return forwardPath;
 	}
 	
@@ -193,20 +187,20 @@ public class UserController {
 				"user-remove-action"
 				})
 	public String user_get() {
-		String forwardPath = "redirect:user-main";
+		String forwardPath = "redirect:index";
 		return forwardPath;
 	}
+	
+	
 	
 	
 	/****************Local Exception Handler***********/
 	@ExceptionHandler(Exception.class)
 	public String user_exception_handler(Exception e) {
-		return "user-error";
+		return "error";
 	}
 
 }
-
-
-
+ 
 
 

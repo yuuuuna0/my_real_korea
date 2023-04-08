@@ -20,7 +20,7 @@ public class WishlistController {
 	private WishlistService wishlistService;
 	
 	// 위시리스트 리스트 + 티켓상품 + 투어상품 전체 보기 (위시리스트 첫화면) 
-	//@LoginCheck
+	@LoginCheck
 	@GetMapping(value = "/wishlist")
 	public String wishlist(HttpSession session, Model model) {
 		

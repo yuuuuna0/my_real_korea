@@ -45,7 +45,7 @@ header.sticky#colored #logo_home h1 a{
     background-image: url(../img/logo_sticky_colored_2x.png);
 	background-size: 160px 34px;
 }
-
+}
 
 .intro_title.error h1 {
     font-size: 50px;
@@ -53,10 +53,13 @@ header.sticky#colored #logo_home h1 a{
     font-weight: bold;
 }
 
-.shop-item .product_description .price .notice_readcount {
-    color: #999999;
-    padding-right: 5px;
+#notice-list-main {
+    color: #fff;
     text-decoration: none;
+    -webkit-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+    outline: none;
 }
-
-
+#notice-list-main:hover {
+	color: #e14d67;
+}

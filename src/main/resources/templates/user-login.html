@@ -27,61 +27,28 @@
 	<!-- CUSTOM CSS -->
 	<link href="css/custom.css" rel="stylesheet">
   
- <script>
- /*
- function submitAuthCode(event) {
-	  event.preventDefault();
-	  const form = event.target;
-	  const mailAuthKey = form.mailAuthKey.value;
-	  const code = `${code}`;
-	  if (mailAuthKey === code) {
-	    form.action = "user_auth_action";
-	    form.method = "POST";
-	    form.submit();
-	  } else {
-	    alert("인증코드가 일치하지 않습니다.");
-	  }
+ <script type="text/javascript">
+	function userCreate() {
+		location.href="user-write";
 	}
- 
- function submitAuthCode(event) {
-	  event.preventDefault();
-	  const form = document.getElementsByName('f')[0];
-	  const mailAuthKey = form.mailAuthKey.value;
-	  const code = `${authUser.mailKey}`;
-	  if (mailAuthKey === code) {
-	    form.action = "user_auth_action";
-	    form.method = "POST";
-	    form.submit();
-	  } else {
-	    alert("인증코드가 일치하지 않습니다.");
-	  }
-	}
- 
- 
- function submitAuthCode(event, authUser) {
-	  event.preventDefault();
-	  const form = document.getElementsByName('f')[0];
-	  const mailAuthKey = form.mailAuthKey.value;
-	  const code = `${authUser.mailKey}`;
-	  if (mailAuthKey === code) {
-	    form.action = "user_auth_action";
-	    form.method = "POST";
-	    form.submit();
-	  } else {
-	    alert("인증코드가 일치하지 않습니다.");
-	  }
-	}
- */
- 
-	function submitAuthCode() {
-		document.f.action = "user-auth-action";
+
+	function login() {
+		if (document.f.userId.value == "") {
+			alert("아이디를 입력하십시오.");
+			document.f.userId.focus();
+			return false;
+		}
+		if (document.f.password.value == "") {
+			alert("비밀번호를 입력하십시오.");
+			document.f.password.focus();
+			return false;
+		}
+
+		document.f.action = "user-login-action";
 		document.method='POST';
 		document.f.submit();
 	}
-
- </script>
-  
-  
+</script>        
 </head>
 <body>
 
@@ -113,10 +80,26 @@
 	<div class="text-center"><img src="img/logo_sticky.png" alt="Image" data-retina="true" ></div>
 	<hr>
 <form th:object="${fuser!=null? fuser : new com.itwill.my_real_korea.dto.user.User()}" name="f" method="post">
+	<a href="https://kauth.kakao.com/oauth/authorize?client_id=61ba951ebe34cfe12e365dba0e735c16&redirect_uri=http://localhost:8080/kakao_login_action&response_type=code">
+		<img src="img/kakao_login_medium_wide.png" />
+	</a>
+	<div class="divider"><span>Or</span></div>
     <div class="form-group">
-        <input type="text" class=" form-control " placeholder="인증코드" name="mailAuthKey">
+        <label>ID</label>
+        <input type="text" class=" form-control " placeholder="Username" name="userId">
+        <font color="red" th:text="${msg1}"></font>
     </div>
-	<input type="button" class="btn_full" value="인증 확인" onclick="submitAuthCode();">
+    <div class="form-group">
+        <label>Password</label>
+        <input type="password" class=" form-control" placeholder="Password" name="password">
+        <font color="red" th:text="${msg2}"></font>
+    </div>
+		<p class="small">
+		    <a href="user-find-id">Forgot ID?</a>
+		    <a href="user-find-pw">Forgot Password?</a>
+		</p>
+	<a class="btn_full" onclick="login();">Sign in</a>
+	<a class="btn_full_outline" onclick="userCreate();">Register</a>
 </form><br/>
 </div>
                         
@@ -125,75 +108,12 @@
         </div>
     </section>
 	</main><!-- End main -->
-
-
-	
-	<footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4 col-sm-3">
-                    <h3>Need help?</h3>
-                    <a href="tel://004542344599" id="phone">+45 423 445 99</a>
-                    <a href="mailto:help@citytours.com" id="email_footer">help@citytours.com</a>
-                </div>
-                <div class="col-md-3 col-sm-3">
-                    <h3>About</h3>
-                    <ul>
-                        <li><a href="#">About us</a></li>
-                        <li><a href="#">FAQ</a></li>
-                        <li><a href="#">Login</a></li>
-                        <li><a href="#">Register</a></li>
-                         <li><a href="#">Terms and condition</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-3 col-sm-3">
-                    <h3>Discover</h3>
-                    <ul>
-                        <li><a href="#">Community blog</a></li>
-                        <li><a href="#">Tour guide</a></li>
-                        <li><a href="#">Wishlist</a></li>
-                         <li><a href="#">Gallery</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-2 col-sm-3">
-                    <h3>Settings</h3>
-                    <div class="styled-select">
-                        <select name="lang" id="lang">
-                            <option value="English" selected>English</option>
-                            <option value="French">French</option>
-                            <option value="Spanish">Spanish</option>
-                            <option value="Russian">Russian</option>
-                        </select>
-                    </div>
-                    <div class="styled-select">
-                        <select name="currency" id="currency">
-                            <option value="USD" selected>USD</option>
-                            <option value="EUR">EUR</option>
-                            <option value="GBP">GBP</option>
-                            <option value="RUB">RUB</option>
-                        </select>
-                    </div>
-                </div>
-            </div><!-- End row -->
-            <div class="row">
-                <div class="col-md-12">
-                    <div id="social_footer">
-                        <ul>
-                            <li><a href="#"><i class="icon-facebook"></i></a></li>
-                            <li><a href="#"><i class="icon-twitter"></i></a></li>
-                            <li><a href="#"><i class="icon-google"></i></a></li>
-                            <li><a href="#"><i class="icon-instagram"></i></a></li>
-                            <li><a href="#"><i class="icon-pinterest"></i></a></li>
-                            <li><a href="#"><i class="icon-vimeo"></i></a></li>
-                            <li><a href="#"><i class="icon-youtube-play"></i></a></li>
-                            <li><a href="#"><i class="icon-linkedin"></i></a></li>
-                        </ul>
-                        <p>© Citytours 2018</p>
-                    </div>
-                </div>
-            </div><!-- End row -->
-        </div><!-- End container -->
-    </footer><!-- End footer -->
+	<!--========================= footer ========================-->
+	<footer class="revealed">
+		<div id="footer" th:include="include-common-bottom::include-common-bottom"></div>
+	</footer>
+		<!-- End container -->
+	<!--========================= End footer ========================-->
 
 	<div id="toTop"></div><!-- Back to top button -->
 	

@@ -26,11 +26,7 @@ public interface UserMapper {
 	//12. 비밀번호 일치 여부 확인
 	public int isMatchPassword(Map<String,Object> map);
 	//13. 이메일, 이름으로 아이디 찾기
-//	public String findIdByEmailName(User user);
 	public String findIdByEmailName(Map<String,Object> map);
-	
-	
-	
 	//14. 이메일, 아이디로 회원 존재여부 확인
 	public int isExistIdMail(Map<String,Object> map);
 	//15. 비밀번호 재설정
@@ -42,10 +38,5 @@ public interface UserMapper {
 	public int updateMailKey(User user);
 	//23. 메일 인증여부 업데이트
 	public int updateMailAuth(User user);
-	
-	//24. 메일 인증 여부 업데이트(map)
-//	public int updateMailAuthMap(Map<String,Integer> map);
-	
-
 	
 }

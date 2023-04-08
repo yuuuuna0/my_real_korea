@@ -60,6 +60,7 @@ class UserDaoImplTest {
 		System.out.println(">> removed rowCount : "+removeRowCount);
 	}
 
+	
 	//11. 회원 존재 여부 확인
 	@Test
 	void testExistedUser() throws Exception {
@@ -81,12 +82,18 @@ class UserDaoImplTest {
 	//14. 이메일, 아이디로 회원 존재여부 확인
 	@Test
 	void isExistIdMail() throws Exception {
-		System.out.println(">> isExistIdMail : "+userDao.isExistIdMail("mailtest2", "kgee12300@gmail.com"));
-		
+		System.out.println(">> isExistIdMail : "+userDao.isExistIdEmail("mailtest2", "kgee12300@gmail.com"));
+	}
+	
+	//15. 비밀번호 찾기 (비밀번호 재설정)
+	@Test
+	void updatePassword() throws Exception {
+		User user = userDao.findUser("user1");
+		user.setPassword("test");
+		System.out.println(">> updatePassword : "+userDao.updatePassword(user));
 	}
 	
 	
-
 	//21. 메일 인증여부 확인
 	@Test
 	void mailAuth() throws Exception {

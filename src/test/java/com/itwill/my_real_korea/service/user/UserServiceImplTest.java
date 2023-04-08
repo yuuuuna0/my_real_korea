@@ -75,12 +75,16 @@ class UserServiceImplTest {
 		System.out.println(">> ID : "+userService.findIdByEmailName("kgee12300@gmail.com","이름"));
 	}
 	
-	
-	//15. 비밀번호 재설정
+	//14. 비밀번호 찾기 (일치하는 회원 존재 여부 확인)
 	@Test
-	void updatePassword() throws Exception {
-		User user = userService.findUser("test222");
-		userService.updatePassword(user);
+	void findIdByIdEmail() throws Exception {
+		System.out.println(">> matchCount : "+userService.findIdByIdEmail("user1", "user1@gmail.com"));
+	}
+	
+	//15. 비밀번호 찾기 (비밀번호 재설정, 임시 비밀번호 발송)
+	@Test
+	void sendTempPassword() throws Exception {
+		userService.sendTempPassword("test11", "kgee12300@gmail.com");
 	}
 	
 	

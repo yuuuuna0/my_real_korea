@@ -24,14 +24,14 @@ public class EmailController {
     @PostMapping(value = "user-find-id", produces = "application/json;charset=UTF-8")
     public String mailAuth(@RequestBody EmailAuthRequest emailDto) throws MessagingException, UnsupportedEncodingException {
         emailService.sendAuth(emailDto.getEmail());
-        return "user-login-form";
+        return "user-login";
     }
     
     @ApiOperation(value = "임시 비밀번호")
     @PostMapping(value = "user-find-password", produces = "application/json;charset=UTF-8")
     public String mailTempPassword(@RequestBody EmailAuthRequest emailDto) throws MessagingException, UnsupportedEncodingException {
         emailService.sendTempPassword(emailDto.getEmail());
-        return "user-login-form";
+        return "user-login";
     }
 
 	

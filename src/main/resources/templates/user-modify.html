@@ -42,10 +42,10 @@
 		document.f.action = "user-modify";
 		document.f.submit();
 	}
-	
+
 	function userRemove() {
 		if (confirm("정말 탈퇴하시겠습니까?")) {
-			document.f.action = "user-remove-action";
+			document.f.action = "user_remove_action";
 			document.f.submit();
 		}
 	}
@@ -116,12 +116,11 @@
 				<div class="content">
 
 					<section id="section-4">
-			<div class="row" th:object="${loginUser}">
+						<div class="row" th:object="${loginUser}" name="f" method="post">
 <!-- 
 <input th:value="${session.sUserId}" type="hidden" name="userId"/>
  -->
 							<div class="col-md-6">
-			<form method="post" name="f">
 								<h4>Your profile</h4>
 								<ul id="profile_summary">
 									<li>아이디 <span th:text="${loginUser.userId}"></span>
@@ -143,16 +142,13 @@
 									<li>포인트 <span th:text="${loginUser.point}"></span>
 									</li>
 								</ul>
-			</form>
 							</div>
 							<div class="col-md-6">
 								<p>
 								<img src="img/tourist_guide_pic.jpg" alt="Image" class="img-fluid styled profile_pic">
 								</p>
 							</div>
-			</div>
-<button class="btn_1 green" type="button" onclick="userModify();">프로필 수정</button>
-<button class="btn_1 green" type="button" onclick="userRemove();">회원 탈퇴</button>
+						</div>
 
 						<!-- End row -->
 <!-- 
@@ -262,7 +258,8 @@
 							<hr>
 							<button type="submit" class="btn_1 green">Update Profile</button>
 -->
-
+<button class="btn_1 green" type="button" onclick="userModify();">프로필 수정</button>
+<button class="btn_1 green" type="button" onclick="userRemove();">회원 탈퇴</button>
 					</section>
 					<!-- End section 4 -->
 					<section id="section-2">

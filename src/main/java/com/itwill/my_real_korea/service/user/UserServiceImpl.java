@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import com.itwill.my_real_korea.dao.user.UserDao;
 import com.itwill.my_real_korea.dto.user.User;
-import com.itwill.my_real_korea.exception.EmailMismatchException;
 import com.itwill.my_real_korea.exception.ExistedUserException;
 import com.itwill.my_real_korea.exception.PasswordMismatchException;
 import com.itwill.my_real_korea.exception.UserNotFoundException;
@@ -92,33 +91,33 @@ public class UserServiceImpl implements UserService{
 	    return user;
 	}
 	
-	//13. 이메일, 이름으로 아이디 찾기
+	//13. 아이디 찾기 (이메일, 이름으로 아이디 찾기)
 	@Override
 	public String findIdByEmailName(String email, String name) throws Exception {
 		return userDao.findIdByEmailName(email,name);
 	}
 	
-	//14. 
-	public User sendTempPassword(String userId, String email) throws Exception {
-		User user = userDao.findUser(userId);
-	    if (user == null) {
-	        throw new UserNotFoundException(userId + " 는 존재하지 않는 아이디입니다.");
-	    }
-	    boolean isExistIdMail = userDao.isExistIdMail(userId,email);
-	    if (!isExistIdMail) {
-	        throw new EmailMismatchException("일치하는 회원 정보가 없습니다.");
-	    }
-	    return user;
-	}
-	
-	//15. 비밀번호 재설정
+	//14. 비밀번호 찾기 (일치하는 회원 존재 여부 확인)
 	@Override
-	public int updatePassword(User user) throws Exception {
-		String tempPassword = emailService.sendTempPassword(user.getEmail());
-		user.setPassword(tempPassword);
-		return userDao.updatePassword(user);
+	public int findIdByIdEmail(String userId, String email) throws Exception{
+		boolean existIdEmail = userDao.isExistIdEmail(userId, email);
+		int matchCount = 0;
+		if(existIdEmail) {
+			matchCount = 1;
+		}else {
+			matchCount = 0;
+		}
+		return matchCount;
 	}
 	
+	//15. 비밀번호 찾기 (비밀번호 재설정, 임시 비밀번호 발송)
+	public User sendTempPassword(String userId, String email) throws Exception {
+	    	User user = userDao.findUser(userId);
+	    	String tempPassword = emailService.sendTempPassword(user.getEmail());
+	    	user.setPassword(tempPassword);
+	    	userDao.updatePassword(user);
+	    	return user;
+	}
 	
 	
 	//21. 메일 인증여부 확인
@@ -142,18 +141,4 @@ public class UserServiceImpl implements UserService{
 
 	
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

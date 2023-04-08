@@ -74,7 +74,7 @@ public class UserDaoImpl implements UserDao {
 		return false;
 	}
 	
-	//13. 이메일, 이름으로 아이디 찾기
+	//13. 아이디 찾기 (이메일, 이름으로 아이디 찾기)
 	@Override
 	public String findIdByEmailName(String email, String name) throws Exception {
 		Map<String,Object> map = new HashMap();
@@ -83,11 +83,10 @@ public class UserDaoImpl implements UserDao {
 		String foundId = userMapper.findIdByEmailName(map);
 		return foundId;
 	}
-		
 
-	//14. 이메일, 아이디로 회원 존재여부 확인
+	//14. 비밀번호 찾기 (이메일, 아이디로 회원 존재여부 확인)
 	@Override
-	public boolean isExistIdMail(String userId, String email) {
+	public boolean isExistIdEmail(String userId, String email) {
 		Map<String,Object> map = new HashMap();
 		map.put("userId", userId);
 		map.put("email", email);
@@ -98,7 +97,7 @@ public class UserDaoImpl implements UserDao {
 		return false;
 	}
 
-	//15. 비밀번호 재설정
+	//15. 비밀번호 찾기 (비밀번호 재설정)
 	@Override
 	public int updatePassword(User user) throws Exception {
 		return userMapper.updatePassword(user);

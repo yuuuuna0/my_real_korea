@@ -63,3 +63,14 @@ header.sticky#colored #logo_home h1 a{
 #notice-list-main:hover {
 	color: #e14d67;
 }
+
+.banner_2 .wrapper h3 {
+    font-size: 60px;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+.banner_2 .wrapper p {
+    font-size: 30px;
+    font-weight: 300;
+}

@@ -13,7 +13,7 @@
                             <li><a href="user_login_form" id="access_link">Sign in</a></li>
                              -->
 	                    	<th:block th:if="${session.sUserId==null}">
-	                            <li><a href="user-login-form">로그인</a></li>
+	                            <li><a href="user-login">로그인</a></li>
 	                        </th:block>
 	                        <th:block th:unless="${session.sUserId==null}">
 		                        <li><a href="user-logout-action">로그아웃</a></li>

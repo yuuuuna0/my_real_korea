@@ -290,13 +290,13 @@
 								</div>
 								<div class="hotel_title">
 									<h3><strong  th:text="${tour.toName}">Park Hyatt</strong></h3>
-									<div class="rating" th:text=${tour.toScore}>
-<!-- 									<i class="icon-star voted"></i>
+									<div class="rating">
+										<input type="hidden" id="toScore" th:value="${tour.toScore}">
+ 									<i class="icon-star voted"></i>
 										<i class="icon-star voted"></i>
 										<i class="icon-star voted"></i>
 										<i class="icon-star voted"></i>
-										<i class="icon-star-empty"></i>
--->									
+										<i class="icon-star-empty"></i>							
 									</div>
 									<!-- end rating -->
 									<div class="wishlist">
@@ -425,8 +425,22 @@
 		   radioClass: 'iradio_square-grey'
 		 });
 	</script>
-	
 
+ 	<script>
+		const ratingDiv=$('div.rating');
+		let score=$('#toScore').val();
+		ratingDiv.html('');	//div.rating 내부 html 업데이트
+		
+		for(let i=0;i<score;i++){
+			let starIcon=$('<i>').addClass('icon-star').addClass('voted');
+			ratingDiv.append(starIcon);
+		}
+		
+		for(let i=score;i<5;i++){
+			let starIcon=$('<i>').addClass('icon-star-empty');
+			ratingDiv.append(starIcon);
+		}
+	</script>
 </body>
 
 </html>

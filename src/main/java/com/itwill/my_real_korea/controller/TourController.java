@@ -24,6 +24,7 @@ import com.itwill.my_real_korea.service.tour.TourService;
 import com.itwill.my_real_korea.util.PageMakerDto;
 
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
 
@@ -51,7 +52,7 @@ public class TourController {
 	}
 
 	//1. 투어상품 전체 리스트 보기
-	@GetMapping(value="/tour-list")
+	@RequestMapping(value="/tour-list")
 	public String tour_list(@RequestParam(required = false, defaultValue = "1") int currentPage,
 							@RequestParam(required = false) String keyword,
 							@RequestParam(required = false, defaultValue = "0") int cityNo,
@@ -72,16 +73,15 @@ public class TourController {
 			}
 			model.addAttribute("tourList",newTourList);
 			forwardPath="tour-list";
-			msg="성공";
 		} catch (Exception e){
 			e.printStackTrace();
-			forwardPath="redirect:error";
+			forwardPath="error";
 		}
 		return forwardPath;
 	}
 
 	//2. 투어상품 상세보기
-	@GetMapping(value="/tour-detail", params = "toNo")
+	@RequestMapping(value="/tour-detail", params = "toNo")
 	public String tourDetail(@RequestParam int toNo, Model model) {
 		String forwardPath="";
 		String msg="";
@@ -90,51 +90,58 @@ public class TourController {
 			if(tour!=null){
 				List<TourImg> tourImgList=tourImgService.findTourImgList(toNo);
 				tour.setTourImgList(tourImgList);
+				int tourScore=tourService.calculateTourScore(toNo);
+				tour.setToScore(tourScore);
 				model.addAttribute("tour",tour);
 				forwardPath="tour-detail";
-				msg="성공";
 			} else{
-				msg="해당 투어제품은 존재하지 않습니다.";
-				forwardPath="redirect:error";
+				forwardPath="error";
 			}
 			List<TourReview> tourReviewList=tourReviewService.findByToNo(toNo);
 			model.addAttribute("tourReviewList", tourReviewList);
 		} catch (Exception e){
 			e.printStackTrace();
-			forwardPath="redirect:error";
+			forwardPath="error";
 		}
 		return forwardPath;
 	}
-	
+/*
 	//2-1. 투어상품 상세보기 액션
-	@PostMapping(value="/tour-detail-action")
-	public String tourDetailAction(@RequestParam int pStarDate, 
-									 @RequestParam int pQty, 
-									 HttpSession session) {
+	@RequestMapping(value="tour-detail-action")
+	public String tourDetailAction(@RequestParam String pStarDate, 
+									 @RequestParam int pQty,
+									 @RequestParam int toNo,
+									 RedirectAttributes redirectAttributes) {
 		String forwardPath="";
-		session.setAttribute("pStartDate",pStarDate);
-		session.setAttribute("pQty",pQty);
+//		redirectAttributes.addAttribute("pStartDate",pStarDate);
+//		redirectAttributes.addAttribute("pQty",pQty);
+//		redirectAttributes.addAttribute("toNo", toNo);
 		forwardPath="redirect:tour-payment";
 		return forwardPath;
 	}
-	
+*/
 	//3. 투어상품 예약하기(구매하기) 폼
-	@RequestMapping(value="/tour-payment", params="toNo")
-	public String tourPayment(@RequestParam int toNo,HttpSession session,Model model) {
+	@RequestMapping(value="/tour-payment")
+	public String tourPaymentForm(@ModelAttribute Date pStartDate,
+								  @RequestParam int pQty,
+								  @ModelAttribute Tour tour,
+								  HttpSession session,
+								  Model model) {
 		String forwardPath="";
 		
-		int pQty=(int)session.getAttribute("pQty");
-		Date pStartDate=(Date)session.getAttribute("pStartDate");
 		model.addAttribute("pQty", pQty);
-		model.addAttribute("pStartDate",pStartDate);
+		model.addAttribute("pStartDate", pStartDate);
+		model.addAttribute("tour", tour);
+		System.out.println(pStartDate);
+		System.out.println(tour);
 		
 		forwardPath="tour-payment";
 		return forwardPath;
 	}
 	
 	//3-1. 투어상품 예약하기(구매하기) 액션
-	@PostMapping(value="/tour-payment-action")
-	public String tourPaymentAction(@ModelAttribute Payment payment,
+	@PostMapping(value="tour-payment-action")
+	public String tour_payment_form(@ModelAttribute Payment payment,
 									HttpSession session,
 									Model model) {
 		String forwardPath="";
@@ -155,7 +162,7 @@ public class TourController {
 	}
 	
 	//4. 예약한 투어상품 상세 확인
-	@RequestMapping(value="/tour-payment-confirmation")
+	@RequestMapping(value="tour-payment-confirmation")
 	public String tourPaymentConfirmation(HttpSession session) {
 		String forwardPath="";
 		session.getAttribute("tour");

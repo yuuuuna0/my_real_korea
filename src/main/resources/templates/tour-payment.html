@@ -103,6 +103,50 @@
 			<div class="row">
 				<div class="col-lg-8 add_bottom_15">
 					<div class="form_title">
+						<h3><strong>1</strong>Tour Details</h3>
+						<p>
+							예약하신 투어 내용입니다.
+						</p>
+					</div>
+					<div class="step">
+						<div class="row">
+							<div class="col-sm-6">
+								<div class="form-group">
+									<label>First name</label>
+									<input type="text" class="form-control" id="firstname_booking" name="firstname_booking">
+								</div>
+							</div>
+							<div class="col-sm-6">
+								<div class="form-group">
+									<label>Last name</label>
+									<input type="text" class="form-control" id="lastname_booking" name="lastname_booking">
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-6">
+								<div class="form-group">
+									<label>Email</label>
+									<input type="email" id="email_booking" name="email_booking" class="form-control">
+								</div>
+							</div>
+							<div class="col-sm-6">
+								<div class="form-group">
+									<label>Confirm email</label>
+									<input type="email" id="email_booking_2" name="email_booking_2" class="form-control">
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-6">
+								<div class="form-group">
+									<label>Telephone</label>
+									<input type="text" id="telephone_booking" name="telephone_booking" class="form-control">
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="form_title">
 						<h3><strong>1</strong>Your Details</h3>
 						<p>
 							Mussum ipsum cacilds, vidis litro abertis.
@@ -291,25 +335,25 @@
 							<tbody>
 								<tr>
 									<td>
-										Check in
+										여행 시작일
 									</td>
-									<td class="text-right">
+									<td class="text-right" th:text="${pStartDate}">
 										10 April 2015
 									</td>
 								</tr>
 								<tr>
 									<td>
-										Check out
+										여행 종료
 									</td>
-									<td class="text-right">
-										12 April 2015
+									<td class="text-right" >
+										10 April 2015
 									</td>
 								</tr>
 								<tr>
 									<td>
-										Rooms
+										여행타입
 									</td>
-									<td class="text-right">
+									<td class="text-right" >
 										1 double room
 									</td>
 								</tr>

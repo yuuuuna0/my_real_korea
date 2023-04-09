@@ -118,16 +118,15 @@ public class NoticeRestController {
 	 * 공지사항 게시판 title 키워드로 검색
 	 */
 	@ApiOperation(value = "공지사항 검색결과 리스트")
-	@PostMapping(value = "/notice-search", produces = "application/json;charset=UTF-8")
+	@GetMapping(value = "/notice-search/{keyword}", produces = "application/json;charset=UTF-8")
 	public Map<String, Object> notice_search_list(@RequestParam(required = false, defaultValue = "1") int pageNo,
-												@RequestBody Map<String,String> keywordMap) {
+												@PathVariable String keyword) {
 
 		Map<String, Object> resultMap = new HashMap<>();
 		int code = 1;
 		String msg = "성공";
 		PageMakerDto<Notice> noticeList = null;
 		try {
-			String keyword = keywordMap.get("keyword");
 			// 페이지 번호(default 값 1)와 검색 keyword로 공지사항 검색결과 리스트 찾기, 성공시 code 1
 			noticeList = noticeService.selectSearchNoticeList(pageNo,keyword);
 			if (noticeList.getTotRecordCount() != 0 && noticeList != null) {

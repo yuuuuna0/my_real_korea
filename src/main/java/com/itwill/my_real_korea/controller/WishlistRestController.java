@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.itwill.my_real_korea.dto.notice.Notice;
 import com.itwill.my_real_korea.dto.ticket.Ticket;
+import com.itwill.my_real_korea.dto.tour.Tour;
 import com.itwill.my_real_korea.dto.wishlist.Wishlist;
 import com.itwill.my_real_korea.service.wishlist.WishlistService;
 import com.itwill.my_real_korea.util.PageMakerDto;
@@ -200,12 +201,12 @@ public class WishlistRestController {
 	 */
 	
 	/*
-	 * 위시리스트 리스트 보기 + 티켓상품 + 투어상품  (user_id) => controller
-
+	 * 위시리스트 리스트 보기 + 투어상품만 (user_id) 
+	 */
 	@LoginCheck
-	@ApiOperation(value = "위시리스트(티켓+투어) 리스트")
-	@GetMapping(value = "/wishlist-with", produces = "application/json;charset=UTF-8")
-	public Map<String, Object> wishlist_list_with_ticket_tour(@RequestParam(required = true) String userId) {
+	@ApiOperation(value = "위시리스트(투어) 리스트")
+	@GetMapping(value = "/wishlist-with-tour", produces = "application/json;charset=UTF-8")
+	public Map<String, Object> wishlist_list_with_tour(@RequestParam(required = true) String userId) {
 
 		Map<String, Object> resultMap = new HashMap<>();
 		int code = 1;
@@ -213,9 +214,15 @@ public class WishlistRestController {
 		List<Wishlist> data = new ArrayList<>();
 		try {
 			// userId로 위시리스트(티켓+투어) 리스트 찾기, 성공시 code 1
-			data = wishlistService.selectAllWithTicketAndTour(userId);
-			code = 1;
-			msg = "성공";
+			List<Wishlist> wishlistList = wishlistService.selectAllWithTicketAndTour(userId);
+			for (Wishlist wishlist : wishlistList) {
+				Tour tour = wishlist.getTour();
+				if (tour != null) {
+					data.add(wishlist);
+					code = 1;
+					msg = "성공";
+				}
+			}
 		} catch (Exception e) {
 			// 에러 발생시 code 2
 			e.printStackTrace();
@@ -227,7 +234,42 @@ public class WishlistRestController {
 		resultMap.put("data", data);
 		return resultMap;
 	}
-		 */
+	/*
+	 * 위시리스트 리스트 보기 + 티켓상품만 (user_id) 
+	 */
+	
+	@LoginCheck
+	@ApiOperation(value = "위시리스트(티켓) 리스트")
+	@GetMapping(value = "/wishlist-with-ticket", produces = "application/json;charset=UTF-8")
+	public Map<String, Object> wishlist_list_with_ticket(@RequestParam(required = true) String userId) {
+
+		Map<String, Object> resultMap = new HashMap<>();
+		int code = 1;
+		String msg = "성공";
+		List<Wishlist> data = new ArrayList<>();
+		try {
+			// userId로 위시리스트(티켓+투어) 리스트 찾기, 성공시 code 1
+			List<Wishlist> wishlistList = wishlistService.selectAllWithTicketAndTour(userId);
+			for (Wishlist wishlist : wishlistList) {
+				Ticket ticket = wishlist.getTicket();
+				if (ticket != null) {
+					data.add(wishlist);
+					code = 1;
+					msg = "성공";
+				}
+			}
+		} catch (Exception e) {
+			// 에러 발생시 code 2
+			e.printStackTrace();
+			code = 2;
+			msg = "관리자에게 문의하세요.";
+		}
+		resultMap.put("code", code);
+		resultMap.put("msg", msg);
+		resultMap.put("data", data);
+		return resultMap;
+	}
+		
 	
 	
 	

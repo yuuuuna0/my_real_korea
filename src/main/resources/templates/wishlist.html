@@ -26,6 +26,10 @@
 	
 	<!-- CUSTOM CSS -->
 	<link href="css/custom.css" rel="stylesheet">
+	
+	<!-- Handlebars -->
+	<script  defer type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.2/handlebars.min.js"></script>
+	
 </head>
 
 <body>
@@ -86,25 +90,22 @@
 					</p>
 
 					<div id="filters_col">
-						<a data-toggle="collapse" href="#collapseFilters" aria-expanded="false" aria-controls="collapseFilters" id="filters_col_bt"><i class="icon_set_1_icon-65"></i>Filters</a>
 						<div class="collapse show" id="collapseFilters">
-							<div class="filter_type">
-								<h6>Price</h6>
+						<div class="filter_type">
+								<h6>Type</h6>
 								<ul>
 									<li>
+									<input type="hidden" id="wishlist-id" th:value="${wishlist.userId}">
 										<label>
-											<input type="checkbox" checked>From $10 to $50</label>
+											<input type="checkbox"  name="wishlistType" value="tour">투어</label>
 									</li>
 									<li>
 										<label>
-											<input type="checkbox">From $50 to $80</label>
-									</li>
-									<li>
-										<label>
-											<input type="checkbox">From $80 to $100</label>
+											<input type="checkbox"  name="wishlistType" value="ticket">티켓</label>
 									</li>
 								</ul>
 							</div>
+						
 							<div class="filter_type">
 								<h6>Rating</h6>
 								<ul>
@@ -150,23 +151,7 @@
 									</li>
 								</ul>
 							</div>
-							<div class="filter_type">
-								<h6>Type</h6>
-								<ul>
-									<li>
-										<label>
-											<input type="checkbox">City tours</label>
-									</li>
-									<li>
-										<label>
-											<input type="checkbox">Hotels</label>
-									</li>
-									<li>
-										<label>
-											<input type="checkbox">Transfers</label>
-									</li>
-								</ul>
-							</div>
+							
 						</div>
 						<!--End collapse -->
 					</div>
@@ -179,44 +164,17 @@
 					</div>
 				</aside>
 				<!--End aside -->
-				<div class="col-lg-9">
-
-					<div id="tools">
-						<div class="row">
-							<div class="col-md-3 col-sm-4 col-6">
-								<div class="styled-select-filters">
-									<select name="sort_price" id="sort_price">
-										<option value="" selected>Sort by price</option>
-										<option value="lower">Lowest price</option>
-										<option value="higher">Highest price</option>
-									</select>
-								</div>
-							</div>
-							<div class="col-md-3 col-sm-4 col-6">
-								<div class="styled-select-filters">
-									<select name="sort_rating" id="sort_rating">
-										<option value="" selected>Sort by ranking</option>
-										<option value="lower">Lowest ranking</option>
-										<option value="higher">Highest ranking</option>
-									</select>
-								</div>
-							</div>
-							<div class="col-md-6 col-sm-4 d-none d-sm-block text-right">
-								<a href="all_tours_grid.html" class="bt_filters"><i class="icon-th"></i></a> <a href="#" class="bt_filters"><i class=" icon-list"></i></a>
-							</div>
-
-						</div>
-					</div>
+				<div id="wishlist-list" class="col-lg-9">
+					
 					<!--/tools -->
 
-					<div class="strip_all_tour_list wow fadeIn" data-wow-delay="0.1s">
+					<div class="strip_all_tour_list wow fadeIn"  th:each="wishlist:${wishlistList}" data-wow-delay="0.1s" >
 						<div class="row">
 							<div class="col-lg-4 col-md-4">
 								<div class="wishlist_close">-</div>
 								<div class="img_list">
 									<a href="single_tour.html">
 										<div class="ribbon popular"></div><img src="img/tour_box_1.jpg" alt="Image">
-										<div class="short_info"><i class="icon_set_1_icon-4"></i>Museums </div>
 									</a>
 								</div>
 							</div>
@@ -224,8 +182,18 @@
 								<div class="tour_list_desc">
 									<div class="rating"><i class="icon-smile voted"></i><i class="icon-smile  voted"></i><i class="icon-smile  voted"></i><i class="icon-smile  voted"></i><i class="icon-smile"></i><small>(75)</small>
 									</div>
-									<h3><strong>Arch Triomphe</strong> tour</h3>
-									<p>Lorem ipsum dolor sit amet, quem convenire interesset ut vix, ad dicat sanctus detracto vis. Eos modus dolorum ex, qui adipisci maiestatis inciderint no, eos in elit dicat.....</p>
+									<div th:if="${wishlist.tour != null}">
+									<h3 th:text="${wishlist.tour.toName}"><strong>Arch Triomphe</strong> tour</h3>
+									</div>
+									<div th:if="${wishlist.ticket != null}">
+									<h3 th:text="${wishlist.ticket.tiTitle}"><strong>Arch Triomphe</strong> tour</h3>
+									</div>
+									<div th:if="${wishlist.tour != null}">
+									<p th:text="${wishlist.tour.toInfo}">Lorem ipsum dolor sit amet, quem convenire interesset ut vix, ad dicat sanctus detracto vis. Eos modus dolorum ex, qui adipisci maiestatis inciderint no, eos in elit dicat.....</p>
+									</div>
+									<div th:if="${wishlist.ticket != null}">
+									<p th:text="${wishlist.ticket.tiInfo}">Lorem ipsum dolor sit amet, quem convenire interesset ut vix, ad dicat sanctus detracto vis. Eos modus dolorum ex, qui adipisci maiestatis inciderint no, eos in elit dicat.....</p>
+									</div>
 									<ul class="add_info">
 										<li>
 											<div class="tooltip_styled tooltip-effect-4">
@@ -285,229 +253,22 @@
 							</div>
 							<div class="col-lg-2 col-md-2">
 								<div class="price_list">
-									<div><sup>$</sup>39*<span class="normal_price_list">$99</span><small>*Per person</small>
-										<p><a href="single_tour.html" class="btn_1">Details</a>
-										</p>
+									<div th:if="${wishlist.tour != null}">
+										<div><sup th:text="${wishlist.tour.toPrice}"></sup><small>*Per person</small>
+											<p><a th:href="@{tour-detail(toNo=${wishlist.tour.toNo})}" href="" class="btn_1">상세보기</a></p>
+										</div>
 									</div>
-
-								</div>
+									<div th:if="${wishlist.ticket != null}">
+										<div><sup th:text="${wishlist.ticket.tiPrice}"></sup><small>*Per person</small>
+											<p><a th:href="@{ticket-detail(tiNo=${wishlist.ticket.tiNo})}" href="" class="btn_1">상세보기</a></p>
+										</div>
+									</div>
 							</div>
 						</div>
 					</div>
-					<!--End strip -->
-
-					<div class="strip_all_tour_list wow fadeIn" data-wow-delay="0.1s">
-						<div class="row">
-							<div class="col-lg-4 col-md-4">
-								<div class="wishlist_close">-</div>
-								<div class="img_list">
-									<a href="single_hotel.html">
-										<div class="ribbon top_rated"></div><img src="img/hotel_2.jpg" alt="Image">
-										<div class="short_info"><i class="icon_set_1_icon-6"></i>Hotel</div>
-									</a>
-								</div>
-							</div>
-							<div class="col-lg-6 col-md-6">
-								<div class="tour_list_desc">
-									<div class="score">Superb<span>9.0</span>
-									</div>
-									<div class="rating"><i class="icon-star voted"></i><i class="icon-star  voted"></i><i class="icon-star  voted"></i><i class="icon-star  voted"></i><i class="icon-star-empty"></i>
-									</div>
-									<h3><strong>Hotel</strong> Mariott</h3>
-									<p>Lorem ipsum dolor sit amet, quem convenire interesset ut vix, ad dicat sanctus detracto vis. Eos modus dolorum...</p>
-									<ul class="add_info">
-										<li>
-											<a href="javascript:void(0);" class="tooltip-1" data-placement="top" title="Free Wifi"><i class="icon_set_1_icon-86"></i></a>
-										</li>
-										<li>
-											<a href="javascript:void(0);" class="tooltip-1" data-placement="top" title="Plasma TV with cable channels"><i class="icon_set_2_icon-116"></i></a>
-										</li>
-										<li>
-											<a href="javascript:void(0);" class="tooltip-1" data-placement="top" title="Swimming pool"><i class="icon_set_2_icon-110"></i></a>
-										</li>
-										<li>
-											<a href="javascript:void(0);" class="tooltip-1" data-placement="top" title="Fitness Center"><i class="icon_set_2_icon-117"></i></a>
-										</li>
-										<li>
-											<a href="javascript:void(0);" class="tooltip-1" data-placement="top" title="Restaurant"><i class="icon_set_1_icon-58"></i></a>
-										</li>
-									</ul>
-								</div>
-							</div>
-							<div class="col-lg-2 col-md-2">
-								<div class="price_list">
-									<div><sup>$</sup>39*<span class="normal_price_list">$99</span><small>*From/Per night</small>
-										<p><a href="single_hotel.html" class="btn_1">Details</a>
-										</p>
-									</div>
-								</div>
-							</div>
-						</div>
 					</div>
+					<!-- End col lg-9 -->
 					<!--End strip -->
-
-					<div class="strip_all_tour_list wow fadeIn" data-wow-delay="0.1s">
-						<div class="row">
-							<div class="col-lg-4 col-md-4">
-								<div class="wishlist_close">-</div>
-								<div class="img_list">
-									<a href="single_transfer.html">
-										<div class="ribbon top_rated"></div><img src="img/transfer_3.jpg" alt="Image">
-									</a>
-									<div class="short_info"><i class="icon_set_1_icon-26"></i>Transfer</div>
-								</div>
-							</div>
-							<div class="col-lg-6 col-md-6">
-								<div class="tour_list_desc">
-									<div class="rating"><i class="icon-smile voted"></i><i class="icon-smile  voted"></i><i class="icon-smile  voted"></i><i class="icon-smile  voted"></i><i class="icon-smile"></i><small>(75)</small>
-									</div>
-									<h3><strong>Orly Airport</strong> group</h3>
-									<p>Lorem ipsum dolor sit amet, quem convenire interesset ut vix, ad dicat sanctus detracto vis. Eos modus dolorum ex, qui adipisci maiestatis inciderint no, eos in elit dicat.....</p>
-									<ul class="add_info">
-										<li>
-											<div class="tooltip_styled tooltip-effect-4">
-												<span class="tooltip-item"><i class="icon_set_1_icon-70"></i></span>
-												<div class="tooltip-content">
-													<h4>Passengers</h4> Up to 40 passengers.
-												</div>
-											</div>
-										</li>
-										<li>
-											<div class="tooltip_styled tooltip-effect-4">
-												<span class="tooltip-item"><i class="icon_set_1_icon-6"></i></span>
-												<div class="tooltip-content">
-													<h4>Pick up</h4> Hotel pick up or different place with an extra cost.
-												</div>
-											</div>
-										</li>
-										<li>
-											<div class="tooltip_styled tooltip-effect-4">
-												<span class="tooltip-item"><i class="icon_set_1_icon-13"></i></span>
-												<div class="tooltip-content">
-													<h4>Accessibility</h4> On request accessibility available.
-												</div>
-											</div>
-										</li>
-										<li>
-											<div class="tooltip_styled tooltip-effect-4">
-												<span class="tooltip-item"><i class="icon_set_1_icon-22"></i></span>
-												<div class="tooltip-content">
-													<h4>Pet allowed</h4> On request pet allowed.
-												</div>
-											</div>
-										</li>
-										<li>
-											<div class="tooltip_styled tooltip-effect-4">
-												<span class="tooltip-item"><i class="icon_set_1_icon-33"></i></span>
-												<div class="tooltip-content">
-													<h4>Baggage</h4> Large baggage drop available.
-												</div>
-											</div>
-										</li>
-									</ul>
-								</div>
-							</div>
-							<div class="col-lg-2 col-md-2">
-								<div class="price_list">
-									<div><sup>$</sup>39*<span class="normal_price_list">$99</span><small>*From/Per person</small>
-										<p><a href="single_transfer.html" class="btn_1">Details</a>
-										</p>
-									</div>
-
-								</div>
-							</div>
-						</div>
-					</div>
-					<!--End strip -->
-
-					<div class="strip_all_tour_list wow fadeIn" data-wow-delay="0.7s">
-						<div class="row">
-							<div class="col-lg-4 col-md-4">
-								<div class="wishlist_close">-</div>
-								<div class="img_list">
-									<a href="single_tour.html">
-										<div class="ribbon top_rated"></div><img src="img/tour_box_5.jpg" alt="Image">
-										<div class="short_info"><i class="icon_set_1_icon-44"></i>Historic Building</div>
-									</a>
-								</div>
-							</div>
-							<div class="col-lg-6 col-md-6">
-								<div class="tour_list_desc">
-									<div class="rating"><i class="icon-smile voted"></i><i class="icon-smile  voted"></i><i class="icon-smile  voted"></i><i class="icon-smile  voted"></i><i class="icon-smile"></i><small>(75)</small>
-									</div>
-									<h3><strong>Pantheon</strong> tour</h3>
-									<p>Lorem ipsum dolor sit amet, quem convenire interesset ut vix, ad dicat sanctus detracto vis. Eos modus dolorum ex, qui adipisci maiestatis inciderint no, eos in elit dicat.....</p>
-									<ul class="add_info">
-										<li>
-											<div class="tooltip_styled tooltip-effect-4">
-												<span class="tooltip-item"><i class="icon_set_1_icon-83"></i></span>
-												<div class="tooltip-content">
-													<h4>Schedule</h4>
-													<strong>Monday to Friday</strong> 09.00 AM - 5.30 PM
-													<br>
-													<strong>Saturday</strong> 09.00 AM - 5.30 PM
-													<br>
-													<strong>Sunday</strong> <span class="label label-danger">Closed</span>
-												</div>
-											</div>
-										</li>
-										<li>
-											<div class="tooltip_styled tooltip-effect-4">
-												<span class="tooltip-item"><i class="icon_set_1_icon-41"></i></span>
-												<div class="tooltip-content">
-													<h4>Address</h4> Musée du Louvre, 75058 Paris - France
-													<br>
-													<a href="#">View on map</a>
-												</div>
-											</div>
-										</li>
-										<li>
-											<div class="tooltip_styled tooltip-effect-4">
-												<span class="tooltip-item"><i class="icon_set_1_icon-97"></i></span>
-												<div class="tooltip-content">
-													<h4>Languages</h4> English - French - Chinese - Russian - Italian
-												</div>
-											</div>
-										</li>
-										<li>
-											<div class="tooltip_styled tooltip-effect-4">
-												<span class="tooltip-item"><i class="icon_set_1_icon-27"></i></span>
-												<div class="tooltip-content">
-													<h4>Parking</h4> 1-3 Rue Elisée Reclus
-													<br> 76 Rue du Général Leclerc
-													<br> 8 Rue Caillaux 94923
-													<br>
-												</div>
-											</div>
-										</li>
-										<li>
-											<div class="tooltip_styled tooltip-effect-4">
-												<span class="tooltip-item"><i class="icon_set_1_icon-25"></i></span>
-												<div class="tooltip-content">
-													<h4>Transport</h4>
-													<strong>Metro: </strong>Musée du Louvre station (line 1)
-													<br>
-													<strong>Bus:</strong> 21, 24, 27, 39, 48, 68, 69, 72, 81, 95
-													<br>
-												</div>
-											</div>
-										</li>
-									</ul>
-								</div>
-							</div>
-							<div class="col-lg-2 col-md-2">
-								<div class="price_list">
-									<div><sup>$</sup>49*<span class="normal_price_list">$59</span><small>*Per person</small>
-										<p><a href="single_tour.html" class="btn_1">Details</a>
-										</p>
-									</div>
-
-								</div>
-							</div>
-						</div>
-					</div>
-					<!--End strip -->
-
 					<hr>
 
 					<nav aria-label="Page navigation">
@@ -532,8 +293,6 @@
 					</nav>
 					<!-- end pagination-->
 
-				</div>
-				<!-- End col lg-9 -->
 			</div>
 			<!-- End row -->
 		</div>
@@ -561,50 +320,113 @@
 	</div><!-- End Search Menu -->
 	
 	<!-- Sign In Popup -->
-	<div id="sign-in-dialog" class="zoom-anim-dialog mfp-hide">
-		<div class="small-dialog-header">
-			<h3>Sign In</h3>
+	<!-- /Sign In Popup -->
+<!--  ####################### template ############################ -->
+<script id="wishlist-ticket-template" type="text/x-handlebars-template">
+<div class="strip_all_tour_list wow fadeIn"  th:each="wishlist:${wishlistList}" data-wow-delay="0.1s" >
+<div class="row">
+	<div class="col-lg-4 col-md-4">
+		<div class="wishlist_close">-</div>
+		<div class="img_list">
+			<a href="single_tour.html">
+				<div class="ribbon popular"></div><img src="img/tour_box_1.jpg" alt="Image">
+			</a>
 		</div>
-		<form>
-			<div class="sign-in-wrapper">
-				<a href="#0" class="social_bt facebook">Login with Facebook</a>
-				<a href="#0" class="social_bt google">Login with Google</a>
-				<div class="divider"><span>Or</span></div>
-				<div class="form-group">
-					<label>Email</label>
-					<input type="email" class="form-control" name="email" id="email">
-					<i class="icon_mail_alt"></i>
-				</div>
-				<div class="form-group">
-					<label>Password</label>
-					<input type="password" class="form-control" name="password" id="password" value="">
-					<i class="icon_lock_alt"></i>
-				</div>
-				<div class="clearfix add_bottom_15">
-					<div class="checkboxes float-left">
-						<input id="remember-me" type="checkbox" name="check">
-						<label for="remember-me">Remember Me</label>
+	</div>
+	<div class="col-lg-6 col-md-6">
+		<div class="tour_list_desc">
+			<div class="rating"><i class="icon-smile voted"></i><i class="icon-smile  voted"></i><i class="icon-smile  voted"></i><i class="icon-smile  voted"></i><i class="icon-smile"></i><small>(75)</small>
+			</div>
+			<div th:if="${wishlist.tour != null}">
+			<h3 th:text="${wishlist.tour.toName}"><strong>Arch Triomphe</strong> tour</h3>
+			</div>
+			<div th:if="${wishlist.ticket != null}">
+			<h3 th:text="${wishlist.ticket.tiTitle}"><strong>Arch Triomphe</strong> tour</h3>
+			</div>
+			<div th:if="${wishlist.tour != null}">
+			<p th:text="${wishlist.tour.toInfo}">Lorem ipsum dolor sit amet, quem convenire interesset ut vix, ad dicat sanctus detracto vis. Eos modus dolorum ex, qui adipisci maiestatis inciderint no, eos in elit dicat.....</p>
+			</div>
+			<div th:if="${wishlist.ticket != null}">
+			<p th:text="${wishlist.ticket.tiInfo}">Lorem ipsum dolor sit amet, quem convenire interesset ut vix, ad dicat sanctus detracto vis. Eos modus dolorum ex, qui adipisci maiestatis inciderint no, eos in elit dicat.....</p>
+			</div>
+			<ul class="add_info">
+				<li>
+					<div class="tooltip_styled tooltip-effect-4">
+						<span class="tooltip-item"><i class="icon_set_1_icon-83"></i></span>
+						<div class="tooltip-content">
+							<h4>Schedule</h4>
+							<strong>Monday to Friday</strong> 09.00 AM - 5.30 PM
+							<br>
+							<strong>Saturday</strong> 09.00 AM - 5.30 PM
+							<br>
+							<strong>Sunday</strong> <span class="label label-danger">Closed</span>
+						</div>
 					</div>
-					<div class="float-right"><a id="forgot" href="javascript:void(0);">Forgot Password?</a></div>
-				</div>
-				<div class="text-center"><input type="submit" value="Log In" class="btn_login"></div>
-				<div class="text-center">
-					Don’t have an account? <a href="javascript:void(0);">Sign up</a>
-				</div>
-				<div id="forgot_pw">
-					<div class="form-group">
-						<label>Please confirm login email below</label>
-						<input type="email" class="form-control" name="email_forgot" id="email_forgot">
-						<i class="icon_mail_alt"></i>
+				</li>
+				<li>
+					<div class="tooltip_styled tooltip-effect-4">
+						<span class="tooltip-item"><i class="icon_set_1_icon-41"></i></span>
+						<div class="tooltip-content">
+							<h4>Address</h4> Musée du Louvre, 75058 Paris - France
+							<br>
+						</div>
 					</div>
-					<p>You will receive an email containing a link allowing you to reset your password to a new preferred one.</p>
-					<div class="text-center"><input type="submit" value="Reset Password" class="btn_1"></div>
+				</li>
+				<li>
+					<div class="tooltip_styled tooltip-effect-4">
+						<span class="tooltip-item"><i class="icon_set_1_icon-97"></i></span>
+						<div class="tooltip-content">
+							<h4>Languages</h4> English - French - Chinese - Russian - Italian
+						</div>
+					</div>
+				</li>
+				<li>
+					<div class="tooltip_styled tooltip-effect-4">
+						<span class="tooltip-item"><i class="icon_set_1_icon-27"></i></span>
+						<div class="tooltip-content">
+							<h4>Parking</h4> 1-3 Rue Elisée Reclus
+							<br> 76 Rue du Général Leclerc
+							<br> 8 Rue Caillaux 94923
+							<br>
+						</div>
+					</div>
+				</li>
+				<li>
+					<div class="tooltip_styled tooltip-effect-4">
+						<span class="tooltip-item"><i class="icon_set_1_icon-25"></i></span>
+						<div class="tooltip-content">
+							<h4>Transport</h4>
+							<strong>Metro: </strong>Musée du Louvre station (line 1)
+							<br>
+							<strong>Bus:</strong> 21, 24, 27, 39, 48, 68, 69, 72, 81, 95
+							<br>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="col-lg-2 col-md-2">
+		<div class="price_list">
+			<div th:if="${wishlist.tour != null}">
+				<div><sup th:text="${wishlist.tour.toPrice}"></sup><small>*Per person</small>
+					<p><a th:href="@{tour-detail(toNo=${wishlist.tour.toNo})}" href="" class="btn_1">상세보기</a></p>
 				</div>
 			</div>
-		</form>
-		<!--form -->
+			<div th:if="${wishlist.ticket != null}">
+				<div><sup th:text="${wishlist.ticket.tiPrice}"></sup><small>*Per person</small>
+					<p><a th:href="@{ticket-detail(tiNo=${wishlist.ticket.tiNo})}" href="" class="btn_1">상세보기</a></p>
+				</div>
+			</div>
 	</div>
-	<!-- /Sign In Popup -->
+</div>
+</div>
+</div>
+
+</script>
+
+
+
 
 	<!-- Common scripts -->
 	<script src="js/jquery-2.2.4.min.js"></script>

@@ -1,11 +1,13 @@
 package com.itwill.my_real_korea.config;
 
+import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.itwill.my_real_korea.controller.AuthAdminAnnotationInterceptor;
 import com.itwill.my_real_korea.controller.AuthLoginAnnotationInterceptor;
 
+@Configuration
 public class WebConfig implements WebMvcConfigurer{
 	/********************WebMvcConfigurer재정의*********************
 	@Override

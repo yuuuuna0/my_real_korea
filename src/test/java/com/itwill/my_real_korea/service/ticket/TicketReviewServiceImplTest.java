@@ -25,7 +25,7 @@ class TicketReviewServiceImplTest {
                         "후기를 써야하나?","review.jpg",3,"user3")));
 
     }
-
+/*
     @Disabled
     @Test
     void selectByTicketReview() throws Exception{
@@ -38,7 +38,7 @@ class TicketReviewServiceImplTest {
         System.out.println(ticketReviewService.selectByTicketReviewUser(1,"user3"));
 
     }
-
+*/
     @Disabled
     @Test
     void updateTicketReview() {

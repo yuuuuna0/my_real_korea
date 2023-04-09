@@ -27,7 +27,7 @@ class TicketReviewDaoImplTest {
                         "테스트","테스트내용","testReview.jpg",1,"user3"));
         assertEquals(rowCount,1);
     }
-
+/*
     @Test
     void selectByTicketReview() {
         List<TicketReview> ticketReviewList
@@ -35,13 +35,13 @@ class TicketReviewDaoImplTest {
         System.out.println(ticketReviewList);
     }
 
-    @Test
+@Test
     void selectByTicketReviewUser() {
         List<TicketReview> ticketReviewUserList
                 = ticketReviewDao.selectByTicketReviewUser(1,10,"user1");
         System.out.println(ticketReviewUserList);
     }
-
+*/
     @Test
     void updateTicketReview() {
         int rowCount

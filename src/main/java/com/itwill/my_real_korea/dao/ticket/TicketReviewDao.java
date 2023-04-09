@@ -10,10 +10,10 @@ public interface TicketReviewDao {
     int insertTicketReview(TicketReview ticketReview);
 
     //티켓 리뷰 보기
-    List<TicketReview> selectByTicketReview(int pageStart, int pageEnd, int tiReviewNo);
+    List<TicketReview> selectByTicketReviewNo(int tiNo);
 
     //내 리뷰 보기
-    List<TicketReview> selectByTicketReviewUser(int pageStart, int pageEnd, String userId);
+    List<TicketReview> selectByTicketReviewUser(String userId);
 
     //리뷰 수정
     int updateTicketReview(TicketReview ticketReview);
@@ -22,7 +22,7 @@ public interface TicketReviewDao {
     int deleteTicketReview(int tiReviewNo);
 
     //리뷰 글 수 보기
-    int selectAllReviewCount() throws Exception;
+    //int selectAllReviewCount() throws Exception;
     
 
 }

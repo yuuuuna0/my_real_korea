@@ -22,7 +22,34 @@ public class TicketReviewDaoImpl implements TicketReviewDao{
     public int insertTicketReview(TicketReview ticketReview) {
         return ticketReviewMapper.insertTicketReview(ticketReview);
     }
+  
 
+    @Override
+    public int updateTicketReview(TicketReview ticketReview) {
+        return ticketReviewMapper.updateTicketReview(ticketReview);
+    }
+
+    @Override
+    public int deleteTicketReview(int tiReviewNo) {
+        return ticketReviewMapper.deleteTicketReview(tiReviewNo);
+    }
+	@Override
+	public List<TicketReview> selectByTicketReviewNo(int tiNo) {
+		return ticketReviewMapper.selectByTicketReviewNo(tiNo);
+	}
+	@Override
+	public List<TicketReview> selectByTicketReviewUser(String userId) {
+		return ticketReviewMapper.selectByTicketReviewUser(userId);
+	}
+
+   
+    
+    /*
+    ---- 페이징 -----
+    @Override
+    public int selectAllReviewCount() throws Exception {
+        return ticketReviewMapper.selectAllReviewCount();
+    }
     @Override
     public List<TicketReview> selectByTicketReview(int pageStart, int pageEnd, int tiReviewNo){
         Map<String, Object> ticketReviewList = new HashMap<>();
@@ -40,19 +67,5 @@ public class TicketReviewDaoImpl implements TicketReviewDao{
         ticketReviewUserList.put("userId", userId);
         return ticketReviewMapper.selectByTicketReviewUser(ticketReviewUserList);
     }
-
-    @Override
-    public int updateTicketReview(TicketReview ticketReview) {
-        return ticketReviewMapper.updateTicketReview(ticketReview);
-    }
-
-    @Override
-    public int deleteTicketReview(int tiReviewNo) {
-        return ticketReviewMapper.deleteTicketReview(tiReviewNo);
-    }
-
-    @Override
-    public int selectAllReviewCount() throws Exception {
-        return ticketReviewMapper.selectAllReviewCount();
-    }
+    */
 }

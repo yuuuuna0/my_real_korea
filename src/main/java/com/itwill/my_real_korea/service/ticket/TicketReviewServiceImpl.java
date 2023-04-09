@@ -24,7 +24,25 @@ public class TicketReviewServiceImpl implements TicketReviewService{
     public int insertTicketReview(TicketReview ticketReview) {
         return ticketReviewDao.insertTicketReview(ticketReview);
     }
+    @Override
+    public List<TicketReview> selectByTicketReviewNo(int tiReviewNo){
+    	return ticketReviewDao.selectByTicketReviewNo(tiReviewNo);
+    }
+    @Override
+    public List<TicketReview> selectByTicketReviewUser(String userId){
+    	return ticketReviewDao.selectByTicketReviewUser(userId);
+    }
+    @Override
+    public int updateTicketReview(TicketReview ticketReview) {
+        return ticketReviewDao.updateTicketReview(ticketReview);
+    }
 
+    @Override
+    public int deleteTicketReview(int tiReviewNo) {
+        return ticketReviewDao.deleteTicketReview(tiReviewNo);
+    }
+    
+    /*	페이징
     @Override
     public PageMakerDto<TicketReview> selectByTicketReview(int currentPage, int tiReviewNo) throws Exception {
         int totReviewCount = ticketReviewDao.selectAllReviewCount();
@@ -42,14 +60,6 @@ public class TicketReviewServiceImpl implements TicketReviewService{
                 = ticketReviewDao.selectByTicketReviewUser(pageMaker.getPageBegin(),pageMaker.getPageEnd(),userId);
         return new PageMakerDto<TicketReview>(ticketReviewUserList, pageMaker, totReviewCount);
     }
-
-    @Override
-    public int updateTicketReview(TicketReview ticketReview) {
-        return ticketReviewDao.updateTicketReview(ticketReview);
-    }
-
-    @Override
-    public int deleteTicketReview(int tiReviewNo) {
-        return ticketReviewDao.deleteTicketReview(tiReviewNo);
-    }
+*/
+    
 }

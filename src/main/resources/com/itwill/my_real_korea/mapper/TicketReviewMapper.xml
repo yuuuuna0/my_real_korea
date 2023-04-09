@@ -12,30 +12,12 @@
     </insert>
 
     <!--리뷰 보기 - 페이징 -->
-    <select id="selectByTicketReview" parameterType="java.lang.Integer" resultType="com.itwill.my_real_korea.dto.ticket.TicketReview">
-                 SELECT * FROM
-                    (SELECT ROWNUM IDX, TR.* FROM
-                        (SELECT TI_REVIEW_NO, TI_REVIEW_DATE,
-                                TI_REVIEW_TITLE, TI_REVIEW_CONTENT,
-                                TI_REVIEW_IMG, TI_NO, USER_ID
-                         FROM TICKET_REVIEW WHERE TI_REVIEW_NO=#{tiReviewNo}
-                        )
-                            TR
-                    )
-                <![CDATA[WHERE IDX>=#{pageStart} AND IDX <=#{pageEnd}]]>
+    <select id="selectByTicketReviewNo" parameterType="java.lang.Integer" resultType="com.itwill.my_real_korea.dto.ticket.TicketReview">
+                 SELECT * FROM TICKET_REVIEW WHERE TI_NO=#{tiNo}
     </select>
     <!--내 리뷰 보기 - 페이징 -->
     <select id="selectByTicketReviewUser" parameterType="java.lang.String" resultType="com.itwill.my_real_korea.dto.ticket.TicketReview">
-                SELECT * FROM
-                    (SELECT ROWNUM IDX, TR.* FROM
-                        (SELECT TI_REVIEW_NO, TI_REVIEW_DATE,
-                                TI_REVIEW_TITLE, TI_REVIEW_CONTENT,
-                                TI_REVIEW_IMG, TI_NO, USER_ID
-                         FROM TICKET_REVIEW
-                         WHERE USER_ID=#{userId}
-                        ) TR
-                    )
-                    <![CDATA[WHERE IDX>=#{pageStart} AND IDX <=#{pageEnd}]]>
+              SELECT * FROM TICKET_REVIEW WHERE USER_ID=#{userId}
     </select>
 
     <!--리뷰 수정-->
@@ -57,5 +39,33 @@
     </select>
 
     <!--완료-->
+    
+    <!--리뷰 보기 - 페이징
+    <select id="selectByTicketReview" parameterType="java.lang.Integer" resultType="com.itwill.my_real_korea.dto.ticket.TicketReview">
+                 SELECT * FROM
+                    (SELECT ROWNUM IDX, TR.* FROM
+                        (SELECT TI_REVIEW_NO, TI_REVIEW_DATE,
+                                TI_REVIEW_TITLE, TI_REVIEW_CONTENT,
+                                TI_REVIEW_IMG, TI_NO, USER_ID
+                         FROM TICKET_REVIEW WHERE TI_REVIEW_NO=#{tiReviewNo}
+                        )
+                            TR
+                    )
+                <![CDATA[WHERE IDX>=#{pageStart} AND IDX <=#{pageEnd}]]>
+    </select>
+    <내 리뷰 보기 - 페이징 
+    <select id="selectByTicketReviewUser" parameterType="java.lang.String" resultType="com.itwill.my_real_korea.dto.ticket.TicketReview">
+                SELECT * FROM
+                    (SELECT ROWNUM IDX, TR.* FROM
+                        (SELECT TI_REVIEW_NO, TI_REVIEW_DATE,
+                                TI_REVIEW_TITLE, TI_REVIEW_CONTENT,
+                                TI_REVIEW_IMG, TI_NO, USER_ID
+                         FROM TICKET_REVIEW
+                         WHERE USER_ID=#{userId}
+                        ) TR
+                    )
+                    <![CDATA[WHERE IDX>=#{pageStart} AND IDX <=#{pageEnd}]]>
+    </select> -->
+    
 
 </mapper>

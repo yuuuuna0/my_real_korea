@@ -22,13 +22,14 @@
         
 	<!-- 전체보기 -->
 	<select id="selectAllTicket" resultMap="ticketResultMap">
+
 		SELECT * FROM
 			(SELECT ROWNUM IDX, TIALL.*FROM
-				(SELECT T.*, TI.TI_IMG_NO, C.CITY_NAME
+				(SELECT T.*, TI.TI_IMG_URL, C.CITY_NAME
 				 FROM TICKET T
 						  JOIN CITY C
 							   ON T.CITY_NO=C.CITY_NO
-						  JOIN TICKET_IMG TI
+						  LEFT JOIN  TICKET_IMG TI
 							   ON T.TI_NO = TI.TI_NO
 				 ORDER BY T.TI_NO
 			<!--<if test="sortOrder != null">
@@ -83,12 +84,12 @@
         
 	<!-- 티켓 상세보기 지역 + 이미지 -->
 			<select id="selectByTicketNoCityWithImg" parameterType="java.lang.Integer" resultMap="ticketResultMap">
-				SELECT T.*, TI.*, C.CITY_NAME, C.LATITUDE, C.LONGITUDE
+				SELECT T.*, C.CITY_NAME, C.LATITUDE, C.LONGITUDE
 				FROM TICKET T
 						 JOIN CITY C
 							  ON T.CITY_NO=C.CITY_NO
-						 LEFT OUTER JOIN TICKET_IMG TI
-							  ON T.TI_NO = TI.TI_NO
+						 <!-- LEFT OUTER JOIN TICKET_IMG TI
+							  ON T.TI_NO = TI.TI_NO-->
 				WHERE T.TI_NO=#{tiNo}
 			</select>
 			

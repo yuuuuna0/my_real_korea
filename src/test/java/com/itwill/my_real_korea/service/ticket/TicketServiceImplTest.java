@@ -41,7 +41,6 @@ class TicketServiceImplTest {
         ticketImgService.insertTicketImg(ticketImg3);
         assertEquals(rowCount, 1);
     }
-    @Disabled
     @Test
     void selectAllTicket() throws Exception{
        System.out.println(ticketService.selectAllTicket(1));

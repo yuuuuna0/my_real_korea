@@ -19,21 +19,19 @@ import com.itwill.my_real_korea.exception.PasswordMismatchException;
 import com.itwill.my_real_korea.exception.UserNotFoundException;
 import com.itwill.my_real_korea.service.user.UserService;
 
-import io.swagger.annotations.ApiOperation;
-
 @Controller
 public class UserController {
 	
 	@Autowired
 	private UserService userService;
 	
-	@ApiOperation(value = "회원가입 폼")
+	//회원 가입 폼
 	@GetMapping(value = "/user-write", produces = "application/json;charset=UTF-8")
 	public String user_write() {
 		return "user-write";
 	}
 	
-	@ApiOperation(value = "회원가입 액션")
+	//회원 가입 액션
 	@PostMapping(value = "user-write-action", produces = "application/json;charset=UTF-8")
 	public String user_write_action(@ModelAttribute("fuser") User user,Model model) throws Exception {
 		String forward_path = "";
@@ -49,13 +47,13 @@ public class UserController {
 	}
 	
 	
-	@ApiOperation(value = "로그인 폼")
+	//로그인 폼
 	@GetMapping(value = "/user-login", produces = "application/json;charset=UTF-8")
 	public String user_login() {
 		return "user-login";
 	}
 
-	@ApiOperation(value = "로그인 액션")
+	//로그인 액션
 	@PostMapping(value = "user-login-action", produces = "application/json;charset=UTF-8")
 	public String user_login_action(@ModelAttribute("fuser") User user, Model model, HttpSession session) throws Exception {
 	    String forwardPath = "";
@@ -80,9 +78,9 @@ public class UserController {
 	    return forwardPath;
 	}
 	
-	
+
+	//회원 인증 폼 (이메일로 전송된 인증코드)
 	@LoginCheck
-	@ApiOperation(value = "메일 인증 폼")
 	@GetMapping(value = "/user-auth")
 	public String user_auth(HttpServletRequest request) throws Exception {
 		String forward_path = "";
@@ -93,7 +91,7 @@ public class UserController {
 		return forward_path;
 	}
 
-	@ApiOperation(value = "메일 인증 액션")
+	//회원 인증 액션
 	@PostMapping(value = "user-auth-action", produces = "application/json;charset=UTF-8")
 	public String user_auth_action(@RequestParam("mailAuthKey") String mailAuthKey, HttpSession session) throws Exception {
 	    String forwardPath = "";
@@ -115,11 +113,13 @@ public class UserController {
 	
 	/***************************ID, Password 찾기********************************/
 
+	//아이디 찾기 폼
 	@GetMapping(value = "/user-find-id", produces = "application/json;charset=UTF-8")
 	public String user_find_id() {
 		return "user-find-id";
 	}
 	
+	//아이디 찾기 액션
 	@PostMapping(value = "/user-find-id-action", produces = "application/json;charset=UTF-8")
 	public String user_find_id_action(@RequestParam("name") String name, @RequestParam("email") String email, Model model) throws Exception {
 		User user = new User();
@@ -136,11 +136,13 @@ public class UserController {
 		return "user-find-id";
 	}
 	
+	//비밀번호 찾기 폼
 	@GetMapping(value = "/user-find-pw", produces = "application/json;charset=UTF-8")
 	public String user_find_pw() throws Exception {
 		return "user-find-pw";
 	}
 	
+	//비밀번호 찾기 액션 (이메일로 임시 비밀번호 발송)
 	@PostMapping(value = "/user-find-pw-action", produces = "application/json;charset=UTF-8")
 	public String user_find_pw_action(@RequestParam("userId") String userId, @RequestParam("email") String email, Model model) throws Exception {
 		User user = new User();
@@ -157,9 +159,9 @@ public class UserController {
 	}
 	
 	/*********************************************************/
-	
+
+	//회원 정보 보기
 	@LoginCheck
-	@ApiOperation(value = "회원 정보 보기")
 	@GetMapping(value = "/user-view", produces = "application/json;charset=UTF-8")
 	public String user_view(HttpServletRequest request) throws Exception {
 	    HttpSession session = request.getSession();
@@ -173,6 +175,7 @@ public class UserController {
 	    return "user-view";
 	}
 	
+	//회원 정보 수정 폼
 	@LoginCheck
 	@PostMapping("/user-modify")
 	public String user_modify(HttpServletRequest request) throws Exception {
@@ -182,6 +185,7 @@ public class UserController {
 		return "user-modify";
 	}
 	
+	//회원 정보 수정 액션
 	@LoginCheck
 	@PostMapping("user-modify-action")
 	public String user_modify_action(@ModelAttribute User user,HttpServletRequest request) throws Exception {
@@ -189,7 +193,7 @@ public class UserController {
 		return "redirect:user-view";
 	}
 	
-	
+	//회원 탈퇴 액션
 	@LoginCheck
 	@PostMapping("user-remove-action")
 	public String user_remove_action(HttpServletRequest request) throws Exception {
@@ -199,6 +203,7 @@ public class UserController {
 		return "redirect:index";
 	}
 	
+	//로그아웃 액션
 	@LoginCheck
 	@RequestMapping("user-logout-action")
 	public String user_logout_action(HttpServletRequest request) {
@@ -206,7 +211,7 @@ public class UserController {
 		return "redirect:index";
 	}
 	
-	/***********GET방식요청시 guest_main redirection*********/
+	//GET 방식으로 요청시 index 화면으로
 	@GetMapping({
 				"user-write-action",
 				"user-login-action",
@@ -218,7 +223,7 @@ public class UserController {
 		return "redirect:index";
 	}
 	
-	/****************Local Exception Handler***********/
+	//error 발생시 error 화면으로
 	@ExceptionHandler(Exception.class)
 	public String user_exception_handler(Exception e) {
 		return "error";

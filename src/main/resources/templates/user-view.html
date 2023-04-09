@@ -121,29 +121,39 @@
 <input th:value="${session.sUserId}" type="hidden" name="userId"/>
  -->
 							<div class="col-md-6">
-			<form method="post" name="f">
-								<h4>Your profile</h4>
-								<ul id="profile_summary">
-									<li>아이디 <span th:text="${loginUser.userId}"></span>
-									</li>
-									<li>이름 <span th:text="${loginUser.name}"></span>
-									</li>
-									<li>닉네임 <span th:text="${loginUser.nickname}"></span>
-									</li>
-									<li>휴대폰 <span th:text="${loginUser.phone}"></span>
-									</li>
-									<li>이메일 <span th:text="${loginUser.email}"></span>
-									</li>
-									<li>생일 <span th:text="${loginUser.birth}"></span>
-									</li>
-									<li>주소 <span th:text="${loginUser.address}"></span>
-									</li>
-									<li>성별 <span th:text="${loginUser.gender}"></span>
-									</li>
-									<li>포인트 <span th:text="${loginUser.point}"></span>
-									</li>
-								</ul>
-			</form>
+<form method="post" name="f">
+	<h4>Your profile</h4>
+	<ul id="profile_summary">
+		<li>아이디 <span th:text="${loginUser.userId}"></span>
+		</li>
+		<li>이름 <span th:text="${loginUser.name}"></span>
+		</li>
+		<li>닉네임 <span th:text="${loginUser.nickname}"></span>
+		</li>
+		<li>휴대폰 <span th:text="${loginUser.phone}"></span>
+		</li>
+		<li>이메일 <span th:text="${loginUser.email}"></span>
+		</li>
+		<li>생일 <span th:text="${loginUser.birth}"></span>
+		</li>
+		<li>주소 <span th:text="${loginUser.address}"></span>
+		</li>
+		<li>성별 <span th:text="${loginUser.gender == 0} ? '남' : '여'"></span>
+		</li>
+		<li>포인트 <span th:text="${loginUser.point}"></span>
+		</li>
+		
+		
+		<li>자기 소개 <span th:text="${loginUser.userAddInfo.introduce}"></span>
+		</li>
+		<li>음주 여부 <span th:text="${loginUser.userAddInfo.alcohol == 0} ? '음주 선호' : '음주 선호하지 않음'"></span>
+		</li>
+		<li>흡연 여부 <span th:text="${loginUser.userAddInfo.smoking == 0} ? '흡연' : '비흡연'"></span>
+		</li>
+	</ul>
+</form>
+									<!-- 
+									 -->
 							</div>
 							<div class="col-md-6">
 								<p>

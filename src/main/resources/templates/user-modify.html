@@ -38,15 +38,24 @@
 
 <script type="text/javascript">
 
-	function userModify() {
-		document.f.action = "user-modify";
-		document.f.submit();
+function modifyUser() {
+	  if (document.getElementsByName("password")[0].value !== document.getElementsByName("password2")[0].value) {
+	    alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
+	    return;
+	  }
+	  document.f.action = "user-modify-action";
+	  document.f.submit();
 	}
+	
+	function modifyAddInfo() {
+		document.a.action = "user-add-modify-action";
+		document.a.submit();
+	}
+	
 
-	function userRemove() {
-		if (confirm("정말 탈퇴하시겠습니까?")) {
-			document.f.action = "user_remove_action";
-			document.f.submit();
+	function userView() {
+		if (confirm("정말 취소하시겠습니까?")) {
+			location.href = "user-view";
 		}
 	}
 </script>
@@ -116,40 +125,68 @@
 				<div class="content">
 
 					<section id="section-4">
-						<div class="row" th:object="${loginUser}" name="f" method="post">
 <!-- 
-<input th:value="${session.sUserId}" type="hidden" name="userId"/>
+<div class="row" th:object="${loginUser}" name="f" method="post">
  -->
-							<div class="col-md-6">
-								<h4>Your profile</h4>
-								<ul id="profile_summary">
-									<li>아이디 <span th:text="${loginUser.userId}"></span>
-									</li>
-									<li>이름 <span th:text="${loginUser.name}"></span>
-									</li>
-									<li>닉네임 <span th:text="${loginUser.nickname}"></span>
-									</li>
-									<li>휴대폰 <span th:text="${loginUser.phone}"></span>
-									</li>
-									<li>이메일 <span th:text="${loginUser.email}"></span>
-									</li>
-									<li>생일 <span th:text="${loginUser.birth}"></span>
-									</li>
-									<li>주소 <span th:text="${loginUser.address}"></span>
-									</li>
-									<li>성별 <span th:text="${loginUser.gender}"></span>
-									</li>
-									<li>포인트 <span th:text="${loginUser.point}"></span>
-									</li>
-								</ul>
-							</div>
-							<div class="col-md-6">
-								<p>
-								<img src="img/tourist_guide_pic.jpg" alt="Image" class="img-fluid styled profile_pic">
-								</p>
-							</div>
-						</div>
+ <form th:object="${loginUser}" name="f" method="post">
+	<input th:value="${session.sUserId}" type="hidden" name="userId"/>
+	<div class="col-md-6">
+		<h4>회원 기본 정보</h4>
+		<ul id="profile_summary">
 
+			<li>이름 <span th:text="*{name}"></span>
+			</li>
+			<li>비밀번호 <span><input type="password" th:value="*{password}" name="password"></span>
+			</li>
+			<li>비밀번호 확인<span><input type="password" th:value="*{password}" name="password2"></span>
+			</li>
+			<li>닉네임 <span><input type="text" th:value="*{nickname}" name="nickname"></span>
+			</li>
+			<li>휴대폰 <span><input type="text"th:value="*{phone}" name="phone" ></span>
+			</li>
+			<li>이메일 <span><input type="text" th:value="*{email}" name="email"></span>
+			</li>
+			<li>주소 <span><input type="text" th:value="*{address}" name="address"></span>
+			</li>
+		</ul>
+	</div>
+
+	</form>
+<button class="btn_1 green" type="button" onclick="modifyUser();">기본 정보 수정</button><br/><br/>
+	
+ <form th:object="${loginUser.userAddInfo}" name="a" method="post">
+	<input th:value="${session.sUserId}" type="hidden" name="userId"/>
+	<div class="col-md-6">
+		<h4>회원 추가 정보</h4>
+		<ul id="profile_summary">
+
+			<li>자기 소개 <span><input type="text" th:value="*{introduce}" name="introduce"></span>
+			</li>
+			<li>음주 여부 <span><input type="radio" name="alcohol" value="0" checked> 음주 선호
+								<input type="radio" name="alcohol" value="1"> 음주 선호하지 않음</span>
+			</li>
+			<li>흡연 여부 <span><input type="radio" name="smoking" value="0" checked> 흡연
+								<input type="radio" name="smoking" value="1"> 비흡연</span>
+			</li>
+<!-- 
+			<li>흡연 여부 <span><input type="text" th:value="*{smoking}" name="smoking"></span>
+			 -->
+		</ul>
+	</div>
+
+	</form>
+<button class="btn_1 green" type="button" onclick="modifyAddInfo();">추가 정보 수정</button>
+<button class="btn_1 green" type="button" method="GET" onclick="userView();">취소</button>
+
+
+	<div class="col-md-6">
+		<p>
+		<img src="img/tourist_guide_pic.jpg" alt="Image" class="img-fluid styled profile_pic">
+		</p>
+	</div>
+	<!-- 
+</div>
+ -->
 						<!-- End row -->
 <!-- 
 						<div class="divider"></div>
@@ -258,8 +295,6 @@
 							<hr>
 							<button type="submit" class="btn_1 green">Update Profile</button>
 -->
-<button class="btn_1 green" type="button" onclick="userModify();">프로필 수정</button>
-<button class="btn_1 green" type="button" onclick="userRemove();">회원 탈퇴</button>
 					</section>
 					<!-- End section 4 -->
 					<section id="section-2">

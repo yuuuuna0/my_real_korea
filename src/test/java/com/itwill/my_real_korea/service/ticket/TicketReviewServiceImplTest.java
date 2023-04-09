@@ -22,7 +22,7 @@ class TicketReviewServiceImplTest {
     void insertTicketReview() {
         System.out.print(ticketReviewService.insertTicketReview(
                 new TicketReview(0,new Date(), "후기작성",
-                        "후기를 써야하나?","review.jpg",3,"user3")));
+                        "후기를 써야하나?","review.jpg",3,"n")));
 
     }
 /*

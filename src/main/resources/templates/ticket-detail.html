@@ -48,19 +48,21 @@
 	<!--======================== Header========================== -->
 	<div id="header" th:include="include-common-top::include-common-top"></div>
 	<!--======================== End Header======================== -->
-
+	
+	<!-- form 태그  -->
+	<form th:object="${ticket}" name="f" action="ticket-detail-action">
 	<section class="parallax-window" data-parallax="scroll" data-image-src="img/single_hotel_bg_1.jpg" data-natural-width="1400" data-natural-height="470">
 		<div class="parallax-content-2">
 			<div class="container">
 				<div class="row">
 					<div class="col-md-8">
 						<span class="rating"><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class=" icon-star-empty"></i></span>
-						<h1>Mariott Hotel</h1>
-						<span>Champ de Mars, 5 Avenue Anatole, 75007 Paris.</span>
+						<h1 th:text="${ticketList[0].tiTitle}"></h1>
+						<span th:text="${ticketList[0].city.cityName}"></span> <!-- ???? -->
 					</div>
 					<div class="col-md-4">
 						<div id="price_single_main" class="hotel">
-							from/per night <span><sup>$</sup>95</span>
+							from/per night <span th:text="${ticketList[0].tiPrice}"></span>
 						</div>
 					</div>
 				</div>
@@ -91,17 +93,7 @@
 		<div class="container margin_60">
 			<div class="row">
 				<div class="col-lg-8" id="single_tour_desc">
-					<div id="single_tour_feat">
-						<ul>
-							<li><i class="icon_set_2_icon-116"></i>Plasma TV</li>
-							<li><i class="icon_set_1_icon-86"></i>Free Wifi</li>
-							<li><i class="icon_set_2_icon-110"></i>Poll</li>
-							<li><i class="icon_set_1_icon-59"></i>Breakfast</li>
-							<li><i class="icon_set_1_icon-22"></i>Pet allowed</li>
-							<li><i class="icon_set_1_icon-13"></i>Accessibiliy</li>
-							<li><i class="icon_set_1_icon-27"></i>Parking</li>
-						</ul>
-					</div>
+		
 					<p class="d-none d-md-block d-block d-lg-none"><a class="btn_map" data-toggle="collapse" href="#collapseMap" aria-expanded="false" aria-controls="collapseMap" data-text-swap="Hide map" data-text-original="View on map">View on map</a>
 					</p>
 					<!-- Map button for tablets/mobiles -->
@@ -109,7 +101,7 @@
 						<div class="sp-slides">
 							<!--이미지-->
 							<div class="sp-slide">
-								<img alt="Image" class="sp-image" src="css/images/blank.gif" data-src="img/slider_single_tour/1_medium.jpg" data-small="img/slider_single_tour/1_small.jpg" data-medium="img/slider_single_tour/1_medium.jpg" data-large="img/slider_single_tour/1_large.jpg" data-retina="img/slider_single_tour/1_large.jpg">
+								<img alt="Image" class="sp-image" th:src="css/images/blank.gif" data-src="img/slider_single_tour/1_medium.jpg" data-small="img/slider_single_tour/1_small.jpg" data-medium="img/slider_single_tour/1_medium.jpg" data-large="img/slider_single_tour/1_large.jpg" data-retina="img/slider_single_tour/1_large.jpg">
 							</div>
 							<div class="sp-slide">
 								<img alt="Image" class="sp-image" src="css/images/blank.gif" data-src="img/slider_single_tour/2_medium.jpg" data-small="img/slider_single_tour/2_small.jpg" data-medium="img/slider_single_tour/2_medium.jpg" data-large="img/slider_single_tour/2_large.jpg" data-retina="img/slider_single_tour/2_large.jpg">
@@ -160,6 +152,7 @@
 
 					<div class="row">
 						<div class="col-lg-3">
+						
 							<h3>Description</h3>
 						</div>
 						<div class="col-lg-9">
@@ -336,11 +329,13 @@
 							</div>
 							<!-- End row -->
 							<hr>
-							<div class="review_strip_single">
+							<div class="review_strip_single"  th:each="ticketReview:${ticketReviewList}">
 								<img src="img/avatar1.jpg" alt="Image" class="rounded-circle">
-								<small> - 10 March 2015 -</small>
-								<h4>Jhon Doe</h4>
-								<p>
+								<small th:text="${ticketReview.tiReviewDate}"> - 10 March 2015 -</small>
+								<h4 th:text="${ticketReview.userId}">Jhon Doe</h4>
+								<!-- 타이틀 추가 -->
+								<h5 th:text="${ticketReview.tiReviewTitle}"></h5>
+								<p th:text="${ticketReview.tiReviewContent}">
 									<!--리뷰내용-->
 									"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed a lorem quis neque interdum consequat ut sed sem. Duis quis tempor nunc. Interdum et malesuada fames ac ante ipsum primis in faucibus."
 								</p>
@@ -389,42 +384,45 @@
 						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
-									<label><i class="icon-calendar-7"></i> Check in</label>
-									<input class="date-pick form-control" data-date-format="M d, D" type="text">
+									<label><i class="icon-calendar-7"></i> 예약 날짜</label>
+																										<!-- name 속성-->
+									<input class="date-pick form-control" data-date-format="M d, D" type="text" name="pStartDate">
 								</div>
 							</div>
-							<div class="col-md-6">
+							<!-- <div class="col-md-6">
 								<div class="form-group">
 									<label><i class="icon-calendar-7"></i> Check out</label>
 									<input class="date-pick form-control" data-date-format="M d, D" type="text">
 								</div>
-							</div>
+							</div> -->
 						</div>
 						<div class="row">
 							<div class="col-6">
 								<div class="form-group">
-									<label>Adults</label>
+									<label>수량</label>
 									<div class="numbers-row">
-										<input type="text" value="1" id="adults" class="qty2 form-control" name="quantity">
+									<!-- text -> number -->
+										<input type="text" value="1" id="adults" class="qty2 form-control" name="pQty">
 									</div>
 								</div>
 							</div>
-							<div class="col-6">
+						<!-- 	<div class="col-6">
 								<div class="form-group">
 									<label>Children</label>
 									<div class="numbers-row">
 										<input type="text" value="0" id="children" class="qty2 form-control" name="quantity">
 									</div>
-								</div>
-							</div>
+								</div> 
+							</div>-->
 						</div>
 						<br>
 
-						<a class="btn_full" href="cart_hotel.html">Check now</a>
+						<button class="btn_full" type="submit">티켓 구매하기</button>
 						<a class="btn_full_outline" href="#"><i class=" icon-heart"></i> Add to whislist</a>
 					</div>
+				
 					<!--/box_style_1 -->
-
+	
 					<div class="box_style_4">
 						<i class="icon_set_1_icon-90"></i>
 						<h4><span>Book</span> by phone</h4>
@@ -435,7 +433,8 @@
 				</aside>
 			</div>
 			<!--End row -->
-		</div>
+			</div>
+		
 		<!--End container -->
         
         <div id="overlay"></div>
@@ -443,6 +442,7 @@
     
 	</main>
 	<!-- End main -->
+	</form>
 	<!--========================= footer ========================-->
 	<footer class="revealed">
 		<div id="footer" th:include="include-common-bottom::include-common-bottom"></div>

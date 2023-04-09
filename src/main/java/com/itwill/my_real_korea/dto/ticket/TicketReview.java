@@ -2,6 +2,8 @@ package com.itwill.my_real_korea.dto.ticket;
 
 import java.util.Date;
 
+import com.itwill.my_real_korea.dto.user.User;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

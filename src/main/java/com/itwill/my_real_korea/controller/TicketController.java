@@ -52,7 +52,7 @@ public class TicketController {
             
             model.addAttribute("ticketList", ticketList.getItemList());
             model.addAttribute("currentPage", currentPage);
-            System.out.println(ticketList.getItemList());
+            //System.out.println(ticketList.getItemList());
         } catch (Exception e) {
             e.printStackTrace();
             // return "redirect:error";//
@@ -67,15 +67,15 @@ public class TicketController {
         	
             List<Ticket> ticketList = ticketService.selectByTicketNoCityWithImg(tiNo);
             List<TicketReview> ticketReviewList = ticketReviewService.selectByTicketReviewNo(tiNo);
-            System.out.println(ticketList);
-            System.out.println(ticketReviewList);
+            //System.out.println(ticketList);
+            //System.out.println(ticketReviewList);
             model.addAttribute("ticketList", ticketList);
             model.addAttribute("ticketReviewList",ticketReviewList);
             model.addAttribute("tiNo", tiNo);
         	
         } catch(Exception e) {
         	e.printStackTrace();
-        	//return "redirect:error";
+        	return "redirect:error";
         }
         return "ticket-detail";
     }
@@ -118,19 +118,23 @@ public class TicketController {
     }
     */
 
-    //티켓 예약(구매) - action
-    @LoginCheck
+    //티켓 상세 페이지에서 수량, 예약하기
+    //@LoginCheck
     @GetMapping("ticket-detail-action")
     public String ticketDatailPayment(@RequestParam int pQty,
                                       @RequestParam String pStartDate,
                                       @ModelAttribute Ticket sTicket,
                                       HttpSession session, Model model) {
-
+    	System.out.println(sTicket); // null 뜸 -_-.... 
+    	System.out.println(pQty);
+    	System.out.println(pStartDate);
         try {
-            if (sTicket != null) {
+            if (sTicket != null) { 
                 session.setAttribute("pQty", pQty);   // 티켓 수량
                 session.setAttribute("pStartDate", pStartDate);  // 티켓 시작 날짜
                 session.setAttribute("sTicket", sTicket); // session 티켓
+                
+                System.out.println(sTicket);
             }
         } catch (Exception e) {
             e.printStackTrace();

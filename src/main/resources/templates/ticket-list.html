@@ -53,8 +53,8 @@
 	<section class="parallax-window" data-parallax="scroll" data-image-src="img/hotels_bg.jpg" data-natural-width="1400" data-natural-height="470">
 		<div class="parallax-content-1">
 			<div class="animated fadeInDown">
-				<h1>Paris Hotels</h1>
-				<p>Ridiculus sociosqu cursus neque cursus curae ante scelerisque vehicula.</p>
+				<h1>티~~~~~~~~~~~~~~~~~~~~~~~~~켓</h1>
+				<p>티켓을 이용하는 방법은 티켓을 사는 것이다.</p>
 			</div>
 		</div>
 	</section>
@@ -78,7 +78,7 @@
 			<div id="map" class="map"></div>
 		</div>
 		<!-- End Map -->
-
+	<!-- 삭제해봄  
 		<div class="container margin_60">
 			<div class="row">
 				<aside class="col-lg-3">
@@ -229,9 +229,9 @@
 								</ul>
 							</div>
 						</div>
-						<!--End collapse -->
-					</div>
-					<!--End filters col-->
+						여기까지 End collapse -->
+					<!-- 삭제해봄 22 </div>
+					End filters col
 					<div class="box_style_2">
 						<i class="icon_set_1_icon-57"></i>
 						<h4>Need <span>Help?</span></h4>
@@ -239,7 +239,7 @@
 						<small>Monday to Friday 9.00am - 7.30pm</small>
 					</div>
 				</aside>
-				<!--End aside -->
+				End aside -->
 
 				<div class="col-lg-9">
 
@@ -271,7 +271,7 @@
 					<!--End tools -->
 
 					<div class="row">
-						<div class="col-md-6 wow zoomIn" data-wow-delay="0.1s" th:each="ticket:${ticketList}">
+						<div class="col-md-4 wow zoomIn" data-wow-delay="0.1s" th:each="ticket:${ticketList}">
 							<div class="hotel_container">
 								<div class="ribbon_3 popular"><span>Popular</span>
 								</div>
@@ -280,11 +280,11 @@
 										<img src="img/hotel_1.jpg" width="800" height="533" class="img-fluid" alt="Image">
 										<div class="score"><span>7.5</span>Good</div>
 										<div class="short_info hotel">
-											 t<span class="price" th:text="${ticket.tiPrice}"></span>
+											 <span class="price" th:text="${ticket.tiPrice}"></span>
 										</div>
 									</a>
 								</div>
-								<div class="hotel_title">
+								<div class="hotel_title"> <!-- 타이틀 -->
 									<h3><strong th:text="${ticket.tiTitle}">Park Hyatt</strong> </h3>
 									<div class="rating">
 										<i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star-empty"></i>
@@ -298,160 +298,9 @@
 							</div>
 							<!-- End box tour -->
 						</div>
+						
 						<!-- End col-md-6 -->
 
-						<div class="col-md-6 wow zoomIn" data-wow-delay="0.2s">
-							<div class="hotel_container">
-								<div class="ribbon_3 popular"><span>Popular</span>
-								</div>
-								<div class="img_container">
-									<a href="single_hotel.html">
-										<img src="img/hotel_2.jpg" width="800" height="533" class="img-fluid" alt="Image">
-										<div class="score"><span>9.0</span>Superb</div>
-										<div class="short_info hotel">
-											From/Per night<span class="price"><sup>$</sup>45</span>
-										</div>
-									</a>
-								</div>
-								<div class="hotel_title">
-									<h3><strong>Mariott</strong> Hotel</h3>
-									<div class="rating">
-										<i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star-empty"></i>
-									</div>
-									<!-- end rating -->
-									<div class="wishlist">
-										<a class="tooltip_flip tooltip-effect-1" href="#">+<span class="tooltip-content-flip"><span class="tooltip-back">Add to wishlist</span></span></a>
-									</div>
-									<!-- End wish list-->
-								</div>
-							</div>
-							<!-- End box -->
-						</div>
-						<!-- End col-md-6 -->
-					</div>
-					<!-- End row -->
-
-					<div class="row">
-						<div class="col-md-6 wow zoomIn" data-wow-delay="0.2s">
-							<div class="hotel_container">
-								<div class="ribbon_3"><span>Top rated</span>
-								</div>
-								<div class="img_container">
-									<a href="single_hotel.html">
-										<img src="img/hotel_3.jpg" width="800" height="533" class="img-fluid" alt="Image">
-										<div class="score"><span>9.5</span>Superb</div>
-										<div class="short_info hotel">
-											From/Per night<span class="price"><sup>$</sup>39</span>
-										</div>
-									</a>
-								</div>
-								<div class="hotel_title">
-									<h3><strong>Lumiere</strong> Hotel</h3>
-									<div class="rating">
-										<i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star-empty"></i>
-									</div>
-									<!-- end rating -->
-									<div class="wishlist">
-										<a class="tooltip_flip tooltip-effect-1" href="#">+<span class="tooltip-content-flip"><span class="tooltip-back">Add to wishlist</span></span></a>
-									</div>
-									<!-- End wish list-->
-								</div>
-							</div>
-							<!-- End box -->
-						</div>
-						<!-- End col-md-6 -->
-
-						<div class="col-md-6 wow zoomIn" data-wow-delay="0.4s">
-							<div class="hotel_container">
-								<div class="ribbon_3"><span>Top rated</span>
-								</div>
-								<div class="img_container">
-									<a href="single_hotel.html">
-										<img src="img/hotel_4.jpg" width="800" height="533" class="img-fluid" alt="Image">
-										<div class="score"><span>7.5</span>Good</div>
-										<div class="short_info hotel">
-											From/Per night<span class="price"><sup>$</sup>45</span>
-										</div>
-									</a>
-								</div>
-								<div class="hotel_title">
-									<h3><strong>Concorde</strong> Hotel</h3>
-									<div class="rating">
-										<i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star-empty"></i>
-									</div>
-									<!-- end rating -->
-									<div class="wishlist">
-										<a class="tooltip_flip tooltip-effect-1" href="javascript:void(0);">+<span class="tooltip-content-flip"><span class="tooltip-back">Add to wishlist</span></span></a>
-									</div>
-									<!-- End wish list-->
-								</div>
-							</div>
-							<!-- End box -->
-						</div>
-						<!-- End col-md-6 -->
-					</div>
-					<!-- End row -->
-
-					<div class="row">
-						<div class="col-md-6 wow zoomIn" data-wow-delay="0.2s">
-							<div class="hotel_container">
-								<div class="ribbon_3"><span>Top rated</span>
-								</div>
-								<div class="img_container">
-									<a href="single_hotel.html">
-										<img src="img/hotel_5.jpg" width="800" height="533" class="img-fluid" alt="Image">
-										<div class="score"><span>8.0</span>Good</div>
-										<div class="short_info hotel">
-											From/Per night<span class="price"><sup>$</sup>39</span>
-										</div>
-									</a>
-								</div>
-								<div class="hotel_title">
-									<h3><strong>Louvre</strong> Hotel</h3>
-									<div class="rating">
-										<i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star-empty"></i>
-									</div>
-									<!-- end rating -->
-									<div class="wishlist">
-										<a class="tooltip_flip tooltip-effect-1" href="#">+<span class="tooltip-content-flip"><span class="tooltip-back">Add to wishlist</span></span></a>
-									</div>
-									<!-- End wish list-->
-								</div>
-							</div>
-							<!-- End box -->
-						</div>
-						<!-- End col-md-6 -->
-
-						<div class="col-md-6 wow zoomIn" data-wow-delay="0.4s">
-							<div class="hotel_container">
-								<div class="ribbon_3"><span>Top rated</span>
-								</div>
-								<div class="img_container">
-									<a href="single_hotel.html">
-										<img src="img/hotel_6.jpg" width="800" height="533" class="img-fluid" alt="Image">
-										<div class="score"><span>8.5</span>Superb</div>
-										<div class="short_info hotel">
-											From/Per night<span class="price"><sup>$</sup>45</span>
-										</div>
-									</a>
-								</div>
-								<div class="hotel_title">
-									<h3><strong>Concorde</strong> Hotel</h3>
-									<div class="rating">
-										<i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star-empty"></i>
-									</div>
-									<!-- end rating -->
-									<div class="wishlist">
-										<a class="tooltip_flip tooltip-effect-1" href="javascript:void(0);">+<span class="tooltip-content-flip"><span class="tooltip-back">Add to wishlist</span></span></a>
-									</div>
-									<!-- End wish list-->
-								</div>
-							</div>
-							<!-- End box -->
-						</div>
-						<!-- End col-md-6 -->
-					</div>
-					<!-- End row -->
 
 					<hr>
 					

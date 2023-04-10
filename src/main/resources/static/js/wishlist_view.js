@@ -2,7 +2,7 @@
  * wishlist_view.js
  */
  
-export function render(templateId='#wishlist-ticket-template', jsonResult={}, contentId='#wishlist-list'){
+export function render(templateId, jsonResult={}, contentId='#wishlist-list'){
 	
 	let templateHtml = $(templateId).html(); // id로 메인페이지 화면의 html 얻기
 	let bindTemplate = Handlebars.compile(templateHtml);

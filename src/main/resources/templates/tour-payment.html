@@ -101,6 +101,8 @@
 
 		<div class="container margin_60">
 			<div class="row">
+			<!-- form start -->
+			<form id="tourPaymentF" th:object=${payment}>
 				<div class="col-lg-8 add_bottom_15">
 					<div class="form_title">
 						<h3><strong>1</strong>Tour Details</h3>
@@ -110,38 +112,30 @@
 					</div>
 					<div class="step">
 						<div class="row">
-							<div class="col-sm-6">
+							<div class="col-sm-12">
 								<div class="form-group">
-									<label>First name</label>
-									<input type="text" class="form-control" id="firstname_booking" name="firstname_booking">
+									<label> 여행명 </label>
+									<input type="readonly" th:value="${session.payment.tour.toName}" class="form-control">
 								</div>
 							</div>
-							<div class="col-sm-6">
+							<div class="col-sm-12">
 								<div class="form-group">
-									<label>Last name</label>
-									<input type="text" class="form-control" id="lastname_booking" name="lastname_booking">
-								</div>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-sm-6">
-								<div class="form-group">
-									<label>Email</label>
-									<input type="email" id="email_booking" name="email_booking" class="form-control">
-								</div>
-							</div>
-							<div class="col-sm-6">
-								<div class="form-group">
-									<label>Confirm email</label>
-									<input type="email" id="email_booking_2" name="email_booking_2" class="form-control">
+									<label> 여행타입 </label>
+									<input type="text" th:value="${session.payment.tour.toType}" class="form-control" >
 								</div>
 							</div>
 						</div>
 						<div class="row">
-							<div class="col-sm-6">
+							<div class="col-sm-12">
 								<div class="form-group">
-									<label>Telephone</label>
-									<input type="text" id="telephone_booking" name="telephone_booking" class="form-control">
+									<label> 여행설명 </label>
+									<input type="text" th:value="${#strings.substring(session.payment.tour.toInfo,0,3)}"class="form-control">
+								</div>
+							</div>
+							<div class="col-sm-12">
+								<div class="form-group">
+									<label> 도시 </label>
+									<input type="text" th:value="${session.payment.tour.city.cityName}"class="form-control">
 								</div>
 							</div>
 						</div>
@@ -154,24 +148,18 @@
 					</div>
 					<div class="step">
 						<div class="row">
-							<div class="col-sm-6">
+							<div class="col-sm-8">
 								<div class="form-group">
-									<label>First name</label>
-									<input type="text" class="form-control" id="firstname_booking" name="firstname_booking">
-								</div>
-							</div>
-							<div class="col-sm-6">
-								<div class="form-group">
-									<label>Last name</label>
-									<input type="text" class="form-control" id="lastname_booking" name="lastname_booking">
+									<label> 이름 </label>
+									<input type="text" class="form-control" name="pName">
 								</div>
 							</div>
 						</div>
 						<div class="row">
 							<div class="col-sm-6">
 								<div class="form-group">
-									<label>Email</label>
-									<input type="email" id="email_booking" name="email_booking" class="form-control">
+									<label> 이메일 </label>
+									<input type="email" id="email_booking" name="pEmail" class="form-control">
 								</div>
 							</div>
 							<div class="col-sm-6">
@@ -245,6 +233,7 @@
 									</div>
 								</div>
 							</div>
+							
 						</div>
 						<!--End row -->
 
@@ -337,7 +326,7 @@
 									<td>
 										여행 시작일
 									</td>
-									<td class="text-right" th:text="${pStartDate}">
+									<td class="text-right" th:text="${payment.pStartDate}">
 										10 April 2015
 									</td>
 								</tr>
@@ -353,7 +342,7 @@
 									<td>
 										여행타입
 									</td>
-									<td class="text-right" >
+									<td class="text-right" th:text="${session.payment.pQty}">
 										1 double room
 									</td>
 								</tr>
@@ -409,7 +398,8 @@
 						<small>Monday to Friday 9.00am - 7.30pm</small>
 					</div>
 				</aside>
-
+			</form>
+			<!-- form end -->
 			</div>
 			<!--End row -->
 		</div>

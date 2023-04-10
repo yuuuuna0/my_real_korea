@@ -9,6 +9,15 @@ select * from wishlist w
 left join ticket ti on w.ti_no=ti.ti_no
 left join tour tu on w.to_no=tu.to_no
 where user_id='user1';
+/*
+select * from wishlist w 
+left join ticket ti on w.ti_no=ti.ti_no
+	left join ticket_img tiimg on w.ti_no=tiimg.ti_no
+	left join tour tu on w.to_no=tu.to_no
+	left join tour_img tuimg on w.to_no=tuimg.to_no
+	left join city c on ti.city_no=c.city_no or tu.city_no=c.city_no
+	where user_id='user1';
+*/
 
 
 -- 위시리스트 한 개 보기 (선택)

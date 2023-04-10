@@ -30,6 +30,7 @@ import javax.servlet.http.HttpSession;
 
 import static org.hamcrest.CoreMatchers.nullValue;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -120,8 +121,38 @@ public class TourController {
 		return forwardPath;
 	}
 */
-	//3. 투어상품 예약하기(구매하기) 폼_session 이용 x(성공)
+/*	
+	//3. 투어상품 예약하기(구매하기) 폼_session 이용 O (실패)
 	@RequestMapping(value="/tour-payment")
+	public String tourPaymentForm(HttpSession session,
+								  @RequestParam String pStartDate,
+								  @RequestParam int pQty,
+								  @RequestParam int toNo) {
+		String forwardPath="";
+		try {
+			SimpleDateFormat dateFormat= new SimpleDateFormat("yyyy-MM-dd");
+			Date date=dateFormat.parse(pStartDate);
+			Tour tour=tourService.findTourWithCityByToNo(toNo);
+			Payment payment=(Payment)session.getAttribute("payment");
+			if(payment==null) {
+				session.setAttribute("payment", new Payment(0, 0, pQty, null, date, null, 0, 0, tour, null, null));
+			}
+			//payment.setPStartDate(null);
+			//System.out.println(pStartDate);
+			//System.out.println(pQty);
+			payment.setPQty(pQty);
+			payment.setTour(tour);
+			payment.setPStartDate(date);
+		}catch (Exception e) {
+			e.printStackTrace();
+			forwardPath="redirect:error";
+		}
+		return forwardPath;
+	}
+*/
+	
+	//3. 투어상품 예약하기(구매하기) 폼_session 이용 x(성공) ----> 모델? 세션? 어느 코드가 나을까?
+ 	@RequestMapping(value="/tour-payment")
 	public String tourPaymentForm(@RequestParam String pStartDate,
 								  @RequestParam int pQty,
 								  @RequestParam int toNo,
@@ -130,16 +161,14 @@ public class TourController {
 
 		String forwardPath="";		
 		try {
-		model.addAttribute("pQty", pQty);
-		model.addAttribute("pStartDate", pStartDate);
-		model.addAttribute("toNo", toNo);
-		Tour tour=tourService.findTourWithCityByToNo(toNo);
-		model.addAttribute("tour", tour);
-		System.out.println(pStartDate);
-		System.out.println(toNo);
-		System.out.println(pQty);
-		
-		System.out.println(tour);
+			Tour tour=tourService.findTourWithCityByToNo(toNo);
+			SimpleDateFormat dateFormat= new SimpleDateFormat("yyyy-MM-dd");
+			Date date=dateFormat.parse(pStartDate);
+			Payment payment=new Payment(0, pQty*(tour.getToPrice()), pQty, null, date, null, pQty*(tour.getToPrice())*1/100, 0, tour, null, null);
+			//1. session에 붙이기
+			session.setAttribute("payment", payment);
+			//2. model에 붙이기
+			//model.addAttribute("payment",payment);
 		}catch (Exception e) {
 			e.printStackTrace();
 			forwardPath="error";
@@ -148,10 +177,11 @@ public class TourController {
 		forwardPath="tour-payment";
 		return forwardPath;
 	}
-	
+
+ 	
 	//3-1. 투어상품 예약하기(구매하기) 액션
 	@PostMapping(value="tour-payment-action")
-	public String tour_payment_form(@ModelAttribute Payment payment,
+	public String tourPaymentAction(@ModelAttribute Payment payment,
 									HttpSession session,
 									Model model) {
 		String forwardPath="";

@@ -24,6 +24,7 @@ public class EmailService {
 
     //이메일 인증 코드 생성(6자리 숫자)
     public void createAuthCode() {
+    	authNum = 0;
         Random random = new Random();
         for(int i=0; i<6; i++) {
             authNum = authNum * 10 + random.nextInt(10);
@@ -34,7 +35,7 @@ public class EmailService {
     public void createTempPassword(){
 		StringBuffer key = new StringBuffer();
 		Random random = new Random();
-
+		tempPassword = "";
 		for (int i=0; i<8; i++) { //임시 비밀번호 8자리
 			int index = random.nextInt(3); // 0~2 까지 랜덤
 

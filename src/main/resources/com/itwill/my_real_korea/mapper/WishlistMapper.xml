@@ -9,16 +9,6 @@
 	 </association>
 	 <association property="city" javaType="com.itwill.my_real_korea.dto.City" autoMapping="true">
 	 </association>
-	 <collection property="ticketImgList"
-	 			javaType="java.util.List"
-	 			ofType="com.itwill.my_real_korea.dto.ticket.TicketImg"
-	 			autoMapping="true">
-	 </collection>
-	 <collection property="tourImgList"
-	 			javaType="java.util.List"
-	 			ofType="com.itwill.my_real_korea.dto.tour.TourImg"
-	 			autoMapping="true">
-	 </collection>
 </resultMap>
 
 
@@ -31,9 +21,7 @@
 <select id="selectAllWithTicketAndTour" parameterType="String" resultMap="wishlistWithTicketTourResultMap">
 	select * from wishlist w 
 	left join ticket ti on w.ti_no=ti.ti_no
-	left join ticket_img tiimg on w.ti_no=tiimg.ti_no
 	left join tour tu on w.to_no=tu.to_no
-	left join tour_img tuimg on w.to_no=tuimg.to_no
 	left join city c on ti.city_no=c.city_no or tu.city_no=c.city_no
 	where user_id=#{userId}
 </select>

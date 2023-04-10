@@ -104,7 +104,7 @@ public class UserController {
 	        	System.out.println("authUser.getMailKey() : "+authUser.getMailKey());
 	        	 */
 	        	session.removeAttribute("authUser");
-	        	forwardPath = "index";
+	        	forwardPath = "user-login";
 	        }else {
 	        	forwardPath = "user-auth";
 	        }

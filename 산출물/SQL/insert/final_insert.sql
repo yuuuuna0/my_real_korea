@@ -288,6 +288,8 @@ insert into wishlist(wish_no,user_id,ti_no,to_no) values(WISHLIST_WISH_NO_SEQ.ne
 insert into wishlist(wish_no,user_id,ti_no,to_no) values(WISHLIST_WISH_NO_SEQ.nextval,'user3',null,3);
 insert into wishlist(wish_no,user_id,ti_no,to_no) values(WISHLIST_WISH_NO_SEQ.nextval,'user3',null,4);
 
-
+/*************** wishlist ***********************/
+insert into payment(p_no,p_price,p_qty,p_date,p_start_date,p_msg,p_point,p_method,ti_no,to_no,user_id)
+		 values(payment_p_no_seq.nextval,3000,3,null,sysdate,'sdsd',30,1,null,1,'user1');
 
 commit;

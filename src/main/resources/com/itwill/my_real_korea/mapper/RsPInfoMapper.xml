@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.itwill.my_real_korea.mapper.RsPInfoMapper">
+	<!-- 1. 예약자 정보 입력-->
+	<insert id="insertRsPerson" parameterType="com.itwill.my_real_korea.dto.RsPInfo">
+		<selectKey resultType="java.lang.Integer" keyProperty="rsPNo" order="BEFORE">
+			select rs_p_info_rs_p_no_seq.nextval from dual
+		</selectKey>
+		insert into rs_p_info(rs_p_no,rs_p_name,rs_p_email,rs_p_phone,user_id,p_no)
+		values(#{rsPNo},#{rsPName},#{rsPEmail},#{rsPPhone},#{userId},#{pNo})
+	</insert>
+	<!-- 2. 상품 예약자 정보 전체보기-->
+	<select id="selectRsPersonByPNo" parameterType="java.lang.Integer" resultType="com.itwill.my_real_korea.dto.RsPInfo">
+		select * from rs_p_info where p_no=#{pNo}
+	</select>
+	
+</mapper>

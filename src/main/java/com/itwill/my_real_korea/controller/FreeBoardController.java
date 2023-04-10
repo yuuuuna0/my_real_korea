@@ -26,10 +26,11 @@ public class FreeBoardController {
         this.freeBoardCommentService = freeBoardCommentService;
     }
 
-    @GetMapping(value = "/freeBoard-list")
+    @GetMapping(value = "/freeboard-list")
     public String freeBoardList(@RequestParam(required = false, defaultValue = "1") int pageNo, Model model) {
         try {
-            PageMakerDto<FreeBoard> freeBoardList = freeBoardService.selectAll(pageNo);
+            PageMakerDto<FreeBoard> freeBoardListPage = freeBoardService.selectAll(pageNo);
+            List<FreeBoard> freeBoardList = freeBoardListPage.getItemList();
             model.addAttribute("freeBoardList", freeBoardList);
             model.addAttribute("pageNo", pageNo);
         } catch (Exception e) {
@@ -42,7 +43,8 @@ public class FreeBoardController {
     @GetMapping(value = "/freeboard-list-fBoNo-asc")
     public String freeBoardListFBoNoAsc(@RequestParam(required = false, defaultValue = "1") int pageNo, Model model) {
         try {
-            PageMakerDto<FreeBoard> freeBoardList = freeBoardService.selectAllOrderByFBoNoAsc(pageNo);
+            PageMakerDto<FreeBoard> freeBoardListPage = freeBoardService.selectAllOrderByFBoNoAsc(pageNo);
+            List<FreeBoard> freeBoardList = freeBoardListPage.getItemList();
             model.addAttribute("freeBoardList", freeBoardList);
             model.addAttribute("pageNo", pageNo);
         } catch (Exception e) {
@@ -54,7 +56,8 @@ public class FreeBoardController {
     @GetMapping(value = "/freeboard-list-fBoNo-desc")
     public String freeBoardListFBoNoDesc(@RequestParam(required = false, defaultValue = "1") int pageNo, Model model) {
         try {
-            PageMakerDto<FreeBoard> freeBoardList = freeBoardService.selectAllOrderByFBoNoDesc(pageNo);
+            PageMakerDto<FreeBoard> freeBoardListPage = freeBoardService.selectAllOrderByFBoNoDesc(pageNo);
+            List<FreeBoard> freeBoardList = freeBoardListPage.getItemList();
             model.addAttribute("freeBoardList", freeBoardList);
             model.addAttribute("pageNo", pageNo);
         } catch (Exception e) {
@@ -67,7 +70,8 @@ public class FreeBoardController {
     @GetMapping(value = "/freeboard-list-readCount-desc")
     public String freeBoardListReadCountDesc(@RequestParam(required = false, defaultValue = "1") int pageNo, Model model) {
         try {
-            PageMakerDto<FreeBoard> freeBoardList = freeBoardService.selectAllOrderByReadCountDesc(pageNo);
+            PageMakerDto<FreeBoard> freeBoardListPage = freeBoardService.selectAllOrderByReadCountDesc(pageNo);
+            List<FreeBoard> freeBoardList = freeBoardListPage.getItemList();
             model.addAttribute("freeBoardList", freeBoardList);
             model.addAttribute("pageNo", pageNo);
         } catch (Exception e) {
@@ -79,8 +83,9 @@ public class FreeBoardController {
     @GetMapping(value = "/freeboard-list-search")
     public String freeBoardSearchList(@RequestParam(required = false, defaultValue = "1") int pageNo, Model model) {
         try {
-            PageMakerDto<FreeBoard> freeBoardList = freeBoardService.selectAllOrderByReadCountDesc(pageNo);
-            model.addAttribute("freeBoardList", freeBoardList);
+            PageMakerDto<FreeBoard> freeBoardListPage = freeBoardService.selectAllOrderByReadCountDesc(pageNo);
+            freeBoardListPage.getItemList();
+            model.addAttribute("freeBoardList", freeBoardListPage);
             model.addAttribute("pageNo", pageNo);
         } catch (Exception e) {
             e.printStackTrace();

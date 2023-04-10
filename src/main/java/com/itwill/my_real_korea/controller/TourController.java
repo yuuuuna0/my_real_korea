@@ -124,17 +124,20 @@ public class TourController {
 	@RequestMapping(value="/tour-payment")
 	public String tourPaymentForm(@ModelAttribute Date pStartDate,
 								  @RequestParam int pQty,
-								  @ModelAttribute Tour tour,
+								  @RequestParam int toNo,
 								  HttpSession session,
 								  Model model) {
 		String forwardPath="";
-		
+		try {
 		model.addAttribute("pQty", pQty);
 		model.addAttribute("pStartDate", pStartDate);
+		Tour tour=tourService.findTourWithCityByToNo(toNo);
 		model.addAttribute("tour", tour);
 		System.out.println(pStartDate);
 		System.out.println(tour);
-		
+		System.out.println(pQty);
+		}catch (Exception e) {
+		}
 		forwardPath="tour-payment";
 		return forwardPath;
 	}

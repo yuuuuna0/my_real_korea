@@ -122,20 +122,26 @@ public class TourController {
 */
 	//3. 투어상품 예약하기(구매하기) 폼
 	@RequestMapping(value="/tour-payment")
-	public String tourPaymentForm(/*@RequestBody String pStartDate,
-								  @RequestBody int pQty,
-								  @RequestBody int toNo,*/
+	public String tourPaymentForm(@ModelAttribute Date pStartDate,
+								  @RequestParam int pQty,
+								  @RequestParam int toNo,
 								  HttpSession session,
 								  Model model) {
-		String forwardPath="";
-/*		
+		String forwardPath="";		
+		try {
 		model.addAttribute("pQty", pQty);
 		model.addAttribute("pStartDate", pStartDate);
 		model.addAttribute("toNo", toNo);
+		Tour tour=tourService.findTourWithCityByToNo(toNo);
+		model.addAttribute("tour", tour);
 		System.out.println(pStartDate);
 		System.out.println(toNo);
 		System.out.println(pQty);
-*/		
+		
+		System.out.println(tour);
+		}catch (Exception e) {
+		}
+
 		forwardPath="tour-payment";
 		return forwardPath;
 	}

@@ -48,6 +48,8 @@ public class TourServiceImpl implements TourService {
 		List<TourImg> tourImgList=tourImgDao.findTourImgList(toNo);
 		Tour findTour=tourDao.findTourWithCityByToNo(toNo);
 		findTour.setTourImgList(tourImgList);
+		int tourScore=this.calculateTourScore(toNo);
+		findTour.setToScore(tourScore);
 		return findTour;
 	}
 

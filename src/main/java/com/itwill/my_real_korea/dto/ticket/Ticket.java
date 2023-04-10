@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import com.itwill.my_real_korea.dto.City;
 
 import lombok.Data;
@@ -16,6 +18,7 @@ public class Ticket {
 
     private int tiNo;
     private String tiTitle;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date tiDate;
     private int tiPrice;
     private String tiInfo;

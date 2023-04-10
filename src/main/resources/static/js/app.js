@@ -6,7 +6,8 @@ import * as Request from "./request.js";
  이벤트 등록
  #notice-search-btn
  #sort-by
- #wishlist-list
+ #type-tour
+ #type-ticket
  */
  
 // on => 동적으로 이벤트 추가 가능 -> 상위 노드에 처리해줘야함 (document)
@@ -113,55 +114,54 @@ $(document).on('change','#sort-by',function(e){
 	
 });
 
-/******** 위시리스트 wishlist-list **********/ 
-$(document).on('change','input[name="wishlistType"]',function(e){
+/******** 위시리스트 - 투어 클릭 wishlist-list **********/ 
+
+$(document).on('click','#type-tour',function(e){
 	// ajax로 리스트 부분만 검색된 리스트로 변경
 	
+	let userId = $('#wishlist-id').val();
+	console.log(userId);
+	let method = 'GET';
+	let contentType = 'application/json;charset=UTF-8';
+	let sendData = {};
+	let async = true;
+	
+	Request.ajaxRequest(`wishlist-with-tour?userId=${userId}`, 
+						method, contentType,
+						sendData,
+						function(resultJson) {
+							//code 1 일때 render, 아닐 때 msg 띄움
+							if (resultJson.code == 1) {
+								WishlistView.render('#wishlist-tour-template', resultJson);
+							} else {
+								alert(resultJson.msg);
+							};
+						}, async);
+					e.preventDefault();
+
+});
+
+/******** 위시리스트 - 티켓 클릭 wishlist-list **********/ 
+
+$(document).on('click','#type-ticket',function(e){
+	// ajax로 리스트 부분만 검색된 리스트로 변경
 	let userId = $('#wishlist-id').val();
 	let method = 'GET';
 	let contentType = 'application/json;charset=UTF-8';
 	let sendData = {};
 	let async = true;
 	
-	if ($(this).is(':checked')) {
-		let wishlistType = $(this).val();
-
-		if (wishlistType === 'ticket') {
-			Request.ajaxRequest(`wishlist-with-ticket?userId=${userId}`, method, contentType,
-				sendData,
-				function(resultJson) {
-					//code 1 일때 render, 아닐 때 msg 띄움
-					if (resultJson.code == 1) {
-						WishlistView.render("#wishlist-ticket-template", resultJson);
-					} else {
-						alert(resultJson.msg);
-					};
-				}, async);
-			e.preventDefault();
-			
-		} else if (wishlistType === 'tour') {
-			Request.ajaxRequest(`wishlist-with-tour?userId=${userId}`, method, contentType,
-				sendData,
-				function(resultJson) {
-					//code 1 일때 render, 아닐 때 msg 띄움
-					if (resultJson.code == 1) {
-						WishlistView.render("#wishlist-ticket-template", resultJson);
-					} else {
-						alert(resultJson.msg);
-					};
-				}, async);
-			e.preventDefault();
-		}
-
-	}
-
-
+	Request.ajaxRequest(`wishlist-with-ticket?userId=${userId}`, 
+						method, contentType,
+						sendData,
+						function(resultJson) {
+							//code 1 일때 render, 아닐 때 msg 띄움
+							if (resultJson.code == 1) {
+								WishlistView.render("#wishlist-ticket-template", resultJson);
+							} else {
+								alert(resultJson.msg);
+							};
+						}, async);
+					e.preventDefault();
 
 });
-
-
-
-
-
-
-

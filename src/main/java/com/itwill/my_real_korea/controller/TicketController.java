@@ -1,22 +1,27 @@
 package com.itwill.my_real_korea.controller;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
-import com.itwill.my_real_korea.dto.ticket.TicketReview;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.itwill.my_real_korea.dto.Payment;
 import com.itwill.my_real_korea.dto.ticket.Ticket;
-import com.itwill.my_real_korea.dto.ticket.TicketImg;
+import com.itwill.my_real_korea.dto.ticket.TicketReview;
 import com.itwill.my_real_korea.service.city.CityService;
 import com.itwill.my_real_korea.service.payment.PaymentService;
 import com.itwill.my_real_korea.service.ticket.TicketImgService;
@@ -24,7 +29,7 @@ import com.itwill.my_real_korea.service.ticket.TicketReviewService;
 import com.itwill.my_real_korea.service.ticket.TicketService;
 import com.itwill.my_real_korea.util.PageMakerDto;
 
-
+@SessionAttributes("ticket")
 @Controller
 public class TicketController {
 
@@ -117,25 +122,33 @@ public class TicketController {
         return ticketMap;
     }
     */
+    
+    //세션 초기화?  -- modelAttribute와 sessionattribute가 연?
+    @ModelAttribute("ticket")
+    public Ticket setTicket() {
+    	return new Ticket(); // ticket 객체가 session에 들어가게 됨.
+    }
+    
 
     //티켓 상세 페이지에서 수량, 예약하기
     //@LoginCheck
-    @GetMapping("ticket-detail-action")
-    public String ticketDatailPayment(@RequestParam int pQty,
+   @PostMapping("ticket-detail-action")
+    public String ticketDatailPayment(@RequestParam int pQty, 
                                       @RequestParam String pStartDate,
-                                      @ModelAttribute Ticket sTicket,
-                                      HttpSession session, Model model) {
-    	System.out.println(sTicket); // null 뜸 -_-.... 
+                                      @ModelAttribute("ticket") Ticket ticket,
+                                      HttpSession session) {
+    	//System.out.println(ticket); // null 뜸 -_-.... 
     	System.out.println(pQty);
     	System.out.println(pStartDate);
-        try {
-            if (sTicket != null) { 
+    	try {
+            if (ticket != null) { 
                 session.setAttribute("pQty", pQty);   // 티켓 수량
                 session.setAttribute("pStartDate", pStartDate);  // 티켓 시작 날짜
-                session.setAttribute("sTicket", sTicket); // session 티켓
+                session.setAttribute("ticket", ticket); // session 티켓
                 
-                System.out.println(sTicket);
+                System.out.println(ticket);
             }
+                
         } catch (Exception e) {
             e.printStackTrace();
             return "error";
@@ -147,11 +160,11 @@ public class TicketController {
     //payment -- 총 가격 js
     @PostMapping("ticket-payment")
     public String ticketPaymentForm (HttpSession session, Model model){
-        /*
+        
         Ticket sTicket = (Ticket)session.getAttribute("sTicket");
         int pQty = (int) session.getAttribute("pQty");
-        Date pStartDate = (Date) session.getAttribute("pStartDate");
-        */
+        String pStartDate = (String) session.getAttribute("pStartDate");
+        
         return "ticket-payment";
     }
 
@@ -188,24 +201,8 @@ public class TicketController {
         return "ticket-payment-confirmation"; // 상세보기?
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+ 
+ 
 
 
 

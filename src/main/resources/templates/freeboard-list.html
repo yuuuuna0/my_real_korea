@@ -129,7 +129,7 @@
 										</div>
 									</div>
 									<div class="product_description" >
-										<h3><a th:text="${freeBoard.fBoTitle}" th:href="@{'freeboard-detail/'+ ${freeBoard.fBoNo}}"></a></h3>
+										<h3><a th:text="${freeBoard.fBoTitle}" th:href="@{freeboard-detail(nNo=${notice.nNo})}"></a></h3>
 										<div class="date" >
 											<span class="freeBoard_readcount" th:text="${#dates.format(freeBoard.fBoDate, 'yyyy.MM.dd')}"></span>
 										</div>
@@ -145,7 +145,7 @@
 							<div class="Page navigation" >
 						<nav aria-label="Page navigation">
 							
-							<ul class="pagination justify-content-center" th:with="pageMaker = ${pageMaker}">
+							<ul class="pagination justify-content-center">
 								<li class="page-item" >
 									<a class="page-link" href="#" aria-label="Previous">
 										<span aria-hidden="true">&laquo;</span>

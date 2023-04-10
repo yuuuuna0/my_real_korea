@@ -129,7 +129,7 @@
 										</div>
 									</div>
 									<div class="product_description" >
-										<h3><a th:text="${freeBoard.fBoTitle}" th:href="@{freeboard-detail(nNo=${notice.nNo})}"></a></h3>
+										<h3><a th:text="${freeBoard.fBoTitle}" th:href="@{freeboard-detail(fBoNo=${freeBoard.fBoNo})}"></a></h3>
 										<div class="date" >
 											<span class="freeBoard_readcount" th:text="${#dates.format(freeBoard.fBoDate, 'yyyy.MM.dd')}"></span>
 										</div>

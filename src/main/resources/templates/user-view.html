@@ -138,7 +138,7 @@
 		</li>
 		<li>주소 <span th:text="${loginUser.address}"></span>
 		</li>
-		<li>성별 <span th:text="${loginUser.gender == 0} ? '남' : '여'"></span>
+		<li>성별 <span th:text="${loginUser.gender == 1} ? '남' : '여'"></span>
 		</li>
 		<li>포인트 <span th:text="${loginUser.point}"></span>
 		</li>
@@ -146,9 +146,9 @@
 		
 		<li>자기 소개 <span th:text="${loginUser.userAddInfo.introduce}"></span>
 		</li>
-		<li>음주 여부 <span th:text="${loginUser.userAddInfo.alcohol == 0} ? '음주 선호' : '음주 선호하지 않음'"></span>
+<li>음주 여부 <span th:text="${loginUser.userAddInfo.alcohol == 1} ? '음주 선호' : (${loginUser.userAddInfo.alcohol == 2} ? '음주 선호하지 않음' : null)"></span></li>
 		</li>
-		<li>흡연 여부 <span th:text="${loginUser.userAddInfo.smoking == 0} ? '흡연' : '비흡연'"></span>
+		<li>흡연 여부 <span th:text="${loginUser.userAddInfo.smoking == 1} ? '흡연' : (${loginUser.userAddInfo.smoking == 2} ? '비흡연' :  null)"></span>
 		</li>
 	</ul>
 </form>

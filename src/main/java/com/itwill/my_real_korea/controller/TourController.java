@@ -1,6 +1,7 @@
 package com.itwill.my_real_korea.controller;
 
 import com.itwill.my_real_korea.dto.Payment;
+import com.itwill.my_real_korea.dto.RsPInfo;
 import com.itwill.my_real_korea.dto.ticket.Ticket;
 import com.itwill.my_real_korea.dto.tour.Tour;
 import com.itwill.my_real_korea.dto.tour.TourImg;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.itwill.my_real_korea.service.city.CityService;
 import com.itwill.my_real_korea.service.payment.PaymentService;
+import com.itwill.my_real_korea.service.rspinfo.RsPInfoService;
 import com.itwill.my_real_korea.service.tour.TourImgService;
 import com.itwill.my_real_korea.service.tour.TourReviewService;
 import com.itwill.my_real_korea.service.tour.TourService;
@@ -42,14 +44,16 @@ public class TourController {
 	private CityService cityService;
 	private TourReviewService tourReviewService;
 	private PaymentService paymentService;
+	private RsPInfoService rsPInfoService;
 
 	@Autowired
-	public TourController(TourService tourService, TourImgService tourImgService, CityService cityService,TourReviewService tourReviewService,PaymentService payService) {
+	public TourController(TourService tourService, TourImgService tourImgService, CityService cityService,TourReviewService tourReviewService,PaymentService payService,RsPInfoService rsPInfoService) {
 		this.tourService=tourService;
 		this.tourImgService=tourImgService;
 		this.cityService=cityService;
 		this.tourReviewService=tourReviewService;
 		this.paymentService=payService;
+		this.rsPInfoService=rsPInfoService;
 	}
 
 	//1. 투어상품 전체 리스트 보기
@@ -164,7 +168,7 @@ public class TourController {
 			Tour tour=tourService.findTourWithCityByToNo(toNo);
 			SimpleDateFormat dateFormat= new SimpleDateFormat("yyyy-MM-dd");
 			Date date=dateFormat.parse(pStartDate);
-			Payment payment=new Payment(0, pQty*(tour.getToPrice()), pQty, null, date, null, pQty*(tour.getToPrice())*1/100, 0, tour, null, null);
+			Payment payment=new Payment(0, pQty*(tour.getToPrice()), pQty, new Date(), date, null, pQty*(tour.getToPrice())*1/100, 0, tour, null, null);
 			//1. session에 붙이기
 			session.setAttribute("payment", payment);
 			//2. model에 붙이기
@@ -181,32 +185,35 @@ public class TourController {
  	
 	//3-1. 투어상품 예약하기(구매하기) 액션
 	@PostMapping(value="tour-payment-action")
-	public String tourPaymentAction(@ModelAttribute Payment payment,
+	public String tourPaymentAction(@ModelAttribute RsPInfo rsPInfo,
+									@RequestParam String pMsg,
+									@RequestParam int pMethod,
 									HttpSession session,
-									Model model) {
+									RedirectAttributes redirectAttributes) {
 		String forwardPath="";
-		String msg="";
 		try {
-			Tour tour=(Tour)session.getAttribute("tour");
-			payment.setTour(tour);
+			Payment payment=(Payment)session.getAttribute("payment");
+			payment.setPMsg(pMsg);
+			payment.setPMethod(pMethod);
 			paymentService.insertTourPayment(payment);
-			session.setAttribute("payment", payment);
+			rsPInfoService.insertRsPerson(rsPInfo);
+			session.removeAttribute("payment");
+			redirectAttributes.addAttribute("payment", payment);
+			redirectAttributes.addAttribute("rsPInfo", rsPInfo);
 			forwardPath="redirect:tour-payment-confirmation";
 		}catch (Exception e) {
 			e.printStackTrace();
-			msg="관리자에게 문의하세요";
-			forwardPath="redirect:error";
+			forwardPath="error";
 		}
-		model.addAttribute(msg);
 		return forwardPath;
 	}
 	
 	//4. 예약한 투어상품 상세 확인
 	@RequestMapping(value="tour-payment-confirmation")
-	public String tourPaymentConfirmation(HttpSession session) {
+	public String tourPaymentConfirmation(RedirectAttributes redirectAttributes) {
 		String forwardPath="";
-		session.getAttribute("tour");
-		session.getAttribute("payment");
+		redirectAttributes.getAttribute("payment");
+		redirectAttributes.getAttribute("rsPInfo");
 		forwardPath="tour-payment-confirmation";
 		return forwardPath;
 	}

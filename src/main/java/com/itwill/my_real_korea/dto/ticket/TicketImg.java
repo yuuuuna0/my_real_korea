@@ -9,9 +9,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class TicketImg {
 
-    private int tiImgNo;
-    private String tiImgUrl;
-    private int tiNo;
+    private int tiImgNo; // 파일이름
+    private String tiImgUrl; // 실제파일이름
+    private int tiNo; //티켓 no.
 
 
 }

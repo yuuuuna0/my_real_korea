@@ -49,8 +49,8 @@
 	<div id="header" th:include="include-common-top::include-common-top"></div>
 	<!--======================== End Header======================== -->
 	
-	<!-- form 태그  -->
-	<form th:object="${ticket}" name="f" action="ticket-detail-action">
+	<!-- form (내꺼)-->
+	<form th:object="${ticket}" name="f" action="ticket-detail-action">  
 	<section class="parallax-window" data-parallax="scroll" data-image-src="img/single_hotel_bg_1.jpg" data-natural-width="1400" data-natural-height="470">
 		<div class="parallax-content-2">
 			<div class="container">
@@ -62,7 +62,7 @@
 					</div>
 					<div class="col-md-4">
 						<div id="price_single_main" class="hotel">
-							from/per night <span th:text="${ticketList[0].tiPrice}"></span>
+							 <span th:text="${ticketList[0].tiPrice}"></span>
 						</div>
 					</div>
 				</div>
@@ -101,7 +101,7 @@
 						<div class="sp-slides">
 							<!--이미지-->
 							<div class="sp-slide">
-								<img alt="Image" class="sp-image" th:src="css/images/blank.gif" data-src="img/slider_single_tour/1_medium.jpg" data-small="img/slider_single_tour/1_small.jpg" data-medium="img/slider_single_tour/1_medium.jpg" data-large="img/slider_single_tour/1_large.jpg" data-retina="img/slider_single_tour/1_large.jpg">
+								<img alt="Image" class="sp-image" src="css/images/blank.gif" data-src="img/slider_single_tour/1_medium.jpg" data-small="img/slider_single_tour/1_small.jpg" data-medium="img/slider_single_tour/1_medium.jpg" data-large="img/slider_single_tour/1_large.jpg" data-retina="img/slider_single_tour/1_large.jpg">
 							</div>
 							<div class="sp-slide">
 								<img alt="Image" class="sp-image" src="css/images/blank.gif" data-src="img/slider_single_tour/2_medium.jpg" data-small="img/slider_single_tour/2_small.jpg" data-medium="img/slider_single_tour/2_medium.jpg" data-large="img/slider_single_tour/2_large.jpg" data-retina="img/slider_single_tour/2_large.jpg">
@@ -121,7 +121,7 @@
 
 							<div class="sp-slide">
 								<img alt="Image" class="sp-image" src="css/images/blank.gif" data-src="img/slider_single_tour/6_medium.jpg" data-small="img/slider_single_tour/6_small.jpg" data-medium="img/slider_single_tour/6_medium.jpg" data-large="img/slider_single_tour/6_large.jpg" data-retina="img/slider_single_tour/6_large.jpg">
-							</div>
+							</div>x`
 
 							<div class="sp-slide">
 								<img alt="Image" class="sp-image" src="css/images/blank.gif" data-src="img/slider_single_tour/7_medium.jpg" data-small="img/slider_single_tour/7_small.jpg" data-medium="img/slider_single_tour/7_medium.jpg" data-large="img/slider_single_tour/7_large.jpg" data-retina="img/slider_single_tour/7_large.jpg">
@@ -436,13 +436,14 @@
 			</div>
 		
 		<!--End container -->
-        
+        </form>
         <div id="overlay"></div>
 		<!-- Mask on input focus -->
-    
+
 	</main>
 	<!-- End main -->
-	</form>
+	   
+	
 	<!--========================= footer ========================-->
 	<footer class="revealed">
 		<div id="footer" th:include="include-common-bottom::include-common-bottom"></div>
@@ -508,19 +509,22 @@
 	</div>
 	<!-- /Sign In Popup -->	
 
-	<!-- Modal Review 리뷰창 모달 -->
+	<!--  Modal Review  ~~~~~~~~~~~~~~~~~~~ 리뷰창 모달 ~~~~~~~~~~~~~~~~~~~  -->
 	<div class="modal fade" id="myReview" tabindex="-1" role="dialog" aria-labelledby="myReviewLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h4 class="modal-title" id="myReviewLabel">Write your review</h4>
+					<h4 class="modal-title" id="myReviewLabel">티켓 리뷰 작성</h4>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 				</div>
 				<div class="modal-body">
 					<div id="message-review">
 					</div>
-					<form method="post" action="assets/review_hotel.php" name="review_hotel" id="review_hotel">
-						<input name="hotel_name" id="hotel_name" type="hidden" value="Mariott Hotel Paris">
+					<!-- 모달 폼 -->
+					<form th:object=${ticketReivew} method="post" action="review-write-action" name="ticketReview" id="ticketReview"  enctype​​="multipart/form-data">
+					<!--파일업로드추가  -->
+						<input type="file" name="uploadFile">
+						<input name="hotel_name" id="hotel_name" type="hidden" th:value="${ticket.tiTitle}">
 						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">

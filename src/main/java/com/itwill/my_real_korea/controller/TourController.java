@@ -120,21 +120,31 @@ public class TourController {
 		return forwardPath;
 	}
 */
-	//3. 투어상품 예약하기(구매하기) 폼
+	//3. 투어상품 예약하기(구매하기) 폼_session 이용 x(성공)
 	@RequestMapping(value="/tour-payment")
-	public String tourPaymentForm(@ModelAttribute Date pStartDate,
+	public String tourPaymentForm(@RequestParam String pStartDate,
 								  @RequestParam int pQty,
-								  @ModelAttribute Tour tour,
+								  @RequestParam int toNo,
 								  HttpSession session,
 								  Model model) {
-		String forwardPath="";
-		
+
+		String forwardPath="";		
+		try {
 		model.addAttribute("pQty", pQty);
 		model.addAttribute("pStartDate", pStartDate);
+		model.addAttribute("toNo", toNo);
+		Tour tour=tourService.findTourWithCityByToNo(toNo);
 		model.addAttribute("tour", tour);
 		System.out.println(pStartDate);
-		System.out.println(tour);
+		System.out.println(toNo);
+		System.out.println(pQty);
 		
+		System.out.println(tour);
+		}catch (Exception e) {
+			e.printStackTrace();
+			forwardPath="error";
+		}
+
 		forwardPath="tour-payment";
 		return forwardPath;
 	}

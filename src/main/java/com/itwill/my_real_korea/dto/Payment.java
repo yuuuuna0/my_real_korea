@@ -2,6 +2,8 @@ package com.itwill.my_real_korea.dto;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import com.itwill.my_real_korea.dto.ticket.Ticket;
 import com.itwill.my_real_korea.dto.tour.Tour;
 
@@ -20,6 +22,7 @@ public class Payment {
     private int pPrice;
     private int pQty;
     private Date pDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date pStartDate;
     private String pMsg;
     private int pPoint;

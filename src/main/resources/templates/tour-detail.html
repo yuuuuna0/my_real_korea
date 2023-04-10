@@ -277,7 +277,7 @@
 					<div class="box_style_1 expose">
 					<!-- form start -->
 					<form name="detailF">
-						<input id="tour" type="hidden" name="tour" th:value="${tour}">
+						<input id="toNo" type="hidden" name="toNo" th:value="${tour.toNo}">
 						<h3 class="inner">Check Availability</h3>
 						<div class="row">
 							<div class="col-md-12">
@@ -587,8 +587,33 @@
 	</script>
 	<script>
 		function tourDetail(){
-			document.detailF.action='tour-payment';
-			document.detailF.submit();
+			
+			let dateStr=$('#pStartDate').val();
+			let dateArr=dateStr.split(",");
+			let dateString=dateArr[0];
+			let pStartDate=new Date(Date.parse(dateString));
+			let pQty=$('#pQty').val();
+			let toNo=$('#toNo').val();
+			//ajax 요청 보내기
+			$.ajax({
+				type:'GET',	//HTTP 요청 메소드
+				url:'/tour-payment',
+				data:{
+					/*
+					"pStartDate":dateString,
+					"pQty":pQty,
+					"toNo":toNo
+					*/
+				},
+				success:function(){
+					console.log(data);
+				}
+			});
+
+			
+			//데이터 controller로 안넘어감
+			//document.detailF.action='tour-payment';
+			//document.detailF.submit();
 		}
 	</script>
 

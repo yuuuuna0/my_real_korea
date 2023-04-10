@@ -120,13 +120,14 @@ public class TourController {
 		return forwardPath;
 	}
 */
-	//3. 투어상품 예약하기(구매하기) 폼
+	//3. 투어상품 예약하기(구매하기) 폼_session 이용 x(성공)
 	@RequestMapping(value="/tour-payment")
-	public String tourPaymentForm(@ModelAttribute Date pStartDate,
+	public String tourPaymentForm(@RequestParam String pStartDate,
 								  @RequestParam int pQty,
 								  @RequestParam int toNo,
 								  HttpSession session,
 								  Model model) {
+
 		String forwardPath="";		
 		try {
 		model.addAttribute("pQty", pQty);
@@ -140,6 +141,8 @@ public class TourController {
 		
 		System.out.println(tour);
 		}catch (Exception e) {
+			e.printStackTrace();
+			forwardPath="error";
 		}
 
 		forwardPath="tour-payment";

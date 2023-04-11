@@ -168,38 +168,48 @@ public class TourController {
 			Tour tour=tourService.findTourWithCityByToNo(toNo);
 			SimpleDateFormat dateFormat= new SimpleDateFormat("yyyy-MM-dd");
 			Date date=dateFormat.parse(pStartDate);
+			System.out.println(date);
 			Payment payment=new Payment(0, pQty*(tour.getToPrice()), pQty, new Date(), date, null, pQty*(tour.getToPrice())*1/100, 0, tour, null, null);
 			//1. session에 붙이기
 			session.setAttribute("payment", payment);
 			//2. model에 붙이기
 			//model.addAttribute("payment",payment);
+			forwardPath="tour-payment";
 		}catch (Exception e) {
 			e.printStackTrace();
 			forwardPath="error";
 		}
 
-		forwardPath="tour-payment";
 		return forwardPath;
 	}
 
- 	
+ 
 	//3-1. 투어상품 예약하기(구매하기) 액션
-	@PostMapping(value="tour-payment-action")
+	@RequestMapping(value="tour-payment-action")
 	public String tourPaymentAction(@ModelAttribute RsPInfo rsPInfo,
 									@RequestParam String pMsg,
-									@RequestParam int pMethod,
+									@RequestParam String pMethodStr,
 									HttpSession session,
 									RedirectAttributes redirectAttributes) {
 		String forwardPath="";
 		try {
 			Payment payment=(Payment)session.getAttribute("payment");
+			String userId="user1";
 			payment.setPMsg(pMsg);
+			int pMethod=Integer.parseInt(pMethodStr);
 			payment.setPMethod(pMethod);
+			payment.setUserId(userId);
+			
 			paymentService.insertTourPayment(payment);
+			Payment findPayment=paymentService.findLatestPaymentByUserId(userId);
+			rsPInfo.setPNo(findPayment.getPNo());
+			rsPInfo.setUserId(userId);
+			System.out.println(findPayment);
+			System.out.println(rsPInfo);
 			rsPInfoService.insertRsPerson(rsPInfo);
 			session.removeAttribute("payment");
-			redirectAttributes.addAttribute("payment", payment);
-			redirectAttributes.addAttribute("rsPInfo", rsPInfo);
+			redirectAttributes.addFlashAttribute("payment",findPayment);
+			redirectAttributes.addFlashAttribute("rsPInfo",rsPInfo);
 			forwardPath="redirect:tour-payment-confirmation";
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -207,14 +217,16 @@ public class TourController {
 		}
 		return forwardPath;
 	}
-	
 	//4. 예약한 투어상품 상세 확인
 	@RequestMapping(value="tour-payment-confirmation")
 	public String tourPaymentConfirmation(RedirectAttributes redirectAttributes) {
 		String forwardPath="";
-		redirectAttributes.getAttribute("payment");
-		redirectAttributes.getAttribute("rsPInfo");
+		Payment payment = (Payment)redirectAttributes.getAttribute("payment");
+		RsPInfo rsPInfo = (RsPInfo)redirectAttributes.getAttribute("rePInfo");
+		System.out.println(payment);	//DB애 to_no는 있는데 tour가 안붙어나옴,,,
+		System.out.println(rsPInfo);
 		forwardPath="tour-payment-confirmation";
 		return forwardPath;
 	}
+  	
 }

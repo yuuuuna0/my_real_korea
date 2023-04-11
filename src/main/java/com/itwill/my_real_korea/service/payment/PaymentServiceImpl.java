@@ -6,28 +6,35 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.itwill.my_real_korea.dao.payment.PaymentDao;
+import com.itwill.my_real_korea.dao.rspinfo.RsPInfoDao;
+import com.itwill.my_real_korea.dao.tour.TourDao;
 import com.itwill.my_real_korea.dto.Payment;
+import com.itwill.my_real_korea.dto.RsPInfo;
 
 @Service
 public class PaymentServiceImpl implements PaymentService{
 
 	
-	private final PaymentDao paymentDao;
+	private PaymentDao paymentDao;
+	private TourDao tourDao; 
 	
 	@Autowired
-	public PaymentServiceImpl(PaymentDao paymentDao) {
+	public PaymentServiceImpl(PaymentDao paymentDao,TourDao tourDao) {
 		this.paymentDao = paymentDao;
+		this.tourDao=tourDao;
 	}
 	
 	@Override
 	public int insertTicketPayment(Payment payment) throws Exception{
 		//티켓주문하기 (예약하기)
+		
 		return paymentDao.insertTicketPayment(payment);
 	}
 	
 	@Override
 	public int insertTourPayment(Payment payment) throws Exception{
-		//티켓주문하기 (예약하기)
+		//투어주문하기 (예약하기)
+		
 		return paymentDao.insertTourPayment(payment);
 	}
 
@@ -49,6 +56,12 @@ public class PaymentServiceImpl implements PaymentService{
 	@Override
 	public int deletePayment(int pNo) {
 		return paymentDao.deletePayment(pNo);
+	}
+
+	@Override
+	public Payment findLatestPaymentByUserId(String userId) {
+		Payment findPayment=paymentDao.findLatestPaymentByUserId(userId);
+		return paymentDao.findLatestPaymentByUserId(userId);
 	}
 
 }

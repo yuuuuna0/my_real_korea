@@ -28,5 +28,5 @@ public class FreeBoardComment {
 	private Date fCommentDate;
 	/* FK */
 	private int fBoNo;
-	private String UserId;
+	private String userId;
 }

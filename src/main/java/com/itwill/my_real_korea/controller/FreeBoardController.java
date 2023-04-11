@@ -103,9 +103,12 @@ public class FreeBoardController {
             FreeBoard freeBoard = freeBoardService.selectByNo(fBoNo);
             List<FreeBoardComment> freeBoardCommentList = freeBoardCommentService.selectByfBoNo(fBoNo);
             freeBoardService.increaseReadCount(freeBoard.getFBoNo());
+            int selectCommentCount = freeBoardCommentService.selectCommentCount(fBoNo);
+
             model.addAttribute("freeBoard", freeBoard);
             model.addAttribute("freeBoardCommentList", freeBoardCommentList);
             model.addAttribute("fBoNo",fBoNo );
+            model.addAttribute("selectCommentCount",selectCommentCount );
         } catch (Exception e) {
             e.printStackTrace();
             return "error";

@@ -16,10 +16,10 @@ public class FreeBoardCommentController {
 
     @LoginCheck
     @PostMapping("/freeboard-comment-write-action")
-    public String freeBoardCommentWriteAction(@ModelAttribute FreeBoardComment freeBoardComment, RedirectAttributes redirectAttributes) throws Exception {
+    public String freeBoardCommentWriteAction(@RequestParam Integer fBoNo,FreeBoardComment freeBoardComment, RedirectAttributes redirectAttributes) throws Exception {
         try {
             freeBoardCommentService.insertComment(freeBoardComment);
-            redirectAttributes.addAttribute("fBoNo", freeBoardComment.getFBoNo());
+            redirectAttributes.addAttribute("fBoNo", fBoNo);
         } catch (Exception e) {
             e.printStackTrace();
             return "error";

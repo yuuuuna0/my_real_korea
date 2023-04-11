@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.itwill.my_real_korea.dto.user.User;
 
-@Transactional
+//@Transactional
 @SpringBootTest
 @MapperScan(basePackages = "com.itwill.my_real_korea.mapper")
 class UserDaoImplTest {

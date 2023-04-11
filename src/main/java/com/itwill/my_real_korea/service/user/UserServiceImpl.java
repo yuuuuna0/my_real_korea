@@ -7,8 +7,10 @@ import org.springframework.stereotype.Service;
 
 import com.itwill.my_real_korea.dao.user.UserAddInfoDao;
 import com.itwill.my_real_korea.dao.user.UserDao;
+import com.itwill.my_real_korea.dao.user.UserImgDao;
 import com.itwill.my_real_korea.dto.user.User;
 import com.itwill.my_real_korea.dto.user.UserAddInfo;
+import com.itwill.my_real_korea.dto.user.UserImg;
 import com.itwill.my_real_korea.exception.ExistedUserException;
 import com.itwill.my_real_korea.exception.PasswordMismatchException;
 import com.itwill.my_real_korea.exception.UserNotFoundException;
@@ -18,6 +20,8 @@ public class UserServiceImpl implements UserService{
 	
 	@Autowired
 	private UserDao userDao;
+	@Autowired
+	private UserImgDao userImgDao;
 	@Autowired
 	private UserAddInfoDao userAddInfoDao;
 	@Autowired
@@ -38,8 +42,15 @@ public class UserServiceImpl implements UserService{
 		userDao.create(user);
 		//mail_key 업데이트
 		userDao.updateMailKey(user);
+		//userAddInfo 생성
 		UserAddInfo userAddInfo = new UserAddInfo("", 0, 0, user.getUserId());
 		userAddInfoDao.createUserAddInfo(userAddInfo);
+		//userImg 생성
+		UserImg userImg = new UserImg(0, "defaultImg.png", user.getUserId());
+//		userImg.setUserImgUrl(null);
+//		userImg.setUserId(user.getUserId());
+		userImgDao.createUserImg(userImg);
+		
 //		emailService.sendEmail(user.getEmail());
 //		System.out.println("UserService 이메일 전송");
 		return 1;

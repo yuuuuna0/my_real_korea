@@ -58,6 +58,13 @@ function modifyUser() {
 			location.href = "user-view";
 		}
 	}
+	
+	function modifyImg() {
+		document.i.action = "user-img-modify-action";
+		document.method="POST"
+		document.i.submit();
+	}
+	
 </script>
 
 </head>
@@ -114,8 +121,6 @@ function modifyUser() {
 					<ul>
 						<li><a href="#section-4" class="icon-profile"><span>Profile</span></a>
 						</li>
-						<li><a href="#section-2" class="icon-wishlist"><span>Wishlist</span></a>
-						</li>
 						<li><a href="#section-3" class="icon-settings"><span>Settings</span></a>
 						</li>
 					</ul>
@@ -133,7 +138,6 @@ function modifyUser() {
 	<div class="col-md-6">
 		<h4>회원 기본 정보</h4>
 		<ul id="profile_summary">
-
 			<li>이름 <span th:text="*{name}"></span>
 			</li>
 			<li>비밀번호 <span><input type="password" th:value="*{password}" name="password"></span>
@@ -150,11 +154,13 @@ function modifyUser() {
 			</li>
 		</ul>
 	</div>
+</form>
+<button class="btn_1 green" type="button" onclick="modifyUser();">기본 정보 수정</button>
+<button class="btn_1 green" type="button" onclick="userView();">취소</button>
+<br/><br/><br/><br/><br/>
 
-	</form>
-<button class="btn_1 green" type="button" onclick="modifyUser();">기본 정보 수정</button><br/><br/>
 	
- <form th:object="${loginUser.userAddInfo}" name="a" method="post">
+<form th:object="${loginUser.userAddInfo}" name="a" method="post">
 	<input th:value="${session.sUserId}" type="hidden" name="userId"/>
 	<div class="col-md-6">
 		<h4>회원 추가 정보</h4>
@@ -168,25 +174,33 @@ function modifyUser() {
 			<li>흡연 여부 <span><input type="radio" name="smoking" value="1"> 흡연
 								<input type="radio" name="smoking" value="2"> 비흡연</span>
 			</li>
-<!-- 
-			<li>흡연 여부 <span><input type="text" th:value="*{smoking}" name="smoking"></span>
-			 -->
 		</ul>
 	</div>
+</form>
+		<button class="btn_1 green" type="button" onclick="modifyAddInfo();">추가 정보 수정</button>
+<br/><br/><br/><br/><br/>
 
-	</form>
-<button class="btn_1 green" type="button" onclick="modifyAddInfo();">추가 정보 수정</button>
-<button class="btn_1 green" type="button" method="GET" onclick="userView();">취소</button>
 
 
+<div>
+		<h4>프로필 이미지</h4>
+<form method="POST" enctype="multipart/form-data" name="i">
+	<ul id="profile_summary">
+		<li>File to upload:</li>
+		<li><input type="file" name="file" /></li>
+	</ul>
+<button type="submit" class="btn_1 green" id="js-upload-submit" onclick="modifyImg();">이미지 수정</button>
+</form>
+</div>
+	<br/><br/>
+
+<!-- 
 	<div class="col-md-6">
 		<p>
 		<img src="img/tourist_guide_pic.jpg" alt="Image" class="img-fluid styled profile_pic">
 		</p>
 	</div>
-	<!-- 
-</div>
- -->
+-->
 						<!-- End row -->
 <!-- 
 						<div class="divider"></div>

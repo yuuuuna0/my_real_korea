@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.itwill.my_real_korea.dto.user.UserImg;
 
-@Transactional
+//@Transactional
 @SpringBootTest
 class UserImgDaoImplTest {
 	@Autowired
@@ -16,7 +16,7 @@ class UserImgDaoImplTest {
 	//1. 회원 이미지 등록
 	@Test
 	void testCreateUserImg() throws Exception {
-		UserImg createUserImg = new UserImg(0, "test1.png", "user1");
+		UserImg createUserImg = new UserImg(0, "test4.png", "test44");
 		System.out.println(">> created : "+userImgDao.createUserImg(createUserImg));
 	}
 	

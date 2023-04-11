@@ -42,5 +42,10 @@
     <delete id="deletePayment" parameterType="java.lang.Integer">
         DELETE FROM PAYMENT WHERE P_NO=#{pNo}
     </delete>
-
+<!-- 4. 사용자의 가장 최근 주문 조회하기 -->
+	<select id="findLatestPaymentByUserId" parameterType="java.lang.String" resultType="com.itwill.my_real_korea.dto.Payment">
+		select *
+		from (select * from payment order by p_no desc)
+		where user_id='${userId}' and rownum=1
+	</select>
 </mapper>

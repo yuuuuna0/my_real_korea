@@ -100,9 +100,9 @@
 		<!-- End position -->
 
 		<div class="container margin_60">
+		
 			<div class="row">
-			<!-- form start -->
-			<form id="tourPaymentF" th:object=${payment}>
+			<form name="rsPInfoF" th:object="${rsPInfo}">
 				<div class="col-lg-8 add_bottom_15">
 					<div class="form_title">
 						<h3><strong>1</strong>Tour Details</h3>
@@ -146,12 +146,13 @@
 							Mussum ipsum cacilds, vidis litro abertis.
 						</p>
 					</div>
+					<form name="rsPInfoF" >
 					<div class="step">
 						<div class="row">
 							<div class="col-sm-8">
 								<div class="form-group">
 									<label> 이름 </label>
-									<input type="text" class="form-control" name="pName">
+									<input type="text" class="form-control" name="rsPName">
 								</div>
 							</div>
 						</div>
@@ -159,7 +160,7 @@
 							<div class="col-sm-6">
 								<div class="form-group">
 									<label> 이메일 </label>
-									<input type="email" id="email_booking" name="pEmail" class="form-control">
+									<input type="email" id="email_booking" name="rsPEmail" class="form-control">
 								</div>
 							</div>
 							<div class="col-sm-6">
@@ -173,11 +174,12 @@
 							<div class="col-sm-6">
 								<div class="form-group">
 									<label>Telephone</label>
-									<input type="text" id="telephone_booking" name="telephone_booking" class="form-control">
+									<input type="text" id="telephone_booking" name="rsPPhone" class="form-control">
 								</div>
 							</div>
 						</div>
 					</div>
+					</form>
 					<!--End step -->
 
 					<div class="form_title">
@@ -188,8 +190,8 @@
 					</div>
 					<div class="step">
 						<div class="form-group">
-							<label>Name on card</label>
-							<input type="text" class="form-control" id="name_card_bookign" name="name_card_bookign">
+							<label>결제방법(숫자)</label>
+							<input type="text" class="form-control" id="name_card_bookign" name="pMethodStr">
 						</div>
 						<div class="row">
 							<div class="col-md-6 col-sm-12">
@@ -250,56 +252,17 @@
 					<!--End step -->
 
 					<div class="form_title">
-						<h3><strong>3</strong>Billing Address</h3>
+						<h3><strong>3</strong> 예약 특이사항 </h3>
 						<p>
-							Mussum ipsum cacilds, vidis litro abertis.
+							예약시 특이사항을 적어주세요
 						</p>
 					</div>
 					<div class="step">
 						<div class="row">
-							<div class="col-sm-6">
+							<div class="col-lg-12">
 								<div class="form-group">
-									<label>Country</label>
-									<select class="form-control" name="country" id="country">
-										<option value="" selected>Select your country</option>
-										<option value="Europe">Europe</option>
-										<option value="United states">United states</option>
-										<option value="Asia">Asia</option>
-									</select>
-								</div>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-sm-6">
-								<div class="form-group">
-									<label>Street line 1</label>
-									<input type="text" id="street_1" name="street_1" class="form-control">
-								</div>
-							</div>
-							<div class="col-sm-6">
-								<div class="form-group">
-									<label>Street line 2</label>
-									<input type="text" id="street_2" name="street_2" class="form-control">
-								</div>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-6 col-sm-12">
-								<div class="form-group">
-									<label>City</label>
-									<input type="text" id="city_booking" name="city_booking" class="form-control">
-								</div>
-							</div>
-							<div class="col-md-3 col-sm-6">
-								<div class="form-group">
-									<label>State</label>
-									<input type="text" id="state_booking" name="state_booking" class="form-control">
-								</div>
-							</div>
-							<div class="col-md-3 col-sm-6">
-								<div class="form-group">
-									<label>Postal code</label>
-									<input type="text" id="postal_code" name="postal_code" class="form-control">
+									<label>특이사항 </label>
+									<input type="text" id="city_booking" name="pMsg" class="form-control">
 								</div>
 							</div>
 						</div>
@@ -316,7 +279,9 @@
 						<a href="confirmation_hotel.html" class="btn_1 green medium">Book now</a>
 					</div>
 				</div>
-
+			</form>
+			
+			
 				<aside class="col-lg-4">
 					<div class="box_style_1">
 						<h3 class="inner">- Summary -</h3>
@@ -326,69 +291,60 @@
 									<td>
 										여행 시작일
 									</td>
-									<td class="text-right">
-										10 April 2015
+									<td class="text-right" th:text="${session.payment.pStartDate}">
 									</td>
 								</tr>
 								<tr>
 									<td>
 										여행 종료
 									</td>
-									<td class="text-right" >
+									<td class="text-right" th:text="${session.payment.pStartDate}">
 										10 April 2015
+									</td>
+								</tr>
+								<tr>
+									<td>
+										여행일수
+									</td>
+									<td class="text-right" th:text="${session.payment.tour.toTime}">
+										1 double room
 									</td>
 								</tr>
 								<tr>
 									<td>
 										여행타입
 									</td>
+									<td class="text-right" th:text="${session.payment.tour.toType}">
+										2
+									</td>
+								</tr>
+								<tr>
+									<td>
+										금액
+									</td>
+									<td class="text-right" th:text="${session.payment.tour.toPrice}">
+										2
+									</td>
+								</tr>
+								<tr>
+									<td>
+										예약 인원 수 
+									</td>
 									<td class="text-right" th:text="${session.payment.pQty}">
-										1 double room
-									</td>
-								</tr>
-								<tr>
-									<td>
-										Nights
-									</td>
-									<td class="text-right">
-										2
-									</td>
-								</tr>
-								<tr>
-									<td>
-										Adults
-									</td>
-									<td class="text-right">
-										2
-									</td>
-								</tr>
-								<tr>
-									<td>
-										Children
-									</td>
-									<td class="text-right">
 										0
-									</td>
-								</tr>
-								<tr>
-									<td>
-										Welcome bottle
-									</td>
-									<td class="text-right">
-										$34
 									</td>
 								</tr>
 								<tr class="total">
 									<td>
-										Total cost
+										총 금액
 									</td>
-									<td class="text-right">
+									<td class="text-right" th:text="${session.payment.pPrice}">
 										$154
 									</td>
 								</tr>
 							</tbody>
 						</table>
-						<a class="btn_full" href="confirmation_hotel.html">Book now</a>
+						<button class="btn_full" type="button" onclick="tourPaymentAction()">Book now</button>
 						<a class="btn_full_outline" href="single_hotel.html"><i class="icon-right"></i> Modify your search</a>
 					</div>
 					<div class="box_style_4">
@@ -398,8 +354,6 @@
 						<small>Monday to Friday 9.00am - 7.30pm</small>
 					</div>
 				</aside>
-			</form>
-			<!-- form end -->
 			</div>
 			<!--End row -->
 		</div>
@@ -481,6 +435,12 @@
 		   checkboxClass: 'icheckbox_square-grey',
 		   radioClass: 'iradio_square-grey'
 		 });
+	</script>
+	<script>
+		function tourPaymentAction(){
+			document.rsPInfoF.action='tour-payment-action';
+			document.rsPInfoF.submit();
+		}
 	</script>
 
 

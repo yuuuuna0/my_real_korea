@@ -3,6 +3,7 @@ package com.itwill.my_real_korea.service.payment;
 import java.util.List;
 
 import com.itwill.my_real_korea.dto.Payment;
+import com.itwill.my_real_korea.dto.RsPInfo;
 
 public interface PaymentService {
 	
@@ -20,5 +21,9 @@ public interface PaymentService {
     int updatePayment(Payment payment);
     //결제 삭제
     int deletePayment(int pNo);
+    
+
+    //사용자의 가장 최근 주문 조회하기
+    Payment findLatestPaymentByUserId(String userId);
 
 }

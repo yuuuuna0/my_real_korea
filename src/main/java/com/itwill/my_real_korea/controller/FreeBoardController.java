@@ -31,6 +31,7 @@ public class FreeBoardController {
         try {
             PageMakerDto<FreeBoard> freeBoardListPage = freeBoardService.selectAll(pageNo);
             List<FreeBoard> freeBoardList = freeBoardListPage.getItemList();
+            model.addAttribute("freeBoardListPage", freeBoardListPage);
             model.addAttribute("freeBoardList", freeBoardList);
             model.addAttribute("pageNo", pageNo);
         } catch (Exception e) {
@@ -45,6 +46,7 @@ public class FreeBoardController {
         try {
             PageMakerDto<FreeBoard> freeBoardListPage = freeBoardService.selectAllOrderByFBoNoAsc(pageNo);
             List<FreeBoard> freeBoardList = freeBoardListPage.getItemList();
+            model.addAttribute("freeBoardListPage", freeBoardListPage);
             model.addAttribute("freeBoardList", freeBoardList);
             model.addAttribute("pageNo", pageNo);
         } catch (Exception e) {
@@ -58,6 +60,7 @@ public class FreeBoardController {
         try {
             PageMakerDto<FreeBoard> freeBoardListPage = freeBoardService.selectAllOrderByFBoNoDesc(pageNo);
             List<FreeBoard> freeBoardList = freeBoardListPage.getItemList();
+            model.addAttribute("freeBoardListPage", freeBoardListPage);
             model.addAttribute("freeBoardList", freeBoardList);
             model.addAttribute("pageNo", pageNo);
         } catch (Exception e) {
@@ -72,6 +75,7 @@ public class FreeBoardController {
         try {
             PageMakerDto<FreeBoard> freeBoardListPage = freeBoardService.selectAllOrderByReadCountDesc(pageNo);
             List<FreeBoard> freeBoardList = freeBoardListPage.getItemList();
+            model.addAttribute("freeBoardListPage", freeBoardListPage);
             model.addAttribute("freeBoardList", freeBoardList);
             model.addAttribute("pageNo", pageNo);
         } catch (Exception e) {
@@ -103,9 +107,12 @@ public class FreeBoardController {
             FreeBoard freeBoard = freeBoardService.selectByNo(fBoNo);
             List<FreeBoardComment> freeBoardCommentList = freeBoardCommentService.selectByfBoNo(fBoNo);
             freeBoardService.increaseReadCount(freeBoard.getFBoNo());
+            int selectCommentCount = freeBoardCommentService.selectCommentCount(fBoNo);
+
             model.addAttribute("freeBoard", freeBoard);
             model.addAttribute("freeBoardCommentList", freeBoardCommentList);
             model.addAttribute("fBoNo",fBoNo );
+            model.addAttribute("selectCommentCount",selectCommentCount );
         } catch (Exception e) {
             e.printStackTrace();
             return "error";

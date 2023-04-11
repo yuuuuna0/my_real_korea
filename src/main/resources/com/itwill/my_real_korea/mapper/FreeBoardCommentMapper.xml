@@ -12,6 +12,9 @@
 <!--    SELECT free_board_f_bo_no_seq.nextval FROM DUAL-->
 <!--</selectKey>-->
 insert into FREE_BOARD_COMMENT (f_co_no,f_comment_content,f_comment_date,f_bo_no,user_id)
+    <selectKey resultType="java.lang.Integer" keyProperty="fCoNo" order="BEFORE">
+        select free_board_comment_f_co_no_seq.nextval from dual
+    </selectKey>
 values( #{fCoNo},#{fCommentContent},sysdate,#{fBoNo},#{userId})
 
 </insert>

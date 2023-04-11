@@ -42,5 +42,10 @@ class TourReviewServiceImplTest {
 		List<TourReview> tourReviewList=tourReviewService.findByToNo(5);
 		System.out.println(tourReviewList);
 	}
+	@Test
+	void testCalculateTourScore() throws Exception{
+		int tourScore=tourReviewService.calculateTourScore(3);
+		System.out.println(tourScore);
+	}
 
 }

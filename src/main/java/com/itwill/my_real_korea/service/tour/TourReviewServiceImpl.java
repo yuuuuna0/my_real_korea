@@ -3,16 +3,21 @@ package com.itwill.my_real_korea.service.tour;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
 import org.springframework.stereotype.Service;
 
 import com.itwill.my_real_korea.dao.tour.TourReviewDao;
+import com.itwill.my_real_korea.dao.user.UserDao;
 import com.itwill.my_real_korea.dto.tour.TourReview;
 import com.itwill.my_real_korea.util.PageMaker;
 import com.itwill.my_real_korea.util.PageMakerDto;
 @Service
 public class TourReviewServiceImpl implements TourReviewService {
-	@Autowired
 	private TourReviewDao tourReviewDao;
+	
+	public TourReviewServiceImpl(TourReviewDao tourReviewDao) {
+		this.tourReviewDao=tourReviewDao;
+	}
 	
 	@Override
 	public int insertTourReview(TourReview tourRiview) throws Exception {
@@ -42,8 +47,24 @@ public class TourReviewServiceImpl implements TourReviewService {
 	@Override
 	public List<TourReview> findByToNo(int toNo) throws Exception {
 		// 투어 상품번호로 후기 전체 보기
-		//게시글 데이터 얻기
 		return tourReviewDao.selectByToNo(toNo);
+	}
+
+	@Override
+	public int calculateTourScore(int toNo) throws Exception {
+		// 투어 평점 구하기
+		List<TourReview> tourReviewList=tourReviewDao.selectByToNo(toNo);
+		int tourScore=0;
+		int totScore=0;
+		if(tourReviewList.size()!=0) {
+			for (TourReview tourReview : tourReviewList) {
+				totScore+=tourReview.getToReviewStar();
+			}
+			tourScore=totScore/(tourReviewList.size());
+		} else if(tourReviewList.size()==0) {
+			tourScore=0;
+		}
+		return tourScore;
 	}
 
 }

@@ -65,7 +65,6 @@ public class TourController {
 							@RequestParam(required = false) String sortOrder,
 								Model model) {
 		String forwardPath="";
-		String msg="";
 		try{
 			PageMakerDto<Tour> tourListPage=tourService.findAll(currentPage,keyword,cityNo,toType,sortOrder);
 			List<Tour> tempTourList=tourListPage.getItemList();	//PageMakerDto -> List로 변환

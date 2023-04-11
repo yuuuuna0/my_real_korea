@@ -122,34 +122,39 @@
  -->
 							<div class="col-md-6">
 <form method="post" name="f">
-	<h4>Your profile</h4>
+	<h4>회원 정보</h4>
 	<ul id="profile_summary">
-		<li>아이디 <span th:text="${loginUser.userId}"></span>
-		</li>
-		<li>이름 <span th:text="${loginUser.name}"></span>
-		</li>
-		<li>닉네임 <span th:text="${loginUser.nickname}"></span>
-		</li>
-		<li>휴대폰 <span th:text="${loginUser.phone}"></span>
-		</li>
-		<li>이메일 <span th:text="${loginUser.email}"></span>
-		</li>
-		<li>생일 <span th:text="${loginUser.birth}"></span>
-		</li>
-		<li>주소 <span th:text="${loginUser.address}"></span>
-		</li>
-		<li>성별 <span th:text="${loginUser.gender == 1} ? '남' : '여'"></span>
-		</li>
-		<li>포인트 <span th:text="${loginUser.point}"></span>
-		</li>
+<li>아이디 <span th:text="${loginUser.userId}"></span>
+</li>
+<li>이름 <span th:text="${loginUser.name}"></span>
+</li>
+<li>닉네임 <span th:text="${loginUser.nickname}"></span>
+</li>
+<li>휴대폰 <span th:text="${loginUser.phone}"></span>
+</li>
+<li>이메일 <span th:text="${loginUser.email}"></span>
+</li>
+<li>생일 <span th:text="${loginUser.birth}"></span>
+</li>
+<li>주소 <span th:text="${loginUser.address}"></span>
+</li>
+<li>성별 <span th:text="${loginUser.gender == 1} ? '남' : '여'"></span>
+</li>
+<li>포인트 <span th:text="${loginUser.point}"></span>
+</li>
 		
+<li>자기 소개 
+<span th:text="${loginUser.userAddInfo.introduce}"></span>
+</li>
+<li>음주 여부 
+<span th:text="${loginUser.userAddInfo.alcohol == 1} ? '음주 선호' : (${loginUser.userAddInfo.alcohol == 2} ? '음주 선호하지 않음' : null)"></span>
+</li>
+<li>흡연 여부 
+<span th:text="${loginUser.userAddInfo.smoking == 1} ? '흡연' : (${loginUser.userAddInfo.smoking == 2} ? '비흡연' :  null)"></span>
+</li>
 		
-		<li>자기 소개 <span th:text="${loginUser.userAddInfo.introduce}"></span>
-		</li>
-<li>음주 여부 <span th:text="${loginUser.userAddInfo.alcohol == 1} ? '음주 선호' : (${loginUser.userAddInfo.alcohol == 2} ? '음주 선호하지 않음' : null)"></span></li>
-		</li>
-		<li>흡연 여부 <span th:text="${loginUser.userAddInfo.smoking == 1} ? '흡연' : (${loginUser.userAddInfo.smoking == 2} ? '비흡연' :  null)"></span>
-		</li>
+<li>프로필 이미지 <span th:text="${loginUser.userImg.userImgUrl}"></span></li>
+		
 	</ul>
 </form>
 									<!-- 

@@ -25,6 +25,9 @@
     <link href="css/style.css" rel="stylesheet">
 	<link href="css/vendors.css" rel="stylesheet">
 	
+	<!-- SPECIFIC CSS -->
+	<link href="css/shop.css" rel="stylesheet">
+	
 	<!-- CUSTOM CSS -->
 	<link href="css/custom.css" rel="stylesheet">
 
@@ -93,7 +96,21 @@
 		                    </span>
 						</div>
 					</div>
+						<!-- End widget -->
 					<hr>
+					<div class="widget" id="cat_shop">
+							<h4>Categories</h4>
+							<ul>
+								<li>
+									<a href="#">전체보기</a>
+								</li>
+								<li th:each="city:${cityList}">
+									<a th:text="${city.cityName}" href="#">서</a>
+								</li>
+							</ul>
+						</div>
+						<!-- End widget -->
+						<hr>
 					<p>
 						<a class="btn_map" data-toggle="collapse" href="#collapseMap" aria-expanded="false" aria-controls="collapseMap" data-text-swap="Hide map" data-text-original="View on map">View on map</a>
 					</p>
@@ -146,76 +163,6 @@
 								</ul>
 							</div>
 							<div class="filter_type">
-								<h6>Review Score</h6>
-								<ul>
-									<li>
-										<label>
-											<input type="checkbox">Superb: 9+ (77)
-										</label>
-									</li>
-									<li>
-										<label>
-											<input type="checkbox">Very good: 8+ (552)
-										</label>
-									</li>
-									<li>
-										<label>
-											<input type="checkbox">Good: 7+ (909)
-										</label>
-									</li>
-									<li>
-										<label>
-											<input type="checkbox">Pleasant: 6+ (1196)
-										</label>
-									</li>
-									<li>
-										<label>
-											<input type="checkbox">No rating (198)
-										</label>
-									</li>
-								</ul>
-							</div>
-							<div class="filter_type">
-								<h6>Facility</h6>
-								<ul>
-									<li>
-										<label>
-											<input type="checkbox">Pet allowed
-										</label>
-									</li>
-									<li>
-										<label>
-											<input type="checkbox">Wifi
-										</label>
-									</li>
-									<li>
-										<label>
-											<input type="checkbox">Spa
-										</label>
-									</li>
-									<li>
-										<label>
-											<input type="checkbox">Restaurant
-										</label>
-									</li>
-									<li>
-										<label>
-											<input type="checkbox">Pool
-										</label>
-									</li>
-									<li>
-										<label>
-											<input type="checkbox">Parking
-										</label>
-									</li>
-									<li>
-										<label>
-											<input type="checkbox">Fitness center
-										</label>
-									</li>
-								</ul>
-							</div>
-							<div class="filter_type">
 								<h6>District</h6>
 								<ul>
 									<li>
@@ -255,32 +202,31 @@
 
 				<div class="col-lg-9">
 
-					<div id="tools">
-						<div class="row">
-							<div class="col-md-3 col-sm-4 col-6">
-								<div class="styled-select-filters">
-									<select name="sort_price" id="sort_price">
-										<option value="" selected>Sort by price</option>
-										<option value="lower">Lowest price</option>
-										<option value="higher">Highest price</option>
-									</select>
+						<div class="shop-section">
+							<div class="items-sorting">
+								<div class="row">
+									<div class="col-6">
+										<div id="page-info" class="results_shop" th:each="noticePage:${noticeListPage}">
+											Showing 
+											<span id="cur-page" th:text="${noticePage.pageMaker.curPage}"></span> of 
+											<span id="tot-record-count" th:text="${noticePage.totRecordCount}"></span> results
+										</div>
+									</div>
+									<div class="col-6">
+										<div class="form-group">
+											<select id="sort-by" name="sort-by">
+												<option value="toNoAsc">정렬</option>
+												<option value="toPriceAsc">가격 낮은순</option>
+												<option value="toPriceDesc">가격 높은순</option>
+												<option value="toCountAsc">구매 적은순</option>
+												<option value="toCountDesc">구매 많은순</option>
+											</select>
+										</div>
+									</div>
 								</div>
-							</div>
-							<div class="col-md-3 col-sm-4 col-6">
-								<div class="styled-select-filters">
-									<select name="sort_rating" id="sort_rating">
-										<option value="" selected>Sort by ranking</option>
-										<option value="lower">Lowest ranking</option>
-										<option value="higher">Highest ranking</option>
-									</select>
-								</div>
-							</div>
-							<div class="col-md-6 col-sm-4 d-none d-sm-block text-right">
-								<a href="#" class="bt_filters"><i class="icon-th"></i></a> <a href="all_hotels_list.html" class="bt_filters"><i class=" icon-list"></i></a>
 							</div>
 						</div>
-					</div>
-					<!--End tools -->
+					<!--End shop-section -->
 
 					<div class="row" id="tour-list">
 						<div class="col-md-6 wow zoomIn" data-wow-delay="0.1s" th:each="tour:${tourList}">
@@ -424,25 +370,24 @@
 	<!-- <script> 태그에 코드 적으면 화면에 안 보임 -->
 <script id="tour-search-list-template" type="text/x-handlebars-template">
 {{#each data}}
-<div class="row" >
 	<div class="col-md-6 wow zoomIn" data-wow-delay="0.1s">
 		<div class="hotel_container">
 			<div class="ribbon_3 popular"><span>Popular</span>
 			</div>
 			<div class="img_container">
-				<!--<a href="tour-detail?toNo={{toNo}}">-->
+				<a href="tour-detail?toNo={{toNo}}">
 					<img src="img/products/image-1.jpg" width="800" height="533" class="img-fluid" alt="Image">
 					<div class="score" >
 						<span>
-							<!--{{toCount}}-->
+							{{toCount}}
 						</span>명이 구매했습니다.
 					</div>
 					<div class="short_info hotel" >
 						<span>
-							<!--{{city.cityName}}-->
+							{{city.cityName}}
 						</span>
 						<span class="price">
-							<!--{{toPrice}}-->
+							{{toPrice}}
 						</span>
 					</div>
 				</a>
@@ -450,11 +395,10 @@
 			<div class="hotel_title">
 				<h3>
 					<strong>
-						<!--{{toName}}-->
+						{{toName}}
 					</strong>
 				</h3>
 				<div class="rating">
-					<input type="hidden" id="toScore">
 					<i class="icon-star voted"></i>
 					<i class="icon-star voted"></i>
 					<i class="icon-star voted"></i>
@@ -471,8 +415,7 @@
 		<!-- End box tour -->
 	</div>
 	<!-- End col-md-6 -->
-</div>
-<!-- End row -->
+{{/each}}
 </script>
 
 

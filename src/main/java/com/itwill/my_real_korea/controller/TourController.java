@@ -1,5 +1,6 @@
 package com.itwill.my_real_korea.controller;
 
+import com.itwill.my_real_korea.dto.City;
 import com.itwill.my_real_korea.dto.Payment;
 import com.itwill.my_real_korea.dto.RsPInfo;
 import com.itwill.my_real_korea.dto.ticket.Ticket;
@@ -65,6 +66,7 @@ public class TourController {
 							@RequestParam(required = false) String sortOrder,
 								Model model) {
 		String forwardPath="";
+		String msg="";
 		try{
 			PageMakerDto<Tour> tourListPage=tourService.findAll(currentPage,keyword,cityNo,toType,sortOrder);
 			List<Tour> tempTourList=tourListPage.getItemList();	//PageMakerDto -> List로 변환
@@ -75,6 +77,8 @@ public class TourController {
 				tour.setToScore(tourScore);
 				tourList.add(tour);	//tourList에 후기 평점 평균 붙이기
 			}
+			List<City> cityList=cityService.findAllCity();
+			model.addAttribute("cityList", cityList);
 			model.addAttribute("tourList",tourList);
 			forwardPath="tour-list";
 		} catch (Exception e){
@@ -99,6 +103,7 @@ public class TourController {
 				forwardPath="error";
 			}
 			List<TourReview> tourReviewList=tourReviewService.findByToNo(toNo);
+			
 			model.addAttribute("tourReviewList", tourReviewList);
 		} catch (Exception e){
 			e.printStackTrace();
@@ -125,6 +130,7 @@ public class TourController {
 			Payment payment=new Payment(0, pQty*(tour.getToPrice()), pQty, new Date(), date, null, pQty*(tour.getToPrice())*1/100, 0, tour, null, null);
 			//1. session에 붙이기
 			session.setAttribute("payment", payment);
+			session.setAttribute("tour", tour);
 			//2. model에 붙이기
 			//model.addAttribute("payment",payment);
 			forwardPath="tour-payment";
@@ -147,7 +153,7 @@ public class TourController {
 		String forwardPath="";
 		try {
 			Payment payment=(Payment)session.getAttribute("payment");
-			String userId="user1";
+			String userId="user2";
 			payment.setPMsg(pMsg);
 			int pMethod=Integer.parseInt(pMethodStr);
 			payment.setPMethod(pMethod);
@@ -155,14 +161,15 @@ public class TourController {
 			
 			paymentService.insertTourPayment(payment);
 			Payment findPayment=paymentService.findLatestPaymentByUserId(userId);
+			findPayment.setTour((Tour)session.getAttribute("tour"));
 			rsPInfo.setPNo(findPayment.getPNo());
 			rsPInfo.setUserId(userId);
 			System.out.println(payment);
 			System.out.println(rsPInfo);
 			rsPInfoService.insertRsPerson(rsPInfo);
-			session.removeAttribute("payment");
 			redirectAttributes.addFlashAttribute("payment",findPayment);
 			redirectAttributes.addFlashAttribute("rsPInfo",rsPInfo);
+			session.removeAttribute("payment");
 			forwardPath="redirect:tour-payment-confirmation";
 		}catch (Exception e) {
 			e.printStackTrace();

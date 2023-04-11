@@ -47,12 +47,6 @@
 				   		</if>
 		   				<if test="sortOrder !=null">
 							<choose>
-								<when test="sortOrder == 'toNoDesc'">
-									ORDER BY T.to_no DESC
-								</when>
-								<when test="sortOrder == 'toNoAsc'">
-									ORDER BY T.to_no Asc
-								</when>
 								<when test="sortOrder == 'toPriceDesc'">
 									ORDER BY T.to_price Desc
 								</when>
@@ -65,10 +59,10 @@
 								<when test="sortOrder == 'toCountAsc'">
 									ORDER BY T.to_count Asc
 								</when>
-								<otherwise>
-									ORDER BY T.to_no Asc
-								</otherwise>
 							</choose>
+						</if>
+		   				<if test="sortOrder ==null">
+								ORDER BY T.to_no Asc
 						</if>
 					) tourAll
 				)

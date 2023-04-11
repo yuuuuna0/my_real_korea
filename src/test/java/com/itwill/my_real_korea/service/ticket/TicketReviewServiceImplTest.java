@@ -1,6 +1,7 @@
 package com.itwill.my_real_korea.service.ticket;
 
 import com.itwill.my_real_korea.dto.ticket.TicketReview;
+import com.itwill.my_real_korea.dto.user.User;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,12 +18,12 @@ class TicketReviewServiceImplTest {
     @Autowired
     TicketReviewService ticketReviewService;
 
-    @Disabled
+    //@Disabled
     @Test //date format
     void insertTicketReview() {
         System.out.print(ticketReviewService.insertTicketReview(
                 new TicketReview(0,new Date(), "후기작성",
-                        "후기를 써야하나?","review.jpg",3,"n")));
+                        "후기를 써야하나?","review.jpg",3, new User("user3","0000",null,null,null,null,null,null,1,1,0,0,0))));
 
     }
 /*

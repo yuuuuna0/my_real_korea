@@ -18,7 +18,7 @@ public class Ticket {
 
     private int tiNo;
     private String tiTitle;
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date tiDate;
     private int tiPrice;
     private String tiInfo;

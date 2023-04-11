@@ -49,20 +49,22 @@
 	<div id="header" th:include="include-common-top::include-common-top"></div>
 	<!--======================== End Header======================== -->
 	
-	<!-- form (내꺼)-->
-	<form th:object="${ticket}" name="f" action="ticket-detail-action">  
+	<!-- form (내꺼)                        ticket (버튼이 여러개 있으면 script로 나누기) -->
+	
+
 	<section class="parallax-window" data-parallax="scroll" data-image-src="img/single_hotel_bg_1.jpg" data-natural-width="1400" data-natural-height="470">
 		<div class="parallax-content-2">
 			<div class="container">
 				<div class="row">
 					<div class="col-md-8">
 						<span class="rating"><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class=" icon-star-empty"></i></span>
-						<h1 th:text="${ticketList[0].tiTitle}"></h1>
-						<span th:text="${ticketList[0].city.cityName}"></span> <!-- ???? -->
+						<!-- 데이터만 가져오기 -->
+						<h1 th:text="${session.ticket.tiTitle}"></h1>
+						<span th:text="${session.ticket.city.cityName}"></span> <!-- ???? -->
 					</div>
 					<div class="col-md-4">
 						<div id="price_single_main" class="hotel">
-							 <span th:text="${ticketList[0].tiPrice}"></span>
+							 <span th:text="${session.ticket.tiPrice}"></span>
 						</div>
 					</div>
 				</div>
@@ -93,13 +95,15 @@
 		<div class="container margin_60">
 			<div class="row">
 				<div class="col-lg-8" id="single_tour_desc">
-		
-					<p class="d-none d-md-block d-block d-lg-none"><a class="btn_map" data-toggle="collapse" href="#collapseMap" aria-expanded="false" aria-controls="collapseMap" data-text-swap="Hide map" data-text-original="View on map">View on map</a>
+
+					<p class="d-none d-md-block d-block d-lg-none">
+					<a class="btn_map" data-toggle="collapse" href="#collapseMap" aria-expanded="false" aria-controls="collapseMap" 
+					data-text-swap="Hide map" data-text-original="View on map">View on map</a>
 					</p>
 					<!-- Map button for tablets/mobiles -->
 					<div id="Img_carousel" class="slider-pro">
 						<div class="sp-slides">
-							<!--이미지-->
+							<!--티켓  이미지 -->
 							<div class="sp-slide">
 								<img alt="Image" class="sp-image" src="css/images/blank.gif" data-src="img/slider_single_tour/1_medium.jpg" data-small="img/slider_single_tour/1_small.jpg" data-medium="img/slider_single_tour/1_medium.jpg" data-large="img/slider_single_tour/1_large.jpg" data-retina="img/slider_single_tour/1_large.jpg">
 							</div>
@@ -153,13 +157,13 @@
 					<div class="row">
 						<div class="col-lg-3">
 						
-							<h3>Description</h3>
+							<h3>상세보기</h3>
 						</div>
 						<div class="col-lg-9">
-							<p>
+							<p th:text="${session.ticket.tiInfo}">
 								Lorem ipsum dolor sit amet, at omnes deseruisse pri. Quo aeterno legimus insolens ad. Sit cu detraxit constituam, an mel iudico constituto efficiendi. Eu ponderum mediocrem has, vitae adolescens in pro. Mea liber ridens inermis ei, mei legendos vulputate an, labitur tibique te qui.
 							</p>
-							<h4>Hotel facilities</h4>
+							<h4>어쩌구 저쩌구 저쩌구 </h4>
 							<p>
 								Lorem ipsum dolor sit amet, at omnes deseruisse pri. Quo aeterno legimus insolens ad. Sit cu detraxit constituam, an mel iudico constituto efficiendi.
 							</p>
@@ -189,104 +193,15 @@
 					</div>
 					<!-- End row  -->
 
-					<hr>
 
 					<div class="row">
 						<div class="col-lg-3">
-							<h3>Rooms Types</h3>
+							
 						</div>
-						<div class="col-lg-9">
-							<h4>Single Room</h4>
-							<p>
-								Lorem ipsum dolor sit amet, at omnes deseruisse pri. Quo aeterno legimus insolens ad. Sit cu detraxit constituam, an mel iudico constituto efficiendi.
-							</p>
-
-							<div class="row">
-								<div class="col-md-6">
-									<ul class="list_icons">
-										<li><i class="icon_set_1_icon-86"></i> Free wifi</li>
-										<li><i class="icon_set_2_icon-116"></i> Plasma Tv</li>
-										<li><i class="icon_set_2_icon-106"></i> Safety box</li>
-									</ul>
-								</div>
-								<div class="col-md-6">
-									<ul class="list_ok">
-										<li>Lorem ipsum dolor sit amet</li>
-										<li>No scripta electram necessitatibus sit</li>
-										<li>Quidam percipitur instructior an eum</li>
-									</ul>
-								</div>
-							</div>
-							<!-- End row  -->
-							<div class="owl-carousel owl-theme carousel-thumbs-2 magnific-gallery">
-								<div class="item">
-									<a href="img/carousel/1.jpg" data-effect="mfp-zoom-in"><img src="img/carousel/1.jpg" alt="Image">
-									</a>
-								</div>
-								<div class="item">
-									<a href="img/carousel/2.jpg" data-effect="mfp-zoom-in"><img src="img/carousel/2.jpg" alt="Image">
-									</a>
-								</div>
-								<div class="item">
-									<a href="img/carousel/3.jpg" data-effect="mfp-zoom-in"><img src="img/carousel/3.jpg" alt="Image">
-									</a>
-								</div>
-								<div class="item">
-									<a href="img/carousel/4.jpg" data-effect="mfp-zoom-in"><img src="img/carousel/4.jpg" alt="Image">
-									</a>
-								</div>
-							</div>
-							<!-- End photo carousel  -->
-
-							<hr>
-
-							<h4>Double Room</h4>
-							<p>
-								Lorem ipsum dolor sit amet, at omnes deseruisse pri. Quo aeterno legimus insolens ad. Sit cu detraxit constituam, an mel iudico constituto efficiendi.
-							</p>
-
-							<div class="row">
-								<div class="col-md-6">
-									<ul class="list_icons">
-										<li><i class="icon_set_1_icon-86"></i> Free wifi</li>
-										<li><i class="icon_set_2_icon-116"></i> Plasma Tv</li>
-										<li><i class="icon_set_2_icon-106"></i> Safety box</li>
-									</ul>
-								</div>
-								<div class="col-md-6">
-									<ul class="list_ok">
-										<li>Lorem ipsum dolor sit amet</li>
-										<li>No scripta electram necessitatibus sit</li>
-										<li>Quidam percipitur instructior an eum</li>
-									</ul>
-								</div>
-							</div>
-							<!-- End row  -->
-							<div class="owl-carousel owl-theme carousel-thumbs-2 magnific-gallery">
-								<div class="item">
-									<a href="img/carousel/1.jpg" data-effect="mfp-zoom-in"><img src="img/carousel/1.jpg" alt="Image">
-									</a>
-								</div>
-								<div class="item">
-									<a href="img/carousel/2.jpg" data-effect="mfp-zoom-in"><img src="img/carousel/2.jpg" alt="Image">
-									</a>
-								</div>
-								<div class="item">
-									<a href="img/carousel/3.jpg" data-effect="mfp-zoom-in"><img src="img/carousel/3.jpg" alt="Image">
-									</a>
-								</div>
-								<div class="item">
-									<a href="img/carousel/4.jpg" data-effect="mfp-zoom-in"><img src="img/carousel/4.jpg" alt="Image">
-									</a>
-								</div>
-							</div>
-							<!-- End photo carousel  -->
-						</div>
-						<!-- End col-md-9  -->
+						
 					</div>
 					<!-- End row  -->
 
-					<hr>
 
 					<div class="row">
 						<div class="col-lg-3">
@@ -294,7 +209,8 @@
 							<a href="#" class="btn_1 add_bottom_30" data-toggle="modal" data-target="#myReview">Leave a review</a>
 						</div>
 						<div class="col-lg-9">
-							<div id="score_detail"><span>7.5</span>Good <small>(Based on 34 reviews)</small>
+							<div id="score_detail"><span th:text="${ticketReviewList.size()}"></span>명이 구매했습니다.
+								
 							</div>
 							<!-- End general_rating -->
 							<div class="row" id="rating_summary">
@@ -331,38 +247,12 @@
 							<hr>
 							<div class="review_strip_single"  th:each="ticketReview:${ticketReviewList}">
 								<img src="img/avatar1.jpg" alt="Image" class="rounded-circle">
-								<small th:text="${ticketReview.tiReviewDate}"> - 10 March 2015 -</small>
-								<h4 th:text="${ticketReview.userId}">Jhon Doe</h4>
+								<small th:text="${#dates.format(ticketReview.tiReviewDate, 'yyyy.MM.dd')}"> - 10 March 2015 -</small>
+								<h4 th:text="${ticketReview.user.userId}">Jhon Doe</h4>
 								<!-- 타이틀 추가 -->
 								<h5 th:text="${ticketReview.tiReviewTitle}"></h5>
 								<p th:text="${ticketReview.tiReviewContent}">
 									<!--리뷰내용-->
-									"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed a lorem quis neque interdum consequat ut sed sem. Duis quis tempor nunc. Interdum et malesuada fames ac ante ipsum primis in faucibus."
-								</p>
-								<div class="rating">
-									<i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile"></i><i class="icon-smile"></i>
-								</div>
-							</div>
-							<!-- End review strip -->
-
-							<div class="review_strip_single">
-								<img src="img/avatar2.jpg" alt="Image" class="rounded-circle">
-								<small> - 10 March 2015 -</small>
-								<h4>Jhon Doe</h4>
-								<p>
-									"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed a lorem quis neque interdum consequat ut sed sem. Duis quis tempor nunc. Interdum et malesuada fames ac ante ipsum primis in faucibus."
-								</p>
-								<div class="rating">
-									<i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile"></i><i class="icon-smile"></i>
-								</div>
-							</div>
-							<!-- End review strip -->
-
-							<div class="review_strip_single last">
-								<img src="img/avatar3.jpg" alt="Image" class="rounded-circle">
-								<small> - 10 March 2015 -</small>
-								<h4>Jhon Doe</h4>
-								<p>
 									"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed a lorem quis neque interdum consequat ut sed sem. Duis quis tempor nunc. Interdum et malesuada fames ac ante ipsum primis in faucibus."
 								</p>
 								<div class="rating">
@@ -379,14 +269,21 @@
 					<p class="d-none d-xl-block d-lg-block d-xl-none">
 						<a class="btn_map" data-toggle="collapse" href="#collapseMap" aria-expanded="false" aria-controls="collapseMap" data-text-swap="Hide map" data-text-original="View on map">View on map</a>
 					</p>
+					<!-- detail - 여기서 티켓 정보 넘기기****************** 예약하기 FORM  ****************** -->
+					<form name="f" method="post" action="ticket-detail-aciton">
 					<div class="box_style_1 expose">
 						<h3 class="inner">Check Availability</h3>
 						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
 									<label><i class="icon-calendar-7"></i> 예약 날짜</label>
+									<!-- 
+									<input id="tiNo" type="hidden" name="tiNo" th:value="${ticket.tiNo}">
+									<input id="tiPrice" type="hidden" name="tiPrice" th:value="${ticket.tiPrice}">
+									 -->
+									
 																										<!-- name 속성-->
-									<input class="date-pick form-control" data-date-format="M d, D" type="text" name="pStartDate">
+									<input class="form-control" data-date-format="yyyy-MM-dd" type="date" id="pStartDate" name="pStartDate">
 								</div>
 							</div>
 							<!-- <div class="col-md-6">
@@ -402,7 +299,7 @@
 									<label>수량</label>
 									<div class="numbers-row">
 									<!-- text -> number -->
-										<input type="text" value="1" id="adults" class="qty2 form-control" name="pQty">
+										<input type="text" value="1" id="pQty" class="qty2 form-control" name="pQty">
 									</div>
 								</div>
 							</div>
@@ -416,11 +313,11 @@
 							</div>-->
 						</div>
 						<br>
-
+						<!-- ~~~~~~~~ ~~~~~~~~~~~~~~~~~~~~~~티켓 버튼 (detail-action~~)~~~~~~~~~ ~~~~~~~~~~~~~~~-->
 						<button class="btn_full" type="submit">티켓 구매하기</button>
 						<a class="btn_full_outline" href="#"><i class=" icon-heart"></i> Add to whislist</a>
 					</div>
-				
+				</form>
 					<!--/box_style_1 -->
 	
 					<div class="box_style_4">
@@ -436,7 +333,7 @@
 			</div>
 		
 		<!--End container -->
-        </form>
+
         <div id="overlay"></div>
 		<!-- Mask on input focus -->
 
@@ -463,7 +360,7 @@
 		</form>
 	</div><!-- End Search Menu -->
 	
-	<!-- Sign In Popup -->
+	<!-- 로그인 팝업 창 ~~~~~~~~~~~~~  -->
 	<div id="sign-in-dialog" class="zoom-anim-dialog mfp-hide">
 		<div class="small-dialog-header">
 			<h3>Sign In</h3>
@@ -507,7 +404,7 @@
 		</form>
 		<!--form -->
 	</div>
-	<!-- /Sign In Popup -->	
+	<!-- /로그인 팝업 창 ~~~~~~~~~~~~~-->	
 
 	<!--  Modal Review  ~~~~~~~~~~~~~~~~~~~ 리뷰창 모달 ~~~~~~~~~~~~~~~~~~~  -->
 	<div class="modal fade" id="myReview" tabindex="-1" role="dialog" aria-labelledby="myReviewLabel" aria-hidden="true">
@@ -521,10 +418,10 @@
 					<div id="message-review">
 					</div>
 					<!-- 모달 폼 -->
-					<form th:object=${ticketReivew} method="post" action="review-write-action" name="ticketReview" id="ticketReview"  enctype​​="multipart/form-data">
+					<form th:object="${ticketReivew}"  method="post" action="review-write-action" name="ticketReview" id="ticketReview"  enctype​​="multipart/form-data">
 					<!--파일업로드추가  -->
 						<input type="file" name="uploadFile">
-						<input name="hotel_name" id="hotel_name" type="hidden" th:value="${ticket.tiTitle}">
+						<input name="hotel_name" id="hotel_name" type="hidden">
 						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
@@ -625,6 +522,7 @@
 						<div class="form-group">
 							<input type="text" id="verify_review" class=" form-control" placeholder="Are you human? 3 + 1 =">
 						</div>
+						<!--리뷰 버튼-->
 						<input type="submit" value="Submit" class="btn_1" id="submit-review">
 					</form>
 				</div>

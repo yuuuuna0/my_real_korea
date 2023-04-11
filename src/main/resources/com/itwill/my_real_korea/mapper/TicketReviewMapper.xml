@@ -1,22 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.itwill.my_real_korea.mapper.TicketReviewMapper">
-
+    <resultMap id="ticketReviewResultMap" type="com.itwill.my_real_korea.dto.ticket.TicketReview" autoMapping="true">
+    <!--user-->
+    <association property="user" javaType="com.itwill.my_real_korea.dto.user.User" autoMapping="true"></association>
+    </resultMap>
     <!--티켓 리뷰 작성 -->
     <insert id="insertTicketReview" parameterType="com.itwill.my_real_korea.dto.ticket.TicketReview">
         <selectKey resultType="java.lang.Integer" keyProperty="tiReviewNo" order="BEFORE">
             SELECT TICKET_REVIEW_TI_REVIEW_NO_SEQ.NEXTVAL FROM DUAL
         </selectKey>
             INSERT INTO TICKET_REVIEW (TI_REVIEW_NO,TI_REVIEW_DATE,TI_REVIEW_TITLE,TI_REVIEW_CONTENT,TI_REVIEW_IMG,TI_NO,USER_ID)
-            VALUES (#{tiReviewNo}, SYSDATE,#{tiReviewTitle},#{tiReviewContent},#{tiReviewImg},#{tiNo},#{userId})
+            VALUES (#{tiReviewNo}, SYSDATE,#{tiReviewTitle},#{tiReviewContent},#{tiReviewImg},#{tiNo},#{user.userId})
     </insert>
 
     <!--리뷰 보기 - 페이징 -->
-    <select id="selectByTicketReviewNo" parameterType="java.lang.Integer" resultType="com.itwill.my_real_korea.dto.ticket.TicketReview">
+    <select id="selectByTicketReviewNo" parameterType="java.lang.Integer" resultMap="ticketReviewResultMap">
                  SELECT * FROM TICKET_REVIEW WHERE TI_NO=#{tiNo}
     </select>
     <!--내 리뷰 보기 - 페이징 -->
-    <select id="selectByTicketReviewUser" parameterType="java.lang.String" resultType="com.itwill.my_real_korea.dto.ticket.TicketReview">
+    <select id="selectByTicketReviewUser" parameterType="java.lang.String" resultMap="ticketReviewResultMap">
               SELECT * FROM TICKET_REVIEW WHERE USER_ID=#{userId}
     </select>
 

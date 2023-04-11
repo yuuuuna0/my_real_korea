@@ -19,7 +19,7 @@ public class TicketReview {
     private String tiReviewContent;
     private String tiReviewImg;
     private int tiNo;
-    private String userId;
+    private User user;
 
 
 

@@ -1,6 +1,7 @@
 package com.itwill.my_real_korea.dao.ticket;
 
 import com.itwill.my_real_korea.dto.ticket.TicketReview;
+import com.itwill.my_real_korea.dto.user.User;
 import com.itwill.my_real_korea.mapper.TicketReviewMapper;
 import org.junit.jupiter.api.Test;
 import org.mybatis.spring.annotation.MapperScan;
@@ -14,7 +15,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-@MapperScan(basePackageClasses = TicketReviewMapper.class)
+@MapperScan(basePackages = "com.itwill.my_real_korea.mapper")
 class TicketReviewDaoImplTest {
 
     @Autowired
@@ -24,7 +25,8 @@ class TicketReviewDaoImplTest {
     void insertTicketReview() {
         int rowCount = ticketReviewDao.insertTicketReview
                 (new TicketReview(0,null,
-                        "테스트","테스트내용","testReview.jpg",1,"user3"));
+                        "테스트","테스트내용","testReview.jpg",1,
+                        new User("user3","0000",null,null,null,null,null,null,1,1,0,0,0)));
         assertEquals(rowCount,1);
     }
 /*

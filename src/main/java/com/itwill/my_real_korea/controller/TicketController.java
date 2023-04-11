@@ -1,23 +1,20 @@
 package com.itwill.my_real_korea.controller;
 
-import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.itwill.my_real_korea.dto.Payment;
 import com.itwill.my_real_korea.dto.ticket.Ticket;
@@ -29,7 +26,6 @@ import com.itwill.my_real_korea.service.ticket.TicketReviewService;
 import com.itwill.my_real_korea.service.ticket.TicketService;
 import com.itwill.my_real_korea.util.PageMakerDto;
 
-@SessionAttributes("ticket")
 @Controller
 public class TicketController {
 
@@ -38,7 +34,6 @@ public class TicketController {
     private final TicketReviewService ticketReviewService;
     private final PaymentService paymentService;
 
-    //test 중
     @Autowired
     public TicketController(TicketService ticketService, TicketImgService ticketImgService, TicketReviewService ticketReviewService,
                             CityService cityService, PaymentService paymentService) {
@@ -50,39 +45,64 @@ public class TicketController {
 
     //티켓 리스트 - 페이지
     @GetMapping("/ticket-list")
-    public String tickeList(@RequestParam(required = false, defaultValue = "1") int currentPage, Model model) {
+    public String tickeList(@RequestParam(required = false, defaultValue = "1") int currentPage,Model model) {
 
         try {
             PageMakerDto<Ticket> ticketList = ticketService.selectAllTicket(currentPage);
             
             model.addAttribute("ticketList", ticketList.getItemList());
             model.addAttribute("currentPage", currentPage);
-            //System.out.println(ticketList.getItemList());
         } catch (Exception e) {
             e.printStackTrace();
-            // return "redirect:error";//
         }
         return "ticket-list";
     }
 
-    //티켓 -- 상세보기
+    //티켓 -- 상세보기 detail
     @GetMapping("/ticket-detail")
-    public String ticketDetail(@RequestParam int tiNo, Model model) {
+    public String ticketDetail(@RequestParam int tiNo, Model model, HttpSession session) {
         try {
         	
             List<Ticket> ticketList = ticketService.selectByTicketNoCityWithImg(tiNo);
             List<TicketReview> ticketReviewList = ticketReviewService.selectByTicketReviewNo(tiNo);
-            //System.out.println(ticketList);
-            //System.out.println(ticketReviewList);
-            model.addAttribute("ticketList", ticketList);
-            model.addAttribute("ticketReviewList",ticketReviewList);
+            model.addAttribute("ticketList", ticketList); // 티켓
+            model.addAttribute("ticketReviewList",ticketReviewList); // 리뷰
             model.addAttribute("tiNo", tiNo);
-        	
+            
+            // 사진을 제외한 공통된 하나의 티켓 정보
+            Ticket ticket = ticketList.get(0);
+            // 세션에 티켓 정보 담기
+            session.setAttribute("ticket", ticket);
+        	// System.out.println(ticket);
         } catch(Exception e) {
         	e.printStackTrace();
         	return "redirect:error";
         }
         return "ticket-detail";
+    }
+   
+    //티켓 상세 페이지에서 수량, 예약하기
+    //@LoginCheck
+    @PostMapping("/ticket-detail-aciton") 
+    public String ticketDatailPayment(@RequestParam String pStartDate,
+    								  @RequestParam int pQty,
+    								  /* @RequestParam int tiNo,*/
+    								  HttpSession session)
+    								throws Exception {
+    	
+    	Ticket ticket = (Ticket) session.getAttribute("ticket");
+    	// 총 금액 = 수량 * 티켓 가격
+    	int price = pQty* ticket.getTiPrice();
+    	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    	Date date = dateFormat.parse(pStartDate);
+    	Payment payment = new Payment();
+    	payment.setPPrice(price); // 총금액
+    	payment.setPQty(pQty); // 수량
+    	payment.setPPoint((int)(pQty * price * 0.1)); // 포인트 
+    	payment.setPStartDate(date); // 예약날짜
+    	session.setAttribute("payment", payment);
+    	
+    	return "ticket-payment";
     }
 
 
@@ -123,44 +143,28 @@ public class TicketController {
     }
     */
     
-    //세션 초기화?  -- modelAttribute와 sessionattribute가 연?
-    @ModelAttribute("ticket")
-    public Ticket setTicket() {
-    	return new Ticket(); // ticket 객체가 session에 들어가게 됨.
-    }
-    
+ 
 
     //티켓 상세 페이지에서 수량, 예약하기
     //@LoginCheck
-   @PostMapping("ticket-detail-action")
-    public String ticketDatailPayment(@RequestParam int pQty, 
-                                      @RequestParam String pStartDate,
-                                      @ModelAttribute("ticket") Ticket ticket,
-                                      HttpSession session) {
-    	//System.out.println(ticket); // null 뜸 -_-.... 
-    	System.out.println(pQty);
-    	System.out.println(pStartDate);
+    @RequestMapping("/ticket-payment-complete-aciton")
+    public String ticketPaymentCompleteAction(HttpSession session) {
+    			
     	try {
-            if (ticket != null) { 
-                session.setAttribute("pQty", pQty);   // 티켓 수량
-                session.setAttribute("pStartDate", pStartDate);  // 티켓 시작 날짜
-                session.setAttribute("ticket", ticket); // session 티켓
-                
-                System.out.println(ticket);
-            }
-                
-        } catch (Exception e) {
-            e.printStackTrace();
-            return "error";
-        }
-        return "redirect:ticket-payment"; // 성공 시 payment로 리다이렉트
+    		Payment payment = (Payment)session.getAttribute("payment");
+    		paymentService.insertTicketPayment(payment);
+    		return "ticket-payment-confirmation";
+    	} catch(Exception e) {
+    		e.printStackTrace();
+    		return "error";
+    	}
+    	
     }
 
-
-    //payment -- 총 가격 js
+   /*payment -- 총 가격 js
     @PostMapping("ticket-payment")
     public String ticketPaymentForm (HttpSession session, Model model){
-        
+        //여기에 담겨야함 --> ticket-detail-action 이 내용이?
         Ticket sTicket = (Ticket)session.getAttribute("sTicket");
         int pQty = (int) session.getAttribute("pQty");
         String pStartDate = (String) session.getAttribute("pStartDate");
@@ -172,8 +176,8 @@ public class TicketController {
     @PostMapping("ticket-payment-action")
     public String ticketPaymentAction (@ModelAttribute Payment payment, HttpSession session, Model model) {
         try {
-            Ticket sTicket = (Ticket) session.getAttribute("sTicket");
-            payment.setTicket(sTicket);
+            Ticket ticket = (Ticket) session.getAttribute("ticket");
+            payment.setTicket(ticket);
             paymentService.insertTicketPayment(payment);
             session.setAttribute("payment", payment);
             return "redirect:ticket-payment-confirmation";
@@ -201,7 +205,7 @@ public class TicketController {
         return "ticket-payment-confirmation"; // 상세보기?
     }
 
- 
+ */
  
 
 

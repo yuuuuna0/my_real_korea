@@ -79,7 +79,7 @@
 	
 	<!-- 번호로 찾기 -->     
 			<select id="selectTicketNo" parameterType="java.lang.Integer" resultMap="ticketResultMap">
-				SELECT * FROM TICKET WHERE TI_NO= #{tiNo}
+				SELECT * FROM TICKET WHERE TI_NO=#{tiNo}
 			</select>
         
 	<!-- 티켓 상세보기 지역 + 이미지 -->

@@ -71,11 +71,11 @@
 		<div id="position">
 			<div class="container">
 				<ul>
-					<li><a href="#">Home</a>
+					<li><a href="index">Home</a>
 					</li>
-					<li><a href="#">Category</a>
+					<li><a href="notice-list">공지사항</a>
 					</li>
-					<li>Page active</li>
+					<li>Now</li>
 				</ul>
 			</div>
 		</div>
@@ -115,15 +115,8 @@
 								<div class="inner-box">
 									<div class="image-box">
 										<figure class="image">
-											<a th:href="@{notice-detail(nNo=${notice.nNo})}" href="shop-single.html"><img src="img/products/image-1.jpg" alt=""></a>
+											<a th:href="@{notice-detail(nNo=${notice.nNo})}" href="shop-single.html"><img src="img/notice/notice_common.png" alt=""></a>
 										</figure>
-										<div class="item-options clearfix">
-											<a href="wishlist" class="btn_shop"><span class="icon-heart-8"></span>
-                                            <div class="tool-tip">
-                                                Add to Wishlist
-                                            </div>
-                                            </a>
-										</div>
 									</div>
 									<div class="product_description">
 										<h3><a th:text="${notice.nTitle}" th:href="@{notice-detail(nNo=${notice.nNo})}" href="" >Travel Book</a></h3>

@@ -43,7 +43,7 @@ public class Tour {
 	private City city;		//FK
 	
 	private List<TourImg> tourImgList;
-	private int toScore;
+	private int toScore;	//투어의 평점 평균
 
 	public Tour(int toNo, String toName, int toType, int toTime, int toPerson, String toMeet, int toPrice,
 			String toInfo, String toNotice, int toCount,City city) {

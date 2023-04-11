@@ -28,6 +28,9 @@
 	<!-- CUSTOM CSS -->
 	<link href="css/custom.css" rel="stylesheet">
 
+<!-- Handlebars -->
+<script  defer type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.2/handlebars.min.js"></script>
+
 </head>
 
 <body>
@@ -82,6 +85,15 @@
 		<div class="container margin_60">
 			<div class="row">
 				<aside class="col-lg-3">
+					<div class="widget">
+						<div class="input-group">
+							<input id="notice-search-keyword" type="text" class="form-control" placeholder="Search...">
+							<span id="notice-search-btn"  class="input-group-btn">
+		                    <button class="btn btn-default" type="button" style="margin-left:0;"><i class="icon-search"></i></button>
+		                    </span>
+						</div>
+					</div>
+					<hr>
 					<p>
 						<a class="btn_map" data-toggle="collapse" href="#collapseMap" aria-expanded="false" aria-controls="collapseMap" data-text-swap="Hide map" data-text-original="View on map">View on map</a>
 					</p>
@@ -441,7 +453,55 @@
 			ratingDiv.append(starIcon);
 		}
 	</script>
+	
+	<!-- ##################### template ###################### -->
+	<!-- <script> 태그에 코드 적으면 화면에 안 보임 -->
+<script id="tour-search-list-template" type="text/x-handlebars-template">
+<div class="row" >
+	<div class="col-md-6 wow zoomIn" data-wow-delay="0.1s" th:each="tour:${tourList}">
+		<div class="hotel_container">
+			<div class="ribbon_3 popular"><span>Popular</span>
+			</div>
+			<div class="img_container">
+				<a th:href="@{tour-detail(toNo=${tour.toNo})}">
+					<img src="img/products/image-1.jpg" width="800" height="533" class="img-fluid" alt="Image">
+					<div class="score" ><span th:text="${tour.toCount}">7.5</span>명이 구매했습니다.</div>
+					<div class="short_info hotel" >
+						<span th:text="${tour.city.cityName}">
+						</span>
+						<span class="price" th:text="${tour.toPrice}">
+							59
+						</span>
+					</div>
+				</a>
+			</div>
+			<div class="hotel_title">
+				<h3><strong  th:text="${tour.toName}">Park Hyatt</strong></h3>
+				<div class="rating">
+					<input type="hidden" id="toScore" th:value="${tour.toScore}">
+					<i class="icon-star voted"></i>
+					<i class="icon-star voted"></i>
+					<i class="icon-star voted"></i>
+					<i class="icon-star voted"></i>
+					<i class="icon-star-empty"></i>							
+				</div>
+				<!-- end rating -->
+				<div class="wishlist">
+					<a class="tooltip_flip tooltip-effect-1" href="#">+<span class="tooltip-content-flip"><span class="tooltip-back">Add to wishlist</span></span></a>
+				</div>
+				<!-- End wish list-->
+			</div>
+		</div>
+		<!-- End box tour -->
+	</div>
+	<!-- End col-md-6 -->
+</div>
+<!-- End row -->
 
+<hr>
+
+
+</script>
 </body>
 
 </html>

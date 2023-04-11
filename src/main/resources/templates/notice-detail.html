@@ -71,11 +71,11 @@
 		<div id="position">
 			<div class="container">
 				<ul>
-					<li><a href="#">Home</a>
+					<li><a href="index">Home</a>
 					</li>
-					<li><a href="#">Category</a>
+					<li><a href="notice-list">공지사항</a>
 					</li>
-					<li>Page active</li>
+					<li>Now</li>
 				</ul>
 			</div>
 		</div>
@@ -86,7 +86,8 @@
 				<div class="col-lg-9">
 					<div class="box_style_1">
 						<div class="post nopadding">
-							<img th:src="@{notice.nImg}" alt="Image" class="img-fluid">
+							<!-- 이미지 일단 지움
+							<img alt="Image" class="img-fluid"> -->
 							<div class="post_info clearfix">
 								<div class="post-left">
 									<ul>
@@ -97,11 +98,11 @@
 							</div>
 							<h2 th:text="${notice.nTitle}">Duis aute irure dolor in reprehenderit</h2>
 							<p th:text=${notice.nContent}>
-								Praesent vestibulum molestie lacus. Aenean nonummy hendrerit mauris. Phasellus porta. Fusce suscipit varius mi nascetur ridiculus mus. Nulla dui. Fusce feugiat malesuada odio. Morbi nunc odio, gravida at, cursus nec, luctus a, lorem.....
 							</p>
 							<p>
-								Aenean iaculis sodales dui, non hendrerit lorem rhoncus ut. Pellentesque ullamcorper venenatis elit idaipiscingi Duis tellus neque, tincidunt eget pulvinar sit amet, rutrum nec urna. Suspendisse pretium laoreet elit vel ultricies. Maecenas ullamcorper ultricies rhoncus. Aliquam erat volutpat.
 							</p>
+							<!-- 이미지 안 들어감 !!!!!!! -->
+								<img th:src="@{img/notice/__${notice.nImg}__}"  alt="Image" class="img-fluid">
 						</div>
 						<!-- end post -->
 					</div>
@@ -125,12 +126,11 @@
 				
 					<div class="widget tags">
 						<h4>Tags</h4>
-						<a href="#">이벤트</a>
-						<a href="#">예약</a>
-						<a href="#">후기</a>
-						<a href="#">동행</a>
-						<a href="#">티켓</a>
-						<a href="#">투어</a>
+						<a href="tripboard-list">동행</a>
+						<a href="ticket-list">티켓</a>
+						<a href="tour-list">투어</a>
+						<a href="freeboard-list">자유게시판</a>
+						<a href="user-view">마이페이지</a>
 					</div>
 					<hr>
 					<!-- End widget -->

@@ -68,7 +68,7 @@ public class NoticeController {
 	}
 	
 	// 공지사항 작성 폼
-	@AdminCheck 
+	//@AdminCheck 
 	@LoginCheck
 	@GetMapping("/notice-write-form")
 	public String notice_write_form(HttpServletRequest request) {
@@ -84,7 +84,7 @@ public class NoticeController {
 	}
 	
 	// 공지사항 수정 폼
-	@AdminCheck 
+	//@AdminCheck 
 	@LoginCheck
 	@GetMapping("/notice-modify-form")
 	public String notice_modify_form(HttpServletRequest request) {

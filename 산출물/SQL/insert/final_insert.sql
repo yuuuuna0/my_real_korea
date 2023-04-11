@@ -58,9 +58,9 @@ insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img,user_id) valu
 insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img,user_id) values (notice_n_no_seq.nextval,'공지사항이다16','공지사항내용4','2023/04/02',4,'img.png','user1');
 insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img,user_id) values (notice_n_no_seq.nextval,'공지사항이야17','공지사항내용5','2023/04/03',8,'img.png','user2');
 insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img,user_id) values (notice_n_no_seq.nextval,'공지사항안내18','공지사항내용6','2023/04/05',10,'img.png','user3');
-insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img,user_id) values (notice_n_no_seq.nextval,'공지사항안내19','공지사항내용7','2023/05/02',15,'img.png','user1');
-insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img,user_id) values (notice_n_no_seq.nextval,'공지사항결제20','공지사항내용8','2023/06/03',23,'img.png','user2');
-insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img,user_id) values (notice_n_no_seq.nextval,'공지사항결론21','공지사항내용9','2023/07/05',2,'img.png','user3');
+insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img,user_id) values (notice_n_no_seq.nextval,'선착순 서울 투어 할인 이벤트','선착순 서울 투어 할인 이벤트입니다.','2023/05/02',15,'notice_seoul.png','user1');
+insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img,user_id) values (notice_n_no_seq.nextval,'제주 투어 50% 파격 할인','마이리얼코리아에만 있는 제주투어 50% 할인!','2023/06/03',23,'notice_jeju.png','user2');
+insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img,user_id) values (notice_n_no_seq.nextval,'마이리얼코리아 신규가입 이벤트 : 적립금 2000 쏜다!','마이리얼코리아 신규가입 이벤트입니다.','2023/07/05',2,'notice_point.png','user3');
 
 
 /*************** tour ***********************/

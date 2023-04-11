@@ -68,15 +68,15 @@ public class TourController {
 		String msg="";
 		try{
 			PageMakerDto<Tour> tourListPage=tourService.findAll(currentPage,keyword,cityNo,toType,sortOrder);
-			List<Tour> tourList=tourListPage.getItemList();
-			List<Tour> newTourList=new ArrayList<>();
+			List<Tour> tempTourList=tourListPage.getItemList();	//PageMakerDto -> List로 변환
+			List<Tour> tourList=new ArrayList<>();
 			//평점 평균 구하기
-			for (Tour tour : tourList) {
-				int tourScore=tourService.calculateTourScore(tour.getToNo());
+			for (Tour tour : tempTourList) {
+				int tourScore=tourReviewService.calculateTourScore(tour.getToNo());
 				tour.setToScore(tourScore);
-				newTourList.add(tour);
+				tourList.add(tour);	//tourList에 후기 평점 평균 붙이기
 			}
-			model.addAttribute("tourList",newTourList);
+			model.addAttribute("tourList",tourList);
 			forwardPath="tour-list";
 		} catch (Exception e){
 			e.printStackTrace();
@@ -89,13 +89,10 @@ public class TourController {
 	@RequestMapping(value="/tour-detail", params = "toNo")
 	public String tourDetail(@RequestParam int toNo, Model model) {
 		String forwardPath="";
-		String msg="";
 		try{
 			Tour tour = tourService.findTourWithCityByToNo(toNo);
 			if(tour!=null){
-				List<TourImg> tourImgList=tourImgService.findTourImgList(toNo);
-				tour.setTourImgList(tourImgList);
-				int tourScore=tourService.calculateTourScore(toNo);
+				int tourScore=tourReviewService.calculateTourScore(toNo);
 				tour.setToScore(tourScore);
 				model.addAttribute("tour",tour);
 				forwardPath="tour-detail";
@@ -110,50 +107,7 @@ public class TourController {
 		}
 		return forwardPath;
 	}
-/*
-	//2-1. 투어상품 상세보기 액션
-	@RequestMapping(value="tour-detail-action")
-	public String tourDetailAction(@RequestParam String pStarDate, 
-									 @RequestParam int pQty,
-									 @RequestParam int toNo,
-									 RedirectAttributes redirectAttributes) {
-		String forwardPath="";
-//		redirectAttributes.addAttribute("pStartDate",pStarDate);
-//		redirectAttributes.addAttribute("pQty",pQty);
-//		redirectAttributes.addAttribute("toNo", toNo);
-		forwardPath="redirect:tour-payment";
-		return forwardPath;
-	}
-*/
-/*	
-	//3. 투어상품 예약하기(구매하기) 폼_session 이용 O (실패)
-	@RequestMapping(value="/tour-payment")
-	public String tourPaymentForm(HttpSession session,
-								  @RequestParam String pStartDate,
-								  @RequestParam int pQty,
-								  @RequestParam int toNo) {
-		String forwardPath="";
-		try {
-			SimpleDateFormat dateFormat= new SimpleDateFormat("yyyy-MM-dd");
-			Date date=dateFormat.parse(pStartDate);
-			Tour tour=tourService.findTourWithCityByToNo(toNo);
-			Payment payment=(Payment)session.getAttribute("payment");
-			if(payment==null) {
-				session.setAttribute("payment", new Payment(0, 0, pQty, null, date, null, 0, 0, tour, null, null));
-			}
-			//payment.setPStartDate(null);
-			//System.out.println(pStartDate);
-			//System.out.println(pQty);
-			payment.setPQty(pQty);
-			payment.setTour(tour);
-			payment.setPStartDate(date);
-		}catch (Exception e) {
-			e.printStackTrace();
-			forwardPath="redirect:error";
-		}
-		return forwardPath;
-	}
-*/
+
 	
 	//3. 투어상품 예약하기(구매하기) 폼_session 이용 x(성공) ----> 모델? 세션? 어느 코드가 나을까?
  	@RequestMapping(value="/tour-payment")
@@ -204,7 +158,7 @@ public class TourController {
 			Payment findPayment=paymentService.findLatestPaymentByUserId(userId);
 			rsPInfo.setPNo(findPayment.getPNo());
 			rsPInfo.setUserId(userId);
-			System.out.println(findPayment);
+			System.out.println(payment);
 			System.out.println(rsPInfo);
 			rsPInfoService.insertRsPerson(rsPInfo);
 			session.removeAttribute("payment");
@@ -219,10 +173,13 @@ public class TourController {
 	}
 	//4. 예약한 투어상품 상세 확인
 	@RequestMapping(value="tour-payment-confirmation")
-	public String tourPaymentConfirmation(RedirectAttributes redirectAttributes) {
+	public String tourPaymentConfirmation(@ModelAttribute Payment payment,
+										  @ModelAttribute RsPInfo rsPInfo,
+										  Model model) {
 		String forwardPath="";
-		Payment payment = (Payment)redirectAttributes.getAttribute("payment");
-		RsPInfo rsPInfo = (RsPInfo)redirectAttributes.getAttribute("rePInfo");
+		
+		model.addAttribute(payment);
+		model.addAttribute(rsPInfo);
 		System.out.println(payment);	//DB애 to_no는 있는데 tour가 안붙어나옴,,,
 		System.out.println(rsPInfo);
 		forwardPath="tour-payment-confirmation";
@@ -230,3 +187,50 @@ public class TourController {
 	}
   	
 }
+
+
+
+/*
+//2-1. 투어상품 상세보기 액션
+@RequestMapping(value="tour-detail-action")
+public String tourDetailAction(@RequestParam String pStarDate, 
+								 @RequestParam int pQty,
+								 @RequestParam int toNo,
+								 RedirectAttributes redirectAttributes) {
+	String forwardPath="";
+//	redirectAttributes.addAttribute("pStartDate",pStarDate);
+//	redirectAttributes.addAttribute("pQty",pQty);
+//	redirectAttributes.addAttribute("toNo", toNo);
+	forwardPath="redirect:tour-payment";
+	return forwardPath;
+}
+*/
+/*	
+//3. 투어상품 예약하기(구매하기) 폼_session 이용 O (실패)
+@RequestMapping(value="/tour-payment")
+public String tourPaymentForm(HttpSession session,
+							  @RequestParam String pStartDate,
+							  @RequestParam int pQty,
+							  @RequestParam int toNo) {
+	String forwardPath="";
+	try {
+		SimpleDateFormat dateFormat= new SimpleDateFormat("yyyy-MM-dd");
+		Date date=dateFormat.parse(pStartDate);
+		Tour tour=tourService.findTourWithCityByToNo(toNo);
+		Payment payment=(Payment)session.getAttribute("payment");
+		if(payment==null) {
+			session.setAttribute("payment", new Payment(0, 0, pQty, null, date, null, 0, 0, tour, null, null));
+		}
+		//payment.setPStartDate(null);
+		//System.out.println(pStartDate);
+		//System.out.println(pQty);
+		payment.setPQty(pQty);
+		payment.setTour(tour);
+		payment.setPStartDate(date);
+	}catch (Exception e) {
+		e.printStackTrace();
+		forwardPath="redirect:error";
+	}
+	return forwardPath;
+}
+*/

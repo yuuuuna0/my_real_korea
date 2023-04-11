@@ -128,60 +128,47 @@
 							<tbody>
 								<tr>
 									<td>
-										<strong>Name</strong>
+										<strong>여행이름</strong>
 									</td>
-									<td>
+									<td >
 										Jhon Doe
 									</td>
 								</tr>
 								<tr>
 									<td>
-										<strong>Check in</strong>
+										<strong>여행 시작일</strong>
 									</td>
-									<td>
-										10 April 2015</td>
+									<td th:text="${payment.pStartDate}">
+										10 April 2015
+									</td>
 								</tr>
 								<tr>
-									<td><strong>Check out</strong>
+									<td><strong>여행종료일</strong>
 									</td>
-									<td>
+									<td th:text="${payment.pStartDate}">
 										12 April 2015
 										<br>
 									</td>
 								</tr>
 								<tr>
-									<td><strong>rooms</strong>
+									<td><strong>예약 인원</strong>
 									</td>
-									<td>1 double room</td>
+									<td th:text="${payment.pQty}">2</td>
 								</tr>
-								<tr>
-									<td><strong>Nights</strong>
-									</td>
-									<td>2</td>
-								</tr>
-								<tr>
-									<td><strong>Adults</strong>
-									</td>
-									<td>2</td>
-								</tr>
-								<tr>
-									<td><strong>Childs</strong>
-									</td>
-									<td>0</td>
-								</tr>
+								
 								<tr>
 									<td>
-										<strong>Payment type</strong>
+										<strong>결제방법</strong>
 									</td>
-									<td>
+									<td th:text="${payment.pMethod}">
 										Credit card
 									</td>
 								</tr>
 								<tr>
 									<td>
-										<strong>TOTAL COST</strong>
+										<strong>총 금액</strong>
 									</td>
-									<td>
+									<td th:text="${payment.pPrice}">
 										$154
 									</td>
 								</tr>

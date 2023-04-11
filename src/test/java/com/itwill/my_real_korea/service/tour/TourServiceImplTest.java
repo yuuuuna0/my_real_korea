@@ -76,11 +76,7 @@ class TourServiceImplTest {
 			System.out.println(tourList);
 	}
 	
-	@Test
-	void testCalculateTourScore() throws Exception{
-		int tourScore=tourService.calculateTourScore(3);
-		System.out.println(tourScore);
-	}
+	
 /*
 	void testFindTourListByToType() throws Exception{
 		List<Tour> tourList=tourService.findTourListByToType(1);

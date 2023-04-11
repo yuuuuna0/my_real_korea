@@ -14,7 +14,10 @@ public interface TourReviewService {
 	public int updateTourReview(TourReview tourReview) throws Exception;
 	//3. 투어후기번호로 후기 삭제
 	public int deleteTourReview(int toReviewNo) throws Exception;
-
+	//4. 투어 평점 구하기
+	int calculateTourScore(int toNo) throws Exception;
+	
+	
 	//페이지 메이커 사용
 	//4. 사용자가 작성한 후기 전체 보기
 	public List<TourReview> findByUserId(String userId) throws Exception;

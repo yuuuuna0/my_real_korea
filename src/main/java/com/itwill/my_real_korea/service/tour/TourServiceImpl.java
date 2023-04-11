@@ -48,8 +48,6 @@ public class TourServiceImpl implements TourService {
 		List<TourImg> tourImgList=tourImgDao.findTourImgList(toNo);
 		Tour findTour=tourDao.findTourWithCityByToNo(toNo);
 		findTour.setTourImgList(tourImgList);
-		int tourScore=this.calculateTourScore(toNo);
-		findTour.setToScore(tourScore);
 		return findTour;
 	}
 
@@ -75,22 +73,6 @@ public class TourServiceImpl implements TourService {
 		return null;
 	}
 
-	@Override
-	public int calculateTourScore(int toNo) throws Exception {
-		// 투어 평점 구하기
-		List<TourReview> tourReviewList=tourReviewDao.selectByToNo(toNo);
-		int tourScore=0;
-		int totScore=0;
-		if(tourReviewList.size()!=0) {
-			for (TourReview tourReview : tourReviewList) {
-				totScore+=tourReview.getToReviewStar();
-			}
-			tourScore=totScore/(tourReviewList.size());
-		} else if(tourReviewList.size()==0) {
-			tourScore=0;
-		}
-		return tourScore;
-	}
 }
 
 /*

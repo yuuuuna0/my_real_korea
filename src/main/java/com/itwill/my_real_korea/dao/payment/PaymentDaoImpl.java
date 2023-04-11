@@ -51,4 +51,10 @@ public class PaymentDaoImpl implements PaymentDao{
     public int deletePayment(int pNo) {
         return paymentMapper.deletePayment(pNo);
     }
+
+    //사용자의 가장 최근 주문 조회하기
+	@Override
+	public Payment findLatestPaymentByUserId(String userId) {
+		return paymentMapper.findLatestPaymentByUserId(userId);
+	}
 }

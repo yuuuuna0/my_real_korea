@@ -23,5 +23,8 @@ public interface PaymentMapper {
 
     //결제 삭제
     int deletePayment(int pNo);
+    
+    //사용자의 가장 최근 주문 조회하기
+    Payment findLatestPaymentByUserId(String userId);
 
 }

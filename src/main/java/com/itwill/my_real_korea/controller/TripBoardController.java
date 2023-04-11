@@ -1,6 +1,6 @@
 package com.itwill.my_real_korea.controller;
 
-import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,25 +9,33 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.itwill.my_real_korea.dto.tripboard.TripBoard;
+import com.itwill.my_real_korea.dto.tripboard.TripBoardComment;
+import com.itwill.my_real_korea.service.tripboard.TripBoardCommentService;
 import com.itwill.my_real_korea.service.tripboard.TripBoardService;
 import com.itwill.my_real_korea.util.PageMakerDto;
 
 @Controller
 public class TripBoardController {
+
+	private TripBoardService tripBoardService;
+	private TripBoardCommentService tripBoardCommentService;
 	
 	@Autowired
-	private TripBoardService tripboardService;
+	public TripBoardController(TripBoardService tripBoardService, TripBoardCommentService tripBoardCommentService) {
+		this.tripBoardService = tripBoardService;
+		this.tripBoardCommentService = tripBoardCommentService;
+	}
 	
-	/*
-	 * 동행 게시판 리스트 보기 
-	 */
-	@GetMapping(value = "/tripboard-list")
-	public String tripboard_list(@RequestParam(required = false, defaultValue = "1")int pageNo, Model model) {
+	//동행게시판 리스트
+	@GetMapping("/tripboard-list")
+	public String tripBooard_list(@RequestParam(required = false, defaultValue = "1")int pageNo, Model model) {
 		
 		try {
-			PageMakerDto<TripBoard> tripBoardList = tripboardService.selectAllTb(pageNo);
-			model.addAttribute("tripBoardList",tripBoardList);
-			model.addAttribute("pageNo",pageNo);
+			PageMakerDto<TripBoard> tripBoardListPage = tripBoardService.selectAllTb(pageNo);
+			List<TripBoard> tripBoardList = tripBoardListPage.getItemList();
+			model.addAttribute("tripBoardListPage", tripBoardListPage);
+			model.addAttribute("tripBoardList", tripBoardList);
+			model.addAttribute("pageNo", pageNo);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return "error";
@@ -35,55 +43,51 @@ public class TripBoardController {
 		return "tripboard-list";
 	}
 	
-	/*
-	 * 동행 게시판 1개 보기
-	 */
-	
-	public String tripboard_detail(@RequestParam int tBoNo, Model model) {
-		
-		try {
-			
-		} catch (Exception e) {
-			// TODO: handle exception
+	//동행게시판 게시글 1개 상세보기
+	@GetMapping("/tripboard-detail")
+	public String tripBoard_detail(@RequestParam Integer tBoNo, Model model) throws Exception {
+		if(tBoNo == null) {
+			return "tripboard-list";
 		}
-		
-		return null; 
+		try {
+			TripBoard tripBoard = tripBoardService.selectByTbNo(tBoNo);
+			List<TripBoardComment> tripBoardCommentList = tripBoardCommentService.selectAllByTBoNo(tBoNo);
+			tripBoardService.increaseTbReadCount(tripBoard.getTBoNo());
+			model.addAttribute("tripBoard", tripBoard);
+			model.addAttribute("tripBoardCommentList", tripBoardCommentList);
+			model.addAttribute("tBoNo", tBoNo);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "error";
+		}
+		return "tripboard-detail";
 	}
 	
 	
-	/*
-	 * 동행 게시판 쓰기 폼
-	 */
-	@AdminCheck
+	//동행게시판 작성 폼
 	@LoginCheck
-	@GetMapping("/tripboard_write_form")
-	public String tripboard_write_form(HttpServletRequest request) {
-		
-		String requestUrl = request.getHeader("Referer");
-		
-		request.getSession().setAttribute("requestUrl", requestUrl);
-		
-		return "tripboard_write_form";
-		
+	@GetMapping("/tripboard-write-form")
+	public String tripBoardWriteForm() {
+		return "tripboard-write-form";
 	}
 	
 	
 	
-	/*
-	 * 동행 게시판 수정 폼
-	 */
-	@AdminCheck
+	//동행게시판 수정 폼
 	@LoginCheck
-	@GetMapping("/tripboard_modify_form")
-	public String tripboard_modify_form(HttpServletRequest request) {
-		
-		String requestUrl = request.getHeader("Referer");
-		
-		request.getSession().setAttribute("requestUrl", requestUrl);
-		
-		return "tripboard_write_form";
-		
+	@GetMapping("/tripboard-modify-form")
+	public String tripBoardModifyForm(Integer tBoNo, Model model) throws Exception {
+		if(tBoNo == null) {
+			return "tripboard-list";
+		}
+		try {
+			TripBoard tripBoard = tripBoardService.selectByTbNo(tBoNo);
+			model.addAttribute("tripBoard", tripBoard);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "error";
+		}
+		return "tripboard-modify-form";
 	}
-	
 
 }

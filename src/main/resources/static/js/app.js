@@ -1,9 +1,8 @@
-import * as NoticeView from "./notice_view.js";
-import * as WishlistView from "./wishlist_view.js";
+import * as View from "./view.js";
 import * as Request from "./request.js";
  
 /*
- 이벤트 등록
+ 이벤트 등록 하는 공용 클래스
  #notice-search-btn
  #sort-by
  #type-tour
@@ -12,7 +11,7 @@ import * as Request from "./request.js";
  
 // on => 동적으로 이벤트 추가 가능 -> 상위 노드에 처리해줘야함 (document)
 
-/******** 검색결과 리스트 notice-search-list **********/ 
+/******** 공지사항 검색결과 리스트 notice-search-list **********/ 
 $(document).on('click','#notice-search-btn',function(e){
 	// ajax로 리스트 부분만 검색된 리스트로 변경
 	let keyword = $('#notice-search-keyword').val();
@@ -35,7 +34,7 @@ $(document).on('click','#notice-search-btn',function(e){
 							totRecordCount.text(resultJson.data.pageMaker.totCount);
 							//code 1 일때 render, 아닐 때 msg 띄움
 							if(resultJson.code == 1){
-								NoticeView.render("#notice-search-list-template", resultJson);
+								View.render("#notice-search-list-template", resultJson, '#notice-list');
 							} else {
 								alert(resultJson.msg);
 							};
@@ -44,7 +43,7 @@ $(document).on('click','#notice-search-btn',function(e){
 	e.preventDefault();
 });
 
-/******** 정렬 : 최신순, 오래된순, 조회수 높은 순 **********/ 
+/******** 공지사항 정렬 : 최신순, 오래된순, 조회수 높은 순 **********/ 
 $(document).on('change','#sort-by',function(e){
 	// ajax로 리스트 부분만 검색된 리스트로 변경
 	let selectedValue = $(this).val();
@@ -62,7 +61,7 @@ $(document).on('change','#sort-by',function(e){
 							function(resultJson){
 								//code 1 일때 render, 아닐 때 msg 띄움
 								if(resultJson.code == 1){
-									NoticeView.render("#notice-search-list-template", resultJson);
+									View.render("#notice-search-list-template", resultJson, '#notice-list');
 								} else {
 									alert(resultJson.msg);
 								};
@@ -83,7 +82,7 @@ $(document).on('change','#sort-by',function(e){
 							function(resultJson){
 								//code 1 일때 render, 아닐 때 msg 띄움
 								if(resultJson.code == 1){
-									NoticeView.render("#notice-search-list-template", resultJson);
+									View.render("#notice-search-list-template", resultJson, '#notice-list');
 								} else {
 									alert(resultJson.msg);
 								};
@@ -104,7 +103,7 @@ $(document).on('change','#sort-by',function(e){
 							function(resultJson){
 								//code 1 일때 render, 아닐 때 msg 띄움
 								if(resultJson.code == 1){
-									NoticeView.render("#notice-search-list-template", resultJson);
+									View.render("#notice-search-list-template", resultJson, '#notice-list');
 								} else {
 									alert(resultJson.msg);
 								};
@@ -132,7 +131,7 @@ $(document).on('click','#type-tour',function(e){
 						function(resultJson) {
 							//code 1 일때 render, 아닐 때 msg 띄움
 							if (resultJson.code == 1) {
-								WishlistView.render('#wishlist-tour-template', resultJson);
+								View.render('#wishlist-tour-template', resultJson, '#wishlist-list');
 							} else {
 								alert(resultJson.msg);
 							};
@@ -157,7 +156,7 @@ $(document).on('click','#type-ticket',function(e){
 						function(resultJson) {
 							//code 1 일때 render, 아닐 때 msg 띄움
 							if (resultJson.code == 1) {
-								WishlistView.render("#wishlist-ticket-template", resultJson);
+								View.render("#wishlist-ticket-template", resultJson, '#wishlist-list');
 							} else {
 								alert(resultJson.msg);
 							};

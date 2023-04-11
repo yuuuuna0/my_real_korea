@@ -1,8 +1,9 @@
 /**
- * notice_view.js
+ * view.js
+  화면 일부분을 템플릿으로 변경할 때 쓰는 공용 클래스
  */
  
-export function render(templateId='#notice-search-list-template', jsonResult={}, contentId='#notice-list'){
+export function render(templateId, jsonResult={}, contentId){
 	
 	let templateHtml = $(templateId).html(); // id로 메인페이지 화면의 html 얻기
 	let bindTemplate = Handlebars.compile(templateHtml);

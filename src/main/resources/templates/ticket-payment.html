@@ -112,7 +112,8 @@
 							<div class="col-sm-6">
 								<div class="form-group">
 									<label>First name</label>
-									<input type="text" class="form-control" id="firstname_booking" name="firstname_booking" th:value="${session.ticket.tiNo}">
+									<input type="text" class="form-control" id="firstname_booking" name="firstname_booking" 
+									th:text="${session.authUser.name}">
 								</div>
 							</div>
 							<div class="col-sm-6">
@@ -126,7 +127,8 @@
 							<div class="col-sm-6">
 								<div class="form-group">
 									<label>Email</label>
-									<input type="email" id="email_booking" name="email_booking" class="form-control">
+									<input type="email" id="email_booking" name="email_booking" class="form-control" 
+											th:text="${session.authUser.Email}">
 								</div>
 							</div>
 							<div class="col-sm-6">
@@ -153,7 +155,7 @@
 							<label>
 								<input type="checkbox" name="policy_terms" id="policy_terms">I accept terms and conditions and general policy.</label>
 						</div>
-						<a href="confirmation_hotel.html" class="btn_1 green medium">Book now</a>
+						<a href="ticket-payment-confirmation.html" class="btn_1 green medium">결제 하기</a>
 					</div>
 				</div>
 			
@@ -201,7 +203,7 @@
 								</tr>
 							</tbody>
 						</table>
-						<a class="btn_full" href="confirmation_hotel.html">결제하기</a>
+						<a class="btn_full" href="ticket-payment-confirmation.html">결제하기</a>
 						<a class="btn_full_outline" href="single_hotel.html"><i class="icon-right"></i> Modify your search</a>
 					<!-- payment 폼 끝 -->
 					</form>

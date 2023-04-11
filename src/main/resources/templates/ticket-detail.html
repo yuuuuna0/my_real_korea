@@ -58,7 +58,6 @@
 				<div class="row">
 					<div class="col-md-8">
 						<span class="rating"><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class=" icon-star-empty"></i></span>
-						<!-- 데이터만 가져오기 -->
 						<h1 th:text="${session.ticket.tiTitle}"></h1>
 						<span th:text="${session.ticket.city.cityName}"></span> <!-- ???? -->
 					</div>
@@ -282,8 +281,8 @@
 									<input id="tiPrice" type="hidden" name="tiPrice" th:value="${ticket.tiPrice}">
 									 -->
 									
-																										<!-- name 속성-->
-									<input class="form-control" data-date-format="yyyy-MM-dd" type="date" id="pStartDate" name="pStartDate">
+																														<!-- function 추가 ? -->
+									<input class="form-control" data-date-format="yyyy-MM-dd" type="date" id="pStartDate" name="pStartDate" required>
 								</div>
 							</div>
 							<!-- <div class="col-md-6">

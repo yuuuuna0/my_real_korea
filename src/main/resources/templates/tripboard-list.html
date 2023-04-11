@@ -110,33 +110,33 @@
 								<div class="inner-box">
 									<div class="image-box">
 										<figure class="image">
-											<a href="tripboard-detail.html"><img src="img/products/image-1.jpg" alt="">
+											<a th:href="@{tripboard-detail(tBoNo=${tripBoard.tBoNo})}" href="tripboard-detail.html"><img src="img/products/image-1.jpg" alt="">
 											</a>
 										</figure>
 										<div class="item-options clearfix">
 											<a href="shopping-cart.html" class="btn_shop"><span class="icon-basket"></span>
-                                            <div class="tool-tip">
-                                                Add to cart
-                                            </div>
+	                                            <div class="tool-tip">
+	                                                Add to cart
+	                                            </div>
                                             </a>
 											<a href="shop-single.html" class="btn_shop"><span class="icon-heart-8"></span>
-                                            <div class="tool-tip">
-                                                Add to Fav
-                                            </div>
+	                                            <div class="tool-tip">
+	                                                Add to Fav
+	                                            </div>
                                             </a>
 											<a href="shop-single.html" class="btn_shop"><span class="icon-eye"></span>
-                                            <div class="tool-tip">
-                                                View
-                                            </div>
+	                                            <div class="tool-tip">
+	                                                View
+	                                            </div>
                                             </a>
 										</div>
 									</div>
 									<div class="product_description">
 										<div class="trip-title">
-											<h3><a href="tripboard-detail.html" th:text="${tripBoard.tBoTitle}">Travel Book</a></h3>
+											<h3><a th:text="${tripBoard.tBoTitle}">Travel Book</a></h3>
 										</div>
 										<div class="trip-date">
-											<h3><a href="tripboard-detail.html" th:text="${#dates.format(tripBoard.tBoStartDate, 'MM.dd')}"></a><a> ~ </a><a href="tripboard-detail.html" th:text="${#dates.format(tripBoard.tBoEndDate, 'MM.dd')}"></a></h3>
+											<h3><a th:text="${#dates.format(tripBoard.tBoStartDate, 'MM.dd')}"></a><a> ~ </a><a href="tripboard-detail.html" th:text="${#dates.format(tripBoard.tBoEndDate, 'MM.dd')}"></a></h3>
 										</div>
 										<div class="price">
 											<span class="offer">$20.00</span> $15.00

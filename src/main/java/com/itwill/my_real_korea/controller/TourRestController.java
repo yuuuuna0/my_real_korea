@@ -52,18 +52,26 @@ public class TourRestController {
 
 	//1. 투어상품 전체 리스트 보기
 		@ApiOperation(value="투어상품리스트(필터&정렬)")
-		@GetMapping(value = "/tour", produces="application/json;charset=UTF-8")
+		@GetMapping(value = "/tour-list-ajax/{keyword}", produces="application/json;charset=UTF-8")
 		public Map<String, Object> tour_list(@RequestParam(required = false, defaultValue = "1") int currentPage,
-											 @RequestParam(required = false, defaultValue = "") String keyword, 
+											 @PathVariable String keyword, 
 											 @RequestParam(required = false, defaultValue = "0") int cityNo, 
 											 @RequestParam(required = false, defaultValue = "0") int toType, 
 											 @RequestParam(required = false, defaultValue = "") String sortOrder){
 			Map<String, Object> resultMap = new HashMap<>();
 			int code = 1;
 			String msg = "성공";
-			PageMakerDto<Tour> data = null;
+			List<Tour> data = null;
 			try {
-				data=tourService.findAll(currentPage,keyword, cityNo, toType, sortOrder);
+				PageMakerDto<Tour> tourListPage=tourService.findAll(currentPage,keyword, cityNo, toType, sortOrder);
+				List<Tour> tempTourList=tourListPage.getItemList();
+				List<Tour> tourList=new ArrayList<>();
+				for (Tour tour : tempTourList) {
+					int tourScore=tourReviewService.calculateTourScore(tour.getToNo());
+					tour.setToScore(tourScore);
+					tourList.add(tour);	//tourList에 후기 평점 평균 붙이기
+				}
+				data=tourList;
 				code=1;
 				msg="성공";
 			}catch (Exception e) {

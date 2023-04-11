@@ -124,8 +124,9 @@
 										</div>
 										<div class="icons">
 											<span class="icon-eye"></span>
-											<span th:text=${tripBoard.tBoReadcount}>$20.00</span>
-											<span class="icon-comment"></span> 3
+											<span th:text="${tripBoard.tBoReadcount}">$20.00</span>
+											<span class="icon-comment"></span>
+											<span th:text="${tripBoard.commentCount}"></span>
 										</div>
 									</div>
 								</div>
@@ -410,17 +411,11 @@
 						<div class="widget" id="cat_shop">
 							<h4>Categories</h4>
 							<ul>
-								<li><a href="#">전체보기</a>
+								<li>
+									<a href="#">전체보기</a>
 								</li>
-								<li><a href="#">서울</a>
-								</li>
-								<li><a href="#">경기</a>
-								</li>
-								<li><a href="#">강원</a>
-								</li>
-								<li><a href="#">부산</a>
-								</li>
-								<li><a href="#">대전</a>
+								<li th:each="city:${cityList}">
+									<a th:text="${city.cityName}" href="#">서</a>
 								</li>
 							</ul>
 						</div>

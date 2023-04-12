@@ -57,7 +57,7 @@
 	<!--======================== End Header======================== -->
 	<!-- End Header -->
 
-	<section class="parallax-window" data-parallax="scroll" data-image-src="img/freeboard_list.png" data-natural-width="1400" data-natural-height="470">
+	<section class="parallax-window" data-parallax="scroll" data-image-src="img/main_freeboard.jpg" data-natural-width="1400" >
 		<div class="parallax-content-1">
 			<div class="animated fadeInDown">
 				<h1><a id="freeboard-list-main" href="freeboard-list">자유게시물</a></h1>
@@ -80,7 +80,7 @@
 			</div>
 		</div>
 		<!-- End Position -->
-
+			
 		<div class="container margin_60">
 			<div class="row">
 				<div class="col-lg-9">
@@ -110,8 +110,11 @@
 					
 						<!--End Sort By-->
 
-
 						<hr>
+					</aside>
+				</div>
+
+						
 		<!-- End row -->
 				<!-- End col -->
 
@@ -136,6 +139,8 @@
 										<div class="item-options clearfix">
 											<span class="icon-eye"></span>
 											<span th:text="${freeBoard.fBoCount}"></span> 
+											<span class="icon-comment"></span>
+											<span th:text="${freeBoard.commentCount}"></span> 
 										</div>
 									</div>
 								</div>
@@ -166,12 +171,14 @@
 						</nav>
 						</div>
 						<!-- end pagination-->
-					
+
 			
 			
-				<!--Sidebar-->
+
+			</div>
+								<!--Sidebar-->
 				<div class="col-lg-3">
-					<aside class="sidebar">
+					<aside class="sidebar" style="float:right">
 						<div class="widget">
 							<div class="input-group">
 								<input id="freeboard-search-keyword" type="text" class="form-control" placeholder="Search...">
@@ -183,7 +190,7 @@
 						<!-- End Search -->
 							<!--Sidebar-->
 						<hr>
-						<div class="widget" id="cat_shop">
+						<div class="widget " id="cat_shop">
 							<h4>Categories</h4>
 							<ul>
 								<li><a href="tour-list">투어 보러가기</a>
@@ -197,11 +204,6 @@
 							</ul>
 						</div>
 						<!-- End widget -->
-						<hr>
-					</aside>
-				</div>
-			</div>
-		
 		<!-- End Container -->
 	</main>
 	<!-- End main -->

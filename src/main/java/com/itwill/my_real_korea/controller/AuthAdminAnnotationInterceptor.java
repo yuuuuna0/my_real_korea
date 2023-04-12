@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 
+import com.itwill.my_real_korea.dto.user.User;
 import com.itwill.my_real_korea.exception.IsNotAdminException;
 import com.itwill.my_real_korea.service.user.UserService;
 
@@ -37,12 +38,12 @@ public class AuthAdminAnnotationInterceptor implements HandlerInterceptor {
 		
 		// HandlerMethod 객체에 @AdminCheck 이 있는 경우, 세션이 있는지 체크
 		HttpSession session = request.getSession();
-		String sUserId = (String) session.getAttribute("sUserId");
+		User loginUser = (User) session.getAttribute("loginUser");
 		
 		// 세션에 저장된 요청URL
 		String requestUrl = (String) session.getAttribute("requestUrl");
-		// sUserId 가 admin 이 아니고 요청URL이 존재할 때, 요청 URL로 돌려보냄
-		if (!sUserId.equals("admin")) {
+		// loginUser.getUserId() 가 admin 이 아니고 요청URL이 존재할 때, 요청 URL로 돌려보냄
+		if (!loginUser.getUserId().equals("admin")) {
 			if (requestUrl != null) {
 				session.removeAttribute("requestUrl");
 				response.sendRedirect(requestUrl);

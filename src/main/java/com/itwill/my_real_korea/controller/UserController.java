@@ -33,7 +33,7 @@ public class UserController {
 	
 	//회원 가입 액션
 	@PostMapping(value = "user-write-action", produces = "application/json;charset=UTF-8")
-	public String user_write_action(@ModelAttribute("fuser") User user,Model model) throws Exception {
+	public String user_write_action(@ModelAttribute("fuser") User user, Model model) throws Exception {
 		String forward_path = "";
 		try {
 			userService.create(user);
@@ -58,12 +58,13 @@ public class UserController {
 	public String user_login_action(@ModelAttribute("fuser") User user, Model model, HttpSession session) throws Exception {
 	    String forwardPath = "";
 	    try {
-	        User loginUser = userService.login(user.getUserId(), user.getPassword());
-	        if (loginUser.getMailAuth() != 1) {
-	        	session.setAttribute("authUser", loginUser);
+	        User authUser = userService.login(user.getUserId(), user.getPassword());
+	        if (authUser.getMailAuth() != 1) {
+	        	session.setAttribute("authUser", authUser);
 	        	forwardPath = "user-auth";
 	        } else {
-	            session.setAttribute("sUserId", loginUser.getUserId());
+	        	User loginUser = userService.login(user.getUserId(), user.getPassword());
+	            session.setAttribute("loginUser", loginUser);
 	            forwardPath = "redirect:index";
 	        }
 	    } catch (UserNotFoundException e) {
@@ -83,19 +84,18 @@ public class UserController {
 	@LoginCheck
 	@GetMapping(value = "/user-auth")
 	public String user_auth(HttpServletRequest request) throws Exception {
-		String forward_path = "";
-		String sUserId=(String)request.getSession().getAttribute("sUserId");
-		User loginUser = userService.findUser(sUserId);
-		request.setAttribute("loginUser", loginUser);
-		forward_path = "user-auth";
-		return forward_path;
+		HttpSession session = request.getSession();
+		User authUser = (User) session.getAttribute("authUser");
+		authUser = userService.findUser(authUser.getUserId());
+		session.setAttribute("authUser", authUser);
+		return "user-auth";
 	}
 
 	//회원 인증 액션
 	@PostMapping(value = "user-auth-action", produces = "application/json;charset=UTF-8")
 	public String user_auth_action(@RequestParam("mailAuthKey") String mailAuthKey, HttpSession session) throws Exception {
 	    String forwardPath = "";
-	        User authUser = (User)session.getAttribute("authUser");
+	        User authUser = (User) session.getAttribute("authUser");
 	        if(authUser.getMailKey() == Integer.parseInt(mailAuthKey)) {
 	        	userService.updateMailAuth(authUser);
 	        	/*
@@ -129,7 +129,6 @@ public class UserController {
 		if(userId != null) {
 			model.addAttribute("userId", userId);
 			model.addAttribute("msg", "회원님의 아이디는 "+userId+" 입니다.");
-//			System.out.println("userId : "+userId);
 		}else {
 			model.addAttribute("msg", "일치하는 회원 정보가 없습니다.");
 		}
@@ -164,32 +163,43 @@ public class UserController {
 	@LoginCheck
 	@GetMapping(value = "/user-view", produces = "application/json;charset=UTF-8")
 	public String user_view(HttpServletRequest request) throws Exception {
-	    HttpSession session = request.getSession();
-	    String sUserId = (String) session.getAttribute("sUserId");
-	    if (sUserId == null) {
-	        session.setAttribute("requestUrl", request.getRequestURL().toString());
-	        return "redirect:user-login";
-	    }
-	    User loginUser = userService.findUser(sUserId);
-	    request.setAttribute("loginUser", loginUser);
-	    return "user-view";
+		HttpSession session = request.getSession();
+		User loginUser = (User) session.getAttribute("loginUser");
+		System.out.println(">> loginUser : "+loginUser);
+		if (loginUser == null) {
+			session.setAttribute("requestUrl", request.getRequestURL().toString());
+			return "redirect:user-login";
+		}
+		loginUser = userService.findUser(loginUser.getUserId());
+		request.setAttribute("loginUser", loginUser);
+		return "user-view";
 	}
+	
+	
+	
 	
 	//회원 정보 수정 폼
 	@LoginCheck
 	@PostMapping("/user-modify")
 	public String user_modify(HttpServletRequest request) throws Exception {
-		String sUserId=(String)request.getSession().getAttribute("sUserId");
-		User loginUser=userService.findUser(sUserId);
+		HttpSession session = request.getSession();
+		User loginUser = (User) session.getAttribute("loginUser");
+		loginUser = userService.findUser(loginUser.getUserId());
 		request.setAttribute("loginUser", loginUser);
 		return "user-modify";
 	}
+
 	
 	//회원 정보 수정 액션
 	@LoginCheck
 	@PostMapping("user-modify-action")
 	public String user_modify_action(@ModelAttribute User user,HttpServletRequest request) throws Exception {
+		HttpSession session = request.getSession();
 		userService.update(user);
+//		System.out.println(">> user : "+user);
+		User loginUser = userService.findUser(user.getUserId());
+		session.setAttribute("loginUser", loginUser);
+//		System.out.println(">> loginUser : "+loginUser);
 		return "redirect:user-view";
 	}
 	
@@ -197,8 +207,9 @@ public class UserController {
 	@LoginCheck
 	@PostMapping("user-remove-action")
 	public String user_remove_action(HttpServletRequest request) throws Exception {
-		String sUserId=(String)request.getSession().getAttribute("sUserId");
-		userService.remove(sUserId);
+		HttpSession session = request.getSession();
+		User loginUser = (User) session.getAttribute("loginUser");
+		userService.remove(loginUser.getUserId());
 		request.getSession(false).invalidate();
 		return "redirect:index";
 	}

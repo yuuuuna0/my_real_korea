@@ -78,7 +78,7 @@
 	<section class="parallax-window" data-parallax="scroll" data-image-src="img/admin_top.jpg" data-natural-width="1400" data-natural-height="470">
 		<div class="parallax-content-1">
 			<div class="animated fadeInDown">
-				<h1>Hello <a th:text="${session.sUserId}" href=''></a> !</h1>
+				<h1>Hello <a th:text="${session.loginUser.userId}" href=''></a> !</h1>
 				<p>Ridiculus sociosqu cursus neque cursus curae ante scelerisque vehicula.</p>
 			</div>
 		</div>
@@ -100,15 +100,12 @@
 		<!-- End Position -->
 
 		<div class="margin_60 container">
-			<div id="tabs" class="tabs">
+			<div id="tabs" >
 				<nav>
 					<ul>
-						<li><a href="#section-4" class="icon-profile"><span>Profile</span></a>
+						<li><a href="#section-4" ></a>
 						</li>
-						<li><a href="#section-2" class="icon-wishlist"><span>Wishlist</span></a>
-						</li>
-						<li><a href="#section-3" class="icon-settings"><span>Settings</span></a>
-						</li>
+						
 					</ul>
 				</nav>
 
@@ -116,56 +113,55 @@
 				<div class="content">
 
 					<section id="section-4">
-			<div class="row" th:object="${loginUser}">
-<!-- 
-<input th:value="${session.sUserId}" type="hidden" name="userId"/>
- -->
-							<div class="col-md-6">
-<form method="post" name="f">
-	<h4>회원 정보</h4>
-	<ul id="profile_summary">
-<li>아이디 <span th:text="${loginUser.userId}"></span>
-</li>
-<li>이름 <span th:text="${loginUser.name}"></span>
-</li>
-<li>닉네임 <span th:text="${loginUser.nickname}"></span>
-</li>
-<li>휴대폰 <span th:text="${loginUser.phone}"></span>
-</li>
-<li>이메일 <span th:text="${loginUser.email}"></span>
-</li>
-<li>생일 <span th:text="${loginUser.birth}"></span>
-</li>
-<li>주소 <span th:text="${loginUser.address}"></span>
-</li>
-<li>성별 <span th:text="${loginUser.gender == 1} ? '남' : '여'"></span>
-</li>
-<li>포인트 <span th:text="${loginUser.point}"></span>
-</li>
-		
-<li>자기 소개 
-<span th:text="${loginUser.userAddInfo.introduce}"></span>
-</li>
-<li>음주 여부 
-<span th:text="${loginUser.userAddInfo.alcohol == 1} ? '음주 선호' : (${loginUser.userAddInfo.alcohol == 2} ? '음주 선호하지 않음' : null)"></span>
-</li>
-<li>흡연 여부 
-<span th:text="${loginUser.userAddInfo.smoking == 1} ? '흡연' : (${loginUser.userAddInfo.smoking == 2} ? '비흡연' :  null)"></span>
-</li>
-		
-<li>프로필 이미지 <span th:text="${loginUser.userImg.userImgUrl}"></span></li>
-		
-	</ul>
-</form>
-									<!-- 
-									 -->
-							</div>
+<div class="row">
+
+
+<div class="col-md-6">
+	<form method="post" name="f">
+	<h3>회원 정보</h3>
+		<ul id="profile_summary" th:object="${loginUser}">
+			<li>아이디 <span th:text="*{userId}"></span>
+			</li>
+			<li>이름 <span th:text="*{name}"></span>
+			</li>
+			<li>닉네임 <span th:text="*{nickname}"></span>
+			</li>
+			<li>휴대폰 <span th:text="*{phone}"></span>
+			</li>
+			<li>이메일 <span th:text="*{email}"></span>
+			</li>
+			<li>생일 <span th:text="*{birth}"></span>
+			</li>
+			<li>주소 <span th:text="*{address}"></span>
+			</li>
+			<li>성별 <span th:text="*{gender == 1} ? '남' : '여'"></span>
+			</li>
+			<li>포인트 <span th:text="*{point}"></span>
+			</li>
+		</ul>
+		<ul id="profile_summary" th:object="${loginUser.userAddInfo}">
+			<li>자기 소개 
+			<span th:text="*{introduce}"></span>
+			</li>
+			<li>음주 여부 
+			<span th:text="*{alcohol == 1} ? '음주 선호' : (*{alcohol == 2} ? '음주 선호하지 않음' : null)"></span>
+			</li>
+			<li>흡연 여부 
+			<span th:text="*{smoking == 1} ? '흡연' : (*{smoking == 2} ? '비흡연' :  null)"></span>
+			</li>
+		</ul>
+		<ul id="profile_summary" th:object="${loginUser.userImg}">
+			<li>프로필 이미지 <span th:text="*{userImgUrl}"></span></li>
+		</ul>
+	</form>
+</div>
+
 							<div class="col-md-6">
 								<p>
 								<img src="img/tourist_guide_pic.jpg" alt="Image" class="img-fluid styled profile_pic">
 								</p>
 							</div>
-			</div>
+</div>
 <button class="btn_1 green" type="button" onclick="userModify();">프로필 수정</button>
 <button class="btn_1 green" type="button" onclick="userRemove();">회원 탈퇴</button>
 
@@ -280,306 +276,12 @@
 
 					</section>
 					<!-- End section 4 -->
-					<section id="section-2">
-						<div class="row">
-							<div class="col-lg-4 col-md-6">
-								<div class="hotel_container">
-									<div class="img_container">
-										<a href="single_hotel.html">
-											<img src="img/hotel_1.jpg" width="800" height="533" class="img-fluid" alt="Image">
-											<div class="ribbon top_rated">
-											</div>
-											<div class="score">
-												<span>7.5</span>Good
-											</div>
-											<div class="short_info hotel">
-												From/Per night<span class="price"><sup>$</sup>59</span>
-											</div>
-										</a>
-									</div>
-									<div class="hotel_title">
-										<h3><strong>Park Hyatt</strong> Hotel</h3>
-										<div class="rating">
-											<i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star-empty"></i>
-										</div>
-										<!-- end rating -->
-										<div class="wishlist_close_admin">
-											-
-										</div>
-									</div>
-								</div>
-								<!-- End box tour -->
-							</div>
-							<!-- End col-md-6 -->
+					
+<!-- section 2 start -->
+<!-- End section 2 -->
 
-							<div class="col-lg-4 col-md-6 ">
-								<div class="hotel_container">
-									<div class="img_container">
-										<a href="single_hotel.html">
-											<img src="img/hotel_2.jpg" width="800" height="533" class="img-fluid" alt="Image">
-											<div class="ribbon top_rated">
-											</div>
-											<div class="score">
-												<span>9.0</span>Superb
-											</div>
-											<div class="short_info hotel">
-												From/Per night<span class="price"><sup>$</sup>45</span>
-											</div>
-										</a>
-									</div>
-									<div class="hotel_title">
-										<h3><strong>Mariott</strong> Hotel</h3>
-										<div class="rating">
-											<i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star-empty"></i>
-										</div>
-										<!-- end rating -->
-										<div class="wishlist_close_admin">
-											-
-										</div>
-									</div>
-								</div>
-								<!-- End box -->
-							</div>
-							<!-- End col-md-6 -->
-
-							<div class="col-lg-4 col-md-6">
-								<div class="tour_container">
-									<div class="img_container">
-										<a href="single_tour.html">
-											<img src="img/tour_box_1.jpg" width="800" height="533" class="img-fluid" alt="Image">
-											<div class="ribbon top_rated">
-											</div>
-											<div class="short_info">
-												<i class="icon_set_1_icon-44"></i>Historic Buildings<span class="price"><sup>$</sup>45</span>
-											</div>
-										</a>
-									</div>
-									<div class="tour_title">
-										<h3><strong>Arc Triomphe</strong> tour</h3>
-										<div class="rating">
-											<i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile"></i><small>(75)</small>
-										</div>
-										<!-- end rating -->
-										<div class="wishlist_close_admin">
-											-
-										</div>
-									</div>
-								</div>
-								<!-- End box tour -->
-							</div>
-							<!-- End col-md-6 -->
-
-							<div class="col-lg-4 col-md-6">
-								<div class="tour_container">
-									<div class="img_container">
-										<a href="single_tour.html">
-											<img src="img/tour_box_3.jpg" width="800" height="533" class="img-fluid" alt="Image">
-											<div class="ribbon popular">
-											</div>
-											<div class="short_info">
-												<i class="icon_set_1_icon-44"></i>Historic Buildings<span class="price"><sup>$</sup>45</span>
-											</div>
-										</a>
-									</div>
-									<div class="tour_title">
-										<h3><strong>Versailles</strong> tour</h3>
-										<div class="rating">
-											<i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile"></i><small>(75)</small>
-										</div>
-										<!-- end rating -->
-										<div class="wishlist_close_admin">
-											-
-										</div>
-									</div>
-								</div>
-								<!-- End box tour -->
-							</div>
-							<!-- End col-md-6 -->
-
-							<div class="col-lg-4 col-md-6">
-								<div class="tour_container">
-									<div class="img_container">
-										<a href="single_tour.html">
-											<img src="img/tour_box_4.jpg" width="800" height="533" class="img-fluid" alt="Image">
-											<div class="ribbon popular">
-											</div>
-											<div class="short_info">
-												<i class="icon_set_1_icon-30"></i>Walking tour<span class="price"><sup>$</sup>45</span>
-											</div>
-										</a>
-									</div>
-									<div class="tour_title">
-										<h3><strong>Pompidue</strong> tour</h3>
-										<div class="rating">
-											<i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile"></i><small>(75)</small>
-										</div>
-										<!-- end rating -->
-										<div class="wishlist_close_admin">
-											-
-										</div>
-									</div>
-								</div>
-								<!-- End box tour -->
-							</div>
-							<!-- End col-md-6 -->
-
-							<div class="col-lg-4 col-md-6">
-								<div class="transfer_container">
-									<div class="img_container">
-										<a href="single_transfer.html">
-											<img src="img/transfer_1.jpg" width="800" height="533" class="img-fluid" alt="Image">
-											<div class="ribbon top_rated">
-											</div>
-											<div class="short_info">
-												From/Per person<span class="price"><sup>$</sup>45</span>
-											</div>
-										</a>
-									</div>
-									<div class="transfer_title">
-										<h3><strong>Orly Airport</strong> private</h3>
-										<div class="rating">
-											<i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile"></i><small>(75)</small>
-										</div>
-										<!-- end rating -->
-										<div class="wishlist_close_admin">
-											-
-										</div>
-									</div>
-								</div>
-								<!-- End box tour -->
-							</div>
-							<!-- End col-md-6 -->
-
-						</div>
-						<!-- End row -->
-						<button type="submit" class="btn_1 green">Update wishlist</button>
-					</section>
-					<!-- End section 2 -->
-
-					<section id="section-3">
-						<div class="row">
-							<div class="col-md-6 add_bottom_30">
-								<h4>Change your password</h4>
-								<div class="form-group">
-									<label>Old password</label>
-									<input class="form-control" name="old_password" id="old_password" type="password">
-								</div>
-								<div class="form-group">
-									<label>New password</label>
-									<input class="form-control" name="new_password" id="new_password" type="password">
-								</div>
-								<div class="form-group">
-									<label>Confirm new password</label>
-									<input class="form-control" name="confirm_new_password" id="confirm_new_password" type="password">
-								</div>
-								<button type="submit" class="btn_1 green">Update Password</button>
-							</div>
-							<div class="col-md-6 add_bottom_30">
-								<h4>Change your email</h4>
-								<div class="form-group">
-									<label>Old email</label>
-									<input class="form-control" name="old_password" id="old_password" type="password">
-								</div>
-								<div class="form-group">
-									<label>New email</label>
-									<input class="form-control" name="new_password" id="new_password" type="password">
-								</div>
-								<div class="form-group">
-									<label>Confirm new email</label>
-									<input class="form-control" name="confirm_new_password" id="confirm_new_password" type="password">
-								</div>
-								<button type="submit" class="btn_1 green">Update Email</button>
-							</div>
-						</div>
-						<!-- End row -->
-
-						<hr>
-						<br>
-						<div class="row">
-							<div class="col-lg-6">
-								<h4>Notification settings</h4>
-								<table class="table table-striped options_cart">
-									<tbody>
-										<tr>
-											<td style="width:10%">
-												<i class="icon_set_1_icon-33"></i>
-											</td>
-											<td style="width:60%">
-												New Citytours Tours
-											</td>
-											<td style="width:35%">
-												<label class="switch-light switch-ios pull-right">
-													<input type="checkbox" name="option_1" id="option_1" checked value="">
-													<span>
-													<span>No</span>
-													<span>Yes</span>
-													</span>
-													<a></a>
-												</label>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<i class="icon_set_1_icon-6"></i>
-											</td>
-											<td>
-												New Citytours Hotels
-											</td>
-											<td>
-												<label class="switch-light switch-ios pull-right">
-													<input type="checkbox" name="option_2" id="option_2" value="">
-													<span>
-													<span>No</span>
-													<span>Yes</span>
-													</span>
-													<a></a>
-												</label>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<i class="icon_set_1_icon-26"></i>
-											</td>
-											<td>
-												New Citytours Transfers
-											</td>
-											<td>
-												<label class="switch-light switch-ios pull-right">
-													<input type="checkbox" name="option_3" id="option_3" value="" checked>
-													<span>
-							<span>No</span>
-													<span>Yes</span>
-													</span>
-													<a></a>
-												</label>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<i class="icon_set_1_icon-81"></i>
-											</td>
-											<td>
-												New Citytours special offers
-											</td>
-											<td>
-												<label class="switch-light switch-ios pull-right">
-													<input type="checkbox" name="option_4" id="option_4" value="">
-													<span>
-							<span>No</span>
-													<span>Yes</span>
-													</span>
-													<a></a>
-												</label>
-											</td>
-										</tr>
-									</tbody>
-								</table>
-								<button type="submit" class="btn_1 green">Update notifications settings</button>
-							</div>
-						</div>
-						<!-- End row -->
-					</section>
-					<!-- End section 3 -->
+<!-- section 3 start -->
+<!-- End section 3 -->
 
 					
 
@@ -674,7 +376,6 @@
 			$(this).parent().parent().parent().fadeOut('slow', function (c) {});
 		});
 	</script>
-</script>
 </body>
 
 </html>

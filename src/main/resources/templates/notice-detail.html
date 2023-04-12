@@ -90,28 +90,31 @@
 							<img alt="Image" class="img-fluid"> -->
 							<div class="post_info clearfix">
 								<div class="post-left">
+								<h2 th:text="${notice.nTitle}">Duis aute irure dolor in reprehenderit</h2>
 									<ul>
-										<li><i class="icon-calendar-empty"></i>작성일 &nbsp;<span th:text="${#dates.format(notice.nDate, 'yyyy.MM.dd')}">12 Nov 2020</span>
+										<li><i class="icon-calendar-empty"></i>작성일 &nbsp;
+										<span th:text="${#dates.format(notice.nDate, 'yyyy.MM.dd')}">12 Nov 2020</span>
 										</li>
 									</ul>
+									
 								</div>
 							</div>
-							<h2 th:text="${notice.nTitle}">Duis aute irure dolor in reprehenderit</h2>
-							<p th:text=${notice.nContent}>
-							</p>
+							<p></p>
+							<p th:text=${notice.nContent}></p>
 							<p>
 							</p>
-							<!-- 이미지 안 들어감 !!!!!!! -->
 								<img th:src="@{img/notice/__${notice.nImg}__}"  alt="Image" class="img-fluid">
-						</div>
+							</div>
 						<!-- end post -->
-					</div>
+						<a class="btn_1" href="notice-write-form" role="button" id="notice-update-btn">수정</a> &nbsp; &nbsp; &nbsp;
+						<a class="btn_1" href="notice-write-form" role="button" id="notice-delete-btn">삭제</a>
+						</div>
 					<!-- end box_style_1 -->
+					</div>
 
 					<!-- End Comments -->
 
-				</div>
-				<!-- End col-md-8-->
+				<!-- End col-lg-9-->
 
 				<aside class="col-lg-3 add_bottom_30">
 				
@@ -137,7 +140,6 @@
 
 				</aside>
 				<!-- End aside -->
-
 			</div>
 			<!-- End row-->
 		</div>
@@ -165,49 +167,7 @@
 	</div><!-- End Search Menu -->
 	
 	<!-- Sign In Popup -->
-	<div id="sign-in-dialog" class="zoom-anim-dialog mfp-hide">
-		<div class="small-dialog-header">
-			<h3>Sign In</h3>
-		</div>
-		<form>
-			<div class="sign-in-wrapper">
-				<a href="#0" class="social_bt facebook">Login with Facebook</a>
-				<a href="#0" class="social_bt google">Login with Google</a>
-				<div class="divider"><span>Or</span></div>
-				<div class="form-group">
-					<label>Email</label>
-					<input type="email" class="form-control" name="email" id="email">
-					<i class="icon_mail_alt"></i>
-				</div>
-				<div class="form-group">
-					<label>Password</label>
-					<input type="password" class="form-control" name="password" id="password" value="">
-					<i class="icon_lock_alt"></i>
-				</div>
-				<div class="clearfix add_bottom_15">
-					<div class="checkboxes float-left">
-						<input id="remember-me" type="checkbox" name="check">
-						<label for="remember-me">Remember Me</label>
-					</div>
-					<div class="float-right"><a id="forgot" href="javascript:void(0);">Forgot Password?</a></div>
-				</div>
-				<div class="text-center"><input type="submit" value="Log In" class="btn_login"></div>
-				<div class="text-center">
-					Don’t have an account? <a href="javascript:void(0);">Sign up</a>
-				</div>
-				<div id="forgot_pw">
-					<div class="form-group">
-						<label>Please confirm login email below</label>
-						<input type="email" class="form-control" name="email_forgot" id="email_forgot">
-						<i class="icon_mail_alt"></i>
-					</div>
-					<p>You will receive an email containing a link allowing you to reset your password to a new preferred one.</p>
-					<div class="text-center"><input type="submit" value="Reset Password" class="btn_1"></div>
-				</div>
-			</div>
-		</form>
-		<!--form -->
-	</div>
+	
 	<!-- /Sign In Popup -->
 
 	<!-- Common scripts -->

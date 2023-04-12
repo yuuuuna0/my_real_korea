@@ -4,11 +4,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 
-import com.itwill.my_real_korea.service.user.UserService;
+import com.itwill.my_real_korea.dto.user.User;
 
 public class AuthLoginAnnotationInterceptor implements HandlerInterceptor {
 	public AuthLoginAnnotationInterceptor() {
@@ -34,21 +33,22 @@ public class AuthLoginAnnotationInterceptor implements HandlerInterceptor {
 		
 		// HandlerMethod 객체에 @LoginCheck 이 있는 경우, 세션이 있는지 체크
 		HttpSession session = request.getSession();
-		String sUserId = (String) session.getAttribute("sUserId");
-		if (sUserId == null) {
+		User loginUser = (User) session.getAttribute("loginUser");
+		if (loginUser == null) {
 			// 로그인이 안되어 있는 상태, 로그인 폼으로 다시 돌려보냄
 		    String requestUrl = request.getRequestURL().toString();
 		    session.setAttribute("requestUrl", requestUrl);
 		    response.sendRedirect("user-login");
 		    return false;
-		} else {
-		    String requestUrl = (String) session.getAttribute("requestUrl");
-		    if (requestUrl != null) {
-		        session.removeAttribute("requestUrl");
-		        response.sendRedirect(requestUrl);
-		        return false;
-		    }
 		}
+//		else {
+//		    String requestUrl = (String) session.getAttribute("requestUrl");
+//		    if (requestUrl != null) {
+//		        session.removeAttribute("requestUrl");
+//		        response.sendRedirect(requestUrl);
+//		        return false;
+//		    }
+//		} 에러나서 주석처리함 ㅠ (민선)
 
 		return true;
 	}

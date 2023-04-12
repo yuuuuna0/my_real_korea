@@ -252,8 +252,19 @@
 								<img src="img/products/image-1.jpg" alt="Image" class="rounded-circle" width="20%" height="30%">
 								<small th:text="${#dates.format(tourReview.toReviewDate,'yyyy/MM/dd')}"> - 10 March 2015 -</small>
 								<h4 th:text=${tourReview.userId}>Jhon Doe</h4>
-								<h6><strong th:text=${tourReview.toReviewTitle}>
-								</strong></h6><br>
+								<div class="row">
+									<div class="col-md-9">
+										<h6>
+											<strong th:text=${tourReview.toReviewTitle}>
+											</strong>
+										</h6>
+									</div>
+									<div class="col-md-3" > <!--th:if="${session.loginUser.userId == tourReview.userId}"-->
+										<input type="button" value="수정">
+										<input type="button" value="삭제">
+									</div>
+								</div>
+								<br>
 								<p th:text=${tourReview.toReviewContent}>
 									"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed a lorem quis neque interdum consequat ut sed sem. Duis quis tempor nunc. Interdum et malesuada fames ac ante ipsum primis in faucibus."
 								</p>

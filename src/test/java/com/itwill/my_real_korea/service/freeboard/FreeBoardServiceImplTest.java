@@ -25,7 +25,8 @@ class FreeBoardServiceImplTest {
                 , "어디로가야하나요", null
                 , 0
                 , new City(3, "강원", 3, 3)
-                , "user1");
+                , "user1"
+                );
         int insert = freeBoardService.insertBoard(freeBoard);
         assertThat(insert).isEqualTo(1);
     }
@@ -33,7 +34,7 @@ class FreeBoardServiceImplTest {
     @Test
     void update() throws Exception {
         FreeBoard updateFreeBoard = new FreeBoard(
-                3, "3수정테스트"
+                3, "3수정테스트" 
                 , "유럽여행 어디로 갈까요", null
                 , 0, new City(1, "서울", 10, 10), "user2");
         freeBoardService.updateFreeBoard(updateFreeBoard);

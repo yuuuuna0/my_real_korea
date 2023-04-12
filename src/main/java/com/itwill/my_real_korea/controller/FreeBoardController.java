@@ -27,13 +27,15 @@ public class FreeBoardController {
     }
 
     @GetMapping(value = "/freeboard-list")
-    public String freeBoardList(@RequestParam(required = false, defaultValue = "1") int pageNo, Model model) {
+    public String freeBoardList(@RequestParam(required = false, defaultValue = "1") int pageNo,int fBoNo, Model model) {
         try {
             PageMakerDto<FreeBoard> freeBoardListPage = freeBoardService.selectAll(pageNo);
             List<FreeBoard> freeBoardList = freeBoardListPage.getItemList();
+            int selectCommentCount = freeBoardCommentService.selectCommentCount(fBoNo);
             model.addAttribute("freeBoardListPage", freeBoardListPage);
             model.addAttribute("freeBoardList", freeBoardList);
             model.addAttribute("pageNo", pageNo);
+            model.addAttribute("selectCommentCount", selectCommentCount);
         } catch (Exception e) {
             e.printStackTrace();
             return "error";

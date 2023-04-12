@@ -11,7 +11,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.itwill.my_real_korea.dto.ticket.TicketImg;
+import com.itwill.my_real_korea.dto.tour.TourImg;
 import com.itwill.my_real_korea.dto.wishlist.Wishlist;
+import com.itwill.my_real_korea.service.ticket.TicketImgService;
+import com.itwill.my_real_korea.service.tour.TourImgService;
 import com.itwill.my_real_korea.service.wishlist.WishlistService;
 
 @Controller
@@ -19,6 +23,7 @@ public class WishlistController {
 
 	@Autowired
 	private WishlistService wishlistService;
+	
 	
 	// 위시리스트 리스트 + 티켓상품 + 투어상품 전체 보기 (위시리스트 첫화면) 
 	@LoginCheck
@@ -35,6 +40,13 @@ public class WishlistController {
 		
 		String sUserId = (String)session.getAttribute("sUserId");
 		List<Wishlist> wishlistList = wishlistService.selectAllWithTicketAndTour(sUserId);
+		
+		for (Wishlist wishlist : wishlistList) {
+			List<TourImg> tourImgList = wishlist.getTourImgList() ;
+			List<TicketImg> ticketImgList = wishlist.getTicketImgList();
+			model.addAttribute("tourImgList", tourImgList);
+			model.addAttribute("ticketImgList", ticketImgList);
+		}
 		model.addAttribute("wishlistList", wishlistList);
 		model.addAttribute("sUserId", sUserId);
 	

@@ -12,10 +12,10 @@
                             <!-- 
                             <li><a href="user_login_form" id="access_link">Sign in</a></li>
                              -->
-	                    	<th:block th:if="${session.sUserId==null}">
+	                    	<th:block th:if="${session.loginUser==null}">
 	                            <li><a href="user-login">로그인</a></li>
 	                        </th:block>
-	                        <th:block th:unless="${session.sUserId==null}">
+	                        <th:block th:unless="${session.loginUser==null}">
 		                        <li><a href="user-logout-action">로그아웃</a></li>
 	                        </th:block>
 	                            <li><a href="wishlist" id="wishlist_link">위시리스트</a></li>

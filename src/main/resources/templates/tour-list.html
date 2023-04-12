@@ -98,19 +98,6 @@
 					</div>
 						<!-- End widget -->
 					<hr>
-					<div class="widget" id="cat_shop">
-							<h4>Categories</h4>
-							<ul>
-								<li>
-									<a href="#">전체보기</a>
-								</li>
-								<li th:each="city:${cityList}">
-									<a th:text="${city.cityName}" href="#">서</a>
-								</li>
-							</ul>
-						</div>
-						<!-- End widget -->
-						<hr>
 					<p>
 						<a class="btn_map" data-toggle="collapse" href="#collapseMap" aria-expanded="false" aria-controls="collapseMap" data-text-swap="Hide map" data-text-original="View on map">View on map</a>
 					</p>
@@ -122,67 +109,28 @@
 								<h6>Price</h6>
 								<input type="text" id="range" name="range" value="">
 							</div>
-							<div class="filter_type">
-								<h6>Star Category</h6>
+							<div class="filter_type" id="cityNo">
+								<h6>여행 도시</h6>
 								<ul>
 									<li>
-										<label>
-											<input type="checkbox"><span class="rating">
-											<i class="icon_set_1_icon-81 voted"></i><i class="icon_set_1_icon-81 voted"></i><i class="icon_set_1_icon-81 voted"></i><i class="icon_set_1_icon-81 voted"></i><i class="icon_set_1_icon-81 voted"></i>
-											</span>(15)
-										</label>
-									</li>
-									<li>
-										<label>
-											<input type="checkbox"><span class="rating">
-											<i class="icon_set_1_icon-81 voted"></i><i class="icon_set_1_icon-81 voted"></i><i class="icon_set_1_icon-81 voted"></i><i class="icon_set_1_icon-81 voted"></i><i class="icon_set_1_icon-81"></i>
-											</span>(45)
-										</label>
-									</li>
-									<li>
-										<label>
-											<input type="checkbox"><span class="rating">
-											<i class="icon_set_1_icon-81 voted"></i><i class="icon_set_1_icon-81 voted"></i><i class="icon_set_1_icon-81 voted"></i><i class="icon_set_1_icon-81"></i><i class="icon_set_1_icon-81"></i>
-											</span>(35)
-										</label>
-									</li>
-									<li>
-										<label>
-											<input type="checkbox"><span class="rating">
-											<i class="icon_set_1_icon-81 voted"></i><i class="icon_set_1_icon-81 voted"></i><i class="icon_set_1_icon-81"></i><i class="icon_set_1_icon-81"></i><i class="icon_set_1_icon-81"></i>
-											</span>(25)
-										</label>
-									</li>
-									<li>
-										<label>
-											<input type="checkbox"><span class="rating">
-											<i class="icon_set_1_icon-81 voted"></i><i class="icon_set_1_icon-81"></i><i class="icon_set_1_icon-81"></i><i class="icon_set_1_icon-81"></i><i class="icon_set_1_icon-81"></i>
-											</span>(15)
+										<label th:each="city:${cityList}">
+											<input type="checkbox" th:value="${city.cityNo}" th:text="${city.cityName}">
+											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 										</label>
 									</li>
 								</ul>
 							</div>
-							<div class="filter_type">
-								<h6>District</h6>
+							<div class="filter_type" id="toType">
+								<h6>여행타입 </h6>
 								<ul>
 									<li>
 										<label>
-											<input type="checkbox">Paris Centre
+											<input type="checkbox" value="1">자유여행
 										</label>
 									</li>
 									<li>
 										<label>
-											<input type="checkbox">La Defance
-										</label>
-									</li>
-									<li>
-										<label>
-											<input type="checkbox">La Marais
-										</label>
-									</li>
-									<li>
-										<label>
-											<input type="checkbox">Latin Quarter
+											<input type="checkbox" value="2">패키지여행
 										</label>
 									</li>
 								</ul>
@@ -215,7 +163,7 @@
 									<div class="col-6">
 										<div class="form-group">
 											<select id="sort-by" name="sort-by">
-												<option value="toNoAsc">정렬</option>
+												<option value="">정렬</option>
 												<option value="toPriceAsc">가격 낮은순</option>
 												<option value="toPriceDesc">가격 높은순</option>
 												<option value="toCountAsc">구매 적은순</option>

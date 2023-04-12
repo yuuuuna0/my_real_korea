@@ -1,30 +1,29 @@
 package com.itwill.my_real_korea.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import com.itwill.my_real_korea.dto.ticket.Ticket;
 import com.itwill.my_real_korea.service.city.CityService;
 import com.itwill.my_real_korea.service.ticket.TicketImgService;
 import com.itwill.my_real_korea.service.ticket.TicketService;
 import com.itwill.my_real_korea.util.PageMakerDto;
-import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 
-import java.util.HashMap;
-import java.util.Map;
+import io.swagger.annotations.ApiOperation;
 
 //@RestController
 public class TicketRestController {
 
     private final TicketService ticketService;
-    private final CityService cityService;
     private final TicketImgService ticketImgService;
 
     //@Autowired
-    public TicketRestController(TicketService ticketService, CityService cityService, TicketImgService ticketImgService) {
+    public TicketRestController(TicketService ticketService, TicketImgService ticketImgService) {
         this.ticketService = ticketService;
-        this.cityService = cityService;
         this.ticketImgService = ticketImgService;
     }
 
@@ -63,5 +62,12 @@ public class TicketRestController {
 
         return ticketMap;
     }
+    
+   /* @LoginCheck
+    @PostMapping(value="ticket-review-write-action", produces="application/json;charset=UTF-8")
+	public Map <String, Object> ticketReviewWriteAction(){
+		
+    	return "";
+	}*/
 
 }

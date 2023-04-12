@@ -246,7 +246,7 @@
 							<hr>
 							<div class="review_strip_single"  th:each="ticketReview:${ticketReviewList}">
 								<img src="img/avatar1.jpg" alt="Image" class="rounded-circle">
-								<small th:text="${#dates.format(ticketReview.tiReviewDate, 'yyyy.MM.dd')}"> - 10 March 2015 -</small>
+								<small th:text="${#dates.format(ticketReview.tiReviewDate, 'yyyy-MM-dd')}"> - 10 March 2015 -</small>
 								<h4 th:text="${ticketReview.user.userId}">Jhon Doe</h4>
 								<!-- 타이틀 추가 -->
 								<h5 th:text="${ticketReview.tiReviewTitle}"></h5>
@@ -406,7 +406,7 @@
 	<!-- /로그인 팝업 창 ~~~~~~~~~~~~~-->	
 
 	<!--  Modal Review  ~~~~~~~~~~~~~~~~~~~ 리뷰창 모달 ~~~~~~~~~~~~~~~~~~~  -->
-	<div class="modal fade" id="myReview" tabindex="-1" role="dialog" aria-labelledby="myReviewLabel" aria-hidden="true">
+	<div class="modal fade" id="myReview" tabindex="1" role="dialog" aria-labelledby="myReviewLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -418,8 +418,8 @@
 					</div>
 					<!-- 모달 폼 -->
 					<form th:object="${ticketReivew}"  method="post" action="review-write-action" name="ticketReview" id="ticketReview"  enctype​​="multipart/form-data">
-					<!--파일업로드추가  -->
-						<input type="file" name="uploadFile">
+					<!--파일업로드추가
+						<input type="file" name="uploadFile">  -->
 						<input name="hotel_name" id="hotel_name" type="hidden">
 						<div class="row">
 							<div class="col-md-6">
@@ -453,36 +453,6 @@
 						</div>
 						<!-- End row -->
 						<hr>
-						<div class="row">
-							<div class="col-md-6">
-								<div class="form-group">
-									<label>Cleanliness</label>
-									<select class="form-control" name="cleanliness_review" id="cleanliness_review">
-										<option value="">Please review</option>
-										<option value="Low">Low</option>
-										<option value="Sufficient">Sufficient</option>
-										<option value="Good">Good</option>
-										<option value="Excellent">Excellent</option>
-										<option value="Superb">Super</option>
-										<option value="Not rated">I don't know</option>
-									</select>
-								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="form-group">
-									<label>Comfort</label>
-									<select class="form-control" name="comfort_review" id="comfort_review">
-										<option value="">Please review</option>
-										<option value="Low">Low</option>
-										<option value="Sufficient">Sufficient</option>
-										<option value="Good">Good</option>
-										<option value="Excellent">Excellent</option>
-										<option value="Superb">Super</option>
-										<option value="Not rated">I don't know</option>
-									</select>
-								</div>
-							</div>
-						</div>
 						<!-- End row -->
 						<div class="row">
 							<div class="col-md-6">
@@ -517,9 +487,6 @@
 						<!-- End row -->
 						<div class="form-group">
 							<textarea name="review_text" id="review_text" class="form-control" style="height:100px" placeholder="Write your review"></textarea>
-						</div>
-						<div class="form-group">
-							<input type="text" id="verify_review" class=" form-control" placeholder="Are you human? 3 + 1 =">
 						</div>
 						<!--리뷰 버튼-->
 						<input type="submit" value="Submit" class="btn_1" id="submit-review">
@@ -591,6 +558,9 @@
 	<!--Review modal validation -->
 	<script src="assets/validate.js"></script>
 	
+	<Script>
+	
+	</Script>
 	
 </body>
 

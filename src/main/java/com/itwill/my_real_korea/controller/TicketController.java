@@ -10,19 +10,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.itwill.my_real_korea.dto.Payment;
+import com.itwill.my_real_korea.dto.RsPInfo;
 import com.itwill.my_real_korea.dto.ticket.Ticket;
 import com.itwill.my_real_korea.dto.ticket.TicketReview;
 import com.itwill.my_real_korea.dto.user.User;
-import com.itwill.my_real_korea.service.city.CityService;
 import com.itwill.my_real_korea.service.payment.PaymentService;
+import com.itwill.my_real_korea.service.rspinfo.RsPInfoService;
 import com.itwill.my_real_korea.service.ticket.TicketImgService;
 import com.itwill.my_real_korea.service.ticket.TicketReviewService;
 import com.itwill.my_real_korea.service.ticket.TicketService;
+import com.itwill.my_real_korea.service.user.UserService;
 import com.itwill.my_real_korea.util.PageMakerDto;
 
 @Controller
@@ -32,14 +34,17 @@ public class TicketController {
     private final TicketImgService ticketImgService;
     private final TicketReviewService ticketReviewService;
     private final PaymentService paymentService;
+    private final RsPInfoService rsPInfoService;
 
     @Autowired
-    public TicketController(TicketService ticketService, TicketImgService ticketImgService, TicketReviewService ticketReviewService,
-                            CityService cityService, PaymentService paymentService) {
+    public TicketController(TicketService ticketService, TicketImgService ticketImgService, 
+    						TicketReviewService ticketReviewService,
+    						RsPInfoService rsPInfoService, PaymentService paymentService) {
         this.ticketService = ticketService;
         this.ticketImgService = ticketImgService;
         this.ticketReviewService = ticketReviewService;
         this.paymentService = paymentService;
+        this.rsPInfoService = rsPInfoService;
     }
 
     //티켓 리스트 - 페이지
@@ -83,13 +88,18 @@ public class TicketController {
     //티켓 상세 페이지에서 수량, 예약하기
     @LoginCheck
     @PostMapping("/ticket-detail-aciton") 
-    public String ticketDetailPayment(@RequestParam String pStartDate, @RequestParam int pQty, HttpSession session) {
+    public String ticketDetailPayment(@RequestParam String pStartDate,
+    									@RequestParam int pQty, HttpSession session) throws Exception{
     	
     	Ticket ticket = (Ticket) session.getAttribute("ticket");
-    	User user = (User) session.getAttribute("authUser"); // user 정보
-    	System.out.println(user);
-    	
+    	/* 세션으로 넣기 */
+    	//String sUserId = (String) session.getAttribute("sUserId");
+    	//User user = userService.findUser(sUserId);
+    	User loginUser = (User) session.getAttribute("loginUser");
+		session.setAttribute("loginUser", loginUser);
     	try {
+    		
+    		System.out.println(loginUser);
     		// 총 금액 = 수량 * 티켓 가격
     		int price = pQty* ticket.getTiPrice();
     		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -99,9 +109,10 @@ public class TicketController {
     		payment.setPQty(pQty); // 수량
     		payment.setPPoint((int)(pQty * price * 0.1)); // 포인트 
     		payment.setPStartDate(date); // 예약날짜
-    		payment.setUserId(user.getUserId());
+    		payment.setUserId(loginUser.getUserId());
+    		payment.setTicket(ticket); // 안넣어도되나?
     		session.setAttribute("payment", payment);
-    		
+    		//System.out.println(payment); 
     	} catch (Exception e) {
     		e.printStackTrace();
     		return "redirect:error";
@@ -110,19 +121,25 @@ public class TicketController {
     	return "ticket-payment";
     }
     
-    
-    //결제 상세 페이지
-    @RequestMapping("/ticket-payment-complete-aciton") // 결제 성공
-    public String ticketPaymentCompleteAction(HttpSession session) throws Exception {
-    	
-    		Payment payment = (Payment) session.getAttribute("payment");
-    		//
-            paymentService.insertTicketPayment(payment);
-
+    //결제 상세 페이지 - action
+    @PostMapping("/ticket-payment-complete-action") // 결제 성공  //default값 설정
+    public String ticketPaymentCompleteAction(HttpSession session, @RequestParam (required = false, defaultValue = "") String pMsg,
+    											@ModelAttribute RsPInfo rsPInfo, Model model) throws Exception {
+    		
+    		Payment payment = (Payment)session.getAttribute("payment"); // session에 담긴 결제
+    		payment.setPMsg(pMsg);
+    		paymentService.insertTicketPayment(payment); // 결제 실행
+    		
+    		rsPInfo.setPNo(payment.getPNo());
+    		// 로그인한 회원에 대한 추가 정보 DB에 담기
+    		rsPInfoService.insertRsPerson(rsPInfo); 
+    		System.out.println(payment);
+    		System.out.println(rsPInfo);
+    		
+    		model.addAttribute("rsPInfo", rsPInfo);
+    		
     		return "ticket-payment-confirmation";
     }
-
-
 
 }
 

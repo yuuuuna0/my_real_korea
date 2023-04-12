@@ -49,7 +49,6 @@
 	<!--======================== Header========================== -->
 	<div id="header" th:include="include-common-top::include-common-top"></div>
 	<!--======================== End Header======================== -->
-
 	<section id="hero_2">
 		<div class="intro_title">
 			<h1>예약 완료 - 상세페이지</h1>
@@ -105,14 +104,14 @@
 				<div class="col-lg-8 add_bottom_15">
 
 					<div class="form_title">
-						<h3><strong><i class="icon-ok"></i></strong>Thank you!</h3>
+						<h3><strong><i class="icon-ok"></i></strong>결제 완료</h3>
 						<p>
 							Mussum ipsum cacilds, vidis litro abertis.
 						</p>
 					</div>
 					<div class="step">
 						<p>
-							Lorem ipsum dolor sit amet, nostrud nominati vis ex, essent conceptam eam ad. Cu etiam comprehensam nec. Cibo delicata mei an, eum porro legere no. Te usu decore omnium, quem brute vis at, ius esse officiis legendos cu. Dicunt voluptatum at cum. Vel et facete equidem deterruisset, mei graeco cetero labores et. Accusamus inciderint eu mea.
+							결제가 완료 됐습니다. ----여기에 대충 안내? 환불? 사항 같은 거 넣기 ---
 						</p>
 					</div>
 					<!--End step -->
@@ -124,27 +123,26 @@
 							Mussum ipsum cacilds, vidis litro abertis.
 						</p>
 					</div>
-					<!-- my form start
-					<form th:object="${payment}" name="f" method="post"> -->
 					<div class="step">
 						<table class="table table-striped confirm">
 							<tbody>
 								<tr>
 									<td>
-										<strong>Name</strong>
+										<strong>예약자</strong>
 									</td>
-									<td>
+									<td th:text="${rsPInfo.rsPName}">
 										Jhon Doe
 									</td>
 								</tr>
 								<tr>
 									<td>
-										<strong>Check in</strong>
+										<strong>예약 날짜</strong>
 									</td>
-									<td>
-										10 April 2015</td>
+									<td th:text="${#dates.format(session.payment.pStartDate, 'yyyy-MM-dd')}">
+										10 April 2015
+									</td>
 								</tr>
-								<tr>
+							<!-- 	<tr>
 									<td><strong>Check out</strong>
 									</td>
 									<td>
@@ -166,15 +164,15 @@
 									<td><strong>Adults</strong>
 									</td>
 									<td>2</td>
-								</tr>
+								</tr> -->
 								<tr>
-									<td><strong>Childs</strong>
+									<td><strong>결제 수량</strong>
 									</td>
-									<td>0</td>
+									<td th:text="${session.payment.pQty}">0</td>
 								</tr>
 								<tr>
 									<td>
-										<strong>Payment type</strong>
+										<strong>결제 수단</strong>
 									</td>
 									<td>
 										Credit card
@@ -182,9 +180,9 @@
 								</tr>
 								<tr>
 									<td>
-										<strong>TOTAL COST</strong>
+										<strong>총 결제 금액</strong>
 									</td>
-									<td>
+									<td th:text="${session.payment.pPrice}">
 										$154
 									</td>
 								</tr>
@@ -218,6 +216,8 @@
 			<!--End row -->
 		</div>
 		<!--End container -->
+
+		<!-- End Form -->
 	</main>
 	<!-- End main -->
 	<!--========================= footer ========================-->
@@ -256,7 +256,7 @@
 				</div>
 				<div class="form-group">
 					<label>Password</label>
-					<input type="password" class="form-control" name="password" id="password" value="">
+					<input type="password" class="form-control" name="password" id="password" >
 					<i class="icon_lock_alt"></i>
 				</div>
 				<div class="clearfix add_bottom_15">
@@ -290,7 +290,7 @@
 	<script src="js/common_scripts_min.js"></script>
 	<script src="js/functions.js"></script>
 
-
+	</form>
 </body>
 
 </html>

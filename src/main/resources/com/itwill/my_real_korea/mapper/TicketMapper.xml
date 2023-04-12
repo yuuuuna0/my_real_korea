@@ -60,7 +60,7 @@
 				</if>
 				<!--지역별-->
 				<if test="cityNo != 0">
-					AND T.CITY_NO=#{cityNo}
+					AND T.CITY_NO=#{cityNo}	
 				</if>
 				
 				<if test="sortOrder!=null">

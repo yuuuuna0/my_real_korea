@@ -57,8 +57,8 @@
 	<section class="parallax-window" data-parallax="scroll" data-image-src="img/bg_blog.jpg" data-natural-width="1400" data-natural-height="470">
 		<div class="parallax-content-1">
 			<div class="animated fadeInDown">
-				<h1>Tour Blog</h1>
-				<p>Ridiculus sociosqu cursus neque cursus curae ante scelerisque vehicula.</p>
+				<h1><a id="tripboard-list-main" href="tripboard-list">동행 게시판</a></h1>
+				<p>마이리얼코리아에서 동행을 찾아보세요</p>
 			</div>
 		</div>
 	</section>
@@ -68,11 +68,11 @@
 		<div id="position">
 			<div class="container">
 				<ul>
-					<li><a href="#">Home</a>
+					<li><a href="#">홈</a>
 					</li>
-					<li><a href="#">Category</a>
+					<li><a href="#">동행게시판</a>
 					</li>
-					<li>Page active</li>
+					<li>상세보기</li>
 				</ul>
 			</div>
 		</div>
@@ -83,24 +83,22 @@
 				<div class="col-lg-9">
 					<div class="box_style_1">
 						<div class="post nopadding">
-							<img src="img/blog-1.jpg" alt="Image" class="img-fluid">
-							<div class="post_info clearfix">
+							<img th:src="@{tripBoard.tBoImg}" alt="Image" class="img-fluid">
+							<div class="post_info clearfix" >
 								<div class="post-left">
 									<ul>
-										<li><i class="icon-calendar-empty"></i>On <span>12 Nov 2020</span>
-										</li>
-										<li><i class="icon-inbox-alt"></i>In <a href="#">Top tours</a>
-										</li>
-										<li><i class="icon-tags"></i>Tags <a href="#">Works</a> <a href="#">Personal</a>
+										<li>
+										 <i class = "icon-user"></i>작성자 &nbsp; <span th:text="${tripBoard.userId}"></span>
+										   <i class="icon-calendar-empty"></i>&nbsp; 작성일 &nbsp; <span
+											th:text="${#dates.format(tripBoard.tBoDate,'yyyy.MM.dd')}">12 Nov 2020</span>
 										</li>
 									</ul>
 								</div>
-								<div class="post-right"><i class="icon-comment"></i><a href="#">25 </a>Comments</div>
+								<div class="post-right"><i class="icon-comment"></i>Comments</div>
 							</div>
-							<h2>Duis aute irure dolor in reprehenderit</h2>
-							<p>
-								Praesent vestibulum molestie lacus. Aenean nonummy hendrerit mauris. Phasellus porta. Fusce suscipit varius mi nascetur ridiculus mus. Nulla dui. Fusce feugiat malesuada odio. Morbi nunc odio, gravida at, cursus nec, luctus a, lorem.....
-							</p>
+							<h2 th:text="${tripBoard.tBoTitle}"></h2>
+							<p th:text="${tripBoard.tBoContent}"></p>
+							<!--  필요 없는 정보 숨김
 							<p>
 								Aenean iaculis sodales dui, non hendrerit lorem rhoncus ut. Pellentesque ullamcorper venenatis elit idaipiscingi Duis tellus neque, tincidunt eget pulvinar sit amet, rutrum nec urna. Suspendisse pretium laoreet elit vel ultricies. Maecenas ullamcorper ultricies rhoncus. Aliquam erat volutpat.
 							</p>
@@ -108,6 +106,7 @@
 								<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. </p>
 								<small>Someone famous in <cite title="">Body of work</cite></small>
 							</blockquote>
+							-->
 						</div>
 						<!-- end post -->
 					</div>
@@ -122,68 +121,31 @@
 									<a href="#"><img src="img/avatar1.jpg" alt="Image">
 									</a>
 								</div>
-								<div class="comment_right clearfix">
+								<div class="comment_right clearfix" th:each="tripBoardComment:${tripBoardCommentList}">
 									<div class="comment_info">
-										Posted by <a href="#">Anna Smith</a><span>|</span> 25 apr 2019 <span>|</span><a href="#">Reply</a>
+										Posted by <span th:text = "${tripBoardComment.userId}">Anna Smith</span><span>|</span><span th:text="${#dates.format(tripBoardComment.tCommentDate,'yyyy.MM.dd')}"></span>
 									</div>
-									<p>
+									<p th:text= "${tripBoardComment.tCommentContent}">
 										Nam cursus tellus quis magna porta adipiscing. Donec et eros leo, non pellentesque arcu. Curabitur vitae mi enim, at vestibulum magna. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed sit amet sem a urna rutrumeger fringilla. Nam vel enim ipsum, et congue ante.
 									</p>
 								</div>
-								<ul>
-									<li>
-										<div class="avatar">
-											<a href="#"><img src="img/avatar2.jpg" alt="Image">
-											</a>
-										</div>
-
-										<div class="comment_right clearfix">
-											<div class="comment_info">
-												Posted by <a href="#">Tom Sawyer</a><span>|</span> 25 apr 2019 <span>|</span><a href="#">Reply</a>
-											</div>
-											<p>
-												Nam cursus tellus quis magna porta adipiscing. Donec et eros leo, non pellentesque arcu. Curabitur vitae mi enim, at vestibulum magna. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed sit amet sem a urna rutrumeger fringilla. Nam vel enim ipsum, et congue ante.
-											</p>
-											<p>
-												Aenean iaculis sodales dui, non hendrerit lorem rhoncus ut. Pellentesque ullamcorper venenatis elit idaipiscingi Duis tellus neque, tincidunt eget pulvinar sit amet, rutrum nec urna. Suspendisse pretium laoreet elit vel ultricies. Maecenas ullamcorper ultricies rhoncus. Aliquam erat volutpat.
-											</p>
-										</div>
-									</li>
-								</ul>
+								
 							</li>
-							<li>
-								<div class="avatar">
-									<a href="#"><img src="img/avatar3.jpg" alt="Image">
-									</a>
-								</div>
-
-								<div class="comment_right clearfix">
-									<div class="comment_info">
-										Posted by <a href="#">Adam White</a><span>|</span> 25 apr 2019 <span>|</span><a href="#">Reply</a>
-									</div>
-									<p>
-										Cursus tellus quis magna porta adipiscin
-									</p>
-								</div>
-							</li>
+							
 						</ol>
 					</div>
 					<!-- End Comments -->
 
-					<h4>Leave a comment</h4>
+					<h4>댓글</h4>
 					<form action="#" method="post">
-						<div class="form-group">
-							<input class="form-control style_2" type="text" name="name" placeholder="Enter name">
-						</div>
-						<div class="form-group">
-							<input class="form-control style_2" type="text" name="mail" placeholder="Enter email">
-						</div>
+					
+					
 						<div class="form-group">
 							<textarea name="message" class="form-control style_2" style="height:150px;" placeholder="Message"></textarea>
 						</div>
 						<div class="form-group">
-							<input type="reset" class="btn_1" value="Clear form" />
-							<input type="submit" class="btn_1" value="Post Comment" />
+							
+							<input type="submit" class="btn_1" value="등록" />
 						</div>
 					</form>
 				</div>
@@ -192,12 +154,16 @@
 				<aside class="col-lg-3 add_bottom_30">
 
 					<div class="widget">
+					<!--  필요 없는 정보 숨김
 						<div class="input-group">
+						
 							<input type="text" class="form-control" placeholder="Search...">
 							<span class="input-group-btn">
 						<button class="btn btn-default" type="button" style="margin-left:0;"><i class="icon-search"></i></button>
 						</span>
+						
 						</div>
+						--> 
 						<!-- /input-group -->
 					</div>
 					<!-- End Search -->
@@ -205,14 +171,10 @@
 					<div class="widget" id="cat_blog">
 						<h4>Categories</h4>
 						<ul>
-							<li><a href="#">Places to visit</a>
-							</li>
-							<li><a href="#">Top tours</a>
-							</li>
-							<li><a href="#">Tips for travellers</a>
-							</li>
-							<li><a href="#">Events</a>
-							</li>
+						<li><a href="tour-list">투어 보러가기</a></li>
+						<li><a href="ticket-list">티켓 보러가기</a></li>
+						<li><a href="tripboard-list">여행 동행 찾기</a></li>
+						<li><a href="freeboard-list">자유게시판</a></li>
 						</ul>
 					</div>
 					<!-- End widget -->
@@ -261,13 +223,14 @@
 		<!-- End container -->
 	</main>
 	<!-- End main -->
-
 	<!--========================= footer ========================-->
 	<footer class="revealed">
 		<div id="footer" th:include="include-common-bottom::include-common-bottom"></div>
 	</footer>
 		<!-- End container -->
 	<!--========================= End footer ========================-->
+
+
 	<div id="toTop"></div><!-- Back to top button -->
 	
 	<!-- Search Menu -->

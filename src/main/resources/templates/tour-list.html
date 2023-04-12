@@ -109,28 +109,28 @@
 								<h6>Price</h6>
 								<input type="text" id="range" name="range" value="">
 							</div>
-							<div class="filter_type" id="cityNo">
+							<div class="filter_type" id="cityListDiv">
 								<h6>여행 도시</h6>
 								<ul>
 									<li>
-										<label  th:each="city:${cityList}">
-											<input class="city_type" type="checkbox" th:value="${city.cityNo}" th:text="${city.cityName}">
-											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										<label th:each="city:${cityList}">
+											<input type="checkbox" id="city-checkbox" name="city-checkbox" th:value="${city.cityNo}" th:text="${city.cityName}">
+											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 										</label>
 									</li>
 								</ul>
 							</div>
-							<div class="filter_type" id="toType">
+							<div class="filter_type" id="toTypeListDiv">
 								<h6>여행타입 </h6>
 								<ul>
 									<li>
 										<label>
-											<input type="checkbox" value="1">자유여행
+											<input type="checkbox" id="toType-chceckbox" name="toType-chceckbox" value="1">자유여행
 										</label>
 									</li>
 									<li>
 										<label>
-											<input type="checkbox" value="2">패키지여행
+											<input type="checkbox" id="toType-chceckbox" name="toType-chceckbox" value="2">패키지여행
 										</label>
 									</li>
 								</ul>
@@ -379,13 +379,14 @@
 	<script src="js/infobox.js"></script>
 	
 	<!-- Check box and radio style iCheck -->
+<!--
 	<script>
 		$('input').iCheck({
 		   checkboxClass: 'icheckbox_square-grey',
 		   radioClass: 'iradio_square-grey'
 		 });
 	</script>
- 
+ -->
  	<script>
 		const ratingDiv=$('div.rating');
 		let score=$('#toScore').val();

@@ -8,7 +8,7 @@
 		select trip_board_comment_t_co_no_seq.nextval from dual
 	</selectKey>
 	insert into trip_board_comment(t_co_no, t_comment_content, t_comment_date, t_bo_no, user_id) 
-                values(#{tCoNo}, #{tCommentContent}, #{tCommentDate}, #{tBoNo}, #{userId})
+                values(#{tCoNo}, #{tCommentContent}, sysdate, #{tBoNo}, #{userId})
 </insert>
 
 <!--  동행게시판 댓글 수정 -->

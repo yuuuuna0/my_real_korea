@@ -30,6 +30,18 @@
 	
 	<!-- CUSTOM CSS -->
 	<link href="css/custom.css" rel="stylesheet">
+	<script type="text/javascript">
+		function tripboardCommentWriteAction(){
+			if (document.tt.tCommentContent.value == ""){
+				alert("내용을 입력하십시요.");
+				document.tt.tCommentContent.focus();
+				return false;
+			}
+			document.tt.action = "tripboard-comment-write-action";
+			document.tt.method = 'POST';
+			document.tt.submit();
+		}
+	</script>
 
 </head>
 
@@ -94,7 +106,7 @@
 										</li>
 									</ul>
 								</div>
-								<div class="post-right"><i class="icon-comment"></i>Comments</div>
+								<div class="post-right"><i class="icon-comment"></i>#</div>
 							</div>
 							<h2 th:text="${tripBoard.tBoTitle}"></h2>
 							<p th:text="${tripBoard.tBoContent}"></p>
@@ -137,15 +149,17 @@
 					<!-- End Comments -->
 
 					<h4>댓글</h4>
-					<form action="#" method="post">
-					
-					
+					<form name="tt" method="post">
+						<input type="hidden" name="tCoNo" value="10"/>
+						<input type="hidden" name="tBoNo" value="" th:value="${tripBoard.tBoNo}"/>
+					    <input type="hidden" name="userId" value="user1"/>
+					    
 						<div class="form-group">
-							<textarea name="message" class="form-control style_2" style="height:150px;" placeholder="Message"></textarea>
+							<textarea  class="form-control style_2" style="height:150px;" placeholder="댓글을 써주세요." name="tCommentContent"></textarea>
 						</div>
 						<div class="form-group">
 							
-							<input type="submit" class="btn_1" value="등록" />
+							<button class="btn_1" type="button" onclick="tripboardCommentWriteAction();">등록</button>
 						</div>
 					</form>
 				</div>

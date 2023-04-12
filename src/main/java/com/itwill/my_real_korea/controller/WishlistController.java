@@ -31,14 +31,6 @@ public class WishlistController {
 	@GetMapping(value = "/wishlist")
 	public String wishlist(HttpServletRequest request, HttpSession session, Model model) {
 		
-		/*
-		 * Referer : HTTP 요청 헤더의 일종으로, 
-		 * 			요청 보낸 페이지의 URL 의미
-		 */
-		//String requestUrl = request.getHeader("Referer");
-		// session 에 요청 보낸 페이지의 URL 저장(관리자 아닐 경우 이전 페이지로 돌려보내기 위해)
-		//request.getSession().setAttribute("requestUrl", requestUrl);
-		
 		User loginUser = (User)session.getAttribute("loginUser");
 		List<Wishlist> wishlistList = wishlistService.selectAllWithTicketAndTour(loginUser.getUserId());
 		

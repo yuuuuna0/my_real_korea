@@ -9,38 +9,10 @@ import * as Request from "./request.js";
  #type-tour
  #type-ticket
  #notice-write-action
+ #notice-modify-action
  */
  
 // on => 동적으로 이벤트 추가 가능 -> 상위 노드에 처리해줘야함 (document)
-
-/******** 공지사항 글쓰기 액션**********/ 
-$(document).on('click','#notice-write-action',function(e){
-	// ajax로 리스트 부분만 검색된 리스트로 변경
-	let url = 'notice';
-	let method = 'POST';
-	let contentType = 'application/json;charset=UTF-8';
-	let sendData = {
-		ntitle:$('#nTitle').val(),
-		ncontent:$('#nContent').val(),
-		nimg:$('#nImg').val(),
-		userId:$('#userId').val()
-	};
-	console.log($('#userId').val());
-	let async = true;
-	// JSON.stringify() => 객체를 string 으로, JSON.parse() => string 을 객체로 만듬
-	Request.ajaxRequest(url, method, contentType, 
-						JSON.stringify(sendData),
-						function(resultJson){
-							//code 1 일때 render, 아닐 때 msg 띄움
-							if(resultJson.code == 1){
-								View.render("#notice-detail-template", resultJson, '#notice-write-detail');
-							} else {
-								alert(resultJson.msg);
-							};
-						}, async);
-	
-	e.preventDefault();
-});
 
 
 
@@ -197,3 +169,65 @@ $(document).on('click','#type-ticket',function(e){
 					e.preventDefault();
 
 });
+
+/******** 공지사항 글쓰기 액션**********/ 
+$(document).on('click','#notice-write-action',function(e){
+	// ajax로 리스트 부분만 검색된 리스트로 변경
+	let url = 'notice';
+	let method = 'POST';
+	let contentType = 'application/json;charset=UTF-8';
+	let sendData = {
+		ntitle:$('#nTitle').val(),
+		ncontent:$('#nContent').val(),
+		nimg:$('#nImg').val(),
+		userId:$('#userId').val()
+	};
+	console.log($('#userId').val());
+	let async = true;
+	// JSON.stringify() => 객체를 string 으로, JSON.parse() => string 을 객체로 만듬
+	Request.ajaxRequest(url, method, contentType, 
+						JSON.stringify(sendData),
+						function(resultJson){
+							//code 1 일때 render, 아닐 때 msg 띄움
+							if(resultJson.code == 1){
+								View.render("#notice-detail-template", resultJson, '#notice-write-detail');
+							} else {
+								alert(resultJson.msg);
+							};
+						}, async);
+	
+	e.preventDefault();
+});
+
+/******** 공지사항 글 수정 액션**********/ 
+$(document).on('click','#notice-modify-action',function(e){
+	// ajax로 리스트 부분만 검색된 리스트로 변경
+	let nNo = $('#modify-nNo').val();
+	console.log(nNo);
+	let url = `notice/${nNo}`;
+	let method = 'PUT';
+	let contentType = 'application/json;charset=UTF-8';
+	let sendData = {
+		ntitle:$('#nTitle').val(),
+		ncontent:$('#nContent').val(),
+		nimg:$('#nImg').val(),
+		userId:$('#userId').val()
+	};
+	console.log($('#userId').val());
+	let async = true;
+	// JSON.stringify() => 객체를 string 으로, JSON.parse() => string 을 객체로 만듬
+	Request.ajaxRequest(url, method, contentType, 
+						JSON.stringify(sendData),
+						function(resultJson){
+							//code 1 일때 render, 아닐 때 msg 띄움
+							if(resultJson.code == 1){
+								View.render("#notice-modified-template", resultJson, '#notice-modify-form');
+							} else {
+								alert(resultJson.msg);
+							};
+						}, async);
+	
+	e.preventDefault();
+});
+
+

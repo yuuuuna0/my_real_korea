@@ -106,9 +106,11 @@
 								<img th:src="@{img/notice/__${notice.nImg}__}"  alt="Image" class="img-fluid">
 							</div>
 						<!-- end post -->
-						<a class="btn_1" href="notice-write-form" role="button" id="notice-update-btn">수정</a> &nbsp; &nbsp; &nbsp;
-						<a class="btn_1" href="notice-write-form" role="button" id="notice-delete-btn">삭제</a>
+						<div th:if="${loginUser.userId == 'admin'}">
+						<a class="btn_1" th:href=@{notice-modify-form(nNo=${notice.nNo})} role="button" id="notice-update-btn">수정</a> &nbsp; &nbsp; &nbsp;
+						<a class="btn_1" th:href=@{notice-write-form} role="button" id="notice-delete-btn">삭제</a>
 						</div>
+					</div>
 					<!-- end box_style_1 -->
 					</div>
 

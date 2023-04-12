@@ -34,21 +34,17 @@ public class AuthLoginAnnotationInterceptor implements HandlerInterceptor {
 		// HandlerMethod 객체에 @LoginCheck 이 있는 경우, 세션이 있는지 체크
 		HttpSession session = request.getSession();
 		User loginUser = (User) session.getAttribute("loginUser");
+		//Referer : HTTP 요청 헤더의 일종으로, 요청 보낸 페이지의 URL 의미
+		String requestUrl = request.getHeader("Referer");
+		// session 에 요청 보낸 페이지의 URL 저장(관리자 아닐 경우 이전 페이지로 돌려보내기 위해)
+		request.getSession().setAttribute("requestUrl", requestUrl);
+		
 		if (loginUser == null) {
 			// 로그인이 안되어 있는 상태, 로그인 폼으로 다시 돌려보냄
-		    String requestUrl = request.getRequestURL().toString();
 		    session.setAttribute("requestUrl", requestUrl);
 		    response.sendRedirect("user-login");
 		    return false;
-		}
-//		else {
-//		    String requestUrl = (String) session.getAttribute("requestUrl");
-//		    if (requestUrl != null) {
-//		        session.removeAttribute("requestUrl");
-//		        response.sendRedirect(requestUrl);
-//		        return false;
-//		    }
-//		} 에러나서 주석처리함 ㅠ (민선)
+		} 
 
 		return true;
 	}

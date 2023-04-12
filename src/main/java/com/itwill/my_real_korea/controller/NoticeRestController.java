@@ -152,17 +152,11 @@ public class NoticeRestController {
 	/*
 	 * 공지사항 게시글 추가
 	 */
-	//@AdminCheck
+	@AdminCheck
 	@LoginCheck
 	@ApiOperation(value = "공지사항 글쓰기")
 	@PostMapping(value = "/notice", produces = "application/json;charset=UTF-8")
 	public Map<String, Object> notice_write_action(@RequestBody Notice notice, HttpServletRequest request){
-		
-		// Referer : HTTP 요청 헤더의 일종으로, 요청 보낸 페이지의 URL 의미
-		String requestUrl = request.getHeader("Referer");
-		// session 에 요청 보낸 페이지의 URL 저장(관리자 아닐 경우 이전 페이지로 돌려보내기 위해)
-		request.getSession().setAttribute("requestUrl", requestUrl);
-		
 		
 		Map<String, Object> resultMap = new HashMap<>();
 		int code = 1;

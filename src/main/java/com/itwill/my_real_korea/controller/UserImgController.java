@@ -70,8 +70,8 @@ public class UserImgController {
 	public String handleFileUpload(@RequestParam("file") MultipartFile file,
 	        HttpSession session, RedirectAttributes redirectAttributes) throws Exception {
 
-	    String sUserId = (String) session.getAttribute("sUserId");
-	    User loginUser = userService.findUser(sUserId);
+	    User loginUser = (User) session.getAttribute("loginUser");
+	    loginUser = userService.findUser(loginUser.getUserId());
 	    System.out.println(">>> loginUser : "+loginUser);
 		storageService.store(file);
 

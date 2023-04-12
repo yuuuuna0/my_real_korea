@@ -259,7 +259,8 @@
 											</strong>
 										</h6>
 									</div>
-									<div class="col-md-3" th:if="${session.loginUser.userId == tourReview.userId}">
+									<div class="col-md-3" > <!--th:if="${session.loginUser.userId == tourReview.userId}"-->
+										<input type="button" value="수정">
 										<input type="button" value="삭제">
 									</div>
 								</div>

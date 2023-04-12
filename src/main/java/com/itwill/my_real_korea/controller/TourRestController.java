@@ -50,7 +50,7 @@ public class TourRestController {
 		this.tourReviewService=tourReviewService;
 	}
 
-	//1. 투어상품 전체 리스트 보기
+	//1. 투어상품 전체 리스트 보기  -> 필터 
 		@ApiOperation(value="투어상품리스트(필터&정렬)")
 		@GetMapping(value = "/tour-list-ajax/{keyword}", produces="application/json;charset=UTF-8")
 		public Map<String, Object> tour_list(@RequestParam(required = false, defaultValue = "1") int currentPage,
@@ -79,6 +79,46 @@ public class TourRestController {
 				code=2;
 				msg="관리자에게 문의하세요.";
 			}
+			resultMap.put("code", code);
+			resultMap.put("msg", msg);
+			resultMap.put("data", data);
+			return resultMap;
+		}
+		
+		//1. 투어상품 전체 리스트 보기  -> 필터 ---> 작성중, 한번에 해보기 
+		@ApiOperation(value="투어상품리스트(필터&정렬)")
+		@PostMapping(value = "/tour-list-ajax", produces="application/json;charset=UTF-8")
+		public Map<String, Object> tourListAjax(@RequestBody Map<String,String> map){
+			Map<String, Object> resultMap = new HashMap<>();
+			int code = 1;
+			String msg = "성공";
+			List<Tour> data = null;
+			int currentPage=Integer.parseInt(map.get("currentPage"));
+			int cityNo=Integer.parseInt(map.get("cityNo"));
+			int toType=Integer.parseInt(map.get("toType"));
+			System.out.println(currentPage);
+			System.out.println(cityNo);
+			System.out.println(toType);
+			String keyword=(String)map.get("keyword");
+			String sortOrder=(String)map.get("sortOrder");
+			try {
+				PageMakerDto<Tour> tourListPage=tourService.findAll(currentPage,keyword, cityNo, toType, sortOrder);
+				List<Tour> tempTourList=tourListPage.getItemList();
+				List<Tour> tourList=new ArrayList<>();
+				for (Tour tour : tempTourList) {
+					int tourScore=tourReviewService.calculateTourScore(tour.getToNo());
+					tour.setToScore(tourScore);
+					tourList.add(tour);	//tourList에 후기 평점 평균 붙이기
+				}
+				data=tourList;
+				code=1;
+				msg="성공";
+			}catch (Exception e) {
+				e.printStackTrace();
+				code=2;
+				msg="관리자에게 문의하세요.";
+			}
+ 
 			resultMap.put("code", code);
 			resultMap.put("msg", msg);
 			resultMap.put("data", data);

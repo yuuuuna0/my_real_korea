@@ -113,8 +113,8 @@
 								<h6>여행 도시</h6>
 								<ul>
 									<li>
-										<label th:each="city:${cityList}">
-											<input type="checkbox" th:value="${city.cityNo}" th:text="${city.cityName}">
+										<label  th:each="city:${cityList}">
+											<input class="city_type" type="checkbox" th:value="${city.cityNo}" th:text="${city.cityName}">
 											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 										</label>
 									</li>

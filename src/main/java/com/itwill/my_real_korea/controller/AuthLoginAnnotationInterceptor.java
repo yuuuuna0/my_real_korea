@@ -40,14 +40,15 @@ public class AuthLoginAnnotationInterceptor implements HandlerInterceptor {
 		    session.setAttribute("requestUrl", requestUrl);
 		    response.sendRedirect("user-login");
 		    return false;
-		} else {
-		    String requestUrl = (String) session.getAttribute("requestUrl");
-		    if (requestUrl != null) {
-		        session.removeAttribute("requestUrl");
-		        response.sendRedirect(requestUrl);
-		        return false;
-		    }
 		}
+//		else {
+//		    String requestUrl = (String) session.getAttribute("requestUrl");
+//		    if (requestUrl != null) {
+//		        session.removeAttribute("requestUrl");
+//		        response.sendRedirect(requestUrl);
+//		        return false;
+//		    }
+//		} 에러나서 주석처리함 ㅠ (민선)
 
 		return true;
 	}

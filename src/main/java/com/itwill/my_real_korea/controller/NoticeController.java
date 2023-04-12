@@ -13,11 +13,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.itwill.my_real_korea.dto.notice.Notice;
+import com.itwill.my_real_korea.dto.user.User;
 import com.itwill.my_real_korea.exception.NoticeNotFoundException;
 import com.itwill.my_real_korea.service.notice.NoticeService;
 import com.itwill.my_real_korea.util.PageMakerDto;
@@ -71,27 +74,47 @@ public class NoticeController {
 	//@AdminCheck 
 	@LoginCheck
 	@GetMapping("/notice-write-form")
-	public String notice_write_form(HttpServletRequest request) {
-		/*
-		 * Referer : HTTP 요청 헤더의 일종으로, 
-		 * 			요청 보낸 페이지의 URL 의미
-		 */
+	public String notice_write_form(HttpServletRequest request, Model model) {
+		//Referer : HTTP 요청 헤더의 일종으로, 요청 보낸 페이지의 URL 의미
 		String requestUrl = request.getHeader("Referer");
 		// session 에 요청 보낸 페이지의 URL 저장(관리자 아닐 경우 이전 페이지로 돌려보내기 위해)
 		request.getSession().setAttribute("requestUrl", requestUrl);
 		
+		User loginUser = (User)request.getSession().getAttribute("loginUser");
+		model.addAttribute("loginUser", loginUser);
+		
 		return "notice-write-form";
 	}
+	
+	/*공지사항 글쓰기
+	@AdminCheck
+	@LoginCheck
+	@PostMapping("/notice-write-action")
+	public String notice_write_action(HttpServletRequest request, 
+									@ModelAttribute("addedNotice") Notice notice,
+									RedirectAttributes redirectAttributes) {
+
+		// Referer : HTTP 요청 헤더의 일종으로, 요청 보낸 페이지의 URL 의미
+		String requestUrl = request.getHeader("Referer");
+		// session 에 요청 보낸 페이지의 URL 저장(관리자 아닐 경우 이전 페이지로 돌려보내기 위해)
+		request.getSession().setAttribute("requestUrl", requestUrl);
+		try {
+ 			noticeService.insertNotice(notice);
+			redirectAttributes.addFlashAttribute("notice", notice);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "notice-list";					
+		} 
+		return "redirect:notice-detail?nNo="+notice.getNNo();
+	}
+	*/
 	
 	// 공지사항 수정 폼
 	//@AdminCheck 
 	@LoginCheck
 	@GetMapping("/notice-modify-form")
 	public String notice_modify_form(HttpServletRequest request) {
-		/*
-		 * Referer : HTTP 요청 헤더의 일종으로, 
-		 * 			요청 보낸 페이지의 URL 의미
-		 */
+		//Referer : HTTP 요청 헤더의 일종으로, 요청 보낸 페이지의 URL 의미
 		String requestUrl = request.getHeader("Referer");
 		// session 에 요청 보낸 페이지의 URL 저장(관리자 아닐 경우 이전 페이지로 돌려보내기 위해)
 		request.getSession().setAttribute("requestUrl", requestUrl);

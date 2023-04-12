@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.itwill.my_real_korea.dto.ticket.TicketImg;
 import com.itwill.my_real_korea.dto.tour.TourImg;
+import com.itwill.my_real_korea.dto.user.User;
 import com.itwill.my_real_korea.dto.wishlist.Wishlist;
 import com.itwill.my_real_korea.service.ticket.TicketImgService;
 import com.itwill.my_real_korea.service.tour.TourImgService;
@@ -38,8 +39,8 @@ public class WishlistController {
 		// session 에 요청 보낸 페이지의 URL 저장(관리자 아닐 경우 이전 페이지로 돌려보내기 위해)
 		//request.getSession().setAttribute("requestUrl", requestUrl);
 		
-		String sUserId = (String)session.getAttribute("sUserId");
-		List<Wishlist> wishlistList = wishlistService.selectAllWithTicketAndTour(sUserId);
+		User loginUser = (User)session.getAttribute("loginUser");
+		List<Wishlist> wishlistList = wishlistService.selectAllWithTicketAndTour(loginUser.getUserId());
 		
 		for (Wishlist wishlist : wishlistList) {
 			List<TourImg> tourImgList = wishlist.getTourImgList() ;
@@ -48,7 +49,7 @@ public class WishlistController {
 			model.addAttribute("ticketImgList", ticketImgList);
 		}
 		model.addAttribute("wishlistList", wishlistList);
-		model.addAttribute("sUserId", sUserId);
+		model.addAttribute("loginUser", loginUser);
 	
 		return "wishlist";
 	}

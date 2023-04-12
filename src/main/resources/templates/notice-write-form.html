@@ -31,6 +31,9 @@
 	<!-- CUSTOM CSS -->
 	<link href="css/custom.css" rel="stylesheet">
 
+<!-- Handlebars -->
+<script  defer type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.2/handlebars.min.js"></script>
+
 
 </head>
 
@@ -80,8 +83,8 @@
 		<!-- End position -->
 		<div class="container margin_60">
 			<div class="row">
-
-				<div class="col-lg-12">
+			
+				<div id="notice-write-detail" class="col-lg-9">
 					<div class="box_style_1">
 						<div class="post nopadding">
 							<div class="post_info clearfix">
@@ -93,17 +96,20 @@
 									</ul>
 								</div>
 							</div>
+							<form id="noticewriteF" name="noticewriteF">
+								<input type="hidden" id="userId" th:value="${loginUser.userId}">
 							<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
 								<p></p>
+								
 									<label>공지사항 제목</label>
-									<input class="form-control" name="first_name" id="first_name" type="text">
+									<input class="form-control" name="nTitle" id="nTitle" type="text">
 								</div>
 								<p></p>
 								<div class="form-group">
 									<label>공지사항 내용</label>
-									<textarea class="form-control" name="email_2" id="email_2" rows="10" cols="50">
+									<textarea class="form-control" name="nContent" id="nContent" rows="10" cols="50">
 									</textarea>
 								</div>
 							</div>
@@ -114,18 +120,20 @@
 						<div class="form-inline upload_1">
 							<div class="form-group">
 								<input type="file" name="files[]" id="js-upload-files" multiple="">
+								<input type="hidden" id="nImg" value="news_home_1.jpg">
 							</div>
 						</div>
+						</form>
 						<p></p>
 						<p></p>
 						<p></p>
 						<p></p>
 						<p></p>
+						<p></p>  
 						<p></p>
 						<p></p>
 						<p></p>
-						<p></p>
-							<button type="submit" class="btn_1 green" id="js-upload-submit">글쓰기</button> &nbsp;&nbsp;&nbsp;&nbsp;
+							<button type="submit" class="btn_1 green" id="notice-write-action">글쓰기</button> &nbsp;&nbsp;&nbsp;&nbsp;
 							<a href="notice-list" class="btn_1 green">취소</a>
 						</div>
 						<!-- end post -->
@@ -135,8 +143,30 @@
 					<!-- End Comments -->
 
 				</div>
-				<!-- End col-md-8-->
+				<!-- End col-lg-9-->
+				<aside class="col-lg-3 add_bottom_30">
+				
+					<div class="widget" id="cat_blog">
+						<h4>CLICK</h4>
+						<ul>
+							<li><a href="notice-list">목록으로 돌아가기</a>
+							</li>
+						</ul>
+					</div>
+					<hr>
+				
+					<div class="widget tags">
+						<h4>Tags</h4>
+						<a href="tripboard-list">동행</a>
+						<a href="ticket-list">티켓</a>
+						<a href="tour-list">투어</a>
+						<a href="freeboard-list">자유게시판</a>
+						<a href="user-view">마이페이지</a>
+					</div>
+					<hr>
+					<!-- End widget -->
 
+				</aside>
 			</div>
 			<!-- End row-->
 		</div>
@@ -163,58 +193,68 @@
 		</form>
 	</div><!-- End Search Menu -->
 	
-	<!-- Sign In Popup -->
-	<div id="sign-in-dialog" class="zoom-anim-dialog mfp-hide">
-		<div class="small-dialog-header">
-			<h3>Sign In</h3>
-		</div>
-		<form>
-			<div class="sign-in-wrapper">
-				<a href="#0" class="social_bt facebook">Login with Facebook</a>
-				<a href="#0" class="social_bt google">Login with Google</a>
-				<div class="divider"><span>Or</span></div>
-				<div class="form-group">
-					<label>Email</label>
-					<input type="email" class="form-control" name="email" id="email">
-					<i class="icon_mail_alt"></i>
-				</div>
-				<div class="form-group">
-					<label>Password</label>
-					<input type="password" class="form-control" name="password" id="password" value="">
-					<i class="icon_lock_alt"></i>
-				</div>
-				<div class="clearfix add_bottom_15">
-					<div class="checkboxes float-left">
-						<input id="remember-me" type="checkbox" name="check">
-						<label for="remember-me">Remember Me</label>
+	<!-- ##################### template ###################### -->
+	<!-- <script> 태그에 코드 적으면 화면에 안 보임 -->
+	<!-- notice-detail-template -->
+	<script id="notice-detail-template" type="text/x-handlebars-template">
+	{{#each data}}
+	<div class="col-lg-12">
+		<div class="box_style_1">
+			<div class="post nopadding">
+				<!-- 이미지 일단 지움
+				<img alt="Image" class="img-fluid"> -->
+				<div class="post_info clearfix">
+					<div class="post-left">
+						<h2>{{ntitle}}</h2>
+						<ul>
+							<li><i class="icon-calendar-empty"></i>작성일 &nbsp;
+							<span>{{dateFormat ndate}}</span>
+							</li>
+						</ul>
 					</div>
-					<div class="float-right"><a id="forgot" href="javascript:void(0);">Forgot Password?</a></div>
 				</div>
-				<div class="text-center"><input type="submit" value="Log In" class="btn_login"></div>
-				<div class="text-center">
-					Don’t have an account? <a href="javascript:void(0);">Sign up</a>
-				</div>
-				<div id="forgot_pw">
-					<div class="form-group">
-						<label>Please confirm login email below</label>
-						<input type="email" class="form-control" name="email_forgot" id="email_forgot">
-						<i class="icon_mail_alt"></i>
-					</div>
-					<p>You will receive an email containing a link allowing you to reset your password to a new preferred one.</p>
-					<div class="text-center"><input type="submit" value="Reset Password" class="btn_1"></div>
-				</div>
+				<p>{{ncontent}}</p>
+				<p>
+				</p>
+					{{#if nimg}}
+					<img src="img/notice/{{nimg}}" alt="Image" class="img-fluid">
+					{{/if}}
 			</div>
-		</form>
-		<!--form -->
+			<!-- end post -->
+		</div>
+		<!-- end box_style_1 -->
+		<!-- End Comments -->
 	</div>
-	<!-- /Sign In Popup -->
+	{{/each}}
+</script>
+
+
+<!-- Functions 
+<script>
+
+	function noticeCreate() {
+		if ($('#nTitle').val() == "") {
+			alert("제목을 입력하십시요.");
+			$('#nTitle').focus();
+			return false;
+		}
+		if ($('#nContent').val() == "") {
+			alert("내용을 입력하십시요.");
+			$('#nContent').focus();
+			return false;
+		}
+		document.noticewriteF.action = 'notice-write-action';
+		document.noticewriteF.method = 'POST';
+		document.noticewriteF.submit();
+	}
+</script>-->
 
 	<!-- Common scripts -->
 	<script src="js/jquery-2.2.4.min.js"></script>
 	<script src="js/common_scripts_min.js"></script>
 	<script src="js/functions.js"></script>
+	<script src="js/app.js" type="module"></script>
 	
-
 </body>
 
 </html>

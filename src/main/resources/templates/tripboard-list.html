@@ -30,6 +30,8 @@
 	<!-- CUSTOM CSS -->
 	<link href="css/custom.css" rel="stylesheet">
 
+	<!-- Handlebars -->
+	<script  defer type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.2/handlebars.min.js"></script>
 </head>
 
 <body>
@@ -103,7 +105,7 @@
 						</div>
 						<!--End Sort By-->
 
-						<div class="row">
+						<div class="row" id="tripboard-list">
 						
 							<div class="shop-item col-lg-4 col-md-6 col-sm-6" th:each="tripBoard:${tripBoardList}">
 								<div class="ribbon_3"><span>모집중</span>
@@ -400,10 +402,10 @@
 					<aside class="sidebar">
 						<div class="widget">
 							<div class="input-group">
-								<input type="text" class="form-control" placeholder="Search...">
+								<input id="tripboard-search-keyword" type="text" class="form-control" placeholder="Search...">
 								<span class="input-group-btn">
-                        <button class="btn btn-default" type="button" style="margin-left:0;"><i class="icon-search"></i></button>
-                        </span>
+		                        <button id="tripboard-search-btn" class="btn btn-default" type="button" style="margin-left:0;"><i class="icon-search"></i></button>
+		                        </span>
 							</div>
 						</div>
 						<!-- End Search -->
@@ -542,11 +544,46 @@
 		<!--form -->
 	</div>
 	<!-- /Sign In Popup -->
+	
+	
+	<!-- ##################### template ###################### -->
+	<script id="tripboard-search-list-template" type="text/x-handlebars-template">
+	{{#each data.itemList}}
+	<div class="shop-item col-lg-4 col-md-6 col-sm-6">
+		<div class="ribbon_3"><span>모집중</span>
+		</div>
+		<div class="inner-box">
+			<div class="image-box">
+				<figure class="image">
+					<a href="tripboard-detail?tBoNo={{tbono}}"><img src="img/products/image-1.jpg" alt="">
+					</a>
+				</figure>
+			</div>
+			<div class="product_description">
+				<div class="trip-title">
+					<h3><a href="tripboard-detail?tBoNo={{tbono}}">{{tbotitle}}</a></h3>
+				</div>
+				<div class="trip-date">
+					<h3><a>{{dateFormat tBoStartDate}}</a><a> ~ </a><a>{{dateFormat tBoEndDate}}</a></h3>
+				</div>
+				<div class="icons">
+					<span class="icon-eye"></span>
+					<span>{{tBoReadcount}}</span>
+					<span class="icon-comment"></span>
+					<span>{{commentCount}}</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	{{/each}}
+	</script>
+	
 
 	<!-- Common scripts -->
 	<script src="js/jquery-2.2.4.min.js"></script>
 	<script src="js/common_scripts_min.js"></script>
 	<script src="js/functions.js"></script>
+	<script src="js/app_tripboard.js" type="module"></script>
 	
 
 </body>

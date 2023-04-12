@@ -145,9 +145,9 @@ public class TripBoardRestController {
 	 * 키워드로 검색된 동행게시판 리스트(keyword) - 페이징 처리
 	 */
 	@ApiOperation(value = "동행게시판 title 검색 결과 리스트")
-	@GetMapping(value = "/tripboard-search-list", produces = "application/json;charset=UTF-8")
-	public Map<String, Object> tripBoard_search_list(@RequestParam(required = false, defaultValue = "1")int tBoNo,
-													 @RequestParam(required = true) String keyword){
+	@GetMapping(value = "/tripboard-search/{keyword}", produces = "application/json;charset=UTF-8")
+	public Map<String, Object> tripBoard_search_list(@RequestParam(required = false, defaultValue = "1")int pageNo,
+														@PathVariable String keyword){
 		
 		Map<String, Object> resultMap = new HashMap<>();
 		int code = 1;
@@ -155,8 +155,9 @@ public class TripBoardRestController {
 		PageMakerDto<TripBoard> tripBoardList = null;
 		try {
 			//페이지 번호(default 값 1)와 검색 keyword로 동행 게시글 키워드로 찾기. 성공시 code 1
-			tripBoardList = tripBoardService.selectSearchTbList(tBoNo, keyword);
+			tripBoardList = tripBoardService.selectSearchTbList(pageNo, keyword);
 			if(tripBoardList.getTotRecordCount() != 0 && tripBoardList != null) {
+				System.out.println("z");
 				code = 1;
 				msg = "성공";
 			}else {

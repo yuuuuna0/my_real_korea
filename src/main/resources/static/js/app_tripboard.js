@@ -22,3 +22,69 @@ $(document).on('click','#tripboard-search-btn',function(e){
 						}, async);
 	e.preventDefault();
 });
+
+//동행게시판 정렬(최신순, 조회수높은순)
+$(document).on('change', '#sort-by', function(e) {
+	let selectedValue = $(this).val();
+	console.log(selectedValue);
+	
+	if(selectedValue === "tripboard-date-desc") {
+		let url = 'tripboard-date-desc';
+		let method = 'GET';
+		let contentType = 'application/json;charset=UTF-8';
+		let sendData = {};
+		let async = true;
+		
+		Request.ajaxRequest(url, method, contentType, sendData,
+							function(resultJson){
+								if(resultJson.code == 1){
+									View.render('#tripboard-search-list-template', resultJson, '#tripboard-list');
+								}else {
+									alert(resultJson.msg);
+								}
+							}, async);
+		e.preventDefault();
+	}
+	
+	if(selectedValue === "tripboard-readcount") {
+		let url = 'tripboard-readcount';
+		let method = 'GET';
+		let contentType = 'application/json;charset=UTF-8';
+		let sendData = {};
+		let async = true;
+		
+		Request.ajaxRequest(url, method, contentType, sendData,
+							function(resultJson){
+								if(resultJson.code == 1){
+									View.render('#tripboard-search-list-template', resultJson, '#tripboard-list');
+								}else {
+									alert(resultJson.msg);
+								}
+							}, async);
+		e.preventDefault();
+	}
+});
+
+//동행게시판 정렬(사이드바 전체보기)
+$(document).on('click', '#all-city-list', function(e) {
+	let selectedValue = $(this).val();
+	console.log(selectedValue);
+	
+	if(selectedValue === "tripboard-all-city-list") {
+		let url = 'tripboard-all-city-list';
+		let method = 'GET';
+		let contentType = 'application/json;charset=UTF-8';
+		let sendData = {};
+		let async = true;
+		
+		Request.ajaxRequest(url, method, contentType, sendData,
+							function(resultJson){
+								if(resultJson.code == 1){
+									View.render('#tripboard-search-list-template', resultJson, '#tripboard-list');
+								}else {
+									alert(resultJson.msg);
+								}
+							}, async);
+		e.preventDefault();
+	}
+});

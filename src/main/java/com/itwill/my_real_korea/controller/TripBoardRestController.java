@@ -275,7 +275,7 @@ public class TripBoardRestController {
 	 * 동행 게시판 리스트 정렬(조회수 기준 내림차순(readcount)) - 페이징 처리
 	 */
 	@ApiOperation(value = "동행 게시판 조회수 정렬 리스트(readcount)")
-	@GetMapping(value = "/tripboard-readcount-list", produces = "application/json;charset=UTF-8")
+	@GetMapping(value = "/tripboard-readcount", produces = "application/json;charset=UTF-8")
 	public Map<String, Object> tripboard_readcount_list(@RequestParam(required = false, defaultValue = "1")int pageNo){
 		
 		Map<String, Object> resultMap = new HashMap<>();
@@ -303,7 +303,7 @@ public class TripBoardRestController {
 	 * 동행 게시판 리스트 정렬(게시글 작성 날짜 기준 내림차순(date)) - 페이징 처리
 	 */
 	@ApiOperation(value = "동행 게시판 작성 날짜 정렬 리스트(date)")
-	@GetMapping(value = "/tripboard-date-list", produces = "application/json;charset=UTF-8")
+	@GetMapping(value = "/tripboard-date-desc", produces = "application/json;charset=UTF-8")
 	public Map<String, Object> tripboard_date_list(@RequestParam(required = false, defaultValue = "1")int pageNo){
 		
 		Map<String, Object> resultMap = new HashMap<>();
@@ -333,6 +333,35 @@ public class TripBoardRestController {
 	@ApiOperation(value = "동행 게시판 리스트")
 	@GetMapping(value = "/tripboard-all-list", produces = "application/json;charset=UTF-8")
 	public Map<String, Object> tripboard_all_list(@RequestParam(required = false, defaultValue = "1")int pageNo){
+		
+		Map<String, Object> resultMap = new HashMap<>();
+		int code = 1;
+		String msg = "성공";
+		PageMakerDto<TripBoard> tripBoardList = null;
+		try {
+			// 페이지 번호(default 값 1)로 동행 게시판 리스트, 성공시 code 1
+			tripBoardList = tripBoardService.selectAllTb(pageNo);
+			code = 1;
+			msg = "성공";
+		} catch (Exception e) {
+			// 에러 발생시 code 2
+			e.printStackTrace();
+			code = 2;
+			msg = "관리자에게 문의하세요.";
+		}
+		resultMap.put("code", code);
+		resultMap.put("msg", msg);
+		resultMap.put("data", tripBoardList);
+		return resultMap;
+		
+	}
+	
+	/*
+	 * 동행 게시판 리스트(모든 지역 리스트 보기) - 페이징 처리
+	 */
+	@ApiOperation(value = "동행 게시판 모든 지역 리스트")
+	@GetMapping(value = "/tripboard-all-city-list", produces = "application/json;charset=UTF-8")
+	public Map<String, Object> tripboard_all_city_list(@RequestParam(required = false, defaultValue = "1")int pageNo){
 		
 		Map<String, Object> resultMap = new HashMap<>();
 		int code = 1;

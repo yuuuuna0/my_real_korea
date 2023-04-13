@@ -111,3 +111,12 @@ header.sticky#colored #logo_home h1 a{
     transition: all 0.2s ease;
     outline: none;
 }
+
+#wishlist-detail-btn p{
+    margin-bottom: 30px;
+}
+
+#wishlist-all-delete{
+	margin-bottom: 30px;
+	margin-left: 50px;
+}

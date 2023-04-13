@@ -20,7 +20,9 @@
 	</insert>
 	<!-- 2. 투어상품 수정 -->
 	<update id="updateTour" parameterType="com.itwill.my_real_korea.dto.tour.Tour">
-		update tour set to_name=#{toName},to_type=#{toType},to_time=#{toTime},to_person=#{toPerson},to_meet=#{toMeet},to_price=#{toPrice},to_info=#{toInfo},to_notice=#{toNotice} where to_no=#{toNo}
+		update tour set to_name=#{toName},to_type=#{toType},to_time=#{toTime},to_person=#{toPerson},to_meet=#{toMeet},to_price=#{toPrice}
+						,to_info=#{toInfo},to_notice=#{toNotice} ,to_count=#{toCount}
+		where to_no=#{toNo}
 	</update>
 	<!--                               Select                            -->
 	<!-- 3. 투어상품 전체리스트  -->

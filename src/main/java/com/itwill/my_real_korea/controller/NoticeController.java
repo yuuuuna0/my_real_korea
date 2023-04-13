@@ -42,13 +42,15 @@ public class NoticeController {
 								Model model, HttpSession session) {
 		
 		try {
+			if(session != null) {
+				User loginUser = (User)session.getAttribute("loginUser");
+				model.addAttribute("loginUser",loginUser);
+			}
 			PageMakerDto<Notice> noticeListPage = noticeService.selectAll(pageNo);
 			List<Notice> noticeList = noticeListPage.getItemList();
-			User loginUser = (User)session.getAttribute("loginUser");
 			model.addAttribute("noticeListPage", noticeListPage);
 			model.addAttribute("noticeList", noticeList);
 			model.addAttribute("pageNo", pageNo);
-			model.addAttribute("loginUser",loginUser);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return "error";
@@ -61,12 +63,14 @@ public class NoticeController {
 	public String notice_detail(@RequestParam int nNo, Model model, HttpSession session) throws Exception {
 		
 		try {
+			if(session != null) {
+				User loginUser = (User)session.getAttribute("loginUser");
+				model.addAttribute("loginUser",loginUser);
+			}
 			Notice notice = noticeService.selectByNo(nNo);
 			noticeService.increaseReadCount(nNo);
-			User loginUser = (User)session.getAttribute("loginUser");
 			model.addAttribute("notice", notice);
 			model.addAttribute("nNo", nNo);
-			model.addAttribute("loginUser",loginUser);
 		} catch (NoticeNotFoundException e) {
 			model.addAttribute("msg", e.getMessage());
 			return "redirect:notice-list";

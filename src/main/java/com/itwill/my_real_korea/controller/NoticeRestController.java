@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.itwill.my_real_korea.dto.notice.Notice;
+import com.itwill.my_real_korea.dto.user.User;
 import com.itwill.my_real_korea.exception.IsNotAdminException;
 import com.itwill.my_real_korea.service.notice.NoticeService;
 import com.itwill.my_real_korea.util.PageMaker;
@@ -299,18 +301,23 @@ public class NoticeRestController {
 	
 	/*
 	 * 공지사항 게시글 번호(boardno)로 해당 게시글 보기 => controller
-	
+	 */
 	@ApiOperation(value = "공지사항 상세보기")
 	@ApiImplicitParam(name = "nNo", value = "공지사항 번호")
 	@GetMapping(value = "/notice/{nNo}", produces = "application/json;charset=UTF-8")
-	public Map<String, Object> notice_detail(@PathVariable(value = "nNo") int nNo) {
+	public Map<String, Object> notice_detail(@PathVariable(value = "nNo") int nNo,
+											HttpSession session) {
 
 		Map<String, Object> resultMap = new HashMap<>();
 		int code = 1;
 		String msg = "성공";
 		List<Notice> data = new ArrayList<Notice>();
+		User loginUser = null;
 
 		try {
+			if(session != null) {
+				loginUser = (User)session.getAttribute("loginUser");
+			}
 			// nNo로 공지사항 1개 찾기, 성공시 code 1
 			Notice notice = noticeService.selectByNo(nNo);
 			if (notice != null) {
@@ -332,10 +339,12 @@ public class NoticeRestController {
 		resultMap.put("code", code);
 		resultMap.put("msg", msg);
 		resultMap.put("data", data);
+		resultMap.put("loginUser", loginUser);
+		
 
 		return resultMap;
 	}
-	 */
+	
 	
 	
 	/*

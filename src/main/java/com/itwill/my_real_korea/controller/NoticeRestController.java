@@ -300,7 +300,7 @@ public class NoticeRestController {
 	 */
 	
 	/*
-	 * 공지사항 게시글 번호(boardno)로 해당 게시글 보기 => controller
+	 * 공지사항 게시글 번호(boardno)로 해당 게시글 보기 => modify action 이후 보여주는 용도
 	 */
 	@ApiOperation(value = "공지사항 상세보기")
 	@ApiImplicitParam(name = "nNo", value = "공지사항 번호")

@@ -134,7 +134,7 @@
 						<p></p>
 						<p></p>
 						<p></p>
-							<button type="submit" class="btn_1 green" id="notice-modify-action">수정</button> &nbsp;&nbsp;&nbsp;&nbsp;
+							<button type="submit" class="btn_1 green" id="notice-modify-action-btn">수정</button> &nbsp;&nbsp;&nbsp;&nbsp;
 							<input type="hidden" id="modify-nNo" th:value=${notice.nNo}>
 							<a th:href=@{notice-detail(nNo=${notice.nNo})} class="btn_1 green">취소</a>
 						</div>
@@ -224,7 +224,7 @@
 			</div>
 			<!-- end post -->
 			<a class="btn_1" href="notice-modify-form?nNo={{nno}}"  role="button" id="notice-update-btn">수정</a> &nbsp; &nbsp; &nbsp;
-			<a class="btn_1" href="notice-write-form" role="button" id="notice-delete-btn">삭제</a>
+			<a class="btn_1" href="" role="button" id="notice-delete-action-btn">삭제</a>
 		</div>
 		<!-- end box_style_1 -->
 		<!-- End Comments -->

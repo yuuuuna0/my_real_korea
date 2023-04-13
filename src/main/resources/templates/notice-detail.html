@@ -108,7 +108,8 @@
 						<!-- end post -->
 						<div th:if="${loginUser != null && loginUser.userId == 'admin'}">
 						<a class="btn_1" th:href=@{notice-modify-form(nNo=${notice.nNo})} role="button" id="notice-update-btn">수정</a> &nbsp; &nbsp; &nbsp;
-						<a class="btn_1" th:href=@{notice-write-form} role="button" id="notice-delete-btn">삭제</a>
+						<a class="btn_1" href="" role="button" id="notice-delete-action-btn">삭제</a>
+						<input type="hidden"  id="nNo-hidden-value" th:value=${notice.nNo}>
 						</div>
 					</div>
 					<!-- end box_style_1 -->
@@ -176,7 +177,7 @@
 	<script src="js/jquery-2.2.4.min.js"></script>
 	<script src="js/common_scripts_min.js"></script>
 	<script src="js/functions.js"></script>
-	
+	<script src="js/app.js" type="module"></script>
 
 </body>
 

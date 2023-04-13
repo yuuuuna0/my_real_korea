@@ -192,7 +192,7 @@
 						</div>
 						<!-- End widget -->
 						<hr>
-						<div th:if="${loginUser.userId == 'admin'}">
+						<div th:if="${loginUser != null && loginUser.userId == 'admin'}">
 						<a class="btn_1" th:href=@{notice-write-form} role="button">공지사항 글쓰기</a>
 						</div>
 					</aside>

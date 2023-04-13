@@ -221,7 +221,13 @@ $(document).on('click','#notice-modify-action',function(e){
 						function(resultJson){
 							//code 1 일때 render, 아닐 때 msg 띄움
 							if(resultJson.code == 1){
-								View.render("#notice-modified-template", resultJson, '#notice-modify-form');
+								let updatednNo = resultJson.data[0].nno;
+								// update 된 거 출력 위해 notice_detail 로 다시 요청
+								Request.ajaxRequest(
+									`notice/${updatednNo}`,'GET', contentType, {},
+									function(resultJson){
+									View.render("#notice-modified-template", resultJson, '#notice-modify-form');
+									});
 							} else {
 								alert(resultJson.msg);
 							};

@@ -46,6 +46,30 @@
 			document.f.method = 'POST';
 			document.f.submit();
 		}
+
+		function fBoModify() {
+			document.f.action = "freeboard-modify-form";
+			document.f.method = 'GET';
+			document.f.submit();
+		}
+
+		function fBoDelete() {
+			document.f.action = "freeboard-delete-action";
+			document.f.method = 'POST';
+			document.f.submit();
+		}
+
+		function fCoModify() {
+			document.f.action = "freeboard-comment-modify-form";
+			document.f.method = 'GET';
+			document.f.submit();
+		}
+
+		function fCoDelete() {
+			document.a.action = "free-board-comment-delete-action";
+			document.a.method = 'POST';
+			document.a.submit();
+		}
 	</script>
 </head>
 
@@ -103,10 +127,14 @@
 						<div class="post_info clearfix">
 							<div class="post-left">
 								<ul>
-									<li><i class="icon-user"></i>작성자
+									<li>
+										<i class="icon-user"></i>작성자
 										<span th:text="${freeBoard.userId}">12 Nov 2020</span>
 										<i class="icon-calendar-empty"></i>작성일
 										<span th:text="${#dates.format(freeBoard.getFBoDate(), 'yyyy.MM.dd')}">12 Nov 2020</span>
+										<i class="icon-map"></i>도시
+										<span th:text="${freeBoard.getCity().cityName}">12 Nov 2020</span>
+
 
 									</li>
 									<!--                                    <li><i class="icon-inbox-alt"></i>In <a href="#">Top tours</a>-->
@@ -118,13 +146,15 @@
 						</div>
 						<h2 th:text="${freeBoard.getFBoTitle()}"></h2>
 						<p th:text="${freeBoard.fBoContent}">
-							Praesent vestibulum molestie lacus. Aenean nonummy hendrerit mauris. Phasellus porta. Fusce
-							suscipit varius mi nascetur ridiculus mus. Nulla dui. Fusce feugiat malesuada odio. Morbi
-							nunc odio, gravida at, cursus nec, luctus a, lorem.....
 						</p>
+
 
 						<blockquote class="styled">
 						</blockquote>
+						<!--                        <div th:if="${userId==freeBoardComment.userId}">-->
+						<span style="float: right" type="button" onclick="fBoDelete();">삭제</span>
+						<span style="float: right" type="button" onclick="fBoModify();">수정</span>
+						<!--                        </div>-->
 					</div>
 					<!-- end post -->
 				</div>
@@ -135,20 +165,28 @@
 				<div id="comments">
 					<ol>
 						<li>
-							<div class="comment_right clearfix" th:each="freeBoardComment:${freeBoardCommentList}">
+							<div th:each="freeBoardComment:${freeBoardCommentList}">
 								<div class="avatar">
 									<a href="#"><img src="img/avatar1.jpg" alt="Image">
 									</a>
 								</div>
 
+								<input type="hidden" name="fCoNo" value=""
+									   th:value="*{freeBoardComment.getFCoNo()}"/>
+								<input type="hidden" name="fBoNo" value="206" th:value="*{freeBoard.getFBoNo()}"/>
 								<div class="comment_info">
-									Posted by <span th:text="${freeBoardComment.userId}"></span>
-									<span th:text="${#dates.format(freeBoardComment.fCommentDate, 'yyyy.MM.dd')}"></span>
+									<h4 class="comment_info" th:text="${freeBoardComment.userId}"></h4>
+
 									<p th:text="${freeBoardComment.getFCommentContent()}"></p>
+									<span th:text="${#dates.format(freeBoardComment.fCommentDate, 'yyyy.MM.dd')}"></span>
+									<!--                                    <div th:if="${userId==freeBoardComment.userId}">-->
+									<p style="float: right" type="button" onclick="fCoDelete();">삭제</p>&nbsp;
+									<p style="float: right" type="button" onclick="fCoModify();">수정</p>
+									<!--                                    </div>-->
 								</div>
 
-							</div>
 
+							</div>
 					</ol>
 				</div>
 
@@ -160,12 +198,12 @@
 					<input type="hidden" name="userId" value="user1"/>
 					<div class="form-group">
                         <textarea class="form-control style_2" style="height:150px;"
-								  placeholder="댓글 달기" name="fCommentContent"> </textarea>
+								  placeholder="내용을 입력하세요" name="fCommentContent"></textarea>
 
 					</div>
 					<div class="form-group">
 						<!--                        <input type="button" class="btn_1" value="댓글 쓰기" onClick="fBoCommentCreate();"> &nbsp;-->
-						<button class="btn_1" type="button" onclick="fBoCommentCreate();">댓글 쓰기</button>
+						<button class="btn_1" type="button" onclick="fBoCommentCreate();">댓글 달기</button>
 						<!--                        <input type="submit" class="btn_1" value="댓글 달기" onClick="fBoCommentCreate();/>-->
 					</div>
 				</form>

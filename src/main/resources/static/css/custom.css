@@ -77,3 +77,37 @@ header.sticky#colored #logo_home h1 a{
     font-size: 30px;
     font-weight: 300;
 }
+
+#boardlist {
+	 border: solid 1px; 
+	 width: 100%;
+	 background-color: #FFFFFF;
+	 border-color: #FFFFFF;
+}
+
+#boardlist_tr1 td{
+	 background-color: #e14d67;
+	 border-color: #FFFFFF;
+	 color: white;
+}
+
+#boardlist_tr2 td{
+	 background-color: #FFFFFF;
+	 border-color: #FFFFFF;
+}
+
+#boardlist_tr2 a {
+    color: #555;
+    text-decoration: none;
+    -webkit-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+    outline: none;
+}
+
+#boardlist_tr2 a:hover {
+    color: #e14d67;
+    text-decoration: none;
+    -webkit-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+    outline: none;
+}

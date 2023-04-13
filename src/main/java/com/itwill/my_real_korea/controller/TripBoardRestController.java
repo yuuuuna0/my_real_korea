@@ -157,12 +157,11 @@ public class TripBoardRestController {
 			//페이지 번호(default 값 1)와 검색 keyword로 동행 게시글 키워드로 찾기. 성공시 code 1
 			tripBoardList = tripBoardService.selectSearchTbList(pageNo, keyword);
 			if(tripBoardList.getTotRecordCount() != 0 && tripBoardList != null) {
-				System.out.println("z");
 				code = 1;
 				msg = "성공";
 			}else {
 				code = 2;
-				msg = "해당 키워드 결과 값이 없습니다.";
+				msg = "해당 키워드와 일치하는 게시글이 없습니다.";
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

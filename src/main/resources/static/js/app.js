@@ -242,6 +242,8 @@ $(document).on('click','#notice-modify-action-btn',function(e){
 $(document).on('click', '#notice-delete-action-btn', function(event) {
 	event.preventDefault(); 
 	let nNo = $('#nNo-hidden-value').val();
+	let nno = $(this).data('nno');
+	console.log(nno);
 	$.ajax({
 		type: 'DELETE',
 		url: 'notice/' + nNo, 

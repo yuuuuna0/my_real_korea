@@ -130,6 +130,49 @@
 									</div>
 								</div>
 							</div>
+							
+						<div class="shop-item col-lg-12 col-md-6 col-sm-6" >
+						<form name='boardlistform' method='POST' action='' style="">
+							<table id='boardlist' cellpadding='5px' cellspacing='1'>
+								<tr id='boardlist_tr1'>
+									<td width=200 align=center >제 목</td>
+									<td width=60 align=center >조회수</td>
+									<td width=80 align=center>작성일</td>
+									<td width=60 align=center >작성자</td>
+								</tr>
+								<tr id="boardlist_tr2" th:each="notice:${noticeList}">
+									<td width=280  style='padding-left: 10px' align='left' >
+										<a th:href="@{notice-detail(nNo=${notice.nNo})}"  th:text="${notice.nTitle}" ></a>
+										<span class="icon-comment"></span>
+									</td>
+									<td width=70 th:text=${notice.nReadcount}></td>
+									<td width=120  th:text="${#dates.format(notice.nDate, 'yyyy.MM.dd')}"></td>
+									<td width=120  th:text=${notice.userId}></td>
+								</tr>
+							</table>
+						</form>
+						</div>
+
+<!-- 
+							<div class="shop-item col-lg-4 col-md-6 col-sm-6" th:each="notice:${noticeList}">
+								<div class="inner-box">
+									<div class="image-box">
+										<figure class="image">
+											<a th:href="@{notice-detail(nNo=${notice.nNo})}" href="shop-single.html"><img src="img/notice/notice_common.png" alt=""></a>
+										</figure>
+									</div>
+									<div class="product_description">
+										<h3><a th:text="${notice.nTitle}" th:href="@{notice-detail(nNo=${notice.nNo})}" href="" >Travel Book</a></h3>
+										<div class="price">
+											<span class="notice_readcount" th:text="${#dates.format(notice.nDate, 'yyyy.MM.dd')}">$20.00</span> 
+										</div>
+										<div class="item-options clearfix">
+											<span class="icon-eye"></span>
+											<span th:text=${notice.nReadcount}>$15.00</span>
+										</div>
+									</div>
+								</div>
+							</div> -->
 							<!--End Shop Item-->
 
 						</div>

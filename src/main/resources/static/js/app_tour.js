@@ -15,16 +15,11 @@ function selectedTourList(){
 	} else{
 		cityNo=0;
 	}
-	if($('#toType-checkbox:checked').length==1){
-		toType=$('#toType-checkbox:checked').val();
+	if($('input[name="toType-checkbox"]:checked').length==1){
+		toType=$('input[name="toType-checkbox"]:checked').val();
 	} else{
 		toType=0;
 	}
-	
-	console.log(keyword);
-	console.log(cityNo);
-	console.log(toType);
-	console.log(sortOrder);
 
 	let url= 'tour-list-ajax';
 	let method='POST';
@@ -52,13 +47,13 @@ function selectedTourList(){
 
 
 //1. 검색, 필터, 정렬 한 투어리스트 
-$(document).on('change',$('#sort-by,#city-checkbox,#toType-chceckbox'),selectedTourList);
+$(document).on('change',$('#sort-by,#city-checkbox,#toType-checkbox'),selectedTourList);
 $(document).on('click',"#tour-search-btn",selectedTourList);
 
 //2. 체크박스 하나만 선택하기
-$('input[type="city-checkbox"][name="city-checkbox"]').click(function(){
+$('input[type="checkbox"][name="city-checkbox"]').click(function(){
 	if($(this).prop('checked')){
-		$('input[type="checkbox"]').prop('checked',false);
+		$('input[type="checkbox"][name="city-checkbox"]').prop('checked',false);
 		$(this).prop('checked',true);
 	}
 });

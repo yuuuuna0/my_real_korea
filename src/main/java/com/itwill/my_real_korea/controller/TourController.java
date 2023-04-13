@@ -7,6 +7,7 @@ import com.itwill.my_real_korea.dto.ticket.Ticket;
 import com.itwill.my_real_korea.dto.tour.Tour;
 import com.itwill.my_real_korea.dto.tour.TourImg;
 import com.itwill.my_real_korea.dto.tour.TourReview;
+import com.itwill.my_real_korea.dto.user.User;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -114,6 +115,7 @@ public class TourController {
 
 	
 	//3. 투어상품 예약하기(구매하기) 폼_session 이용 x(성공) ----> 모델? 세션? 어느 코드가 나을까?
+	@LoginCheck
  	@RequestMapping(value="/tour-payment")
 	public String tourPaymentForm(@RequestParam String pStartDate,
 								  @RequestParam int pQty,
@@ -124,10 +126,11 @@ public class TourController {
 		String forwardPath="";		
 		try {
 			Tour tour=tourService.findTourWithCityByToNo(toNo);
+			User loginUser=(User)session.getAttribute("loginUser");
 			SimpleDateFormat dateFormat= new SimpleDateFormat("yyyy-MM-dd");
 			Date date=dateFormat.parse(pStartDate);
 			System.out.println(date);
-			Payment payment=new Payment(0, pQty*(tour.getToPrice()), pQty, new Date(), date, null, pQty*(tour.getToPrice())*1/100, 0, tour, null, null);
+			Payment payment=new Payment(0, pQty*(tour.getToPrice()), pQty, new Date(), date, null, pQty*(tour.getToPrice())*1/100, 0, tour, null, loginUser.getUserId());
 			//1. session에 붙이기
 			session.setAttribute("payment", payment);
 			session.setAttribute("tour", tour);
@@ -144,6 +147,7 @@ public class TourController {
 
  
 	//3-1. 투어상품 예약하기(구매하기) 액션
+ 	@LoginCheck
 	@RequestMapping(value="tour-payment-action")
 	public String tourPaymentAction(@ModelAttribute RsPInfo rsPInfo,
 									@RequestParam String pMsg,
@@ -152,24 +156,26 @@ public class TourController {
 									RedirectAttributes redirectAttributes) {
 		String forwardPath="";
 		try {
+			User loginUser=(User)session.getAttribute("loginUser");
 			Payment payment=(Payment)session.getAttribute("payment");
-			String userId="user2";
+			Tour tour=(Tour)session.getAttribute("tour");
 			payment.setPMsg(pMsg);
 			int pMethod=Integer.parseInt(pMethodStr);
 			payment.setPMethod(pMethod);
-			payment.setUserId(userId);
 			
 			paymentService.insertTourPayment(payment);
-			Payment findPayment=paymentService.findLatestPaymentByUserId(userId);
-			findPayment.setTour((Tour)session.getAttribute("tour"));
+			tour.setToCount(tour.getToCount()+payment.getPQty());	//tour에 구매수량만큼 올리기
+			tourService.updateTour(tour);
+			Tour updatedTour=tourService.findTourWithCityByToNo(tour.getToNo());
+			Payment findPayment=paymentService.findLatestPaymentByUserId(loginUser.getUserId());
+			findPayment.setTour(updatedTour);
 			rsPInfo.setPNo(findPayment.getPNo());
-			rsPInfo.setUserId(userId);
-			System.out.println(payment);
-			System.out.println(rsPInfo);
+			rsPInfo.setUserId(loginUser.getUserId());
 			rsPInfoService.insertRsPerson(rsPInfo);
 			redirectAttributes.addFlashAttribute("payment",findPayment);
 			redirectAttributes.addFlashAttribute("rsPInfo",rsPInfo);
 			session.removeAttribute("payment");
+			session.removeAttribute("tour");
 			forwardPath="redirect:tour-payment-confirmation";
 		}catch (Exception e) {
 			e.printStackTrace();

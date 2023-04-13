@@ -125,12 +125,12 @@
 								<ul>
 									<li>
 										<label>
-											<input type="checkbox" name="toType-chceckbox" value="1">자유여행
+											<input type="checkbox" name="toType-checkbox" id="toType-checkbox" value="1">자유여행
 										</label>
 									</li>
 									<li>
 										<label>
-											<input type="checkbox" name="toType-chceckbox" value="2">패키지여행
+											<input type="checkbox" name="toType-checkbox" id="toType-checkbox" value="2">패키지여행
 										</label>
 									</li>
 								</ul>
@@ -355,7 +355,7 @@
 	<!-- <script> 태그에 코드 적으면 화면에 안 보임 -->
 <script id="tour-search-list-template" type="text/x-handlebars-template">
 {{#each data}}
-	<div class="col-md-6 wow zoomIn" data-wow-delay="0.1s">
+	<div class="col-md-4 wow zoomIn" data-wow-delay="0.1s">
 		<div class="hotel_container">
 			<div class="ribbon_3 popular"><span>Popular</span>
 			</div>
@@ -383,13 +383,14 @@
 						{{toName}}
 					</strong>
 				</h3>
-				<div class="rating">
+	<div class="rating">
 					<i class="icon-star voted"></i>
 					<i class="icon-star voted"></i>
 					<i class="icon-star voted"></i>
 					<i class="icon-star voted"></i>
 					<i class="icon-star-empty"></i>							
 				</div>
+
 				<!-- end rating -->
 				<div class="wishlist">
 					<a class="tooltip_flip tooltip-effect-1" href="#">+<span class="tooltip-content-flip"><span class="tooltip-back">Add to wishlist</span></span></a>
@@ -441,7 +442,32 @@
  	}
 	</script>
  -->
-	
+
+
+<!--	핸들바 내에 별찍기 -> 안됨 수정해야함,,,,
+				<div class="rating">
+					{{#if toScore eq 0}}
+						<i class="icon-star-empty"></i>							
+						<i class="icon-star-empty"></i>							
+						<i class="icon-star-empty"></i>							
+						<i class="icon-star-empty"></i>							
+						<i class="icon-star-empty"></i>							
+					{{else if toScore eq 5}}
+	 					<i class="icon-star voted"></i>
+	 					<i class="icon-star voted"></i>
+	 					<i class="icon-star voted"></i>
+	 					<i class="icon-star voted"></i>
+	 					<i class="icon-star voted"></i>
+					{{else}}	
+						{{#each (range 0 (toScore-1))}}
+ 							<i class="icon-star voted"></i>
+						{{/each}}
+						{{#each (range toScore 4)}}
+ 							<i class="icon-star-empty"></i>
+						{{/each}}
+					{{/if}}
+				</div>
+-->	
 
 </body>
 

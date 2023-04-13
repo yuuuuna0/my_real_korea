@@ -11,6 +11,8 @@ import * as Request from "./request.js";
  #notice-write-action
  #notice-modify-action-btn
  #notice-delete-action-btn
+ #wishlist-delete-action-btn
+ #wishlist-all-delete-action-btn
  */
  
 // on => 동적으로 이벤트 추가 가능 -> 상위 노드에 처리해줘야함 (document)
@@ -250,6 +252,46 @@ $(document).on('click', '#notice-delete-action-btn', function(event) {
 		success: function(result) {
 			// 삭제 후 notice-list 로 이동
 			window.location.href = 'notice-list'; 
+		},
+		error: function(xhr, status, error) {
+			console.log(error); 
+		}
+	});
+});
+
+/******** 위시리스트 삭제 액션**********/
+
+$(document).on('click', '#wishlist-delete-action-btn', function(event) {
+	event.preventDefault(); 
+	let userId = $('#wishlist-userId').val();
+	let wishNo = $('#wishlist-wishNo').val();
+	console.log(userId);
+	console.log(wishNo);
+	$.ajax({
+		type: 'DELETE',
+		url: `wishlist/${wishNo}/${userId}`,
+		success: function(result) {
+			// 삭제 후 wishlist 로 이동
+			window.location.href = 'wishlist'; 
+		},
+		error: function(xhr, status, error) {
+			console.log(error); 
+		}
+	});
+});
+
+/******** 위시리스트 전체삭제 액션**********/
+
+$(document).on('click', '#wishlist-all-delete-action-btn', function(event) {
+	event.preventDefault(); 
+	let userId = $('#wishlist-all-delete-userId').val();
+	console.log(userId);
+	$.ajax({
+		type: 'DELETE',
+		url: `wishlist/${userId}`,
+		success: function(result) {
+			// 삭제 후 wishlist 로 이동
+			window.location.href = 'wishlist'; 
 		},
 		error: function(xhr, status, error) {
 			console.log(error); 

@@ -94,10 +94,10 @@
 								</div>
 								<div class="col-6">
 									<div class="form-group">
-										<select name="sort-by">
-											<option>정렬하기</option>
-											<option>조회수 높은 순</option>
-											<option>최신 작성 순</option>
+										<select id="sort-by" name="sort-by">
+											<option value="tripboard-date-desc"><a href="">정렬</a></option>
+											<option value="tripboard-date-desc"><a href="">최신순</a></option>
+											<option value="tripboard-readcount"><a href="">조회수높은순</a></option>
 										</select>
 									</div>
 								</div>
@@ -119,7 +119,7 @@
 									</div>
 									<div class="product_description">
 										<div class="trip-title">
-											<h3><a th:text="${tripBoard.tBoTitle}">Travel Book</a></h3>
+											<h3><a th:text="${tripBoard.tBoTitle}" href="">Travel Book</a></h3>
 										</div>
 										<div class="trip-date">
 											<h3><a th:text="${#dates.format(tripBoard.tBoStartDate, 'MM.dd')}"></a><a> ~ </a><a th:text="${#dates.format(tripBoard.tBoEndDate, 'MM.dd')}"></a></h3>
@@ -182,10 +182,10 @@
 							<h4>Categories</h4>
 							<ul>
 								<li>
-									<a href="#">전체보기</a>
+									<a id="all-city-list" value="tripboard-all-city-list" href="#">전체보기</a>
 								</li>
 								<li th:each="city:${cityList}">
-									<a th:text="${city.cityName}" href="#">서</a>
+									<a th:value="${city.cityNo}" th:text="${city.cityName}" href="#">서</a>
 								</li>
 							</ul>
 						</div>

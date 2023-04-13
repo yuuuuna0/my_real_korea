@@ -159,23 +159,29 @@ public class TourController {
 			User loginUser=(User)session.getAttribute("loginUser");
 			Payment payment=(Payment)session.getAttribute("payment");
 			Tour tour=(Tour)session.getAttribute("tour");
+			//	페이지에서 받아온 값 payment에 넣어주기
 			payment.setPMsg(pMsg);
-			int pMethod=Integer.parseInt(pMethodStr);
-			payment.setPMethod(pMethod);
-			
+			payment.setPMethod(Integer.parseInt(pMethodStr));
 			paymentService.insertTourPayment(payment);
+			
 			tour.setToCount(tour.getToCount()+payment.getPQty());	//tour에 구매수량만큼 올리기
 			tourService.updateTour(tour);
+			
 			Tour updatedTour=tourService.findTourWithCityByToNo(tour.getToNo());
 			Payment findPayment=paymentService.findLatestPaymentByUserId(loginUser.getUserId());
 			findPayment.setTour(updatedTour);
+			
 			rsPInfo.setPNo(findPayment.getPNo());
 			rsPInfo.setUserId(loginUser.getUserId());
 			rsPInfoService.insertRsPerson(rsPInfo);
+			
+			//redirect하는 곳으로 붙여줄 객체 --> 객체 붙일깨는 FlashAttribute
 			redirectAttributes.addFlashAttribute("payment",findPayment);
 			redirectAttributes.addFlashAttribute("rsPInfo",rsPInfo);
+			
 			session.removeAttribute("payment");
 			session.removeAttribute("tour");
+			
 			forwardPath="redirect:tour-payment-confirmation";
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -184,6 +190,7 @@ public class TourController {
 		return forwardPath;
 	}
 	//4. 예약한 투어상품 상세 확인
+ 	@LoginCheck
 	@RequestMapping(value="tour-payment-confirmation")
 	public String tourPaymentConfirmation(@ModelAttribute Payment payment,
 										  @ModelAttribute RsPInfo rsPInfo,
@@ -192,8 +199,6 @@ public class TourController {
 		
 		model.addAttribute(payment);
 		model.addAttribute(rsPInfo);
-		System.out.println(payment);	//DB애 to_no는 있는데 tour가 안붙어나옴,,,
-		System.out.println(rsPInfo);
 		forwardPath="tour-payment-confirmation";
 		return forwardPath;
 	}

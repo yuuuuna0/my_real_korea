@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -27,15 +28,24 @@ public class FreeBoardController {
     }
 
     @GetMapping(value = "/freeboard-list")
-    public String freeBoardList(@RequestParam(required = false, defaultValue = "1") int pageNo,int fBoNo, Model model) {
+    public String freeBoardList(@RequestParam(required = false, defaultValue = "1") int pageNo, Model model) {
         try {
             PageMakerDto<FreeBoard> freeBoardListPage = freeBoardService.selectAll(pageNo);
-            List<FreeBoard> freeBoardList = freeBoardListPage.getItemList();
-            int selectCommentCount = freeBoardCommentService.selectCommentCount(fBoNo);
+            List<FreeBoard> tempFreeBoardList = freeBoardListPage.getItemList();
+            List<FreeBoard> freeBoardList = new ArrayList<>();
+            List<FreeBoardComment> freeBoardCommentList = new ArrayList<>();
+            for(FreeBoard freeBoard: tempFreeBoardList) {
+            int commentCount=freeBoardCommentService.selectByfBoNo(freeBoard.getFBoNo()).size();
+            freeBoard.setCommentCount(commentCount);
+            freeBoardList.add(freeBoard);
+            }
+            model.addAttribute(freeBoardCommentList);
             model.addAttribute("freeBoardListPage", freeBoardListPage);
             model.addAttribute("freeBoardList", freeBoardList);
             model.addAttribute("pageNo", pageNo);
-            model.addAttribute("selectCommentCount", selectCommentCount);
+          
+       
+            
         } catch (Exception e) {
             e.printStackTrace();
             return "error";

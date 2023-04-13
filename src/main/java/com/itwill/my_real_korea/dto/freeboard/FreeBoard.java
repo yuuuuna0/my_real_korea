@@ -35,4 +35,16 @@ public class FreeBoard {
 	/* FK */
 	private City city;
 	private String userId;
+	private int commentCount;
+	public FreeBoard(int fBoNo, String fBoTitle, String fBoContent, Date fBoDate, int fBoCount, City city,
+			String userId) {
+		super();
+		this.fBoNo = fBoNo;
+		this.fBoTitle = fBoTitle;
+		this.fBoContent = fBoContent;
+		this.fBoDate = fBoDate;
+		this.fBoCount = fBoCount;
+		this.city = city;
+		this.userId = userId;
+	}
 }

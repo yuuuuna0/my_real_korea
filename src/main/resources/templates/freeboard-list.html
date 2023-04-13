@@ -60,7 +60,7 @@
 	<section class="parallax-window" data-parallax="scroll" data-image-src="img/main_freeboard.jpg" data-natural-width="1400" >
 		<div class="parallax-content-1">
 			<div class="animated fadeInDown">
-				<h1><a id="freeboard-list-main" href="freeboard-list">자유게시물</a></h1>
+				<h1><a id="freeboard-list-main" href="freeboard-list">자유게시판</a></h1>
 				<p>마이리얼코리아의 게시판을 확인해보세요.</p>
 			</div>
 		</div>
@@ -84,26 +84,28 @@
 		<div class="container margin_60">
 			<div class="row">
 				<div class="col-lg-9">
-					<div class="shop-section">
+					<div class="shop-section" th:each="freeBoardList:${freeBoardListPage}">
 
 						<div class="items-sorting">
 							<div class="row">
 								<div class="col-6">
-									<div id="page-info" class="results_shop" th:each="freeBoardList:${freeBoardListPage}">
+									<div id="page-info" class="results_shop" >
 										Showing 
-										<span id="cur-page" th:text="${freeBoardList.pageMaker.curPage}"></span> of 
+										<span id="cur-page" th:text="${freeBoardList.pageMaker.curPage}"></span> -  
+										<span id="cur-page" th:text="${freeBoardList.pageMaker.BLOCK_SCALE-1}"></span> of
 										<span id="tot-record-count" th:text="${freeBoardList.totRecordCount}"></span> results
 									</div>
 								</div>
 								<div class="col-6">
 									<div class="form-group">
 										<select id="sort-by" name="sort-by">
-											<option value="freeboard-date-desc">정렬</option>
-											<option value="freeboard-list-fBoNo-desc">최신순</option>
+											<option value="">정렬</option>
+											<option value="freeboard-list-fBoNo-desc" >최신순</option>
 											<option value="freeboard-list-fBoNo-asc">오래된순</option>
 											<option value="freeboard-readCount-desc">조회수높은순</option>
 										</select>
 									</div>
+								
 								</div>
 							</div>
 						</div>
@@ -111,7 +113,7 @@
 						<!--End Sort By-->
 
 						<hr>
-					</aside>
+				</div>
 				</div>
 
 						
@@ -120,28 +122,33 @@
 
 					
 				<div class="row" id="freeboard-list" >
-					<div class="shop-item col-lg-4 col-md-6 col-sm-6" th:each="freeBoard:${freeBoardList}">
-								<div class="inner-box">
-									<div class="image-box">
-									</div>
-									<div class="product_description" >
-										<h3><a th:text="${freeBoard.fBoTitle}" th:href="@{freeboard-detail(fBoNo=${freeBoard.fBoNo})}"></a></h3>
-										<div class="date" >
-											<span class="freeBoard_readcount" th:text="${#dates.format(freeBoard.fBoDate, 'yyyy.MM.dd')}"></span>
-										</div>
-										<div class="item-options clearfix">
-											<span class="icon-eye"></span>
-											<span th:text="${freeBoard.fBoCount}"></span> 
-											<span class="icon-comment"></span>
-											<span th:text="${freeBoard.commentCount}"></span> 
-										<!--  <span class="icon-map" ></span> -->
-											<span class="icon-user" ></span>
-											<span th:text="${freeBoard.userId}"></span><!--city아직 안됨-->
-										</div>
-									</div>
-								</div>
-							</div>
+					<div class="shop-item col-lg-12 col-md-6 col-sm-6" >
+						<form name='boardlistform' method='POST' action='' style="color:grey;">
+							<table id='boardlist' cellpadding='5px' cellspacing='1'>
+								<tr id='boardlist_tr1'>
+									<td width=200 align=center >제 목</td>
+									<td width=60 align=center >조회수</td>
+									<td width=80 align=center>작성일</td>
+									<td width=60 align=center >작성자</td>
+								</tr>
+								
+								<tr id="boardlist_tr2" th:each="freeBoard:${freeBoardList}">
+									<td width=280  style='padding-left: 10px' align='left' >
+										<a th:href="@{freeboard-detail(fBoNo=${freeBoard.fBoNo})}"  th:text="${freeBoard.fBoTitle}" ></a>
+										<span class="icon-comment"></span>
+										<span th:text="   ${freeBoard.commentCount}"></span> 
+										<span class="icon-map"></span>
+										<span th:text="   ${freeBoard.getCity().cityName}"></span>
+									</td>
+									<td width=70 th:text=${freeBoard.fBoCount}></td>
+									<td width=120  th:text="${#dates.format(freeBoard.fBoDate, 'yyyy.MM.dd')}"></td>
+									<td width=120  th:text=${freeBoard.userId}></td>
+								</tr>
+								
+							</table>
+						</form>
 						</div>
+				
 				
 							<div class="Page navigation" >
 						<nav aria-label="Page navigation">
@@ -149,13 +156,13 @@
 							<ul class="pagination justify-content-center">
 								<li class="page-item" >
 									<a class="page-link" href="#" aria-label="Previous">
-										<span aria-hidden="true">&laquo;</span>
+										<span aria-hidden="true" >&laquo;</span>
 										<span class="sr-only">Previous</span>
 									</a>
 								</li>
-								<li class="page-item active" ><span class="page-link" >1<span class="sr-only"></span></span>
+								<li class="page-item" ><span class="page-link" >1<span class="sr-only"></span></span>
 								</li>
-								<li class="page-item"><a class="page-link" href="#">2</a></li>
+								<li class="page-item active"><a class="page-link" href="#">2</a></li>
 								<li class="page-item"><a class="page-link" href="#">3</a></li>
 								<li class="page-item">
 									<a class="page-link" href="#" aria-label="Next">
@@ -166,12 +173,12 @@
 							</ul>
 						</nav>
 						</div>
+						</div>
 						<!-- end pagination-->
 
 			
 			
 
-			</div>
 								<!--Sidebar-->
 				<div class="col-lg-3">
 					<aside class="sidebar" style="float:right">
@@ -183,21 +190,24 @@
 		                        </span>
 							</div>
 						</div>
+												<hr>
+						</aside>
 						<!-- End Search -->
 							<!--Sidebar-->
-						<hr>
 						<div class="widget " id="cat_shop">
 							<h4>Categories</h4>
 							<ul>
-								<li><a href="tour-list">투어 보러가기</a>
+								<li><a href="freeboard-list-fBoNo-desc">최신순</a>
 								</li>
-								<li><a href="ticket-list">티켓 보러가기</a>
+								<li><a href="freeboard-list-fBoNo-asc">오래된순</a>
 								</li>
-								<li><a href="tripboard-list">여행 동행 찾기</a>
+								<li><a href="freeboard-list-readCount-desc">조회수많은순</a>
 								</li>
-								<li><a href="freeboard-list">자유게시판</a>
+								<li><a href="freeboard-list">*자유게시판 홈</a>
 								</li>
 							</ul>
+
+						</div>
 						</div>
 						<!-- End widget -->
 		<!-- End Container -->

@@ -4,7 +4,6 @@ import * as Request from "./request.js";
 
 /********* function *********/
 function selectedTourList(){
-	
 	let keyword=$('#tour-search-keyword').val();
 	let cityNo;
 	let toType;
@@ -63,6 +62,26 @@ $('input[type="checkbox"][name="toType-checkbox"]').click(function(){
 		$(this).prop('checked',true);
 	}
 });
+
+//3. 투어리뷰 남기기
+$(document).on('click','#submit-review',function(){
+	let url="tour-detail-ajax";
+	let method="POST";
+	let contentType="application/json;charset=UTF-8";
+	let sendData=[];
+	let async=true;
+	
+	Request.ajaxRequest(url,method,contentType,
+						JSON.stringify(sendData),	//json으로 보낼 때 전부 string화 해 줘야 한다.
+						function(resultJson){
+							//code=1 성공 -> render , 아닐때 msg
+							if(resultJson.code==1){
+								View.render('#tourReview-template',resultJson,'#tourReviewDiv')
+							} else{
+								alert(resultJson.msg);
+							}
+						},async);
+})
 
 
 

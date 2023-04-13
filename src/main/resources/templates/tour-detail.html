@@ -224,7 +224,7 @@
 
 					<hr>
 
-					<div class="row">
+					<div class="row" id="tourReviewDiv">
 						<div class="col-lg-3">
 							<h3>Reviews</h3>
 							<a href="#" class="btn_1 add_bottom_30" data-toggle="modal" data-target="#myReview">Leave a review</a>
@@ -403,120 +403,61 @@
 	</div>
 	<!-- /Sign In Popup -->	
 
-	<!-- Modal Review -->
-	<div class="modal fade" id="myReview" tabindex="-1" role="dialog" aria-labelledby="myReviewLabel" aria-hidden="true">
+<!--  Modal Review  -->
+	<div class="modal fade" id="myReview" tabindex="1" role="dialog" aria-labelledby="myReviewLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h4 class="modal-title" id="myReviewLabel">Write your review</h4>
+					<h4 class="modal-title" id="myReviewLabel">리뷰 작성</h4>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 				</div>
 				<div class="modal-body">
 					<div id="message-review">
 					</div>
-					<form method="post" action="assets/review_hotel.php" name="review_hotel" id="review_hotel">
-						<input name="hotel_name" id="hotel_name" type="hidden" value="Mariott Hotel Paris">
+					<!-- 모달 폼 -->
+					<form  method="post" name="tourReviewF" id="tourReviewF"  enctype​​="multipart/form-data">
+					<!--파일업로드추가
+						<input type="file" name="uploadFile">  -->
+						<input name="toNo" id="toNo" type="hidden" th:value="${tour.toNo}">
 						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
-									<input name="name_review" id="name_review" type="text" placeholder="Your name" class="form-control">
-								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="form-group">
-									<input name="lastname_review" id="lastname_review" type="text" placeholder="Your last name" class="form-control">
+									<input readonly type="text" name="userId" id="userId"  class="form-control">
 								</div>
 							</div>
 						</div>
 						<!-- End row -->
 						<div class="row">
-							<div class="col-md-6">
+							<div class="col-md-12">
 								<div class="form-group">
-									<input name="email_review" id="email_review" type="email" placeholder="Your email" class="form-control">
-								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="form-group">
-									<select class="form-control" name="room_type_review" id="room_type_review">
-										<option value="">Select room type</option>
-										<option value="Single room">Single Room</option>
-										<option value="Double Room">Double Room</option>
-										<option value="King double room">King Double Room</option>
-									</select>
+									<input name="toReviewTitle" id="toReviewTitle" type="text" placeholder="제목을 적어주세요" class="form-control">
 								</div>
 							</div>
 						</div>
 						<!-- End row -->
 						<hr>
-						<div class="row">
-							<div class="col-md-6">
-								<div class="form-group">
-									<label>Cleanliness</label>
-									<select class="form-control" name="cleanliness_review" id="cleanliness_review">
-										<option value="">Please review</option>
-										<option value="Low">Low</option>
-										<option value="Sufficient">Sufficient</option>
-										<option value="Good">Good</option>
-										<option value="Excellent">Excellent</option>
-										<option value="Superb">Super</option>
-										<option value="Not rated">I don't know</option>
-									</select>
-								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="form-group">
-									<label>Comfort</label>
-									<select class="form-control" name="comfort_review" id="comfort_review">
-										<option value="">Please review</option>
-										<option value="Low">Low</option>
-										<option value="Sufficient">Sufficient</option>
-										<option value="Good">Good</option>
-										<option value="Excellent">Excellent</option>
-										<option value="Superb">Super</option>
-										<option value="Not rated">I don't know</option>
-									</select>
-								</div>
-							</div>
-						</div>
 						<!-- End row -->
 						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
-									<label>Price</label>
-									<select class="form-control" name="price_review" id="price_review">
-										<option value="">Please review</option>
-										<option value="Low">Low</option>
-										<option value="Sufficient">Sufficient</option>
-										<option value="Good">Good</option>
-										<option value="Excellent">Excellent</option>
-										<option value="Superb">Super</option>
-										<option value="Not rated">I don't know</option>
-									</select>
-								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="form-group">
-									<label>Quality</label>
-									<select class="form-control" name="quality_review" id="quality_review">
-										<option value="">Please review</option>
-										<option value="Low">Low</option>
-										<option value="Sufficient">Sufficient</option>
-										<option value="Good">Good</option>
-										<option value="Excellent">Excellent</option>
-										<option value="Superb">Super</option>
-										<option value="Not rated">I don't know</option>
+									<label>평점</label>
+									<select class="form-control" name="toReviewStar" id="toReviewStar">
+										<option value="0">Please review</option>
+										<option value="1">Low</option>
+										<option value="2">Sufficient</option>
+										<option value="3">Good</option>
+										<option value="4">Excellent</option>
+										<option value="5">Super</option>
 									</select>
 								</div>
 							</div>
 						</div>
 						<!-- End row -->
 						<div class="form-group">
-							<textarea name="review_text" id="review_text" class="form-control" style="height:100px" placeholder="Write your review"></textarea>
+							<textarea name="toReviewContent" id="toReviewContent" class="form-control" style="height:100px" placeholder="내용을 적어주세요"></textarea>
 						</div>
-						<div class="form-group">
-							<input type="text" id="verify_review" class=" form-control" placeholder="Are you human? 3 + 1 =">
-						</div>
-						<input type="submit" value="Submit" class="btn_1" id="submit-review">
+						<!--리뷰 버튼-->
+						<button type="button" class="btn_1" id="submit-review" onclick="submitReview()"></button>
 					</form>
 				</div>
 			</div>
@@ -524,10 +465,71 @@
 	</div>
 	<!-- End modal review -->
 
+	
+<!-- ##################### template ###################### -->
+<!-- <script> 태그에 코드 적으면 화면에 안 보임 -->
+<script id="tourReview-template" type="text/x-handlebars-template">
+<div class="col-lg-9">
+	<div id="score_detail">
+		<span th:text="${tour.toCount}">7.5
+		</span>명이 구매했습니다.
+	</div>
+	<!-- End general_rating -->
+	<div class="row" id="rating_summary">
+		<div class="col-md-6">
+			<div class="rating">
+				<i class="icon-star voted"></i>
+				<i class="icon-star voted"></i>
+				<i class="icon-star voted"></i>
+				<i class="icon-star voted"></i>
+				<i class="icon-star-empty"></i>
+			</div>
+			<small th:text="'(Based on '+ ${tourReviewList.size()}+' reviews)'"></small>
+		</div>
+	</div>
+	<!-- End row :rating_summary -->
+	<hr>
+	<div class="review_strip_single" th:each="tourReview:${tourReviewList}">
+		<img src="img/products/image-1.jpg" alt="Image" class="rounded-circle" width="20%" height="30%">
+		<small th:text="${#dates.format(tourReview.toReviewDate,'yyyy/MM/dd')}"> 
+			- 10 March 2015 -
+		</small>
+		<h4 th:text=${tourReview.userId}>
+			Jhon Doe
+		</h4>
+		<div class="row">
+			<div class="col-md-9">
+				<h6>
+					<strong th:text=${tourReview.toReviewTitle}>
+					</strong>
+				</h6>
+			</div>
+			<div class="col-md-3" > 
+				<!--th:if="${session.loginUser.userId == tourReview.userId}"-->
+					<input type="button" value="수정">
+					<input type="button" value="삭제">
+			</div>
+		</div>
+		<br>
+		<p th:text=${tourReview.toReviewContent}>
+			"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed a lorem quis neque interdum consequat ut sed sem. Duis quis tempor nunc. Interdum et malesuada fames ac ante ipsum primis in faucibus."
+		</p>
+		<div class="rating" th:text=${tourReview.toReviewStar}>
+			<i class="icon-star voted"></i>
+			<i class="icon-star voted"></i>
+			<i class="icon-star voted"></i>
+			<i class="icon-star voted"></i>
+			<i class="icon-star-empty"></i>
+		</div>
+	</div>
+	<!-- End review strip -->
+</div>
+</script>
 	<!-- Common scripts -->
 	<script src="js/jquery-2.2.4.min.js"></script>
 	<script src="js/common_scripts_min.js"></script>
 	<script src="js/functions.js"></script>
+	<script src="js/app_tour.js" type="module"></script>
 
 	<!-- Date and time pickers -->
 	<script src="js/jquery.sliderPro.min.js"></script>
@@ -600,6 +602,13 @@
 		function tourDetail(){
 			document.detailF.action='tour-payment';
 			document.detailF.submit();
+		}
+	</script>
+	<script>
+		function submitReview(){
+			document.toReviewF.action="tour-detail-ajax";
+			document.toReviewF.method="POST";
+			document.toReviewF.submit();
 		}
 	</script>
 

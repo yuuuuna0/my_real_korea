@@ -61,7 +61,7 @@
 	<section class="parallax-window" data-parallax="scroll" data-image-src="img/notice_list.png" data-natural-width="1400" data-natural-height="470">
 		<div class="parallax-content-1">
 			<div class="animated fadeInDown">
-				<h1>공지사항 글쓰기</h1>
+				<h1>공지사항 수정</h1>
 				<p>관리자만 가능합니다.</p>
 			</div>
 		</div>
@@ -134,7 +134,7 @@
 						<p></p>
 						<p></p>
 						<p></p>
-							<button type="submit" class="btn_1 green" id="notice-modify-action">수정</button> &nbsp;&nbsp;&nbsp;&nbsp;
+							<button type="submit" class="btn_1 green" id="notice-modify-action-btn">수정</button> &nbsp;&nbsp;&nbsp;&nbsp;
 							<input type="hidden" id="modify-nNo" th:value=${notice.nNo}>
 							<a th:href=@{notice-detail(nNo=${notice.nNo})} class="btn_1 green">취소</a>
 						</div>
@@ -223,6 +223,8 @@
 					{{/if}}
 			</div>
 			<!-- end post -->
+			<a class="btn_1" href="notice-modify-form?nNo={{nno}}"  role="button" id="notice-update-btn">수정</a> &nbsp; &nbsp; &nbsp;
+			<a class="btn_1" href="" role="button" id="notice-delete-action-btn">삭제</a>
 		</div>
 		<!-- end box_style_1 -->
 		<!-- End Comments -->

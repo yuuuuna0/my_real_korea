@@ -5,6 +5,7 @@ import com.itwill.my_real_korea.dto.freeboard.FreeBoard;
 import com.itwill.my_real_korea.dto.freeboard.FreeBoardComment;
 import com.itwill.my_real_korea.service.freeboard.FreeBoardCommentService;
 import com.itwill.my_real_korea.service.freeboard.FreeBoardService;
+import com.itwill.my_real_korea.service.user.UserService;
 import com.itwill.my_real_korea.util.PageMakerDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +13,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -19,23 +22,30 @@ public class FreeBoardController {
 
     private FreeBoardService freeBoardService;
     private FreeBoardCommentService freeBoardCommentService;
+    private UserService userService;
 
     @Autowired
-    public FreeBoardController(FreeBoardService freeBoardService, FreeBoardCommentService freeBoardCommentService) {
+    public FreeBoardController(FreeBoardService freeBoardService, FreeBoardCommentService freeBoardCommentService, UserService userService) {
         this.freeBoardService = freeBoardService;
         this.freeBoardCommentService = freeBoardCommentService;
+        this.userService = userService;
     }
 
     @GetMapping(value = "/freeboard-list")
-    public String freeBoardList(@RequestParam(required = false, defaultValue = "1") int pageNo,int fBoNo, Model model) {
+    public String freeBoardList(@RequestParam(required = false, defaultValue = "1") int pageNo, Model model) throws Exception {
+
         try {
             PageMakerDto<FreeBoard> freeBoardListPage = freeBoardService.selectAll(pageNo);
-            List<FreeBoard> freeBoardList = freeBoardListPage.getItemList();
-            int selectCommentCount = freeBoardCommentService.selectCommentCount(fBoNo);
+            List<FreeBoard> tempFreeBoardList = freeBoardListPage.getItemList();
+            List<FreeBoard> freeBoardList = new ArrayList<>();
+            for (FreeBoard freeBoard : tempFreeBoardList) {
+                int commentCount = freeBoardCommentService.selectByfBoNo(freeBoard.getFBoNo()).size();
+                freeBoard.setCommentCount(commentCount);
+                freeBoardList.add(freeBoard);
+            }
             model.addAttribute("freeBoardListPage", freeBoardListPage);
             model.addAttribute("freeBoardList", freeBoardList);
             model.addAttribute("pageNo", pageNo);
-            model.addAttribute("selectCommentCount", selectCommentCount);
         } catch (Exception e) {
             e.printStackTrace();
             return "error";
@@ -48,7 +58,6 @@ public class FreeBoardController {
         try {
             PageMakerDto<FreeBoard> freeBoardListPage = freeBoardService.selectAllOrderByFBoNoAsc(pageNo);
             List<FreeBoard> freeBoardList = freeBoardListPage.getItemList();
-            model.addAttribute("freeBoardListPage", freeBoardListPage);
             model.addAttribute("freeBoardList", freeBoardList);
             model.addAttribute("pageNo", pageNo);
         } catch (Exception e) {
@@ -57,12 +66,12 @@ public class FreeBoardController {
         }
         return "freeboard-list";
     }
+
     @GetMapping(value = "/freeboard-list-fBoNo-desc")
     public String freeBoardListFBoNoDesc(@RequestParam(required = false, defaultValue = "1") int pageNo, Model model) {
         try {
             PageMakerDto<FreeBoard> freeBoardListPage = freeBoardService.selectAllOrderByFBoNoDesc(pageNo);
             List<FreeBoard> freeBoardList = freeBoardListPage.getItemList();
-            model.addAttribute("freeBoardListPage", freeBoardListPage);
             model.addAttribute("freeBoardList", freeBoardList);
             model.addAttribute("pageNo", pageNo);
         } catch (Exception e) {
@@ -77,7 +86,6 @@ public class FreeBoardController {
         try {
             PageMakerDto<FreeBoard> freeBoardListPage = freeBoardService.selectAllOrderByReadCountDesc(pageNo);
             List<FreeBoard> freeBoardList = freeBoardListPage.getItemList();
-            model.addAttribute("freeBoardListPage", freeBoardListPage);
             model.addAttribute("freeBoardList", freeBoardList);
             model.addAttribute("pageNo", pageNo);
         } catch (Exception e) {
@@ -86,6 +94,7 @@ public class FreeBoardController {
         }
         return "freeboard-list";
     }
+
     @GetMapping(value = "/freeboard-list-search")
     public String freeBoardSearchList(@RequestParam(required = false, defaultValue = "1") int pageNo, Model model) {
         try {
@@ -101,20 +110,37 @@ public class FreeBoardController {
     }
 
     @GetMapping("/freeboard-detail")
-    public String freeBoardDetail(@RequestParam Integer fBoNo, Model model) throws Exception {
+    public String freeBoardDetail(@RequestParam Integer fBoNo, Model model, HttpServletRequest request) throws Exception {
         if (fBoNo == null) {
             return "freeboard-list";
         }
         try {
+
+//            HttpSession session = request.getSession();
+//            String sUserId = (String) session.getAttribute("sUserId");
+//            User loginUser = userService.findUser(sUserId);
+//            String userId = loginUser.getUserId();
+//            request.setAttribute("userId", userId);
+//
+//        if (sUserId == null) {
+//            session.setAttribute("requestUrl", request.getRequestURL().toString());
+//            return "redirect:user-login";
+//        }
+//            if (userId != null) {
+//                model.addAttribute("userId", userId);
+//            }
+
+
             FreeBoard freeBoard = freeBoardService.selectByNo(fBoNo);
             List<FreeBoardComment> freeBoardCommentList = freeBoardCommentService.selectByfBoNo(fBoNo);
             freeBoardService.increaseReadCount(freeBoard.getFBoNo());
             int selectCommentCount = freeBoardCommentService.selectCommentCount(fBoNo);
 
+
             model.addAttribute("freeBoard", freeBoard);
             model.addAttribute("freeBoardCommentList", freeBoardCommentList);
-            model.addAttribute("fBoNo",fBoNo );
-            model.addAttribute("selectCommentCount",selectCommentCount );
+            model.addAttribute("fBoNo", fBoNo);
+            model.addAttribute("selectCommentCount", selectCommentCount);
         } catch (Exception e) {
             e.printStackTrace();
             return "error";
@@ -132,7 +158,7 @@ public class FreeBoardController {
     @PostMapping("/freeboard-write-action")
     public String freeBoardWriteAction(@ModelAttribute FreeBoard freeBoard, RedirectAttributes redirectAttributes) throws Exception {
         try {
-             freeBoardService.insertBoard(freeBoard);
+            freeBoardService.insertBoard(freeBoard);
             redirectAttributes.addAttribute("fBoNo", freeBoard.getFBoNo());
         } catch (Exception e) {
             e.printStackTrace();
@@ -160,7 +186,7 @@ public class FreeBoardController {
 
     @LoginCheck
     @PatchMapping("/freeboard-modify-action")
-    public String freeBoardModifyAction(@ModelAttribute FreeBoard freeBoard,RedirectAttributes redirectAttributes) throws Exception {
+    public String freeBoardModifyAction(@ModelAttribute FreeBoard freeBoard, RedirectAttributes redirectAttributes) throws Exception {
 
         freeBoardService.updateFreeBoard(freeBoard);
         redirectAttributes.addAttribute("fBoNo", freeBoard.getFBoNo());
@@ -169,8 +195,8 @@ public class FreeBoardController {
     }
 
     @LoginCheck
-    @DeleteMapping("/freeboard-delete-action")
-    public String freeBoardDeleteAction(@RequestParam int fBoNo) throws Exception {
+    @PostMapping("/freeboard-delete-action")
+    public String freeBoardDeleteAction(@RequestParam Integer fBoNo) throws Exception {
         freeBoardService.deleteFreeBoard(fBoNo);
         return "redirect:freeboard-list";
     }

@@ -9,7 +9,8 @@ import * as Request from "./request.js";
  #type-tour
  #type-ticket
  #notice-write-action
- #notice-modify-action
+ #notice-modify-action-btn
+ #notice-delete-action-btn
  */
  
 // on => 동적으로 이벤트 추가 가능 -> 상위 노드에 처리해줘야함 (document)
@@ -200,7 +201,7 @@ $(document).on('click','#notice-write-action',function(e){
 });
 
 /******** 공지사항 글 수정 액션**********/ 
-$(document).on('click','#notice-modify-action',function(e){
+$(document).on('click','#notice-modify-action-btn',function(e){
 	// ajax로 리스트 부분만 검색된 리스트로 변경
 	let nNo = $('#modify-nNo').val();
 	console.log(nNo);
@@ -221,13 +222,37 @@ $(document).on('click','#notice-modify-action',function(e){
 						function(resultJson){
 							//code 1 일때 render, 아닐 때 msg 띄움
 							if(resultJson.code == 1){
-								View.render("#notice-modified-template", resultJson, '#notice-modify-form');
+								let updatednNo = resultJson.data[0].nno;
+								// update 된 거 출력 위해 notice_detail 로 다시 요청
+								Request.ajaxRequest(
+									`notice/${updatednNo}`,'GET', contentType, {},
+									function(resultJson){
+									View.render("#notice-modified-template", resultJson, '#notice-modify-form');
+									});
 							} else {
 								alert(resultJson.msg);
 							};
 						}, async);
 	
 	e.preventDefault();
+});
+
+/******** 공지사항 글 삭제 액션**********/
+
+$(document).on('click', '#notice-delete-action-btn', function(event) {
+	event.preventDefault(); 
+	let nNo = $('#nNo-hidden-value').val();
+	$.ajax({
+		type: 'DELETE',
+		url: 'notice/' + nNo, 
+		success: function(result) {
+			// 삭제 후 notice-list 로 이동
+			window.location.href = 'notice-list'; 
+		},
+		error: function(xhr, status, error) {
+			console.log(error); 
+		}
+	});
 });
 
 

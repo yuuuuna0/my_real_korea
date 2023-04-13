@@ -3,6 +3,7 @@ package com.itwill.my_real_korea.controller;
 import com.itwill.my_real_korea.dto.City;
 import com.itwill.my_real_korea.dto.freeboard.FreeBoard;
 import com.itwill.my_real_korea.dto.freeboard.FreeBoardComment;
+import com.itwill.my_real_korea.service.city.CityService;
 import com.itwill.my_real_korea.service.freeboard.FreeBoardCommentService;
 import com.itwill.my_real_korea.service.freeboard.FreeBoardService;
 import com.itwill.my_real_korea.util.PageMakerDto;
@@ -20,11 +21,12 @@ public class FreeBoardController {
 
     private FreeBoardService freeBoardService;
     private FreeBoardCommentService freeBoardCommentService;
-
+    private CityService cityService;
     @Autowired
-    public FreeBoardController(FreeBoardService freeBoardService, FreeBoardCommentService freeBoardCommentService) {
+    public FreeBoardController(FreeBoardService freeBoardService, FreeBoardCommentService freeBoardCommentService, CityService cityService) {
         this.freeBoardService = freeBoardService;
         this.freeBoardCommentService = freeBoardCommentService;
+        this.cityService = cityService;
     }
 
     @GetMapping(value = "/freeboard-list")
@@ -34,16 +36,18 @@ public class FreeBoardController {
             List<FreeBoard> tempFreeBoardList = freeBoardListPage.getItemList();
             List<FreeBoard> freeBoardList = new ArrayList<>();
             List<FreeBoardComment> freeBoardCommentList = new ArrayList<>();
+            List<City> cityList = cityService.findAllCity();
             for(FreeBoard freeBoard: tempFreeBoardList) {
             int commentCount=freeBoardCommentService.selectByfBoNo(freeBoard.getFBoNo()).size();
             freeBoard.setCommentCount(commentCount);
             freeBoardList.add(freeBoard);
             }
+            
             model.addAttribute(freeBoardCommentList);
             model.addAttribute("freeBoardListPage", freeBoardListPage);
             model.addAttribute("freeBoardList", freeBoardList);
             model.addAttribute("pageNo", pageNo);
-          
+            model.addAttribute("cityList",cityList);
        
             
         } catch (Exception e) {

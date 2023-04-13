@@ -123,13 +123,6 @@
 					<div class="shop-item col-lg-4 col-md-6 col-sm-6" th:each="freeBoard:${freeBoardList}">
 								<div class="inner-box">
 									<div class="image-box">
-										<div class="item-options clearfix">
-											<a href="freeboard-detail" class="btn_shop"><span class="icon-eye"></span>
-                                            <div class="tool-tip">
-                                            상세 보기
-                                            </div>
-                                            </a>
-										</div>
 									</div>
 									<div class="product_description" >
 										<h3><a th:text="${freeBoard.fBoTitle}" th:href="@{freeboard-detail(fBoNo=${freeBoard.fBoNo})}"></a></h3>
@@ -141,6 +134,9 @@
 											<span th:text="${freeBoard.fBoCount}"></span> 
 											<span class="icon-comment"></span>
 											<span th:text="${freeBoard.commentCount}"></span> 
+										<!--  <span class="icon-map" ></span> -->
+											<span class="icon-user" ></span>
+											<span th:text="${freeBoard.userId}"></span><!--city아직 안됨-->
 										</div>
 									</div>
 								</div>

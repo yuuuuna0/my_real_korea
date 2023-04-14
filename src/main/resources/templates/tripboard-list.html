@@ -182,10 +182,11 @@
 							<h4>Categories</h4>
 							<ul>
 								<li>
-									<a id="all-city-list" value="tripboard-all-city-list" href="#">전체보기</a>
+									<a id="all-city-list" value="tripboard-all-city-list" name="0">전체보기
+									</a>
 								</li>
 								<li th:each="city:${cityList}">
-									<a th:value="${city.cityNo}" th:text="${city.cityName}" href="#">서</a>
+									<a th:name="${city.cityNo}" th:text="${city.cityName}" href="#">서</a>
 								</li>
 							</ul>
 						</div>

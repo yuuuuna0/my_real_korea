@@ -22,6 +22,7 @@ import com.itwill.my_real_korea.dto.City;
 import com.itwill.my_real_korea.dto.tour.Tour;
 import com.itwill.my_real_korea.dto.tour.TourImg;
 import com.itwill.my_real_korea.dto.tour.TourReserve;
+import com.itwill.my_real_korea.dto.tour.TourReview;
 import com.itwill.my_real_korea.dto.wishlist.Wishlist;
 import com.itwill.my_real_korea.service.city.CityService;
 import com.itwill.my_real_korea.service.tour.TourImgService;
@@ -48,44 +49,8 @@ public class TourRestController {
 		this.cityService=cityService;
 		this.tourReserveService=tourReserveService;
 		this.tourReviewService=tourReviewService;
-	}
-
-	//1. 투어상품 전체 리스트 보기  -> 필터 
-		@ApiOperation(value="투어상품리스트(필터&정렬)")
-		@GetMapping(value = "/tour-list-ajax/{keyword}", produces="application/json;charset=UTF-8")
-		public Map<String, Object> tour_list(@RequestParam(required = false, defaultValue = "1") int currentPage,
-											 @PathVariable String keyword, 
-											 @RequestParam(required = false, defaultValue = "0") int cityNo, 
-											 @RequestParam(required = false, defaultValue = "0") int toType, 
-											 @RequestParam(required = false, defaultValue = "") String sortOrder){
-			Map<String, Object> resultMap = new HashMap<>();
-			int code = 1;
-			String msg = "성공";
-			List<Tour> data = null;
-			try {
-				PageMakerDto<Tour> tourListPage=tourService.findAll(currentPage,keyword, cityNo, toType, sortOrder);
-				List<Tour> tempTourList=tourListPage.getItemList();
-				List<Tour> tourList=new ArrayList<>();
-				for (Tour tour : tempTourList) {
-					int tourScore=tourReviewService.calculateTourScore(tour.getToNo());
-					tour.setToScore(tourScore);
-					tourList.add(tour);	//tourList에 후기 평점 평균 붙이기
-				}
-				data=tourList;
-				code=1;
-				msg="성공";
-			}catch (Exception e) {
-				e.printStackTrace();
-				code=2;
-				msg="관리자에게 문의하세요.";
-			}
-			resultMap.put("code", code);
-			resultMap.put("msg", msg);
-			resultMap.put("data", data);
-			return resultMap;
-		}
-		
-		//1. 투어상품 전체 리스트 보기  -> 필터 ---> 작성중, 한번에 해보기 
+	}	
+		//1. 투어상품 전체 리스트 보기 
 		@ApiOperation(value="투어상품리스트(필터&정렬)")
 		@PostMapping(value = "/tour-list-ajax", produces="application/json;charset=UTF-8")
 		public Map<String, Object> tourListAjax(@RequestBody Map<String,String> map){
@@ -125,6 +90,30 @@ public class TourRestController {
 			return resultMap;
 		}
 	
+		//2. 투어 리뷰 남기기
+		@ApiOperation(value="투어상세보기(투어리뷰남기기)")
+		@PostMapping(value="/tour-detail-ajax", produces="application/json;charset=UTF-8")
+		public Map<String, Object> tourDetailAjax(@RequestBody TourReview tourReview,int toNo){
+			Map<String,Object> resultMap=new HashMap<>();
+			int code=0;
+			String msg="성공";
+			List<TourReview> data=null;
+			try {
+				tourReviewService.insertTourReview(tourReview);
+				List<TourReview> tourReviewList=tourReviewService.findByToNo(toNo);
+				code=1;
+				msg="성공";
+				
+			}catch (Exception e) {
+				e.printStackTrace();
+				code=2;
+				msg="관리자에게 문의하세요";
+			}
+			resultMap.put("code", code);
+			resultMap.put("msg", msg);
+			resultMap.put("data", data);
+			return resultMap;
+		}
 	
 
 
@@ -164,7 +153,41 @@ public class TourRestController {
 }
 
 /*	
-	
+	//1. 투어상품 전체 리스트 보기  -> 필터 
+		@ApiOperation(value="투어상품리스트(필터&정렬)")
+		@GetMapping(value = "/tour-list-ajax/{keyword}", produces="application/json;charset=UTF-8")
+		public Map<String, Object> tour_list(@RequestParam(required = false, defaultValue = "1") int currentPage,
+											 @PathVariable String keyword, 
+											 @RequestParam(required = false, defaultValue = "0") int cityNo, 
+											 @RequestParam(required = false, defaultValue = "0") int toType, 
+											 @RequestParam(required = false, defaultValue = "") String sortOrder){
+			Map<String, Object> resultMap = new HashMap<>();
+			int code = 1;
+			String msg = "성공";
+			List<Tour> data = null;
+			try {
+				PageMakerDto<Tour> tourListPage=tourService.findAll(currentPage,keyword, cityNo, toType, sortOrder);
+				List<Tour> tempTourList=tourListPage.getItemList();
+				List<Tour> tourList=new ArrayList<>();
+				for (Tour tour : tempTourList) {
+					int tourScore=tourReviewService.calculateTourScore(tour.getToNo());
+					tour.setToScore(tourScore);
+					tourList.add(tour);	//tourList에 후기 평점 평균 붙이기
+				}
+				data=tourList;
+				code=1;
+				msg="성공";
+			}catch (Exception e) {
+				e.printStackTrace();
+				code=2;
+				msg="관리자에게 문의하세요.";
+			}
+			resultMap.put("code", code);
+			resultMap.put("msg", msg);
+			resultMap.put("data", data);
+			return resultMap;
+		}
+
 	
 	//2. 투어상품 상세보기
 	@ApiOperation(value="투어상품 상세보기")

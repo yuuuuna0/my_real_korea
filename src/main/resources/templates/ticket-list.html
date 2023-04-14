@@ -28,6 +28,10 @@
 	<!-- CUSTOM CSS -->
 	<link href="css/custom.css" rel="stylesheet">
 
+	<!-- Handlebars -->
+	<script  defer type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.2/handlebars.min.js"></script>
+
+
 </head>
 
 <body>
@@ -81,6 +85,18 @@
 		<div class="container margin_60">
 			<div class="row">
 				<aside class="col-lg-3">
+				<!-- START TICKET SEARCH -->
+				<div class="widget">
+						<div class="input-group">
+							<input id="ticket-search-keyword" type="text" class="form-control" placeholder="Search...">
+							<span id="ticket-search-btn"  class="input-group-btn">
+							<!-- script로  -->
+		                    <button class="btn btn-default" type="button" style="margin-left:0;"><i class="icon-search"></i></button>
+		                    </span>
+						</div>
+					</div>
+					<br>
+				<!-- END TICKET SEARCH-->
 					<p>
 						<a class="btn_map" data-toggle="collapse" href="#collapseMap" aria-expanded="false" aria-controls="collapseMap" data-text-swap="Hide map" data-text-original="View on map">View on map</a>
 					</p>
@@ -244,27 +260,37 @@
 
 					<div id="tools">
 						<div class="row">
-							<div class="col-md-3 col-sm-4 col-6">
-								<div class="styled-select-filters">
-									<select name="sort_price" id="sort_price">
-										<option value="" selected>Sort by price</option>
-										<option value="lower">Lowest price</option>
-										<option value="higher">Highest price</option>
-									</select>
-								</div>
+						
+							<!-- grid filter -->
+							<div class="col-md-6 col-sm-4 d-none d-sm-block text-right">
 							</div>
+							<!-- grid fitlter -->
+				
 							<div class="col-md-3 col-sm-4 col-6">
-								<div class="styled-select-filters">
+								<!--<div class="styled-select-filters">
 									<select name="sort_rating" id="sort_rating">
 										<option value="" selected>Sort by ranking</option>
 										<option value="lower">Lowest ranking</option>
 										<option value="higher">Highest ranking</option>
 									</select>
+								  </div>-->
+							</div> 
+									<!-- sort -->
+							<div class="col-md-3 col-sm-4 col-6">
+								<div class="styled-select-filters">
+								<!--  <when test="sortOrder == 'tiNoDESC'"> ORDER BY T.TI_NO DESC </when>
+						<when test="sortOrder == 'tiPriASC'"> ORDER BY T.TI_PRICE ASC</when>
+						<when test="sortOrder == 'tiPriDESC'"> ORDER BY T.TI_PRICE DESC</when> -->
+									<select name="ticket-sort" id="ticket-sort">
+										<option value="" selected>정렬</option>
+										<option value="tiNoDESC">최신순</option>
+										<option value="tiPriASC">가격 높은순</option>
+										<option value="tiPriDESC">가격 낮은순</option>
+									</select>
 								</div>
 							</div>
-							<div class="col-md-6 col-sm-4 d-none d-sm-block text-right">
-								<a href="#" class="bt_filters"><i class="icon-th"></i></a> <a href="all_hotels_list.html" class="bt_filters"><i class=" icon-list"></i></a>
-							</div>
+						<!-- sort -->
+							
 						</div>
 					</div>
 					<!--End tools -->
@@ -277,7 +303,8 @@
 								<div class="img_container">
 									<a th:href="@{ticket-detail(tiNo=${ticket.tiNo})}">
 										<img src="img/hotel_1.jpg" width="800" height="533" class="img-fluid" alt="Image">
-										<div class="score"><span>7.5</span>Good</div>
+										
+										<div class="score" ><span  th:text="${payment.pQty}">7.5</span>Good</div>
 										<div class="short_info hotel">
 											 <span class="price" th:text="${ticket.tiPrice}"></span>
 										</div>
@@ -398,6 +425,12 @@
 		<!--form -->
 	</div>
 	<!-- /Sign In Popup -->
+	<!-- ticket template -->
+
+
+
+
+
 
 	<!-- Common scripts -->
 	<script src="js/jquery-2.2.4.min.js"></script>

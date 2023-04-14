@@ -1,5 +1,6 @@
 package com.itwill.my_real_korea.controller;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -9,20 +10,32 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.itwill.my_real_korea.dto.notice.Notice;
 import com.itwill.my_real_korea.dto.user.User;
 import com.itwill.my_real_korea.exception.IsNotAdminException;
+import com.itwill.my_real_korea.fileupload.FileStore;
+import com.itwill.my_real_korea.fileupload.UploadFile;
 import com.itwill.my_real_korea.service.notice.NoticeService;
+import com.itwill.my_real_korea.util.FileUploadNotFoundException;
+import com.itwill.my_real_korea.util.FileUploadService;
 import com.itwill.my_real_korea.util.PageMaker;
 import com.itwill.my_real_korea.util.PageMakerDto;
 
@@ -32,8 +45,17 @@ import io.swagger.annotations.ApiOperation;
 @RestController
 public class NoticeRestController {
 
+	private final FileUploadService storageService;
+	
 	@Autowired
 	private NoticeService noticeService;
+	
+	@Autowired
+	public NoticeRestController(FileUploadService storageService) {
+		this.storageService = storageService;
+	}
+	
+
 	
 	/*
 	 * 최신순 정렬 : 공지사항 리스트 보기 (게시글 시작번호, 게시글 끝번호) - 페이징 처리
@@ -158,7 +180,8 @@ public class NoticeRestController {
 	@LoginCheck
 	@ApiOperation(value = "공지사항 글쓰기")
 	@PostMapping(value = "/notice", produces = "application/json;charset=UTF-8")
-	public Map<String, Object> notice_write_action(@RequestBody Notice notice, HttpServletRequest request){
+	public Map<String, Object> notice_write_action(@ModelAttribute Notice notice, 
+													@RequestParam(name = "file" ,required = false) MultipartFile file){
 		
 		Map<String, Object> resultMap = new HashMap<>();
 		int code = 1;
@@ -166,13 +189,22 @@ public class NoticeRestController {
 		List<Notice> data = new ArrayList<Notice>();
 		
 		try {
+			// 첨부파일 처리하는 부분
+			if (file != null) {
+				storageService.store(file);
+				// 업로드 된 첨부파일의 이름을 nImg 에 넣어줌
+				notice.setNImg(file.getOriginalFilename());
+			} else {
+				notice.setNImg(notice.getNImg());
+			}
 			// 공지사항 글쓰기, 성공시 code 1
 			noticeService.insertNotice(notice);
-			code = 1;
-			msg = "성공";
 			// 공지사항 글쓰기 후 그 공지사항을 찾아서 데이터에 붙여줌
 			notice = noticeService.selectByNo(notice.getNNo());
+			code = 1;
+			msg = "성공";
 			data.add(notice);
+			
 		} catch (Exception e) {
 			// 실패 시 code 2
 			e.printStackTrace();
@@ -345,6 +377,10 @@ public class NoticeRestController {
 		return resultMap;
 	}
 	
+	@ExceptionHandler(FileUploadNotFoundException.class)
+	public ResponseEntity<?> handleStorageFileNotFound(FileUploadNotFoundException exc) {
+		return ResponseEntity.notFound().build();
+	}
 	
 	
 	/*

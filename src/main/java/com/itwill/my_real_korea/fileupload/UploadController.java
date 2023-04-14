@@ -15,13 +15,13 @@ import org.springframework.web.multipart.MultipartFile;
 
 import lombok.extern.log4j.Log4j2;
 
-@RestController
+//@RestController
 @Log4j2
 public class UploadController {
 
+	// @Value를 import할때 springframwork.beans.factory.annotation.Value;를 선택!
 	@Value("${part4.upload.path}") // application.properties의 변수
 	private String uploadPath;
-	// @Value를 import할때 springframwork.beans.factory.annotation.Value;를 선택!
 
 	@PostMapping("/uploadAjax")
 	public void uploadFile(MultipartFile[] uploadFiles) {

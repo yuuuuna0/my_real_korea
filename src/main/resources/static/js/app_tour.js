@@ -64,8 +64,14 @@ $('input[type="checkbox"][name="toType-checkbox"]').click(function(){
 });
 
 //3. 투어리뷰 남기기
-$(document).on('click','#submit-review',function(){
-	let url="tour-detail-ajax";
+// 3-1. 로그인상태면 모달 내 이름에 아이디 넣어주기
+$(document).on('show.bs.modal','#myReviewModal',function(){
+	let userId=$('#myReviewBtn').data('id');
+	  $('#myReviewModal').find('#userId').val(userId);
+});
+//3-2. 리뷰남기기 버튼 클릭시
+$(document).on('click','#submitReviewBtn',function(){
+	let url="tour-review-action";
 	let method="POST";
 	let contentType="application/json;charset=UTF-8";
 	let sendData=[];

@@ -13,7 +13,7 @@ public interface FreeBoardCommentService {
     List<FreeBoardComment> selectAll() throws Exception;
 
     List<FreeBoardComment> selectByfBoNo(int fBoNo) throws Exception;
-    FreeBoardComment selectByfCoNo(int fBoNo) throws Exception;
+    FreeBoardComment selectByfCoNo(int fCoNo) throws Exception;
 
 
     int deleteComment(int fCommentNo) throws Exception;

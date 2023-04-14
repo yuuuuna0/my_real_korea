@@ -1,6 +1,9 @@
 package com.itwill.my_real_korea.config;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.multipart.MultipartResolver;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -16,6 +19,13 @@ public class WebConfig implements WebMvcConfigurer{
 	}
 	*************************************************************/
 	/*********************Spring MVC 빈객체등록*********************/
+	@Bean
+	public MultipartResolver multipartResolver() {
+	    CommonsMultipartResolver resolver = new CommonsMultipartResolver();
+	    resolver.setMaxUploadSizePerFile(5242880); // 파일당 최대 업로드 크기 설정
+	    return resolver;
+	}
+	
 	
 	/*********************Interceptor 등록*********************/
 	@Override

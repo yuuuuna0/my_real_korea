@@ -92,8 +92,8 @@ public class TourRestController {
 	
 		//2. 투어 리뷰 남기기
 		@ApiOperation(value="투어상세보기(투어리뷰남기기)")
-		@PostMapping(value="/tour-detail-ajax", produces="application/json;charset=UTF-8")
-		public Map<String, Object> tourDetailAjax(@RequestBody TourReview tourReview,int toNo){
+		@PostMapping(value="/tour-review-action", produces="application/json;charset=UTF-8")
+		public Map<String, Object> tourReviewAction(@RequestBody TourReview tourReview,int toNo){
 			Map<String,Object> resultMap=new HashMap<>();
 			int code=0;
 			String msg="성공";

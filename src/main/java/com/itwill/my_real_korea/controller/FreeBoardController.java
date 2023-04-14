@@ -3,6 +3,7 @@ package com.itwill.my_real_korea.controller;
 import com.itwill.my_real_korea.dto.City;
 import com.itwill.my_real_korea.dto.freeboard.FreeBoard;
 import com.itwill.my_real_korea.dto.freeboard.FreeBoardComment;
+import com.itwill.my_real_korea.dto.user.User;
 import com.itwill.my_real_korea.service.freeboard.FreeBoardCommentService;
 import com.itwill.my_real_korea.service.freeboard.FreeBoardService;
 import com.itwill.my_real_korea.service.user.UserService;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -110,24 +112,39 @@ public class FreeBoardController {
     }
 
     @GetMapping("/freeboard-detail")
-    public String freeBoardDetail(@RequestParam Integer fBoNo, Model model, HttpServletRequest request) throws Exception {
+    public String freeBoardDetail(@RequestParam Integer fBoNo, Model model, HttpServletRequest request, HttpSession session) throws Exception {
         if (fBoNo == null) {
             return "freeboard-list";
         }
         try {
+            if (session != null) {
+                User loginUser = (User) session.getAttribute("loginUser");
+                model.addAttribute("loginUser", loginUser);
+            }
+////
+//            HttpSession session = request.getSession();
+//            User loginUser = (User) session.getAttribute("loginUser");
+//
+//            if (loginUser != null) {
+//                String loginUserUserId = loginUser.getUserId();
+//
+//                request.setAttribute("loginUserUserId", loginUserUserId);
+//
+//                model.addAttribute("loginUserUserId", loginUserUserId);
+//            }
 
 //            HttpSession session = request.getSession();
 //            String sUserId = (String) session.getAttribute("sUserId");
 //            User loginUser = userService.findUser(sUserId);
-//            String userId = loginUser.getUserId();
-//            request.setAttribute("userId", userId);
-//
+//            String loginUserUserId = loginUser.getUserId();
+//            request.setAttribute("loginUserUserId", loginUserUserId);
+
 //        if (sUserId == null) {
 //            session.setAttribute("requestUrl", request.getRequestURL().toString());
 //            return "redirect:user-login";
 //        }
-//            if (userId != null) {
-//                model.addAttribute("userId", userId);
+//            if (loginUserUserId != null) {
+//                model.addAttribute("loginUserUserId", loginUserUserId);
 //            }
 
 

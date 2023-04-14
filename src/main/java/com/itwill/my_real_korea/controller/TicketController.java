@@ -31,17 +31,14 @@ import com.itwill.my_real_korea.util.PageMakerDto;
 public class TicketController {
 
     private final TicketService ticketService;
-    private final TicketImgService ticketImgService;
     private final TicketReviewService ticketReviewService;
     private final PaymentService paymentService;
     private final RsPInfoService rsPInfoService;
 
     @Autowired
-    public TicketController(TicketService ticketService, TicketImgService ticketImgService, 
-    						TicketReviewService ticketReviewService,
+    public TicketController(TicketService ticketService, TicketReviewService ticketReviewService,
     						RsPInfoService rsPInfoService, PaymentService paymentService) {
         this.ticketService = ticketService;
-        this.ticketImgService = ticketImgService;
         this.ticketReviewService = ticketReviewService;
         this.paymentService = paymentService;
         this.rsPInfoService = rsPInfoService;
@@ -49,13 +46,15 @@ public class TicketController {
 
     //티켓 리스트 - 페이지
     @GetMapping("/ticket-list")
-    public String tickeList(@RequestParam(required = false, defaultValue = "1") int currentPage,Model model) {
+    public String tickeList(@RequestParam(required = false, defaultValue = "1") int currentPage,
+    						@ModelAttribute Payment payment, Model model) {
 
         try {
             PageMakerDto<Ticket> ticketList = ticketService.selectAllTicket(currentPage);
             
             model.addAttribute("ticketList", ticketList.getItemList());
             model.addAttribute("currentPage", currentPage);
+            System.out.println(payment.getPQty());
         } catch (Exception e) {
             e.printStackTrace();
         }

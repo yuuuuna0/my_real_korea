@@ -258,7 +258,7 @@ public class TripBoardRestController {
 				msg = "성공";
 			}else {
 				code = 2;
-				msg = "해당 키워드 결과 값이 없습니다.";
+				msg = "해당 지역과 일치하는 게시글이 없습니다.";
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -333,35 +333,6 @@ public class TripBoardRestController {
 	@ApiOperation(value = "동행 게시판 리스트")
 	@GetMapping(value = "/tripboard-all-list", produces = "application/json;charset=UTF-8")
 	public Map<String, Object> tripboard_all_list(@RequestParam(required = false, defaultValue = "1")int pageNo){
-		
-		Map<String, Object> resultMap = new HashMap<>();
-		int code = 1;
-		String msg = "성공";
-		PageMakerDto<TripBoard> tripBoardList = null;
-		try {
-			// 페이지 번호(default 값 1)로 동행 게시판 리스트, 성공시 code 1
-			tripBoardList = tripBoardService.selectAllTb(pageNo);
-			code = 1;
-			msg = "성공";
-		} catch (Exception e) {
-			// 에러 발생시 code 2
-			e.printStackTrace();
-			code = 2;
-			msg = "관리자에게 문의하세요.";
-		}
-		resultMap.put("code", code);
-		resultMap.put("msg", msg);
-		resultMap.put("data", tripBoardList);
-		return resultMap;
-		
-	}
-	
-	/*
-	 * 동행 게시판 리스트(모든 지역 리스트 보기) - 페이징 처리
-	 */
-	@ApiOperation(value = "동행 게시판 모든 지역 리스트")
-	@GetMapping(value = "/tripboard-all-city-list", produces = "application/json;charset=UTF-8")
-	public Map<String, Object> tripboard_all_city_list(@RequestParam(required = false, defaultValue = "1")int pageNo){
 		
 		Map<String, Object> resultMap = new HashMap<>();
 		int code = 1;

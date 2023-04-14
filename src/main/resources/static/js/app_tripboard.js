@@ -67,20 +67,20 @@ $(document).on('change', '#sort-by', function(e) {
 
 //동행게시판 필터(사이드바 전체보기)
 $(document).on('click', '#all-city-list', function(e) {
-	let cityNo=$('#all-city-list').attr('name');
+	let cityNo=$(this).attr('name');
 	console.log(cityNo);
 		let url;
 		let method = 'GET';
 		let contentType = 'application/json;charset=UTF-8';
 		let sendData;
 		if(cityNo==0){
-			url= 'tripboard-all-city-list';
+			url= 'tripboard-all-list';
 			sendData={};
 		} else{
-			
+			url= 'tripboard-city-list';
 			sendData={
 				cityNo:cityNo
-			}
+			};
 		}
 		let async = true;
 		
@@ -95,3 +95,27 @@ $(document).on('click', '#all-city-list', function(e) {
 							}, async);
 		e.preventDefault();
 });
+
+/*
+//동행게시판 필터(사이드바 전체보기)
+$(document).on('click', '#all-city-list2', function(e) {
+	let cityNo=$(this).attr('name');
+	console.log(cityNo);
+		let url = 'tripboard-city-list';
+		let method = 'GET';
+		let contentType = 'application/json;charset=UTF-8';
+		let sendData = {cityNo:cityNo};
+		let async = true;
+		
+		Request.ajaxRequest(url, method, contentType, 
+							sendData,
+							function(resultJson){
+								if(resultJson.code == 1){
+									View.render('#tripboard-search-list-template', resultJson, '#tripboard-list');
+								}else {
+									alert(resultJson.msg);
+								}
+							}, async);
+		e.preventDefault();
+});
+*/

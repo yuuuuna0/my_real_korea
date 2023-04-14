@@ -13,8 +13,11 @@ USER_ID              VARCHAR2(50)
 
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
+
+import com.itwill.my_real_korea.fileupload.UploadFile;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,8 +25,8 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @ToString
 public class Notice {
 	private int nNo;
@@ -35,7 +38,6 @@ public class Notice {
 	private String nImg;
 	/* FK */
 	private String userId;
-
 
 	
 }

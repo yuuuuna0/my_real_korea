@@ -64,8 +64,8 @@ public class TourRestController {
 			System.out.println(currentPage);
 			System.out.println(cityNo);
 			System.out.println(toType);
-			String keyword=(String)map.get("keyword");
-			String sortOrder=(String)map.get("sortOrder");
+			String keyword=map.get("keyword");
+			String sortOrder=map.get("sortOrder");
 			try {
 				PageMakerDto<Tour> tourListPage=tourService.findAll(currentPage,keyword, cityNo, toType, sortOrder);
 				List<Tour> tempTourList=tourListPage.getItemList();

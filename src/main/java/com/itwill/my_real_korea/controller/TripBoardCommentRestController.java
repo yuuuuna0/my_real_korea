@@ -115,7 +115,7 @@ public class TripBoardCommentRestController {
 		try {
 			//댓글 삭제 성공 시 code1
 			int rowCount = tripBoardCommentService.deleteTripBoardComment(tCoNo);
-			if(rowCount != 0) {
+			if(rowCount == 1) {
 				code = 1;
 				msg = "성공";
 			}else {

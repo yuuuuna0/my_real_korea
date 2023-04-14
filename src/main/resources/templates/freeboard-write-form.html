@@ -85,6 +85,7 @@
 				<div class="col-lg-9">
 					<div class="box_style_1">
 						<div class="post nopadding">
+							<form th:object="${freeBoard}" name="f" method="post">
 							<img src="img/blog-1.jpg" alt="Image" class="img-fluid">
 							<div class="post_info clearfix">
 								<div class="post-left">
@@ -99,7 +100,7 @@
 								</div>
 								<div class="post-right"><i class="icon-comment"></i><a href="#">25 </a>Comments</div>
 							</div>
-							<h2>Duis aute irure dolor in reprehenderit</h2>
+							<span><input th:value=""></span><h2></h2>
 							<p>
 								Praesent vestibulum molestie lacus. Aenean nonummy hendrerit mauris. Phasellus porta. Fusce suscipit varius mi nascetur ridiculus mus. Nulla dui. Fusce feugiat malesuada odio. Morbi nunc odio, gravida at, cursus nec, luctus a, lorem.....
 							</p>
@@ -111,6 +112,7 @@
 								<small>Someone famous in <cite title="">Body of work</cite></small>
 							</blockquote>
 						</div>
+						
 						<!-- end post -->
 					</div>
 					<!-- end box_style_1 -->

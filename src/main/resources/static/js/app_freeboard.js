@@ -1,3 +1,5 @@
+import * as View from "./view.js";
+import * as Request from "./request.js";
 
 $(document).on('click','#freeboard-search-btn',function(e){
 	// ajax로 리스트 부분만 검색된 리스트로 변경
@@ -5,7 +7,14 @@ $(document).on('click','#freeboard-search-btn',function(e){
 	let url = `freeboard-list-search?=${keyword}`;
 	let method = 'GET';
 	let contentType = 'application/json;charset=UTF-8';
-	let sendData = {};
+	let toType;
+	let sortOrder=$('#sort-by').val();
+	let sendData = {
+		currentPage:"1",
+			keyword:keyword,
+			cityNo:cityNo,
+			toType:toType,
+			sortOrder:sortOrder};
 	let async = true;
 	
 	// 키워드 결과, 현재 페이지 숫자 표시
@@ -14,7 +23,7 @@ $(document).on('click','#freeboard-search-btn',function(e){
 	
 	// JSON.stringify() => 객체를 string 으로, JSON.parse() => string 을 객체로 만듬
 	Request.ajaxRequest(url, method, contentType, 
-						sendData,
+						JSON.stringify(sendData),
 						function(resultJson){
 							//페이지 정보 변경
 							curPage.text(resultJson.data.pageMaker.curPage);

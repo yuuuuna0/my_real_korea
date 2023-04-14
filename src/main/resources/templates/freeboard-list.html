@@ -80,7 +80,8 @@
 			</div>
 		</div>
 		<!-- End Position -->
-			
+
+
 		<div class="container margin_60">
 			<div class="row">
 				<div class="col-lg-9">
@@ -92,7 +93,7 @@
 									<div id="page-info" class="results_shop" >
 										Showing 
 										<span id="cur-page" th:text="${freeBoardList.pageMaker.curPage}"></span> -  
-										<span id="cur-page" th:text="${freeBoardList.pageMaker.BLOCK_SCALE-1}"></span> of
+										<span id="BLOCK-SCALE" th:text="${freeBoardList.pageMaker.BLOCK_SCALE-1}"></span> of
 										<span id="tot-record-count" th:text="${freeBoardList.totRecordCount}"></span> results
 									</div>
 								</div>
@@ -105,7 +106,6 @@
 											<option value="freeboard-readCount-desc">조회수높은순</option>
 										</select>
 									</div>
-								
 								</div>
 							</div>
 						</div>
@@ -124,7 +124,7 @@
 				<div class="row" id="freeboard-list" >
 					<div class="shop-item col-lg-12 col-md-6 col-sm-6" >
 						<form name='boardlistform' method='POST' action='' style="color:grey;">
-							<table id='boardlist' cellpadding='5px' cellspacing='1'>
+							<table id='boardlist'  cellpadding='5px' cellspacing='1'>
 								<tr id='boardlist_tr1'>
 									<td width=200 align=center >제 목</td>
 									<td width=60 align=center >조회수</td>
@@ -132,8 +132,8 @@
 									<td width=60 align=center >작성자</td>
 								</tr>
 								
-								<tr id="boardlist_tr2" th:each="freeBoard:${freeBoardList}">
-									<td width=280  style='padding-left: 10px' align='left' >
+								<tr id="boardlist_tr2"   th:each="freeBoard:${freeBoardList}">
+									<td width=280  style='padding-left: 10px ;' align='left' >
 										<a th:href="@{freeboard-detail(fBoNo=${freeBoard.fBoNo})}"  th:text="${freeBoard.fBoTitle}" ></a>
 										<span class="icon-comment"></span>
 										<span th:text="   ${freeBoard.commentCount}"></span> 
@@ -142,7 +142,9 @@
 									</td>
 									<td width=70 th:text=${freeBoard.fBoCount}></td>
 									<td width=120  th:text="${#dates.format(freeBoard.fBoDate, 'yyyy.MM.dd')}"></td>
-									<td width=120  th:text=${freeBoard.userId}></td>
+									<td width=120  th:text=${freeBoard.userId} onclick="btn_alert()"></td>
+								
+
 								</tr>
 								
 							</table>
@@ -155,7 +157,7 @@
 							
 							<ul class="pagination justify-content-center">
 								<li class="page-item" >
-									<a class="page-link" href="#" aria-label="Previous">
+									<a class="page-link" href="#1" aria-label="Previous">
 										<span aria-hidden="true" >&laquo;</span>
 										<span class="sr-only">Previous</span>
 									</a>
@@ -186,7 +188,7 @@
 							<div class="input-group">
 								<input id="freeboard-search-keyword" type="text" class="form-control" placeholder="Search...">
 								<span id="freeboard-search-btn"  class="input-group-btn">
-		                        <button class="btn btn-default" type="button" style="margin-left:0;"><i class="icon-search"></i></button>
+		                        <button class="btn btn_default" type="button" style="margin-left:0;"><i class="icon-search"></i></button>
 		                        </span>
 							</div>
 						</div>
@@ -210,6 +212,8 @@
 						</div>
 						</div>
 						<!-- End widget -->
+						
+
 		<!-- End Container -->
 	</main>
 	<!-- End main -->
@@ -260,8 +264,48 @@
 	<script src="js/common_scripts_min.js"></script>
 	<script src="js/functions.js"></script>
 	<script src="js/app.js" type="module"></script>
-	
+	 <script>
+        // 경고창
+            function btn_alert(str) {
+                alert(str);         }
+        </script>
+<script type="text/javascript">
+var $ = jQuery.noConflict();
+jQuery(document).ready(function( $ ){
+    delete_confirmation_modal.init();
+});
 
+var delete_confirmation_modal =
+{
+    init: function()
+    {
+        $('.confirm-delete-modal').on('click', function(e){
+            if($(this).closest('form').attr('data-submit') == "true")
+            {
+                $(this).closest('form').removeAttr('data-submit');
+                $('.modal-delete').closest('.modal').removeClass('modal-show');
+                return true;
+            } else {
+                $('#modal-1').addClass('modal-show');
+                return false;
+            }
+        });
+
+        $('.modal-delete').on('click', function(){
+            $(this).closest('.modal').prev('form').attr('data-submit', 'true');
+            $('.confirm-delete-modal').trigger('click');
+        });
+
+        $('.modal-delete-cancel').on('click', function(){
+          $(this).closest('.modal').removeClass('modal-show');
+        });
+    }
+}
+</script>
+
+<form name="form-name" id="form-qna" method="post" onsubmit="return false;">
+	
+</form>
 </body>
 
 </html>

@@ -227,7 +227,14 @@
 					<div class="row" id="tourReviewDiv">
 						<div class="col-lg-3">
 							<h3>Reviews</h3>
-							<a href="#" class="btn_1 add_bottom_30" data-toggle="modal" data-target="#myReview">Leave a review</a>
+							<div th:if="${session.loginUser!=null}">
+								<button class="btn_1 add_bottom_30" id="myReviewBtn" data-toggle="modal" data-target="#myReviewModal" th:data-id="${session.loginUser.userId}">Leave a review
+								</button>
+							</div>
+							<div th:if="${session.loginUser==null}">
+								<button class="btn_1 add_bottom_30" onclick="location.href='./user-login'" >Leave a review
+								</button>
+							</div>
 						</div>
 						<div class="col-lg-9">
 							<div id="score_detail"><span th:text="${tour.toCount}">7.5</span>명이 구매했습니다. 
@@ -404,12 +411,14 @@
 	<!-- /Sign In Popup -->	
 
 <!--  Modal Review  -->
-	<div class="modal fade" id="myReview" tabindex="1" role="dialog" aria-labelledby="myReviewLabel" aria-hidden="true">
+	<div class="modal fade" id="myReviewModal" tabindex="1" role="dialog" aria-labelledby="myReviewLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
 					<h4 class="modal-title" id="myReviewLabel">리뷰 작성</h4>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
 				</div>
 				<div class="modal-body">
 					<div id="message-review">
@@ -457,7 +466,7 @@
 							<textarea name="toReviewContent" id="toReviewContent" class="form-control" style="height:100px" placeholder="내용을 적어주세요"></textarea>
 						</div>
 						<!--리뷰 버튼-->
-						<button type="button" class="btn_1" id="submit-review" onclick="submitReview()"></button>
+						<button type="button" class="btn_1" id="submitReviewBtn" >submit</button>
 					</form>
 				</div>
 			</div>
@@ -583,7 +592,8 @@
 		}
 	});
 	</script>
-	 	<script>
+	 <!-- 별찍기 -->
+	 <script>
 		const ratingDiv=$('#toScoreDiv');
 		let score=$('#toScore').val();
 		ratingDiv.html('');	//div.rating 내부 html 업데이트
@@ -598,20 +608,22 @@
 			ratingDiv.append(starIcon);
 		}
 	</script>
+	<!--  예약하기 -->
 	<script>
 		function tourDetail(){
 			document.detailF.action='tour-payment';
 			document.detailF.submit();
 		}
 	</script>
-	<script>
-		function submitReview(){
-			document.toReviewF.action="tour-detail-ajax";
-			document.toReviewF.method="POST";
-			document.toReviewF.submit();
-		}
-	</script>
-
+	<!-- 모달에 값 넘기기
+<script>
+$('#myReview').on('show.bs.modal', function (e) {
+  let userId=$('#myReviewBtn').data('id');
+  console.log(userId);
+  $('#myReview').find('#userId').val(userId);
+});
+</script>
+ -->
 	<!--Review modal validation -->
 	<script src="assets/validate.js"></script>
 	

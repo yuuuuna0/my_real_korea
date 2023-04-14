@@ -25,7 +25,7 @@ values( #{fCoNo},#{fCommentContent},sysdate,#{fBoNo},#{userId})
            from free_board_comment fc
                     join free_board fb
                          on fc.f_bo_no = fb.f_bo_no
-           where fc.f_bo_no = #{fBoNo}
+           where fc.f_bo_no = #{fBoNo} order by f_co_no
        </select>
 
     <select id="selectByfCoNo"

@@ -111,7 +111,7 @@ public class TripBoardRestController {
 	@LoginCheck
 	@ApiOperation(value = "동행 게시글 삭제")/*swagger 에서 출력 값*/
 	@ApiImplicitParam(name = "tBoNo", value = "동행 게시글 번호")/*swagger 에서 출력 값*/
-	@DeleteMapping(value = "/botice/{tBoNo}", produces = "application/json;charset=UTF-8")
+	@DeleteMapping(value = "/tripboard/{tBoNo}", produces = "application/json;charset=UTF-8")
 	public Map<String, Object> tripboard_delete_action(@PathVariable(value = "tBoNo")int tBoNo, HttpServletRequest request) {
 		Map<String, Object> resultMap = new HashMap<>();
 		int code = 1;
@@ -119,7 +119,7 @@ public class TripBoardRestController {
 		List<TripBoard> data = new ArrayList<TripBoard>();
 		try {
 			int rowCount = tripBoardService.deleteTripBoard(tBoNo);
-			if(rowCount != 0) {
+			if(rowCount == 1) {
 				code = 1;
 				msg = "성공";
 			}else {

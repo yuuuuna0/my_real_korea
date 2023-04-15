@@ -115,7 +115,9 @@
 								<div class="inner-box">
 									<div class="image-box">
 										<figure class="image">
-											<a th:href="@{notice-detail(nNo=${notice.nNo})}" href="shop-single.html"><img src="img/notice/notice_common.png" alt=""></a>
+											<a th:href="@{notice-detail(nNo=${notice.nNo})}" href="shop-single.html">
+											<!-- <img class="notice-list-img" th:src="@{img/notice/{nImg}(nImg=${notice.nImg})}" alt="" width="320px" height="270px"></a> -->	
+												<img class="notice-list-img" src="img/notice/notice_common.png" alt="" width="320px" height="270px"></a>
 										</figure>
 									</div>
 									<div class="product_description">

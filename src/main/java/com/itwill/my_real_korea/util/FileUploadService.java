@@ -20,4 +20,6 @@ public interface FileUploadService {
 
 	void deleteAll();
 
+	String getFullPath(String filename);
+
 }

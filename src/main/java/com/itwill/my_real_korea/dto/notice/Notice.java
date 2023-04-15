@@ -17,7 +17,6 @@ import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.itwill.my_real_korea.fileupload.UploadFile;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -38,6 +37,7 @@ public class Notice {
 	private String nImg;
 	/* FK */
 	private String userId;
+	
 
 	
 }

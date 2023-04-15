@@ -120,7 +120,7 @@
 						<h4>파일 업로드</h4>
 						<div class="form-inline upload_1">
 							<div class="form-group">
-								<input type="file" id="imageFiles" name="nImg" multiple=""/>
+								<input type="file" id="imageFile" name="imageFile" multiple=""/>
 								<input type="hidden" id="nImg" value="news_home_1.jpg">
 							</div>
 						</div>
@@ -221,7 +221,7 @@
 				<p>
 				</p>
 					{{#if nimg}}
-					<img src="img/notice/{{nimg}}" alt="Image" class="img-fluid">
+					<img src="images/{{nimg}}" alt="Image" class="img-fluid">
 					{{/if}}
 			</div>
 			<!-- end post -->

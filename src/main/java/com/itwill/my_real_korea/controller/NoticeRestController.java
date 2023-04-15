@@ -1,6 +1,7 @@
 package com.itwill.my_real_korea.controller;
 
 import java.io.File;
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -12,7 +13,9 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -31,8 +34,6 @@ import org.springframework.web.multipart.MultipartFile;
 import com.itwill.my_real_korea.dto.notice.Notice;
 import com.itwill.my_real_korea.dto.user.User;
 import com.itwill.my_real_korea.exception.IsNotAdminException;
-import com.itwill.my_real_korea.fileupload.FileStore;
-import com.itwill.my_real_korea.fileupload.UploadFile;
 import com.itwill.my_real_korea.service.notice.NoticeService;
 import com.itwill.my_real_korea.util.FileUploadNotFoundException;
 import com.itwill.my_real_korea.util.FileUploadService;
@@ -50,12 +51,19 @@ public class NoticeRestController {
 	@Autowired
 	private NoticeService noticeService;
 	
+	// NoticeRestController 객체 생성 시 storaeService 사용, 파일 업로드 기능 구현가능하도록
 	@Autowired
 	public NoticeRestController(FileUploadService storageService) {
 		this.storageService = storageService;
 	}
-	
-
+	// HTML <img>에 이미지 출력
+	@ResponseBody // 이 메소드는 HTTP응답의 body로 사용될 객체를 반환한다.
+	@GetMapping(value =  "/images/{filename}", 
+				produces = {MediaType.IMAGE_JPEG_VALUE, MediaType.IMAGE_PNG_VALUE, MediaType.IMAGE_GIF_VALUE})
+	public Resource showImage(@PathVariable String filename) throws MalformedURLException {
+		// UrlResource로 이미지 파일을 읽어서 @ResponseBody로 이미지 바이너리 반환
+		return new UrlResource("file:" + storageService.getFullPath(filename));
+	}
 	
 	/*
 	 * 최신순 정렬 : 공지사항 리스트 보기 (게시글 시작번호, 게시글 끝번호) - 페이징 처리
@@ -189,12 +197,15 @@ public class NoticeRestController {
 		List<Notice> data = new ArrayList<Notice>();
 		
 		try {
-			// 첨부파일 처리하는 부분
+			// 파일업로드 처리하는 부분
 			if (file != null) {
+				// 선택된 파일이 있다면, 파일 저장
 				storageService.store(file);
-				// 업로드 된 첨부파일의 이름을 nImg 에 넣어줌
+				// 업로드 된 파일의 이름을 notice.nImg 에 넣어줌
 				notice.setNImg(file.getOriginalFilename());
+				System.out.println(">>>>>>>>>>>>>>"+file.getOriginalFilename());
 			} else {
+				// 선택된 파일 없다면 notice.nImg 그대로
 				notice.setNImg(notice.getNImg());
 			}
 			// 공지사항 글쓰기, 성공시 code 1

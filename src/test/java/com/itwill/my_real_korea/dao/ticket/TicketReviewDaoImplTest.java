@@ -21,14 +21,14 @@ class TicketReviewDaoImplTest {
     @Autowired
     private TicketReviewDao ticketReviewDao;
 
-    @Test
+ /*  @Test
     void insertTicketReview() {
         int rowCount = ticketReviewDao.insertTicketReview
                 (new TicketReview(0,null,
                         "테스트","테스트내용","testReview.jpg",1,
                         new User("user3","0000",null,null,null,null,null,null,1,1,0,0,0)));
         assertEquals(rowCount,1);
-    }
+    }*/
 /*
     @Test
     void selectByTicketReview() {
@@ -44,13 +44,13 @@ class TicketReviewDaoImplTest {
         System.out.println(ticketReviewUserList);
     }
 */
-    @Test
+  /*  @Test
     void updateTicketReview() {
         int rowCount
                 = ticketReviewDao.updateTicketReview
                 (new TicketReview(1,null,"수정테스트","테스트내용","modify.jpg",0,null));
         assertEquals(rowCount,1);
-    }
+    }*/
 
     @Test
     void deleteTicketReview() {

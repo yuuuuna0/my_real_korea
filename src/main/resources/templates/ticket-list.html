@@ -108,27 +108,34 @@
 								<h6>Price</h6>
 								<input type="text" id="range" name="range" value="">
 							</div>
-							<div class="filter_type">
-								<h6>Star Category</h6>
+							<!-- 지역 리스트 DIV (보여줌) -->
+							<div class="filter_type" id="cityListDiv">
+								<h6>여행 도시</h6>
 								<ul>
 									<li>
-										<label>
-											<input type="checkbox"><span class="rating">
-											<i class="icon_set_1_icon-81 voted"></i><i class="icon_set_1_icon-81 voted"></i><i class="icon_set_1_icon-81 voted"></i><i class="icon_set_1_icon-81 voted"></i><i class="icon_set_1_icon-81 voted"></i>
-											</span>(15)
+										<label th:each="city:${cityList}">
+											<input type="checkbox" id="city-checkbox" name="city-checkbox"
+											th:value="${city.cityNo}" th:text="${city.cityName}">
 										</label>
 									</li>
-									<li>
 										<label>
 											<input type="checkbox"><span class="rating">
-											<i class="icon_set_1_icon-81 voted"></i><i class="icon_set_1_icon-81 voted"></i><i class="icon_set_1_icon-81 voted"></i><i class="icon_set_1_icon-81 voted"></i><i class="icon_set_1_icon-81"></i>
+											<i class="icon_set_1_icon-81 voted"></i>
+											<i class="icon_set_1_icon-81 voted"></i>
+											<i class="icon_set_1_icon-81 voted"></i>
+											<i class="icon_set_1_icon-81 voted"></i>
+											<i class="icon_set_1_icon-81"></i>
 											</span>(45)
 										</label>
 									</li>
 									<li>
 										<label>
 											<input type="checkbox"><span class="rating">
-											<i class="icon_set_1_icon-81 voted"></i><i class="icon_set_1_icon-81 voted"></i><i class="icon_set_1_icon-81 voted"></i><i class="icon_set_1_icon-81"></i><i class="icon_set_1_icon-81"></i>
+											<i class="icon_set_1_icon-81 voted"></i>
+											<i class="icon_set_1_icon-81 voted"></i>
+											<i class="icon_set_1_icon-81 voted"></i>
+											<i class="icon_set_1_icon-81"></i>
+											<i class="icon_set_1_icon-81"></i>
 											</span>(35)
 										</label>
 									</li>
@@ -284,8 +291,8 @@
 									<select name="ticket-sort" id="ticket-sort">
 										<option value="" selected>정렬</option>
 										<option value="tiNoDESC">최신순</option>
-										<option value="tiPriASC">가격 높은순</option>
-										<option value="tiPriDESC">가격 낮은순</option>
+										<option value="tiPriDESC">가격 높은순</option>
+										<option value="tiPriASC">가격 낮은순</option>
 									</select>
 								</div>
 							</div>
@@ -294,8 +301,8 @@
 						</div>
 					</div>
 					<!--End tools -->
-
-					<div class="row">
+					<!--  티켓 리스트 -->
+					<div class="row" id="ticket-list">
 						<div class="col-md-4 wow zoomIn" data-wow-delay="0.1s" th:each="ticket:${ticketList}">
 							<div class="hotel_container">
 								<div class="ribbon_3 popular"><span>Popular</span>
@@ -304,7 +311,7 @@
 									<a th:href="@{ticket-detail(tiNo=${ticket.tiNo})}">
 										<img src="img/hotel_1.jpg" width="800" height="533" class="img-fluid" alt="Image">
 										
-										<div class="score" ><span  th:text="${payment.pQty}">7.5</span>Good</div>
+										<div class="score" ><span  th:text="${ticket.tiCount}">7.5</span>Good</div>
 										<div class="short_info hotel">
 											 <span class="price" th:text="${ticket.tiPrice}"></span>
 										</div>
@@ -312,9 +319,31 @@
 								</div>
 								<div class="hotel_title"> <!-- 타이틀 -->
 									<h3><strong th:text="${ticket.tiTitle}">Park Hyatt</strong> </h3>
-									<div class="rating">
-										<i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star-empty"></i>
+									<div class="rating" th:switch="${ticket.tiScore}">
+											<div th:case="0">
+												<i class="icon-star-empty"></i>
+												<i class="icon-star-empty"></i>
+												<i class="icon-star-empty"></i>
+												<i class="icon-star-empty"></i>
+												<i class="icon-star-empty"></i>
+											</div>
+
+											<div th:case="5">
+												<i class="icon-star voted"></i>
+												<i class="icon-star voted"></i>
+												<i class="icon-star voted"></i>
+												<i class="icon-star voted"></i>
+												<i class="icon-star voted"></i>
+											</div>
+									<div th:case="*">
+										<span th:each="i:${#numbers.sequence(0,ticket.tiScore-1)}">
+											<i class="icon-star voted"></i>
+										</span>
+										<span th:each="i.${#numbers.sequence(ticket.tiScore,4)}">
+											<i class="icon-star-empty"></i>
+										</span>
 									</div>
+								</div>
 									<!-- end rating -->
 									<div class="wishlist">
 										<a class="tooltip_flip tooltip-effect-1" href="#">+<span class="tooltip-content-flip"><span class="tooltip-back">Add to wishlist</span></span></a>
@@ -426,7 +455,56 @@
 	</div>
 	<!-- /Sign In Popup -->
 	<!-- ticket template -->
+	<script id="ticket-search-list-template" type="text/x-handlebars-template">
+		{{#each data}}
+		<div class="col-md-4 wow zoomIn" data-wow-delay="0.1s">
+			<div class="hotel_container">
+				<div class="ribbon_3 popular"><span>Popular</span>
+				</div>
+				<div class="img_container">
+					<a href="ticket-detail?tiNo={{tiNo}}">
+						<img src="img/hotel_1.jpg" width="800" height="533" class="img-fluid" alt="Image">
+						<div class="score" >
+						<span>
+							{{tiCount}}
+						</span>명이 구매했습니다.
+						</div>
+						<div class="short_info hotel" >
+						<span>
+							{{city.cityName}}
+						</span>
+							<span class="price">
+							{{tiPrice}}
+						</span>
+						</div>
+					</a>
+				</div>
+				<div class="hotel_title">
+					<h3>
+						<strong>
+							{{tiTitle}}
+						</strong>
+					</h3>
+					<div class="rating">
+						<i class="icon-star voted"></i>
+						<i class="icon-star voted"></i>
+						<i class="icon-star voted"></i>
+						<i class="icon-star voted"></i>
+						<i class="icon-star-empty"></i>
+					</div>
 
+					<!-- end rating -->
+					<div class="wishlist">
+						<a class="tooltip_flip tooltip-effect-1" href="#">+<span class="tooltip-content-flip"><span class="tooltip-back">Add to wishlist</span></span></a>
+					</div>
+					<!-- End wish list-->
+				</div>
+			</div>
+			<!-- End box tour -->
+		</div>
+		<!-- End col-md-6 -->
+		{{/each}}
+	</script>
 
 
 
@@ -436,6 +514,7 @@
 	<script src="js/jquery-2.2.4.min.js"></script>
 	<script src="js/common_scripts_min.js"></script>
 	<script src="js/functions.js"></script>
+	<script src="js/app_ticket.js" type="module"></script>
 
 	<!-- Map -->
 	<script src="http://maps.googleapis.com/maps/api/js"></script>

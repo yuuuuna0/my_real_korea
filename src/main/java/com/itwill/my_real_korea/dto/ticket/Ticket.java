@@ -24,8 +24,11 @@ public class Ticket {
     private String tiInfo;
     private String tiNotice;
     private int tiCount;
+
     private City city;
     private List<TicketImg> ticketImgList;
+
+    private int tiScore;
 
     public Ticket(int tiNo, String tiTitle, Date tiDate, int tiPrice, String tiInfo, String tiNotice, int tiCount, City city) {
         this.tiNo = tiNo;

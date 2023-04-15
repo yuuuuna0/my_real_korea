@@ -1,18 +1,14 @@
 package com.itwill.my_real_korea.controller;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import com.itwill.my_real_korea.dto.Payment;
 import com.itwill.my_real_korea.dto.RsPInfo;
@@ -139,6 +135,44 @@ public class TicketController {
     		
     		return "ticket-payment-confirmation";
     }
+
+
+    @PostMapping(value = "/ticket-list-sort", produces = "application/json;charset=UTF-8") //rest
+    @ResponseBody
+    public Map<String, Object> ticketList(@RequestBody Map<String,String> map){
+        Map<String, Object> ticketListMap = new HashMap<>();
+        int code = 1;
+        String msg = "성공";
+        List<Ticket> data = null;
+        int currentPage = Integer.parseInt(map.get("currentPage"));
+        int cityNo = Integer.parseInt(map.get("cityNo"));
+        String keyword = map.get("keyword");
+        String sortOrder = map.get("sortOrder");
+
+        try {
+            PageMakerDto<Ticket> ticketPage
+                    = ticketService.selectByTicketAllSort(currentPage,keyword, cityNo, sortOrder);
+            List<Ticket> tempTicketList = ticketPage.getItemList();
+            List<Ticket> ticketList = new ArrayList<>();
+            for(Ticket ticket : tempTicketList) {
+                int ticketScore = ticketReviewService.calculateTourScore(ticket.getTiNo());
+                ticket.setTiScore(ticketScore);
+                ticketList.add(ticket);
+            }
+            data = ticketList;
+            code = 1;
+            msg = "성공";
+        } catch (Exception e){
+            e.printStackTrace();
+            code = 2;
+            msg = "관리자에게 문의하세요.";
+        }
+        ticketListMap.put("code", code);
+        ticketListMap.put("msg", msg);
+        ticketListMap.put("data", data);
+        return ticketListMap;
+    }
+
 
 }
 

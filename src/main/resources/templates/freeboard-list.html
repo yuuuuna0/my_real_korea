@@ -84,9 +84,9 @@
 
 		<div class="container margin_60">
 			<div class="row">
-			<a href="freeboard-write-action">글쓰기</a>
+	
 				<div class="col-lg-9">
-					<div class="shop-section" th:each="freeBoardList:${freeBoardListPage}">
+				<div class="shop-section" th:each="freeBoardList:${freeBoardListPage}">
 
 						<div class="items-sorting">
 							<div class="row">
@@ -110,21 +110,14 @@
 								</div>
 							</div>
 						</div>
-					
+					</div>
 						<!--End Sort By-->
 
-						<hr>
-				</div>
-				</div>
+							<hr>
 
-						
-		<!-- End row -->
-				<!-- End col -->
-
-					
-				<div class="row" id="freeboard-list" >
+						<div class="row" id="freeboard-list" >
 					<div class="shop-item col-lg-12 col-md-6 col-sm-6" >
-						<form name='boardlistform' method='POST' action='' style="color:grey;">
+						<form name='boardlistform' method='POST' action='' style="color:grey; width:825px;">
 							<table id='boardlist'  cellpadding='5px' cellspacing='1'>
 								<tr id='boardlist_tr1'>
 									<td width=200 align=center >제 목</td>
@@ -149,11 +142,10 @@
 								</tr>
 								
 							</table>
-						</form>
-						</div>
 				
+
 				
-							<div class="Page navigation" >
+							<div class="Page navigation">
 						<nav aria-label="Page navigation">
 							
 							<ul class="pagination justify-content-center">
@@ -178,13 +170,12 @@
 						</div>
 						</div>
 						<!-- end pagination-->
-
-			
-			
-
-								<!--Sidebar-->
-				<div class="col-lg-3">
-					<aside class="sidebar" style="float:right">
+		</form>
+						</div>
+					
+		</div>
+			<div class="col-lg-3" style="float:right; margin-top:0px">
+					<aside class="sidebar" >
 						<div class="widget">
 							<div class="input-group">
 								<input id="freeboard-search-keyword" type="text" class="form-control" placeholder="Search...">
@@ -194,8 +185,8 @@
 							</div>
 						</div>
 												<hr>
-						</aside>
 						<!-- End Search -->
+				
 							<!--Sidebar-->
 						<div class="widget " id="cat_shop">
 							<h4>Categories</h4>
@@ -207,12 +198,27 @@
 								<li><a href="freeboard-list-readCount-desc">조회수많은순</a>
 								</li>
 								<li><a href="freeboard-list">*자유게시판 홈</a>
-								</li>
+								</li><br><br>
+										<hr>
+						<a class="btn_1" href="tripboard-write-form" role="button">자유게시판 글쓰기</a>
+						<hr>
 							</ul>
-
-						</div>
 						</div>
 						<!-- End widget -->
+								</aside>
+				</div>
+						</div>
+																					<!--Sidebar-->
+				
+	
+		</div>
+		<!-- End row -->
+
+
+				<!-- End col -->
+	
+	
+							
 						
 
 		<!-- End Container -->
@@ -241,23 +247,33 @@
 	<!-- <script> 태그에 코드 적으면 화면에 안 보임 -->
 	<!-- freeboard-search-list-template -->
 	<script id="freeboard-search-list-template" type="text/x-handlebars-template">
-	{{#each data.itemList}}
-	<div class="shop-item col-lg-4 col-md-6 col-sm-6">
-	<div class="inner-box">
-			</div>
-		<div class="description">
-			<h3><a href="freeboard-detail?fBoNo={{fBoNo}}">{{fBoTitle}}</a></h3>
-			<div class="price">
-				<span class="freeboard_date">{{dateFormat fBoDate}}</span> 
-			</div>
-			<div class="item-options clearfix">
-				<span class="icon-eye"></span>
-				<span>{{fBoCount}}</span>
-			</div>
-		</div>
-	</div>
-	</div>
-	{{/each}}
+	{{#each data.getItemList()}}
+						<form name='boardlistform' method='POST' action='' style="color:grey; width:870px;">
+							<table id='boardlist'  cellpadding='5px' cellspacing='1'>
+								<tr id='boardlist_tr1'>
+									<td width=200 align=center >제 목</td>
+									<td width=60 align=center >조회수</td>
+									<td width=80 align=center>작성일</td>
+									<td width=60 align=center >작성자</td>
+								</tr>
+								
+								<tr id="boardlist_tr2">
+									<td width=280  style='padding-left: 10px ;' align='left' >
+										<a href="freeboard-detail?fBoNo={{fBoNo}}">{{fBoTitle}}</a>
+										<span class="icon-comment"></span>
+										<span> {{commentCount}}</span> 
+										<span class="icon-map"></span>
+										<span>   {{getCity().cityName}}</span>
+									</td>
+																	
+
+								</tr>
+								
+							</table>
+				
+
+						</form>
+							{{/each}}
 	</script>
 
 	<!-- Common scripts -->
@@ -270,40 +286,6 @@
             function btn_alert(str) {
                 alert(str);         }
         </script>
-<script type="text/javascript">
-var $ = jQuery.noConflict();
-jQuery(document).ready(function( $ ){
-    delete_confirmation_modal.init();
-});
-
-var delete_confirmation_modal =
-{
-    init: function()
-    {
-        $('.confirm-delete-modal').on('click', function(e){
-            if($(this).closest('form').attr('data-submit') == "true")
-            {
-                $(this).closest('form').removeAttr('data-submit');
-                $('.modal-delete').closest('.modal').removeClass('modal-show');
-                return true;
-            } else {
-                $('#modal-1').addClass('modal-show');
-                return false;
-            }
-        });
-
-        $('.modal-delete').on('click', function(){
-            $(this).closest('.modal').prev('form').attr('data-submit', 'true');
-            $('.confirm-delete-modal').trigger('click');
-        });
-
-        $('.modal-delete-cancel').on('click', function(){
-          $(this).closest('.modal').removeClass('modal-show');
-        });
-    }
-}
-</script>
-
 <form name="form-name" id="form-qna" method="post" onsubmit="return false;">
 	
 </form>

@@ -4,7 +4,7 @@ public class PageMaker {
 	// 페이지 당 게시글 수
 	public static final int PAGE_SCALE = 12;
 	// 화면 당 페이지 수 
-	public static final int BLOCK_SCALE = 10;
+	public static final int BLOCK_SCALE = 5;
 	// 전체 게시글 수
 	private int totCount;
 	// 현재 페이지

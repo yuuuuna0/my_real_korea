@@ -28,6 +28,8 @@ public class PaymentServiceImpl implements PaymentService{
 	public int insertTicketPayment(Payment payment) throws Exception{
 		//티켓주문하기 (예약하기)
 		
+		
+		
 		return paymentDao.insertTicketPayment(payment);
 	}
 	
@@ -60,8 +62,7 @@ public class PaymentServiceImpl implements PaymentService{
 
 	@Override
 	public Payment findLatestPaymentByUserId(String userId) {
-		Payment findPayment=paymentDao.findLatestPaymentByUserId(userId);
 		return paymentDao.findLatestPaymentByUserId(userId);
 	}
-
+	
 }

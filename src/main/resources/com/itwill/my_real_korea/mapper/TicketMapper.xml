@@ -51,7 +51,7 @@
 				FROM TICKET T
 					JOIN CITY C
 						ON T.CITY_NO = C.CITY_NO
-					JOIN TICKET_IMG TI
+					LEFT JOIN TICKET_IMG TI
 						ON T.TI_NO = TI.TI_NO
 				WHERE 1=1
 				  <!--키워드-->

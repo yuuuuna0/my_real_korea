@@ -281,7 +281,8 @@ CREATE TABLE notice(
 		n_date                        		DATE		 DEFAULT sysdate		 NULL ,
 		n_readcount                   		NUMBER		 DEFAULT 0		 NULL ,
 		n_img                         		VARCHAR2(500)	DEFAULT 	 NULL ,
-		user_id                       		VARCHAR2(50)		 NULL 
+		user_id                       		VARCHAR2(50)		 NULL, 
+        upload_file                         VARCHAR2(500)	DEFAULT 	 NULL 
 );
 
 DROP SEQUENCE notice_n_no_SEQ;

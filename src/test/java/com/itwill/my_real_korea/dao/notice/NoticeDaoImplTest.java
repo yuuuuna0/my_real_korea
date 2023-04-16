@@ -27,9 +27,22 @@ class NoticeDaoImplTest {
 	@Disabled
 	@Test
 	void testInsertNotice() throws Exception{
-		int rowCount = noticeDao.insertNotice(new Notice(0, "공지테스트1", "내용테스트1", null, 0, "이미지1.png","kms1"));
+		int rowCount = noticeDao.insertNotice(new Notice(0, "공지테스트1", "내용테스트1", null, 0, "user1"));
 		assertEquals(rowCount, 1);
 	}
+	@Disabled
+	@Test
+	void testUpdateNoticeImg() throws Exception{
+		int rowCount = noticeDao.updateNoticeImg("image.png",4);
+		assertEquals(rowCount, 1);
+	}
+	@Disabled
+	@Test
+	void testUpdateUploadFile() throws Exception{
+		int rowCount = noticeDao.updateUploadFile("file.png",4);
+		assertEquals(rowCount, 1);
+	}
+	
 	@Disabled
 	@Test
 	void testSelectByNo() throws Exception {
@@ -58,7 +71,7 @@ class NoticeDaoImplTest {
 		List<Notice> noticeList = noticeDao.selectAllOrderByDateAsc(1,10);
 		System.out.println(noticeList);
 	}
-	
+	@Disabled
 	@Test
 	void testselectAllOrderByReadcount() throws Exception {
 		assertNotNull(noticeDao.selectAll(1,10));
@@ -71,10 +84,10 @@ class NoticeDaoImplTest {
 		int rowCount = noticeDao.deleteNotice(4);
 		assertEquals(rowCount, 1);
 	}
-	@Disabled
+	
 	@Test
 	void testUpdateNotice() throws Exception {
-		int rowCount = noticeDao.updateNotice(new Notice(4, "공지수정1", "내용수정1", null, 0, "이미지수정.png","kms1"));
+		int rowCount = noticeDao.updateNotice(new Notice(1, "공지수정1", "내용수정1", null, 0,"user1"));
 		assertEquals(rowCount, 1);
 	}
 	@Disabled

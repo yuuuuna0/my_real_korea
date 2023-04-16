@@ -47,6 +47,7 @@ public class NoticeController {
 				model.addAttribute("loginUser",loginUser);
 			}
 			PageMakerDto<Notice> noticeListPage = noticeService.selectAll(pageNo);
+			System.out.println(noticeListPage.getPageMaker().getCurPage());
 			List<Notice> noticeList = noticeListPage.getItemList();
 			model.addAttribute("noticeListPage", noticeListPage);
 			model.addAttribute("noticeList", noticeList);

@@ -1,10 +1,13 @@
 package com.itwill.my_real_korea.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.itwill.my_real_korea.controller.AuthAdminAnnotationInterceptor;
@@ -18,6 +21,14 @@ public class WebConfig implements WebMvcConfigurer{
 		registry.addViewController("/").setViewName("forward:/index.jsp");
 	}
 	*************************************************************/
+    //web root가 아닌 외부 경로에 있는 리소스를 url로 불러올 수 있도록 설정
+    //fileAdd에 실질적인 파일저장위치를 설정해줍니다.
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/images/**")
+                .addResourceLocations("file:///C:/Temp/");
+    }
+	
 	/*********************Spring MVC 빈객체등록*********************/
 	@Bean
 	public MultipartResolver multipartResolver() {

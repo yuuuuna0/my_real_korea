@@ -59,8 +59,8 @@ class UserServiceImplTest {
 	//11. 아이디 중복 체크 (회원 가입(회원 존재 여부 확인))
 	@Test
 	void testIsDuplicateId() throws Exception {
-		System.out.println("is Duplicated : "+userService.isDuplicateId("user1"));
-		System.out.println("is Duplicated : "+userService.isDuplicateId("user11"));
+		System.out.println("is Duplicated : "+userService.countExistId("user1"));
+		System.out.println("is Duplicated : "+userService.countExistId("user11"));
 	}
 	
 	//12. 로그인 (비밀번호 일치 여부 확인)

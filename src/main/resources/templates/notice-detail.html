@@ -103,7 +103,12 @@
 							<p th:text=${notice.nContent}></p>
 							<p>
 							</p>
-								<img th:src="@{img/notice/__${notice.nImg}__}"  alt="Image" class="img-fluid">
+								<div th:if=${notice.nImg}>
+								<img th:src="@{img/notice/{nImg}(nImg=${notice.nImg})}"  alt="Image" class="img-fluid">
+								</div>
+								<div th:if=${notice.uploadFile}>
+								<img th:src="@{images/{uploadFile}(uploadFile=${notice.uploadFile})}"  alt="Image" class="img-fluid">
+								</div>
 							</div>
 						<!-- end post -->
 						<div th:if="${loginUser != null && loginUser.userId == 'admin'}">

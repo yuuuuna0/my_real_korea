@@ -11,7 +11,18 @@ public interface NoticeDao {
 	 * 공지사항 게시글 추가
 	 */
 	int insertNotice(Notice notice) throws Exception;
-
+	/*
+	 * 공지사항 게시글 이미지 변경(추가)
+	 */
+	int updateNoticeImg(String nImg, int nNo) throws Exception;
+	/*
+	 * 공지사항 게시글 업로드된 파일 변경(추가)
+	 */
+	int updateUploadFile(String uploadFile, int nNo) throws Exception;
+	/*
+	 * 공지사항 게시글 이미지 null 로 만들기
+	 */
+	int updateNoticeImgNull(int nNo) throws Exception;
 	/*
 	 * 공지사항 게시글 번호(boardno)로 해당 게시글 보기
 	 */

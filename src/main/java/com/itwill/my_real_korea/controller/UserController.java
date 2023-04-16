@@ -12,11 +12,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.itwill.my_real_korea.dto.user.User;
 import com.itwill.my_real_korea.exception.ExistedUserException;
-import com.itwill.my_real_korea.exception.PasswordMismatchException;
-import com.itwill.my_real_korea.exception.UserNotFoundException;
 import com.itwill.my_real_korea.service.user.UserService;
 
 @Controller
@@ -29,6 +28,14 @@ public class UserController {
 	@GetMapping(value = "/user-write", produces = "application/json;charset=UTF-8")
 	public String user_write() {
 		return "user-write";
+	}
+	
+	//아이디 중복 체크
+	@PostMapping("/idCheck")
+	@ResponseBody
+	public int countExistId(@RequestParam("userId") String userId) throws Exception {
+		int existCount = userService.countExistId(userId);
+		return existCount;
 	}
 	
 	//회원 가입 액션
@@ -49,35 +56,56 @@ public class UserController {
 	
 	//로그인 폼
 	@GetMapping(value = "/user-login", produces = "application/json;charset=UTF-8")
-	public String user_login() {
-		return "user-login";
+	public String user_login(HttpServletRequest request, Model model) {
+	    HttpSession session = request.getSession();
+	    String prevPage = request.getHeader("Referer");
+	    if (prevPage == null || prevPage.contains("/user-login") || prevPage.contains("/user-auth")) {
+	        prevPage = request.getContextPath() + "/index";
+	    }
+	    session.setAttribute("prevPage", prevPage);
+	    model.addAttribute("prevPage", prevPage);
+	    return "user-login";
 	}
 
-	//로그인 액션
-	@PostMapping(value = "user-login-action", produces = "application/json;charset=UTF-8")
-	public String user_login_action(@ModelAttribute("fuser") User user, Model model, HttpSession session) throws Exception {
-	    String forwardPath = "";
-	    try {
-	        User authUser = userService.login(user.getUserId(), user.getPassword());
-	        if (authUser.getMailAuth() != 1) {
-	        	session.setAttribute("authUser", authUser);
-	        	forwardPath = "user-auth";
-	        } else {
-	        	User loginUser = userService.login(user.getUserId(), user.getPassword());
-	            session.setAttribute("loginUser", loginUser);
-	            forwardPath = "redirect:index";
-	        }
-	    } catch (UserNotFoundException e) {
-	        e.printStackTrace();
-	        model.addAttribute("msg1", e.getMessage());
-	        forwardPath = "user-login";
-	    } catch (PasswordMismatchException e) {
-	        e.printStackTrace();
-	        model.addAttribute("msg2", e.getMessage());
-	        forwardPath = "user-login";
-	    }
-	    return forwardPath;
-	}
+	/*
+	 * REST로 변경
+	 * 
+		//로그인 액션
+		@PostMapping(value = "user-login-action", produces = "application/json;charset=UTF-8")
+		public String user_login_action(@ModelAttribute("fuser") User user, Model model, 
+											HttpServletRequest request, HttpServletResponse response) throws Exception {
+			HttpSession session = request.getSession();
+			String forwardPath = "";
+		    try {
+		        User authUser = userService.login(user.getUserId(), user.getPassword());
+		        if (authUser.getMailAuth() != 1) {
+		        	session.setAttribute("authUser", authUser);
+		        	forwardPath = "user-auth";
+		        } else {
+		            User loginUser = userService.login(user.getUserId(), user.getPassword());
+		            session.setAttribute("loginUser", loginUser);
+		            String prevPage = (String) session.getAttribute("prevPage");
+		            if (prevPage == null || prevPage.contains("/user-login") || prevPage.contains("/user-auth")) {
+		                prevPage = request.getContextPath() + "/index";
+		            }
+		            session.removeAttribute("prevPage");
+		            response.sendRedirect(prevPage);
+		            return null;
+		        }
+		    } catch (UserNotFoundException e) {
+		        e.printStackTrace();
+		        model.addAttribute("msg1", e.getMessage());
+		        session.setAttribute("prevPage", request.getHeader("Referer"));
+		        forwardPath = "user-login";
+		    } catch (PasswordMismatchException e) {
+		        e.printStackTrace();
+		        model.addAttribute("msg2", e.getMessage());
+		        session.setAttribute("prevPage", request.getHeader("Referer"));
+		        forwardPath = "user-login";
+		    }
+		    return forwardPath;
+		}
+	 */	
 	
 
 	//회원 인증 폼 (이메일로 전송된 인증코드)
@@ -86,6 +114,7 @@ public class UserController {
 	public String user_auth(HttpServletRequest request) throws Exception {
 		HttpSession session = request.getSession();
 		User authUser = (User) session.getAttribute("authUser");
+		System.out.println(">> authUser : "+authUser);
 		authUser = userService.findUser(authUser.getUserId());
 		session.setAttribute("authUser", authUser);
 		return "user-auth";
@@ -113,12 +142,15 @@ public class UserController {
 	
 	/***************************ID, Password 찾기********************************/
 
-	//아이디 찾기 폼
-	@GetMapping(value = "/user-find-id", produces = "application/json;charset=UTF-8")
-	public String user_find_id() {
-		return "user-find-id";
+	//아이디, 비밀번호 찾기 폼
+	@GetMapping(value = "/user-find", produces = "application/json;charset=UTF-8")
+	public String user_find() {
+		return "user-find";
 	}
 	
+/*
+ * REST
+ * 
 	//아이디 찾기 액션
 	@PostMapping(value = "/user-find-id-action", produces = "application/json;charset=UTF-8")
 	public String user_find_id_action(@RequestParam("name") String name, @RequestParam("email") String email, Model model) throws Exception {
@@ -134,13 +166,12 @@ public class UserController {
 		}
 		return "user-find-id";
 	}
+ */
 	
-	//비밀번호 찾기 폼
-	@GetMapping(value = "/user-find-pw", produces = "application/json;charset=UTF-8")
-	public String user_find_pw() throws Exception {
-		return "user-find-pw";
-	}
-	
+
+/*
+ * REST	
+ *
 	//비밀번호 찾기 액션 (이메일로 임시 비밀번호 발송)
 	@PostMapping(value = "/user-find-pw-action", produces = "application/json;charset=UTF-8")
 	public String user_find_pw_action(@RequestParam("userId") String userId, @RequestParam("email") String email, Model model) throws Exception {
@@ -156,6 +187,7 @@ public class UserController {
 		}
 		return "user-find-pw";
 	}
+ */	
 	
 	/*********************************************************/
 

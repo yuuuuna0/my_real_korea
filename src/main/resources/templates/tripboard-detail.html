@@ -80,9 +80,9 @@
 		<div id="position">
 			<div class="container">
 				<ul>
-					<li><a href="#">홈</a>
+					<li><a href="index">홈</a>
 					</li>
-					<li><a href="#">동행게시판</a>
+					<li><a href="tripboard-list">동행게시판</a>
 					</li>
 					<li>상세보기</li>
 				</ul>
@@ -113,20 +113,30 @@
 									</ul>
 								</div>
 							</div>
-							
+			
 							<div>
 								<ul>
 									<li><h2 th:text="${tripBoard.tBoTitle}"></h2></li>
 									<li><p th:text="${tripBoard.tBoContent}"></p></li>
-									<li><p th:text="${tripBoard.tBoPerson}"></p></li>
-									<li><p th:text="${tripBoard.tBoStyle}"></p></li>
-									<li><p th:text="${tripBoard.hashtag}"></p></li>
+							
 									<li>4</li>
 								</ul>
 							</div>
-							<div>
-							<a th:href="@{/tripboard-modify-form(tBoNo=${tripBoard.tBoNo})}" class="btn btn-primary">수정</a>
-							<a th:href="@{/tripboard_delete(tBoNo=${tripBoard.tBoNo})}" class="btn btn-danger">삭제</a>
+							<div class="post-left">
+									<ul>
+										<li style="padding:5px 0px;">
+										 <i class = "icon-tag"></i>태그-#<a th:text="${tripBoard.hashtag}"></a>
+										</li>
+										<li style="padding:5px 0px;">
+											<i class = "icon-tag"></i>여행스타일-#<a th:text="${tripBoard.tBoStyle}"></a>
+										</li>
+									</ul>
+								</div>
+							<div style="text-align:right;" >
+							
+							  	<a th:href="@{/tripboard-modify-form(tBoNo=${tripBoard.tBoNo})}" class="btn btn-primary">수정</a>
+							 	<a th:href="@{/tripboard_delete(tBoNo=${tripBoard.tBoNo})}" class="btn btn-danger">삭제</a>
+							
 							</div>
 							
 						</div>
@@ -154,7 +164,7 @@
 					<!-- end box_style_1 -->
 					
 					
-					<h4 style="display:inline" th:text="${commentCount}"> comments </h4>
+					<h4 style="display:inline" th:text="${tripBoard.commentCount}"> comments </h4>
                    <h4 style="display:inline">개의 답변</h4>
 					
 

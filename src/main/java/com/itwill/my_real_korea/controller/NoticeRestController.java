@@ -302,7 +302,6 @@ public class NoticeRestController {
 					noticeService.updateUploadFile(file.getOriginalFilename(), nNo);
 					System.out.println(">>>>>>>>>>>>>>"+file.getOriginalFilename());
 				} 
-				
 				noticeService.updateNotice(notice);
 				code = 1;
 				msg = "성공";

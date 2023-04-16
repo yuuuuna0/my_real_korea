@@ -250,14 +250,14 @@
 	<!-- notice-search-list-template -->
 	<script id="notice-search-list-template" type="text/x-handlebars-template">
 	{{#each data.itemList}}
-	<div class="shop-item col-lg-4 col-md-6 col-sm-6">
+	<div class="shop-item col-lg-6 col-md-6 col-sm-6" id="notice-list-items" >
 	<div class="inner-box">
 		<div class="image-box">
 			<figure class="image">
-				<a href="notice-detail?nNo={{nno}}"><img src="img/notice/notice_common.png" alt=""></a>
+				<a href="notice-detail?nNo={{nno}}"><img class="notice-list-img" src="img/notice/notice_list_pink.png" alt="" ></a>
 			</figure>
 		</div>
-		<div class="product_description">
+		<div class="product_description" id="notice-list-item">
 			<h3><a href="notice-detail?nNo={{nno}}">{{ntitle}}</a></h3>
 			<div class="price">
 				<span class="notice_readcount">{{dateFormat ndate}}</span> 

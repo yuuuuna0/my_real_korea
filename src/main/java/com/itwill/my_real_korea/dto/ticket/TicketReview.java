@@ -22,6 +22,4 @@ public class TicketReview {
     private int tiNo;
     private User user;
 
-
-
 }

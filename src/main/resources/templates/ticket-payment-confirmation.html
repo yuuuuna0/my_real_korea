@@ -138,7 +138,7 @@
 									<td>
 										<strong>예약 날짜</strong>
 									</td>
-									<td th:text="${#dates.format(session.payment.pStartDate, 'yyyy-MM-dd')}">
+									<td th:text="${#dates.format(payment.pStartDate, 'yyyy-MM-dd')}">
 										10 April 2015
 									</td>
 								</tr>
@@ -168,13 +168,14 @@
 								<tr>
 									<td><strong>결제 수량</strong>
 									</td>
-									<td th:text="${session.payment.pQty}">0</td>
+									<td th:text="${payment.pQty}">0</td>
 								</tr>
 								<tr>
 									<td>
 										<strong>결제 수단</strong>
 									</td>
-									<td>
+									<!-- 현장결제?? . . . -_-  -->
+									<td th:text="${payment.pMethod == 1 ? '카드결제' : payment.pMethod == 2 ? '현장결제' : payment.pMethod}">
 										Credit card
 									</td>
 								</tr>
@@ -182,7 +183,7 @@
 									<td>
 										<strong>총 결제 금액</strong>
 									</td>
-									<td th:text="${session.payment.pPrice}">
+									<td th:text="${payment.pPrice}">
 										$154
 									</td>
 								</tr>
@@ -290,7 +291,7 @@
 	<script src="js/common_scripts_min.js"></script>
 	<script src="js/functions.js"></script>
 
-	</form>
+	
 </body>
 
 </html>

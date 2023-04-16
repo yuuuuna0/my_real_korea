@@ -111,22 +111,22 @@
 
 						<div class="row" id="notice-list" >
 
-							<div class="shop-item col-lg-4 col-md-6 col-sm-6" th:each="notice:${noticeList}">
+							<div class="shop-item col-lg-6 col-md-6 col-sm-6" id="notice-list-items" th:each="notice:${noticeList}">
 								<div class="inner-box">
 									<div class="image-box">
 										<figure class="image">
 											<a th:href="@{notice-detail(nNo=${notice.nNo})}" href="shop-single.html">
 											<!-- <img class="notice-list-img" th:src="@{img/notice/{nImg}(nImg=${notice.nImg})}" alt="" width="320px" height="270px"></a> -->	
-												<img class="notice-list-img" src="img/notice/notice_common.png" alt="" width="320px" height="270px"></a>
+											<img class="notice-list-img" src="img/notice/notice_list_pink.png" alt="" ></a>
 										</figure>
 									</div>
-									<div class="product_description">
+									<div class="product_description" id="notice-list-item">
 										<h3><a th:text="${notice.nTitle}" th:href="@{notice-detail(nNo=${notice.nNo})}" href="" >Travel Book</a></h3>
 										<div class="price">
 											<span class="notice_readcount" th:text="${#dates.format(notice.nDate, 'yyyy.MM.dd')}">$20.00</span> 
 										</div>
 										<div class="item-options clearfix">
-											<span class="icon-eye"></span>
+											<span class="icon-eye">조회수</span>
 											<span th:text=${notice.nReadcount}>$15.00</span>
 										</div>
 									</div>

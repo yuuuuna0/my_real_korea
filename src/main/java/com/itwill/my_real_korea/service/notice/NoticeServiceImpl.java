@@ -22,6 +22,22 @@ public class NoticeServiceImpl implements NoticeService{
 	public int insertNotice(Notice notice) throws Exception {
 		return noticeDao.insertNotice(notice);
 	}
+	
+	@Override
+	public int updateNoticeImg(String nImg, int nNo) throws Exception {
+		return noticeDao.updateNoticeImg(nImg, nNo);
+	}
+
+	@Override
+	public int updateUploadFile(String uploadFile, int nNo) throws Exception {
+		return noticeDao.updateUploadFile(uploadFile, nNo);
+	}
+	
+
+	@Override
+	public int updateNoticeImgNull(int nNo) throws Exception {
+		return noticeDao.updateNoticeImgNull(nNo);
+	}
 
 	@Override
 	public Notice selectByNo(int nNo) throws Exception {
@@ -154,5 +170,6 @@ public class NoticeServiceImpl implements NoticeService{
 	public int selectSearchCount(String keyword) throws Exception {
 		return noticeDao.selectSearchCount(keyword);
 	}
+
 
 }

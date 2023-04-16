@@ -2,14 +2,29 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.itwill.my_real_korea.mapper.NoticeMapper">
 
-<!--  공지사항 게시글 추가 -->
+<!--  공지사항 게시글 추가  -->
 <insert id="insertNotice" parameterType="com.itwill.my_real_korea.dto.notice.Notice" >
 	<selectKey resultType="java.lang.Integer" keyProperty="nNo" order="BEFORE">
 		select notice_n_no_seq.nextval from dual
 	</selectKey>
-	insert into notice(n_no, n_title, n_content, n_date, n_readcount, n_img, user_id) 
-	values (#{nNo},#{nTitle},#{nContent},sysdate,#{nReadcount},#{nImg},#{userId})
+	insert into notice(n_no, n_title, n_content, n_date, n_readcount, user_id) 
+	values (#{nNo},#{nTitle},#{nContent},sysdate,#{nReadcount},#{userId})
 </insert>
+
+<!--  공지사항 게시글 이미지 변경(추가) -->
+<update id="updateNoticeImg" parameterType="java.util.Map">
+	update notice set n_img = #{nImg} where n_no = #{nNo}
+</update>
+
+<!--  공지사항 게시글 업로드된 파일 변경(추가) -->
+<update id="updateUploadFile" parameterType="java.util.Map">
+	update notice set upload_file = #{uploadFile} where n_no = #{nNo}
+</update>
+
+<!--  공지사항 게시글 이미지 null 로 변경 -->
+<update id="updateNoticeImgNull" parameterType="java.lang.Integer">
+	update notice set n_img = null where n_no = #{nNo}
+</update>
 
 <!--  공지사항 게시글 번호(boardno)로 해당 게시글 보기  -->
 <select id="selectByNo" parameterType="java.lang.Integer" resultType="com.itwill.my_real_korea.dto.notice.Notice">
@@ -63,7 +78,7 @@
 
 <!--  공지사항 게시글 내용 수정 -->
 <update id="updateNotice" parameterType="com.itwill.my_real_korea.dto.notice.Notice">
-	update notice set n_title=#{nTitle},n_content=#{nContent},n_img=#{nImg} where n_no=#{nNo}
+	update notice set n_title=#{nTitle},n_content=#{nContent} where n_no=#{nNo}
 </update>
 <!--  공지사항 게시글 조회수 1 증가 -->
 <update id="increaseReadCount" parameterType="java.lang.Integer">

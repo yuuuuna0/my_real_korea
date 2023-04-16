@@ -32,7 +32,27 @@ public class NoticeDaoImpl implements NoticeDao{
 	public int insertNotice(Notice notice) throws Exception {
 		return noticeMapper.insertNotice(notice);
 	}
+	
+	@Override
+	public int updateNoticeImg(String nImg, int nNo) throws Exception {
+		Map<String, Object> map = new HashMap<>();
+		map.put("nImg", nImg);
+		map.put("nNo", nNo);
+		return noticeMapper.updateNoticeImg(map);
+	}
+	@Override
+	public int updateUploadFile(String uploadFile, int nNo) throws Exception {
+		Map<String, Object> map = new HashMap<>();
+		map.put("uploadFile", uploadFile);
+		map.put("nNo", nNo);
+		return noticeMapper.updateUploadFile(map);
+	}
 
+	@Override
+	public int updateNoticeImgNull(int nNo) throws Exception {
+		return noticeMapper.updateNoticeImgNull(nNo);
+	}
+	
 	@Override
 	public Notice selectByNo(int nNo) throws Exception {
 		return noticeMapper.selectByNo(nNo);
@@ -105,5 +125,7 @@ public class NoticeDaoImpl implements NoticeDao{
 		
 		return noticeMapper.selectSearchNoticeList(pageMap);
 	}
+
+
 
 }

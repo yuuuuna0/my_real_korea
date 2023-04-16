@@ -96,7 +96,7 @@
 									</ul>
 								</div>
 							</div>
-							<form id="noticewriteF" name="noticewriteF">
+							<form id="noticewriteF" name="noticewriteF"  enctype="multipart/form-data">
 								<input type="hidden" id="userId" th:value="${loginUser.userId}">
 							<div class="row">
 							<div class="col-md-12">
@@ -120,8 +120,8 @@
 						<h4>파일 업로드</h4>
 						<div class="form-inline upload_1">
 							<div class="form-group">
-								<input type="file" name="files[]" id="js-upload-files" multiple="">
-								<input type="hidden" id="nImg" value="news_home_1.jpg">
+								<input type="file" id="imageFile" name="imageFile" multiple=""/>
+								<input type="hidden" id="nImg" th:value="${nImg}">
 							</div>
 						</div>
 						</form>
@@ -220,6 +220,9 @@
 				</p>
 					{{#if nimg}}
 					<img src="img/notice/{{nimg}}" alt="Image" class="img-fluid">
+					{{/if}}
+					{{#if uploadFile}}
+					<img src="images/{{uploadFile}}" alt="Image" class="img-fluid">
 					{{/if}}
 			</div>
 			<!-- end post -->

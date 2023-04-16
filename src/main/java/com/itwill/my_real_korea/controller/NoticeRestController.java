@@ -197,19 +197,21 @@ public class NoticeRestController {
 		List<Notice> data = new ArrayList<Notice>();
 		
 		try {
+			// 공지사항 글쓰기, 성공시 code 1
+			noticeService.insertNotice(notice);
+			
 			// 파일업로드 처리하는 부분
 			if (file != null) {
 				// 선택된 파일이 있다면, 파일 저장
 				storageService.store(file);
-				// 업로드 된 파일의 이름을 notice.nImg 에 넣어줌
-				notice.setNImg(file.getOriginalFilename());
+				// 업로드 된 파일로 uploadFile update
+				noticeService.updateUploadFile(file.getOriginalFilename(), notice.getNNo());
 				System.out.println(">>>>>>>>>>>>>>"+file.getOriginalFilename());
-			} else {
-				// 선택된 파일 없다면 notice.nImg 그대로
-				notice.setNImg(notice.getNImg());
+			} 
+			// 이미지 있다면 nImg update
+			if (notice.getNImg() != null) {
+				noticeService.updateNoticeImg(notice.getNImg(), notice.getNNo());
 			}
-			// 공지사항 글쓰기, 성공시 code 1
-			noticeService.insertNotice(notice);
 			// 공지사항 글쓰기 후 그 공지사항을 찾아서 데이터에 붙여줌
 			notice = noticeService.selectByNo(notice.getNNo());
 			code = 1;
@@ -279,7 +281,8 @@ public class NoticeRestController {
 	@ApiImplicitParam(name = "nNo", value = "공지사항 번호")
 	@PutMapping(value = "/notice/{nNo}", produces = "application/json;charset=UTF-8")
 	public Map<String, Object> notice_modify_action(@PathVariable(value="nNo") int nNo,
-													@RequestBody Notice notice) {
+													@ModelAttribute Notice notice, 
+													@RequestParam(name = "file" ,required = false) MultipartFile file) {
 
 		Map<String, Object> resultMap = new HashMap<>();
 		int code = 1;
@@ -290,6 +293,16 @@ public class NoticeRestController {
 			Notice findNotice = noticeService.selectByNo(nNo);
 			if (findNotice != null) {
 				notice.setNNo(nNo);
+				// 파일업로드 처리하는 부분
+				if (file != null) {
+					// 선택된 파일이 있다면, 파일 저장
+					storageService.store(file);
+					// 업로드 된 파일로 uploadFile update, 기존의 nImg null 만들기
+					noticeService.updateNoticeImgNull(nNo);
+					noticeService.updateUploadFile(file.getOriginalFilename(), nNo);
+					System.out.println(">>>>>>>>>>>>>>"+file.getOriginalFilename());
+				} 
+				
 				noticeService.updateNotice(notice);
 				code = 1;
 				msg = "성공";

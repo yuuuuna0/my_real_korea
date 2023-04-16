@@ -121,7 +121,7 @@
 						<div class="form-inline upload_1">
 							<div class="form-group">
 								<input type="file" id="imageFile" name="imageFile" multiple=""/>
-								<input type="hidden" id="nImg" value="news_home_1.jpg">
+								<input type="hidden" id="nImg" th:value="${nImg}">
 							</div>
 						</div>
 						
@@ -221,7 +221,10 @@
 				<p>
 				</p>
 					{{#if nimg}}
-					<img src="images/{{nimg}}" alt="Image" class="img-fluid">
+					<img src="img/notice/{{nimg}}" alt="Image" class="img-fluid">
+					{{/if}}
+					{{#if uploadFile}}
+					<img src="images/{{uploadFile}}" alt="Image" class="img-fluid">
 					{{/if}}
 			</div>
 			<!-- end post -->

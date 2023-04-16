@@ -40,27 +40,28 @@ insert into city(city_no,city_name,latitude,longitude) values(city_city_no_seq.n
 /*************** notice ***********************/
 -- 공지사항 notice insert
 
-insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img,user_id) values (notice_n_no_seq.nextval,'공지사항은1','공지사항내용1',sysdate,1,'img.png','user1');
-insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img,user_id) values (notice_n_no_seq.nextval,'공지사항은2','공지사항내용2',sysdate,2,'img.png','user2');
-insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img,user_id) values (notice_n_no_seq.nextval,'공지사항삼3','공지사항내용3',sysdate,3,'img.png','user3');
-insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img,user_id) values (notice_n_no_seq.nextval,'공지사항이다4','공지사항내용4','2023/04/02',4,'img.png','user1');
-insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img,user_id) values (notice_n_no_seq.nextval,'공지사항이야5','공지사항내용5','2023/04/03',8,'img.png','user2');
-insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img,user_id) values (notice_n_no_seq.nextval,'공지사항안내6','공지사항내용6','2023/04/05',10,'img.png','user3');
-insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img,user_id) values (notice_n_no_seq.nextval,'공지사항안내7','공지사항내용7','2023/05/02',15,'img.png','user1');
-insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img,user_id) values (notice_n_no_seq.nextval,'공지사항결제8','공지사항내용8','2023/06/03',23,'img.png','user2');
-insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img,user_id) values (notice_n_no_seq.nextval,'공지사항결론9','공지사항내용9','2023/07/05',2,'img.png','user3');
-insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img,user_id) values (notice_n_no_seq.nextval,'공지사항이다10','공지사항내용4','2023/04/02',4,'img.png','user1');
-insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img,user_id) values (notice_n_no_seq.nextval,'공지사항이야11','공지사항내용5','2023/04/03',8,'img.png','user2');
-insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img,user_id) values (notice_n_no_seq.nextval,'공지사항안내12','공지사항내용6','2023/04/05',10,'img.png','user3');
-insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img,user_id) values (notice_n_no_seq.nextval,'공지사항안내13','공지사항내용7','2023/05/02',15,'img.png','user1');
-insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img,user_id) values (notice_n_no_seq.nextval,'공지사항결제14','공지사항내용8','2023/06/03',23,'img.png','user2');
-insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img,user_id) values (notice_n_no_seq.nextval,'공지사항결론15','공지사항내용9','2023/07/05',2,'img.png','user3');
-insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img,user_id) values (notice_n_no_seq.nextval,'공지사항이다16','공지사항내용4','2023/04/02',4,'img.png','user1');
-insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img,user_id) values (notice_n_no_seq.nextval,'공지사항이야17','공지사항내용5','2023/04/03',8,'img.png','user2');
-insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img,user_id) values (notice_n_no_seq.nextval,'공지사항안내18','공지사항내용6','2023/04/05',10,'img.png','user3');
-insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img,user_id) values (notice_n_no_seq.nextval,'선착순 서울 투어 할인 이벤트','선착순 서울 투어 할인 이벤트입니다.','2023/05/02',15,'notice_seoul.png','user1');
-insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img,user_id) values (notice_n_no_seq.nextval,'제주 투어 50% 파격 할인','마이리얼코리아에만 있는 제주투어 50% 할인!','2023/06/03',23,'notice_jeju.png','user2');
-insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img,user_id) values (notice_n_no_seq.nextval,'마이리얼코리아 신규가입 이벤트 : 적립금 2000 쏜다!','마이리얼코리아 신규가입 이벤트입니다.','2023/07/05',2,'notice_point.png','user3');
+insert into notice(n_no,n_title,n_content,n_date,n_readcount,user_id) values (notice_n_no_seq.nextval,'공지사항은1','공지사항내용1',sysdate,1,'admin');
+insert into notice(n_no,n_title,n_content,n_date,n_readcount,user_id) values (notice_n_no_seq.nextval,'공지사항은2','공지사항내용2',sysdate,2,'admin');
+insert into notice(n_no,n_title,n_content,n_date,n_readcount,user_id) values (notice_n_no_seq.nextval,'공지사항삼3','공지사항내용3',sysdate,3,'admin');
+insert into notice(n_no,n_title,n_content,n_date,n_readcount,user_id) values (notice_n_no_seq.nextval,'공지사항이다4','공지사항내용4','2023/04/02',4,'admin');
+insert into notice(n_no,n_title,n_content,n_date,n_readcount,user_id) values (notice_n_no_seq.nextval,'공지사항이야5','공지사항내용5','2023/04/03',8,'admin');
+insert into notice(n_no,n_title,n_content,n_date,n_readcount,user_id) values (notice_n_no_seq.nextval,'공지사항안내6','공지사항내용6','2023/04/05',10,'admin');
+insert into notice(n_no,n_title,n_content,n_date,n_readcount,user_id) values (notice_n_no_seq.nextval,'공지사항안내7','공지사항내용7','2023/05/02',15,'admin');
+insert into notice(n_no,n_title,n_content,n_date,n_readcount,user_id) values (notice_n_no_seq.nextval,'공지사항결제8','공지사항내용8','2023/06/03',23,'admin');
+insert into notice(n_no,n_title,n_content,n_date,n_readcount,user_id) values (notice_n_no_seq.nextval,'공지사항결론9','공지사항내용9','2023/07/05',2,'admin');
+insert into notice(n_no,n_title,n_content,n_date,n_readcount,user_id) values (notice_n_no_seq.nextval,'공지사항이다10','공지사항내용4','2023/04/02',4,'admin');
+insert into notice(n_no,n_title,n_content,n_date,n_readcount,user_id) values (notice_n_no_seq.nextval,'공지사항이야11','공지사항내용5','2023/04/03',8,'admin');
+insert into notice(n_no,n_title,n_content,n_date,n_readcount,user_id) values (notice_n_no_seq.nextval,'공지사항안내12','공지사항내용6','2023/04/05',10,'admin');
+insert into notice(n_no,n_title,n_content,n_date,n_readcount,user_id) values (notice_n_no_seq.nextval,'공지사항안내13','공지사항내용7','2023/05/02',15,'admin');
+insert into notice(n_no,n_title,n_content,n_date,n_readcount,user_id) values (notice_n_no_seq.nextval,'공지사항결제14','공지사항내용8','2023/06/03',23,'admin');
+insert into notice(n_no,n_title,n_content,n_date,n_readcount,user_id) values (notice_n_no_seq.nextval,'공지사항결론15','공지사항내용9','2023/07/05',2,'admin');
+insert into notice(n_no,n_title,n_content,n_date,n_readcount,user_id) values (notice_n_no_seq.nextval,'공지사항이다16','공지사항내용4','2023/04/02',4,'admin');
+insert into notice(n_no,n_title,n_content,n_date,n_readcount,user_id) values (notice_n_no_seq.nextval,'공지사항이야17','공지사항내용5','2023/04/03',8,'admin');
+insert into notice(n_no,n_title,n_content,n_date,n_readcount,user_id) values (notice_n_no_seq.nextval,'공지사항안내18','공지사항내용6','2023/04/05',10,'admin');
+insert into notice(n_no,n_title,n_content,n_date,n_readcount,user_id) values (notice_n_no_seq.nextval,'선착순 서울 투어 할인 이벤트','선착순 서울 투어 할인 이벤트입니다.','2023/05/02',0,'admin');
+insert into notice(n_no,n_title,n_content,n_date,n_readcount,user_id) values (notice_n_no_seq.nextval,'제주 투어 50% 파격 할인','마이리얼코리아에만 있는 제주투어 50% 할인!','2023/06/03',0,'admin');
+insert into notice(n_no,n_title,n_content,n_date,n_readcount,user_id) values (notice_n_no_seq.nextval,'마이리얼코리아 신규가입 이벤트 : 적립금 2000 쏜다!','마이리얼코리아 신규가입 이벤트입니다.','2023/07/05',0,'admin');
+
 
 
 /*************** tour ***********************/

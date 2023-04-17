@@ -354,11 +354,11 @@
           
     	  /*[[${session.payment.pPrice}]]", */
           IMP.request_pay({
-              pg : "html5_inicis", // KG이니시스 일반결제창 호출(상점아이디 MID-a 적용) // pg 사 바꿀 예정
+              pg : "html5_inicis", // KG이니시스 일반결제창 호출(상점아이디 MID-a 적용) // 카드, 페이 결제 다 되는데 나눌지 말지 고민중
               pay_method : pMethod,
               merchant_uid: "[[${session.payment.pNo}]]", 
               name : "[[${session.ticket.tiTitle}]]",
-              amount : 100, // test
+              amount : 100, // 테스트 용으로 100원만 결제 되게 해둠 
               buyer_email : "[[${session.loginUser.email}]]",
               buyer_name : "[[${session.loginUser.name}]]",
               buyer_tel : "[[${session.loginUser.phone}]]",

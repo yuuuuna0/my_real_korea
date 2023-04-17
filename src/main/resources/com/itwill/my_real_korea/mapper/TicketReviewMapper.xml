@@ -10,8 +10,8 @@
         <selectKey resultType="java.lang.Integer" keyProperty="tiReviewNo" order="BEFORE">
             SELECT TICKET_REVIEW_TI_REVIEW_NO_SEQ.NEXTVAL FROM DUAL
         </selectKey>
-            INSERT INTO TICKET_REVIEW (TI_REVIEW_NO,TI_REVIEW_DATE,TI_REVIEW_TITLE,TI_REVIEW_CONTENT,TI_REVIEW_IMG,TI_NO,USER_ID)
-            VALUES (#{tiReviewNo}, SYSDATE,#{tiReviewTitle},#{tiReviewContent},#{tiReviewImg},#{tiNo},#{user.userId})
+            INSERT INTO TICKET_REVIEW (TI_REVIEW_NO,TI_REVIEW_DATE,TI_REVIEW_TITLE,TI_REVIEW_CONTENT,TI_REVIEW_IMG,TI_NO,USER_ID,TI_REVIEW_STAR)
+            VALUES (#{tiReviewNo}, SYSDATE,#{tiReviewTitle},#{tiReviewContent},#{tiReviewImg},#{tiNo},#{user.userId},#{tiReviewStar})
     </insert>
 
     <!--리뷰 보기 - 페이징 -->

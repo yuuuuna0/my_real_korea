@@ -25,6 +25,7 @@ import com.itwill.my_real_korea.dto.Payment;
 import com.itwill.my_real_korea.dto.RsPInfo;
 import com.itwill.my_real_korea.dto.ticket.Ticket;
 import com.itwill.my_real_korea.dto.ticket.TicketReview;
+import com.itwill.my_real_korea.dto.tour.TourReview;
 import com.itwill.my_real_korea.dto.user.User;
 import com.itwill.my_real_korea.service.payment.PaymentService;
 import com.itwill.my_real_korea.service.rspinfo.RsPInfoService;
@@ -118,8 +119,10 @@ public class TicketController {
     		payment.setPStartDate(date); // 예약날짜
     		payment.setUserId(loginUser.getUserId()); // user 담기
     		payment.setTicket(ticket); // 티켓 담기
+    		
+    		paymentService.insertTicketPayment(payment);
     		session.setAttribute("payment", payment);
-    		//System.out.println(payment); 
+    		System.out.println(payment); 
     		forwardPath="ticket-payment";
     	} catch (Exception e) {
     		e.printStackTrace();
@@ -153,7 +156,8 @@ public class TicketController {
         	 // System.out.println(pMethodStr);
         	payment.setPMsg(pMsg);  
         	//payment.setPMethod(Integer.parseInt(pMethodStr));
-            paymentService.insertTicketPayment(payment);
+            // paymentService.insertTicketPayment(payment);
+        	paymentService.updatePayment(payment);
             ticket.setTiCount(ticket.getTiCount() + payment.getPQty());
             ticketService.updateTicket(ticket);
 
@@ -228,7 +232,32 @@ public class TicketController {
         return ticketSortMap;
     }
 
-	
+	@PostMapping("/ticket-review-action")
+	@ResponseBody
+	public Map<String, Object> ticketReviewAction(@RequestBody TicketReview ticketReview, int tiNo) {
+		Map<String, Object> resultMap = new HashMap<>();
+		int code = 0;
+		String msg = "성공";
+		
+		List<TicketReview> data = null;
+		try {
+			ticketReviewService.insertTicketReview(ticketReview);
+			data = ticketReviewService.selectByTicketReviewNo(tiNo);
+			code=1;
+			msg="성공";
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			code=2;
+			msg="관리자에게 문의하세요";
+		}
+		
+		resultMap.put("code", code);
+		resultMap.put("msg", msg);
+		resultMap.put("data", data);
+		
+		return resultMap;
+	}
 	
 
 }

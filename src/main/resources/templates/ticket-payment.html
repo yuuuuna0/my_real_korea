@@ -144,7 +144,7 @@
 							<div class="col-sm-6">
 								<div class="form-group">
 									<label>입력창</label>
-									<input type ="text" class="form-control" id="firstname_booking" name="username">
+									<input type ="text" class="form-control" name="pMsg">
 								</div>
 							</div>
 							<!-- 아래 쪽 삭제하기 -->
@@ -152,7 +152,7 @@
 								<div class="form-group">
 									<label>결제 수단</label>
 									<!-- radio -->
-								<select name="pMethod">
+								<select id="pMethod" name="pMethod">
 								  <option value="" selected> 선택해주세요</option>
 								  <option value="1">카드결제</option>
 								  <option value="2">현장결제</option>
@@ -339,21 +339,22 @@
 		<!-- portone -->
 	<!-- iamport.payment.js -->
 	<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+	<!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script> -->
 	<script>
-		console.log("[[${session.ticket}]]");
+		console.log("[[${session.payment}]]");
 	
       function ticket_payment_complete_action() {
     	  var IMP = window.IMP; 
           IMP.init("imp43548145"); 
           
           var pMethod = "";
-          if("[[${session.payment.pMethod}]]" == 1) {
+          if($("#pMethod").val() == 1) {
         	  pMethod = "card";
           }
+          
     	  /*[[${session.payment.pPrice}]]", */
           IMP.request_pay({
-              pg : 'nice', // KG이니시스 일반결제창 호출(상점아이디 MID-a 적용)
+              pg : "html5_inicis", // KG이니시스 일반결제창 호출(상점아이디 MID-a 적용) // pg 사 바꿀 예정
               pay_method : pMethod,
               merchant_uid: "[[${session.payment.pNo}]]", 
               name : "[[${session.ticket.tiTitle}]]",
@@ -361,8 +362,11 @@
               buyer_email : "[[${session.loginUser.email}]]",
               buyer_name : "[[${session.loginUser.name}]]",
               buyer_tel : "[[${session.loginUser.phone}]]",
-              buyer_addr : "${session.loginUser.address}]]",
+              buyer_addr : "[[${session.loginUser.address}]]",
           }, function (rsp) { // callback
+        	  
+        	  console.log(rsp);
+        	  
               if (rsp.success) {
                   document.f.action='ticket-payment-complete-action';
                   document.f.submit();

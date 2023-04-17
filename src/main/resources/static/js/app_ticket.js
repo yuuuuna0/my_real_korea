@@ -38,8 +38,6 @@ function selectedTicketList(){
 };
 
 
-
-
 $(document).on('change',$('#ticket-sort,#city-checkbox'),selectedTicketList);
 $(document).on('click',"#ticket-search-btn",selectedTicketList);
 
@@ -57,17 +55,20 @@ $(document).on('show.bs.modal','#myReviewModal',function(){
     $('#myReviewModal').find('#userId').val(userId);
 });
 
-
 $(document).on('click','#submitReviewBtn',function(){
     let url="ticket-review-action";
     let method="POST";
     let contentType="application/json;charset=UTF-8";
     let sendData=[];
     let async=true;
+    
+    console.log(sendData);
 
     Request.ajaxRequest(url,method,contentType,
         JSON.stringify(sendData),
         function(resultJson){
+			
+			console.log(resultJson);
 
             if(resultJson.code==1){
                 View.render('#ticketReview-template',resultJson,'#ticketReviewDiv')
@@ -75,4 +76,4 @@ $(document).on('click','#submitReviewBtn',function(){
                 alert(resultJson.msg);
             }
         },async);
-})
+});

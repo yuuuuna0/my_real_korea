@@ -36,7 +36,7 @@
     <!-- CUSTOM CSS -->
     <link href="css/custom.css" rel="stylesheet">
     <script type="text/javascript">
-            /*
+       
         function fBoCommentCreate() {
             if (document.f.fCommentContent.value == "") {
                 alert("내용을 입력하십시요.");
@@ -66,18 +66,13 @@
             document.f.submit();
         }
 
+   
         function fCoDelete() {
-            console.log(fCoNo);
             document.a.action = "freeboard-comment-delete-action";
             document.a.method = 'POST';
             document.a.submit();
         }
-             */
-             
-        $(document).on('click','#fCoDelete',function (e){
-        	let fCoNo=$(this).value;
-        	console.log(fCoNo);
-        });
+            
 
         //
         // $(document).on('click', '#fCoModifyForm', function (e) {
@@ -215,24 +210,19 @@
                                         <p th:text="${freeBoardComment.getFCommentContent()}"></p>
 
                                         <div th:if="${loginUser != null && loginUser.userId == freeBoardComment.userId}">
-                                            <!--
                                             <input type="hidden" name="fCoNo"
-                                                   th:value="${freeBoardComment.fCoNo}"/>
+                                                   th:value="${freeBoardComment.getFCoNo()}"/>
                                             <input type="hidden" name="fBoNo"
-                                                   th:value="${freeBoard.getFBoNo()}"/>
-                                            -->
-                                            <p style="float: right">
-                                            	<button id="fCoDelete" th:value="${freeBoardComment.fCoNo}" >삭제
-                                            	</button>
-                                            </p>&nbsp;
-<!--                                            <p style="float: right" type="button" onclick="fCoModifyForm();">수정</p>  onclick="fCoDelete();" -->
+                                                   th:value="*{freeBoard.getFBoNo()}"/>
+                                            <p style="float: right" type="button" onclick="fCoDelete();">삭제</p>&nbsp;
+                                            <p style="float: right" type="button" onclick="fCoModifyForm();">수정</p>
                                         </div>
 
                                     </div>
 
 
                                 </div>
-                            </form>
+                                </form>
                     </ol>
                 </div>
 

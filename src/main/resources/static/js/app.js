@@ -56,7 +56,7 @@ $(document).on('change','#sort-by',function(e){
 	console.log(selectedValue);
 	if(selectedValue === "notice-date-desc"){
 		// 최신순
-		let url = 'notice-date-desc';
+		let url = "notice-date-desc";
 		let method = 'GET';
 		let contentType = 'application/json;charset=UTF-8';
 		let sendData = {};
@@ -67,7 +67,13 @@ $(document).on('change','#sort-by',function(e){
 							function(resultJson){
 								//code 1 일때 render, 아닐 때 msg 띄움
 								if(resultJson.code == 1){
+									console.log(">>>>>>>>>>>>>>>>>>>>>>>>>");
 									View.render("#notice-search-list-template", resultJson, '#notice-list');
+									console.log("#########################");
+									View.render("#notice-paging-template", resultJson, '#notice-paging');
+									console.log("#########################");
+									let blockEnd = $('#blockEnd').val();
+									console.log(blockEnd);
 								} else {
 									alert(resultJson.msg);
 								};
@@ -360,5 +366,8 @@ $(document).on('click', '#wishlist-all-delete-action-btn', function(event) {
 		}
 	});
 });
+
+
+/************************/
 
 

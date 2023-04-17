@@ -3,6 +3,8 @@ package com.itwill.my_real_korea.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.itwill.my_real_korea.dto.City;
 import com.itwill.my_real_korea.dto.tripboard.TripBoard;
 import com.itwill.my_real_korea.dto.tripboard.TripBoardComment;
+import com.itwill.my_real_korea.dto.user.User;
 import com.itwill.my_real_korea.service.city.CityService;
 import com.itwill.my_real_korea.service.tripboard.TripBoardCommentService;
 import com.itwill.my_real_korea.service.tripboard.TripBoardService;
@@ -61,11 +64,15 @@ public class TripBoardController {
 	
 	//동행게시판 게시글 1개 상세보기
 	@GetMapping("/tripboard-detail")
-	public String tripBoard_detail(@RequestParam Integer tBoNo, Model model) throws Exception {
+	public String tripBoard_detail(@RequestParam Integer tBoNo, Model model, HttpSession session) throws Exception {
 		if(tBoNo == null) {
 			return "tripboard-list";
 		}
 		try {
+			if(session != null) {
+				User loginUser = (User)session.getAttribute("loginUser");
+				model.addAttribute("loginUser",loginUser);
+			}
 			TripBoard tripBoard = tripBoardService.selectByTbNo(tBoNo);
 			List<TripBoardComment> tripBoardCommentList = tripBoardCommentService.selectAllByTBoNo(tBoNo);
 			tripBoardService.increaseTbReadCount(tripBoard.getTBoNo());

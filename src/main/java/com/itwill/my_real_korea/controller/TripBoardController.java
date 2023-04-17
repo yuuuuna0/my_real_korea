@@ -105,5 +105,24 @@ public class TripBoardController {
 		}
 		return "tripboard-modify-form";
 	}
+	
+	//상단바 지역별 동행게시판
+	@GetMapping("/tripboard-city-bar-list")
+	public String tripBoardCityBarList(@RequestParam(required = false, defaultValue = "1") int pageNo, int cityNo, Model model) {
+		try {
+			PageMakerDto<TripBoard> tripBoardListPage = tripBoardService.selectByCityNoList(pageNo, cityNo);
+			List<TripBoard> tripBoardList= tripBoardListPage.getItemList();
+			List<City> cityList = cityService.findAllCity();
+			
+			model.addAttribute("tripBoardListPage", tripBoardListPage);
+			model.addAttribute("tripBoardList", tripBoardList);
+			model.addAttribute("pageNo", pageNo);
+			model.addAttribute("cityList", cityList);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "error";
+		}
+		return "tripboard-city-bar-list";
+	}
 
 }

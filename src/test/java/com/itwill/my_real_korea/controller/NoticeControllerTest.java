@@ -42,9 +42,9 @@ public class NoticeControllerTest {
 		PageMakerDto<Notice> noticeList = new PageMakerDto<Notice>();
 		
 		List<Notice> notices = new ArrayList<Notice>();
-		notices.add(new Notice(1, null, null, null, 0, null, null));
-		notices.add(new Notice(2, null, null, null, 0, null, null));
-		notices.add(new Notice(3, null, null, null, 0, null, null));
+		notices.add(new Notice(1, null, null, null, 0, null));
+		notices.add(new Notice(2, null, null, null, 0, null));
+		notices.add(new Notice(3, null, null, null, 0, null));
 		// noticeList에 notices 붙이기
 		noticeList.setItemList(notices);
 		noticeList.setPageMaker(new PageMaker(1, 10));
@@ -66,7 +66,7 @@ public class NoticeControllerTest {
 	@Test
 	void testNotice_detail() throws Exception{
 		// 임의로 notice 만들기
-		Notice notice = new Notice(1, null, null, null, 0, null, null);
+		Notice notice = new Notice(1, null, null, null, 0, null);
 		// selectByNo(1) 메소드 실행시 notice 가 return 된다고 가정
 		given(noticeService.selectByNo(1)).willReturn(notice);
 	

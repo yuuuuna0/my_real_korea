@@ -34,10 +34,13 @@ public class UserServiceImpl implements UserService{
 	//1. 회원 가입
 	@Override
 	public int create(User user)throws ExistedUserException, Exception {
+/*
+ * 아이디 중복체크 AJAX로 분리
 		//아이디 중복 체크
 		if(userDao.isExistUser(user.getUserId())) {
 			throw new ExistedUserException(user.getUserId() + " 는 이미 존재하는 아이디입니다.");
 		}
+ */
 		//회원가입
 		userDao.create(user);
 		//mail_key 업데이트
@@ -84,13 +87,12 @@ public class UserServiceImpl implements UserService{
 	
 	//11. 아이디 중복 체크 (회원 가입(회원 존재 여부 확인))
 	@Override
-	public boolean isDuplicateId(String userId) throws Exception{
-		boolean isExist = userDao.isExistUser(userId);
-		if(isExist) {
-			return true;
-		}else {
-			return false;
+	public int countExistId(String userId) throws Exception {
+		int existCount = 0;
+		if(userDao.isExistUser(userId)) {
+			existCount = 1;
 		}
+		return existCount;
 	}
 	
 	//12. 로그인 (비밀번호 일치 여부 확인)

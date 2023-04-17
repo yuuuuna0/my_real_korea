@@ -96,7 +96,7 @@
 									</ul>
 								</div>
 							</div>
-							<form id="noticewriteF" name="noticewriteF"  enctype="multipart/form-data">
+							<form id="noticewriteF" name="noticewriteF" class="was-validated" enctype="multipart/form-data">
 								<input type="hidden" id="userId" th:value="${loginUser.userId}">
 							<div class="row">
 							<div class="col-md-12">
@@ -104,13 +104,15 @@
 								<p></p>
 								
 									<label>공지사항 제목</label>
-									<input class="form-control" name="nTitle" id="nTitle" type="text">
+									<input class="form-control" name="nTitle" id="nTitle" type="text" required="required">
+									<div class="invalid-feedback">공지사항 제목을 작성해주세요.</div>
 								</div>
 								<p></p>
 								<div class="form-group">
 									<label>공지사항 내용</label>
-									<textarea class="form-control" name="nContent" id="nContent" rows="10" cols="50" placeholder="내용을 입력하세요.">
-									</textarea>
+									<textarea class="form-control" name="nContent" id="nContent" 
+												rows="10" cols="50" placeholder="" required="required"></textarea>
+									<div class="invalid-feedback">공지사항 내용을 작성해주세요.</div>
 								</div>
 							</div>
 							</div>
@@ -120,8 +122,8 @@
 						<h4>파일 업로드</h4>
 						<div class="form-inline upload_1">
 							<div class="form-group">
-								<input type="file" id="imageFiles" name="nImg" multiple=""/>
-								<input type="hidden" id="nImg" value="news_home_1.jpg">
+								<input type="file" id="imageFile" name="imageFile" multiple=""/>
+								<input type="hidden" id="nImg" th:value="${nImg}">
 							</div>
 						</div>
 						
@@ -222,6 +224,9 @@
 				</p>
 					{{#if nimg}}
 					<img src="img/notice/{{nimg}}" alt="Image" class="img-fluid">
+					{{/if}}
+					{{#if uploadFile}}
+					<img src="images/{{uploadFile}}" alt="Image" class="img-fluid">
 					{{/if}}
 			</div>
 			<!-- end post -->

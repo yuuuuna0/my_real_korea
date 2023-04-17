@@ -20,7 +20,9 @@ public interface TicketReviewService {
 
     //리뷰 삭제
     int deleteTicketReview(int tiReviewNo);
-    
+
+    //티켓 평점
+    int calculateTourScore(int tiNo) throws Exception;
     
     
     /* 페이징 

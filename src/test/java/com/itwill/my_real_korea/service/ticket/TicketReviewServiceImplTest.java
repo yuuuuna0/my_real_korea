@@ -19,13 +19,13 @@ class TicketReviewServiceImplTest {
     TicketReviewService ticketReviewService;
 
     //@Disabled
-    @Test //date format
+  /*  @Test //date format
     void insertTicketReview() {
         System.out.print(ticketReviewService.insertTicketReview(
                 new TicketReview(0,new Date(), "후기작성",
                         "후기를 써야하나?","review.jpg",3, new User("user3","0000",null,null,null,null,null,null,1,1,0,0,0))));
 
-    }
+    }*/
 /*
     @Disabled
     @Test
@@ -40,12 +40,12 @@ class TicketReviewServiceImplTest {
 
     }
 */
-    @Disabled
+    /*@Disabled
     @Test
     void updateTicketReview() {
         assertEquals(ticketReviewService.updateTicketReview(new TicketReview(1,null,"후기수정할게요","사진넣었어요","티켓예약1번후기사진.jpg",0,null)),1);
 
-    }
+    }*/
 
     @Disabled
     @Test

@@ -80,9 +80,9 @@
 		<div id="position">
 			<div class="container">
 				<ul>
-					<li><a href="#">홈</a>
+					<li><a href="index">홈</a>
 					</li>
-					<li><a href="#">동행게시판</a>
+					<li><a href="tripboard-list">동행게시판</a>
 					</li>
 					<li>상세보기</li>
 				</ul>
@@ -100,16 +100,46 @@
 								<div class="post-left">
 									<ul>
 										<li>
-										 <i class = "icon-user"></i>작성자 &nbsp; <span th:text="${tripBoard.userId}"></span>
-										   <i class="icon-calendar-empty"></i>&nbsp; 작성일 &nbsp; <span
-											th:text="${#dates.format(tripBoard.tBoDate,'yyyy.MM.dd')}">12 Nov 2020</span>
+										 <i class = "icon-user"></i>작성자<span th:text="${tripBoard.userId}" style="padding:0px 10px 0px 10px;"></span>
+										   <i class="icon-calendar-empty"></i> 작성일  
+										   <span th:text="${#dates.format(tripBoard.tBoDate,'yyyy.MM.dd')}" style="padding:0px 10px 0px 10px;">12 Nov 2020</span>
+										</li>
+										<li style="padding:5px 0px 5px 0px;">
+											<i class="icon-comment"></i>댓글<span th:text="${tripBoard.commentCount}" style="padding:0px 10px 0px 10px;"></span>
+										   <i class="icon-calendar-empty"></i>여행일정<a th:text="${#dates.format(tripBoard.tBoStartDate, 'MM.dd')}" style="padding:0px 10px 0px 10px; color:red ;"></a><a> ~ </a><a th:text="${#dates.format(tripBoard.tBoEndDate, 'MM.dd')}" style="padding:0px 10px 0px 10px;color:red;"></a>
+										   <i class="icon-map"></i>지역<span th:text="${tripBoard.city.cityName}" style="padding:0px 10px 0px 10px;">12 Nov 2020</span>
+										
 										</li>
 									</ul>
 								</div>
-								<div class="post-right"><i class="icon-comment"></i>#</div>
 							</div>
-							<h2 th:text="${tripBoard.tBoTitle}"></h2>
-							<p th:text="${tripBoard.tBoContent}"></p>
+			
+							<div>
+								<ul>
+									<li><h2 th:text="${tripBoard.tBoTitle}"></h2></li>
+									<li><p th:text="${tripBoard.tBoContent}"></p></li>
+							
+									<li>4</li>
+								</ul>
+							</div>
+							<div class="post-left">
+									<ul>
+										<li style="padding:5px 0px;">
+										 <i class = "icon-tag"></i>태그-#<a th:text="${tripBoard.hashtag}"></a>
+										</li>
+										<li style="padding:5px 0px;">
+											<i class = "icon-tag"></i>여행스타일-#<a th:text="${tripBoard.tBoStyle}"></a>
+										</li>
+									</ul>
+								</div>
+							<div style="text-align:right;" >
+							
+							  	<a th:href="@{/tripboard-modify-form(tBoNo=${tripBoard.tBoNo})}" class="btn btn-primary">수정</a>
+							 	<a th:href="@{/tripboard_delete(tBoNo=${tripBoard.tBoNo})}" class="btn btn-danger">삭제</a>
+							
+							</div>
+							
+						</div>
 							<!--  필요 없는 정보 숨김
 							<p>
 								Aenean iaculis sodales dui, non hendrerit lorem rhoncus ut. Pellentesque ullamcorper venenatis elit idaipiscingi Duis tellus neque, tincidunt eget pulvinar sit amet, rutrum nec urna. Suspendisse pretium laoreet elit vel ultricies. Maecenas ullamcorper ultricies rhoncus. Aliquam erat volutpat.
@@ -119,12 +149,24 @@
 								<small>Someone famous in <cite title="">Body of work</cite></small>
 							</blockquote>
 							-->
-						</div>
-						<!-- end post -->
+							
+						
+				
 					</div>
+					 <!-- end post -->
+					 <!--  
+					<div th:if="${loginUser != null && loginUser.userId == tripBoard.userId}">
+					<a class="btn_1" href="" role="button" id="tripboard-delete-action-btn">삭제</a>
+					<input type="hidden"  id="tBoNo-hidden-value" th:value=${tripboard.tBoNo}>
+					</div>
+					-->
+					
 					<!-- end box_style_1 -->
-
-					<h4>3 comments</h4>
+					
+					
+					<h4 style="display:inline" th:text="${tripBoard.commentCount}"> comments </h4>
+                   <h4 style="display:inline">개의 답변</h4>
+					
 
 					<div id="comments">
 						<ol>
@@ -140,6 +182,10 @@
 									<p th:text= "${tripBoardComment.tCommentContent}">
 										Nam cursus tellus quis magna porta adipiscing. Donec et eros leo, non pellentesque arcu. Curabitur vitae mi enim, at vestibulum magna. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed sit amet sem a urna rutrumeger fringilla. Nam vel enim ipsum, et congue ante.
 									</p>
+									<div th:if="${loginUser != null && loginUser.userId == tripBoard.userId}">
+									<a class="btn_1" href="" role="button" id="tripboard-delete-action-btn">삭제</a>
+									<input type="hidden"  id="tBoNo-hidden-value" th:value=${tripboard.tBoNo}>
+									</div>
 								</div>
 								
 							</li>

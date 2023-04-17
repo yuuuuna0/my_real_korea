@@ -14,6 +14,18 @@ public interface NoticeMapper {
 	 */
 	int insertNotice(Notice notice) throws Exception;
 	/*
+	 * 공지사항 게시글 이미지 변경(추가)
+	 */
+	int updateNoticeImg(Map<String, Object> map) throws Exception;
+	/*
+	 * 공지사항 게시글 업로드된 파일 변경(추가)
+	 */
+	int updateUploadFile(Map<String, Object> map) throws Exception;
+	/*
+	 * 공지사항 게시글 이미지 null 로 만들기
+	 */
+	int updateNoticeImgNull(int nNo) throws Exception;
+	/*
 	 * 공지사항 게시글 번호(boardno)로 해당 게시글 보기 
 	 */
 	Notice selectByNo(int nNo) throws Exception;

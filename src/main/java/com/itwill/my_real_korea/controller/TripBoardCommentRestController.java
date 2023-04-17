@@ -80,7 +80,7 @@ public class TripBoardCommentRestController {
 			tripBoardCommentService.updateTripBoardComment(tripBoardComment);
 			code = 1;
 			msg = "성공";
-			data.add(findTripBoardComment);
+			data.add(tripBoardComment);
 		}else {
 			//댓글 수정 실패 시 code2
 			code = 2;

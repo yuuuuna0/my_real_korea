@@ -18,9 +18,8 @@ public class TicketReview {
     private String tiReviewTitle;
     private String tiReviewContent;
     private String tiReviewImg;
+    private int tiReviewStar;
     private int tiNo;
     private User user;
-
-
 
 }

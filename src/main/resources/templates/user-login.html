@@ -26,29 +26,43 @@
 	
 	<!-- CUSTOM CSS -->
 	<link href="css/custom.css" rel="stylesheet">
+	
+	<script defer type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.2/handlebars.min.js"></script>
+	
   
- <script type="text/javascript">
-	function userCreate() {
-		location.href="user-write";
-	}
-
-	function login() {
-		if (document.f.userId.value == "") {
-			alert("아이디를 입력하십시오.");
-			document.f.userId.focus();
-			return false;
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+<script>
+		
+// 사용하려는 앱의 JavaScript 키 입력
+Kakao.init('033833936fe6b95d5d87c91cde329685');
+function kakaoLogin() {
+	Kakao.Auth.login({
+		success : function(response) {
+			Kakao.API.request({ // 사용자 정보 가져오기 
+				url : '/v2/user/me',
+				success : function(response) {
+					console.log(response);
+					console.log(response.id);
+					// ID중복체크를 통해 회원가입 유무를 결정한다.
+					// 존재하는 경우 로그인 처리
+					let kakaoId = response.id
+					// 회원가입
+					alert(kakaoId);
+					$('#kakao-login-btn').hide();
+					$('#kakao-logout-btn').show();
+				}
+			});
+		},
+		fail : function(error) {
+			alert(error);
 		}
-		if (document.f.password.value == "") {
-			alert("비밀번호를 입력하십시오.");
-			document.f.password.focus();
-			return false;
-		}
-
-		document.f.action = "user-login-action";
-		document.method='POST';
-		document.f.submit();
-	}
-</script>        
+	});
+}
+function kakaoLogout() {
+	//location.href = 'https://kauth.kakao.com/oauth/logout?client_id=d2863dba7035b2676678c151834a9978&logout_redirect_uri=http://localhost:80/practice_user_01/index';
+	location.href = 'https://kauth.kakao.com/oauth/logout?client_id=d2863dba7035b2676678c151834a9978&logout_redirect_uri=http://localhost/practice_user_01/index';
+}
+</script>       
 </head>
 <body>
 
@@ -76,11 +90,11 @@
         	<div class="row justify-content-center">
             	<div class="col-xl-4 col-lg-5 col-md-6 col-sm-8">
             	
+<!-- 로그인 폼 시작 -->            	
 <div id="login">
-	<div class="text-center"><img src="img/logo_sticky.png" alt="Image" data-retina="true" ></div>
-	<hr>
-<form th:object="${fuser!=null? fuser : new com.itwill.my_real_korea.dto.user.User()}" name="f" method="post">
-	<a href="https://kauth.kakao.com/oauth/authorize?client_id=61ba951ebe34cfe12e365dba0e735c16&redirect_uri=http://localhost:8080/kakao_login_action&response_type=code">
+<form id="user-login" th:object="${fuser!=null? fuser : new com.itwill.my_real_korea.dto.user.User()}" name="f" method="post">
+<input type="hidden" name="prevPage" value="${prevPage}">
+	<a href="https://kauth.kakao.com/oauth/authorize?client_id=d2863dba7035b2676678c151834a9978&redirect_uri=http://localhost:80/practice_user_01/kakao_login_action&response_type=code">
 		<img src="img/kakao_login_medium_wide.png" />
 	</a>
 	<div class="divider"><span>Or</span></div>
@@ -95,13 +109,68 @@
         <font color="red" th:text="${msg2}"></font>
     </div>
 		<p class="small">
-		    <a href="user-find-id">Forgot ID?</a>
-		    <a href="user-find-pw">Forgot Password?</a>
+		    <a href="user-find" id="menu-user-find">아이디 / 비밀번호 찾기</a>
 		</p>
-	<a class="btn_full" onclick="login();">Sign in</a>
-	<a class="btn_full_outline" onclick="userCreate();">Register</a>
+	<a class="btn_full" id="login_btn" onclick="login();">로그인</a>
+	<a class="btn_full_outline" onclick="userCreate();">회원 가입</a>
 </form><br/>
 </div>
+<!-- 로그인 폼 끝 -->
+<!-- 
+ -->
+<script id="user-find-template" type="text/x-handlebars-template">
+<div id="login">
+
+<!-- 아이디 찾기 폼 시작 -->
+<form name="i" method="post">
+
+    <div class="form-group">
+        <label>ID 찾기</label><br/>
+        <label>이름</label>
+        <input type="text" class=" form-control " placeholder="Username" name="name">
+    </div>
+    <div class="form-group">
+        <label>이메일</label>
+        <input type="text" class=" form-control" placeholder="Email" name="email">
+    </div>
+	<a class="btn_full_outline" onclick="findId();">아이디 찾기</a><br/>
+</form>
+<!-- 아이디 찾기 폼 끝 -->
+
+<div class="divider"><span>Or</span></div>
+
+<!-- 비밀번호 찾기 폼 시작 -->
+<form name="p" method="post">
+
+    <div class="form-group">
+        <label>비밀번호 찾기</label><br/>
+        <label>ID</label>
+        <input type="text" class=" form-control " placeholder="ID" name="userId">
+    </div>
+    <div class="form-group">
+        <label>이메일</label>
+        <input type="text" class=" form-control" placeholder="Email" name="email">
+    </div>
+	<a class="btn_full_outline" onclick="findPassword();">비밀번호 찾기</a>
+</form>
+<!-- 비밀번호 찾기 폼 끝 -->
+
+</div>
+</script>
+<script id="user-auth-template" type="text/x-handlebars-template">
+	<div class="text-center"><img src="img/logo_sticky.png" alt="Image" data-retina="true" ></div>
+<br/>
+	<hr>
+<br/><br/>
+	<form name="a" method="post">
+	    <div class="form-group">
+			<label>인증코드</label>
+	        <input type="text" class="form-control" name="mailAuthKey">
+	    </div>
+<br/><br/>
+		<input type="button" class="btn_full" value="인증 확인" onclick="submitAuthCode();">
+	</form><br/>
+</script>
                         
                 </div>
             </div>
@@ -183,7 +252,115 @@
 	<script src="js/jquery-2.2.4.min.js"></script>
 	<script src="js/common_scripts_min.js"></script>
 	<script src="js/functions.js"></script>
+	<script src="js/app_user.js" type="module"></script>
 	
+<script type="text/javascript">
+
+//회원 가입 폼
+function userCreate() {
+	location.href="user-write";
+}
+
+//로그인 액션
+function login() {
+  if (document.f.userId.value == "") {
+    alert("아이디를 입력하십시오.");
+    document.f.userId.focus();
+    return false;
+  }
+  if (document.f.password.value == "") {
+    alert("비밀번호를 입력하십시오.");
+    document.f.password.focus();
+    return false;
+  }
+
+	  $.ajax({
+	    url: 'user-login',
+	    type: 'POST',
+	    data: JSON.stringify({
+	      userId: document.f.userId.value,
+	      password: document.f.password.value
+	    }),
+        contentType: 'application/json;charset=UTF-8',
+        success: function (data) {
+            if (data.status == 0) {
+                window.location.replace(data.data); // 이전 페이지로 이동
+            } else {
+                alert(data.message);
+            }
+        },
+        error: function (error) {
+            console.error(error);
+            alert('로그인에 실패했습니다.');
+        }
+    });
+}
+
+//아이디 찾기 액션
+function findId() {
+    var name = document.i.name.value;
+    var email = document.i.email.value;
+    console.log(name);
+    console.log(email);
+
+    if (name == "") {
+        alert("이름을 입력하세요.");
+        document.i.name.focus();
+        return false;
+    }
+
+    if (email == "") {
+        alert("이메일을 입력하세요.");
+        document.i.email.focus();
+        return false;
+    }
+
+    $.ajax({
+        type: "POST",
+        url: "/user-find-id-action",
+        dataType: "json",
+        data: {
+            name: name,
+            email: email
+        },
+        success: function(response) {
+            if (response.status == 1) {
+                alert(response.message);
+            } else if (response.status == 2) {
+                alert(response.message);
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.log(textStatus, errorThrown);
+        }
+    });
+}
+
+//비밀번호 찾기 액션
+function findPassword() {
+	if (document.p.userId.value == "") {
+		alert("아이디를 입력하십시오.");
+		document.p.name.focus();
+		return false;
+	}
+	if (document.p.email.value == "") {
+		alert("이메일을 입력하십시오.");
+		document.p.email.focus();
+		return false;
+	}
+
+	document.p.action = "user-find-pw-action";
+	document.p.submit();
+}
+
+//이메일 인증 액션	
+function submitAuthCode() {
+	document.a.action = "user-auth-action";
+	document.method='POST';
+	document.a.submit();
+}
+
+</script>		
 
 
   </body>

@@ -108,70 +108,55 @@
 							</div>
 						</div>
 						<!--End Sort By-->
-
 						<div class="row" id="notice-list" >
 
-							<div class="shop-item col-lg-4 col-md-6 col-sm-6" th:each="notice:${noticeList}">
+							<div class="shop-item col-lg-6 col-md-6 col-sm-6" id="notice-list-items" th:each="notice:${noticeList}">
 								<div class="inner-box">
 									<div class="image-box">
 										<figure class="image">
-											<a th:href="@{notice-detail(nNo=${notice.nNo})}" href="shop-single.html"><img src="img/notice/notice_common.png" alt=""></a>
+											<a th:href="@{notice-detail(nNo=${notice.nNo})}" href="shop-single.html">
+											<!-- <img class="notice-list-img" th:src="@{img/notice/{nImg}(nImg=${notice.nImg})}" alt="" width="320px" height="270px"></a> -->	
+											<img class="notice-list-img" src="img/notice/notice_list_pink.png" alt="" ></a>
 										</figure>
 									</div>
-									<div class="product_description">
+									<div class="product_description" id="notice-list-item">
 										<h3><a th:text="${notice.nTitle}" th:href="@{notice-detail(nNo=${notice.nNo})}" href="" >Travel Book</a></h3>
 										<div class="price">
 											<span class="notice_readcount" th:text="${#dates.format(notice.nDate, 'yyyy.MM.dd')}">$20.00</span> 
 										</div>
 										<div class="item-options clearfix">
-											<span class="icon-eye"></span>
+											<span class="icon-eye">조회수</span>
 											<span th:text=${notice.nReadcount}>$15.00</span>
 										</div>
 									</div>
 								</div>
 							</div>
-						<!-- 
-						<div class="shop-item col-lg-12 col-md-6 col-sm-6" >
-						<form name='boardlistform' method='POST' action='' style="">
-							<table id='boardlist' cellpadding='5px' cellspacing='1'>
-								<tr id='boardlist_tr1'>
-									<td width=200 align=center >제 목</td>
-									<td width=60 align=center >조회수</td>
-									<td width=80 align=center>작성일</td>
-									<td width=60 align=center >작성자</td>
-								</tr>
-								<tr id="boardlist_tr2" th:each="notice:${noticeList}">
-									<td width=280  style='padding-left: 10px' align='left' >
-										<a th:href="@{notice-detail(nNo=${notice.nNo})}"  th:text="${notice.nTitle}" ></a>
-										<span class="icon-comment"></span>
-									</td>
-									<td width=70 th:text=${notice.nReadcount}></td>
-									<td width=120  th:text="${#dates.format(notice.nDate, 'yyyy.MM.dd')}"></td>
-									<td width=120  th:text=${notice.userId}></td>
-								</tr>
-							</table>
-						</form>
-						</div> -->	
-
 						</div>
 						<!--End Shop Item-->
 
 						<hr>
-
+						<!-- Pagination ~!!!! -->
 						<nav aria-label="Page navigation">
 							<ul class="pagination justify-content-center">
+								<!-- 이전 블록으로 이동 -->
 								<li class="page-item">
-									<a class="page-link" href="#" aria-label="Previous">
+									<a class="page-link" th:href="@{notice-list(pageNo=${noticeListPage.pageMaker.prevGroupStartPage})}"  href="#" aria-label="Previous">
 										<span aria-hidden="true">&laquo;</span>
 										<span class="sr-only">Previous</span>
 									</a>
 								</li>
-								<li class="page-item active"><span class="page-link">1<span class="sr-only">(current)</span></span>
-								</li>
-								<li class="page-item"><a class="page-link" href="#">2</a></li>
-								<li class="page-item"><a class="page-link" href="#">3</a></li>
+								<th:block th:each="num : ${#numbers.sequence(noticeListPage.pageMaker.blockBegin, noticeListPage.pageMaker.blockEnd)}">
+									<th:block th:if="${num le noticeListPage.pageMaker.totPage}">
+									 <li class="page-item" th:classappend="${noticeListPage.pageMaker.curPage == num} ? 'active'">
+									    <a class="page-link" id="page-no" th:href="@{notice-list(pageNo=${num})}">
+									      <span th:text="${num}"></span>
+									    </a>
+									 </li>
+									 </th:block>
+								</th:block>
+								<!-- 다음 블록으로 이동 -->
 								<li class="page-item">
-									<a class="page-link" href="#" aria-label="Next">
+									<a class="page-link" th:href="@{notice-list(pageNo=${noticeListPage.pageMaker.nextGroupStartPage})}"   href="#" aria-label="Next">
 										<span aria-hidden="true">&raquo;</span>
 										<span class="sr-only">Next</span>
 									</a>
@@ -180,8 +165,9 @@
 						</nav>
 						<!-- end pagination-->
 						
-					</div>
 					<!-- End row -->
+					</div>
+					<!-- End shop selection -->
 				</div>
 				<!-- End col -->
 
@@ -220,6 +206,7 @@
 				</div>
 				<!--Sidebar-->
 			</div>
+			<!-- End row -->
 		</div>
 		<!-- End Container -->
 	</main>
@@ -248,14 +235,14 @@
 	<!-- notice-search-list-template -->
 	<script id="notice-search-list-template" type="text/x-handlebars-template">
 	{{#each data.itemList}}
-	<div class="shop-item col-lg-4 col-md-6 col-sm-6">
+	<div class="shop-item col-lg-6 col-md-6 col-sm-6" id="notice-list-items" >
 	<div class="inner-box">
 		<div class="image-box">
 			<figure class="image">
-				<a href="notice-detail?nNo={{nno}}"><img src="img/notice/notice_common.png" alt=""></a>
+				<a href="notice-detail?nNo={{nno}}"><img class="notice-list-img" src="img/notice/notice_list_pink.png" alt="" ></a>
 			</figure>
 		</div>
-		<div class="product_description">
+		<div class="product_description" id="notice-list-item">
 			<h3><a href="notice-detail?nNo={{nno}}">{{ntitle}}</a></h3>
 			<div class="price">
 				<span class="notice_readcount">{{dateFormat ndate}}</span> 

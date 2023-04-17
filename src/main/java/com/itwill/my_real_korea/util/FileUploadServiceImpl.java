@@ -1,5 +1,6 @@
 package com.itwill.my_real_korea.util;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
@@ -7,6 +8,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.UUID;
 import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,38 +23,34 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class FileUploadServiceImpl implements FileUploadService {
-
+	
 	private final Path rootLocation;
 
+	// 파일을 저장할 디렉토리의 경로 저장 - file.location 을 통해 지정함
 	@Autowired
 	public FileUploadServiceImpl(FileUploadProperties properties) {
 		this.rootLocation = Paths.get(properties.getLocation());
 	}
-
+	
+	// 업로드 된 파일 저장 (현재는 파일 1개 업로드만 가능하도록 설정해둠)
 	@Override
 	public void store(MultipartFile file) {
 		try {
 			if (file.isEmpty()) {
-				throw new FileUploadException("Failed to store empty file.");
+				throw new FileUploadException("파일이 비었습니다.");
 			}
-			Path destinationFile = this.rootLocation.resolve(
-					Paths.get(file.getOriginalFilename()))
-					.normalize().toAbsolutePath();
-			if (!destinationFile.getParent().equals(this.rootLocation.toAbsolutePath())) {
-				// This is a security check
-				throw new FileUploadException(
-						"Cannot store file outside current directory.");
-			}
-			try (InputStream inputStream = file.getInputStream()) {
-				Files.copy(inputStream, destinationFile,
-					StandardCopyOption.REPLACE_EXISTING);
-			}
+			String saveName = this.rootLocation +"/"+ file.getOriginalFilename();
+			// 업로드 할 경로 : savePath
+			Path savePath = Paths.get(saveName);
+			// 서버에 파일 저장, 이미 존재하는 파일이면 덮어씌움
+			file.transferTo(savePath);
 		}
 		catch (IOException e) {
-			throw new FileUploadException("Failed to store file.", e);
+			throw new FileUploadException("파일 업로드에 실패했습니다.", e);
 		}
 	}
 
+	// rootLocation 경로 아래 저장된 모든 파일의 경로 가져옴
 	@Override
 	public Stream<Path> loadAll() {
 		try {
@@ -59,16 +59,21 @@ public class FileUploadServiceImpl implements FileUploadService {
 				.map(this.rootLocation::relativize);
 		}
 		catch (IOException e) {
-			throw new FileUploadException("Failed to read stored files", e);
+			throw new FileUploadException("저장된 파일을 읽을 수 없습니다.", e);
 		}
 
 	}
-
+	// 지정된 파일이름 사용, 파일 전체 경로를 반환
 	@Override
 	public Path load(String filename) {
 		return rootLocation.resolve(filename);
 	}
-
+	// 서버에 저장된 파일 전체 경로 String 으로 반환
+	@Override
+	public String getFullPath(String filename) {
+		return this.rootLocation +"/"+ filename;
+	}
+	// 파일 로드 후 Resource 반환
 	@Override
 	public Resource loadAsResource(String filename) {
 		try {
@@ -79,27 +84,28 @@ public class FileUploadServiceImpl implements FileUploadService {
 			}
 			else {
 				throw new FileUploadNotFoundException(
-						"Could not read file: " + filename);
+						"파일을 읽을 수 없습니다: " + filename);
 
 			}
 		}
 		catch (MalformedURLException e) {
-			throw new FileUploadNotFoundException("Could not read file: " + filename, e);
+			throw new FileUploadNotFoundException("파일을 읽을 수 없습니다: " + filename, e);
 		}
 	}
-
+	// 해당 경로에 저장된 모든 파일 삭제
 	@Override
 	public void deleteAll() {
 		FileSystemUtils.deleteRecursively(rootLocation.toFile());
 	}
 
+	// 파일 업로드를 위한 디렉토리 생성
 	@Override
 	public void init() {
 		try {
 			Files.createDirectories(rootLocation);
 		}
 		catch (IOException e) {
-			throw new FileUploadException("Could not initialize storage", e);
+			throw new FileUploadException("디렉토리 생성에 실패했습니다.", e);
 		}
 	}
 }

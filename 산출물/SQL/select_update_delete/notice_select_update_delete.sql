@@ -64,8 +64,20 @@ select count(*) cnt from notice;
 -- 게시물 삭제
 delete notice where n_no=1;
 
+-- 게시물 이미지 삭제
+delete notice_img where n_no=1;
+
 -- 게시물 내용 수정
 update notice set n_title='제목수정',n_content='내용수정',n_img='img1111.png' where n_no=2;
+
+-- 게시물 이미지 수정(추가)
+update notice set n_img = 'notice_seoul.png' where n_no = 1;
+
+-- 게시물 uploadFile 수정(추가)
+update notice set upload_file = 'notice_seoul.png' where n_no = 2;
+
+-- 게시물 이미지 null 로 만들기
+update notice set n_img = null where n_no = 3;
 
 -- 게시물 조회수 1 증가
 update notice set n_readcount=n_readcount+1 where n_no=3;

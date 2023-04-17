@@ -65,37 +65,39 @@ public class UserRestController {
 	    Response res = new Response();
 	    try {
 	        User authUser = userService.login(user.getUserId(), user.getPassword());
-	        if (authUser.getMailAuth() != 1) {
-	            session.setAttribute("authUser", authUser);
-	            res.setCode(1);
-	            res.setMessage("이메일을 확인해주세요.");
-	            res.setData("user-auth");
-	        } else {
+	        if (authUser.getMailAuth() == 1) {
+	            // authUser.getMailAuth()가 1인 경우 바로 로그인 처리하고 이전 페이지로 redirect
 	            User loginUser = userService.login(user.getUserId(), user.getPassword());
 	            session.setAttribute("loginUser", loginUser);
 	            String prevPage = (String) session.getAttribute("prevPage");
-	            System.out.println(">> prevPage : "+prevPage);
 	            if (prevPage == null || prevPage.contains("/user-login") || prevPage.contains("/user-auth")) {
 	                prevPage = request.getContextPath() + "/index";
 	            }
 	            session.removeAttribute("prevPage");
-	            res.setCode(0);
+	            res.setStatus(0);
 	            res.setMessage("성공");
 	            res.setData(prevPage);
+	        } else {
+	            // authUser.getMailAuth()가 1이 아닌 경우 user-auth-template을 렌더링
+	            session.setAttribute("authUser", authUser);
+	            res.setStatus(1);
+	            res.setMessage("이메일을 확인해주세요.");
+	            res.setData("user-auth");
 	        }
 	    } catch (UserNotFoundException e) {
 	        e.printStackTrace();
-	        res.setCode(2);
+	        res.setStatus(2);
 	        res.setMessage(e.getMessage());
 	        session.setAttribute("prevPage", request.getHeader("Referer"));
 	    } catch (PasswordMismatchException e) {
 	        e.printStackTrace();
-	        res.setCode(3);
+	        res.setStatus(3);
 	        res.setMessage(e.getMessage());
 	        session.setAttribute("prevPage", request.getHeader("Referer"));
 	    }
 	    return res;
 	}
+
 
 	/***************************ID, Password 찾기********************************/
 
@@ -109,11 +111,11 @@ public class UserRestController {
 		user.setEmail(email);
 		String userId = userService.findIdByEmailName(email,name);
 		if(userId != null) {
-			response.setCode(1);
+			response.setStatus(1);
 			response.setMessage("회원님의 아이디는 "+userId+" 입니다.");
 			response.setData(userId);
 		}else {
-			response.setCode(2);
+			response.setStatus(2);
 			response.setMessage("일치하는 회원 정보가 없습니다.");
 		}
 		return response;
@@ -130,14 +132,15 @@ public class UserRestController {
 	    Response response = new Response();
 	    if(matchCount == 1) {
 	        userService.sendTempPassword(userId, email);
-	        response.setCode(1);
+	        response.setStatus(1);
 	        response.setMessage("이메일로 임시 비밀번호가 발송되었습니다.");
 	    }else {
-	        response.setCode(2);
+	        response.setStatus(2);
 	        response.setMessage("일치하는 회원 정보가 없습니다.");
 	    }
 	    return response;
 	}
+	
 	/*********************************************************/
 
 	

@@ -13,19 +13,24 @@ insert into user_info(user_id,password,name,nickname,phone,email,birth,address,g
 	values('user3','user3333','회원3','마리코3','010-3333-3333','user3@gmail.com','2003-03-03','테헤란로3',1,0,1,1,0);
 
 insert into user_info(user_id,password,name,nickname,phone,email,birth,address,gender,point,is_admin,mail_auth,mail_key)
-	values('user4','user4444','회원4','마리코4','010-4444-4444','user4@gmail.com','2004-04-04','테헤란로4',1,0,1,0,1234);
+	values('user4','user4444','회원4','마리코4','010-4444-4444','user4@gmail.com','2004-04-04','테헤란로4',1,0,1,0,123456);
 
 select * from user_info;
 --user_photo
-insert into user_img(user_img_no,user_img_url,user_id) values(10,'010.png','admin');
-insert into user_img(user_img_no,user_img_url,user_id) values(11,'011.png','user1');
-insert into user_img(user_img_no,user_img_url,user_id) values(12,'012.png','user2');
-insert into user_img(user_img_no,user_img_url,user_id) values(13,'013.png','user3');
+insert into user_img(user_img_no,user_img_url,user_id) values(9000,'9000.png','admin');
+insert into user_img(user_img_no,user_img_url,user_id) values(9001,'9001.png','user1');
+insert into user_img(user_img_no,user_img_url,user_id) values(9002,'9002.png','user2');
+insert into user_img(user_img_no,user_img_url,user_id) values(9003,'9003.png','user3');
+insert into user_img(user_img_no,user_img_url,user_id) values(9004,'9004.png','user4');
+
 --user_add_info
 insert into user_add_info(introduce,alcohol,smoking,user_id) values('관리자인사',0,0,'admin');
 insert into user_add_info(introduce,alcohol,smoking,user_id) values('안녕1',0,0,'user1');
 insert into user_add_info(introduce,alcohol,smoking,user_id) values('안녕2',1,0,'user2');
 insert into user_add_info(introduce,alcohol,smoking,user_id) values('안녕3',0,1,'user3');
+insert into user_add_info(introduce,alcohol,smoking,user_id) values('안녕4',0,1,'user4');
+
+
 
 /*************** city ***********************/
 -- city

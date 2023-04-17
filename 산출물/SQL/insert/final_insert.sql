@@ -16,7 +16,7 @@ insert into user_info(user_id,password,name,nickname,phone,email,birth,address,g
 	values('user4','user4444','회원4','마리코4','010-4444-4444','user4@gmail.com','2004-04-04','테헤란로4',1,0,1,0,123456);
 
 select * from user_info;
---user_photo
+--user_img
 insert into user_img(user_img_no,user_img_url,user_id) values(9000,'9000.png','admin');
 insert into user_img(user_img_no,user_img_url,user_id) values(9001,'9001.png','user1');
 insert into user_img(user_img_no,user_img_url,user_id) values(9002,'9002.png','user2');

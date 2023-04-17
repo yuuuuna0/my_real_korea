@@ -34,7 +34,7 @@ import com.itwill.my_real_korea.util.PageMakerDto;
 
 @Controller
 public class TicketController {
-
+	
     private final TicketService ticketService;
     private final TicketReviewService ticketReviewService;
     private final PaymentService paymentService;
@@ -228,6 +228,8 @@ public class TicketController {
         return ticketSortMap;
     }
 
+	
+	
 
 }
 

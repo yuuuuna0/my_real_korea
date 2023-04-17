@@ -65,11 +65,16 @@ public class UserRestController {
 	    Response res = new Response();
 	    try {
 	        User authUser = userService.login(user.getUserId(), user.getPassword());
-	        if (authUser.getMailAuth() == 1) {
-	            // authUser.getMailAuth()가 1인 경우 바로 로그인 처리하고 이전 페이지로 redirect
+	        if (authUser.getMailAuth() != 1) {
+	            session.setAttribute("authUser", authUser);
+	            res.setStatus(1);
+	            res.setMessage("이메일을 확인해주세요.");
+	            res.setData("user-auth");
+	        } else {
 	            User loginUser = userService.login(user.getUserId(), user.getPassword());
 	            session.setAttribute("loginUser", loginUser);
 	            String prevPage = (String) session.getAttribute("prevPage");
+	            System.out.println(">> prevPage : "+prevPage);
 	            if (prevPage == null || prevPage.contains("/user-login") || prevPage.contains("/user-auth")) {
 	                prevPage = request.getContextPath() + "/index";
 	            }
@@ -77,12 +82,6 @@ public class UserRestController {
 	            res.setStatus(0);
 	            res.setMessage("성공");
 	            res.setData(prevPage);
-	        } else {
-	            // authUser.getMailAuth()가 1이 아닌 경우 user-auth-template을 렌더링
-	            session.setAttribute("authUser", authUser);
-	            res.setStatus(1);
-	            res.setMessage("이메일을 확인해주세요.");
-	            res.setData("user-auth");
 	        }
 	    } catch (UserNotFoundException e) {
 	        e.printStackTrace();
@@ -97,6 +96,7 @@ public class UserRestController {
 	    }
 	    return res;
 	}
+
 
 
 	/***************************ID, Password 찾기********************************/

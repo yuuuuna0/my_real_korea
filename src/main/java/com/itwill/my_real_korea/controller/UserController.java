@@ -109,16 +109,33 @@ public class UserController {
 	
 
 	//회원 인증 폼 (이메일로 전송된 인증코드)
+//	@LoginCheck
+//	@GetMapping(value = "/user-auth")
+//	public String user_auth(HttpServletRequest request) throws Exception {
+//		HttpSession session = request.getSession();
+//		User authUser = (User) session.getAttribute("authUser");
+//		System.out.println(">> authUser : "+authUser);
+//		authUser = userService.findUser(authUser.getUserId());
+//		session.setAttribute("authUser", authUser);
+//		return "user-auth";
+//	}
+	
+	
 	@LoginCheck
 	@GetMapping(value = "/user-auth")
 	public String user_auth(HttpServletRequest request) throws Exception {
-		HttpSession session = request.getSession();
-		User authUser = (User) session.getAttribute("authUser");
-		System.out.println(">> authUser : "+authUser);
-		authUser = userService.findUser(authUser.getUserId());
-		session.setAttribute("authUser", authUser);
-		return "user-auth";
+	    HttpSession session = request.getSession();
+	    User authUser = (User) session.getAttribute("authUser");
+	    System.out.println(">> user_auth > authUser : "+authUser);
+	    if (authUser == null) {
+	        // authUser 객체가 존재하지 않는 경우, 로그인 페이지로 이동
+	        return "redirect:/user-login";
+	    }
+	    authUser = userService.findUser(authUser.getUserId());
+	    session.setAttribute("authUser", authUser);
+	    return "user-auth";
 	}
+	
 
 	//회원 인증 액션
 	@PostMapping(value = "user-auth-action", produces = "application/json;charset=UTF-8")

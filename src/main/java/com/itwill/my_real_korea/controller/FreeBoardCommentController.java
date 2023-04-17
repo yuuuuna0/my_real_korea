@@ -53,9 +53,10 @@ public class FreeBoardCommentController {
     }
 
 
-    @PostMapping("/free-board-comment-delete-action")
+    @PostMapping("/freeboard-comment-delete-action")
     public String freeBoardCommentDeleteAction(@RequestParam Integer fCoNo, @RequestParam Integer fBoNo, RedirectAttributes redirectAttributes) throws Exception {
-        freeBoardCommentService.deleteComment(fCoNo);
+        int deleteComment = freeBoardCommentService.deleteComment(fCoNo);
+        System.out.println("deleteComment = " + deleteComment);
         redirectAttributes.addAttribute("fBoNo", fBoNo);
         return "redirect:freeboard-detail";
     }

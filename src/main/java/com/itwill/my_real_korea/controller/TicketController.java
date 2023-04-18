@@ -76,6 +76,12 @@ public class TicketController {
         	
             List<Ticket> ticketList = ticketService.selectByTicketNoCityWithImg(tiNo);
             List<TicketReview> ticketReviewList = ticketReviewService.selectByTicketReviewNo(tiNo);
+//            User loginUser = (User)session.getAttribute("loginUser");
+//			if(loginUser!=null) {
+//				model.addAttribute("loginUser",loginUser);
+//				model.addAttribute("userId", loginUser.getUserId());
+//			}
+            
             model.addAttribute("ticketList", ticketList); // 티켓
             model.addAttribute("ticketReviewList",ticketReviewList); // 리뷰
             model.addAttribute("tiNo", tiNo);
@@ -122,7 +128,7 @@ public class TicketController {
     		
     		paymentService.insertTicketPayment(payment);
     		session.setAttribute("payment", payment);
-    		System.out.println(payment); 
+    		//System.out.println(payment); 
     		forwardPath="ticket-payment";
     	} catch (Exception e) {
     		e.printStackTrace();
@@ -133,14 +139,13 @@ public class TicketController {
     }
     
     //결제 상세 페이지 - action
+    //@LoginCheck
     @PostMapping("/ticket-payment-complete-action") // 결제 성공  //default값 설정
-    public String ticketPaymentCompleteAction(
-        HttpSession session, 
-        @ModelAttribute RsPInfo rsPInfo,
-        @RequestParam(required = false, defaultValue = "") String pMsg,
-        @RequestParam int pMethod, // ?
-        RedirectAttributes redirectAttributes
-    ) {
+    public String ticketPaymentCompleteAction(HttpSession session, 
+										        @ModelAttribute RsPInfo rsPInfo,
+										        @RequestParam(required = false, defaultValue = "") String pMsg,
+										        @RequestParam int pMethod, // ?
+										        RedirectAttributes redirectAttributes) {
         String forwardPath = "";
         Payment payment = (Payment) session.getAttribute("payment");
         Ticket ticket = (Ticket) session.getAttribute("ticket");
@@ -232,17 +237,22 @@ public class TicketController {
         return ticketSortMap;
     }
 
-	@PostMapping("/ticket-review-action")
+	@PostMapping(value="/ticket-review-action", produces ="application/json;charset=UTF-8")
 	@ResponseBody
-	public Map<String, Object> ticketReviewAction(@RequestBody TicketReview ticketReview, int tiNo) {
+	public Map<String, Object> ticketReviewAction(@RequestBody TicketReview ticketReview,
+													HttpSession session) {
 		Map<String, Object> resultMap = new HashMap<>();
 		int code = 0;
 		String msg = "성공";
 		
-		List<TicketReview> data = null;
+		List<TicketReview> data = new ArrayList<>();
 		try {
+			User loginUser = (User) session.getAttribute("loginUser");
+			ticketReview.setUser(loginUser);
 			ticketReviewService.insertTicketReview(ticketReview);
-			data = ticketReviewService.selectByTicketReviewNo(tiNo);
+			//티켓에 리뷰 붙이기
+			ticketReview = ticketReviewService.selectByTicketReviewOne(ticketReview.getTiReviewNo());
+			data.add(ticketReview);
 			code=1;
 			msg="성공";
 			

@@ -2,7 +2,7 @@ import * as View from "./view.js";
 import * as Request from "./request.js";
 // JSON.stringify() => 객체를 string 으로, JSON.parse() => string 을 객체로 만듦
 
-/********* function *********/
+/********* function ********/
 function selectedTicketList(){
     let keyword=$('#ticket-search-keyword').val();
     let cityNo;
@@ -50,30 +50,39 @@ $('input[type="checkbox"][name="city-checkbox"]').click(function(){
 });
 
 
-/*$(document).on('show.bs.modal','#myReviewModal',function(){
-    let userId=$('#myReviewBtn').data('id');
-    $('#myReviewModal').find('#userId').val(userId);
-});*/
+$(document).on('show.bs.modal','#myReview',function(){
+    let loginUser=$('#myReviewBtn').data('id');
+    let tiNo=$('#myReviewBtn').data('tino');
+    $('#myReview').find('#userId').val(loginUser);
+    $('#myReview').find('#hiddenTiNo').val(tiNo);
+    console.log(loginUser); // id....
+    console.log(tiNo);
+});
 
-$(document).on('click','#submitReviewBtn',function(){
-    let url="ticket-review-action";
-    let method="POST";
-    let contentType="application/json;charset=UTF-8";
-    let sendData=[];
-    let async=true;
-    
-    console.log(sendData);
-
-    Request.ajaxRequest(url,method,contentType,
-        JSON.stringify(sendData),
-        function(resultJson){
-			
-			console.log(resultJson);
-
-            if(resultJson.code==1){
-                View.render('#ticketReview-template',resultJson,'#ticketReviewDiv')
-            } else{
-                alert(resultJson.msg);
-            }
-        },async);
+$('#ticket-review-action').click(function(e){
+	  let sendData={
+					tiNo:$('#hiddenTiNo').val(), // 임의
+					tiReviewTitle:document.ticketReview.tiReviewTitle.value,
+					tiReviewStar:document.ticketReview.tiReviewStar.value,
+					tiReviewContent:document.ticketReview.tiReviewContent.value,
+					tiReviewImg:'어쩌구.jpg', // 임의
+					userId:document.ticketReview.userId.value
+					};
+					console.log($('#hiddenTiNo').val());
+		/*url,mehtod,contentType,sendData,callbakc,async*/
+	    Request.ajaxRequest('ticket-review-action',
+	    					'POST',
+	    					'application/json;charset=UTF-8',
+		       				 JSON.stringify(sendData),
+		       				 function(resultJson){
+							let tiNo = $('#hiddenTiNo').val();
+		           		 		if(resultJson.code==1){
+			window.location.href=`ticket-detail?tiNo=${tiNo}`;
+			/*아이디값? */
+		          			  } else{
+		               				 alert(resultJson.msg);
+		            }
+		            }
+		            ,true);
+        e.preventDefault();
 });

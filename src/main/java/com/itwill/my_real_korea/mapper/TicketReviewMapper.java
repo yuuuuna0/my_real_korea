@@ -13,6 +13,8 @@ public interface TicketReviewMapper {
     //티켓 리뷰 작성
     int insertTicketReview(TicketReview ticketReview);
     
+    TicketReview selectByTicketReviewOne(int tiReviewNo);
+    
     //티켓 리뷰 보기
     List<TicketReview> selectByTicketReviewNo(int tiNo);
 

@@ -198,6 +198,8 @@ public class NoticeRestController {
 		
 		try {
 			// 공지사항 글쓰기, 성공시 code 1
+			notice.setNImg("");
+			//noticeService.updateNoticeImgNull(notice.getNNo());
 			noticeService.insertNotice(notice);
 			
 			// 파일업로드 처리하는 부분

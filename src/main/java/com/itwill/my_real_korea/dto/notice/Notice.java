@@ -40,13 +40,14 @@ public class Notice {
 	
 	private String uploadFile;
 
-	public Notice(int nNo, String nTitle, String nContent, Date nDate, int nReadcount, String userId) {
+	public Notice(int nNo, String nTitle, String nContent, Date nDate, int nReadcount, String nImg, String userId) {
 		super();
 		this.nNo = nNo;
 		this.nTitle = nTitle;
 		this.nContent = nContent;
 		this.nDate = nDate;
 		this.nReadcount = nReadcount;
+		this.nImg = nImg;
 		this.userId = userId;
 	}
 	

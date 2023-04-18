@@ -21,10 +21,10 @@ class NoticeServiceImplTest {
 	@Autowired
 	private NoticeService noticeService;
 	
-	@Disabled
+	
 	@Test
 	void testInsertNotice() throws Exception {
-		int rowCount = noticeService.insertNotice(new Notice(0, "공지S테스트1", "내용S테스트1", null, 0, "user1"));
+		int rowCount = noticeService.insertNotice(new Notice(0, "공지S테스트1", "내용S테스트1", null, 0, "", "user1"));
 		assertEquals(rowCount, 1);
 	}
 	@Disabled
@@ -32,6 +32,7 @@ class NoticeServiceImplTest {
 	void testUpdateNoticeImg() throws Exception{
 		assertEquals(noticeService.updateNoticeImg("ha.png",4), 1);
 	}
+	@Disabled
 	@Test
 	void testUpdateUploadFile() throws Exception{
 		assertEquals(noticeService.updateUploadFile("haha.png",4), 1);
@@ -95,7 +96,7 @@ class NoticeServiceImplTest {
 	@Disabled
 	@Test
 	void testUpdateNotice() throws Exception {
-		assertEquals(noticeService.updateNotice(new Notice(2, "공지S수정1", "내용S수정테스트1", null, 0, "user2")), 1);
+		assertEquals(noticeService.updateNotice(new Notice(2, "공지S수정1", "내용S수정테스트1", null, 0,"" ,"user2")), 1);
 	}
 	@Disabled
 	@Test

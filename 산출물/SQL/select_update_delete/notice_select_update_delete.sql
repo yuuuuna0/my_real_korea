@@ -77,7 +77,7 @@ update notice set n_img = 'notice_jeju.png' where n_no = 21;
 update notice set upload_file = 'notice_seoul.png' where n_no = 2;
 
 -- 게시물 이미지 null 로 만들기
-update notice set n_img = null where n_no = 3;
+update notice set n_img = null where n_no = 23;
 
 -- 게시물 조회수 1 증가
 update notice set n_readcount=n_readcount+1 where n_no=3;

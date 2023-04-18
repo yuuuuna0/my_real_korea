@@ -106,6 +106,7 @@
 		<!-- End Map -->
 
 		<div class="container margin_60">
+		<div>
 			<div class="row">
 				<div class="col-lg-8" id="single_tour_desc">
 
@@ -219,7 +220,7 @@
 					<div class="row" id="ticketReviewDiv">
 						<div class="col-lg-3">
 							<h3>Reviews</h3>
-							<div th:if="${session.loginUser!=null}">
+							<!--  <div th:if="${session.loginUser!=null}">-->
 							<a href="#" class="btn_1 add_bottom_30" data-toggle="modal" data-target="#myReview">Leave a review</a>
 						</div>
 						<div class="col-lg-9">
@@ -348,7 +349,8 @@
 				</aside>
 			</div>
 			<!--End row -->
-			</div>
+		</div>
+		
 		
 		<!--End container -->
 
@@ -442,7 +444,7 @@
 						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
-									<input readonly type="text" name="userId" id="userId" class="form-control" th:value="${session.loginUser.userId}">
+									<input name="userId" id="userId" readonly="readonly"> 어쩌구
 								</div>
 							</div>
 						</div>

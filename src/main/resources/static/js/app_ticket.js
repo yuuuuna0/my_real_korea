@@ -50,10 +50,10 @@ $('input[type="checkbox"][name="city-checkbox"]').click(function(){
 });
 
 
-$(document).on('show.bs.modal','#myReviewModal',function(){
+/*$(document).on('show.bs.modal','#myReviewModal',function(){
     let userId=$('#myReviewBtn').data('id');
     $('#myReviewModal').find('#userId').val(userId);
-});
+});*/
 
 $(document).on('click','#submitReviewBtn',function(){
     let url="ticket-review-action";

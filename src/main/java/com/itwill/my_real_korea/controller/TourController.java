@@ -106,12 +106,14 @@ public class TourController {
 	public String tourDetail(@RequestParam int toNo, Model model, HttpServletRequest request) {
 		String forwardPath="";
 		try{
+			// 위시리스트 추가 코드 시작
 			// 로그인 한 유저면 userId model에 붙이기
 			User loginUser = (User) request.getSession().getAttribute("loginUser");
 			if (loginUser != null) {
 				String userId = loginUser.getUserId();
 				model.addAttribute("userId", userId);
 			}
+			// 위시리스트 추가 코드 끝
 			
 			Tour tour = tourService.findTourWithCityByToNo(toNo);
 			if(tour!=null){

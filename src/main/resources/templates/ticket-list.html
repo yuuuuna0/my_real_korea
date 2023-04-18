@@ -83,6 +83,18 @@
 		</div>
 		<!-- End Map -->
 		<div class="container margin_60">
+		
+			<!-- 위시리스트 성공시 toast (민선)-->
+			<div class="toast align-items-center" role="alert" id="wishlist-add-toast" 
+						aria-live="assertive" aria-atomic="true" >
+			  <div class="d-flex">
+			    <div class="toast-body">
+			    위시리스트에 상품이 추가되었습니다!
+			   </div>
+			  </div>
+			</div>
+			<!-- End toast -->	
+		
 			<div class="row">
 				<aside class="col-lg-3">
 				<!-- START TICKET SEARCH -->
@@ -216,8 +228,21 @@
 									</div>
 								</div>
 									<!-- end rating -->
-									<div class="wishlist">
-										<a class="tooltip_flip tooltip-effect-1" href="#">+<span class="tooltip-content-flip"><span class="tooltip-back">Add to wishlist</span></span></a>
+									<!-- 위시리스트 추가 작업 (민선) -->
+									<!-- userId null 이 아닐때 위시리스트 추가 버튼 실행 -->
+									<div class="wishlist" th:if="${userId != null}">
+										<a class="tooltip_flip tooltip-effect-1" id="ticket-add-to-wishlist-btn" href="#" 
+										th:data-tiNo="${ticket.tiNo}" th:data-tiTitle="${ticket.tiTitle}" th:data-tiDate="${#dates.format(ticket.tiDate, 'yyyy-MM-dd')}"
+										th:data-tiPrice="${ticket.tiPrice}" th:data-tiInfo="${ticket.tiInfo}" th:data-tiNotice="${ticket.tiNotice}"
+										th:data-tiCount="${ticket.tiCount}" 
+										th:data-cityNo="${ticket.city.cityNo}" th:data-cityName="${ticket.city.cityName}"
+										th:data-latitude="${ticket.city.latitude}" th:data-longitude="${ticket.city.longitude}">+
+										<span class="tooltip-content-flip"><span class="tooltip-back">위시리스트 담기</span></span></a>
+									</div>
+									<!-- userId null 일 때는 위시리스트 추가 버튼 클릭 시 로그인 페이지로 -->
+									<div class="wishlist" th:if="${userId == null}">
+										<a class="tooltip_flip tooltip-effect-1"  th:href="@{user-login}">+
+										<span class="tooltip-content-flip"><span class="tooltip-back">위시리스트 담기</span></span></a>
 									</div>
 									<!-- End wish list-->
 								</div>
@@ -386,6 +411,7 @@
 	<script src="js/common_scripts_min.js"></script>
 	<script src="js/functions.js"></script>
 	<script src="js/app_ticket.js" type="module"></script>
+	<script src="js/app.js" type="module"></script>
 
 	<!-- Map -->
 	<script src="http://maps.googleapis.com/maps/api/js"></script>

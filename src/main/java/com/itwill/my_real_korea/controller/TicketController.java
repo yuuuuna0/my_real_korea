@@ -53,9 +53,19 @@ public class TicketController {
     //티켓 리스트 - 페이지
     @GetMapping("/ticket-list")
     public String tickeList(@RequestParam(required = false, defaultValue = "1") int currentPage,
-    						@ModelAttribute Payment payment, Model model) {
+    						@ModelAttribute Payment payment, Model model,
+    						HttpSession session) {
     	
         try {
+        	// 위시리스트 추가 코드 시작
+            // 로그인 한 유저면 userId model에 붙이기
+ 			User loginUser = (User)session.getAttribute("loginUser");
+ 			if (loginUser != null) {
+ 				String userId = loginUser.getUserId();
+ 				model.addAttribute("userId", userId);
+ 			}
+ 			// 위시리스트 추가 코드 끝
+        	
             PageMakerDto<Ticket> ticketList = ticketService.selectAllTicket(currentPage);
             
             model.addAttribute("ticketList", ticketList.getItemList());
@@ -81,6 +91,15 @@ public class TicketController {
 //				model.addAttribute("loginUser",loginUser);
 //				model.addAttribute("userId", loginUser.getUserId());
 //			}
+            
+            // 위시리스트 추가 코드 시작
+            // 로그인 한 유저면 userId model에 붙이기
+ 			User loginUser = (User)session.getAttribute("loginUser");
+ 			if (loginUser != null) {
+ 				String userId = loginUser.getUserId();
+ 				model.addAttribute("userId", userId);
+ 			}
+ 			// 위시리스트 추가 코드 끝
             
             model.addAttribute("ticketList", ticketList); // 티켓
             model.addAttribute("ticketReviewList",ticketReviewList); // 리뷰

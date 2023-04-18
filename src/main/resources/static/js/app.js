@@ -367,7 +367,7 @@ $(document).on('click', '#wishlist-all-delete-action-btn', function(event) {
 
 /******** 투어상품 버튼 클릭 시 위시리스트로 추가 액션 **********/
 
-$(document).on('click', '#add-to-wishlist-btn', function(e) {
+$(document).on('click', '#tour-add-to-wishlist-btn', function(e) {
 	// ajax로 리스트 부분만 검색된 리스트로 변경
 	let url = 'wishlist-tour';
 	let method = 'POST';
@@ -411,6 +411,72 @@ $(document).on('click', '#add-to-wishlist-btn', function(e) {
 			toInfo : toInfo,
 			toNotice : toNotice,
 			toCount : toCount,
+			city : {
+				cityNo : cityNo,
+				cityName : cityName,
+				latitude : latitude,
+				longitude : longitude
+			}
+		}
+	};
+	let async = true;
+	
+	Request.ajaxRequest(url, 
+						method, contentType,
+						JSON.stringify(sendData),
+						function(resultJson) {
+							console.log(">>>>>>>>>>>>>>>>>>>>");
+							//성공시 toast로 성공메세지 띄우기
+							if (resultJson.code == 1) {
+								$('#wishlist-add-toast').toast('show');
+								$('#wishlist-add-toast').toast({delay: 4000});
+							} else {
+								alert(resultJson.msg);
+							};
+						}, async);
+	e.preventDefault();
+});
+
+/******** 티켓상품 버튼 클릭 시 위시리스트로 추가 액션 **********/
+
+$(document).on('click', '#ticket-add-to-wishlist-btn', function(e) {
+	// ajax로 리스트 부분만 검색된 리스트로 변경
+	let url = 'wishlist-ticket';
+	let method = 'POST';
+	let contentType = 'application/json;charset=UTF-8';
+	let tiNo = $(this).attr('data-tiNo');
+	let tiTitle = $(this).attr('data-tiTitle');
+	let tiDate = $(this).attr('data-tiDate');
+	let tiPrice = $(this).attr('data-tiPrice');
+	let tiInfo = $(this).attr('data-tiInfo');
+	let tiNotice = $(this).attr('data-tiNotice');
+	let tiCount = $(this).attr('data-tiCount');
+	let cityNo = $(this).attr('data-cityNo');
+	let cityName = $(this).attr('data-cityName');
+	let latitude = $(this).attr('data-latitude');
+	let longitude = $(this).attr('data-longitude');
+	
+	console.log(tiNo);
+	console.log(tiTitle);
+	console.log(tiDate);
+	console.log(tiPrice);
+	console.log(tiInfo);
+	console.log(tiNotice);
+	console.log(tiCount);
+	console.log(cityNo);
+	console.log(cityName);
+	console.log(latitude);
+	console.log(longitude);
+	
+	let sendData = {
+		ticket : {
+			tiNo : tiNo,
+			tiTitle : tiTitle,
+			tiDate : tiDate,
+			tiPrice : tiPrice,
+			tiInfo : tiInfo,
+			tiNotice : tiNotice,
+			tiCount : tiCount,
 			city : {
 				cityNo : cityNo,
 				cityName : cityName,

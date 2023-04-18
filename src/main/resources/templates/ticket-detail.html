@@ -110,6 +110,17 @@
 
 		<div class="container margin_60">
 		<div>
+			<!-- 위시리스트 성공시 toast (민선)-->
+			<div class="toast align-items-center" role="alert" id="wishlist-add-toast" 
+						aria-live="assertive" aria-atomic="true" >
+			  <div class="d-flex">
+			    <div class="toast-body">
+			    위시리스트에 상품이 추가되었습니다!
+			   </div>
+			  </div>
+			</div>
+			<!-- End toast -->	
+		
 			<div class="row">
 				<div class="col-lg-8" id="single_tour_desc">
 
@@ -341,7 +352,27 @@
 						<br>
 						<!-- ~~~~~~~~ ~~~~~~~~~~~~~~~~~~~~~~티켓 버튼 (detail-action~~)~~~~~~~~~ ~~~~~~~~~~~~~~~-->
 						<button class="btn_full" type="submit">티켓 구매하기</button>
-						<a class="btn_full_outline" href="#"><i class=" icon-heart"></i> Add to whislist</a>
+						
+						<!-- 위시리스트 추가 작업 (민선) -->
+						<!-- userId null 이 아닐때 위시리스트 추가 버튼 실행 -->
+						<div class="detail-to-wishlist" th:if="${userId != null}">
+							<div th:each="ticket:${ticketList}">
+							<a class="btn_full_outline" id="ticket-add-to-wishlist-btn" href="#" 
+							th:data-tiNo="${ticket.tiNo}" th:data-tiTitle="${ticket.tiTitle}" th:data-tiDate="${#dates.format(ticket.tiDate, 'yyyy-MM-dd')}"
+							th:data-tiPrice="${ticket.tiPrice}" th:data-tiInfo="${ticket.tiInfo}" th:data-tiNotice="${ticket.tiNotice}"
+							th:data-tiCount="${ticket.tiCount}" 
+							th:data-cityNo="${ticket.city.cityNo}" th:data-cityName="${ticket.city.cityName}"
+							th:data-latitude="${ticket.city.latitude}" th:data-longitude="${ticket.city.longitude}">
+							<i class=" icon-heart"></i>위시리스트 담기</a>
+							</div>
+						</div>
+						<!-- userId null 일 때는 위시리스트 추가 버튼 클릭 시 로그인 페이지로 -->
+						<div class="detail-to-wishlist" th:if="${userId == null}">
+							<a class="btn_full_outline" th:href="@{user-login}">
+								<i class=" icon-heart"></i>위시리스트 담기</a>
+						</div>
+						<!-- End wish list-->
+						
 					</div>
 				</form>
 					<!--/box_style_1 -->
@@ -499,6 +530,7 @@
 	<script src="js/common_scripts_min.js"></script>
 	<script src="js/functions.js"></script>
 	<script src="js/app_ticket.js" type="module"></script>
+	<script src="js/app.js" type="module"></script>
 
 	<!-- Date and time pickers -->
 	<script src="js/jquery.sliderPro.min.js"></script>

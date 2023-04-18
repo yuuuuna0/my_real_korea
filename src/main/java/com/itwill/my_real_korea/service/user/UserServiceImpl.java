@@ -3,6 +3,7 @@ package com.itwill.my_real_korea.service.user;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.itwill.my_real_korea.dao.user.UserAddInfoDao;
@@ -26,6 +27,8 @@ public class UserServiceImpl implements UserService{
 	private UserAddInfoDao userAddInfoDao;
 	@Autowired
 	public EmailService emailService;
+	@Autowired
+	private BCryptPasswordEncoder bCryptPasswordEncoder;
 	
 	public UserServiceImpl() throws Exception {
 		
@@ -41,22 +44,21 @@ public class UserServiceImpl implements UserService{
 			throw new ExistedUserException(user.getUserId() + " 는 이미 존재하는 아이디입니다.");
 		}
  */
-		//회원가입
-		userDao.create(user);
-		//mail_key 업데이트
-		userDao.updateMailKey(user);
-		//userAddInfo 생성
-		UserAddInfo userAddInfo = new UserAddInfo("", 0, 0, user.getUserId());
-		userAddInfoDao.createUserAddInfo(userAddInfo);
-		//userImg 생성
-		UserImg userImg = new UserImg(0, "defaultImg.png", user.getUserId());
-//		userImg.setUserImgUrl(null);
-//		userImg.setUserId(user.getUserId());
-		userImgDao.createUserImg(userImg);
-		
-//		emailService.sendEmail(user.getEmail());
-//		System.out.println("UserService 이메일 전송");
-		return 1;
+		//비밀번호 암호화
+		String encodedPassword = bCryptPasswordEncoder.encode(user.getPassword());
+	    user.setPassword(encodedPassword);
+	    //회원가입
+	    userDao.create(user);
+	    //mail_key 업데이트
+	    userDao.updateMailKey(user);
+	    //userAddInfo 생성
+	    UserAddInfo userAddInfo = new UserAddInfo("", 0, 0, user.getUserId());
+	    userAddInfoDao.createUserAddInfo(userAddInfo);
+	    //userImg 생성
+	    UserImg userImg = new UserImg(0, "defaultImg.png", user.getUserId());
+	    userImgDao.createUserImg(userImg);
+	    
+	    return 1;
 	}
 	
 	
@@ -75,6 +77,8 @@ public class UserServiceImpl implements UserService{
 	//4. 회원 정보 수정
 	@Override
 	public int update(User user)throws Exception{
+	    String encodedPassword = bCryptPasswordEncoder.encode(user.getPassword());
+	    user.setPassword(encodedPassword);
 		return userDao.update(user);
 	}
 	
@@ -103,8 +107,9 @@ public class UserServiceImpl implements UserService{
 	    if (user == null) {
 	        throw new UserNotFoundException(userId + " 는 존재하지 않는 아이디입니다.");
 	    }
-	    boolean isMatchPassword = userDao.isMatchPassword(userId,password);
-	    if (!isMatchPassword) {
+	    
+	    //저장된 비밀번호와 암호화된 비밀번호를 비교
+	    if (!bCryptPasswordEncoder.matches(password, user.getPassword())) {
 	        throw new PasswordMismatchException("패스워드가 일치하지 않습니다.");
 	    }
 	    return user;

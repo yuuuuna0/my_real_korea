@@ -39,7 +39,17 @@
 <script type="text/javascript">
 
 function modifyUser() {
-	  if (document.getElementsByName("password")[0].value !== document.getElementsByName("password2")[0].value) {
+	if (document.f.password.value == "") {
+		alert("비밀번호를 입력하세요.");
+		f.password.focus();
+		return false;
+	}
+	if (document.f.password2.value == "") {
+		alert("비밀번호확인을 입력하세요.");
+		f.password2.focus();
+		return false;
+	} 
+	if (document.getElementsByName("password")[0].value !== document.getElementsByName("password2")[0].value) {
 	    alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
 	    return;
 	  }
@@ -137,9 +147,9 @@ function modifyUser() {
 			<ul id="profile_summary">
 				<li>이름 <span th:text="*{name}"></span>
 				</li>
-				<li>비밀번호 <span><input type="password" th:value="*{password}" name="password"></span>
+				<li>비밀번호 <span><input type="password" name="password"></span>
 				</li>
-				<li>비밀번호 확인<span><input type="password" th:value="*{password}" name="password2"></span>
+				<li>비밀번호 확인<span><input type="password" name="password2"></span>
 				</li>
 				<li>닉네임 <span><input type="text" th:value="*{nickname}" name="nickname"></span>
 				</li>

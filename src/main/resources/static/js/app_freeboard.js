@@ -4,17 +4,11 @@ import * as Request from "./request.js";
 $(document).on('click','#freeboard-search-btn',function(e){
 	// ajax로 리스트 부분만 검색된 리스트로 변경
 	let keyword = $('#freeboard-search-keyword').val();
-	let url = `freeboard-list-search?=${keyword}`;
+	let url = `freeBoard-search?pageNo=${keyword}&keyword=${keyword}`;
 	let method = 'GET';
 	let contentType = 'application/json;charset=UTF-8';
-	let toType;
-	let sortOrder=$('#sort-by').val();
-	let sendData = {
-		currentPage:"1",
-			keyword:keyword,
-			cityNo:cityNo,
-			toType:toType,
-			sortOrder:sortOrder};
+
+	let sendData;
 	let async = true;
 	
 	// 키워드 결과, 현재 페이지 숫자 표시
@@ -27,7 +21,7 @@ $(document).on('click','#freeboard-search-btn',function(e){
 						function(resultJson){
 							//페이지 정보 변경
 							curPage.text(resultJson.data.pageMaker.curPage);
-							totRecordCount.text(resultJson.data.pageMaker.totCount);
+							totRecordCount.text(resultJson.data.totRecordCount);
 							//code 1 일때 render, 아닐 때 msg 띄움
 							if(resultJson.code == 1){
 								View.render("#freeboard-search-list-template", resultJson, '#freeboard-list');
@@ -56,7 +50,7 @@ $(document).on('change','#sort-by',function(e){
 							function(resultJson){
 								//code 1 일때 render, 아닐 때 msg 띄움
 								if(resultJson.code == 1){
-									View.render("#freeboard-search-list-template", resultJson, '#notice-list');
+									View.render("#freeboard-search-list-template", resultJson, '#freeboard-list');
 								} else {
 									alert(resultJson.msg);
 								};
@@ -98,7 +92,7 @@ $(document).on('change','#sort-by',function(e){
 							function(resultJson){
 								//code 1 일때 render, 아닐 때 msg 띄움
 								if(resultJson.code == 1){
-									View.render("#freeboard-search-list-template", resultJson, '#notice-list');
+									View.render("#freeboard-search-list-template", resultJson, '#freeboard-list');
 								} else {
 									alert(resultJson.msg);
 								};

@@ -93,8 +93,10 @@
 							<div class="row">
 								<div class="col-6">
 									<div id="page-info" class="results_shop" th:each="freeBoardList:${freeBoardListPage}">
-									
-										<span id="tot-record-count" th:text="${freeBoardList.totRecordCount}"></span> results
+										<span id="cur-page" th:text="${freeBoardList.pageMaker.pageBegin}"></span> -
+										<span id="page-end" th:if="${freeBoardList.totRecordCount} &gt; ${freeBoardList.pageMaker.pageEnd}" th:text="${freeBoardList.pageMaker.pageEnd}"></span>
+										<span id="tot-record-count"  th:unless="${freeBoardList.totRecordCount} &gt; ${freeBoardList.pageMaker.pageEnd}" th:text="${freeBoardList.totRecordCount}"></span>
+										       | 전체 건수: <span id="tot-record-count"   th:text="${freeBoardList.totRecordCount}"></span>
 										<br>
 									</div>
 								</div>
@@ -118,7 +120,7 @@
 
 						<div class="row" id="freeboard-list" >
 					<div class="shop-item col-lg-12 col-md-6 col-sm-6" >
-						<form name='boardlistform' method='POST' action='' style="color:grey; width:825px;">
+						<form name='boardlistform' method='POST' action='' style="color:grey; width:flex;">
 							<table id='boardlist'  cellpadding='5px' cellspacing='1'>
 								<tr id='boardlist_tr1'>
 									<td width=200 align=center >제 목</td>
@@ -128,16 +130,16 @@
 								</tr>
 								
 								<tr id="boardlist_tr2"   th:each="freeBoard:${freeBoardList}">
-									<td width=280  style='padding-left: 10px ;' align='left' >
+									<td width=280  style='padding-left: 10px;' align='left' >
 										<a th:href="@{freeboard-detail(fBoNo=${freeBoard.fBoNo})}"  th:text="${freeBoard.fBoTitle}" ></a>
 										<span class="icon-comment"></span>
 										<span th:text="   ${freeBoard.commentCount}"></span> 
 										<span class="icon-map"></span>
 										<span th:text="   ${freeBoard.getCity().cityName}"></span>
 									</td>
-									<td width=70 th:text=${freeBoard.fBoCount}></td>
+									<td width=70 th:text="${freeBoard.fBoCount}"></td>
 									<td width=120  th:text="${#dates.format(freeBoard.fBoDate, 'yyyy.MM.dd')}"></td>
-									<td width=120  th:text=${freeBoard.userId} onclick="btn_alert()"></td>
+									<td width=120  th:text="${freeBoard.userId}"></td>
 								
 
 								</tr>
@@ -251,34 +253,36 @@
 	<!-- ##################### template ###################### -->
 	<!-- <script> 태그에 코드 적으면 화면에 안 보임 -->
 	<!-- freeboard-search-list-template -->
-	<script id="freeboard-search-list-template" type="text/x-handlebars-template">
-<!--	{{#each data.getItemList()}}-->
-						<form name='boardlistform' method='POST' action='' style="color:grey; width:870px;">
+	<script id="freeboard-search-list-template" type="text/x-handlebars-template" th:inline="javascript">
+	<form id="form-qna" name='boardlistform' method='POST' action='' style="color:grey; flex:auto ">
 							<table id='boardlist'  cellpadding='5px' cellspacing='1'>
-								<tr id='boardlist_tr1'>
-									<td width=200 align=center >제 목</td>
-									<td width=60 align=center >조회수</td>
-									<td width=80 align=center>작성일</td>
-									<td width=60 align=center >작성자</td>
+								<tr id='boardlist_tr1' >
+									<td  align=center >제목</td>
+									<td  align=center >조회수</td>
+									<td  align=center>작성일</td>
+									<td  align=center >작성자</td>
 								</tr>
 								
-								<tr id="boardlist_tr2">
-									<td width=280  style='padding-left: 10px ;' align='left' >
-										<a href="freeboard-detail?fBoNo={{fBoNo}}">{{fBoTitle}}</a>
+								
+								
+								<tr id="boardlist_tr2" th:each="freeBoard:${freeBoardList}" >
+									<td   >
+										<a href="@{freeboard-detail(fBoNo=${freeBoard.fBoNo})}" th:text="${freeBoard.fBoTitle}"></a>
 										<span class="icon-comment"></span>
-										<span> {{commentCount}}</span> 
+										<span  th:text="   ${freeBoard.commentCount}"></span> 
 										<span class="icon-map"></span>
-										<span>   {{getCity().cityName}}</span>
+										<span  th:text="   ${freeBoard.getCity().cityName}"></span>
 									</td>
-																	
-
+									<td width=70   th:text="${freeBoard.fBoCount}"></td>
+									<td width=120  th:text="${#dates.format(freeBoard.fBoDate, 'yyyy.MM.dd')}"></td>
+									<td width=120  th:text="${freeBoard.userId}"></td>
 								</tr>
+								
 								
 							</table>
 				
 
 						</form>
-						<!--	{{/each}} -->
 	</script>
 
 	<!-- Common scripts -->
@@ -286,14 +290,7 @@
 	<script src="js/common_scripts_min.js"></script>
 	<script src="js/functions.js"></script>
 	<script src="js/app.js" type="module"></script>
-	<script src="js/app_freeboard.js" ></script>
-	 <script>
-        // 경고창
-            function btn_alert() {
-                alert();
-                }
-        </script>
-        // 경고창
+	<script src="js/app_freeboard.js" type="module"></script>
 <form name="form-name" id="form-qna" method="post" onsubmit="return false;">
 	
 </form>

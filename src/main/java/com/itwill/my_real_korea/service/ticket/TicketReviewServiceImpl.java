@@ -25,8 +25,8 @@ public class TicketReviewServiceImpl implements TicketReviewService{
         return ticketReviewDao.insertTicketReview(ticketReview);
     }
     @Override
-    public List<TicketReview> selectByTicketReviewNo(int tiReviewNo){
-    	return ticketReviewDao.selectByTicketReviewNo(tiReviewNo);
+    public List<TicketReview> selectByTicketReviewNo(int tiNo){
+    	return ticketReviewDao.selectByTicketReviewNo(tiNo);
     }
     @Override
     public List<TicketReview> selectByTicketReviewUser(String userId){

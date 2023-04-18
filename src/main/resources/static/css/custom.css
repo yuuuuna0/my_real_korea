@@ -131,3 +131,32 @@ header.sticky#colored #logo_home h1 a{
     position: relative;
     padding: 0 20px 3px 20px;
 }
+
+
+.items-sorting select {
+    display: block;
+    width: 100%;
+    line-height: 24px;
+    padding: 0 10px;
+    height: 34px;
+    font-size: 13px;
+    border: 1px solid #ededed;
+    cursor: pointer;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    -ms-appearance: none;
+    -o-appearance: none;
+    background: url(../img/icon-select.png) right center no-repeat;
+    color: #999999;
+    transition: all 500ms ease;
+    -webkit-transition: all 500ms ease;
+    -ms-transition: all 500ms ease;
+    -o-transition: all 500ms ease;
+    outline: none;
+}
+
+.items-sorting .form-group {
+    margin-bottom: 10px;
+    width: 130px;
+    float: right;
+}

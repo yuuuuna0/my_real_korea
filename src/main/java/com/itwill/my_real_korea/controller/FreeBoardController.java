@@ -14,7 +14,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
@@ -112,7 +111,7 @@ public class FreeBoardController {
     }
 
     @GetMapping("/freeboard-detail")
-    public String freeBoardDetail(@RequestParam Integer fBoNo, Model model, HttpServletRequest request, HttpSession session) throws Exception {
+    public String freeBoardDetail(@RequestParam Integer fBoNo, Model model, HttpSession session) throws Exception {
         if (fBoNo == null) {
             return "freeboard-list";
         }
@@ -122,32 +121,6 @@ public class FreeBoardController {
                 model.addAttribute("loginUser", loginUser);
             }
 ////
-//            HttpSession session = request.getSession();
-//            User loginUser = (User) session.getAttribute("loginUser");
-//
-//            if (loginUser != null) {
-//                String loginUserUserId = loginUser.getUserId();
-//
-//                request.setAttribute("loginUserUserId", loginUserUserId);
-//
-//                model.addAttribute("loginUserUserId", loginUserUserId);
-//            }
-
-//            HttpSession session = request.getSession();
-//            String sUserId = (String) session.getAttribute("sUserId");
-//            User loginUser = userService.findUser(sUserId);
-//            String loginUserUserId = loginUser.getUserId();
-//            request.setAttribute("loginUserUserId", loginUserUserId);
-
-//        if (sUserId == null) {
-//            session.setAttribute("requestUrl", request.getRequestURL().toString());
-//            return "redirect:user-login";
-//        }
-//            if (loginUserUserId != null) {
-//                model.addAttribute("loginUserUserId", loginUserUserId);
-//            }
-
-
             FreeBoard freeBoard = freeBoardService.selectByNo(fBoNo);
             List<FreeBoardComment> freeBoardCommentList = freeBoardCommentService.selectByfBoNo(fBoNo);
             freeBoardService.increaseReadCount(freeBoard.getFBoNo());

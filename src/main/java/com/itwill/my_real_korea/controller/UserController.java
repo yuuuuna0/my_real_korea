@@ -58,6 +58,7 @@ public class UserController {
 	@GetMapping(value = "/user-login", produces = "application/json;charset=UTF-8")
 	public String user_login(HttpServletRequest request, Model model) {
 	    HttpSession session = request.getSession();
+	    
 	    String prevPage = request.getHeader("Referer");
 	    if (prevPage == null || prevPage.contains("/user-login") || prevPage.contains("/user-auth")) {
 	        prevPage = request.getContextPath() + "/index";
@@ -107,18 +108,24 @@ public class UserController {
 		}
 	 */	
 	
-
-	//회원 인증 폼 (이메일로 전송된 인증코드)
-	@LoginCheck
-	@GetMapping(value = "/user-auth")
-	public String user_auth(HttpServletRequest request) throws Exception {
-		HttpSession session = request.getSession();
-		User authUser = (User) session.getAttribute("authUser");
-		System.out.println(">> authUser : "+authUser);
-		authUser = userService.findUser(authUser.getUserId());
-		session.setAttribute("authUser", authUser);
-		return "user-auth";
-	}
+	
+	/*
+	 * REST로 변경
+	 * 
+		//회원 인증 폼 (이메일로 전송된 인증코드)
+		@LoginCheck
+		@GetMapping(value = "/user-auth")
+		public String user_auth(HttpServletRequest request) throws Exception {
+			HttpSession session = request.getSession();
+			User authUser = (User) session.getAttribute("authUser");
+			System.out.println(">> authUser : "+authUser);
+			authUser = userService.findUser(authUser.getUserId());
+			session.setAttribute("authUser", authUser);
+			return "user-auth";
+		}
+	 */
+	
+	
 
 	//회원 인증 액션
 	@PostMapping(value = "user-auth-action", produces = "application/json;charset=UTF-8")

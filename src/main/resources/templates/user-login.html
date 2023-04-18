@@ -26,13 +26,12 @@
 	
 	<!-- CUSTOM CSS -->
 	<link href="css/custom.css" rel="stylesheet">
-	
-	<script defer type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.2/handlebars.min.js"></script>
-	
-  
+ 
+<script defer type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.2/handlebars.min.js"></script>
+
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script>
-		
+	
 // 사용하려는 앱의 JavaScript 키 입력
 Kakao.init('033833936fe6b95d5d87c91cde329685');
 function kakaoLogin() {
@@ -50,6 +49,7 @@ function kakaoLogin() {
 					alert(kakaoId);
 					$('#kakao-login-btn').hide();
 					$('#kakao-logout-btn').show();
+					
 				}
 			});
 		},
@@ -62,7 +62,9 @@ function kakaoLogout() {
 	//location.href = 'https://kauth.kakao.com/oauth/logout?client_id=d2863dba7035b2676678c151834a9978&logout_redirect_uri=http://localhost:80/practice_user_01/index';
 	location.href = 'https://kauth.kakao.com/oauth/logout?client_id=d2863dba7035b2676678c151834a9978&logout_redirect_uri=http://localhost/practice_user_01/index';
 }
-</script>       
+		
+</script>
+
 </head>
 <body>
 
@@ -87,9 +89,10 @@ function kakaoLogout() {
 	<main>
     <section id="hero" class="login">
     	<div class="container">
-        	<div class="row justify-content-center">
-            	<div class="col-xl-4 col-lg-5 col-md-6 col-sm-8">
-            	
+        	<div class="row justify-content-center" >
+            	<div class="col-xl-4 col-lg-5 col-md-6 col-sm-8" >
+ 
+ 
 <!-- 로그인 폼 시작 -->            	
 <div id="login">
 <form id="user-login" th:object="${fuser!=null? fuser : new com.itwill.my_real_korea.dto.user.User()}" name="f" method="post">
@@ -109,7 +112,8 @@ function kakaoLogout() {
         <font color="red" th:text="${msg2}"></font>
     </div>
 		<p class="small">
-		    <a href="user-find" id="menu-user-find">아이디 / 비밀번호 찾기</a>
+		    <a href="user-find" id="menu-user-find">아이디 / 비밀번호 찾기</a><br/>
+		    <a href="user-auth" id="menu-user-auth">인증 페이지</a>
 		</p>
 	<a class="btn_full" id="login_btn" onclick="login();">로그인</a>
 	<a class="btn_full_outline" onclick="userCreate();">회원 가입</a>
@@ -117,23 +121,21 @@ function kakaoLogout() {
 </div>
 <!-- 로그인 폼 끝 -->
 <!-- 
+ 
  -->
 <script id="user-find-template" type="text/x-handlebars-template">
-<div id="login">
 
 <!-- 아이디 찾기 폼 시작 -->
-<form name="i" method="post">
-
+<form name="d" method="post">
     <div class="form-group">
-        <label>ID 찾기</label><br/>
         <label>이름</label>
-        <input type="text" class=" form-control " placeholder="Username" name="name">
+        <input type="text" class="form-control" placeholder="Username" name="name" id="name">
     </div>
     <div class="form-group">
         <label>이메일</label>
-        <input type="text" class=" form-control" placeholder="Email" name="email">
+        <input type="text" class="form-control" placeholder="Email" name="email" id="email">
     </div>
-	<a class="btn_full_outline" onclick="findId();">아이디 찾기</a><br/>
+    <a class="btn_full_outline" onclick="findId();">아이디 찾기</a><br/>
 </form>
 <!-- 아이디 찾기 폼 끝 -->
 
@@ -141,9 +143,7 @@ function kakaoLogout() {
 
 <!-- 비밀번호 찾기 폼 시작 -->
 <form name="p" method="post">
-
     <div class="form-group">
-        <label>비밀번호 찾기</label><br/>
         <label>ID</label>
         <input type="text" class=" form-control " placeholder="ID" name="userId">
     </div>
@@ -155,7 +155,6 @@ function kakaoLogout() {
 </form>
 <!-- 비밀번호 찾기 폼 끝 -->
 
-</div>
 </script>
 <script id="user-auth-template" type="text/x-handlebars-template">
 	<div class="text-center"><img src="img/logo_sticky.png" alt="Image" data-retina="true" ></div>
@@ -171,11 +170,14 @@ function kakaoLogout() {
 		<input type="button" class="btn_full" value="인증 확인" onclick="submitAuthCode();">
 	</form><br/>
 </script>
+
                         
                 </div>
             </div>
         </div>
     </section>
+    
+    
 	</main><!-- End main -->
 	<!--========================= footer ========================-->
 	<footer class="revealed">
@@ -196,64 +198,14 @@ function kakaoLogout() {
 		</form>
 	</div><!-- End Search Menu -->
 	
-	<!-- Sign In Popup -->
-	<!-- 
-	<div id="sign-in-dialog" class="zoom-anim-dialog mfp-hide">
-		<div class="small-dialog-header">
-			<h3>Sign In</h3>
-		</div>
-	-->
-	<!-- 
-		<form>
-			<div class="sign-in-wrapper">
-				<a href="#0" class="social_bt facebook">Login with Facebook</a>
-				<a href="#0" class="social_bt google">Login with Google</a>
-				<div class="divider"><span>Or</span></div>
-				<div class="form-group">
-					<label>Email</label>
-					<input type="email" class="form-control" name="email" id="email">
-					<i class="icon_mail_alt"></i>
-				</div>
-				<div class="form-group">
-					<label>Password</label>
-					<input type="password" class="form-control" name="password" id="password" value="">
-					<i class="icon_lock_alt"></i>
-				</div>
-				<div class="clearfix add_bottom_15">
-					<div class="checkboxes float-left">
-						<input id="remember-me" type="checkbox" name="check">
-						<label for="remember-me">Remember Me</label>
-					</div>
-					<div class="float-right"><a id="forgot" href="javascript:void(0);">Forgot Password?</a></div>
-				</div>
-				<div class="text-center"><input type="submit" value="Log In" class="btn_login"></div>
-				<div class="text-center">
-					Don’t have an account? <a href="javascript:void(0);">Sign up</a>
-				</div>
-				<div id="forgot_pw">
-					<div class="form-group">
-						<label>Please confirm login email below</label>
-						<input type="email" class="form-control" name="email_forgot" id="email_forgot">
-						<i class="icon_mail_alt"></i>
-					</div>
-					<p>You will receive an email containing a link allowing you to reset your password to a new preferred one.</p>
-					<div class="text-center"><input type="submit" value="Reset Password" class="btn_1"></div>
-				</div>
-			</div>
-		</form>
-	 -->
-		<!--form -->
-	<!-- 
-	</div>
-	 -->
-	<!-- /Sign In Popup -->
+	
 
 	<!-- Common scripts -->
 	<script src="js/jquery-2.2.4.min.js"></script>
 	<script src="js/common_scripts_min.js"></script>
 	<script src="js/functions.js"></script>
 	<script src="js/app_user.js" type="module"></script>
-	
+
 <script type="text/javascript">
 
 //회원 가입 폼
@@ -298,17 +250,19 @@ function login() {
 
 //아이디 찾기 액션
 function findId() {
-    var name = document.i.name.value;
-    var email = document.i.email.value;
-    console.log(name);
-    console.log(email);
-
+	
+    //var name = document.i.name.value;
+    //var email = document.i.email.value;
+    
+    var name = $('#name').val();
+    var email = $('#email').val();
+    
+    
     if (name == "") {
         alert("이름을 입력하세요.");
         document.i.name.focus();
         return false;
     }
-
     if (email == "") {
         alert("이메일을 입력하세요.");
         document.i.email.focus();
@@ -317,7 +271,7 @@ function findId() {
 
     $.ajax({
         type: "POST",
-        url: "/user-find-id-action",
+        url: "./user-find-id-action",
         dataType: "json",
         data: {
             name: name,
@@ -360,8 +314,7 @@ function submitAuthCode() {
 	document.a.submit();
 }
 
-</script>		
-
+</script>	
 
   </body>
 </html>

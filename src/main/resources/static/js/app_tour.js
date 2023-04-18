@@ -2,7 +2,7 @@ import * as View from "./view.js";
 import * as Request from "./request.js";
 // JSON.stringify() => 객체를 string 으로, JSON.parse() => string 을 객체로 만듦 
 
-/********* function *********/
+/********* function ********/
 function selectedTourList(){
 	let keyword=$('#tour-search-keyword').val();
 	let cityNo;
@@ -43,11 +43,10 @@ function selectedTourList(){
 						},async);
 };
 
-
-
 //1. 검색, 필터, 정렬 한 투어리스트 
 $(document).on('change',$('#sort-by,#city-checkbox,#toType-checkbox'),selectedTourList);
 $(document).on('click',"#tour-search-btn",selectedTourList);
+
 
 //2. 체크박스 하나만 선택하기
 $('input[type="checkbox"][name="city-checkbox"]').click(function(){
@@ -67,27 +66,52 @@ $('input[type="checkbox"][name="toType-checkbox"]').click(function(){
 // 3-1. 로그인상태면 모달 내 이름에 아이디 넣어주기
 $(document).on('show.bs.modal','#myReviewModal',function(){
 	let userId=$('#myReviewBtn').data('id');
-	  $('#myReviewModal').find('#userId').val(userId);
+	  $('#myReviewModal').find('#userIdM').val(userId);
 });
 //3-2. 리뷰남기기 버튼 클릭시
 $(document).on('click','#submitReviewBtn',function(){
+
+	e.preventDefault();	//폼 전송 방지
+	
+	//이미지랑 별점 해결해야함
+	let toNo=$('#toNoM').val();
+	let userId=$('#userIdM').val();
+	let toReviewTitle=$('#toReviewTitleM').val();
+	let toReviewStar=$('#toReviewStarM').val();	//undefined
+	let toReviewContent=$('#toReviewContentM').val();
+	let toReviewImg=$('#toReviewImg').val();
+	
 	let url="tour-review-action";
 	let method="POST";
 	let contentType="application/json;charset=UTF-8";
-	let sendData=[];
+	let sendData={
+		toNo:toNo,
+		userId:userId,
+		toReviewTitle:toReviewTitle,
+		toReviewStar:toReviewStar,
+		toReviewContent:toReviewContent,
+		toReviewImg:toReviewImg
+	};
 	let async=true;
+	
+	$('#myReviewModal').modal('hide');
 	
 	Request.ajaxRequest(url,method,contentType,
 						JSON.stringify(sendData),	//json으로 보낼 때 전부 string화 해 줘야 한다.
 						function(resultJson){
 							//code=1 성공 -> render , 아닐때 msg
 							if(resultJson.code==1){
+								let toNo=$('#toNoM').val();
+								//window.location.href=`tour-detail?toNo=${toNo}`;
 								View.render('#tourReview-template',resultJson,'#tourReviewDiv')
 							} else{
 								alert(resultJson.msg);
 							}
 						},async);
-})
+	
+});
+
+
 
 
 

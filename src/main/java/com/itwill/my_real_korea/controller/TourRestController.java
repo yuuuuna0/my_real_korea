@@ -93,14 +93,25 @@ public class TourRestController {
 		//2. 투어 리뷰 남기기
 		@ApiOperation(value="투어상세보기(투어리뷰남기기)")
 		@PostMapping(value="/tour-review-action", produces="application/json;charset=UTF-8")
-		public Map<String, Object> tourReviewAction(@RequestBody TourReview tourReview,int toNo){
+		public Map<String, Object> tourReviewAction(@RequestBody TourReview tourReview){
 			Map<String,Object> resultMap=new HashMap<>();
 			int code=0;
+			int toScore=0;
+			int toCount=0;
+			int toReviewCount=0;
 			String msg="성공";
-			List<TourReview> data=null;
+			List<TourReview> data=new ArrayList<>();
 			try {
 				tourReviewService.insertTourReview(tourReview);
-				List<TourReview> tourReviewList=tourReviewService.findByToNo(toNo);
+				List<TourReview> tourReviewList=tourReviewService.findByToNo(tourReview.getToNo());
+				data=tourReviewList;
+				int totScore=0;
+				for (TourReview tempTourReview : tourReviewList) {
+					totScore+=tempTourReview.getToReviewStar();
+				}
+				toScore=totScore/tourReviewList.size();
+				toCount=tourService.findTourWithCityByToNo(tourReview.getToNo()).getToCount();
+				toReviewCount=tourReviewList.size();
 				code=1;
 				msg="성공";
 				
@@ -112,6 +123,9 @@ public class TourRestController {
 			resultMap.put("code", code);
 			resultMap.put("msg", msg);
 			resultMap.put("data", data);
+			resultMap.put("toScore", toScore);
+			resultMap.put("toCount", toCount);
+			resultMap.put("toReviewCount", toReviewCount);
 			return resultMap;
 		}
 	

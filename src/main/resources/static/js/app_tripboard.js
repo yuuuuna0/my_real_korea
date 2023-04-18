@@ -65,7 +65,7 @@ $(document).on('change', '#sort-by', function(e) {
 	}
 });
 
-//동행게시판 필터(사이드바 전체보기)
+//동행게시판 필터(사이드바 전체보기, 지역별 보기)
 $(document).on('click', '#all-city-list', function(e) {
 	let cityNo=$(this).attr('name');
 	console.log(cityNo);
@@ -96,26 +96,4 @@ $(document).on('click', '#all-city-list', function(e) {
 		e.preventDefault();
 });
 
-/*
-//동행게시판 필터(사이드바 전체보기)
-$(document).on('click', '#all-city-list2', function(e) {
-	let cityNo=$(this).attr('name');
-	console.log(cityNo);
-		let url = 'tripboard-city-list';
-		let method = 'GET';
-		let contentType = 'application/json;charset=UTF-8';
-		let sendData = {cityNo:cityNo};
-		let async = true;
-		
-		Request.ajaxRequest(url, method, contentType, 
-							sendData,
-							function(resultJson){
-								if(resultJson.code == 1){
-									View.render('#tripboard-search-list-template', resultJson, '#tripboard-list');
-								}else {
-									alert(resultJson.msg);
-								}
-							}, async);
-		e.preventDefault();
-});
-*/
+

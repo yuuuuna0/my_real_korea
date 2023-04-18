@@ -38,4 +38,9 @@ public interface TripBoardCommentMapper {
 	 */
 	int selectAllCount() throws Exception;
 	
+	/*
+	 * 댓글 갯수 1개보기
+	 */
+	int selectCommentCount(int tBoNo) throws Exception;
+	
 }

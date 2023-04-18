@@ -19,11 +19,16 @@ public class TicketReviewServiceImpl implements TicketReviewService{
         this.ticketReviewDao = ticketReviewDao;
     }
 
-
     @Override
     public int insertTicketReview(TicketReview ticketReview) {
         return ticketReviewDao.insertTicketReview(ticketReview);
     }
+    
+    @Override
+	public TicketReview selectByTicketReviewOne(int tiReviewNo) {
+		return ticketReviewDao.selectByTicketReviewOne(tiReviewNo);
+	}
+    //티켓 리뷰 LIST
     @Override
     public List<TicketReview> selectByTicketReviewNo(int tiNo){
     	return ticketReviewDao.selectByTicketReviewNo(tiNo);
@@ -76,5 +81,6 @@ public class TicketReviewServiceImpl implements TicketReviewService{
         return new PageMakerDto<TicketReview>(ticketReviewUserList, pageMaker, totReviewCount);
     }
 */
+	
     
 }

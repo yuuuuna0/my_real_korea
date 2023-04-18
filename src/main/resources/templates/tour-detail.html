@@ -26,6 +26,10 @@
 	
 	<!-- CUSTOM CSS -->
 	<link href="css/custom.css" rel="stylesheet">
+	
+	<!-- Handlebars-->
+	<script defer type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.2/handlebars.min.js"></script>
+	
 
 </head>
 
@@ -97,6 +101,18 @@
 		<!-- End Map -->
 
 		<div class="container margin_60">
+		
+			<!-- 위시리스트 성공시 toast (민선)-->
+			<div class="toast align-items-center" role="alert" id="wishlist-add-toast" 
+						aria-live="assertive" aria-atomic="true" >
+			  <div class="d-flex">
+			    <div class="toast-body">
+			    위시리스트에 상품이 추가되었습니다!
+			   </div>
+			  </div>
+			</div>
+			<!-- End toast -->	
+		
 			<div class="row">
 				<div class="col-lg-8" id="single_tour_desc">
 					<div id="single_tour_feat">
@@ -224,7 +240,7 @@
 
 					<hr>
 
-					<div class="row" id="tourReviewDiv">
+					<div class="row" >
 						<div class="col-lg-3">
 							<h3>Reviews</h3>
 							<div th:if="${session.loginUser!=null}">
@@ -236,21 +252,38 @@
 								</button>
 							</div>
 						</div>
-						<div class="col-lg-9">
+						<div class="col-lg-9"id="tourReviewDiv">
 							<div id="score_detail"><span th:text="${tour.toCount}">7.5</span>명이 구매했습니다. 
 								
 							</div>
 							<!-- End general_rating -->
 							<div class="row" id="rating_summary">
-								<div class="col-md-6">
-									<div class="rating">
-										<i class="icon-star voted"></i>
-										<i class="icon-star voted"></i>
-										<i class="icon-star voted"></i>
-										<i class="icon-star voted"></i>
-										<i class="icon-star-empty"></i>
-									</div>
-									<small th:text="'(Based on '+ ${tourReviewList.size()}+' reviews)'"></small>
+								<div class="col-md-12">
+									<div class="rating" th:switch=${tour.toScore}>
+										<div th:case="0">
+											<i class="icon-star-empty"></i>							
+											<i class="icon-star-empty"></i>							
+											<i class="icon-star-empty"></i>							
+											<i class="icon-star-empty"></i>							
+											<i class="icon-star-empty"></i>							
+										</div>
+										<div th:case="5">
+												<i class="icon-star voted"></i>
+												<i class="icon-star voted"></i>
+												<i class="icon-star voted"></i>
+												<i class="icon-star voted"></i>
+												<i class="icon-star voted"></i>
+										</div>
+										<div th:case="*">
+											<span th:each="i:${#numbers.sequence(0,tour.toScore-1)}">
+													<i class="icon-star voted"></i>
+											</span>
+											<span th:each="i:${#numbers.sequence(tour.toScore,4)}">
+													<i class="icon-star-empty"></i>
+											</span>
+										</div>
+										<small th:text="'(Based on '+ ${tourReviewList.size()}+' reviews)'"></small>
+									<div>
 								</div>
 							</div>
 							<!-- End row -->
@@ -275,12 +308,29 @@
 								<p th:text=${tourReview.toReviewContent}>
 									"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed a lorem quis neque interdum consequat ut sed sem. Duis quis tempor nunc. Interdum et malesuada fames ac ante ipsum primis in faucibus."
 								</p>
-								<div class="rating" th:text=${tourReview.toReviewStar}>
-									<i class="icon-star voted"></i>
-									<i class="icon-star voted"></i>
-									<i class="icon-star voted"></i>
-									<i class="icon-star voted"></i>
-									<i class="icon-star-empty"></i>
+								<div class="rating" th:switch=${tourReview.toReviewStar}>
+									<div th:case="0">
+										<i class="icon-star-empty"></i>							
+										<i class="icon-star-empty"></i>							
+										<i class="icon-star-empty"></i>							
+										<i class="icon-star-empty"></i>							
+										<i class="icon-star-empty"></i>							
+									</div>
+									<div th:case="5">
+											<i class="icon-star voted"></i>
+											<i class="icon-star voted"></i>
+											<i class="icon-star voted"></i>
+											<i class="icon-star voted"></i>
+											<i class="icon-star voted"></i>
+									</div>
+									<div th:case="*">
+										<span th:each="i:${#numbers.sequence(0,tour.toScore-1)}">
+												<i class="icon-star voted"></i>
+										</span>
+										<span th:each="i:${#numbers.sequence(tour.toScore,4)}">
+												<i class="icon-star-empty"></i>
+										</span>
+									</div>
 								</div>
 							</div>
 							<!-- End review strip -->
@@ -288,7 +338,12 @@
 					</div>
 				</div>
 				<!--End  single_tour_desc-->
-				<aside class="col-lg-4">
+			</div>
+			<!--End row -->
+
+		</div>
+		<!--End container -->
+							<aside class="col-lg-4">
 					<p class="d-none d-xl-block d-lg-block d-xl-none">
 						<a class="btn_map" data-toggle="collapse" href="#collapseMap" aria-expanded="false" aria-controls="collapseMap" data-text-swap="Hide map" data-text-original="View on map">View on map</a>
 					</p>
@@ -322,7 +377,25 @@
 						<br>
 
 						<button class="btn_full" type="button" onclick="tourDetail()">Check now</button>
-						<a class="btn_full_outline" href="#"><i class=" icon-heart"></i> Add to whislist</a>
+						
+						<!-- 위시리스트 추가 작업 (민선) -->
+						<!-- userId null 이 아닐때 위시리스트 추가 버튼 실행 -->
+						<div class="detail-to-wishlist" th:if="${userId != null}">
+							<a class="btn_full_outline" id="tour-add-to-wishlist-btn" href="#" 
+							th:data-toNo="${tour.toNo}" th:data-toName="${tour.toName}" th:data-toTime="${tour.toTime}"
+							th:data-toPerson="${tour.toPerson}" th:data-toMeet="${tour.toMeet}" th:data-toPrice="${tour.toPrice}"
+							th:data-toInfo="${tour.toInfo}" th:data-toNotice="${tour.toNotice}" th:data-toCount="${tour.toCount}"
+							th:data-cityNo="${tour.city.cityNo}" th:data-cityName="${tour.city.cityName}"
+							th:data-latitude="${tour.city.latitude}" th:data-longitude="${tour.city.longitude}">
+							<i class=" icon-heart"></i>위시리스트 담기</a>
+						</div>
+						<!-- userId null 일 때는 위시리스트 추가 버튼 클릭 시 로그인 페이지로 -->
+						<div class="detail-to-wishlist" th:if="${userId == null}">
+							<a class="btn_full_outline"  th:href="@{user-login}">
+								<i class=" icon-heart"></i>위시리스트 담기</a>
+						</div>
+						<!-- End wish list-->
+						
 						</form>
 						<!-- form end -->
 					</div>
@@ -334,12 +407,7 @@
 						<small>Monday to Friday 9.00am - 7.30pm</small>
 					</div>
 
-				</aside>
-			</div>
-			<!--End row -->
-		</div>
-		<!--End container -->
-        
+				</aside>        
         <div id="overlay"></div>
 		<!-- Mask on input focus -->
     
@@ -411,7 +479,7 @@
 	<!-- /Sign In Popup -->	
 
 <!--  Modal Review  -->
-	<div class="modal fade" id="myReviewModal" tabindex="1" role="dialog" aria-labelledby="myReviewLabel" aria-hidden="true">
+	<div class="modal fade" id="myReviewModal" tabindex="1" role="dialog" aria-labelledby="myReviewLabel" aria-hidden="true" style="z-index:100000;">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -424,14 +492,14 @@
 					<div id="message-review">
 					</div>
 					<!-- 모달 폼 -->
-					<form  method="post" name="tourReviewF" id="tourReviewF"  enctype​​="multipart/form-data">
+				<form  method="post" name="tourReviewF" id="tourReviewF"  enctype​​="multipart/form-data">
 					<!--파일업로드추가
 						<input type="file" name="uploadFile">  -->
-						<input name="toNo" id="toNo" type="hidden" th:value="${tour.toNo}">
+						<input name="toNo" id="toNoM" type="hidden" th:value="${tour.toNo}">
 						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
-									<input readonly type="text" name="userId" id="userId"  class="form-control">
+									<input readonly type="text" name="userId" id="userIdM"  class="form-control">
 								</div>
 							</div>
 						</div>
@@ -439,7 +507,7 @@
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
-									<input name="toReviewTitle" id="toReviewTitle" type="text" placeholder="제목을 적어주세요" class="form-control">
+									<input name="toReviewTitle" id="toReviewTitleM" type="text" placeholder="제목을 적어주세요" class="form-control">
 								</div>
 							</div>
 						</div>
@@ -450,7 +518,7 @@
 							<div class="col-md-6">
 								<div class="form-group">
 									<label>평점</label>
-									<select class="form-control" name="toReviewStar" id="toReviewStar">
+									<select class="form-control" name="toReviewStarM" id="toReviewStarM">
 										<option value="0">Please review</option>
 										<option value="1">Low</option>
 										<option value="2">Sufficient</option>
@@ -460,10 +528,13 @@
 									</select>
 								</div>
 							</div>
+							<div class="col-md-6">
+								<input type="file" id="toReviewImg" name="toReviewImg" size="20" style="width:200px">
+							</div>
 						</div>
 						<!-- End row -->
 						<div class="form-group">
-							<textarea name="toReviewContent" id="toReviewContent" class="form-control" style="height:100px" placeholder="내용을 적어주세요"></textarea>
+							<textarea name="toReviewContent" id="toReviewContentM" class="form-control" style="height:100px" placeholder="내용을 적어주세요"></textarea>
 						</div>
 						<!--리뷰 버튼-->
 						<button type="button" class="btn_1" id="submitReviewBtn" >submit</button>
@@ -478,52 +549,51 @@
 <!-- ##################### template ###################### -->
 <!-- <script> 태그에 코드 적으면 화면에 안 보임 -->
 <script id="tourReview-template" type="text/x-handlebars-template">
-<div class="col-lg-9">
 	<div id="score_detail">
-		<span th:text="${tour.toCount}">7.5
+		<span>
+			{{toCount}}
 		</span>명이 구매했습니다.
 	</div>
 	<!-- End general_rating -->
 	<div class="row" id="rating_summary">
 		<div class="col-md-6">
-			<div class="rating">
-				<i class="icon-star voted"></i>
-				<i class="icon-star voted"></i>
-				<i class="icon-star voted"></i>
-				<i class="icon-star voted"></i>
-				<i class="icon-star-empty"></i>
+			<div class="rating" value="{{toScore}}">
 			</div>
-			<small th:text="'(Based on '+ ${tourReviewList.size()}+' reviews)'"></small>
+			<small>
+				(Based on {{toReviewCount}} reviews)
+			</small>
 		</div>
 	</div>
 	<!-- End row :rating_summary -->
 	<hr>
-	<div class="review_strip_single" th:each="tourReview:${tourReviewList}">
+{{#each data}}
+	<div class="review_strip_single">
 		<img src="img/products/image-1.jpg" alt="Image" class="rounded-circle" width="20%" height="30%">
-		<small th:text="${#dates.format(tourReview.toReviewDate,'yyyy/MM/dd')}"> 
-			- 10 March 2015 -
+		<small> 
+			{{toReveiwDate}}
 		</small>
-		<h4 th:text=${tourReview.userId}>
-			Jhon Doe
+		<h4>
+			{{userId}}
 		</h4>
 		<div class="row">
 			<div class="col-md-9">
 				<h6>
-					<strong th:text=${tourReview.toReviewTitle}>
+					<strong>
+						{{toReviewTitle}}
 					</strong>
 				</h6>
 			</div>
 			<div class="col-md-3" > 
-				<!--th:if="${session.loginUser.userId == tourReview.userId}"-->
 					<input type="button" value="수정">
 					<input type="button" value="삭제">
 			</div>
 		</div>
 		<br>
-		<p th:text=${tourReview.toReviewContent}>
-			"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed a lorem quis neque interdum consequat ut sed sem. Duis quis tempor nunc. Interdum et malesuada fames ac ante ipsum primis in faucibus."
+		<p>
+			{{toReviewContent}}
 		</p>
-		<div class="rating" th:text=${tourReview.toReviewStar}>
+		<div class="rating" value="{{toReviewStar}}">
+			
 			<i class="icon-star voted"></i>
 			<i class="icon-star voted"></i>
 			<i class="icon-star voted"></i>
@@ -532,13 +602,14 @@
 		</div>
 	</div>
 	<!-- End review strip -->
-</div>
+{{/each}}
 </script>
 	<!-- Common scripts -->
 	<script src="js/jquery-2.2.4.min.js"></script>
 	<script src="js/common_scripts_min.js"></script>
 	<script src="js/functions.js"></script>
 	<script src="js/app_tour.js" type="module"></script>
+	<script src="js/app.js" type="module"></script>
 
 	<!-- Date and time pickers -->
 	<script src="js/jquery.sliderPro.min.js"></script>
@@ -615,6 +686,15 @@
 			document.detailF.submit();
 		}
 	</script>
+	<!-- 모달에 값 넘기기
+<script>
+$('#myReview').on('show.bs.modal', function (e) {
+  let userId=$('#myReviewBtn').data('id');
+  console.log(userId);
+  $('#myReview').find('#userId').val(userId);
+});
+</script>
+ -->
 	<!--Review modal validation -->
 	<script src="assets/validate.js"></script>
 	

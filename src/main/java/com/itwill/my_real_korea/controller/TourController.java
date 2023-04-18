@@ -27,9 +27,12 @@ import com.itwill.my_real_korea.service.tour.TourReviewService;
 import com.itwill.my_real_korea.service.tour.TourService;
 import com.itwill.my_real_korea.util.PageMakerDto;
 
+import io.netty.handler.codec.http.HttpRequest;
+
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import static org.hamcrest.CoreMatchers.nullValue;
@@ -65,23 +68,32 @@ public class TourController {
 							@RequestParam(required = false, defaultValue = "0") int cityNo,
 							@RequestParam(required = false, defaultValue = "0") int toType,
 							@RequestParam(required = false) String sortOrder,
-								Model model) {
+								Model model,
+								HttpServletRequest request) {
 		String forwardPath="";
 		String msg="";
 		try{
-			PageMakerDto<Tour> tourListPage=tourService.findAll(currentPage,keyword,cityNo,toType,sortOrder);
-			List<Tour> tempTourList=tourListPage.getItemList();	//PageMakerDto -> List로 변환
-			List<Tour> tourList=new ArrayList<>();
-			//평점 평균 구하기
-			for (Tour tour : tempTourList) {
-				int tourScore=tourReviewService.calculateTourScore(tour.getToNo());
-				tour.setToScore(tourScore);
-				tourList.add(tour);	//tourList에 후기 평점 평균 붙이기
+			// 로그인 한 유저면 userId model에 붙이기
+			User loginUser = (User) request.getSession().getAttribute("loginUser");
+			if (loginUser != null) {
+				String userId = loginUser.getUserId();
+				model.addAttribute("userId", userId);
 			}
-			List<City> cityList=cityService.findAllCity();
+
+			PageMakerDto<Tour> tourListPage = tourService.findAll(currentPage, keyword, cityNo, toType, sortOrder);
+			List<Tour> tempTourList = tourListPage.getItemList(); // PageMakerDto -> List로 변환
+			List<Tour> tourList = new ArrayList<>();
+			// 평점 평균 구하기
+			for (Tour tour : tempTourList) {
+				int tourScore = tourReviewService.calculateTourScore(tour.getToNo());
+				tour.setToScore(tourScore);
+				tourList.add(tour); // tourList에 후기 평점 평균 붙이기
+			}
+			List<City> cityList = cityService.findAllCity();
 			model.addAttribute("cityList", cityList);
-			model.addAttribute("tourList",tourList);
-			forwardPath="tour-list";
+			model.addAttribute("tourList", tourList);
+			forwardPath = "tour-list";
+
 		} catch (Exception e){
 			e.printStackTrace();
 			forwardPath="error";
@@ -91,9 +103,18 @@ public class TourController {
 
 	//2. 투어상품 상세보기
 	@RequestMapping(value="/tour-detail", params = "toNo")
-	public String tourDetail(@RequestParam int toNo, Model model) {
+	public String tourDetail(@RequestParam int toNo, Model model, HttpServletRequest request) {
 		String forwardPath="";
 		try{
+			// 위시리스트 추가 코드 시작
+			// 로그인 한 유저면 userId model에 붙이기
+			User loginUser = (User) request.getSession().getAttribute("loginUser");
+			if (loginUser != null) {
+				String userId = loginUser.getUserId();
+				model.addAttribute("userId", userId);
+			}
+			// 위시리스트 추가 코드 끝
+			
 			Tour tour = tourService.findTourWithCityByToNo(toNo);
 			if(tour!=null){
 				int tourScore=tourReviewService.calculateTourScore(toNo);

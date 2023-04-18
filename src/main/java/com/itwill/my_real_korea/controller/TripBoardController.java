@@ -76,9 +76,14 @@ public class TripBoardController {
 			TripBoard tripBoard = tripBoardService.selectByTbNo(tBoNo);
 			List<TripBoardComment> tripBoardCommentList = tripBoardCommentService.selectAllByTBoNo(tBoNo);
 			tripBoardService.increaseTbReadCount(tripBoard.getTBoNo());
+			int selectCommentCount = tripBoardCommentService.selectCommentCount(tBoNo);
+			
+			
 			model.addAttribute("tripBoard", tripBoard);
 			model.addAttribute("tripBoardCommentList", tripBoardCommentList);
 			model.addAttribute("tBoNo", tBoNo);
+			model.addAttribute("selectCommentCount", selectCommentCount);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			return "error";

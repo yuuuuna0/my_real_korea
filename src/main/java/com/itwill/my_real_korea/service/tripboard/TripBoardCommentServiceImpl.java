@@ -65,5 +65,14 @@ public class TripBoardCommentServiceImpl implements TripBoardCommentService {
 		return tripBoardCommentDao.selectAllCount();
 	}
 	
+	/*
+	 * 댓글 갯수 1개보기
+	 */
+	@Override
+	public int selectCommentCount(int tBoNo) throws Exception {
+		
+		return tripBoardCommentDao.selectCommentCount(tBoNo);
+	}
+	
 	
 }

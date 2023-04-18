@@ -160,3 +160,13 @@ header.sticky#colored #logo_home h1 a{
     width: 130px;
     float: right;
 }
+
+.toast {
+    left: 50%;
+    position: fixed;
+    transform: translate(-50%, 0px);
+    z-index: 9999;
+    background-color: #e14d67;
+    color: #ededed;
+}
+

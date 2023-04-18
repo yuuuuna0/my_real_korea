@@ -41,6 +41,10 @@ public class TicketReviewDaoImpl implements TicketReviewDao{
 	public List<TicketReview> selectByTicketReviewUser(String userId) {
 		return ticketReviewMapper.selectByTicketReviewUser(userId);
 	}
+	@Override
+	public TicketReview selectByTicketReviewOne(int tiReviewNo) {
+		return ticketReviewMapper.selectByTicketReviewOne(tiReviewNo);
+	}
 
    
     

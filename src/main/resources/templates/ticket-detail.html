@@ -27,6 +27,9 @@
 	<!-- CUSTOM CSS -->
 	<link href="css/custom.css" rel="stylesheet">
 	
+	<!-- Handlebars -->
+	<script  defer type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.2/handlebars.min.js"></script>
+	
 </head>
 
 <body>
@@ -85,11 +88,11 @@
 			</div>
 		</div>
 		<!-- End Position -->
-  <!---------------------START KAKAO MAP   일단 냅다 넣음 파일 분리?해야겠음.. ㅠ 
+  <!---------------------START KAKAO MAP   일단 넣음 (느람) -> 파일 분리?해야겠음.. ㅠ --------------------->
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=34fb8be020c4d96a5450f8ad5dd1e744"></script>
 			<div class="collapse" id="collapseMap">
 				<div id="map" style="width:100%;height:350px;"></div>
-				지도를 표시할 div 입니다
+				
 		<script>
 			var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 			    mapOption = { 
@@ -100,12 +103,24 @@
 			// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
 			var map = new kakao.maps.Map(mapContainer, mapOption); 
 		</script>
-	</div>--------------------->
+	</div>
 	
   <!--------------------- END KAKAO MAP--------------------->
 		<!-- End Map -->
 
 		<div class="container margin_60">
+		<div>
+			<!-- 위시리스트 성공시 toast (민선)-->
+			<div class="toast align-items-center" role="alert" id="wishlist-add-toast" 
+						aria-live="assertive" aria-atomic="true" >
+			  <div class="d-flex">
+			    <div class="toast-body">
+			    위시리스트에 상품이 추가되었습니다!
+			   </div>
+			  </div>
+			</div>
+			<!-- End toast -->	
+		
 			<div class="row">
 				<div class="col-lg-8" id="single_tour_desc">
 
@@ -217,12 +232,16 @@
 
 
 					<div class="row" id="ticketReviewDiv">
-						<div class="col-lg-3">
+						<div class="col-lg-12">
 							<h3>Reviews</h3>
 							<div th:if="${session.loginUser!=null}">
-							<a href="#" class="btn_1 add_bottom_30" data-toggle="modal" data-target="#myReview">Leave a review</a>
-						</div>
-						<div class="col-lg-9">
+								<a href="#" class="btn_1 add_bottom_30" id="myReviewBtn" data-toggle="modal" data-target="#myReview" 
+								th:data-id="${session.loginUser.userId}" th:data-tino="${session.ticket.tiNo}">Leave a review</a>
+							</div>
+							<div th:if="${session.loginUser==null}">
+								<a href="#" class="btn_1 add_bottom_30" onclick="location.href='./user-login'">Leave a review</a>
+							</div>
+						<div class="col-lg-12">
 							<div id="score_detail"><span th:text="${ticketReviewList.size()}"></span>명이 구매했습니다.
 								
 							</div>
@@ -333,7 +352,27 @@
 						<br>
 						<!-- ~~~~~~~~ ~~~~~~~~~~~~~~~~~~~~~~티켓 버튼 (detail-action~~)~~~~~~~~~ ~~~~~~~~~~~~~~~-->
 						<button class="btn_full" type="submit">티켓 구매하기</button>
-						<a class="btn_full_outline" href="#"><i class=" icon-heart"></i> Add to whislist</a>
+						
+						<!-- 위시리스트 추가 작업 (민선) -->
+						<!-- userId null 이 아닐때 위시리스트 추가 버튼 실행 -->
+						<div class="detail-to-wishlist" th:if="${userId != null}">
+							<div th:each="ticket:${ticketList}">
+							<a class="btn_full_outline" id="ticket-add-to-wishlist-btn" href="#" 
+							th:data-tiNo="${ticket.tiNo}" th:data-tiTitle="${ticket.tiTitle}" th:data-tiDate="${#dates.format(ticket.tiDate, 'yyyy-MM-dd')}"
+							th:data-tiPrice="${ticket.tiPrice}" th:data-tiInfo="${ticket.tiInfo}" th:data-tiNotice="${ticket.tiNotice}"
+							th:data-tiCount="${ticket.tiCount}" 
+							th:data-cityNo="${ticket.city.cityNo}" th:data-cityName="${ticket.city.cityName}"
+							th:data-latitude="${ticket.city.latitude}" th:data-longitude="${ticket.city.longitude}">
+							<i class=" icon-heart"></i>위시리스트 담기</a>
+							</div>
+						</div>
+						<!-- userId null 일 때는 위시리스트 추가 버튼 클릭 시 로그인 페이지로 -->
+						<div class="detail-to-wishlist" th:if="${userId == null}">
+							<a class="btn_full_outline" th:href="@{user-login}">
+								<i class=" icon-heart"></i>위시리스트 담기</a>
+						</div>
+						<!-- End wish list-->
+						
 					</div>
 				</form>
 					<!--/box_style_1 -->
@@ -348,7 +387,8 @@
 				</aside>
 			</div>
 			<!--End row -->
-			</div>
+		</div>
+		
 		
 		<!--End container -->
 
@@ -436,13 +476,13 @@
 					<div id="message-review">
 					</div>
 					<!-- 모달 폼 -->
-					<form  method="post" name="ticketReview" id="ticketReview" enctype​​="multipart/form-data">
-					<!-- 파일업로드추가 
-						<input name="tiNo" id="tiNo" type="hidden" th:value="${tiNo}">-->
+					<form method="post" id="ticketReview"  name="ticketReview"  enctype​​="multipart/form-data">
 						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
-									<input readonly type="text" name="userId" id="userId" class="form-control" th:value="${session.loginUser.userId}">
+									<input readonly type="text" name="userId"  id="userId" class="form-control">
+									<input type="hidden" id="hiddenTiNo" class="form-control">
+									 
 								</div>
 							</div>
 						</div>
@@ -477,7 +517,7 @@
 							<textarea name="tiReviewContent" id="tiReviewContent" class="form-control" style="height:100px" placeholder="내용을 적어주세요"></textarea>
 						</div>
 						<!--리뷰 버튼-->
-						<button type="button" class="btn_1" id="submitReviewBtn">submit</button>
+						<button type="button" class="btn_1" id="ticket-review-action">submit</button>
 					</form>
 				</div>
 			</div>
@@ -490,6 +530,7 @@
 	<script src="js/common_scripts_min.js"></script>
 	<script src="js/functions.js"></script>
 	<script src="js/app_ticket.js" type="module"></script>
+	<script src="js/app.js" type="module"></script>
 
 	<!-- Date and time pickers -->
 	<script src="js/jquery.sliderPro.min.js"></script>
@@ -547,9 +588,69 @@
 
 	<!--Review modal validation -->
 	<script src="assets/validate.js"></script>
+	<!-- 리뷰 템플릿 -->	
+	 <script id="ticketReview-template" type="text/x-handlebars-template">
 	
-	<script>
-		
+	{{#each data}}
+	<div class="modal fade" id="myReview" tabindex="1" role="dialog" aria-labelledby="myReviewLabel" aria-hidden="true" style="z-index:100000;">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="myReviewLabel">티켓 리뷰 작성</h4>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				</div>
+				<div class="modal-body">
+					<div id="message-review">
+					</div>
+					<!-- 모달 폼 -->
+					<form method="post" id="ticketReview"  name="ticketReview"  enctype​​="multipart/form-data">
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<input readonly type="text" name="userId"  id="userId" class="form-control">
+									<input type="hidden" id="hiddenTiNo" class="form-control">
+									 
+								</div>
+							</div>
+						</div>
+						<!-- End row -->
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<input name="tiReviewTitle" id="tiReviewTitle" type="text" placeholder="제목을 적어주세요" class="form-control">
+								</div>
+							</div>
+						</div>
+						<!-- End row -->
+						<hr>
+						<!-- End row -->
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label>평점</label>
+									<select class="form-control" name="tiReviewStar" id="tiReviewStar">
+										<option value="0">Please review</option>
+										<option value="1">Low</option>
+										<option value="2">Sufficient</option>
+										<option value="3">Good</option>
+										<option value="4">Excellent</option>
+										<option value="5">Super</option>
+									</select>
+								</div>
+							</div>
+						</div>
+						<!-- End row -->
+						<div class="form-group">
+							<textarea name="tiReviewContent" id="{{tiReviewCount}}" class="form-control" style="height:100px" placeholder="내용을 적어주세요"></textarea>
+						</div>
+						<!--리뷰 버튼-->
+						<button type="button" class="btn_1" id="ticket-review-action">submit</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+{{/each}}
 	</script>
 	
 </body>

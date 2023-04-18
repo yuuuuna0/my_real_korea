@@ -12,6 +12,7 @@ import * as Request from "./request.js";
  #type-ticket
  #wishlist-delete-action-btn
  #wishlist-all-delete-action-btn
+ #add-to-wishlist-btn
  */
  
 // on => 동적으로 이벤트 추가 가능 -> 상위 노드에 처리해줘야함 (document)
@@ -67,13 +68,11 @@ $(document).on('change','#sort-by',function(e){
 							function(resultJson){
 								//code 1 일때 render, 아닐 때 msg 띄움
 								if(resultJson.code == 1){
-									console.log(">>>>>>>>>>>>>>>>>>>>>>>>>");
+									//console.log(">>>>>>>>>>>>>>>>>>>>>>>>>");
 									View.render("#notice-search-list-template", resultJson, '#notice-list');
-									console.log("#########################");
-									View.render("#notice-paging-template", resultJson, '#notice-paging');
-									console.log("#########################");
-									let blockEnd = $('#blockEnd').val();
-									console.log(blockEnd);
+									//console.log("#########################");
+									//View.render("#notice-paging-template", resultJson, '#notice-paging');
+									//console.log("#########################");
 								} else {
 									alert(resultJson.msg);
 								};
@@ -192,6 +191,7 @@ $(document).on('click','#notice-modify-action-btn',function(e){
 	if(form.get(0).checkValidity() === false){
 		// 폼의 유효성 검사에서 실패한 요소에 커서 두기
 		form.find(':invalid').first().focus();
+		
 		// 폼 유효성 검사 실패 시 이벤트 중지
 		e.preventDefault();
 		e.stopPropagation();
@@ -325,8 +325,6 @@ $(document).on('click','#type-ticket',function(e){
 
 });
 
-
-
 /******** 위시리스트 삭제 액션**********/
 
 $(document).on('click', '#wishlist-delete-action-btn', function(event) {
@@ -367,7 +365,144 @@ $(document).on('click', '#wishlist-all-delete-action-btn', function(event) {
 	});
 });
 
+/******** 투어상품 버튼 클릭 시 위시리스트로 추가 액션 **********/
 
-/************************/
+$(document).on('click', '#tour-add-to-wishlist-btn', function(e) {
+	// ajax로 리스트 부분만 검색된 리스트로 변경
+	let url = 'wishlist-tour';
+	let method = 'POST';
+	let contentType = 'application/json;charset=UTF-8';
+	let toNo = $(this).attr('data-toNo');
+	let toName = $(this).attr('data-toName');
+	let toTime = $(this).attr('data-toTime');
+	let toPerson = $(this).attr('data-toPerson');
+	let toMeet = $(this).attr('data-toMeet');
+	let toPrice = $(this).attr('data-toPrice');
+	let toInfo = $(this).attr('data-toInfo');
+	let toNotice = $(this).attr('data-toNotice');
+	let toCount = $(this).attr('data-toCount');
+	let cityNo = $(this).attr('data-cityNo');
+	let cityName = $(this).attr('data-cityName');
+	let latitude = $(this).attr('data-latitude');
+	let longitude = $(this).attr('data-longitude');
+	
+	console.log(toNo);
+	console.log(toName);
+	console.log(toTime);
+	console.log(toPerson);
+	console.log(toMeet);
+	console.log(toPrice);
+	console.log(toInfo);
+	console.log(toNotice);
+	console.log(toCount);
+	console.log(cityNo);
+	console.log(cityName);
+	console.log(latitude);
+	console.log(longitude);
+	
+	let sendData = {
+		tour : {
+			toNo : toNo,
+			toName : toName,
+			toTime : toTime,
+			toPerson : toPerson,
+			toMeet : toMeet,
+			toPrice : toPrice,
+			toInfo : toInfo,
+			toNotice : toNotice,
+			toCount : toCount,
+			city : {
+				cityNo : cityNo,
+				cityName : cityName,
+				latitude : latitude,
+				longitude : longitude
+			}
+		}
+	};
+	let async = true;
+	
+	Request.ajaxRequest(url, 
+						method, contentType,
+						JSON.stringify(sendData),
+						function(resultJson) {
+							console.log(">>>>>>>>>>>>>>>>>>>>");
+							//성공시 toast로 성공메세지 띄우기
+							if (resultJson.code == 1) {
+								$('#wishlist-add-toast').toast('show');
+								$('#wishlist-add-toast').toast({delay: 4000});
+							} else {
+								alert(resultJson.msg);
+							};
+						}, async);
+	e.preventDefault();
+});
+
+/******** 티켓상품 버튼 클릭 시 위시리스트로 추가 액션 **********/
+
+$(document).on('click', '#ticket-add-to-wishlist-btn', function(e) {
+	// ajax로 리스트 부분만 검색된 리스트로 변경
+	let url = 'wishlist-ticket';
+	let method = 'POST';
+	let contentType = 'application/json;charset=UTF-8';
+	let tiNo = $(this).attr('data-tiNo');
+	let tiTitle = $(this).attr('data-tiTitle');
+	let tiDate = $(this).attr('data-tiDate');
+	let tiPrice = $(this).attr('data-tiPrice');
+	let tiInfo = $(this).attr('data-tiInfo');
+	let tiNotice = $(this).attr('data-tiNotice');
+	let tiCount = $(this).attr('data-tiCount');
+	let cityNo = $(this).attr('data-cityNo');
+	let cityName = $(this).attr('data-cityName');
+	let latitude = $(this).attr('data-latitude');
+	let longitude = $(this).attr('data-longitude');
+	
+	console.log(tiNo);
+	console.log(tiTitle);
+	console.log(tiDate);
+	console.log(tiPrice);
+	console.log(tiInfo);
+	console.log(tiNotice);
+	console.log(tiCount);
+	console.log(cityNo);
+	console.log(cityName);
+	console.log(latitude);
+	console.log(longitude);
+	
+	let sendData = {
+		ticket : {
+			tiNo : tiNo,
+			tiTitle : tiTitle,
+			tiDate : tiDate,
+			tiPrice : tiPrice,
+			tiInfo : tiInfo,
+			tiNotice : tiNotice,
+			tiCount : tiCount,
+			city : {
+				cityNo : cityNo,
+				cityName : cityName,
+				latitude : latitude,
+				longitude : longitude
+			}
+		}
+	};
+	let async = true;
+	
+	Request.ajaxRequest(url, 
+						method, contentType,
+						JSON.stringify(sendData),
+						function(resultJson) {
+							console.log(">>>>>>>>>>>>>>>>>>>>");
+							//성공시 toast로 성공메세지 띄우기
+							if (resultJson.code == 1) {
+								$('#wishlist-add-toast').toast('show');
+								$('#wishlist-add-toast').toast({delay: 4000});
+							} else {
+								alert(resultJson.msg);
+							};
+						}, async);
+	e.preventDefault();
+});
+
+
 
 

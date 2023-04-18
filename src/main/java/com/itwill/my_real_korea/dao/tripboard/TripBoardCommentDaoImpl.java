@@ -66,4 +66,13 @@ public class TripBoardCommentDaoImpl implements TripBoardCommentDao {
 	public int selectAllCount() throws Exception {
 		return tripBoardCommentMapper.selectAllCount();
 	}
+	
+	/*
+	 * 댓글 갯수 보기
+	 */
+	@Override
+	public int selectCommentCount(int tBoNo) throws Exception {
+		
+		return tripBoardCommentMapper.selectCommentCount(tBoNo);
+	}
 }

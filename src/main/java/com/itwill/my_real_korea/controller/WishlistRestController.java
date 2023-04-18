@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.itwill.my_real_korea.dto.notice.Notice;
 import com.itwill.my_real_korea.dto.ticket.Ticket;
 import com.itwill.my_real_korea.dto.tour.Tour;
+import com.itwill.my_real_korea.dto.user.User;
 import com.itwill.my_real_korea.dto.wishlist.Wishlist;
 import com.itwill.my_real_korea.service.wishlist.WishlistService;
 import com.itwill.my_real_korea.util.PageMakerDto;
@@ -35,13 +38,18 @@ public class WishlistRestController {
 	@LoginCheck
 	@ApiOperation(value = "위시리스트에 티켓 상품 추가")
 	@PostMapping(value = "/wishlist-ticket", produces = "application/json;charset=UTF-8")
-	public Map<String, Object> wishlist_ticket_add_action(@RequestBody Wishlist wishlist) {
+	public Map<String, Object> wishlist_ticket_add_action(@RequestBody Wishlist wishlist,
+														HttpSession session) {
 
 		Map<String, Object> resultMap = new HashMap<>();
 		int code = 1;
 		String msg = "성공";
 		List<Wishlist> data = new ArrayList<>();
 		try {
+			// 세션에서 가져온 유저의 아이디로 위시리스트 userId 설정
+			User loginUser = (User)session.getAttribute("loginUser");
+			String userId = loginUser.getUserId();
+			wishlist.setUserId(userId);
 			// 위시리스트에 티켓 상품추가, 성공시 code 1
 			wishlistService.insertTicketToWishlist(wishlist);
 			code = 1;
@@ -66,13 +74,18 @@ public class WishlistRestController {
 	@LoginCheck
 	@ApiOperation(value = "위시리스트에 투어 상품 추가")
 	@PostMapping(value = "/wishlist-tour", produces = "application/json;charset=UTF-8")
-	public Map<String, Object> wishlist_tour_add_action(@RequestBody Wishlist wishlist) {
+	public Map<String, Object> wishlist_tour_add_action(@RequestBody Wishlist wishlist,
+														HttpSession session) {
 
 		Map<String, Object> resultMap = new HashMap<>();
 		int code = 1;
 		String msg = "성공";
 		List<Wishlist> data = new ArrayList<>();
 		try {
+			// 세션에서 가져온 유저의 아이디로 위시리스트 userId 설정
+			User loginUser = (User)session.getAttribute("loginUser");
+			String userId = loginUser.getUserId();
+			wishlist.setUserId(userId);
 			// 위시리스트에 투어 상품추가, 성공시 code 1
 			wishlistService.insertTourToWishlist(wishlist);
 			code = 1;

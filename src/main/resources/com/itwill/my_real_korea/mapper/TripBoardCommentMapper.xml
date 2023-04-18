@@ -35,4 +35,8 @@
 <select id="selectAllCount" parameterType="String" resultType="java.lang.Integer">
 	select count(*) cnt from trip_board_comment
 </select>
+<!-- 댓글 갯수 보기 -->
+ <select id="selectCommentCount" resultType="java.lang.Integer">
+        select count(*) cnt from trip_board_comment where t_bo_no = #{tBoNo}
+    </select>
 </mapper>

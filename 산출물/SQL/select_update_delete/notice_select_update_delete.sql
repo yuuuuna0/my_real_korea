@@ -71,7 +71,7 @@ delete notice_img where n_no=1;
 update notice set n_title='제목수정',n_content='내용수정',n_img='img1111.png' where n_no=2;
 
 -- 게시물 이미지 수정(추가)
-update notice set n_img = 'notice_seoul.png' where n_no = 1;
+update notice set n_img = 'notice_jeju.png' where n_no = 21;
 
 -- 게시물 uploadFile 수정(추가)
 update notice set upload_file = 'notice_seoul.png' where n_no = 2;

@@ -31,4 +31,18 @@ public class TourReview {
 	private int toReviewStar;
 	private int toNo;	//FK
 	private String userId;	//FK
+	private String toReviewUpload;
+	
+	public TourReview(int toReviewNo, Date toReviewDate, String toReviewTitle, String toReviewContent,
+			String toReviewImg, int toReviewStar, int toNo, String userId) {
+		this.toReviewNo = toReviewNo;
+		this.toReviewDate = toReviewDate;
+		this.toReviewTitle = toReviewTitle;
+		this.toReviewContent = toReviewContent;
+		this.toReviewImg = toReviewImg;
+		this.toReviewStar = toReviewStar;
+		this.toNo = toNo;
+		this.userId = userId;
+	}
+	
 }

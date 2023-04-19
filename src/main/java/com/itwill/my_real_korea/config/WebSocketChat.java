@@ -1,4 +1,4 @@
-package com.itwill.my_real_korea.service.chat;
+package com.itwill.my_real_korea.config;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -17,15 +17,19 @@ import lombok.extern.log4j.Log4j2;
 
 //@Log4j2
 //@Service
-//@ServerEndpoint(value="/chat")
+//@ServerEndpoint(value="/ws/chat")
 //public class WebSocketChat {
 //	
 //	private static Set<Session> clients = Collections.synchronizedSet(new HashSet<Session>());
 //
 //	@OnOpen
 //	public void onOpen(Session session) {
-//		clients.add(session);
-//		log.info("OnOpen");
+//		if (!clients.contains(session)) {
+//			clients.add(session);
+//			log.info("OnOpen : session open" + session);
+//		} else {
+//			log.info("이미 연결된 session");
+//		}
 //	}
 //
 //	@OnClose
@@ -37,5 +41,10 @@ import lombok.extern.log4j.Log4j2;
 //	@OnMessage
 //	public void onMessage(String message, Session session) {
 //		log.info("OnMessage:" + message);
+//		for (Session s : clients) {
+//            log.info("send data : {}", message);
+//
+//            s.getBasicRemote().sendText(message);
+//        }
 //	}
 //}

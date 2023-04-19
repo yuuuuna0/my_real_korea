@@ -19,30 +19,19 @@ public class WebSocketConfig implements WebSocketConfigurer{
 
 	@Autowired
 	private ChatHandler chatHandler;
-	
-	
-//	 public WebSocketConfig(ChatHandler chatHandler) {
-//	        this.chatHandler = chatHandler;
-//	    }
-
-    /* 
-	 WebSocket에 접속하기 위한 Endpoint : /chat 으로 설정
+	/* 
+	 WebSocket에 접속하기 위한 Endpoint : ws/chat 으로 설정
 	 	(Endpoint : API가 서버에서 자원(resource)에 접근할 수 있도록 하는 URL),
 	 해당 서버 모든 다른 도메인에서 들어오는 요청 허용 
-	 => localhost/chat 으로 커넥션 연결, 메세지 통신할 준비 
+	 => 커넥션 연결, 메세지 통신할 준비 
 	 */
-    
     @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry webSocketHandlerRegistry) {
     	System.out.println("######################");
-//        webSocketHandlerRegistry.addHandler(chatHandler, "ws/chat")
-//            .setAllowedOriginPatterns("*")
-//            .withSockJS()
-//            .setClientLibraryUrl("https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.5/sockjs.min.js");
     	webSocketHandlerRegistry.addHandler(chatHandler, "ws/chat")
-        //.setAllowedOriginPatterns("http://localhost:8080")
         .setAllowedOriginPatterns("*")
         .withSockJS();
+//      .setClientLibraryUrl("https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.5/sockjs.min.js");
     }
 
 }

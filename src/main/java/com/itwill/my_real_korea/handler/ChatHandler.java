@@ -33,10 +33,10 @@ public class ChatHandler extends TextWebSocketHandler{
 	public static Map<String, WebSocketSession> sessionMap = new HashMap<>();
 	
 	// ObjectMapper : JSON 데이터를 java객체로, java객체를 JSON데이터로 변환
-//	@Autowired
-//	private ObjectMapper objectMapper;
-//	@Autowired
-//	private ChatService chatService;
+	@Autowired
+	private ObjectMapper objectMapper;
+	@Autowired
+	private ChatService chatService;
 	
 	
 	/* 채팅 유저 접속 시 호출되는 메소드 */
@@ -44,7 +44,6 @@ public class ChatHandler extends TextWebSocketHandler{
     public void afterConnectionEstablished(WebSocketSession session) {
     	log.info("#ChattingHandler, afterConnectionEstablished");
         sessionMap.put(session.getId(), session);
-        System.out.println(">>>>>>>>>>> afterConnectionEstablished >>>>>>>>>>>>>>");
         log.info(session.getId() + " 채팅 유저 접속");
     }
 
@@ -54,16 +53,14 @@ public class ChatHandler extends TextWebSocketHandler{
     	// 등록된 세션을 돌면서 메세지 전달
     	sessionMap.forEach((sessionId, sessionInMap) -> {
 			try {
-				
-//				String payload = (String) message.getPayload();
-//				log.info("payload : " + payload);
-//				// 채팅유저가 전송한(request) payload를 chatMsg로 변경
-//				ChatMsg chatMsg = objectMapper.readValue(payload, ChatMsg.class);
-//				// 채팅 메세지가 가진 roomNo로 채팅방 정보 조회
-//				ChatRoom chatRoom = chatService.selectRoomByRoomNo(chatMsg.getRoomNo());
-//				// 채팅방에 있는 모든 채팅유저들에게 메세지 전달
-//				chatRoom.handleAction(session, chatMsg, chatService);
-				 System.out.println(">>>>>>>>>>> handleMessage >>>>>>>>>>>>>>");
+				String payload = (String) message.getPayload();
+				log.info("payload : " + payload);
+				// 채팅유저가 전송한(request) payload를 chatMsg로 변경(JSON->java객체)
+				ChatMsg chatMsg = objectMapper.readValue(payload, ChatMsg.class);
+				// 채팅 메세지가 가진 roomNo로 채팅방 정보 조회
+				ChatRoom chatRoom = chatService.selectRoomByRoomNo(chatMsg.getRoomNo());
+				// 채팅방에 있는 모든 채팅유저들에게 메세지 전달
+				chatRoom.handleAction(session, chatMsg, chatService);
 				sessionInMap.sendMessage(message);
 				log.info("메세지 : "+ message.getPayload());
 			} catch (IOException e) {
@@ -76,7 +73,6 @@ public class ChatHandler extends TextWebSocketHandler{
     @Override
     public void afterConnectionClosed(WebSocketSession session, CloseStatus status) {
     	log.info("#ChattingHandler, afterConnectionClosed");
-    	System.out.println(">>>>>>>>>>> afterConnectionClosed >>>>>>>>>>>>>>");
         sessionMap.remove(session.getId());
         log.info(session.getId() + " 채팅 유저 접속 해제");
     }

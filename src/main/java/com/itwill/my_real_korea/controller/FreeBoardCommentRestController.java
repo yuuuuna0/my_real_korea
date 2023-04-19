@@ -5,6 +5,7 @@ import com.itwill.my_real_korea.service.freeboard.FreeBoardCommentService;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,36 +23,31 @@ public class FreeBoardCommentRestController {
     //    @LoginCheck
     @ApiOperation(value = "자유게시판 댓글 수정폼")
     @ApiImplicitParam(name = "fCoNo", value = "자유게시판 댓글 번호")
-    @PostMapping(value = "/freeboardcomment", produces = "application/json;charset=UTF-8")
+    @GetMapping(value = "freeboardcomment/{fCoNo}", produces = "application/json;charset=UTF-8")
     public Map<String, Object> fCoCommentModifyForm(
-//            @PathVariable(value = "fCoNo") int fCoNo,
-            @RequestBody FreeBoardComment freeBoardComment
+            @PathVariable(value = "fCoNo") int fCoNo
+//            @RequestBody FreeBoardComment freeBoardComment
     ) {
 
         Map<String, Object> resultMap = new HashMap<>();
-        int no= 1;
-        String comment = null;
         int code = 1;
         String msg = "성공";
-        FreeBoardComment freeBoardComment2 = null;
+
         List<FreeBoardComment> data = new ArrayList<>();
         try {
             // fBoNo로 자유게시판  1개 찾기, 수정 성공시 code 1
-            FreeBoardComment freeBoardComment1 = freeBoardCommentService.selectByfCoNo(freeBoardComment.getFCoNo());
-//            FreeBoardComment freeBoardComment1 = freeBoardCommentService.selectByfCoNo(fCoNo);
+//            FreeBoardComment freeBoardComment1 = freeBoardCommentService.selectByfCoNo(freeBoardComment.getFCoNo());
+            FreeBoardComment freeBoardComment1 = freeBoardCommentService.selectByfCoNo(fCoNo);
             if (freeBoardComment1 != null) {
-                freeBoardComment2 = freeBoardComment;
-                comment = freeBoardComment.getFCommentContent();
-                no = freeBoardComment.getFCoNo();
                 code = 1;
                 msg = "성공";
                 // 수정 성공한 자유게시판  객체 데이터에 붙여줌
-
+//                System.out.println(freeBoardComment1.getFCoNo());
+//                System.out.println(freeBoardComment1.getFBoNo());
+//                System.out.println(freeBoardComment1.getFCommentContent());
                 data.add(freeBoardComment1);
             } else {
                 // 실패시 code 2
-                comment = freeBoardComment.getFCommentContent();
-                no = freeBoardComment.getFCoNo();
                 code = 2;
                 msg = "자유게시판 수정 실패";
             }
@@ -61,22 +57,25 @@ public class FreeBoardCommentRestController {
             code = 3;
             msg = "관리자에게 문의하세요.";
         }
-        resultMap.put("freeBoardComment2", freeBoardComment2);
-        resultMap.put("comment", comment);
-        resultMap.put("no", no);
         resultMap.put("code", code);
         resultMap.put("msg", msg);
         resultMap.put("data", data);
         return resultMap;
     }
 
-
     @ApiOperation(value = "자유게시판 수정액션")
     @ApiImplicitParam(name = "fCoNo", value = "공지사항 번호")
     @PutMapping(value = "/freeboardcomment/{fCoNo}", produces = "application/json;charset=UTF-8")
     public Map<String, Object> freeboardcomment_modify_action(
 //            @PathVariable(value = "fCoNo") int fCoNo,
-                                                              @RequestBody FreeBoardComment freeBoardComment) {
+            @RequestBody FreeBoardComment freeBoardComment) {
+
+
+        System.out.println(freeBoardComment.getFCoNo());
+        System.out.println("freeBoardComment.getFCommentContent()=="+freeBoardComment.getFCommentContent());
+        System.out.println(freeBoardComment.getUserId());
+
+
 
         Map<String, Object> resultMap = new HashMap<>();
         int code = 1;
@@ -110,11 +109,59 @@ public class FreeBoardCommentRestController {
     }
 
 
+
+
+//    @ApiOperation(value = "자유게시판 수정액션")
+//    @ApiImplicitParam(name = "fCoNo", value = "자유게시판 댓글 번호")
+//    @PutMapping(value = "freeboardcomment/{fCoNo}", produces = "application/json;charset=UTF-8")
+//    public Map<String, Object> freeboardcomment_modify_action(
+////            @PathVariable(value = "fCoNo") int fCoNo,
+//            @RequestBody FreeBoardComment freeBoardComment
+//    )
+//    {
+//
+//        Map<String, Object> resultMap = new HashMap<>();
+//        int code = 1;
+//        String msg = "성공";
+//        List<FreeBoardComment> data = new ArrayList<>();
+//        try {
+//            // nNo로 공지사항 1개 찾기, 수정 성공시 code 1
+////            FreeBoardComment findFreeBoardComment = freeBoardCommentService.selectByfCoNo(fCoNo);
+//            if (freeBoardComment != null) {
+////                freeBoardComment.setFCoNo(freeBoardComment.getFCoNo());
+////                System.out.println(fCoNo);
+////                System.out.println(fCoNo);
+////                System.out.println(fCoNo);
+//                System.out.println(freeBoardComment);
+//                System.out.println(freeBoardComment);
+//                System.out.println(freeBoardComment.getFCoNo());
+//                freeBoardCommentService.updateComment(freeBoardComment);
+//                code = 1;
+//                msg = "성공";
+//                // 수정 성공한 공지사항 객체 데이터에 붙여줌
+//                data.add(freeBoardComment);
+//            } else {
+//                // 실패시 code 2
+//                code = 2;
+//                msg = "공지사항 수정 실패";
+//            }
+//        } catch (Exception e) {
+//            // 에러 발생 시 code 3
+//            e.printStackTrace();
+//            code = 3;
+//            msg = "관리자에게 문의하세요.";
+//        }
+//        resultMap.put("code", code);
+//        resultMap.put("msg", msg);
+//        resultMap.put("data", data);
+//        return resultMap;
+//    }
+
+
     @ApiOperation(value = "자유게시판 댓글 삭제")
     @ApiImplicitParam(name = "fCoNo", value = "자유게시판 댓글 번호")
-    @DeleteMapping(value = "/freeboardcomment/{fCoNo}", produces = "application/json;charset=UTF-8")
-    public Map<String, Object> freeBoardDeleteAction(@PathVariable(value = "fCoNo") int fCoNo,
-                                                     HttpServletRequest request) {
+    @DeleteMapping(value = "freeboardcomment/{fCoNo}", produces = "application/json;charset=UTF-8")
+    public Map<String, Object> freeBoardDeleteAction(@PathVariable(value = "fCoNo") int fCoNo) {
 
         Map<String, Object> resultMap = new HashMap<>();
         int code = 1;

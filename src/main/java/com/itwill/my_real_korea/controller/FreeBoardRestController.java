@@ -95,7 +95,7 @@ public class FreeBoardRestController {
         try {
             // 페이지 번호(default 값 1)와 검색 keyword로 자유게시판 검색결과 리스트 찾기, 성공시 code 1
             freeBoardList = freeBoardService.selectSearchFreeBoardList(pageNo,keyword);
-            if (freeBoardList.getTotRecordCount() != 0 && freeBoardList != null) {
+            if (freeBoardList.getPageMaker().getTotCount() != 0 && freeBoardList != null) {
                 code = 1;
                 msg = "성공";
             } else {

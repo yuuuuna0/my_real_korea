@@ -66,7 +66,7 @@ function kakaopost() {
 				
 <div id="login">
 	<div class="text-center">
-		<img src="img/logo_sticky.png" alt="Image" data-retina="true" >
+		<img src="img/logo_myrealkorea_main2.png" alt="Image" data-retina="true" >
 	</div>
 	<hr>
 <table>
@@ -74,46 +74,47 @@ function kakaopost() {
 		<table>
 
         <div class="form-group">
-			<label>ID</label>
+			<label>아이디</label>
 			<input type="text" class=" form-control" id="userId" name="userId" placeholder="6 - 12글자의 영어 소문자와 숫자의 조합">
 			<input type="button" class="btn btn-info" onclick="idCheck();" value="아이디 중복 확인">
         </div>
 		<div class="form-group">
-			<label>Password</label>
-		    <input type="password" class=" form-control" id="password1" placeholder="Password"  name="password">
+			<label>비밀번호</label>
+			<input type="password" class="form-control" id="password1" placeholder="8 - 12글자의 영어, 숫자, 특수문자의 조합" name="password" oninput="validatePassword()">
+			<span id="passwordMsg"></span>
 		</div>
 		<div class="form-group">
-			<label>Confirm Password</label>
+			<label>비밀번호 확인</label>
 		    <input type="password" class=" form-control" id="password2" placeholder="Confirm password"  name="password2">
 		</div>
 		<div class="form-group">
-			<label>Name</label>
+			<label>이름</label>
 		    <input type="text" class=" form-control" name="name" placeholder="Name">
 		</div>
 		<div class="form-group">
-			<label>NickName</label>
+			<label>닉네임</label>
 		    <input type="text" class=" form-control" name="nickname" placeholder="NickName">
 		</div>
 		<div class="form-group">
-			<label>Phone</label>
+			<label>휴대폰 번호</label>
 		    <input type="text" class=" form-control" name="phone" placeholder="Phone">
 		</div>
 		<div class="form-group">
-			<label>Email</label>
+			<label>이메일</label>
 		    <input type="email" class=" form-control" name="email" placeholder="Email">
 		</div>
 		
 		<div class="form-group">
-			<label>Birth</label>
-		    <input type="text" class=" form-control" name="birth" placeholder="yyyy-MM-dd">
+			<label>생년월일</label>
+		    <input type="text" class=" form-control" name="birth" placeholder="yyyy-MM-dd"> 
 		</div>
 		<div class="form-group">
-			<label>Address</label>
+			<label>주소</label>
 		    <input type="text" class=" form-control" name="address" id="address">
 		    <input type="button" class="btn btn-info" value="우편번호찾기" onclick="kakaopost()">
 		</div>
 		<div class="form-group">
-			<label>Gender</label><br/><br/>
+			<label>성별</label><br/><br/>
 		    <input type="radio" name="gender" value="1"> 남&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		    <input type="radio" name="gender" value="2"> 여
 		</div>
@@ -208,109 +209,136 @@ function kakaopost() {
 	
 <script>
 
+
+
+//비밀번호 유효성 검사
+function validatePassword() {
+	const password = document.getElementById("password1").value;
+	const passwordMsg = document.getElementById("passwordMsg");
+
+	if (/([^a-zA-Z0-9~!@#$%^&*()_+,.?])/.test(password)) {
+		const invalidChar = password.match(/([^a-zA-Z0-9~!@#$%^&*()_+,.?])/)[1];
+		passwordMsg.textContent = "허용되지 않는 문자 " + invalidChar + " 가 포함되어 있습니다.";
+		passwordMsg.style.color = "red";
+		return false;
+	} else if (/(.)\1\1/.test(password)) {
+		passwordMsg.textContent =
+		"같은 문자를 연속으로 3개 이상 사용할 수 없습니다.";
+		passwordMsg.style.color = "red";
+		return false;
+	} else if (password.length < 8 || password.length > 12) {
+		passwordMsg.textContent =
+		"비밀번호는 8글자 이상 12글자 이하여야 합니다.";
+		passwordMsg.style.color = "red";
+		return false;
+	} else if (!/^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[~!@#$%^&*()_+,.?])/.test(password)) {
+		passwordMsg.textContent =
+		"비밀번호는 영어, 숫자, 특수문자를 모두 포함해야 합니다.";
+		passwordMsg.style.color = "red";
+		return false;
+	} else {
+		passwordMsg.textContent = "";
+		return true;
+	}
+}
+
+
+
 let isIdChecked = false;
 
 //아이디 유효성 검사, 중복 체크
-    function idCheck() {
-    	  const idValidate = /^[a-z][-_.a-z0-9]{5,11}$/g;
-    	  const userId = $('#userId').val().trim();
+function idCheck() {
+	const idValidate = /^[a-z][-_.a-z0-9]{5,11}$/g;
+	const userId = $('#userId').val().trim();
 
-    	  if (!idValidate.test(userId)) {
-    	    alert('사용 불가능한 아이디 형식입니다.');
-    	        
-    	    return $('#userId').val('');
-    	  }
+	if (!idValidate.test(userId)) {
+		alert('사용 불가능한 아이디 형식입니다.');
+		return $('#userId').val('');
+	}
+	if (userId === '') {
+		alert('아이디를 입력해주세요.');
+		return;
+	}
 
-    	  if (userId === '') {
-    	    alert('아이디를 입력해주세요.');
-    	    return;
-    	  }
-
-    	  $.ajax({
-    	    url: './idCheck',
-    	    type: 'post',
+		$.ajax({
+			url: './idCheck',
+			type: 'post',
     	    data: { userId: userId },
     	    success: function(cnt) {
-    	      if (cnt == 0) {
-    	        alert('사용 가능한 아이디입니다.');
-    	        isIdChecked = true;
-    	      } else {
-    	        alert('이미 사용중인 아이디입니다.');
-    	        $('#userId').val('');
-    	      }
-    	    },
-    	    error: function() {
-    	      alert('에러입니다.');
+				if (cnt == 0) {
+					alert('사용 가능한 아이디입니다.');
+					isIdChecked = true;
+				} else {
+					alert('이미 사용중인 아이디입니다.');
+					$('#userId').val('');
+				}
+			},
+			error: function() {
+				alert('에러입니다.');
     	    }
-    	  });
-    	};
+		});
+};
     	
     	
-    	function userCreate() {
-    		if (document.f.userId.value == "") {
-    			alert("사용자 아이디를 입력하세요.");
-    			f.userId.focus();
-    			return false;
-    		}
-    	    if (!isIdChecked) {
-    	        alert("아이디 중복 확인 버튼을 클릭해주세요.");
-    	        return false;
-    	    }
-    		if (document.f.password1.value == "") {
-    			alert("비밀번호를 입력하세요.");
-    			f.password.focus();
-    			return false;
-    		}
-    		if (document.f.password2.value == "") {
-    			alert("비밀번호확인을 입력하세요.");
-    			f.password2.focus();
-    			return false;
-    		}
-    		if (document.f.name.value == "") {
-    			alert("이름을 입력하세요.");
-    			f.name.focus();
-    			return false;
-    		}
-    		if (document.f.nickname.value == "") {
-    			alert("닉네임을 입력하세요.");
-    			f.email.focus();
-    			return false;
-    		}
-    		if (document.f.phone.value == "") {
-    			alert("휴대폰 번호를 입력하세요.");
-    			f.email.focus();
-    			return false;
-    		}
-    		if (document.f.email.value == "") {
-    			alert("이메일 주소를 입력하세요.");
-    			f.email.focus();
-    			return false;
-    		}
-    		if (document.f.birth.value == "") {
-    			alert("생년월일을 입력하세요.");
-    			f.email.focus();
-    			return false;
-    		}
-    		if (document.f.address.value == "") {
-    			alert("주소를 입력하세요.");
-    			f.email.focus();
-    			return false;
-    		}
-    		if (document.f.gender.value == "") {
-    			alert("성별을 선택하세요.");
-    			f.email.focus();
-    			return false;
-    		}
-    		if (document.f.password.value != document.f.password2.value) {
-    			alert("비밀번호와 비밀번호확인은 일치하여야합니다.");
-    			f.password.focus();
-    			f.password.select();
-    			return false;
-    		}
-    		document.f.action = "user-write-action";
-    		document.f.method='POST';
-    		document.f.submit();
-    	}    	
+function userCreate() {
+	if (document.f.userId.value == "") {
+		alert("사용자 아이디를 입력하세요.");
+		f.userId.focus();
+		return false;
+	}
+	if (!isIdChecked) {
+		alert("아이디 중복 확인 버튼을 클릭해주세요.");
+		return false;
+	}
+	if (!validatePassword()) {
+		return false;
+	}
+	if (document.f.password.value != document.f.password2.value) {
+		alert("비밀번호와 비밀번호확인은 일치하여야합니다.");
+		f.password.focus();
+		f.password.select();
+		return false;
+	}
+	if (document.f.name.value == "") {
+		alert("이름을 입력하세요.");
+		f.name.focus();
+		return false;
+	}
+	if (document.f.nickname.value == "") {
+		alert("닉네임을 입력하세요.");
+		f.email.focus();
+		return false;
+	}
+	if (document.f.phone.value == "") {
+		alert("휴대폰 번호를 입력하세요.");
+		f.email.focus();
+		return false;
+	}
+	if (document.f.email.value == "") {
+		alert("이메일 주소를 입력하세요.");
+		f.email.focus();
+		return false;
+	}
+	if (document.f.birth.value == "") {
+		alert("생년월일을 입력하세요.");
+		f.email.focus();
+		return false;
+	}
+	if (document.f.address.value == "") {
+		alert("주소를 입력하세요.");
+		f.email.focus();
+		return false;
+	}
+	if (document.f.gender.value == "") {
+		alert("성별을 선택하세요.");
+		f.email.focus();
+		return false;
+	}
+		
+	document.f.action = "user-write-action";
+	document.f.method='POST';
+	document.f.submit();
+ }    	
 
 </script>
   </body>

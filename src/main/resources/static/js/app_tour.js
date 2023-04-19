@@ -44,7 +44,7 @@ function selectedTourList(){
 };
 
 //1. 검색, 필터, 정렬 한 투어리스트 
-$(document).on('change',$('#sort-by,#city-checkbox,#toType-checkbox'),selectedTourList);
+$(document).on('change','#sort-by,#city-checkbox,#toType-checkbox',selectedTourList);
 $(document).on('click',"#tour-search-btn",selectedTourList);
 
 
@@ -79,7 +79,7 @@ $(document).on('click','#submitReviewBtn',function(){
 	let toReviewTitle=$('#toReviewTitleM').val();
 	let toReviewStar=$('#toReviewStarM').val();	//undefined
 	let toReviewContent=$('#toReviewContentM').val();
-	let toReviewImg=$('#toReviewImg').val();
+
 	
 	let url="tour-review-action";
 	let method="POST";

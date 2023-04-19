@@ -208,7 +208,8 @@ CREATE TABLE tour_review(
 		to_review_img                 		VARCHAR2(500)		 NULL ,
 		to_review_star                		NUMBER		 NOT NULL,
 		to_no                         		NUMBER		 NULL ,
-		user_id                       		VARCHAR2(50)		 NULL 
+		user_id                       		VARCHAR2(50)		 NULL ,
+		to_review_upload              		VARCHAR2(500)		 NULL 
 );
 
 DROP SEQUENCE tour_review_to_review_no_SEQ;

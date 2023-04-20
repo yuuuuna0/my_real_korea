@@ -67,4 +67,14 @@ public class TourReviewServiceImpl implements TourReviewService {
 		return tourScore;
 	}
 
+	@Override
+	public int updateToReviewUpload(String toReviewUpload, int toReviewNo) throws Exception {
+		return tourReviewDao.updateToReviewUpload(toReviewUpload, toReviewNo);
+	}
+
+	@Override
+	public int updateToReviewImg(String toReviewImg, int toReviewNo) throws Exception {
+		return tourReviewDao.updateToReviewImg(toReviewImg, toReviewNo);
+	}
+
 }

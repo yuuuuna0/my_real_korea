@@ -69,21 +69,72 @@ $(document).on('show.bs.modal','#myReviewModal',function(){
 	  $('#myReviewModal').find('#userIdM').val(userId);
 });
 //3-2. 리뷰남기기 버튼 클릭시
-$(document).on('click','#submitReviewBtn',function(){
+$(document).on('click','#submitReviewBtn',function(e){
 
-	e.preventDefault();	//폼 전송 방지
+	/****************** 1. form으로 전달하는 방법 *************/
+	let form=$('tourReviewF');
+	if(/*form.get(0).checkValidity()===*/false){
+		//폼 유효성 검사 실패시 
+		form.find(':invalid').first().focus();	//폼 유효성 검사 실패한 요소에 커서 두기
+		//이벤트 중지
+		e.preventDefault();
+		e.stopPropagation();
+	} else{
+		//폼 유효성 검사 성공시
+		let url="tour-review-action";
+		let method="POST";
+		let async=true;
+		let formData=new FormData();
+		let toReviewImg;
+		
+		formData.append('toNo',$('#toNoM').val());
+		formData.append('userId',$('#userIdM').val());
+		formData.append('toReviewTitle',$('#toReviewTitleM').val());
+		formData.append('toReviewStar',$('#toReviewStarM').val());
+		formData.append('toReviewContent',$('#toReviewContentM').val());
+		
+		let uploadImg=$('#toReviewUploadM');
+		//이미지 업로드시 & 업로드 안할 시 나눠서 처리함 
+		if(uploadImg.prop('files') && uploadImg.prop('files').length>0){
+			//파일 업로드시 업로드한 이미지 폼데이터에 추가 
+			formData.append('file',uploadImg.prop('files')[0]);
+		} else{
+			//파일 선택 안되면 hidden으로 넣은 toReviewImg 선택해서 폼데이터에 추가
+			//toReviewImg=$('toReviewImgM').val();
+			formData.append('toReviewImg',toReviewImg);
+		}
+	$('#myReviewModal').modal('hide');
 	
+	$.ajax({
+		method:method,
+		url:url,
+		data:formData,
+		processData:false,
+		contentType:false,
+		success:function(resultJson){
+			if(resultJson.code==1){
+				//window.location.href=`tour-detail?toNo=${formData.get('toNo')}`;
+				View.render("tourReview-template",resultJson,'#tourReviewDiv');
+			} else{
+				alert(resultJson.msg);
+			}
+		},
+		error:function(err){
+			alert(err.status);
+		},
+		async:async
+	});
+		e.preventDefault();	////폼 제출 방지
+	}
+	
+	/***************** 2. 데이터 하나하나 전달하는 방법 **********
 	//이미지랑 별점 해결해야함
 	let toNo=$('#toNoM').val();
 	let userId=$('#userIdM').val();
 	let toReviewTitle=$('#toReviewTitleM').val();
 	let toReviewStar=$('#toReviewStarM').val();	//undefined
 	let toReviewContent=$('#toReviewContentM').val();
-
-	
-	let url="tour-review-action";
-	let method="POST";
-	let contentType="application/json;charset=UTF-8";
+	let toReviewImg=$('#toReviewImg').val();
 	let sendData={
 		toNo:toNo,
 		userId:userId,
@@ -92,25 +143,34 @@ $(document).on('click','#submitReviewBtn',function(){
 		toReviewContent:toReviewContent,
 		toReviewImg:toReviewImg
 	};
-	let async=true;
+	******************************************************/
+});
 	
-	$('#myReviewModal').modal('hide');
+//4. 투어리뷰 삭제
+$(document).on('click',"button[name='deleteToReview']",function(e){
+	let urlSearchParams=new URLSearchParams(window.location.search);
+	
+	let toNo=urlSearchParams.get('toNo');
+	let toReviewNo=e.target.value;
+	console.log(toNo);
+	let url= `tour-review-delete/${toNo}/${toReviewNo}`;
+	let method='DELETE';
+	let contentType='application/json;charset=UTF-8';
+	let sendData={};
+	let async=true;
 	
 	Request.ajaxRequest(url,method,contentType,
 						JSON.stringify(sendData),	//json으로 보낼 때 전부 string화 해 줘야 한다.
 						function(resultJson){
 							//code=1 성공 -> render , 아닐때 msg
 							if(resultJson.code==1){
-								let toNo=$('#toNoM').val();
-								//window.location.href=`tour-detail?toNo=${toNo}`;
-								View.render('#tourReview-template',resultJson,'#tourReviewDiv')
+								window.location.href=`tour-detail?toNo=${toNo}`;
+								//View.render("tourReview-template",resultJson,'#tourReviewDiv');
 							} else{
 								alert(resultJson.msg);
 							}
 						},async);
-	
 });
-
 
 
 

@@ -216,7 +216,7 @@ public class UserController {
 	
 	
 	
-	
+	/*
 	//회원 정보 수정 폼
 	@LoginCheck
 	@PostMapping("/user-modify")
@@ -227,7 +227,7 @@ public class UserController {
 		request.setAttribute("loginUser", loginUser);
 		return "user-modify";
 	}
-
+	 */
 	
 	//회원 정보 수정 액션
 	@LoginCheck

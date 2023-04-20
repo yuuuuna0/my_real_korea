@@ -36,6 +36,12 @@
 <script  defer type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.2/handlebars.min.js"></script>
 -->	
 
+	
+	<!-- Handlebars -->
+	<script  defer type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.2/handlebars.min.js"></script>
+	<script src="js/app_user.js" type="module"></script>
+	
+	
 <script type="text/javascript">
 
 	function userModify() {
@@ -168,6 +174,12 @@
 <button class="btn_1 green" type="button" onclick="userModify();">프로필 수정</button>
 <button class="btn_1 green" type="button" onclick="userRemove();">회원 탈퇴</button>
 
+	<input id="btn-user-modify-form" value="프로필 수정" class="btn_1 green" type="button"> 
+	
+		<script id="user-modify-form-template" type="text/x-handlebars-template">
+				<h1> 수정 폼 나와라 </h1>
+		</script>
+						 
 						<!-- End row -->
 
 </section>

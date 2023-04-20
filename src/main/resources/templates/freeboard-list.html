@@ -208,7 +208,8 @@
 							<ul >
 								<li><a th:each="freeBoard:${freeBoardList}" th:href="@{freeBoard-search(keyword=${freeBoard.getCity().cityName})}" th:text="${freeBoard.getCity().cityName}" >test</a>
 								<hr>
-									<a class="btn_1" style="color:white;  text-align:center" href="fBoWrite" role="button">자유게시판 글쓰기</a>
+<!--									<a class="btn_1" style="color:white;  text-align:center" href="fBoWrite" role="button">자유게시판 글쓰기</a>-->
+									<a class="btn_1" style="color:white;  text-align:center" id="freeboard-write-form" href="freeboard-write-form">자유게시판 글쓰기</a>
 						</li>
 							
 							</ul>

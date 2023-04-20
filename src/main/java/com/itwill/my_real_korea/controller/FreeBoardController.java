@@ -4,10 +4,12 @@ import com.itwill.my_real_korea.dto.City;
 import com.itwill.my_real_korea.dto.freeboard.FreeBoard;
 import com.itwill.my_real_korea.dto.freeboard.FreeBoardComment;
 import com.itwill.my_real_korea.dto.user.User;
+import com.itwill.my_real_korea.service.city.CityService;
 import com.itwill.my_real_korea.service.freeboard.FreeBoardCommentService;
 import com.itwill.my_real_korea.service.freeboard.FreeBoardService;
 import com.itwill.my_real_korea.service.user.UserService;
 import com.itwill.my_real_korea.util.PageMakerDto;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,12 +26,14 @@ public class FreeBoardController {
     private FreeBoardService freeBoardService;
     private FreeBoardCommentService freeBoardCommentService;
     private UserService userService;
+    private CityService cityService;
 
     @Autowired
-    public FreeBoardController(FreeBoardService freeBoardService, FreeBoardCommentService freeBoardCommentService, UserService userService) {
+    public FreeBoardController(FreeBoardService freeBoardService, FreeBoardCommentService freeBoardCommentService, UserService userService, CityService cityService) {
         this.freeBoardService = freeBoardService;
         this.freeBoardCommentService = freeBoardCommentService;
         this.userService = userService;
+        this.cityService = cityService;
     }
 
     @GetMapping(value = "/freeboard-list")
@@ -138,9 +142,18 @@ public class FreeBoardController {
         return "freeboard-detail";
     }
 
-    @LoginCheck
+    //    @LoginCheck
     @GetMapping("/freeboard-write-form")
-    public String freeBoardWriteForm(@ModelAttribute City city) {
+    public String freeBoardWriteForm(HttpSession session, Model model) throws Exception {
+        if (session != null) {
+            User loginUser = (User) session.getAttribute("loginUser");
+            model.addAttribute("loginUser", loginUser);
+        }
+        List<City> allCity = cityService.findAllCity();
+        model.addAttribute(allCity);
+
+
+////
         return "freeboard-write-form";
     }
 

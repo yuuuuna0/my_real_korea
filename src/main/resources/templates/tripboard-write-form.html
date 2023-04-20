@@ -138,9 +138,8 @@
 								</ul>
 							</div>
 						</div>
-						<form id="tripboardWriteForm" name="tripboardWriteForm" action="#" enctype="multipart/form-data">
-							
-						<br>
+						<form id="tripboardWriteForm" name="tripboardWriteForm" enctype="multipart/form-data">
+							<input type="hidden" id="userId" th:value="${session.loginUser.userId}">
 						<div>
 							&emsp;&emsp;&emsp;<button id="city_btn" value="">서울</button>&ensp;
 							<button id="city_btn">경기</button>&ensp;
@@ -169,6 +168,7 @@
 							</div>
 						</div>
 						<br>
+						
 						<div class="form-group">
 							<label>지역</label>
 							<input class="form-control style_2" type="text" name="cityNo" id="cityNo">

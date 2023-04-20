@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -18,8 +19,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.itwill.my_real_korea.dto.City;
 import com.itwill.my_real_korea.dto.notice.Notice;
 import com.itwill.my_real_korea.dto.tripboard.TripBoard;
+import com.itwill.my_real_korea.service.city.CityService;
 import com.itwill.my_real_korea.service.tripboard.TripBoardService;
 import com.itwill.my_real_korea.util.PageMakerDto;
 
@@ -31,14 +34,15 @@ public class TripBoardRestController {
 	
 	@Autowired
 	private TripBoardService tripBoardService;
+	@Autowired
+	private CityService cityService;
 	/*
 	* 동행 게시글 추가 
 	*/
-	@AdminCheck
 	@LoginCheck
 	@ApiOperation(value = "동행게시글 추가")
-	@PostMapping(value = "/tripboard_write_action", produces = "application/json;charset=UTF-8")
-	public Map<String, Object> tripboard_write_action(@RequestBody TripBoard tripBoard){
+	@PostMapping(value = "/tripboard", produces = "application/json;charset=UTF-8")
+	public Map<String, Object> tripboard_write_action(@ModelAttribute TripBoard tripBoard, @RequestParam int cityNo){
 		Map<String, Object> resultMap = new HashMap<>();
 		int code = 1;
 		String msg = "성공";
@@ -46,6 +50,8 @@ public class TripBoardRestController {
 		
 		try {
 			// 동행 게시글 쓰기, 성공시 code 1
+			City city=cityService.findByCityNo(cityNo);
+			tripBoard.setCity(city);
 			tripBoardService.insertTripBoard(tripBoard);
 			code = 1;
 			msg = "성공";
@@ -66,8 +72,7 @@ public class TripBoardRestController {
 	
 	/*
 	 * 동행 게시글 수정
-	 */									
-	@AdminCheck
+	 */				
 	@LoginCheck
 	@ApiOperation(value = "동행게시글 수정")
 	@ApiImplicitParam(name = "tBoNo", value = "동행게시글 번호")/*Api 의 파라미터(하나)만 가지고 오려고 사용*/
@@ -107,7 +112,6 @@ public class TripBoardRestController {
 	/*
 	 * 동행 게시글 삭제
 	 */
-	@AdminCheck
 	@LoginCheck
 	@ApiOperation(value = "동행 게시글 삭제")/*swagger 에서 출력 값*/
 	@ApiImplicitParam(name = "tBoNo", value = "동행 게시글 번호")/*swagger 에서 출력 값*/

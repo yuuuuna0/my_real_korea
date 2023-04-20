@@ -270,6 +270,8 @@ insert into trip_board(t_bo_no,t_bo_title,t_bo_content,t_bo_date,t_bo_readcount,
                     t_bo_img,t_bo_start_date,t_bo_end_date,t_bo_style,hashtag,city_no,user_id) 
             values (trip_board_t_bo_no_seq.nextval,'대전 갈래11','대전 갈래11',sysdate,67,1,8,
                     'img11.png','2023-07-02','2023-07-12','계획형','맛있는거좋아하는사람',5,'user2');
+                    
+
 
 
 -- 동행게시판 댓글 insert

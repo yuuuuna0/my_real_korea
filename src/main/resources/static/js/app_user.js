@@ -104,15 +104,25 @@ $(document).ready(function() {
   });
 });
 
-
-
 //아이디, 비밀번호 찾기 폼
 $('#menu-user-find').click(function(e){
 	View.render('#user-find-template', {}, '#user-login');
 	e.preventDefault();
 });
 
-
+// 프로필 수정 폼 
+$('#btn-user-modify-form').click(function(e) {
+	 console.log("click!! >> "+e.target)
+		Request.ajaxRequest('user-view',
+							'GET',
+							'application/json;charset=UTF-8',
+							 null,
+							function(resultJson){
+								   View.render('#user-modify-form-template',resultJson);
+							},
+							true);
+		e.preventDefault();
+});
 
 
 

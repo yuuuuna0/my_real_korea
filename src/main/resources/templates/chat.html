@@ -110,7 +110,7 @@
                     <div class="input-group mb-0">
                     
                         <div id="chatConnect">
-						    <button onclick="connectSocket()">채팅 시작하기</button>
+						    <button id="chat-start-btn">채팅 시작하기</button>
 						</div>
                         
                         <div class="input-group mb-3">
@@ -127,51 +127,6 @@
 </div>
 </div>
    
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.5/sockjs.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-   
-<script type="text/javascript">
-
-    let sock;
-
-    function connectSocket() {
-        sock = new SockJS("ws/chat");
-        sock.onopen = function () {
-            alert('연결에 성공하였습니다.');
-            
-            sock.onmessage = (data => {
-            	 const newChatBox = $('<div class="message other-message float-right"></div>'); // 새로운 chatBox 생성
-                 $("<div>" + data.data + "</div>").prependTo(newChatBox); // 데이터를 새로 생성한 chatBox 안에 추가
-                 $('#chatContainer').prepend(newChatBox); // chatContainer의 맨 앞에 새로 생성한 chat-box 요소를 추가
-            });
-            
-            $('#chatConnect').hide();
-        }
-        sock.onerror = function (e) {
-            alert('연결에 실패하였습니다.');
-        }
-        sock.onclose = function () {
-            alert('연결을 종료합니다.');
-        };
-    }
-
-    function sendMessage() {
-        sock.send($("#msg").val());
-        $('#msg').val("");
-    }
-
-    $("#msg").keyup(e => {
-        if (e.keyCode == 13) {
-            sendMessage();
-        }
-    });
-
-    $("#button-send").click(() => {
-        sendMessage();
-    });
-</script>
-
-
 <style type="text/css">
 body{
     background-color: #f4f7f6;
@@ -433,8 +388,9 @@ body{
 }
 </style>
 
-<script type="text/javascript">
-
-</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.5/sockjs.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+   
+<script src="js/app_chat.js" type="module"></script>
 </body>
 </html>

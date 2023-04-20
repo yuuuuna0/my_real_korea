@@ -31,6 +31,50 @@
 	<!-- CUSTOM CSS -->
 	<link href="css/custom.css" rel="stylesheet">
 
+	<title>Button</title>
+    <style>
+        #city_btn{
+            border-radius: 5px;
+            border: 2px solid #626262;
+            background-color: rgba(0,0,0,0);
+            color: #626262;
+            font-weight: bold;
+            font-size: 14px;
+            padding: 9px;
+            width: 90px;
+        }
+        #city_btn:hover{
+            border-radius: 5px;
+            border: 2px solid #626262;
+            background-color: #626262;
+            color: #FFFFFF;
+            font-weight: bold;
+            font-size: 14px;
+            padding: 9px;
+            width: 90px;
+        }
+        #style_btn{
+            border-radius: 5px;
+            border: 2px solid #F089A4;
+            background-color: rgba(0,0,0,0);
+            color: #F089A4;
+            font-weight: bold;
+            font-size: 14px;
+            padding: 7px;
+            width: 80px;
+        }
+        #style_btn:hover{
+            border-radius: 5px;
+            border: 2px solid #F089A4;
+            background-color: #F089A4;
+            color: #FFFFFF;
+            font-weight: bold;
+            font-size: 14px;
+            padding: 7px;
+            width: 80px;
+        }
+    </style>
+    
 </head>
 
 <body>
@@ -83,31 +127,107 @@
 				<div class="col-lg-9">
 					<div class="box_style_1">
 						<div class="post nopadding">
-							<img src="img/blog-1.jpg" alt="Image" class="img-fluid">
+							<!-- <img src="img/blog-1.jpg" alt="Image" class="img-fluid">  -->
 							<div class="post_info clearfix">
 								<div class="post-left">
 									<ul>
-										<li><i class="icon-calendar-empty"></i>On <span>12 Nov 2020</span>
+										<li>
+										<h2>동행게시판 수정</h2>
 										</li>
-										<li><i class="icon-inbox-alt"></i>In <a href="#">Top tours</a>
-										</li>
-										<li><i class="icon-tags"></i>Tags <a href="#">Works</a> <a href="#">Personal</a>
-										</li>
-									</ul>
+										</ul>
 								</div>
-								<div class="post-right"><i class="icon-comment"></i><a href="#">25 </a>Comments</div>
 							</div>
-							<h2>Duis aute irure dolor in reprehenderit</h2>
-							<p>
-								Praesent vestibulum molestie lacus. Aenean nonummy hendrerit mauris. Phasellus porta. Fusce suscipit varius mi nascetur ridiculus mus. Nulla dui. Fusce feugiat malesuada odio. Morbi nunc odio, gravida at, cursus nec, luctus a, lorem.....
-							</p>
-							<p>
-								Aenean iaculis sodales dui, non hendrerit lorem rhoncus ut. Pellentesque ullamcorper venenatis elit idaipiscingi Duis tellus neque, tincidunt eget pulvinar sit amet, rutrum nec urna. Suspendisse pretium laoreet elit vel ultricies. Maecenas ullamcorper ultricies rhoncus. Aliquam erat volutpat.
-							</p>
-							<blockquote class="styled">
-								<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. </p>
-								<small>Someone famous in <cite title="">Body of work</cite></small>
-							</blockquote>
+							
+							<form id="tripboardModifyForm" name="tripboardModifyForm" enctype="multipart/form-data">
+							<input type="hidden" id="userId" th:value="${session.loginUser.userId}">
+							<div>
+							&emsp;&emsp;&emsp;<button id="city_btn" value="">서울</button>&ensp;
+							<button id="city_btn">경기</button>&ensp;
+							<button id="city_btn">강원</button>&ensp;
+							<button id="city_btn">부산</button>&ensp;
+							<button id="city_btn">대전</button>&ensp;
+							<button id="city_btn">전주</button>&ensp;
+							<button id="city_btn">제주</button>&ensp;
+							</div>
+							<br>
+							<br>
+							<div>
+							<br>
+							&emsp;&emsp;&emsp;<label><i class="icon-quote-left"> 저는</i></label>
+							<br>
+							<div>
+							&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<button id="style_btn">계획적인</button>&ensp;
+								<button id="style_btn">즉흥적인</button>&ensp;
+								<button id="style_btn">느긋한</button>&ensp;
+								<button id="style_btn">외향적인</button>&ensp;
+								<button id="style_btn">사진찍는</button>&ensp;
+								<button id="style_btn">뚜벅이</button>&ensp;
+							</div>
+							<div style="width: 100%; text-align: right;">
+							  <label>여행자입니다. <i class="icon-quote-right"></i></label>&emsp;&emsp;&emsp;
+							</div>
+							</div>
+							<br>
+							
+							<div class="form-group">
+								<label>지역</label>
+								<input class="form-control style_2" type="text" name="cityNo" id="cityNo" th:value="${tripBoard.City.cityNo}">
+							</div>
+							<div class="form-group">
+								<label>여행스타일</label>
+								<input class="form-control style_2" type="text" name="tBoStyle" id="tBoStyle" th:value="${tripBoard.tBoStyle}">
+							</div>
+								<div class="row">
+									<div class="col-md-4">
+										<div class="form-group">
+											<label><i class="icon-calendar-7"></i> 여행 시작일</label>
+											<input class="start-date-pick form-control" data-date-format="yyyy-mm-dd, D" type="text" id="tBoStartDate" name="tBoStartDate" th:value="${#dates.format(tripBoard.tBoStartDate, 'yyyy-MM-dd')}" >
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-4">
+										<div class="form-group">
+											<label><i class="icon-calendar-7"></i> 여행 종료일</label>
+											<input class="end-date-pick form-control" data-date-format="yyyy-mm-dd, D" type="text" id="tBoEndDate" name="tBoEndDate" th:value="${#dates.format(tripBoard.tBoEndDate, 'yyyy-MM-dd')}">
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-2">
+										<div class="form-group">
+											<label><i class="icon-user-2"></i> 동행인원</label>
+										</div>
+									</div>
+									<div class="col-2">
+										<div class="form-group">
+											<div class="numbers-row">
+												<input type="text" value="1" name="tBoPerson" id="tBoPerson" class="qty2 form-control" th:value="${tripBoard.tBoPerson}">
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="form-group">
+									<label>제목</label>
+									<input class="form-control style_2" type="text" name="tBoTitle" id="tBoTitle" th:value="${tripBoard.tBoTitle}">
+								</div>
+								<div class="form-group">
+									<label>내용</label>
+									<textarea class="form-control style_2" name="tBoContent" id="tBoContent" style="height:150px;" th:value="${tripBoard.tBoContent}"></textarea>
+								</div>
+								<div class="form-group">
+									<label><i class="icon-tag"></i> 해시태그</label>
+									<input class="form-control style_2" type="text" name="hashtag" id="hashtag" th:value="${tripBoard.hashtag}">
+								</div>
+							</form>
+							<br>
+							<br>
+							<div class="form-group">
+								<button type="submit" class="btn_1 green" id="tripboard-modify-action">수정</button>
+								<input type="hidden" id="modify-tBoNo" th:value=${tripBoard.tBoNo}>
+								<a th:href=@{tripboard-detail(tBoNo=${tripBoard.tBoNo})} class="btn_1 green">취소</a>
+							</div>
+							
 						</div>
 						<!-- end post -->
 					</div>
@@ -331,6 +451,58 @@
 	<script src="js/common_scripts_min.js"></script>
 	<script src="js/functions.js"></script>
 	
+	<!-- Date and time pickers -->
+	<script src="js/jquery.sliderPro.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function ($) {
+			$('#Img_carousel').sliderPro({
+				width: 960,
+				height: 500,
+				fade: true,
+				arrows: true,
+				buttons: false,
+				fullScreen: false,
+				smallSize: 500,
+				startSlide: 0,
+				mediumSize: 1000,
+				largeSize: 3000,
+				thumbnailArrows: true,
+				autoplay: false
+			});
+		});
+	</script>
+
+	<!-- Date and time pickers -->
+	<script>
+		$('#tBoStartDate').datepicker('setDate', 'today');
+	</script>
+	
+	
+	<!-- Date and time pickers -->
+	<script src="js/jquery.sliderPro.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function ($) {
+			$('#Img_carousel').sliderPro({
+				width: 960,
+				height: 500,
+				fade: true,
+				arrows: true,
+				buttons: false,
+				fullScreen: false,
+				smallSize: 500,
+				startSlide: 0,
+				mediumSize: 1000,
+				largeSize: 3000,
+				thumbnailArrows: true,
+				autoplay: false
+			});
+		});
+	</script>
+
+	<!-- Date and time pickers -->
+	<script>
+		$('#tBoEndDate').datepicker('setDate', 'today');
+	</script>
 
 </body>
 

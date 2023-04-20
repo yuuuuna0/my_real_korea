@@ -24,25 +24,10 @@ public class ChatController {
 	"/chat" 경로로 GET 요청이 들어오면 "chat" 뷰를 반환하며, 이 과정에서 로그를 출력
 	 */
 	@GetMapping("/chat")
-	public String chatGET() {
+	public String chat() {
 		
 		log.info("@ChatController, chat GET()");
 		return "chat";
-	}
-	
-	// TEST 용 임시
-	@GetMapping("/chat_room")
-	public String chatRoom() {
-		
-		log.info("@ChatController, chat GET()");
-		return "chat_room";
-	}
-	// TEST 용 임시
-	@GetMapping("/chat_appointment")
-	public String chatApp() {
-		
-		log.info("@ChatController, chat GET()");
-		return "chat_appointment";
 	}
 	
 	

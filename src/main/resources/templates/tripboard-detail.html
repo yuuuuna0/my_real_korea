@@ -208,8 +208,9 @@
 					<form name="tt" method="post">
 						<input type="hidden" name="tCoNo" value="10"/>
 						<input type="hidden" name="tBoNo" value="" th:value="${tripBoard.tBoNo}"/>
-					    <input type="hidden" name="userId" value="user1"/>
-					    
+					    <div th:if="${loginUser != null}">
+					    <input type="hidden" name="userId" value="user1" th:value="${loginUser.userId}"/>
+					    </div>
 						<div class="form-group">
 							<textarea  class="form-control style_2" style="height:150px;" placeholder="댓글을 써주세요." name="tCommentContent"></textarea>
 						</div>

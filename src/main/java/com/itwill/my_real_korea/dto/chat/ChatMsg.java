@@ -1,6 +1,7 @@
 package com.itwill.my_real_korea.dto.chat;
 
-import java.sql.Date;
+
+import java.util.Date;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

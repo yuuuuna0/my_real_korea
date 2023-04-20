@@ -261,27 +261,35 @@ public class UserRestController {
 	
 	@ApiOperation(value = "내 프로필 수정 폼 불러오기")
 	@LoginCheck
-	@PostMapping("/user-view")
-	public Map<String,Object> user_modify_form (HttpServletRequest request) throws Exception{
-		Map<String,Object> resultMap = new HashMap<>();
-		int code=1;
-		String url="user-view";
-		String msg="성공";
+	@GetMapping("/user-modify-form")
+	public Map<String, Object> user_modify_form(HttpServletRequest request) throws Exception {
+		Map<String, Object> resultMap = new HashMap<>();
+
+		int code = 1;
+		String msg = "성공";
 		List<User> data = new ArrayList<User>();
-		
-		HttpSession session = request.getSession();
-		User loginUser = (User) session.getAttribute("loginUser");
-		loginUser = userService.findUser(loginUser.getUserId());
-		request.setAttribute("loginUser", loginUser);
-		
-		data.add(loginUser);
-		
+
+		try {
+			HttpSession session = request.getSession();
+			User loginUser = (User) session.getAttribute("loginUser");
+			loginUser = userService.findUser(loginUser.getUserId());
+			code = 1;
+			msg = "성공";
+			data.add(loginUser);
+
+		} catch (Exception e) {
+			code = 2;
+			msg = "실패";
+			e.printStackTrace();
+		}
 		resultMap.put("code", code);
-		resultMap.put("url", url);
 		resultMap.put("msg", msg);
-		resultMap.put("data",data);
+		resultMap.put("data", data);
 		return resultMap;
 	}
+	
+	
+	
 
 }
 

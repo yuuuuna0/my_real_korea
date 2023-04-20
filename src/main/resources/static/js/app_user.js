@@ -111,18 +111,24 @@ $('#menu-user-find').click(function(e){
 });
 
 // 프로필 수정 폼 
-$('#btn-user-modify-form').click(function(e) {
-	 console.log("click!! >> "+e.target)
-		Request.ajaxRequest('user-view',
-							'GET',
-							'application/json;charset=UTF-8',
-							 null,
-							function(resultJson){
-								   View.render('#user-modify-form-template',resultJson);
-							},
-							true);
-		e.preventDefault();
+$(document).on('click', '#btn-user-modify-form', function(e) {
+	console.log("click!! >> " + e.target)
+	Request.ajaxRequest('user-modify-form',
+						'GET',
+						'application/json;charset=UTF-8',
+						{},
+						function(resultJson) {
+							console.log(">>>>>>>>>>>>>>>>>>>>>>>>>> ")
+							if(resultJson.code == 1){
+								View.render('#user-modify-form-template', resultJson, '#user-detail-form');
+							} else {
+								alert(resultJson.msg);
+							}
+						},
+						true);
+	e.preventDefault();
 });
+
 
 
 

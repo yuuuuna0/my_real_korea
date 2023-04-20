@@ -30,7 +30,7 @@ class TripBoardDaoImplTest {
 	 @Disabled
 	 @Test
 	 void testInsertTripBoard() throws Exception { 
-		 int rowCount = tripBoardDao.insertTripBoard(new TripBoard(0, "테스트추추", "테스트333", new Date(), 0, 1, 5, "테스트사진1.png", new Date(), new Date(), "무계획", "아무나다좋아", new City(1, "서울", 1, 1), "user1"));
+		 int rowCount = tripBoardDao.insertTripBoard(new TripBoard(0, "테스트추추", "테스트333", new Date(), 0, 1, 5, "테스트사진1.png", new Date(), new Date(), "무계획", "아무나다좋아", "user1"));
 		 assertEquals(rowCount, 1); 
 	 }
 	 
@@ -41,7 +41,7 @@ class TripBoardDaoImplTest {
 	 @Disabled
 	 @Test 
 	 void testUpdateTripBoard() throws Exception { 
-		 int rowCount = tripBoardDao.updateTripBoard(new TripBoard(26, "제목또수정", "내용또수정", new Date(), 3, 0, 1, "수정사진1.png", new Date(), new Date(), "즉흥적", "맛집투어", new City(4, "부산", 4, 4), "user2"));
+		 int rowCount = tripBoardDao.updateTripBoard(new TripBoard(26, "제목또수정", "내용또수정", new Date(), 3, 0, 1, "수정사진1.png", new Date(), new Date(), "즉흥적", "맛집투어", "user2"));
 		 assertEquals(rowCount, 1); 
 	 }
 	 

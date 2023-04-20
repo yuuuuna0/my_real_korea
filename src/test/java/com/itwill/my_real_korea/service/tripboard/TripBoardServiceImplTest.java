@@ -30,7 +30,7 @@ class TripBoardServiceImplTest {
 	@Disabled
 	@Test
 	void testInsertTripBoard() throws Exception {
-		int rowCount = tripBoardService.insertTripBoard(new TripBoard(0, "추추제목", "추추내용", new Date(), 1, 1, 3, "추가사진jpg", new Date(), new Date(), "무계획", "인싸만", new City(3, "강원", 3, 3), "user2"));
+		int rowCount = tripBoardService.insertTripBoard(new TripBoard(0, "추추제목", "추추내용", new Date(), 1, 1, 3, "추가사진jpg", new Date(), new Date(), "무계획", "인싸만", "user2"));
 		assertEquals(rowCount, 1);
 	}
 	
@@ -41,7 +41,7 @@ class TripBoardServiceImplTest {
 	@Disabled
 	@Test
 	void testUpdateTripBoard() throws Exception {
-		int rowCount = tripBoardService.insertTripBoard(new TripBoard(3, "제목수정", "내용수정", new Date(), 3, 0, 1, "수정사진1.png", new Date(), new Date(), "무계획", "아무나다좋아", new City(1, "서울", 1, 1), "user1"));
+		int rowCount = tripBoardService.insertTripBoard(new TripBoard(3, "제목수정", "내용수정", new Date(), 3, 0, 1, "수정사진1.png", new Date(), new Date(), "무계획", "아무나다좋아", "user1"));
 	}
 	
 	/*

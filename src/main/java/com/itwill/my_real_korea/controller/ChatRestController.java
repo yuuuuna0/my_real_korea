@@ -1,6 +1,9 @@
 package com.itwill.my_real_korea.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,6 +11,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,13 +41,13 @@ public class ChatRestController {
 	private ChatService chatService;
 	
 	// 채팅 아이디 가져오기
-	@PostMapping("/get-chat-id")
+	@PostMapping(value = "/get-chat-id")
 	public Map<String, Object> returnSessionCheck(HttpSession session){
 		Map<String, Object> resultMap = new HashMap<>();
 		User loginUser = (User)session.getAttribute("loginUser");
-		String chatId = loginUser.getUserId();
+		String userId = loginUser.getUserId();
 		
-		resultMap.put("chatId", chatId);
+		resultMap.put("userId", userId);
 		
 		return resultMap;
 	}
@@ -56,12 +60,12 @@ public class ChatRestController {
 		String msg = "";
 		String receiverId = "";
 		String roomNo = chatList.get("roomNo");
-		String chatId = chatList.get("chatId");
+		String userId = chatList.get("userId");
 		// 채팅방 번호로 채팅방 찾기
 		ChatRoom chatRoom = chatService.selectRoomByRoomNo(Integer.parseInt(roomNo));
 
 		// 채팅유저아이디 = 채팅방 발신자라면 수신자 아이디 설정
-		if (chatRoom.getFromId().equals(chatId)) {
+		if (chatRoom.getFromId().equals(userId)) {
 			receiverId = chatRoom.getToId();
 		} else {
 			receiverId = chatRoom.getFromId();
@@ -69,7 +73,7 @@ public class ChatRestController {
 		List<ChatMsg> resultList = new ArrayList<ChatMsg>();
 		try {
 			// 안읽은 메세지 있다면 상대의 기존 채팅 모두 읽음 처리
-			int notReadMsg = chatService.countNotReadInChatRoom(Integer.parseInt(roomNo), chatId);
+			int notReadMsg = chatService.countNotReadInChatRoom(Integer.parseInt(roomNo), userId);
 			if (notReadMsg != 0) {
 				chatService.updateReadMsg(Integer.parseInt(roomNo), receiverId);
 			}
@@ -84,7 +88,7 @@ public class ChatRestController {
 			e.printStackTrace();
 
 		}
-		System.out.println("채팅아이디" + chatId);
+		System.out.println("채팅아이디" + userId);
 		System.out.println("상대아이디" + receiverId);
 
 		resultMap.put("code", code);
@@ -95,6 +99,75 @@ public class ChatRestController {
 
 		return resultMap;
 	}
+	
+	// 안 읽은 채팅 수 
+	@PostMapping(value = "/count-not-read-chat")
+	public Map<String, Object> countNotReadChat(@RequestParam String userId,
+												@RequestParam int roomNo){
+		Map<String, Object> resultMap = new HashMap<>();
+		int code = 1;
+		String msg = "성공";
+		int data = 0;
+		try {
+			data = chatService.countNotReadInChatRoom(roomNo, userId);
+			code = 1;
+			msg = "성공";
+		} catch (Exception e){
+			code = 2;
+			msg = "안읽은 채팅 수 불러오기 실패";
+			e.printStackTrace();
+		}
+		resultMap.put("code", code);
+		resultMap.put("msg", msg);
+		resultMap.put("data", data);
+		
+		return resultMap;
+	}
+	// 메세지 DB저장
+	@PostMapping(value = "/save-chat")
+	public Map<String, Object> saveChat(@RequestBody Map<String, String> messages) {
+	
+		Map<String, Object> resultMap = new HashMap<>();
+		int code = 1;
+		String msg = "";
+		String msgSendTimeStr = "";
+		int newChatMsgNo = 0;
+		// 채팅아이디 가져오기
+		System.out.println(String.valueOf(messages.get("userId")));
+		
+		String newMsgSendTimeStr = messages.get("msgSendTime");
+		ChatMsg newChatMsg;
+		try {
+			newChatMsg = new ChatMsg(0, String.valueOf(messages.get("msgContent")), 
+										new SimpleDateFormat("yyyy-MM-dd").parse(newMsgSendTimeStr),
+										Integer.parseInt(messages.get("msgRead")), 
+										Integer.parseInt(messages.get("roomNo")),
+										String.valueOf(messages.get("userId")));
+			
+			int rowCount = chatService.insertChatMsg(newChatMsg);
+			Date msgSendTimeDate = chatService.selectByMsgNo(newChatMsg.getMsgNo()).getMsgSendTime();
+			msgSendTimeStr = new SimpleDateFormat("yyyy-MM-dd").format(msgSendTimeDate);
+			newChatMsgNo = newChatMsg.getMsgNo();
+			// DB 저장 성공 시
+			if (rowCount != 0) {
+				code = 1;
+				msg = "성공";
+			}
+		} catch (NumberFormatException e1) {
+			e1.printStackTrace();
+		} catch (ParseException e1) {
+			e1.printStackTrace();
+		} catch (Exception e) {
+			code = 2;
+			msg = "메세지 DB저장 실패";
+			e.printStackTrace();
+		}
+		resultMap.put("msgSendTimeStr", msgSendTimeStr);
+		resultMap.put("newChatMsgNo", newChatMsgNo);
+
+		return resultMap;
+	}
+	
 	
 	
 	/*

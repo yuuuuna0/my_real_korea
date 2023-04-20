@@ -100,38 +100,38 @@ function session_check(){
 
 
 function connectServer(loginId){
-	console.log("connectWS 실행 : "+loginId)
-	var url="ws://localhost:80/brown_carrot_market/replyEcho?"+loginId;
-	var ws=new WebSocket(url);
-	socket=ws;
-	
-	ws.onopen = function() {
-			console.log(loginId+'채팅대기창 서버 연결 성공');
-		
-	    };
-	    
-		ws.onmessage=function(result){
+	console.log("connectWS 실행 : " + loginId)
+	var url = "ws://localhost:80/brown_carrot_market/replyEcho?" + loginId;
+	var ws = new WebSocket(url);
+	socket = ws;
 
-		
-		var msg=JSON.parse(result.data);
+	ws.onopen = function() {
+		console.log(loginId + '채팅대기창 서버 연결 성공');
+
+	};
+
+	ws.onmessage = function(result) {
+
+
+		var msg = JSON.parse(result.data);
 		console.log(msg);
-		var id=msg.toastId;
-		var message=msg.c_content;
-		
-		if(message.startsWith("@@image!#")){
-			message="사진 전송";
+		var id = msg.toastId;
+		var message = msg.c_content;
+
+		if (message.startsWith("@@image!#")) {
+			message = "사진 전송";
 		}
-		
-		if(id==loginId){
-			
-		 reloadChatList();
-	      
-	      /******************채팅수증가******* */
-	     getChatNum(loginId);
-	
-		
+
+		if (id == loginId) {
+
+			reloadChatList();
+
+			/******************채팅수증가******* */
+			getChatNum(loginId);
+
+
 		}
-		
+
 		
 		
 	}    

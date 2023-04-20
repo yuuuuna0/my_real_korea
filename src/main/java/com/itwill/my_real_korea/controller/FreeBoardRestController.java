@@ -1,12 +1,15 @@
 package com.itwill.my_real_korea.controller;
 
+import com.itwill.my_real_korea.dto.City;
 import com.itwill.my_real_korea.dto.freeboard.FreeBoard;
 import com.itwill.my_real_korea.dto.freeboard.FreeBoardComment;
+import com.itwill.my_real_korea.service.city.CityService;
 import com.itwill.my_real_korea.service.freeboard.FreeBoardCommentService;
 import com.itwill.my_real_korea.service.freeboard.FreeBoardService;
 import com.itwill.my_real_korea.util.PageMakerDto;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,14 +19,17 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
+
 public class FreeBoardRestController {
     private FreeBoardService freeBoardService;
     private FreeBoardCommentService freeBoardCommentService;
+    private CityService cityService;
 
     @Autowired
-    public FreeBoardRestController(FreeBoardService freeBoardService, FreeBoardCommentService freeBoardCommentService) {
+    public FreeBoardRestController(FreeBoardService freeBoardService, FreeBoardCommentService freeBoardCommentService, CityService cityService) {
         this.freeBoardService = freeBoardService;
         this.freeBoardCommentService = freeBoardCommentService;
+        this.cityService = cityService;
     }
 
     @ApiOperation(value = "자유게시판 리스트 최신순")
@@ -86,7 +92,7 @@ public class FreeBoardRestController {
     @ApiOperation(value = "자유게시판 검색결과 리스트")
     @GetMapping(value = "/freeBoard-search", produces = "application/json;charset=UTF-8")
     public Map<String, Object> freeBoardSearchList(@RequestParam(required = false, defaultValue = "1") int pageNo,
-                                                  @RequestParam(required = true) String keyword) {
+                                                   @RequestParam(required = true) String keyword) {
 
         Map<String, Object> resultMap = new HashMap<>();
         int code = 1;
@@ -94,7 +100,7 @@ public class FreeBoardRestController {
         PageMakerDto<FreeBoard> freeBoardList = null;
         try {
             // 페이지 번호(default 값 1)와 검색 keyword로 자유게시판 검색결과 리스트 찾기, 성공시 code 1
-            freeBoardList = freeBoardService.selectSearchFreeBoardList(pageNo,keyword);
+            freeBoardList = freeBoardService.selectSearchFreeBoardList(pageNo, keyword);
             if (freeBoardList.getPageMaker().getTotCount() != 0 && freeBoardList != null) {
                 code = 1;
                 msg = "성공";
@@ -120,7 +126,7 @@ public class FreeBoardRestController {
     @ApiOperation(value = "자유게시판 상세보기")
     @ApiImplicitParam(name = "fBoNo", value = "자유게시판 번호")
     @GetMapping(value = "/fBoDetail/{fBoNo}", produces = "application/json;charset=UTF-8")
-    public Map<String, Object> fBoDetail(@PathVariable(value = "fBoNo") int fBoNo ) {
+    public Map<String, Object> fBoDetail(@PathVariable(value = "fBoNo") int fBoNo) {
 
         Map<String, Object> resultMap = new HashMap<>();
         int code = 1;
@@ -157,17 +163,25 @@ public class FreeBoardRestController {
         return resultMap;
     }
 
-    @LoginCheck
+    //    @LoginCheck
     @ApiOperation(value = "자유게시판 글쓰기")
-    @PostMapping(value = "/fBoWrite/", produces = "application/json;charset=UTF-8")
-    public Map<String, Object> fBoWriteAction(@RequestBody FreeBoard freeBoard) {
+    @PostMapping(value = "/freeboard", produces = "application/json;charset=UTF-8")
+    public Map<String, Object> fBoWriteAction(@ModelAttribute FreeBoard freeBoard,  @RequestParam Integer cityNo) {
 
         Map<String, Object> resultMap = new HashMap<>();
         int code = 1;
         String msg = "성공";
         List<FreeBoard> data = new ArrayList<FreeBoard>();
+        System.out.println(freeBoard.getFBoContent());
+        System.out.println(freeBoard.getFBoTitle());
+        System.out.println(cityNo);
 
         try {
+
+            City city = cityService.findByCityNo(cityNo);
+
+            System.out.println(city);
+            freeBoard.setCity(city);
             // 자유게시판 글쓰기, 성공시 code 1
             freeBoardService.insertBoard(freeBoard);
             code = 1;
@@ -227,9 +241,6 @@ public class FreeBoardRestController {
         resultMap.put("data", data);
         return resultMap;
     }
-
-
-
 
 
     //자유게시판 게시글 삭제

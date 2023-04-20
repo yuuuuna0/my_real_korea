@@ -13,7 +13,6 @@ import com.itwill.my_real_korea.handler.ChatHandler;
 import lombok.RequiredArgsConstructor;
 
 @Configuration
-@RequiredArgsConstructor
 @EnableWebSocket // WebSocket 활성화
 public class WebSocketConfig implements WebSocketConfigurer{
 

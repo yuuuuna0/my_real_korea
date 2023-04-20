@@ -36,6 +36,12 @@
 <script  defer type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.2/handlebars.min.js"></script>
 -->	
 
+	
+	<!-- Handlebars -->
+	<script  defer type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.2/handlebars.min.js"></script>
+	
+	
+	
 <script type="text/javascript">
 
 	function userModify() {
@@ -120,7 +126,7 @@
 <div class="row">
 
 <div class="col-md-6">
-	<form method="post" name="f">
+	<form method="post" name="f" id="user-detail-form">
 	<h3>회원 정보</h3>
 		<ul id="profile_summary" th:object="${loginUser}">
 			<li>아이디 <span th:text="*{userId}"></span>
@@ -168,6 +174,9 @@
 <button class="btn_1 green" type="button" onclick="userModify();">프로필 수정</button>
 <button class="btn_1 green" type="button" onclick="userRemove();">회원 탈퇴</button>
 
+	<input id="btn-user-modify-form" value="프로필 수정" class="btn_1 green" type="button"> 
+	
+		
 						<!-- End row -->
 
 </section>
@@ -255,6 +264,57 @@
 		<!--form -->
 	</div>
 	<!-- /Sign In Popup -->
+<!-- 
+<script type="text/javascript">
+
+Handlebars.registerHelper('ifEquals', function(arg1, arg2, options) {
+    return (arg1 == arg2) ? options.fn(this) : options.inverse(this);
+});
+</script>	 -->	
+	
+<script id="user-modify-form-template" type="text/x-handlebars-template">
+{{#each data}}
+<form method="post" name="f" id="">
+	<h3>회원 정보</h3>
+		<ul id="profile_summary">
+			<li>아이디 <span>{{userId}}</span>
+			</li>
+			<li>이름 <span>
+			<input class="name" name="name" id="name" type="text" required="required" value="{{name}}"></span>
+			</li>
+			<li>닉네임 <span>{{nickname}}</span>
+			</li>
+			<li>휴대폰 <span>{{phone}}</span>
+			</li>
+			<li>이메일 <span>{{email}}</span>
+			</li>
+			<li>생일 <span>{{birth}}</span>
+			</li>
+			<li>주소 <span>{{address}}</span>
+			</li>
+    		<li>성별 <span>{{gender}}</span>
+			</li>
+			<li>포인트 <span>{{point}}</span>
+			</li>
+		</ul>
+		<ul id="profile_summary">
+			<li>자기 소개 
+			<span>{{userAddInfo.introduce}}</span>
+			</li>
+			<li>음주 여부 
+			<span>{{userAddInfo.alcohol}}</span>
+			</li>
+			<li>흡연 여부 
+			<span>{{userAddInfo.smoking}}</span>
+			</li>
+		</ul>
+		<ul id="profile_summary">
+			<li>프로필 이미지 <span>{{userImg.userImgUrl}}</span></li>
+		</ul>
+	</form>
+{{/each}}
+</script> 
+
 
 	<!-- Common scripts -->
 	<script src="js/jquery-2.2.4.min.js"></script>
@@ -263,6 +323,8 @@
 
 	<!-- Specific scripts -->
 	<script src="js/tabs.js"></script>
+	<script src="js/app_user.js" type="module"></script>
+	
 	<script>
 		new CBPFWTabs(document.getElementById('tabs'));
 	</script>

@@ -93,6 +93,105 @@ $(document).on('click','#freeboardcomment-modify-action-btn',function(e){
     e.preventDefault();
 });
 
+// $(document).on('click','#freeboard-write-action',function(e){
+//     let city;
+//     // $(document).on('click', '#city_btn1, #city_btn2, #city_btn3, #city_btn4, #city_btn5, #city_btn6, #city_btn7', function(e) {
+//     //     city = $(this).val(); // 선택된 버튼의 value 값을 가져옴
+//     //     console.log(city); // 선택된 버튼의 값 출력
+//     //     // 나머지 코드 작성
+//     // });
+//     // ajax로 리스트 부분만 검색된 리스트로 변경
+//     // let fCoNo = $('#fCoNo-hidden-value2').val();
+//     // let fCoNo = $(this).data("value");
+//     // let fBoNo = $('#fBoNo-hidden-value2').val();
+//     let fBoTitle =  $("#fBoTitle").val();
+//     let fBoContent = $('textarea[name="fBoContent"]').val();
+//     let userId = $("input[name='userId']").val();
+//     let cityNo = parseInt($("input[name='cityNo']").val());
+//      let url = 'freeboard';
+//     let method = 'POST';
+//     let contentType = 'application/json;charset=UTF-8';
+//     // console.log(fCoNo);
+//     console.log(fBoTitle);
+//     console.log(fBoContent);
+//     console.log(userId);
+//     console.log(cityNo);
+//
+//     let sendData= {
+//         // fcoNo: fCoNo,
+//         // fboNo:$('#fBoNo-hidden-value2').val(),]
+//         fBoDate:null,
+//         fBoCount:0,
+//         fBoTitle : fBoTitle,
+//         fBoContent:fBoContent,
+//         userId: userId,
+//         // cityNo: cityNo,
+//     };
+//     let async = true;
+//     // JSON.stringify() => 객체를 string 으로, JSON.parse() => string 을 객체로 만듬
+//     Request.ajaxRequest(url, method, contentType,cityNo,
+//         JSON.stringify(sendData),
+//         function(resultJson){
+//             //code 1 일때 render, 아닐 때 msg 띄움
+//             if(resultJson.code == 1){
+//                 window.location.href = 'freeboard-list';
+//             } else {
+//                 alert(resultJson.msg);
+//             };
+//         }, async);
+//
+//     e.preventDefault();
+// });
+
+
+$(document).on('click', '#freeboard-write-action', function(e){
+
+    let url = 'freeboard';
+    let method = 'POST';
+    let formData = new FormData();
+    let tBoImg = "이미지";
+    let cityNo = $('input[name="options"]:checked').val();
+    // $('input[name="options"]').on('click', function() {
+    //     // Get the value of the clicked radio button
+    //      let cityNo = $(this).val();
+    //     // Pass the value to another function
+    //     anotherFunction(cityNo);
+    // });
+    // console.log(cityNo);
+
+    formData.append('fBoTitle', $('#fBoTitle').val());
+    formData.append('fBoContent', $('#fBoContent').val());
+    formData.append('cityNo', cityNo);
+    formData.append('userId', $('#userId').val());
+
+
+    console.log(formData);
+//     console.log(fBoContent);
+//     console.log(userId);
+//     console.log(cityNo);
+
+    let async = true;
+
+    $.ajax({
+        method : method,
+        url : url,
+        data : formData,
+        processData : false,
+        contentType: false,
+        success : function(resultJson){
+            if(resultJson.code == 1) {
+                window.location.href='freeboard-list';
+            }else {
+                alert(resultJson.msg);
+            }
+        },
+        error : function(err) {
+            alert(err.status);
+        },
+        async : async
+    });
+    e.preventDefault();
+});
 
 
 

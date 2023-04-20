@@ -107,7 +107,7 @@
 										<li style="padding:5px 0px 5px 0px;" >
 											<i class="icon-users"></i>모집인원<span th:text="${tripBoard.tBoPerson}" style="padding:0px 10px 0px 10px;"></span>
 										   <i class="icon-calendar-empty"></i>여행일정<a th:text="${#dates.format(tripBoard.tBoStartDate, 'MM.dd')}" style="padding:0px 10px 0px 10px; color:red ;"></a><a> ~ </a><a th:text="${#dates.format(tripBoard.tBoEndDate, 'MM.dd')}" style="padding:0px 10px 0px 10px;color:red;"></a>
-										   <i class="icon-map"></i>지역<span th:text="${tripBoard.city.cityName}" style="padding:0px 10px 0px 10px;">12 Nov 2020</span>
+										   <i class="icon-map"></i>지역<span th:value="${tripBoard.city.cityNo}" th:text="${tripBoard.city.cityName}" style="padding:0px 10px 0px 10px;">12 Nov 2020</span>
 										
 										</li>
 									</ul>

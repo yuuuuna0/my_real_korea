@@ -39,7 +39,7 @@ public class TripBoard {
 	
 	public TripBoard(int tBoNo, String tBoTitle, String tBoContent, Date tBoDate, int tBoReadcount, int tBoStatus,
 			int tBoPerson, String tBoImg, Date tBoStartDate, Date tBoEndDate, String tBoStyle, String hashtag,
-			City city, String userId) {
+			/*City city,*/ String userId) {
 		super();
 		this.tBoNo = tBoNo;
 		this.tBoTitle = tBoTitle;
@@ -53,7 +53,7 @@ public class TripBoard {
 		this.tBoEndDate = tBoEndDate;
 		this.tBoStyle = tBoStyle;
 		this.hashtag = hashtag;
-		this.city = city;
+		this.city = new City();
 		this.userId = userId;
 	}
 	

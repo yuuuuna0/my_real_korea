@@ -1,10 +1,7 @@
 package com.itwill.my_real_korea.dto.freeboard;
 
 import com.itwill.my_real_korea.dto.City;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
@@ -36,15 +33,15 @@ public class FreeBoard {
 	private City city;
 	private String userId;
 	private int commentCount;
-	public FreeBoard(int fBoNo, String fBoTitle, String fBoContent, Date fBoDate, int fBoCount, City city,
+	@Builder
+	public FreeBoard(int fBoNo, String fBoTitle, String fBoContent, Date fBoDate, int fBoCount,
 			String userId) {
-		super();
 		this.fBoNo = fBoNo;
 		this.fBoTitle = fBoTitle;
 		this.fBoContent = fBoContent;
 		this.fBoDate = fBoDate;
 		this.fBoCount = fBoCount;
-		this.city = city;
+		this.city = new City();
 		this.userId = userId;
 	}
 }

@@ -257,6 +257,38 @@ public class UserRestController {
 	    return response;
 	}
  */
+
+	
+	@ApiOperation(value = "내 프로필 수정 폼 불러오기")
+	@LoginCheck
+	@GetMapping("/user-modify-form")
+	public Map<String, Object> user_modify_form(HttpServletRequest request) throws Exception {
+		Map<String, Object> resultMap = new HashMap<>();
+
+		int code = 1;
+		String msg = "성공";
+		List<User> data = new ArrayList<User>();
+
+		try {
+			HttpSession session = request.getSession();
+			User loginUser = (User) session.getAttribute("loginUser");
+			loginUser = userService.findUser(loginUser.getUserId());
+			code = 1;
+			msg = "성공";
+			data.add(loginUser);
+
+		} catch (Exception e) {
+			code = 2;
+			msg = "실패";
+			e.printStackTrace();
+		}
+		resultMap.put("code", code);
+		resultMap.put("msg", msg);
+		resultMap.put("data", data);
+		return resultMap;
+	}
+	
+	
 	
 
 }

@@ -78,16 +78,16 @@ public class TourRestController {
 			int code = 1;
 			String msg = "성공";
 			List<Tour> data = null;
-			int currentPage=Integer.parseInt(map.get("currentPage"));
+			int pageNo=Integer.parseInt(map.get("pageNo"));
 			int cityNo=Integer.parseInt(map.get("cityNo"));
 			int toType=Integer.parseInt(map.get("toType"));
-			System.out.println(currentPage);
+			System.out.println(pageNo);
 			System.out.println(cityNo);
 			System.out.println(toType);
 			String keyword=map.get("keyword");
 			String sortOrder=map.get("sortOrder");
 			try {
-				PageMakerDto<Tour> tourListPage=tourService.findAll(currentPage,keyword, cityNo, toType, sortOrder);
+				PageMakerDto<Tour> tourListPage=tourService.findAll(pageNo,keyword, cityNo, toType, sortOrder);
 				List<Tour> tempTourList=tourListPage.getItemList();
 				List<Tour> tourList=new ArrayList<>();
 				for (Tour tour : tempTourList) {
@@ -258,7 +258,7 @@ public class TourRestController {
 	//1. 투어상품 전체 리스트 보기  -> 필터 
 		@ApiOperation(value="투어상품리스트(필터&정렬)")
 		@GetMapping(value = "/tour-list-ajax/{keyword}", produces="application/json;charset=UTF-8")
-		public Map<String, Object> tour_list(@RequestParam(required = false, defaultValue = "1") int currentPage,
+		public Map<String, Object> tour_list(@RequestParam(required = false, defaultValue = "1") int pageNo,
 											 @PathVariable String keyword, 
 											 @RequestParam(required = false, defaultValue = "0") int cityNo, 
 											 @RequestParam(required = false, defaultValue = "0") int toType, 
@@ -268,7 +268,7 @@ public class TourRestController {
 			String msg = "성공";
 			List<Tour> data = null;
 			try {
-				PageMakerDto<Tour> tourListPage=tourService.findAll(currentPage,keyword, cityNo, toType, sortOrder);
+				PageMakerDto<Tour> tourListPage=tourService.findAll(pageNo,keyword, cityNo, toType, sortOrder);
 				List<Tour> tempTourList=tourListPage.getItemList();
 				List<Tour> tourList=new ArrayList<>();
 				for (Tour tour : tempTourList) {

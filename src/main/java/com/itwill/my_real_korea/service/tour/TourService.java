@@ -19,9 +19,9 @@ public interface TourService {
 
 	//페이지메이커 사용
 	//5. 투어 전체 리스트 보기 + 필터 + 정렬 + 페이징
-	PageMakerDto<Tour> findAll(int currentPage,String keyword, int cityNo, int toType, String sortOrder) throws Exception;
+	PageMakerDto<Tour> findAll(int pageNo,String keyword, int cityNo, int toType, String sortOrder) throws Exception;
 	//6. 상품 지역필터 + 정렬 + 페이징
-	PageMakerDto<Tour> findAllByFilter(int currentPage, int cityNo, String sortOrder) throws Exception;
+	PageMakerDto<Tour> findAllByFilter(int pageNo, int cityNo, String sortOrder) throws Exception;
 
 }
 

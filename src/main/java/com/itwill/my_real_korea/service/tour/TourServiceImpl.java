@@ -52,10 +52,10 @@ public class TourServiceImpl implements TourService {
 	}
 
 	@Override
-	public PageMakerDto<Tour> findAll(int currentPage,String keyword, int cityNo, int toType, String sortOrder) throws Exception {
+	public PageMakerDto<Tour> findAll(int pageNo,String keyword, int cityNo, int toType, String sortOrder) throws Exception {
 		// 투어 전체 리스트 보기 + 정렬 + 페이징
 		int totTourCount=tourDao.findTourCount();	//전체 글 
-		PageMaker pageMaker= new PageMaker(totTourCount,currentPage);	//page 계산 (PageMaker)
+		PageMaker pageMaker= new PageMaker(totTourCount,pageNo);	//page 계산 (PageMaker)
 		//게시글 데이터 얻기
 		List<Tour> tourList=tourDao.findTourWithTourImgWithCityAll(pageMaker.getPageBegin(), pageMaker.getPageEnd(), keyword, cityNo, toType, sortOrder);
 		PageMakerDto<Tour> pageMakerTourList=new PageMakerDto<Tour>(tourList,pageMaker,totTourCount);
@@ -63,14 +63,14 @@ public class TourServiceImpl implements TourService {
 	}
 
 	@Override
-	public PageMakerDto<Tour> findAllByFilter(int currentPage, int cityNo, String sortOrder)
+	public PageMakerDto<Tour> findAllByFilter(int pageNo, int cityNo, String sortOrder)
 			throws Exception {
 		int totTourCount=tourDao.findTourCount();	//전체 글 개수 
-		PageMaker pageMaker= new PageMaker(totTourCount,currentPage);	//page 계산 (PageMaker)
+		PageMaker pageMaker= new PageMaker(totTourCount,pageNo);	//page 계산 (PageMaker)
 		//게시글 데이터 얻기
 		List<Tour> tourList=tourDao.findTourListByCity(pageMaker.getPageBegin(), pageMaker.getPageEnd(), cityNo, sortOrder);
 		PageMakerDto<Tour> pageMakerTourList=new PageMakerDto<Tour>(tourList,pageMaker,totTourCount);
-		return null;
+		return pageMakerTourList;
 	}
 
 }

@@ -41,19 +41,33 @@ public class ChatRestController {
 	private ChatService chatService;
 	
 	// 채팅 아이디 가져오기
-	@PostMapping(value = "/get-chat-id")
-	public Map<String, Object> returnSessionCheck(HttpSession session){
+	@GetMapping(value = "/get-chat-id")
+	public Map<String, Object> returnSessionCheck(HttpSession session) {
 		Map<String, Object> resultMap = new HashMap<>();
-		User loginUser = (User)session.getAttribute("loginUser");
-		String userId = loginUser.getUserId();
-		
+		int code = 1;
+		String msg = "";
+		String userId = "";
+		User loginUser = (User) session.getAttribute("loginUser");
+		try {
+			if (loginUser != null) {
+				userId = loginUser.getUserId();
+			}
+			code = 1;
+			msg = "성공";
+		} catch (Exception e) {
+			code = 2;
+			msg = "채팅아이디 가져오기 실패";
+			e.printStackTrace();
+		}
+		resultMap.put("code", code);
+		resultMap.put("msg", msg);
 		resultMap.put("userId", userId);
-		
+
 		return resultMap;
 	}
 	
 	// 채팅 내용 불러오기
-	@PostMapping(value = "/chat-detail-rest")
+	@GetMapping(value = "/chat-detail-rest")
 	public Map<String, Object> chatDetailRest(@RequestBody Map<String, String> chatList) throws Exception {
 		Map<String, Object> resultMap = new HashMap<>();
 		int code = 1;
@@ -101,7 +115,7 @@ public class ChatRestController {
 	}
 	
 	// 안 읽은 채팅 수 
-	@PostMapping(value = "/count-not-read-chat")
+	@GetMapping(value = "/count-not-read-chat")
 	public Map<String, Object> countNotReadChat(@RequestParam String userId,
 												@RequestParam int roomNo){
 		Map<String, Object> resultMap = new HashMap<>();
@@ -123,35 +137,49 @@ public class ChatRestController {
 		
 		return resultMap;
 	}
-	// 메세지 DB저장
+	// 메세지 보내기 & DB저장
 	@PostMapping(value = "/save-chat")
-	public Map<String, Object> saveChat(@RequestBody Map<String, String> messages) {
+	public String saveChat(@RequestBody Map<String, String> messages) {
 	
-		Map<String, Object> resultMap = new HashMap<>();
 		int code = 1;
 		String msg = "";
+		int msgNo = 0;
+		String msgContent = null;
+		Date msgSendTime = null;
+		int msgRead = 0;
+		int roomNo = 0;
+		String userId = "";
 		String msgSendTimeStr = "";
-		int newChatMsgNo = 0;
 		// 채팅아이디 가져오기
 		System.out.println(String.valueOf(messages.get("userId")));
 		
-		String newMsgSendTimeStr = messages.get("msgSendTime");
-		ChatMsg newChatMsg;
+		JSONObject jsonObject = null;
 		try {
-			newChatMsg = new ChatMsg(0, String.valueOf(messages.get("msgContent")), 
-										new SimpleDateFormat("yyyy-MM-dd").parse(newMsgSendTimeStr),
-										Integer.parseInt(messages.get("msgRead")), 
-										Integer.parseInt(messages.get("roomNo")),
-										String.valueOf(messages.get("userId")));
+			msgContent = String.valueOf(messages.get("msgContent"));
+			String newMsgSendTimeStr = messages.get("msgSendTime");
+			msgSendTime = new SimpleDateFormat("yyyy-MM-dd").parse(newMsgSendTimeStr);
+			msgRead = Integer.parseInt(messages.get("msgRead"));
+			roomNo = Integer.parseInt(messages.get("roomNo"));
+			userId = String.valueOf(messages.get("userId"));
+			ChatMsg newChatMsg;
 			
+			newChatMsg = new ChatMsg(0, msgContent, msgSendTime, msgRead, roomNo, userId);
+			// 메세지 생성, DB 저장
 			int rowCount = chatService.insertChatMsg(newChatMsg);
 			Date msgSendTimeDate = chatService.selectByMsgNo(newChatMsg.getMsgNo()).getMsgSendTime();
 			msgSendTimeStr = new SimpleDateFormat("yyyy-MM-dd").format(msgSendTimeDate);
-			newChatMsgNo = newChatMsg.getMsgNo();
+			msgNo = newChatMsg.getMsgNo();
+			
+			// insert 후 클라이언트에게 jsonObject 만들어서 보내기
 			// DB 저장 성공 시
 			if (rowCount != 0) {
-				code = 1;
-				msg = "성공";
+				jsonObject = new JSONObject();
+				jsonObject.put("msgNo", msgNo);
+				jsonObject.put("msgContent", msgContent);
+				jsonObject.put("msgSendTime", msgSendTimeStr);
+				jsonObject.put("msgRead", msgRead);
+				jsonObject.put("roomNo", roomNo);
+				jsonObject.put("userId", userId);
 			}
 		} catch (NumberFormatException e1) {
 			e1.printStackTrace();
@@ -162,10 +190,8 @@ public class ChatRestController {
 			msg = "메세지 DB저장 실패";
 			e.printStackTrace();
 		}
-		resultMap.put("msgSendTimeStr", msgSendTimeStr);
-		resultMap.put("newChatMsgNo", newChatMsgNo);
 
-		return resultMap;
+		return jsonObject.toString();
 	}
 	
 	

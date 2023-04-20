@@ -27,12 +27,9 @@ import com.itwill.my_real_korea.service.tour.TourReviewService;
 import com.itwill.my_real_korea.service.tour.TourService;
 import com.itwill.my_real_korea.util.PageMakerDto;
 
-import io.netty.handler.codec.http.HttpRequest;
-
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import static org.hamcrest.CoreMatchers.nullValue;
@@ -62,38 +59,38 @@ public class TourController {
 	}
 
 	//1. 투어상품 전체 리스트 보기
-	@RequestMapping(value="/tour-list")
-	public String tour_list(@RequestParam(required = false, defaultValue = "1") int currentPage,
+	@GetMapping(value="/tour-list")
+	public String tour_list(@RequestParam(required = false, defaultValue = "1") int pageNo,
 							@RequestParam(required = false) String keyword,
 							@RequestParam(required = false, defaultValue = "0") int cityNo,
 							@RequestParam(required = false, defaultValue = "0") int toType,
 							@RequestParam(required = false) String sortOrder,
-								Model model,
-								HttpServletRequest request) {
+								Model model) {
 		String forwardPath="";
-		String msg="";
+		System.out.println(">>>>>>>>>>>>" +pageNo);
 		try{
-			// 로그인 한 유저면 userId model에 붙이기
-			User loginUser = (User) request.getSession().getAttribute("loginUser");
-			if (loginUser != null) {
-				String userId = loginUser.getUserId();
-				model.addAttribute("userId", userId);
+			PageMakerDto<Tour> tourListPage=tourService.findAll(pageNo,keyword,cityNo,toType,sortOrder);
+			List<Tour> tourList=new ArrayList<>();
+			System.out.println(tourListPage.getItemList().size());
+			//평점 평균 구하기
+			for (Tour tour : tourListPage.getItemList()) {
+				if(tourReviewService.findByToNo(tour.getToNo()).size()==0) {
+					//후기가 없을 때
+					tour.setToScore(0);
+					tourList.add(tour);
+				} else {
+					//후기가 있을 때
+					int tourScore=tourReviewService.calculateTourScore(tour.getToNo());
+					tour.setToScore(tourScore);
+					tourList.add(tour);	//tourList에 후기 평점 평균 붙이기
+				}
 			}
-
-			PageMakerDto<Tour> tourListPage = tourService.findAll(currentPage, keyword, cityNo, toType, sortOrder);
-			List<Tour> tempTourList = tourListPage.getItemList(); // PageMakerDto -> List로 변환
-			List<Tour> tourList = new ArrayList<>();
-			// 평점 평균 구하기
-			for (Tour tour : tempTourList) {
-				int tourScore = tourReviewService.calculateTourScore(tour.getToNo());
-				tour.setToScore(tourScore);
-				tourList.add(tour); // tourList에 후기 평점 평균 붙이기
-			}
-			List<City> cityList = cityService.findAllCity();
+			tourListPage.setItemList(tourList);
+			System.out.println(tourListPage.getItemList().size());
+			List<City> cityList=cityService.findAllCity();
 			model.addAttribute("cityList", cityList);
-			model.addAttribute("tourList", tourList);
-			forwardPath = "tour-list";
-
+			model.addAttribute("tourListPage",tourListPage);
+			forwardPath="tour-list";
 		} catch (Exception e){
 			e.printStackTrace();
 			forwardPath="error";
@@ -102,19 +99,10 @@ public class TourController {
 	}
 
 	//2. 투어상품 상세보기
-	@RequestMapping(value="/tour-detail", params = "toNo")
-	public String tourDetail(@RequestParam int toNo, Model model, HttpServletRequest request) {
+	@GetMapping(value="/tour-detail", params = "toNo")
+	public String tourDetail(@RequestParam int toNo, Model model) {
 		String forwardPath="";
 		try{
-			// 위시리스트 추가 코드 시작
-			// 로그인 한 유저면 userId model에 붙이기
-			User loginUser = (User) request.getSession().getAttribute("loginUser");
-			if (loginUser != null) {
-				String userId = loginUser.getUserId();
-				model.addAttribute("userId", userId);
-			}
-			// 위시리스트 추가 코드 끝
-			
 			Tour tour = tourService.findTourWithCityByToNo(toNo);
 			if(tour!=null){
 				int tourScore=tourReviewService.calculateTourScore(toNo);
@@ -137,7 +125,7 @@ public class TourController {
 	
 	//3. 투어상품 예약하기(구매하기) 폼_session 이용 x(성공) ----> 모델? 세션? 어느 코드가 나을까?
 	@LoginCheck
- 	@RequestMapping(value="/tour-payment")
+ 	@GetMapping(value="/tour-payment")
 	public String tourPaymentForm(@RequestParam String pStartDate,
 								  @RequestParam int pQty,
 								  @RequestParam int toNo,
@@ -151,7 +139,13 @@ public class TourController {
 			SimpleDateFormat dateFormat= new SimpleDateFormat("yyyy-MM-dd");
 			Date date=dateFormat.parse(pStartDate);
 			System.out.println(date);
-			Payment payment=new Payment(0, pQty*(tour.getToPrice()), pQty, new Date(), date, null, pQty*(tour.getToPrice())*1/100, 0, tour, null, loginUser.getUserId());
+			Payment payment=new Payment();
+			payment.setPPrice(pQty*(tour.getToPrice()));
+			payment.setPQty(pQty);
+			payment.setPStartDate(date);
+			payment.setPPoint(pQty*(tour.getToPrice())*1/100);
+			payment.setTour(tour);
+			payment.setUserId(loginUser.getUserId());
 			//1. session에 붙이기
 			session.setAttribute("payment", payment);
 			session.setAttribute("tour", tour);
@@ -171,8 +165,8 @@ public class TourController {
  	@LoginCheck
 	@RequestMapping(value="tour-payment-action")
 	public String tourPaymentAction(@ModelAttribute RsPInfo rsPInfo,
-									@RequestParam String pMsg,
-									@RequestParam String pMethodStr,
+									@RequestParam(required = false, defaultValue = "") String pMsg,
+									@RequestParam int pMethod,
 									HttpSession session,
 									RedirectAttributes redirectAttributes) {
 		String forwardPath="";
@@ -180,9 +174,12 @@ public class TourController {
 			User loginUser=(User)session.getAttribute("loginUser");
 			Payment payment=(Payment)session.getAttribute("payment");
 			Tour tour=(Tour)session.getAttribute("tour");
+			
+			
+			
 			//	페이지에서 받아온 값 payment에 넣어주기
 			payment.setPMsg(pMsg);
-			payment.setPMethod(Integer.parseInt(pMethodStr));
+			payment.setPMethod(pMethod);
 			paymentService.insertTourPayment(payment);
 			
 			tour.setToCount(tour.getToCount()+payment.getPQty());	//tour에 구매수량만큼 올리기

@@ -324,22 +324,22 @@
 		<div class="inner-box">
 			<div class="image-box">
 				<figure class="image">
-					<a href="tripboard-detail?tBoNo={{tbono}}"><img src="img/products/image-1.jpg" alt="">
+					<a href="tripboard-detail?tBoNo={{tboNo}}"><img src="img/products/image-1.jpg" alt="">
 					</a>
 				</figure>
 			</div>
 			<div class="product_description">
 				<div class="trip-title">
-					<h3><a href="tripboard-detail?tBoNo={{tbono}}">{{tbotitle}}</a></h3>
+					<h3><a href="tripboard-detail?tBoNo={{tboNo}}">{{tboTitle}}</a></h3>
 				</div>
 				<div class="trip-date">
-					<h3><a>1</a><a> ~ </a><a>1</a></h3>
+					<h3><a>{{dateFormat tboStartDate}}</a><a> ~ </a><a>{{dateFormat tboEndDate}}</a></h3>
 				</div>
 				<div class="icons">
 					<span class="icon-eye"></span>
-					<span>{{tboreadcount}}</span>
+					<span>{{tboReadcount}}</span>
 					<span class="icon-comment"></span>
-					<span>{{commentcount}}</span>
+					<span>{{commentCount}}</span>
 				</div>
 			</div>
 		</div>

@@ -168,49 +168,111 @@
 							</div>
 							</div>
 							<br>
-							
-							<div class="form-group">
-								<label>지역</label>
-								<input class="form-control style_2" type="text" name="cityNo" id="cityNo" th:value="${tripBoard.City.cityNo}">
+							<br>
+						<div class="btn-group btn-group-toggle" data-toggle="buttons">
+						  <label class="btn btn-secondary active">
+						    <input type="radio" name="cOptions" id="option1" checked value="1"> 서울
+						  </label>
+						  <label class="btn btn-secondary">
+						    <input type="radio" name="cOptions" id="option2" value="2"> 경기
+						  </label>
+						  <label class="btn btn-secondary">
+						    <input type="radio" name="cOptions" id="option3" value="3"> 강원
+						  </label>
+						  <label class="btn btn-secondary">
+						    <input type="radio" name="cOptions" id="option4" value="4"> 부산
+						  </label>
+						  <label class="btn btn-secondary">
+						    <input type="radio" name="cOptions" id="option5" value="5"> 대전
+						  </label>
+						  <label class="btn btn-secondary">
+						    <input type="radio" name="cOptions" id="option6" value="6"> 전주
+						  </label>
+						  <label class="btn btn-secondary">
+						    <input type="radio" name="cOptions" id="option7" value="7"> 제주
+						  </label>
+						</div>						
+						<br>
+						<br>
+						<div>
+						<br>
+						&emsp;&emsp;&emsp;<label><i class="icon-quote-left"> 저는</i></label>
+						<br>
+						<div >
+							<div class="btn-group btn-group-toggle" data-toggle="buttons">
+							  <label class="btn btn-secondary active">
+							    <input type="radio" name="sOoptions" id="option1" checked value="계획적인"> 계획적인
+							  </label>
+							  <label class="btn btn-secondary">
+							    <input type="radio" name="sOoptions" id="option2" value="즉흥적인"> 즉흥적인
+							  </label>
+							  <label class="btn btn-secondary">
+							    <input type="radio" name="sOoptions" id="option3" value="느긋한"> 느긋한
+							  </label>
+							  <label class="btn btn-secondary">
+							    <input type="radio" name="sOoptions" id="option3" value="외향적인"> 외향적인
+							  </label>
+							  <label class="btn btn-secondary">
+							    <input type="radio" name="sOoptions" id="option3" value="사진찍는"> 사진찍는
+							  </label>
+							  <label class="btn btn-secondary">
+							    <input type="radio" name="sOoptions" id="option3" value="뚜벅이"> 뚜벅이
+							  </label>
 							</div>
-							<div class="form-group">
-								<label>여행스타일</label>
-								<input class="form-control style_2" type="text" name="tBoStyle" id="tBoStyle" th:value="${tripBoard.tBoStyle}">
+						</div>
+							<div style="width: 100%; text-align: right;">
+							  <label>여행자입니다. <i class="icon-quote-right"></i></label>&emsp;&emsp;&emsp;
 							</div>
+						</div>
+							<br>
 								<div class="row">
-									<div class="col-md-4">
+									<div class="col-md-6">
 										<div class="form-group">
 											<label><i class="icon-calendar-7"></i> 여행 시작일</label>
 											<input class="start-date-pick form-control" data-date-format="yyyy-mm-dd, D" type="text" id="tBoStartDate" name="tBoStartDate" th:value="${#dates.format(tripBoard.tBoStartDate, 'yyyy-MM-dd')}" >
 										</div>
 									</div>
-								</div>
-								<div class="row">
-									<div class="col-md-4">
+									<div class="col-md-6">
 										<div class="form-group">
 											<label><i class="icon-calendar-7"></i> 여행 종료일</label>
 											<input class="end-date-pick form-control" data-date-format="yyyy-mm-dd, D" type="text" id="tBoEndDate" name="tBoEndDate" th:value="${#dates.format(tripBoard.tBoEndDate, 'yyyy-MM-dd')}">
 										</div>
 									</div>
 								</div>
+								<br>
 								<div class="row">
-									<div class="col-2">
+									<div class="col-3">
 										<div class="form-group">
 											<label><i class="icon-user-2"></i> 동행인원</label>
 										</div>
 									</div>
-									<div class="col-2">
+									<div class="col-3">
 										<div class="form-group">
 											<div class="numbers-row">
 												<input type="text" value="1" name="tBoPerson" id="tBoPerson" class="qty2 form-control" th:value="${tripBoard.tBoPerson}">
 											</div>
 										</div>
 									</div>
+									<div class="col-3">
+										<div class="form-group">
+											<label><i class=" icon-ok-circled2"></i> 모집상태</label>
+										</div>
+									</div>
+									<div class="col-3">
+										<div class="form-group">
+											<select id="sort-by" name="sort-by">
+												<option value=""><a href="">모집중</a></option>
+												<option value=""><a href="">모집완료</a></option>
+											</select>
+										</div>
 								</div>
+								</div>
+								<br>
 								<div class="form-group">
 									<label>제목</label>
 									<input class="form-control style_2" type="text" name="tBoTitle" id="tBoTitle" th:value="${tripBoard.tBoTitle}">
 								</div>
+								<br>
 								<div class="form-group">
 									<label>내용</label>
 									<textarea class="form-control style_2" name="tBoContent" id="tBoContent" style="height:150px;" th:value="${tripBoard.tBoContent}"></textarea>
@@ -232,82 +294,8 @@
 						<!-- end post -->
 					</div>
 					<!-- end box_style_1 -->
-
-					<h4>3 comments</h4>
-
-					<div id="comments">
-						<ol>
-							<li>
-								<div class="avatar">
-									<a href="#"><img src="img/avatar1.jpg" alt="Image">
-									</a>
-								</div>
-								<div class="comment_right clearfix">
-									<div class="comment_info">
-										Posted by <a href="#">Anna Smith</a><span>|</span> 25 apr 2019 <span>|</span><a href="#">Reply</a>
-									</div>
-									<p>
-										Nam cursus tellus quis magna porta adipiscing. Donec et eros leo, non pellentesque arcu. Curabitur vitae mi enim, at vestibulum magna. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed sit amet sem a urna rutrumeger fringilla. Nam vel enim ipsum, et congue ante.
-									</p>
-								</div>
-								<ul>
-									<li>
-										<div class="avatar">
-											<a href="#"><img src="img/avatar2.jpg" alt="Image">
-											</a>
-										</div>
-
-										<div class="comment_right clearfix">
-											<div class="comment_info">
-												Posted by <a href="#">Tom Sawyer</a><span>|</span> 25 apr 2019 <span>|</span><a href="#">Reply</a>
-											</div>
-											<p>
-												Nam cursus tellus quis magna porta adipiscing. Donec et eros leo, non pellentesque arcu. Curabitur vitae mi enim, at vestibulum magna. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed sit amet sem a urna rutrumeger fringilla. Nam vel enim ipsum, et congue ante.
-											</p>
-											<p>
-												Aenean iaculis sodales dui, non hendrerit lorem rhoncus ut. Pellentesque ullamcorper venenatis elit idaipiscingi Duis tellus neque, tincidunt eget pulvinar sit amet, rutrum nec urna. Suspendisse pretium laoreet elit vel ultricies. Maecenas ullamcorper ultricies rhoncus. Aliquam erat volutpat.
-											</p>
-										</div>
-									</li>
-								</ul>
-							</li>
-							<li>
-								<div class="avatar">
-									<a href="#"><img src="img/avatar3.jpg" alt="Image">
-									</a>
-								</div>
-
-								<div class="comment_right clearfix">
-									<div class="comment_info">
-										Posted by <a href="#">Adam White</a><span>|</span> 25 apr 2019 <span>|</span><a href="#">Reply</a>
-									</div>
-									<p>
-										Cursus tellus quis magna porta adipiscin
-									</p>
-								</div>
-							</li>
-						</ol>
-					</div>
-					<!-- End Comments -->
-
-					<h4>Leave a comment</h4>
-					<form action="#" method="post">
-						<div class="form-group">
-							<input class="form-control style_2" type="text" name="name" placeholder="Enter name">
-						</div>
-						<div class="form-group">
-							<input class="form-control style_2" type="text" name="mail" placeholder="Enter email">
-						</div>
-						<div class="form-group">
-							<textarea name="message" class="form-control style_2" style="height:150px;" placeholder="Message"></textarea>
-						</div>
-						<div class="form-group">
-							<input type="reset" class="btn_1" value="Clear form" />
-							<input type="submit" class="btn_1" value="Post Comment" />
-						</div>
-					</form>
 				</div>
-				<!-- End col-md-8-->
+				<!-- end col-lg-9 -->
 
 				<aside class="col-lg-3 add_bottom_30">
 

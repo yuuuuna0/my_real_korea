@@ -140,59 +140,79 @@
 						</div>
 						<form id="tripboardWriteForm" name="tripboardWriteForm" enctype="multipart/form-data">
 							<input type="hidden" id="userId" th:value="${session.loginUser.userId}">
-						<div>
-							&emsp;&emsp;&emsp;<button id="city_btn" value="">서울</button>&ensp;
-							<button id="city_btn">경기</button>&ensp;
-							<button id="city_btn">강원</button>&ensp;
-							<button id="city_btn">부산</button>&ensp;
-							<button id="city_btn">대전</button>&ensp;
-							<button id="city_btn">전주</button>&ensp;
-							<button id="city_btn">제주</button>&ensp;
-						</div>
+						<br>
+						<div class="btn-group btn-group-toggle" data-toggle="buttons">
+						  <label class="btn btn-secondary active">
+						    <input type="radio" name="cOptions" id="option1" checked value="1"> 서울
+						  </label>
+						  <label class="btn btn-secondary">
+						    <input type="radio" name="cOptions" id="option2" value="2"> 경기
+						  </label>
+						  <label class="btn btn-secondary">
+						    <input type="radio" name="cOptions" id="option3" value="3"> 강원
+						  </label>
+						  <label class="btn btn-secondary">
+						    <input type="radio" name="cOptions" id="option4" value="4"> 부산
+						  </label>
+						  <label class="btn btn-secondary">
+						    <input type="radio" name="cOptions" id="option5" value="5"> 대전
+						  </label>
+						  <label class="btn btn-secondary">
+						    <input type="radio" name="cOptions" id="option6" value="6"> 전주
+						  </label>
+						  <label class="btn btn-secondary">
+						    <input type="radio" name="cOptions" id="option7" value="7"> 제주
+						  </label>
+						</div>						
 						<br>
 						<br>
 						<div>
-							<br>
-							&emsp;&emsp;&emsp;<label><i class="icon-quote-left"> 저는</i></label>
-							<br>
-							<div>
-							&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<button id="style_btn">계획적인</button>&ensp;
-								<button id="style_btn">즉흥적인</button>&ensp;
-								<button id="style_btn">느긋한</button>&ensp;
-								<button id="style_btn">외향적인</button>&ensp;
-								<button id="style_btn">사진찍는</button>&ensp;
-								<button id="style_btn">뚜벅이</button>&ensp;
+						<br>
+						&emsp;&emsp;&emsp;<label><i class="icon-quote-left"> 저는</i></label>
+						<br>
+						<div >
+							<div class="btn-group btn-group-toggle" data-toggle="buttons">
+							  <label class="btn btn-secondary active">
+							    <input type="radio" name="sOoptions" id="option1" checked value="계획적인"> 계획적인
+							  </label>
+							  <label class="btn btn-secondary">
+							    <input type="radio" name="sOoptions" id="option2" value="즉흥적인"> 즉흥적인
+							  </label>
+							  <label class="btn btn-secondary">
+							    <input type="radio" name="sOoptions" id="option3" value="느긋한"> 느긋한
+							  </label>
+							  <label class="btn btn-secondary">
+							    <input type="radio" name="sOoptions" id="option3" value="외향적인"> 외향적인
+							  </label>
+							  <label class="btn btn-secondary">
+							    <input type="radio" name="sOoptions" id="option3" value="사진찍는"> 사진찍는
+							  </label>
+							  <label class="btn btn-secondary">
+							    <input type="radio" name="sOoptions" id="option3" value="뚜벅이"> 뚜벅이
+							  </label>
 							</div>
+						</div>
 							<div style="width: 100%; text-align: right;">
 							  <label>여행자입니다. <i class="icon-quote-right"></i></label>&emsp;&emsp;&emsp;
 							</div>
 						</div>
 						<br>
-						
-						<div class="form-group">
-							<label>지역</label>
-							<input class="form-control style_2" type="text" name="cityNo" id="cityNo">
-						</div>
-						<div class="form-group">
-							<label>여행스타일</label>
-							<input class="form-control style_2" type="text" name="tBoStyle" id="tBoStyle">
-						</div>
+						<br>
 							<div class="row">
-								<div class="col-md-4">
+								<div class="col-md-6">
 									<div class="form-group">
 										<label><i class="icon-calendar-7"></i> 여행 시작일</label>
 										<input class="start-date-pick form-control" data-date-format="yyyy-mm-dd, D" type="text" id="tBoStartDate" name="tBoStartDate">
 									</div>
 								</div>
-							</div>
-							<div class="row">
-								<div class="col-md-4">
+								<div class="col-md-6">
 									<div class="form-group">
 										<label><i class="icon-calendar-7"></i> 여행 종료일</label>
 										<input class="end-date-pick form-control" data-date-format="yyyy-mm-dd, D" type="text" id="tBoEndDate" name="tBoEndDate">
 									</div>
 								</div>
 							</div>
+							<br>
 							<div class="row">
 								<div class="col-2">
 									<div class="form-group">
@@ -207,14 +227,17 @@
 									</div>
 								</div>
 							</div>
+							<br>
 							<div class="form-group">
 								<label>제목</label>
 								<input class="form-control style_2" type="text" name="tBoTitle" id="tBoTitle" placeholder="제목을 입력하세요.">
 							</div>
+							<br>
 							<div class="form-group">
 								<label>내용</label>
 								<textarea class="form-control style_2" name="tBoContent" id="tBoContent" style="height:150px;" placeholder="내용을 입력하세요."></textarea>
 							</div>
+							<br>
 							<div class="form-group">
 								<label><i class="icon-tag"></i> 해시태그</label>
 								<input class="form-control style_2" type="text" name="hashtag" id="hashtag" placeholder="해시태그를 입력하세요.">

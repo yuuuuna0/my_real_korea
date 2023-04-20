@@ -103,6 +103,8 @@ $(document).on('click', '#tripboard-write-action', function(e){
 	let method = 'POST';
 	let formData = new FormData();
 	let tBoImg = "이미지";
+	let cityNo = $('input[name="cOptions"]:checked').val();
+	let tBoStyle = $('input[name="sOoptions"]:checked').val();
 	
 	
 	formData.append('tBoTitle', $('#tBoTitle').val());
@@ -110,9 +112,9 @@ $(document).on('click', '#tripboard-write-action', function(e){
 	formData.append('tBoPerson', $('#tBoPerson').val());
 	formData.append('tBoStartDate', $('#tBoStartDate').val());
 	formData.append('tBoEndDate', $('#tBoEndDate').val());
-	formData.append('tBoStyle', $('#tBoStyle').val());
+	formData.append('tBoStyle', tBoStyle);
 	formData.append('hashtag', $('#hashtag').val());
-	formData.append('cityNo', $('#cityNo').val());
+	formData.append('cityNo', cityNo);
 	formData.append('userId', $('#userId').val());
 	formData.append('tBoImg', tBoImg);
 	
@@ -148,7 +150,7 @@ $(document).on('click', '#tripboard-modify-action', function(e){
 	let method = 'PUT';
 	let formData = new FormData();
 	let tBoImg = "이미지";
-	
+	console.log("RIdkdkdk");
 	
 	formData.append('tBoTitle', $('#tBoTitle').val());
 	formData.append('tBoContent', $('#tBoContent').val());

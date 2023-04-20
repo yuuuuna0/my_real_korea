@@ -24,7 +24,7 @@ function selectedTourList(){
 	let method='POST';
 	let contentType='application/json;charset=UTF-8';
 	let sendData={
-			currentPage:"1",
+			pageNo:"1",
 			keyword:keyword,
 			cityNo:cityNo,
 			toType:toType,
@@ -172,7 +172,50 @@ $(document).on('click',"button[name='deleteToReview']",function(e){
 						},async);
 });
 
+//5. 투어 결제하기 (API 적용)
+$(document).on('click','#tourPayment',function(e){
+	e.preventDefault();
+	e.stopPropagation();
+	
+	let IMP = window.IMP; // 생략 가능
+	IMP.init("imp43548145"); // 예: imp00000000a
+	
+	let pMethod;
+	if('#pMethod'.val==3){
+		pMethod='card';
+	}
+	/********** 자바스크립트에서 세션 값 가져오는거 먼저 해야 함!!  ***** */
+    IMP.request_pay({
+      pg: "html5_inicis",
+      pay_method: pMethod,
+      merchant_uid: "[[${session.payment.toNo}]]",   // 주문번호
+      name: "[[${session.payment.toName}]]",
+      //amount: "[[${{session.payment.pPrice}}]]",                         // 숫자 타입
+      amount: 100,                        // 숫자 타입
+     // buyer_email: "[[${session.loginUser.email}]]",
+      buyer_email: "jyn9306@naver.com",
+      buyer_name: "[[${session.loginUser.name}]]",
+      buyer_tel: "[[${session.loginUser.phone}]]",
+      buyer_addr: "[[${session.loginUser.address}]]"
+    }, function (rsp) { // callback
+    	console.log(rsp);
+      if (rsp.success) {
+        // 결제 성공 시 로직
+			document.rsPInfoF.action='tour-payment-action';
+			document.rsPInfoF.submit();
+      } else {
+        // 결제 실패 시 로직
+        alert
+      }
+    });
+	
+	
+	
+});
 
+function tourPaymentAction(){
+			
+}
 
 
 /*

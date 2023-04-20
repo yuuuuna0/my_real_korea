@@ -100,9 +100,8 @@
 		<!-- End position -->
 
 		<div class="container margin_60">
-		
+		<form name="rsPInfoF" method="POST" >
 			<div class="row">
-			<form name="rsPInfoF" th:object="${rsPInfo}">
 				<div class="col-lg-8 add_bottom_15">
 					<div class="form_title">
 						<h3><strong>1</strong>Tour Details</h3>
@@ -146,7 +145,7 @@
 							Mussum ipsum cacilds, vidis litro abertis.
 						</p>
 					</div>
-					<form name="rsPInfoF" >
+					
 					<div class="step">
 						<div class="row">
 							<div class="col-sm-8">
@@ -181,78 +180,9 @@
 					</div>
 					</form>
 					<!--End step -->
-
+					
 					<div class="form_title">
-						<h3><strong>2</strong>Payment Information</h3>
-						<p>
-							Mussum ipsum cacilds, vidis litro abertis.
-						</p>
-					</div>
-					<div class="step">
-						<div class="form-group">
-							<label>결제방법(숫자)</label>
-							<input type="text" class="form-control" id="name_card_bookign" name="pMethodStr">
-						</div>
-						<div class="row">
-							<div class="col-md-6 col-sm-12">
-								<div class="form-group">
-									<label>Card number</label>
-									<input type="text" id="card_number" name="card_number" class="form-control">
-								</div>
-							</div>
-							<div class="col-md-6 col-sm-12">
-								<img src="img/cards.png" width="207" height="43" alt="Cards" class="cards">
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-6">
-								<label>Expiration date</label>
-								<div class="row">
-									<div class="col-md-6">
-										<div class="form-group">
-											<input type="text" id="expire_month" name="expire_month" class="form-control" placeholder="MM">
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="form-group">
-											<input type="text" id="expire_year" name="expire_year" class="form-control" placeholder="Year">
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="form-group">
-									<label>Security code</label>
-									<div class="row">
-										<div class="col-4">
-											<div class="form-group">
-												<input type="text" id="ccv" name="ccv" class="form-control" placeholder="CCV">
-											</div>
-										</div>
-										<div class="col-8">
-											<img src="img/icon_ccv.gif" width="50" height="29" alt="ccv"><small>Last 3 digits</small>
-										</div>
-									</div>
-								</div>
-							</div>
-							
-						</div>
-						<!--End row -->
-
-						<hr>
-
-						<h4>Or checkout with Paypal</h4>
-						<p>
-							Lorem ipsum dolor sit amet, vim id accusata sensibus, id ridens quaeque qui. Ne qui vocent ornatus molestie, reque fierent dissentiunt mel ea.
-						</p>
-						<p>
-							<img src="img/paypal_bt.png" alt="Image">
-						</p>
-					</div>
-					<!--End step -->
-
-					<div class="form_title">
-						<h3><strong>3</strong> 예약 특이사항 </h3>
+						<h3><strong>2</strong> 예약 특이사항 </h3>
 						<p>
 							예약시 특이사항을 적어주세요
 						</p>
@@ -270,17 +200,29 @@
 					</div>
 					<!--End step -->
 
-					<div id="policy">
-						<h4>Cancellation policy</h4>
-						<div class="form-group">
-							<label>
-								<input type="checkbox" name="policy_terms" id="policy_terms">I accept terms and conditions and general policy.</label>
-						</div>
-						<a href="confirmation_hotel.html" class="btn_1 green medium">Book now</a>
+					<div class="form_title">
+						<h3><strong>3</strong>Payment Information</h3>
+						<p>
+							Mussum ipsum cacilds, vidis litro abertis.
+						</p>
 					</div>
-				</div>
+					<div class="step">
+						<div class="form-group">
+							<select class="form-control" name="pMethod" id="pMethod" required>
+								<option value="" selected disabled hidden>결제방법</option>
+								<option value="1">계좌이체</option>
+								<option value="2">카카오페이</option>
+								<option value="3">카드결제</option>
+							</select>
+						</div>
+							
+					</div>
+						<!--End row -->
+					</div>
+					<!--End step -->
+
+				
 			</form>
-			
 			
 				<aside class="col-lg-4">
 					<div class="box_style_1">
@@ -344,7 +286,7 @@
 								</tr>
 							</tbody>
 						</table>
-						<button class="btn_full" type="button" onclick="tourPaymentAction()">Book now</button>
+						<button class="btn_full" type="button" id="tourPayment">Book now</button>
 						<a class="btn_full_outline" href="single_hotel.html"><i class="icon-right"></i> Modify your search</a>
 					</div>
 					<div class="box_style_4">
@@ -356,6 +298,14 @@
 				</aside>
 			</div>
 			<!--End row -->
+								<div id="policy">
+						<h4>Cancellation policy</h4>
+						<div class="form-group">
+							<label>
+								<input type="checkbox" name="policy_terms" id="policy_terms">I accept terms and conditions and general policy.
+							</label>
+						</div>
+					</div>
 		</div>
 		<!--End container -->
 	</main>
@@ -378,56 +328,13 @@
 		</form>
 	</div><!-- End Search Menu -->
 	
-	<!-- Sign In Popup -->
-	<div id="sign-in-dialog" class="zoom-anim-dialog mfp-hide">
-		<div class="small-dialog-header">
-			<h3>Sign In</h3>
-		</div>
-		<form>
-			<div class="sign-in-wrapper">
-				<a href="#0" class="social_bt facebook">Login with Facebook</a>
-				<a href="#0" class="social_bt google">Login with Google</a>
-				<div class="divider"><span>Or</span></div>
-				<div class="form-group">
-					<label>Email</label>
-					<input type="email" class="form-control" name="email" id="email">
-					<i class="icon_mail_alt"></i>
-				</div>
-				<div class="form-group">
-					<label>Password</label>
-					<input type="password" class="form-control" name="password" id="password" value="">
-					<i class="icon_lock_alt"></i>
-				</div>
-				<div class="clearfix add_bottom_15">
-					<div class="checkboxes float-left">
-						<input id="remember-me" type="checkbox" name="check">
-						<label for="remember-me">Remember Me</label>
-					</div>
-					<div class="float-right"><a id="forgot" href="javascript:void(0);">Forgot Password?</a></div>
-				</div>
-				<div class="text-center"><input type="submit" value="Log In" class="btn_login"></div>
-				<div class="text-center">
-					Don’t have an account? <a href="javascript:void(0);">Sign up</a>
-				</div>
-				<div id="forgot_pw">
-					<div class="form-group">
-						<label>Please confirm login email below</label>
-						<input type="email" class="form-control" name="email_forgot" id="email_forgot">
-						<i class="icon_mail_alt"></i>
-					</div>
-					<p>You will receive an email containing a link allowing you to reset your password to a new preferred one.</p>
-					<div class="text-center"><input type="submit" value="Reset Password" class="btn_1"></div>
-				</div>
-			</div>
-		</form>
-		<!--form -->
-	</div>
-	<!-- /Sign In Popup -->
 
 	<!-- Common scripts -->
 	<script src="js/jquery-2.2.4.min.js"></script>
 	<script src="js/common_scripts_min.js"></script>
 	<script src="js/functions.js"></script>
+	<script src="js/app_tour.js" type="module"></script>
+	<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
 	
 	<!-- Check box and radio style iCheck -->
 	<script>
@@ -435,12 +342,6 @@
 		   checkboxClass: 'icheckbox_square-grey',
 		   radioClass: 'iradio_square-grey'
 		 });
-	</script>
-	<script>
-		function tourPaymentAction(){
-			document.rsPInfoF.action='tour-payment-action';
-			document.rsPInfoF.submit();
-		}
 	</script>
 
 

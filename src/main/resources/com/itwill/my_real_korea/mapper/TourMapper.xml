@@ -35,7 +35,7 @@
 			   		from tour t 
 						 join city c
 				   			on t.city_no=c.city_no
-						 left outer join tour_img ti
+						 left join tour_img ti
 				   			on t.to_no=ti.to_no
 				   	where 1=1
 				   		<if test="keyword !=null">
@@ -68,7 +68,7 @@
 						</if>
 					) tourAll
 				)
- 		<![CDATA[WHERE IDX >= #{pageStart} AND IDX <=#{pageEnd}]]>
+ 		<![CDATA[ where idx >= #{pageStart} and idx <= #{pageEnd} ]]> 
 	</select>
 <!--
 	<select id="findTourWithTourImgWithCityAll" resultMap="TourWithCityWithTourImgMap">

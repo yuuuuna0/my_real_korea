@@ -37,7 +37,7 @@ public class TripBoardRestController {
 	@AdminCheck
 	@LoginCheck
 	@ApiOperation(value = "동행게시글 추가")
-	@PostMapping(value = "/tripboard", produces = "application/json;charset=UTF-8")
+	@PostMapping(value = "/tripboard_write_action", produces = "application/json;charset=UTF-8")
 	public Map<String, Object> tripboard_write_action(@RequestBody TripBoard tripBoard){
 		Map<String, Object> resultMap = new HashMap<>();
 		int code = 1;
@@ -86,7 +86,7 @@ public class TripBoardRestController {
 				code = 1;
 				msg = "성공";
 				// 수정 성공한 동행 게시판 객체 데이터 붙임
-				data.add(findTripBoard);
+				data.add(tripBoard);
 			} else {
 				//실패시 code 2
 				code = 2;

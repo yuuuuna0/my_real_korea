@@ -2,8 +2,8 @@ spring:
   datasource:
     driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
     url: jdbc:log4jdbc:oracle:thin:@182.237.126.19:1521:XE
-    username: jdeveloper19
-    password: jdeveloper19
+    username: jdeveloper
+    password: jdeveloper
 
 logging:
   level:

@@ -33,4 +33,13 @@
 	<select id="findCountByUserId" parameterType="java.lang.String" resultType="java.lang.Integer">
 		select count(*) cnt from tour_review where user_id=#{userId} 
 	</select>
+	<!-- 8. 사전 업로드 할 경우 업로드파일로 업데이트 -->
+	<update id="updateToReviewUpload" parameterType="java.util.Map">
+		update tour_review set to_review_upload=#{toReviewUpload} where to_review_no=#{toReviewNo}
+	</update>
+	<!-- 9. 사전 업로드 안 할 경우의 업데이트 -->
+	<update id="updateToReviewImg" parameterType="java.util.Map">
+		update tour_review set to_review_img=#{toReviewImg} where to_review_no=#{toReviewNo}
+	</update>
+	
 </mapper>

@@ -19,4 +19,8 @@ public interface TourReviewDao {
 	public int findCountByToNo(int toNo) throws Exception;
 	//7. 사용자가 작성한 후기 갯수 
 	public int findCountByUserId(String userId) throws Exception;
+	//8. 사진 업로드 할 경우 업로드파일로 업데이트
+	public int updateToReviewUpload(String toReviewUpload, int toReviewNo) throws Exception;
+	//9. 사진 업로드 안 할 경우 의 업데이트
+	public int updateToReviewImg(String toReviewImg, int toReviewNo) throws Exception;
 }

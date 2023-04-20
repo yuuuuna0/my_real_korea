@@ -96,4 +96,50 @@ $(document).on('click', '#all-city-list', function(e) {
 		e.preventDefault();
 });
 
+//동행게시판 글쓰기 액션
+$(document).on('click', '#tripboard-write-action', function(e){
+	let form = $('#tripboardWriteForm');
+	let url = 'tripboard_write_action';
+	let method = 'POST';
+	let formData = new FormData();
+	let tBoImg = "이미지";
+	let userId = 'aaa111';
+	let tBoDate = '2023-04-20';
+	let tBoReadcount = '0';
+	let tBoStatus = '0';
+	let tBoNo = '15';
+	
+	
+	formData.append('tBoTitle', $('#tBoTitle').val());
+	formData.append('tBoContent', $('#tBoContent').val());
+	formData.append('tBoPerson', $('#tBoPerson').val());
+	formData.append('tBoStartDate', $('#tBoStartDate').val());
+	formData.append('tBoEndDate', $('#tBoEndDate').val());
+	formData.append('tBoStyle', $('#tBoStyle').val());
+	formData.append('hashtag', $('#hashtag').val());
+	formData.append('cityNo', $('#cityNo').val());
+	
+	
+	let async = true;
+	
+	$.ajax({
+		method : method,
+		url : url,
+		data : formData,
+		processData : false,
+		contentType: false,
+		success : function(resultJson){
+			if(resultJson.code == 1) {
+				window.location.href=`tripboard-list`;
+			}else {
+				alert(resultJson.msg);
+			};
+		},
+		err:function(err) {
+			alert(err.status);
+		},
+		async : async
+	});
+		e.preventDefault();
+});
 

@@ -295,13 +295,13 @@
 								<div class="row">
 									<div class="col-md-9">
 										<h6>
-											<strong th:text=${tourReview.toReviewTitle}>
+											<strong th:text="${tourReview.toReviewTitle}">
 											</strong>
 										</h6>
 									</div>
-									<div class="col-md-3" > <!--th:if="${session.loginUser.userId == tourReview.userId}"-->
-										<input type="button" value="수정">
-										<input type="button" value="삭제">
+									<div class="col-md-3" th:if="${session.loginUser!=null && session.loginUser.userId == tourReview.userId}"> 
+										<button th:value="${tourReview.toReviewNo}" name="updateToReview">수정</button>
+										<button th:value="${tourReview.toReviewNo}" name="deleteToReview">삭제</button>
 									</div>
 								</div>
 								<br>
@@ -492,7 +492,7 @@
 					<div id="message-review">
 					</div>
 					<!-- 모달 폼 -->
-				<form  method="post" name="tourReviewF" id="tourReviewF"  enctype​​="multipart/form-data">
+				<form  method="post" name="tourReviewF" id="tourReviewF" class="was-validated" enctype​​="multipart/form-data">
 					<!--파일업로드추가
 						<input type="file" name="uploadFile">  -->
 						<input name="toNo" id="toNoM" type="hidden" th:value="${tour.toNo}">
@@ -507,7 +507,7 @@
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
-									<input name="toReviewTitle" id="toReviewTitleM" type="text" placeholder="제목을 적어주세요" class="form-control">
+									<input name="toReviewTitle" id="toReviewTitleM" type="text" placeholder="제목을 적어주세요" class="form-control" required>
 								</div>
 							</div>
 						</div>
@@ -518,8 +518,8 @@
 							<div class="col-md-6">
 								<div class="form-group">
 									<label>평점</label>
-									<select class="form-control" name="toReviewStarM" id="toReviewStarM">
-										<option value="0">Please review</option>
+									<select class="form-control" name="toReviewStarM" id="toReviewStarM" required>
+										<option value="" selected disabled hidden>Please review</option>
 										<option value="1">Low</option>
 										<option value="2">Sufficient</option>
 										<option value="3">Good</option>
@@ -528,14 +528,17 @@
 									</select>
 								</div>
 							</div>
-							<div class="col-md-6">
-								<input type="file" id="toReviewImg" name="toReviewImg" size="20" style="width:200px">
+							<div class="col-md-6" style="margin-top:35px;">
+								<input type="file" id="toReviewUploadM" name="toReviewUploadM" size="20" style="width:200px" accept="image/*">
+								<input type="hidden" id="toReviewImgM" th:value="${toReviewImg}">
 							</div>
 						</div>
 						<!-- End row -->
 						<div class="form-group">
-							<textarea name="toReviewContent" id="toReviewContentM" class="form-control" style="height:100px" placeholder="내용을 적어주세요"></textarea>
+							<textarea name="toReviewContent" id="toReviewContentM" class="form-control" style="height:100px" 
+							placeholder="10자 이상 50자 이내의 내용을 적어주세요" required ></textarea>
 						</div>
+						<!--minlength="10" maxlength="50"-->
 						<!--리뷰 버튼-->
 						<button type="button" class="btn_1" id="submitReviewBtn" >submit</button>
 					</form>

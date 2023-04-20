@@ -60,5 +60,23 @@ public class TourReviewDaoImpl implements TourReviewDao {
 		//사용자가 작성한 후기 갯수 
 		return tourReviewMapper.findCountByUserId(userId);
 	}
+
+	@Override
+	public int updateToReviewUpload(String toReviewUpload, int toReviewNo) throws Exception {
+		//사진 업로드 할 경우 업로드파일로 업데이트
+		Map<String,Object> map=new HashMap<>();
+		map.put("toReviewUpload", toReviewUpload);
+		map.put("toReviewNo", toReviewNo);
+		return tourReviewMapper.updateToReviewUpload(map);
+	}
+
+	@Override
+	public int updateToReviewImg(String toReviewImg, int toReviewNo) throws Exception {
+		//사진 업로드 안 할 경우의 업데이트
+		Map<String,Object> map=new HashMap<>();
+		map.put("toReviewImg", toReviewImg);
+		map.put("toReviewNo", toReviewNo);
+		return tourReviewMapper.updateToReviewImg(map);
+	}
 	
 }

@@ -54,13 +54,12 @@ public class ChatHandler extends TextWebSocketHandler{
     	sessionMap.forEach((sessionId, sessionInMap) -> {
 			try {
 				String payload = (String) message.getPayload();
-				log.info("payload : " + payload);
-				// 채팅유저가 전송한(request) payload를 chatMsg로 변경(JSON->java객체)
-				ChatMsg chatMsg = objectMapper.readValue(payload, ChatMsg.class);
-				// 채팅 메세지가 가진 roomNo로 채팅방 정보 조회
-				ChatRoom chatRoom = chatService.selectRoomByRoomNo(chatMsg.getRoomNo());
-				// 채팅방에 있는 모든 채팅유저들에게 메세지 전달
-				chatRoom.handleAction(session, chatMsg, chatService);
+//				// 채팅유저가 전송한(request) payload를 chatMsg로 변경(JSON->java객체)
+//				ChatMsg chatMsg = objectMapper.readValue(payload, ChatMsg.class);
+//				// 채팅 메세지가 가진 roomNo로 채팅방 정보 조회
+//				ChatRoom chatRoom = chatService.selectRoomByRoomNo(chatMsg.getRoomNo());
+//				// 채팅방에 있는 모든 채팅유저들에게 메세지 전달
+//				chatRoom.handleAction(session, chatMsg, chatService);
 				sessionInMap.sendMessage(message);
 				log.info("메세지 : "+ message.getPayload());
 			} catch (IOException e) {

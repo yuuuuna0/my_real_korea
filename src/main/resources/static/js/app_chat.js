@@ -4,7 +4,7 @@ import * as Request from "./request.js";
 /*
  */
 let sock;
-//let userId = getUserId();
+let userId = getUserId();
 var jsonData = {
 			code:null,
 			url:null,
@@ -34,6 +34,24 @@ $(document).on('click', '#chat-start-btn', function(e) {
 	sock.onopen = function() {
 		alert('연결에 성공하였습니다.');
 
+		jsonData.userId = userId;
+		// 상대방 아이디 / 채팅방 데이터 받아오기
+		jsonData.receiverId = "";
+		jsonData.msg = "채팅방 입장(socket.send)";
+		jsonData.code = "2";
+		jsonData.data = [{
+					msgNo: "",
+					msgContent: "",
+					msgSendTime: "",
+					msgRead: "0",
+					roomNo: "",
+					userId: userId
+		}]
+		sock.send(JSON.stringify(jsonData));
+		console.log('>>>>>>>>>>>>> socket.send()');
+		getChatNum(userId);
+
+		// 메세지 보내기
 		sock.onmessage = (data => {
 			const newChatBox = $('<div class="message other-message float-right"></div>'); // 새로운 chatBox 생성
 			$("<div>" + data.data + "</div>").prependTo(newChatBox); // 데이터를 새로 생성한 chatBox 안에 추가
@@ -41,6 +59,8 @@ $(document).on('click', '#chat-start-btn', function(e) {
 		});
 		$('#chatConnect').hide();
 	}
+	
+
 	sock.onerror = function(e) {
 		alert('연결에 실패하였습니다.');
 	}
@@ -65,15 +85,16 @@ $("#button-send").click(() => {
 	sendMessage();
 });
 
-/**************채팅 아이디 가져오기**************
+/**************채팅 아이디 가져오기****************/
 
 
 function getUserId(){
 	let url = 'get-chat-id';
-	let method = 'POST';
+	let method = 'GET';
 	let contentType = 'application/json;charset=UTF-8';
 	let sendData = {};
 	let async = true;
+	let userId = null;
 	Request.ajaxRequest(url, method, contentType, 
 						sendData,
 						function(resultJson){
@@ -87,32 +108,31 @@ function getUserId(){
 						}, async);
 	return userId;
 }
-**/
-/**************안읽은 채팅 수 가져오기***************
-function getChatNum() {
+
+/**************안읽은 채팅 수 가져오기***************/
+function getChatNum(userId) {
+	let roomNo = '1';
 	let url = `count-not-read-chat?userId=${userId}&roomNo=${roomNo}`;
-	let method = 'POST';
+	let method = 'GET';
 	let contentType = 'application/json;charset=UTF-8';
 	let sendData = {};
 	let async = true;
-	let userId = userId;
-	let roomNo = $().val;
 	Request.ajaxRequest(url, method, contentType,
 						sendData,
 						function(resultJson)  {
 						//code 1 , 안읽은 채팅이 있을 때
 						if (resultJson.code == 1 && resultJson.data != 0) {
-							
+							console.log('안읽은채팅 있음');
 						// 안읽은 채팅이 0 일 때	
 						} else if(resultJson.code == 1 && resultJson.data == 0) {
-							
+							console.log('안읽은채팅 없음');
 						} else {
 							alert(resultJson.msg);
 						};
 						}, async);
 }
 
-*/
+
 
 
 

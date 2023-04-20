@@ -25,9 +25,9 @@ import com.itwill.my_real_korea.dto.chat.ChatMsg;
 
 import lombok.extern.log4j.Log4j2;
 
-@Log4j2
-@Component
-@ServerEndpoint(value="/ws/chat")
+//@Log4j2
+//@Component
+//@ServerEndpoint(value="/ws/chat")
 public class WebSocketChat {
 	
 	private static Set<Session> clients = Collections.synchronizedSet(new HashSet<Session>());
@@ -38,7 +38,7 @@ public class WebSocketChat {
 	String userKey = "";
 	
 	// 웹소켓 연결 시
-	@OnOpen
+	//@OnOpen
 	public void onOpen(Session session) {
 		String userId = "";
 		String roomNo = "";
@@ -72,7 +72,7 @@ public class WebSocketChat {
 	}
 
 	// 웹소켓 연결 끊길 때
-	@OnClose
+	//@OnClose
 	public void OnClose(Session session) {
 		System.out.println("socket 닫기 : " + userKey);
 		userSessions.remove(userKey);
@@ -82,7 +82,7 @@ public class WebSocketChat {
 	}
 
 	// 웹소켓 메세지 보낼 때
-	@OnMessage
+	//@OnMessage
 	public void onMessage(String message, Session session) {
 		System.out.println("---------ON MESSAGE--------");
 		System.out.println(message);

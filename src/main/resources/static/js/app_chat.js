@@ -4,7 +4,7 @@ import * as Request from "./request.js";
 /*
  */
 let sock;
-let userId = getUserId();
+//let userId = getUserId();
 var jsonData = {
 			code:null,
 			url:null,
@@ -33,7 +33,7 @@ $(document).on('click', '#chat-start-btn', function(e) {
 	sock = new SockJS("ws/chat");
 	sock.onopen = function() {
 		alert('연결에 성공하였습니다.');
-
+		let userId = getUserId();
 		jsonData.userId = userId;
 		// 상대방 아이디 / 채팅방 데이터 받아오기
 		jsonData.receiverId = "";
@@ -50,6 +50,7 @@ $(document).on('click', '#chat-start-btn', function(e) {
 		sock.send(JSON.stringify(jsonData));
 		console.log('>>>>>>>>>>>>> socket.send()');
 		getChatNum(userId);
+		console.log('>>>>>>>>>>>>> userId' + userId);
 
 		// 메세지 보내기
 		sock.onmessage = (data => {

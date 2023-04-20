@@ -53,7 +53,8 @@ public class ChatHandler extends TextWebSocketHandler{
     	// 등록된 세션을 돌면서 메세지 전달
     	sessionMap.forEach((sessionId, sessionInMap) -> {
 			try {
-				String payload = (String) message.getPayload();
+				
+//				String payload = (String) message.getPayload();
 //				// 채팅유저가 전송한(request) payload를 chatMsg로 변경(JSON->java객체)
 //				ChatMsg chatMsg = objectMapper.readValue(payload, ChatMsg.class);
 //				// 채팅 메세지가 가진 roomNo로 채팅방 정보 조회

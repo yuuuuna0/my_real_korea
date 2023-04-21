@@ -308,8 +308,6 @@ public class UserRestController {
 		try {
 			HttpSession session = request.getSession();
 			User loginUser = userService.findUser(user.getUserId());
-			String encodedPassword = bCryptPasswordEncoder.encode(user.getPassword());
-			user.setPassword(encodedPassword);
 			userService.update(user);
 			session.setAttribute("loginUser", loginUser);
 			
@@ -325,7 +323,6 @@ public class UserRestController {
 	}
 
 }
-
 
 
 

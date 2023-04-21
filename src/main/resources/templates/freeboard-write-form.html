@@ -69,11 +69,11 @@
 		<div id="position">
 			<div class="container">
 				<ul>
-					<li><a href="#">Home</a>
+					<li><a href="index">Home</a>
 					</li>
-					<li><a href="#">Category</a>
+					<li><a href="freeboard-list">게시판</a>
 					</li>
-					<li>Page active</li>
+					<li>자유 게시판</li>
 				</ul>
 			</div>
 		</div>
@@ -83,35 +83,48 @@
 
 				<div class="col-lg-9">
 					<div class="box_style_1">
-						<div class="post nopadding">
-							<form name="f" method="post">
-							<img src="img/blog-1.jpg" alt="Image" class="img-fluid">
-							<div class="post_info clearfix">
+						<div class="post nopadding" >
+							<form name="f" method="GET">
+							<div class="post_info clearfix" >
 								<div class="post-left">
-									<ul>
-										<li><i class="icon-calendar-empty"></i>On <span>12 Nov 2020</span>
-										</li>
-										<li><i class="icon-inbox-alt"></i>In <a href="#">Top tours</a>
-										</li>
-										<li><i class="icon-tags"></i>Tags <a href="#">Works</a> <a href="#">Personal</a>
-										</li>
-									</ul>
-								</div>
-								<div class="post-right"><i class="icon-comment"></i><a href="#">25 </a>Comments</div>
-							</div>
-							<span th:each="freeBoard:${freeBoardList}" ><input th:value="*{fBoTitle}" ></span><h2></h2>
-							<span><input th:value="*{fBoContent}" ></span><p></p>
+									50번 게시물
+									<ul >
 								
-						</div>
+										<li><i class="icon-inbox-alt"></i> 
+										
+										</li>
+										
+										</ul>
+								</div>
+								
+								<div class="post-right"><a ></a>  today
+								<br>
+								<div id="city-list" >
+										<input type="checkbox" value="{1,2,3}">전국
+										<input type="checkbox" value=1>서울
+										<input type="checkbox" value=2>경기
+										<input type="checkbox" value=3>강원
+								</div>
+								</div>
+								</div>
+							<div th:object="${freeBoard}"  class="" style='width:800px;'></div>
+							<span><input th:value="*{fBoTitle}" style='width:max;'></span><h2>제목</h2>
+							<span><input th:value="*{fBoContent}" style="flex:auto"></span><p>내용</p>
+							<a class="btn_1 green" type="submit" role="button">제출하기</a>
+								
+							</form>
+							</div>
+						
 						
 						<!-- end post -->
 					</div>
 					<!-- end box_style_1 -->
-
+		</div>
 	
 				<!-- End col-md-8-->
-
-				<aside class="col-lg-3 add_bottom_30">
+	</div>
+</div>
+				<aside class="col-lg-9 add_bottom_30">
 
 					<div class="widget">
 						<div class="input-group">

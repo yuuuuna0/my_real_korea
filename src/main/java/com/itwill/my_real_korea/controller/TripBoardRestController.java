@@ -77,13 +77,15 @@ public class TripBoardRestController {
 	@ApiOperation(value = "동행게시글 수정")
 	@ApiImplicitParam(name = "tBoNo", value = "동행게시글 번호")/*Api 의 파라미터(하나)만 가지고 오려고 사용*/
 	@PutMapping(value = "/tripboard/{tBoNo}", produces = "application/json;charset=UTF-8")/*text*/
-	public Map<String,Object> tripboard_modify_action(@PathVariable(value = "tBoNo")int tBoNo,@ModelAttribute TripBoard tripBoard){
+	public Map<String,Object> tripboard_modify_action(@PathVariable(value = "tBoNo")int tBoNo,@ModelAttribute TripBoard tripBoard, @RequestParam int cityNo){
 		Map<String, Object> resultMap = new HashMap<>();
 		int code = 1;
 		String msg = "성공";
 		List<TripBoard> data = new ArrayList<TripBoard>();
 		try {
 			// tBoNo로 동행 게시글 1개 찾기, 수정 성공시 code 1
+			City city=cityService.findByCityNo(cityNo);
+			tripBoard.setCity(city);
 			TripBoard findTripBoard = tripBoardService.selectByTbNo(tBoNo);
 			if(findTripBoard != null) {
 				tripBoard.setTBoNo(tBoNo);

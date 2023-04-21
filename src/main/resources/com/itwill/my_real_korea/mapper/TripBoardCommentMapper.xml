@@ -39,4 +39,14 @@
  <select id="selectCommentCount" resultType="java.lang.Integer">
         select count(*) cnt from trip_board_comment where t_bo_no = #{tBoNo}
     </select>
+    
+<!-- 동행게시판에서 댓글 번호 가져오기 -->  
+    <select id="selectBytBoNo"
+            parameterType="java.lang.Integer" resultType="com.itwill.my_real_korea.dto.freeboard.FreeBoardComment">
+        select tc.*
+        from trip_board_comment tc
+                 join trip_board tb
+                      on tc.t_bo_no = tb.t_bo_no
+        where tc.t_bo_no = #{tBoNo} order by t_co_no
+    </select>
 </mapper>

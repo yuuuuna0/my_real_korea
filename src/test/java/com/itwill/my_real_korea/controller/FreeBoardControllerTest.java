@@ -42,9 +42,9 @@ public class FreeBoardControllerTest {
         PageMakerDto<FreeBoard> freeBoardList = new PageMakerDto<>();
 
         List<FreeBoard> freeBoards = new ArrayList<>();
-        freeBoards.add(new FreeBoard(1, "title", "content", null, 0, new City(1,"서울",1,1), "user2"));
-        freeBoards.add(new FreeBoard(2, "title", "content", null, 0, new City(1,"서울",1,1), "user1"));
-        freeBoards.add(new FreeBoard(3, "title", "content", null, 0, new City(1,"서울",1,1), "user3"));
+        freeBoards.add(new FreeBoard(1, "title", "content", null, 0, new City(1,"서울",1,1), "user2",0));
+        freeBoards.add(new FreeBoard(2, "title", "content", null, 0, new City(1,"서울",1,1), "user1",0));
+        freeBoards.add(new FreeBoard(3, "title", "content", null, 0, new City(1,"서울",1,1), "user3",0));
         freeBoardList.setItemList(freeBoards);
         freeBoardList.setPageMaker(new PageMaker(1, 10));
         freeBoardList.setTotRecordCount(3);
@@ -62,7 +62,7 @@ public class FreeBoardControllerTest {
 
     @Test
     void freeBoard_detail() throws Exception{
-        FreeBoard freeBoard = new FreeBoard(1,"title","content",null,12,new City(1,"서울",1,1),"user2");
+        FreeBoard freeBoard = new FreeBoard(1,"title","content",null,12,new City(1,"서울",1,1),"user2",0);
         List<FreeBoardComment> freeBoardCommentList = new ArrayList<>();
         freeBoardCommentList.add(new FreeBoardComment(1, null, null, 1, null));
         freeBoardCommentList.add(new FreeBoardComment(2, null, null, 1, null));
@@ -93,7 +93,7 @@ public class FreeBoardControllerTest {
 
     //@Test
     void freeBoardModifyForm() throws Exception {
-        FreeBoard freeBoard = new FreeBoard(1,"title","content",null,12,new City(1,"서울",1,1),"user2");
+        FreeBoard freeBoard = new FreeBoard(1,"title","content",null,12,new City(1,"서울",1,1),"user2",0);
         given(freeBoardService.selectByNo(1)).willReturn(freeBoard);
 
         mockMvc.perform(get("/freeboard-modify-form").param("fBoNo","1"))

@@ -13,7 +13,7 @@ import org.springframework.context.annotation.ComponentScan;
 import com.itwill.my_real_korea.dto.notice.Notice;
 import com.itwill.my_real_korea.service.notice.NoticeService;
 
-//@SpringBootApplication
+@SpringBootApplication
 @SpringBootTest
 @ComponentScan(basePackages = {"com.itwill.my_real_korea"})
 class NoticeServiceImplTest {
@@ -24,7 +24,7 @@ class NoticeServiceImplTest {
 	
 	@Test
 	void testInsertNotice() throws Exception {
-		int rowCount = noticeService.insertNotice(new Notice(0, "공지S테스트1", "내용S테스트1", null, 0, "", "user1"));
+		int rowCount = noticeService.insertNotice(new Notice(0, "공지S테스트1", "내용S테스트1", null, 0, "", "aaa111"));
 		assertEquals(rowCount, 1);
 	}
 	@Disabled

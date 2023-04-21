@@ -24,10 +24,10 @@ class NoticeDaoImplTest {
 	@Autowired
 	private NoticeDao noticeDao;
 	
-	@Disabled
+	
 	@Test
 	void testInsertNotice() throws Exception{
-		int rowCount = noticeDao.insertNotice(new Notice(0, "공지테스트1", "내용테스트1", null, 0, "","user1"));
+		int rowCount = noticeDao.insertNotice(new Notice(0, "공지테스트1", "내용테스트1", null, 0, "","aaa111"));
 		assertEquals(rowCount, 1);
 	}
 	@Disabled
@@ -84,7 +84,7 @@ class NoticeDaoImplTest {
 		int rowCount = noticeDao.deleteNotice(4);
 		assertEquals(rowCount, 1);
 	}
-	
+	@Disabled
 	@Test
 	void testUpdateNotice() throws Exception {
 		int rowCount = noticeDao.updateNotice(new Notice(1, "공지수정1", "내용수정1", null, 0, "","user1"));

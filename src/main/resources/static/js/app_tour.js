@@ -103,7 +103,8 @@ $(document).on('click','#submitReviewBtn',function(e){
 			//toReviewImg=$('toReviewImgM').val();
 			formData.append('toReviewImg',toReviewImg);
 		}
-	$('#myReviewModal').modal('hide');
+	$('#myReviewModal').modal('hide');	//모달 창 닫기
+	$('#tourReviewF')[0].reset();
 	
 	$.ajax({
 		method:method,
@@ -114,7 +115,7 @@ $(document).on('click','#submitReviewBtn',function(e){
 		success:function(resultJson){
 			if(resultJson.code==1){
 				//window.location.href=`tour-detail?toNo=${formData.get('toNo')}`;
-				View.render("tourReview-template",resultJson,'#tourReviewDiv');
+				View.render("#tourReview-template",resultJson,'#tourReviewDiv');
 			} else{
 				alert(resultJson.msg);
 			}
@@ -164,8 +165,8 @@ $(document).on('click',"button[name='deleteToReview']",function(e){
 						function(resultJson){
 							//code=1 성공 -> render , 아닐때 msg
 							if(resultJson.code==1){
-								window.location.href=`tour-detail?toNo=${toNo}`;
-								//View.render("tourReview-template",resultJson,'#tourReviewDiv');
+								//window.location.href=`tour-detail?toNo=${toNo}`;
+								View.render("#tourReview-template",resultJson,'#tourReviewDiv');
 							} else{
 								alert(resultJson.msg);
 							}

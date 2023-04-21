@@ -18,7 +18,6 @@ export function render(templateId, jsonResult={}, contentId){
 	  var date = new Date(dateString);
 	  return date.toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit' });
 	});
-	
 	//if함수 (if else 아님)
 	Handlebars.registerHelper('ifCond',function(v1,operator,v2,options){
 		switch(operator){
@@ -42,7 +41,27 @@ export function render(templateId, jsonResult={}, contentId){
             	return options.inverse(this);
 		}
 	});
-	
+	//별찍기
+	Handlebars.registerHelper('generateStarHtml',function(count){
+		let html='';
+		if(count==0){
+			for(let i=0;i<5;i++) {
+ 				html += "<i class='icon-star-empty'></i>&nbsp";
+			}
+		}else if(count==5){
+			for(let i=0;i<5;i++) {
+ 				html += "<i class='icon-star voted'></i>&nbsp";
+			}
+		}else{
+			for(let i=0;i<count;i++) {
+ 				html += "<i class='icon-star voted'></i>&nbsp";
+			}
+			for(let i=count;i<5;i++) {
+ 				html += "<i class='icon-star-empty'></i>&nbsp";
+			}
+		}
+		return new Handlebars.SafeString(html);
+	});
 	let resultTemplate = bindTemplate(jsonResult); // {}에 JSON객체/JSON Array 넣어줌 => 메인페이지 화면 + JSON 데이터 합친 결과 = resultTemplate
 	$(contentId).html(resultTemplate); // content 부분에 resultTemplate 넣기
 	

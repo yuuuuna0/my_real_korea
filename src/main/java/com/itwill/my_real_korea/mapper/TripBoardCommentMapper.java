@@ -43,4 +43,9 @@ public interface TripBoardCommentMapper {
 	 */
 	int selectCommentCount(int tBoNo) throws Exception;
 	
+	/*
+	 * 동행게시판에서 댓글 번호 가져오기
+	 */
+	List <TripBoardComment> selectBytBoNo(int tBoNo);
+	
 }

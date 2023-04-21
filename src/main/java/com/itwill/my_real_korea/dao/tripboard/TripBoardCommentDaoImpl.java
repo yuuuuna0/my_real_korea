@@ -75,4 +75,12 @@ public class TripBoardCommentDaoImpl implements TripBoardCommentDao {
 		
 		return tripBoardCommentMapper.selectCommentCount(tBoNo);
 	}
+	
+	@Override
+	public List<TripBoardComment> selectBytBoNo(int tBoNo) throws Exception {
+		// TODO Auto-generated method stub
+		return tripBoardCommentMapper.selectAllByTBoNo(tBoNo);
+	}
+
+
 }

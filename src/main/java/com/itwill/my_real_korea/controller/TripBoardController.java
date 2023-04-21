@@ -74,7 +74,7 @@ public class TripBoardController {
 				model.addAttribute("loginUser",loginUser);
 			}
 			TripBoard tripBoard = tripBoardService.selectByTbNo(tBoNo);
-			List<TripBoardComment> tripBoardCommentList = tripBoardCommentService.selectAllByTBoNo(tBoNo);
+			List<TripBoardComment> tripBoardCommentList = tripBoardCommentService.selectBytBoNo(tBoNo);
 			tripBoardService.increaseTbReadCount(tripBoard.getTBoNo());
 			int selectCommentCount = tripBoardCommentService.selectCommentCount(tBoNo);
 			

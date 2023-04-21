@@ -74,5 +74,14 @@ public class TripBoardCommentServiceImpl implements TripBoardCommentService {
 		return tripBoardCommentDao.selectCommentCount(tBoNo);
 	}
 	
+	/*
+	 * 동행게시판에서 댓글 번호 가져오기
+	 */
+	@Override
+	public List<TripBoardComment> selectBytBoNo(int tBoNo) throws Exception {
+		// TODO Auto-generated method stub
+		return tripBoardCommentDao.selectBytBoNo(tBoNo);
+	}
+	
 	
 }

@@ -244,7 +244,7 @@ $(document).on('click', '#tripboardcomment-modify-form-btn', function(e) {
         function(resultJson) {
           
             if (resultJson.code == 1) {
-                View.render("#tripBoardCommentModifyForm", resultJson, '#tripboardcomment-detail');
+                View.render("#tripBoardCommentModifyForm", resultJson, '#comments');
             } else {
                 alert(resultJson.msg);
             }
@@ -254,9 +254,9 @@ $(document).on('click', '#tripboardcomment-modify-form-btn', function(e) {
     e.preventDefault();
 });
 
-// 동행게시판 댓글 폼 액션
+// 동행게시판 댓글 수정 액션
 $(document).on('click','#tripboardcomment-modify-action-btn',function(e){
-  
+   
     let tCoNo = $(this).data("value");
     let tBoNo = $('#tBoNo-hidden-value2').val();
     let tcommentContent = $('textarea[name="tCoContent2"]').val();
@@ -264,34 +264,37 @@ $(document).on('click','#tripboardcomment-modify-action-btn',function(e){
     let url = 'tripboardcommentupdateaction/'+tCoNo;
     let method = 'PUT';
     let contentType = 'application/json;charset=UTF-8';
+    let tcommentDate = $('#tCoDate2').val();
+    
     console.log('tCoNo'+tCoNo);
     console.log('tcommentContent'+tcommentContent);
     console.log('tBoNo'+tBoNo);
-    console.log('tCoDate'+$('#tCoDate2').val());
+    console.log('tCoDate'+ tcommentDate);
     console.log('userId'+userId);
 
     let sendData= {
         tcoNo: tCoNo,
-        tboNo:$('#tBoNo-hidden-value2').val(),
-        tcommentContent:conetent,
-        tcommentDate:$('#tCoDate2').val(),
+        tboNo: tBoNo,
+        tcommentContent:tcommentContent,
+        tcommentDate:tcommentDate,
         userId: userId
     };
     let async = true;
-    /*
+    
     // JSON.stringify() => 객체를 string 으로, JSON.parse() => string 을 객체로 만듬
     Request.ajaxRequest(url, method, contentType,
         JSON.stringify(sendData),
         function(resultJson){
             //code 1 일때 render, 아닐 때 msg 띄움
             if(resultJson.code == 1){
-                //window.location.href = 'tripboard-detail?tBoNo='+tBoNo;
-                 View.render("#tripBoardCommentModifyAction", resultJson, '#tripboardcomment-detail');
+                window.location.href = 'tripboard-detail?tBoNo='+tBoNo;
+                 console.log('###################');
+                // View.render("#tripBoardCommentModifyAction", resultJson, '#tripboardcomment-detail');
             } else {
                 alert(resultJson.msg);
             };
         }, async);
-*/
+
     e.preventDefault();
 });
 

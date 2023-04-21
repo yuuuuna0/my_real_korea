@@ -97,7 +97,10 @@ function kakaoLogout() {
 <div id="login">
 <form id="user-login" th:object="${fuser!=null? fuser : new com.itwill.my_real_korea.dto.user.User()}" name="f" method="post">
 <input type="hidden" name="prevPage" value="${prevPage}">
+<!--  
 	<a href="https://kauth.kakao.com/oauth/authorize?client_id=d2863dba7035b2676678c151834a9978&redirect_uri=http://localhost:80/practice_user_01/kakao_login_action&response_type=code">
+-->
+	<a href="user-login/oauth2/authorization/kakao" class="me-1" style="text-decoration:none;">
 		<img src="img/kakao_login_medium_wide.png" />
 	</a>
 	<div class="divider"><span>Or</span></div>
@@ -115,7 +118,7 @@ function kakaoLogout() {
 		    <a href="user-find" id="menu-user-find">아이디 / 비밀번호 찾기</a><br/>
 		    <a href="user-auth" id="menu-user-auth">인증 페이지</a>
 		</p>
-	<a class="btn_full" id="login_btn" onclick="login();">로그인</a>
+	<a class="btn_full" id="login_btn">로그인</a>
 	<a class="btn_full_outline" onclick="userCreate();">회원 가입</a>
 </form><br/>
 </div>
@@ -126,6 +129,7 @@ function kakaoLogout() {
 <script id="user-find-template" type="text/x-handlebars-template">
 
 <!-- 아이디 찾기 폼 시작 -->
+
 <form name="i" method="post">
     <div class="form-group">
         <label>이름</label>
@@ -198,7 +202,6 @@ function kakaoLogout() {
 		</form>
 	</div><!-- End Search Menu -->
 	
-	
 
 	<!-- Common scripts -->
 	<script src="js/jquery-2.2.4.min.js"></script>
@@ -213,47 +216,10 @@ function userCreate() {
 	location.href="user-write";
 }
 
-//로그인 액션
-function login() {
-  if (document.f.userId.value == "") {
-    alert("아이디를 입력하십시오.");
-    document.f.userId.focus();
-    return false;
-  }
-  if (document.f.password.value == "") {
-    alert("비밀번호를 입력하십시오.");
-    document.f.password.focus();
-    return false;
-  }
-
-	  $.ajax({
-	    url: 'user-login',
-	    type: 'POST',
-	    data: JSON.stringify({
-	      userId: document.f.userId.value,
-	      password: document.f.password.value
-	    }),
-        contentType: 'application/json;charset=UTF-8',
-        success: function (data) {
-            if (data.status == 0) {
-                window.location.replace(data.data); // 이전 페이지로 이동
-            } else {
-                alert(data.message);
-            }
-        },
-        error: function (error) {
-            console.error(error);
-            alert('로그인에 실패했습니다.');
-        }
-    });
-}
 
 //아이디 찾기 액션
 function findId() {
 	
-    //var name = document.i.name.value;
-    //var email = document.i.email.value;
-    
     var name = $('#name').val();
     var email = $('#email').val();
     
@@ -292,26 +258,67 @@ function findId() {
 
 //비밀번호 찾기 액션
 function findPassword() {
-	if (document.p.userId.value == "") {
-		alert("아이디를 입력하십시오.");
-		document.p.name.focus();
-		return false;
-	}
-	if (document.p.email.value == "") {
-		alert("이메일을 입력하십시오.");
-		document.p.email.focus();
-		return false;
-	}
+  const userId = document.p.userId.value;
+  const email = document.p.email.value;
 
-	document.p.action = "user-find-pw-action";
-	document.p.submit();
+  if (userId === "") {
+    alert("아이디를 입력하십시오.");
+    document.p.name.focus();
+    return false;
+  }
+
+  if (email === "") {
+    alert("이메일을 입력하십시오.");
+    document.p.email.focus();
+    return false;
+  }
+
+  const data = {
+    userId: userId,
+    email: email,
+  };
+
+  $.ajax({
+    type: "POST",
+    url: "./user-find-pw-action",
+    data: data,
+    dataType: "json",
+    success: function (response) {
+      if (response.status == 1) {
+        alert(response.message);
+        window.location.replace("user-login");
+      } else {
+        alert(response.message);
+      }
+    },
+    error: function (xhr, status, error) {
+      console.error(error);
+      alert("오류가 발생했습니다.");
+    },
+  });
+
+  return true;
 }
 
-//이메일 인증 액션	
+//이메일 인증 액션
 function submitAuthCode() {
-	document.a.action = "user-auth-action";
-	document.method='POST';
-	document.a.submit();
+    var mailAuthKey = $("input[name='mailAuthKey']").val();
+    $.post({
+        url: "./user-auth-action",
+        data: { mailAuthKey: mailAuthKey },
+        success: function(response) {
+            if (response.status === 0) {
+                // 인증 성공
+                window.location.replace(response.data);
+            } else {
+                // 인증 실패
+                alert("인증 코드가 일치하지 않습니다.");
+            }
+        },
+        error: function(xhr) {
+            alert("서버 오류가 발생했습니다.");
+        }
+    });
 }
 
 </script>	

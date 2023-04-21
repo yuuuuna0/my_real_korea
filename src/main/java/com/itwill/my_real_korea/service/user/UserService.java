@@ -21,6 +21,8 @@ public interface UserService {
 	int countExistId(String userId) throws Exception;
 	//12. 로그인 (비밀번호 일치 여부 확인)
 	User login(String userId, String password) throws Exception;
+	//12-1. 비밀번호 유효성 검사
+	boolean validatePassword(String password) throws Exception;
 	//13. 아이디 찾기 (이메일, 이름으로 아이디 찾기)
 	String findIdByEmailName(String email, String name) throws Exception;
 	//14. 비밀번호 찾기 (일치하는 회원 존재 여부 확인)

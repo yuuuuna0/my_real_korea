@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.itwill.my_real_korea.dto.user.User;
+import com.itwill.my_real_korea.exception.ExistedUserException;
 import com.itwill.my_real_korea.exception.PasswordMismatchException;
 import com.itwill.my_real_korea.exception.UserNotFoundException;
 import com.itwill.my_real_korea.service.user.UserService;
@@ -32,37 +33,34 @@ public class UserRestController {
 	@Autowired
 	private UserService userService;
 	
-	@Autowired
-	private BCryptPasswordEncoder bCryptPasswordEncoder;
 	
-/*	
- * 보류
- * 
 	//회원 가입 액션
 	@ApiOperation(value="회원 가입 액션")
-	@PostMapping(value = "/user", produces = "application/json;charset=UTF-8")
-	public Map<String, Object> user_write_action(@RequestBody User user) throws Exception {
-		Map<String,Object> resultMap = new HashMap<>();
-		int code = 1;
-		String msg = "성공";
-		try {
-			userService.create(user);
-			userService.updateMailKey(user);
-		} catch (Exception e) {
-			e.printStackTrace();
-			code = 2;
-			msg = "이미 존재하는 아이디 입니다.";
-			//error_code와 error_msg는 예외 발생 시 해당 예외에 대한 정보를 나타냄
-			resultMap.put("error_code", code);
-			resultMap.put("error_msg", msg);
-		}
-		//code와 msg는 API 호출 결과에 대한 정보를 의미
-	    resultMap.put("code", code);
-	    resultMap.put("msg", msg);
-	    resultMap.put("data", user);
-		return resultMap;
+	@PostMapping(value = "/user-write-action", produces = "application/json;charset=UTF-8")
+	public Response user_write_action(@RequestBody User user) throws Exception {
+	    Response response = new Response();
+	    try {
+	        //비밀번호 유효성 검사
+	        if (!userService.validatePassword(user.getPassword())) {
+	        	response.setStatus(2);
+	        	response.setMessage("비밀번호 형식을 확인해주세요.");
+	            return response;
+	        } else {
+	            userService.create(user);
+	            userService.updateMailKey(user);
+	            response.setStatus(0);
+	            response.setMessage("My Real Korea 회원이 되신것을 환영합니다.");
+	        }
+	    } catch (ExistedUserException e) {
+	    	response.setStatus(3);
+	    	response.setMessage(e.getMessage());
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        response.setStatus(4);
+	        response.setMessage("오류 발생");
+	    }
+	    return response;
 	}
-*/	
 	
 	//로그인 액션
 	@ApiOperation(value="로그인 액션")
@@ -70,14 +68,15 @@ public class UserRestController {
 	@ResponseBody
 	public Response user_login_action(@RequestBody User user, HttpServletRequest request) throws Exception {
 	    HttpSession session = request.getSession();
-	    Response res = new Response();
+	    Response response = new Response();
 	    try {
 	        User authUser = userService.login(user.getUserId(), user.getPassword());
 	        if (authUser.getMailAuth() != 1) {
 	            session.setAttribute("authUser", authUser);
-	            res.setStatus(1);
-	            res.setMessage("이메일을 확인해주세요.");
-	            res.setData("user-auth");
+	            response.setStatus(1);
+	            response.setMessage("이메일을 확인해주세요.");
+	            response.setData("user-auth");
+	            System.out.println(">> user-auth (1) :"+response.getStatus());
 	        } else {
 	            User loginUser = userService.login(user.getUserId(), user.getPassword());
 	            session.setAttribute("loginUser", loginUser);
@@ -87,77 +86,29 @@ public class UserRestController {
 	                prevPage = request.getContextPath() + "/index";
 	            }
 	            session.removeAttribute("prevPage");
-	            res.setStatus(0);
-	            res.setMessage("성공");
-	            res.setData(prevPage);
+	            response.setStatus(0);
+	            response.setMessage("로그인 성공");
+	            response.setData(prevPage);
+	            System.out.println(">> 로그인 성공 (0) :"+response.getStatus());
 	        }
 	    } catch (UserNotFoundException e) {
 	        e.printStackTrace();
-	        res.setStatus(2);
-	        res.setMessage(e.getMessage());
-	        session.setAttribute("prevPage", request.getHeader("Referer"));
+	        response.setStatus(2);
+	        response.setMessage(e.getMessage());
+	        response.setData("user-login");
+	        System.out.println(">> 존재하지 않는 회원 (2) :"+response.getStatus());
+	        return response;
 	    } catch (PasswordMismatchException e) {
 	        e.printStackTrace();
-	        res.setStatus(3);
-	        res.setMessage(e.getMessage());
-	        session.setAttribute("prevPage", request.getHeader("Referer"));
+	        response.setStatus(3);
+	        response.setMessage(e.getMessage());
+	        response.setData("user-login");
+	        System.out.println(">> 패스워드 불일치 (3) :"+response.getStatus());
+	        return response;
 	    }
-	    return res;
+	    return response;
 	}
 	
-	
-/*
- * 보류
- * 
-	@ApiOperation(value="로그인 액션")
-	@PostMapping(value = "user-login", produces = "application/json;charset=UTF-8")
-	@ResponseBody
-	public Map<String,Object> user_login_action(@RequestBody User user, HttpServletRequest request) throws Exception {
-	    HttpSession session = request.getSession();
-		Map<String, Object> resultMap = new HashMap<>();
-		int code = 1;
-		String msg = "성공";
-		List<Object> data = new ArrayList<Object>();
-		
-	    try {
-	        User authUser = userService.login(user.getUserId(), user.getPassword());
-	        if (authUser.getMailAuth() != 1) {
-	            session.setAttribute("authUser", authUser);
-	            code = 2;
-	            msg = "이메일을 확인해주세요.";
-	            data.add(authUser.getMailAuth());
-	            
-	        } else {
-	            User loginUser = userService.login(user.getUserId(), user.getPassword());
-	            session.setAttribute("loginUser", loginUser);
-	            String prevPage = (String) session.getAttribute("prevPage");
-	            System.out.println(">> prevPage : "+prevPage);
-	            if (prevPage == null || prevPage.contains("/user-login") || prevPage.contains("/user-auth")) {
-	                prevPage = request.getContextPath() + "/index";
-	            }
-	            session.removeAttribute("prevPage");
-	            code = 1;
-	            msg = ("성공");
-	            data.add(prevPage);
-	        }
-	    } catch (UserNotFoundException e) {
-	        e.printStackTrace();
-	        code = 2;
-	        msg = e.getMessage();
-	        session.setAttribute("prevPage", request.getHeader("Referer"));
-	    } catch (PasswordMismatchException e) {
-	        e.printStackTrace();
-	        code = 3;
-	        msg = e.getMessage();
-	        session.setAttribute("prevPage", request.getHeader("Referer"));
-	    }
-	    resultMap.put("code", code);
-	    resultMap.put("msg", msg);
-	    resultMap.put("data", data);
-
-	    return resultMap;
-	}
-*/
 	
 	//회원 인증 폼 (이메일로 전송된 인증코드)
 	@LoginCheck
@@ -181,6 +132,35 @@ public class UserRestController {
 	    response.setMessage("인증 페이지로 이동합니다.");
 	    response.setData("user-auth");
 	    
+	    return response;
+	}
+	
+	//회원 인증 액션
+	@PostMapping(value = "user-auth-action", produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public Response userAuthAction(@RequestParam("mailAuthKey") String mailAuthKey, HttpSession session) {
+	    Response response = new Response();
+	    try {
+	        User authUser = (User) session.getAttribute("authUser");
+	        if (authUser.getMailKey() == Integer.parseInt(mailAuthKey)) {
+	        	/*
+	        	 * 확인용
+	        	System.out.println("mailAuthKey : "+mailAuthKey);
+	        	System.out.println("authUser.getMailKey() : "+authUser.getMailKey());
+	        	 */
+	            userService.updateMailAuth(authUser);
+	            //인증 완료 후 세션에서 삭제
+	            session.removeAttribute("authUser"); 
+	            response.setStatus(0);
+	            response.setData("user-login");
+	        } else {
+	            response.setStatus(1);
+	            response.setData("user-auth");
+	        }
+	    } catch (Exception e) {
+	        response.setStatus(2);
+	        response.setMessage(e.getMessage());
+	    }
 	    return response;
 	}
 

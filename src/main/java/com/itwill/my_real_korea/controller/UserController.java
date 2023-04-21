@@ -38,6 +38,9 @@ public class UserController {
 		return existCount;
 	}
 	
+/*
+ * REST로 변경
+ * 	
 	//회원 가입 액션
 	@PostMapping(value = "user-write-action", produces = "application/json;charset=UTF-8")
 	public String user_write_action(@ModelAttribute("fuser") User user, Model model) throws Exception {
@@ -52,7 +55,7 @@ public class UserController {
 		}
 		return forward_path;
 	}
-	
+ */
 	
 	//로그인 폼
 	@GetMapping(value = "/user-login", produces = "application/json;charset=UTF-8")
@@ -67,66 +70,68 @@ public class UserController {
 	    model.addAttribute("prevPage", prevPage);
 	    return "user-login";
 	}
-
-	/*
-	 * REST로 변경
-	 * 
-		//로그인 액션
-		@PostMapping(value = "user-login-action", produces = "application/json;charset=UTF-8")
-		public String user_login_action(@ModelAttribute("fuser") User user, Model model, 
-											HttpServletRequest request, HttpServletResponse response) throws Exception {
-			HttpSession session = request.getSession();
-			String forwardPath = "";
-		    try {
-		        User authUser = userService.login(user.getUserId(), user.getPassword());
-		        if (authUser.getMailAuth() != 1) {
-		        	session.setAttribute("authUser", authUser);
-		        	forwardPath = "user-auth";
-		        } else {
-		            User loginUser = userService.login(user.getUserId(), user.getPassword());
-		            session.setAttribute("loginUser", loginUser);
-		            String prevPage = (String) session.getAttribute("prevPage");
-		            if (prevPage == null || prevPage.contains("/user-login") || prevPage.contains("/user-auth")) {
-		                prevPage = request.getContextPath() + "/index";
-		            }
-		            session.removeAttribute("prevPage");
-		            response.sendRedirect(prevPage);
-		            return null;
-		        }
-		    } catch (UserNotFoundException e) {
-		        e.printStackTrace();
-		        model.addAttribute("msg1", e.getMessage());
-		        session.setAttribute("prevPage", request.getHeader("Referer"));
-		        forwardPath = "user-login";
-		    } catch (PasswordMismatchException e) {
-		        e.printStackTrace();
-		        model.addAttribute("msg2", e.getMessage());
-		        session.setAttribute("prevPage", request.getHeader("Referer"));
-		        forwardPath = "user-login";
-		    }
-		    return forwardPath;
-		}
-	 */	
+	
+/*
+ * REST로 변경
+ * 
+	//로그인 액션
+	@PostMapping(value = "user-login-action", produces = "application/json;charset=UTF-8")
+	public String user_login_action(@ModelAttribute("fuser") User user, Model model, 
+										HttpServletRequest request, HttpServletResponse response) throws Exception {
+		HttpSession session = request.getSession();
+		String forwardPath = "";
+	    try {
+	        User authUser = userService.login(user.getUserId(), user.getPassword());
+	        if (authUser.getMailAuth() != 1) {
+	        	session.setAttribute("authUser", authUser);
+	        	forwardPath = "user-auth";
+	        } else {
+	            User loginUser = userService.login(user.getUserId(), user.getPassword());
+	            session.setAttribute("loginUser", loginUser);
+	            String prevPage = (String) session.getAttribute("prevPage");
+	            if (prevPage == null || prevPage.contains("/user-login") || prevPage.contains("/user-auth")) {
+	                prevPage = request.getContextPath() + "/index";
+	            }
+	            session.removeAttribute("prevPage");
+	            response.sendRedirect(prevPage);
+	            return null;
+	        }
+	    } catch (UserNotFoundException e) {
+	        e.printStackTrace();
+	        model.addAttribute("msg1", e.getMessage());
+	        session.setAttribute("prevPage", request.getHeader("Referer"));
+	        forwardPath = "user-login";
+	    } catch (PasswordMismatchException e) {
+	        e.printStackTrace();
+	        model.addAttribute("msg2", e.getMessage());
+	        session.setAttribute("prevPage", request.getHeader("Referer"));
+	        forwardPath = "user-login";
+	    }
+	    return forwardPath;
+	}
+ */	
 	
 	
-	/*
-	 * REST로 변경
-	 * 
-		//회원 인증 폼 (이메일로 전송된 인증코드)
-		@LoginCheck
-		@GetMapping(value = "/user-auth")
-		public String user_auth(HttpServletRequest request) throws Exception {
-			HttpSession session = request.getSession();
-			User authUser = (User) session.getAttribute("authUser");
-			System.out.println(">> authUser : "+authUser);
-			authUser = userService.findUser(authUser.getUserId());
-			session.setAttribute("authUser", authUser);
-			return "user-auth";
-		}
-	 */
+/*
+ * REST로 변경
+ * 
+	//회원 인증 폼 (이메일로 전송된 인증코드)
+	@LoginCheck
+	@GetMapping(value = "/user-auth")
+	public String user_auth(HttpServletRequest request) throws Exception {
+		HttpSession session = request.getSession();
+		User authUser = (User) session.getAttribute("authUser");
+		System.out.println(">> authUser : "+authUser);
+		authUser = userService.findUser(authUser.getUserId());
+		session.setAttribute("authUser", authUser);
+		return "user-auth";
+	}
+ */
 	
 	
-
+/*
+ * REST
+ * 
 	//회원 인증 액션
 	@PostMapping(value = "user-auth-action", produces = "application/json;charset=UTF-8")
 	public String user_auth_action(@RequestParam("mailAuthKey") String mailAuthKey, HttpSession session) throws Exception {
@@ -134,11 +139,6 @@ public class UserController {
 	        User authUser = (User) session.getAttribute("authUser");
 	        if(authUser.getMailKey() == Integer.parseInt(mailAuthKey)) {
 	        	userService.updateMailAuth(authUser);
-	        	/*
-	        	 * 확인용
-	        	System.out.println("mailAuthKey : "+mailAuthKey);
-	        	System.out.println("authUser.getMailKey() : "+authUser.getMailKey());
-	        	 */
 	        	session.removeAttribute("authUser");
 	        	forwardPath = "user-login";
 	        }else {
@@ -147,6 +147,7 @@ public class UserController {
 	    return forwardPath;
 	}
 	
+*/
 	/***************************ID, Password 찾기********************************/
 
 	//아이디, 비밀번호 찾기 폼

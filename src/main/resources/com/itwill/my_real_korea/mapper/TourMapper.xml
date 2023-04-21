@@ -30,14 +30,19 @@
 		select *
 		from (select rownum idx, tourAll.*
 			  from (select t.*,
-			   			   c.city_name,
-			   			   ti.to_img_url
-			   		from tour t 
-						 join city c
-				   			on t.city_no=c.city_no
-						 left join tour_img ti
-				   			on t.to_no=ti.to_no
-				   	where 1=1
+                           c.city_name,
+                           ti.to_img_url
+                    from tour t 
+                    join city c on t.city_no=c.city_no
+                    left join 
+                         (select a.to_no,b.to_img_url
+                          from 
+                              (select to_no,min(to_img_no) as min_img
+                               from tour_img
+                               group by to_no) a
+                          join tour_img b on a.min_img=b.to_img_no) ti
+                    on t.to_no=ti.to_no
+                    where 1=1
 				   		<if test="keyword !=null">
 				   			and t.to_name like '%'||#{keyword}||'%'
 				   		</if>
@@ -47,7 +52,7 @@
 				   		<if test="toType !=0">
 				   			and t.to_type=#{toType}
 				   		</if>
-		   				<if test="sortOrder !=null">
+		   				<if test="sortOrder !=null and sortOrder!=''">
 							<choose>
 								<when test="sortOrder == 'toPriceDesc'">
 									ORDER BY T.to_price Desc
@@ -63,7 +68,7 @@
 								</when>
 							</choose>
 						</if>
-		   				<if test="sortOrder ==null">
+		   				<if test="sortOrder == null or sortOrder == ''">
 								ORDER BY T.to_no Asc
 						</if>
 					) tourAll

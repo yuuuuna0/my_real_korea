@@ -59,7 +59,13 @@
 			location.href = "user-view";
 		}
 	}
-
+	
+	  const hypenTel = (target) => {
+	 target.value = target.value
+	   .replace(/[^0-9]/g, '')
+	   .replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`);
+	}
+	  
 </script>
 </head>
 
@@ -174,7 +180,7 @@
 					<input id="btn-user-modify-form" value="프로필 수정" class="btn_1 green" type="button"> 
 					<button class="btn_1 green" type="button" onclick="userRemove();">회원 탈퇴</button>	
 						</form>
-						
+						<button class="btn_1 green" type="button" onclick="userModify();">프로필 수정 pg</button>
 						
 <!-- 페이지 로드 하는 폼  
 <div class="row">
@@ -202,6 +208,9 @@
 			<li>포인트 <span th:text="*{point}"></span>
 			</li>
 		</ul>
+		
+			
+
 		<ul id="profile_summary" th:object="${loginUser.userAddInfo}">
 			<li>자기 소개 
 			<span th:text="*{introduce}"></span>
@@ -338,7 +347,7 @@ Handlebars.registerHelper('ifEquals', function(arg1, arg2, options) {
 		<div style="text-align: center;">
 		 <h3 style="margin-top: 0;"> <a>{{userId}}</a></h3>
 		<button class="btn_1 green" style="width: 140px; margin-top: 15px;">프로필 사진 수정</button>
-<ul id="profile_summary">
+<ul id="profile_summary_user">
 			<li>프로필 이미지 {{userImg.userImgUrl}} </li>
 		</ul>
 					
@@ -348,31 +357,37 @@ Handlebars.registerHelper('ifEquals', function(arg1, arg2, options) {
 		<input type="hidden"  id="userId" value="{{userId}}" >
 		<input type="hidden" id="password1" value="{{password}}">
 
-		<ul id="profile_summary">	   
+		<ul id="profile_summary_user">	   
 			<li>이름 <span>{{name}}</span></li>
 			<li>성별 <span>{{gender}}</span></li>
 			
+			<li>비밀번호 <span><input type="password" name="password"></span></li>
+			<li>비밀번호 확인<span><input type="password" name="password2"></span></li>
 
 			<li>닉네임 
-			<span><input id="nickname" class=" form-control" type="text" required="required" value="{{nickname}}"></span>
+			<span><input id="nickname" class=" form-control-user " type="text" required="required" value="{{nickname}}"></span>
 			</li>
 			<li>휴대폰 <span>
-			<input id="phone" class=" form-control "type="text" required="required" value="{{phone}}"></span>
+			<input id="phone" class=" form-control-user "type="text" oninput="hypenTel(this)" maxlength="13" required="required" value="{{phone}}"></span>
+ 
 			</li>
 			<li>이메일 
-			<span><input id="email" class=" form-control " type="text" required="required" value="{{email}}"></span>
+			<span><input id="email" class=" form-control-user " type="text" required="required" value="{{email}}"></span>
 			</li>
 			<li>생일
-			<span><input id="brith" class=" form-control " type="text" required="required" value="{{brith}}"></span>
+			<span><input id="brith" class=" form-control-user " type="text" required="required" value="{{brith}}"></span>
 			</li>
 			<li>주소 
-			<span><input id="address" class=" form-control " type="text" required="required" value="{{address}}"></span>
+			<span><input id="address" class=" form-control-user " type="text" required="required" value="{{address}}"></span>
 			</li>
 
 		    <li>포인트 <span>{{point}}</span></li>
 		</ul>
 	<hr>
-		<ul id="profile_summary">
+
+  
+  
+		<ul id="profile_summary_user">
 			
 
 			<li>음주 여부 

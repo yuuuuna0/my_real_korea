@@ -170,3 +170,34 @@ header.sticky#colored #logo_home h1 a{
     color: #ededed;
 }
 
+.form-control-user {
+	font-size: 13px;
+    color: #333;
+    height: 30px;
+    border-radius: 3px;
+    margin-bottom: 10px;
+    border: 1px solid #ced4da;
+}
+
+ul#profile_summary_user{
+	margin:50px 0 20px 0;
+	padding:0;
+	list-style:none;
+	text-transform:uppercase;
+	font-weight:600;
+	margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+ul#profile_summary_user li{
+	padding:4px 0;
+	position:relative;
+	 margin-top: 10px;
+    margin-bottom: 10px;
+}
+ul#profile_summary_user li span{
+	text-transform: none;
+	font-weight: normal;
+	position:absolute;
+	left:200px;
+}

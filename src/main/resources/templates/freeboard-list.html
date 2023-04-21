@@ -71,11 +71,11 @@
 		<div id="position">
 			<div class="container">
 				<ul>
-					<li><a href="#">Home</a>
+					<li><a href="index">마이리얼코리아</a>
 					</li>
-					<li><a href="#">Category</a>
+					<li><a href="freeboard-list">게시판</a>
 					</li>
-					<li>Page active</li>
+					<li>자유게시판</li>
 				</ul>
 			</div>
 		</div>
@@ -177,14 +177,13 @@
 								</li>
 								<li class="page-item" th:if="${freeBoardList.pageMaker.curPage!=1}"><a class="page-link"   th:href="'?pageNo=1'">1</a>
 								</li>
+								<li class="page-item active" ><a class="page-link" th:if="${freeBoardList.pageMaker.curPage}==2"  href="?pageNo=2" >2</a>
+								</li>
+								<li class="page-item" ><a class="page-link"  th:if="${freeBoardList.pageMaker.curPage}!=2" href="?pageNo=2" >2</a>
+								</li>
+								<li class="page-item active" ><a class="page-link"  th:if="${freeBoardList.pageMaker.curPage}==3" href="?pageNo=3" >3</a></li>
 								
-								<li class="page-item" ><a class="page-link"   >...</a>
-								</li>
-							
-								<li class="page-item active" ><a class="page-link" th:if="${freeBoardList.pageMaker.curPage}!=1 and ${freeBoardList.pageMaker.curPage}!=${freeBoardList.pageMaker.totPage}" th:href="?pageNo='+${freeBoardList.pageMaker.curPage}" th:text="${freeBoardList.pageMaker.curPage}"></a>
-								</li>
-								<li class="page-item" ><a class="page-link"   >...</a>
-								</li>
+								<li class="page-item" ><a class="page-link"  th:unless="${freeBoardList.pageMaker.curPage}==3" href="?pageNo=3" >3</a></li>
 								<li class="page-item active" ><a class="page-link" th:if="${freeBoardList.pageMaker.curPage}==${freeBoardList.pageMaker.totPage}" th:href="'?pageNo='+${freeBoardList.pageMaker.totPage}" th:text="${freeBoardList.pageMaker.totPage}"></a>
 								</li>
 								<li class="page-item" ><a class="page-link" th:if="${freeBoardList.pageMaker.curPage}!=${freeBoardList.pageMaker.totPage}" th:href="'?pageNo='+${freeBoardList.pageMaker.totPage}" th:text="${freeBoardList.pageMaker.totPage}"></a>
@@ -209,7 +208,7 @@
 					<aside class="sidebar" >
 						<div class="widget">
 							<div class="input-group">
-								<input id="freeboard-search-keyword" type="text" class="form-control" placeholder="검색 :서울, 부산,대전" >
+								<input id="freeboard-search-keyword" type="text" class="form-control" placeholder="Search..." >
 								<span  class="input-group-btn" >
 		                        <button id="freeboard-search-btn" class="btn btn-default" type="button" style="margin-left:0;" ><i class="icon-search"></i></button>
 		                        </span>
@@ -223,20 +222,20 @@
 						<div class="widget " id="cat_shop">
 							<h4>Categories</h4>
 							<ul >
-								<li  ><a id="freeboard-city1">서울</a>
-								<a id="freeboard-city2">경기</a>
-								<a id="freeboard-city3">강원</a>
-								<a id="freeboard-city4">대전</a>
-								<a id="freeboard-city5">부산</a>
-								<a id="freeboard-city6">제주</a>
+								<li><a id="freeboard-city1">전체보기</a></li>
+								<li><a id="freeboard-city2">서울</a></li>
+								<li><a id="freeboard-city3">경기</a></li>
+								<li><a id="freeboard-city4">강원</a></li>
+								<li><a id="freeboard-city5">대전</a></li>
+								<li><a id="freeboard-city6">부산</a>
 								<hr>
-									<a th:id="'fBoUserId'"  th:if="${loginUser != null && loginUser.userId == freeBoard.userId}"  th:value="${loginUser.userId}"></a>
-									<a id="freeboard-write-form-btn" class="btn_1" style="color:white;  text-align:center" role="button">자유게시판 글쓰기</a>
+									<h id="freeboard-write-form-btn" class="btn_1" style="color:white;  text-align:center"  th:if="${loginUser != null && loginUser.userId == freeBoard.userId}" role="button" th:text="'자유게시판 글쓰기'"></h>
+									<h  class="btn_1" style="color:white;  text-align:center" th:unless="${loginUser != null && loginUser.userId == freeBoard.userId}" role="button" onclick="window.alert('로그인하세요')" th:text="'자유게시판 글쓰기'"></h>
 									<hr>
-									
 						</li>
 							
 							</ul>
+									<a class="sr-only" id="'fBoUserId'"  th:each="freeBoard:${freeBoardList}" th:if="${loginUser != null && loginUser.userId == freeBoard.userId}"  th:value="${loginUser.userId}"></a>
 							
 						</div>
 						<!-- End widget -->
@@ -285,10 +284,10 @@
 	
 	<script id="freeboard-search-list-template" type="text/x-handlebars-template" >
 <form name='boardlistform' style='width:flex;  '>
-						<div class="row" style='color:grey; width:max; margin:10px; margin-left:auto; margin-right:auto;'>
-							<table id='boardlist'  cellpadding='5px' cellspacing='1px' style='flex:auto; '>
+						<div class="row" style='color:grey; width:max-flex; margin-left:15px; margin-right:15px;'>
+							<table id='boardlist' cellpadding='5px' cellspacing='1px' style='flex:auto; '>
 								<tr id='boardlist_tr1' >
-									<td   width='200'; align='center'>제 목</td>
+									<td   width='150'; align='center'>제 목</td>
 <td></td>
 <td></td>
 <td></td>
@@ -298,25 +297,25 @@
 <td></td>
 <td></td>
 <td></td>
-									<td   width=5 align=center>조회수</td>
+									<td   width=1 align=center>조회수</td>
 									<td   width=20 align=center>작성일</td>
 									<td   align=center>작성자</td>
 								</tr>
 								<tr id='boardlist_tr2'> 
 {{#each data.itemList}}
-								   <td  width=150> <a  href=freeboard-detail?fBoNo={{fboNo}}>{{fboTitle}}></a></td>
+								        <td width=300> <a  href=freeboard-detail?fBoNo={{fboNo}}>{{fboTitle}}></a></td>
 										<td width=5 class="icon-comment"></td>
 										<td width=10> {{commentCount}}</td> 
 										<td width=5 class="icon-map"></td>
-										<td width=100> {{city.cityName}}</td>
+										<td width=60> {{city.cityName}}</td>
 <td></td>
 <td></td>
 <td></td>
 <td></td>
 <td></td>
-									<td  width=50>{{fboCount}}</td>
-									<td  width=100>{{dateFormat fboDate}}</td>
-									<td  width=50>{{userId}}</td>
+									<td  width=70>{{fboCount}}</td>
+									<td  width=120>{{dateFormat fboDate}}</td>
+									<td  width=120>{{userId}}</td>
 									</li><br>
 								</tr>
 <br>
@@ -334,6 +333,7 @@
 	<script src="js/functions.js"></script>
 	<script src="js/app.js" type="module"></script>
 	<script src="js/app_freeboard.js" type="module"></script>
+	
 <form name="form-name" id="form-qna" method="post" onsubmit="return false;">
 	
 </form>

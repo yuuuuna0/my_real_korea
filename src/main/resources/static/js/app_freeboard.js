@@ -4,7 +4,7 @@ import * as Request from "./request.js";
 
 $(document).on('click','#freeboard-city1',function(e){
 
-	let keyword = $('#freeboard-city1').text();
+	let keyword = '';
 	let url = `freeBoard-search?pageNo=1&keyword=${keyword}`;
 	let method = 'GET';
 	let contentType = 'application/json;charset=UTF-8';
@@ -212,7 +212,14 @@ $(document).on('click','#freeboard-search-btn',function(e){
 	
 	e.preventDefault();
 });
+$('#freeboard-write-form-btn').click(function(e){
+	window.location.href="freeboard-write-form"
+	e.preventDefault();
+});
+
+
 /******** 공지사항 정렬 : 최신순, 오래된순, 조회수 높은 순 **********/ 
+/**
 $(document).on('change','#sort-by',function(e){
 	// ajax로 리스트 부분만 검색된 리스트로 변경
 	let selectedValue = $(this).val();
@@ -274,3 +281,4 @@ $(document).on('change','#sort-by',function(e){
 		}
 	
 });
+ */

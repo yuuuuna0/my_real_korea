@@ -157,7 +157,7 @@ $(document).on('click', '#tripboard-modify-action', function(e){
 	let tBoImg = "이미지";
 	let cityNo = $('input[name="cOptions"]:checked').val();
 	let tBoStyle = $('input[name="sOoptions"]:checked').val();
-	let tBoStatus = $('#tBoStatus').val();
+	let tBoStatus = $('input[name="tBoStatus"]:checked').val();
 	
 	formData.append('tBoTitle', $('#tBoTitle').val());
 	formData.append('tBoContent', $('#tBoContent').val());

@@ -236,7 +236,7 @@
 									<div class="col-3">
 										<div class="form-group">
 											<label class="switch-light switch-ios pull-right">
-												<input type="checkbox" name="tBoStatus" id="tBoStatus" checked value="0" >
+												<input type="checkbox" name="tBoStatus" id="tBoStatus" checked th:value="${tripBoard.tBoStatus}">
 													<span>
 													<span>모집완료</span>
 													<span>모집중</span>
@@ -472,7 +472,19 @@
 	<script>
 		$('#tBoEndDate').datepicker('setDate', 'today');
 	</script>
+	<!-- 
+	<script>
+	function checkedStatus() {
+		if(document.f.tBoStatus.checked == true) {
+			document.f.tBoStatus.value == '0';
+		}
+		if(document.f.tBoStatus.checked == false) {
+			document.f.tBoStatus.value == '1';
+		}
+	}
+	</script>
 	
+	 -->
 	
 </body>
 

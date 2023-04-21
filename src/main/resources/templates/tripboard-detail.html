@@ -42,9 +42,29 @@
 			document.tt.submit();
 		}
 	</script>
-<!-- Handlebars -->
-<script  defer type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.2/handlebars.min.js"></script>
-
+	<!-- Handlebars -->
+	<script  defer type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.2/handlebars.min.js"></script>
+	
+	<style>
+	#chat-icon {
+		position: fixed;
+	    bottom: 100px;
+	    right: 10px;
+	    width: 80px;
+	    height: 80px;
+	    background-color : white;
+	    border-radius: 100px;
+	    border: 3px solid white;
+	}
+	
+	#chat-img{
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%,-50%);
+	}
+	</style>
+	
 </head>
 
 <body>
@@ -254,7 +274,11 @@
 		<!-- End container -->
 	<!--========================= End footer ========================-->
 
-
+	<div id="chat-icon">
+		<div id="chat-img">
+    		<img src="img/chat3_60.png">
+		</div>
+	</div>
 	<div id="toTop"></div><!-- Back to top button -->
 	
 	<!-- Search Menu -->

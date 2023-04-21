@@ -284,7 +284,13 @@
 					<nav aria-label="Page navigation">
 						<ul class="pagination justify-content-center">
 							<!-- 이전블록으로 이동 -->
-							<li class="page-item">
+							<li class="page-item" th:if="${tourListPage.pageMaker.prevGroupStartPage lt 0}">
+								<a class="page-link" href="tour-list?pageNo=1"  aria-label="Previous">
+									<span aria-hidden="true">&laquo;</span>
+									<span class="sr-only">Previous</span>
+								</a>
+							</li>
+							<li class="page-item" th:if="${tourListPage.pageMaker.prevGroupStartPage gt 0}">
 								<a class="page-link" th:href="@{tour-list(pageNo=${tourListPage.pageMaker.prevGroupStartPage})}" href="#"  aria-label="Previous">
 									<span aria-hidden="true">&laquo;</span>
 									<span class="sr-only">Previous</span>
@@ -301,7 +307,13 @@
 								</th:block>
 							</th:block>
 							<!-- 다음블록으로 이동 -->
-							<li class="page-item">
+							<li class="page-item" th:if="${tourListPage.pageMaker.nextGroupStartPage gt tourListPage.pageMaker.totPage}">
+								<a class="page-link" th:href="@{tour-list(pageNo=${tourListPage.pageMaker.totPage})}" href="#" aria-label="Next">
+									<span aria-hidden="true">&raquo;</span>
+									<span class="sr-only">Next</span>
+								</a>
+							</li>
+							<li class="page-item" th:if="${tourListPage.pageMaker.nextGroupStartPage le tourListPage.pageMaker.totPage}">
 								<a class="page-link" th:href="@{tour-list(pageNo=${tourListPage.pageMaker.nextGroupStartPage})}" href="#" aria-label="Next">
 									<span aria-hidden="true">&raquo;</span>
 									<span class="sr-only">Next</span>
@@ -416,14 +428,10 @@
 						{{toName}}
 					</strong>
 				</h3>
-	<div class="rating" id="toScoreH" value={{toScore}}>
-					<i class="icon-star voted"></i>
-					<i class="icon-star voted"></i>
-					<i class="icon-star voted"></i>
-					<i class="icon-star voted"></i>
-					<i class="icon-star-empty"></i>							
+				<div class="rating" id="toScoreH" value={{toScore}}>
+	 					{{#generateStarHtml toScore}}
+						{{/generateStarHtml}}
 				</div>
-
 				<!-- end rating -->
 				<div class="wishlist">
 					<a class="tooltip_flip tooltip-effect-1" href="#">+<span class="tooltip-content-flip"><span class="tooltip-back">Add to wishlist</span></span></a>

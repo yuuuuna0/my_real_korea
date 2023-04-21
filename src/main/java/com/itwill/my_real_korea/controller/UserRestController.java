@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,6 +32,8 @@ public class UserRestController {
 	@Autowired
 	private UserService userService;
 	
+	@Autowired
+	private BCryptPasswordEncoder bCryptPasswordEncoder;
 	
 /*	
  * 보류
@@ -305,6 +308,8 @@ public class UserRestController {
 		try {
 			HttpSession session = request.getSession();
 			User loginUser = userService.findUser(user.getUserId());
+			String encodedPassword = bCryptPasswordEncoder.encode(user.getPassword());
+			user.setPassword(encodedPassword);
 			userService.update(user);
 			session.setAttribute("loginUser", loginUser);
 			

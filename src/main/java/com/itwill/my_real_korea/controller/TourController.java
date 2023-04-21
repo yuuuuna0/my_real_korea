@@ -100,9 +100,11 @@ public class TourController {
 
 	//2. 투어상품 상세보기
 	@GetMapping(value="/tour-detail", params = "toNo")
-	public String tourDetail(@RequestParam int toNo, Model model) {
+	public String tourDetail(@RequestParam int toNo, Model model,HttpSession session) {
 		String forwardPath="";
 		try{
+			User loginUser=(User)session.getAttribute("loginUser");
+			model.addAttribute("loginUser",loginUser);
 			Tour tour = tourService.findTourWithCityByToNo(toNo);
 			if(tour!=null){
 				int tourScore=tourReviewService.calculateTourScore(toNo);

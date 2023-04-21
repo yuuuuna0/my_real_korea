@@ -141,58 +141,60 @@
 							<form id="tripboardModifyForm" name="tripboardModifyForm" enctype="multipart/form-data">
 							<input type="hidden" id="userId" th:value="${session.loginUser.userId}">
 							<br>
-							
-						<div class="btn-group btn-group-toggle" data-toggle="buttons">
-						  <label class="btn btn-secondary active">
-						    <input type="radio" name="cOptions" id="option1" checked value="1"> 서울
-						  </label>
-						  <label class="btn btn-secondary">
-						    <input type="radio" name="cOptions" id="option2" value="2"> 경기
-						  </label>
-						  <label class="btn btn-secondary">
-						    <input type="radio" name="cOptions" id="option3" value="3"> 강원
-						  </label>
-						  <label class="btn btn-secondary">
-						    <input type="radio" name="cOptions" id="option4" value="4"> 부산
-						  </label>
-						  <label class="btn btn-secondary">
-						    <input type="radio" name="cOptions" id="option5" value="5"> 대전
-						  </label>
-						  <label class="btn btn-secondary">
-						    <input type="radio" name="cOptions" id="option6" value="6"> 전주
-						  </label>
-						  <label class="btn btn-secondary">
-						    <input type="radio" name="cOptions" id="option7" value="7"> 제주
-						  </label>
-						</div>						
+							<div class="col text-center">
+							<div class="btn-group btn-group-toggle" data-toggle="buttons">
+							  <label class="btn btn-secondary active">
+							    <input type="radio" name="cOptions" id="option1" checked value="1"> 서울
+							  </label>
+							  <label class="btn btn-secondary">
+							    <input type="radio" name="cOptions" id="option2" value="2"> 경기
+							  </label>
+							  <label class="btn btn-secondary">
+							    <input type="radio" name="cOptions" id="option3" value="3"> 강원
+							  </label>
+							  <label class="btn btn-secondary">
+							    <input type="radio" name="cOptions" id="option4" value="4"> 부산
+							  </label>
+							  <label class="btn btn-secondary">
+							    <input type="radio" name="cOptions" id="option5" value="5"> 대전
+							  </label>
+							  <label class="btn btn-secondary">
+							    <input type="radio" name="cOptions" id="option6" value="6"> 전주
+							  </label>
+							  <label class="btn btn-secondary">
+							    <input type="radio" name="cOptions" id="option7" value="7"> 제주
+							  </label>
+							</div>						
+						</div>					
 						<br>
 						<br>
 						<div>
 						<br>
 						&emsp;&emsp;&emsp;<label><i class="icon-quote-left"> 저는</i></label>
 						<br>
-						<div >
+						<div class="col text-center">
 							<div class="btn-group btn-group-toggle" data-toggle="buttons">
-							  <label class="btn btn-secondary active">
+							  <label class="btn btn-light active">
 							    <input type="radio" name="sOoptions" id="option1" checked value="계획적인"> 계획적인
 							  </label>
-							  <label class="btn btn-secondary">
+							  <label class="btn btn-light">
 							    <input type="radio" name="sOoptions" id="option2" value="즉흥적인"> 즉흥적인
 							  </label>
-							  <label class="btn btn-secondary">
+							  <label class="btn btn-light">
 							    <input type="radio" name="sOoptions" id="option3" value="느긋한"> 느긋한
 							  </label>
-							  <label class="btn btn-secondary">
+							  <label class="btn btn-light">
 							    <input type="radio" name="sOoptions" id="option3" value="외향적인"> 외향적인
 							  </label>
-							  <label class="btn btn-secondary">
+							  <label class="btn btn-light">
 							    <input type="radio" name="sOoptions" id="option3" value="사진찍는"> 사진찍는
 							  </label>
-							  <label class="btn btn-secondary">
+							  <label class="btn btn-light">
 							    <input type="radio" name="sOoptions" id="option3" value="뚜벅이"> 뚜벅이
 							  </label>
 							</div>
 						</div>
+						<br>
 							<div style="width: 100%; text-align: right;">
 							  <label>여행자입니다. <i class="icon-quote-right"></i></label>&emsp;&emsp;&emsp;
 							</div>

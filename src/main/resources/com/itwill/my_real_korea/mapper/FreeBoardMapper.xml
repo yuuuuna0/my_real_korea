@@ -52,7 +52,7 @@
                  from free_board f
                           join city c
                                on f.city_no = c.city_no
-                 order by f.f_bo_no )s
+                 order by f.f_bo_date asc)s
             )ss
     <![CDATA[ where idx >= #{pageStart} and idx <= #{pageEnd} ]]>
     </select>

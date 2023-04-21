@@ -7,12 +7,14 @@ import org.springframework.web.socket.config.annotation.EnableWebSocket;
 import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
 import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
 import org.springframework.web.socket.server.standard.ServerEndpointExporter;
+import org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor;
 
 import com.itwill.my_real_korea.handler.ChatHandler;
 
 import lombok.RequiredArgsConstructor;
 
 @Configuration
+@RequiredArgsConstructor
 @EnableWebSocket // WebSocket 활성화
 public class WebSocketConfig implements WebSocketConfigurer{
 
@@ -27,10 +29,9 @@ public class WebSocketConfig implements WebSocketConfigurer{
     @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry webSocketHandlerRegistry) {
     	System.out.println("######################");
-    	webSocketHandlerRegistry.addHandler(chatHandler, "ws/chat")
+    	webSocketHandlerRegistry.addHandler(chatHandler, "/ws/chat")
         .setAllowedOriginPatterns("*")
-        .withSockJS();
-//      .setClientLibraryUrl("https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.5/sockjs.min.js");
+        .addInterceptors(new HttpSessionHandshakeInterceptor());
     }
 
 }

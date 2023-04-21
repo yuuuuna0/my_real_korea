@@ -139,8 +139,9 @@ public class ChatRestController {
 	}
 	// 메세지 보내기 & DB저장
 	@PostMapping(value = "/save-chat")
-	public String saveChat(@RequestBody Map<String, String> messages) {
+	public Map<String, Object> saveChat(@RequestBody Map<String, String> messages) {
 	
+		Map<String, Object> resultMap = new HashMap<>();
 		int code = 1;
 		String msg = "";
 		int msgNo = 0;
@@ -153,7 +154,6 @@ public class ChatRestController {
 		// 채팅아이디 가져오기
 		System.out.println(String.valueOf(messages.get("userId")));
 		
-		JSONObject jsonObject = null;
 		try {
 			msgContent = String.valueOf(messages.get("msgContent"));
 			String newMsgSendTimeStr = messages.get("msgSendTime");
@@ -170,16 +170,14 @@ public class ChatRestController {
 			msgSendTimeStr = new SimpleDateFormat("yyyy-MM-dd").format(msgSendTimeDate);
 			msgNo = newChatMsg.getMsgNo();
 			
-			// insert 후 클라이언트에게 jsonObject 만들어서 보내기
-			// DB 저장 성공 시
+			// DB 저장 성공 시 insert 후 클라이언트에게 메세지 데이터 만들어서 보내기
 			if (rowCount != 0) {
-				jsonObject = new JSONObject();
-				jsonObject.put("msgNo", msgNo);
-				jsonObject.put("msgContent", msgContent);
-				jsonObject.put("msgSendTime", msgSendTimeStr);
-				jsonObject.put("msgRead", msgRead);
-				jsonObject.put("roomNo", roomNo);
-				jsonObject.put("userId", userId);
+				resultMap.put("msgNo", msgNo);
+				resultMap.put("msgContent", msgContent);
+				resultMap.put("msgSendTime", msgSendTimeStr);
+				resultMap.put("msgRead", msgRead);
+				resultMap.put("roomNo", roomNo);
+				resultMap.put("userId", userId);
 			}
 		} catch (NumberFormatException e1) {
 			e1.printStackTrace();
@@ -190,8 +188,7 @@ public class ChatRestController {
 			msg = "메세지 DB저장 실패";
 			e.printStackTrace();
 		}
-
-		return jsonObject.toString();
+		return resultMap;
 	}
 	
 	

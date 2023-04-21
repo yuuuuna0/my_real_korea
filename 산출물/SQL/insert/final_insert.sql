@@ -14,6 +14,12 @@ insert into user_info(user_id,password,name,nickname,phone,email,birth,address,g
 
 insert into user_info(user_id,password,name,nickname,phone,email,birth,address,gender,point,is_admin,mail_auth,mail_key)
 	values('user4','user4444','회원4','마리코4','010-4444-4444','user4@gmail.com','2004-04-04','테헤란로4',1,0,1,0,123456);
+    
+insert into user_info(user_id,password,name,nickname,phone,email,birth,address,gender,point,is_admin,mail_auth,mail_key)
+	values('aaa111','aaa111','회원4','마리코4','010-4444-4444','user4@gmail.com','2004-04-04','테헤란로4',1,0,1,0,123456);
+    
+insert into user_info(user_id,password,name,nickname,phone,email,birth,address,gender,point,is_admin,mail_auth,mail_key)
+	values('master','master','회원4','마리코4','010-4444-4444','user4@gmail.com','2004-04-04','테헤란로4',1,0,1,0,123456);
 
 select * from user_info;
 --user_img

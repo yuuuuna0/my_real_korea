@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.itwill.my_real_korea.dto.user.User;
 
-@Transactional
+//@Transactional
 @SpringBootTest
 @MapperScan(basePackages = "com.itwill.my_real_korea.mapper")
 class UserServiceImplTest {
@@ -40,11 +40,11 @@ class UserServiceImplTest {
 	//4. 회원 정보 수정
 	@Test
 	void testUpdate() throws Exception {
-		User user = userService.findUser("user1");
-		user.setPassword("user1111");
-		user.setNickname("마리코1");
+		User user = userService.findUser("swagger3");
+		user.setPassword("asdfasdf1!");
+		user.setNickname("swagger3");
 		user.setPhone("011-1111-1111");
-		user.setEmail("user1@gmail.com");
+		user.setEmail("kgee12300@gmail.com");
 		System.out.println(">> updated :"+userService.update(user));
 	}
 	

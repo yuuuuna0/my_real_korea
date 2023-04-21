@@ -202,16 +202,18 @@
 						<br>
 						<br>
 							<div class="row">
-								<div class="col-md-6">
+								<div class="col-md-6" >
 									<div class="form-group">
 										<label><i class="icon-calendar-7"></i> 여행 시작일</label>
-										<input class="start-date-pick form-control" data-date-format="yyyy-mm-dd, D" type="text" id="tBoStartDate" name="tBoStartDate">
+										<input class="start-date-pick form-control" data-date-format="yyyy-mm-dd, D" type="text" id="tBoStartDate" name="tBoStartDate" required="required">
+										<div class="invalid-feedback">여행 시작일은 반드시 선택해야 합니다.</div>
 									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="form-group">
 										<label><i class="icon-calendar-7"></i> 여행 종료일</label>
-										<input class="end-date-pick form-control" data-date-format="yyyy-mm-dd, D" type="text" id="tBoEndDate" name="tBoEndDate">
+										<input class="end-date-pick form-control" data-date-format="yyyy-mm-dd, D" type="text" id="tBoEndDate" name="tBoEndDate" required="required">
+										<div class="invalid-feedback">여행 종료일은 반드시 선택해야 합니다.</div>
 									</div>
 								</div>
 							</div>
@@ -225,20 +227,23 @@
 								<div class="col-2">
 									<div class="form-group">
 										<div class="numbers-row">
-											<input type="text" value="1" name="tBoPerson" id="tBoPerson" class="qty2 form-control">
+											<input type="text" value="1" name="tBoPerson" id="tBoPerson" class="qty2 form-control" min="1">
+											<div class="invalid-feedback">동행인원은 최소 1명 이상이어야 합니다.</div>
 										</div>
 									</div>
 								</div>
 							</div>
 							<br>
-							<div class="form-group">
+							<div class="was-validated">
 								<label>제목</label>
-								<input class="form-control style_2" type="text" name="tBoTitle" id="tBoTitle" placeholder="제목을 입력하세요.">
+								<input class="form-control style_2" type="text" name="tBoTitle" id="tBoTitle" placeholder="제목을 입력하세요." required>
+								<div class="invalid-feedback">제목을 반드시 입력해야 합니다.</div>							
 							</div>
 							<br>
-							<div class="form-group">
+							<div class="was-validated">
 								<label>내용</label>
-								<textarea class="form-control style_2" name="tBoContent" id="tBoContent" style="height:150px;" placeholder="내용을 입력하세요."></textarea>
+								<textarea class="form-control style_2" name="tBoContent" id="tBoContent" style="height:150px;" placeholder="내용을 입력하세요." required></textarea>
+								<div class="invalid-feedback">내용을 반드시 입력해야 합니다.</div>
 							</div>
 							<br>
 							<div class="form-group">

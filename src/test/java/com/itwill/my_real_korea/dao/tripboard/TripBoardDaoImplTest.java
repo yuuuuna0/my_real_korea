@@ -27,7 +27,7 @@ class TripBoardDaoImplTest {
 	 * 게시글 추가
 	 */
 	 //성공
-	 @Disabled
+	 
 	 @Test
 	 void testInsertTripBoard() throws Exception { 
 		 int rowCount = tripBoardDao.insertTripBoard(new TripBoard(0, "테스트추추", "테스트333", new Date(), 0, 1, 5, "테스트사진1.png", new Date(), new Date(), "무계획", "아무나다좋아", "user1"));

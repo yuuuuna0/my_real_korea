@@ -227,11 +227,11 @@
 								<li><a id="freeboard-city3">경기</a></li>
 								<li><a id="freeboard-city4">강원</a></li>
 								<li><a id="freeboard-city5">대전</a></li>
-								<li><a id="freeboard-city6">부산</a><hr>
-									<h3 th:if="${loginUser != null && loginUser.userId == freeBoard.userId}" id="freeboard-write-form-btn" class="btn_1" style="color:white;  text-align:center" role="button">자유게시판 글쓰기</h3>
-									<h3 th:if="${loginUser == null || loginUser.userId != freeBoard.userId}" onclick="window.location.href='user-login'" class="btn_1" style="color:white;  text-align:center" role="button">로그인</h3>
+								<li><a id="freeboard-city6">부산</a>
+								<hr>
+									<h id="freeboard-write-form-btn" class="btn_1" style="color:white;  text-align:center"  th:if="${loginUser != null && loginUser.userId == freeBoard.userId}" role="button" th:text="'자유게시판 글쓰기'"></h>
+									<h  class="btn_1" style="color:white;  text-align:center" th:unless="${loginUser != null && loginUser.userId == freeBoard.userId}" role="button" onclick="window.alert('로그인하세요')" th:text="'자유게시판 글쓰기'"></h>
 									<hr>
-									
 						</li>
 							
 							</ul>

@@ -129,8 +129,52 @@ $(document).on('click', '#btn-user-modify-form', function(e) {
 	e.preventDefault();
 });
 
+// 프로필 수정 완료 버튼 
 
-
+$(document).on('click','#btn-user-modify-action',function(e) {
+	let form = $('user-modify-form');
+	console.log(form);
+	let url = 'user-modify-form-action';
+	let method = 'PUT';
+	let formData = new FormData();
+	
+	formData.append('userId', $('#userId').val());
+	formData.append('password', $('#password1').val());
+	formData.append('nickname', $('#nickname').val());
+	formData.append('phone', $('#phone').val());
+	formData.append('email', $('#email').val());
+	formData.append('brith', $('#brith').val());
+	formData.append('address', $('#address').val());
+	formData.append('alcohol', $('#alcohol').val());
+	formData.append('smoking', $('#smoking').val());
+	formData.append('introduce', $('#introduce').val());
+	
+	let async = true;
+	console.log(formData);
+		
+	$.ajax({
+	    method : method,
+	    url : url, 
+	    data : formData,
+	    processData: false,
+	    contentType: false,
+	    success : function(resultJson){
+		
+		console.log(">>>>>>>");
+				//code 1 일때 render, 아닐 때 msg 띄움
+				if(resultJson.code == 1){
+						window.location.href = 'user-view'; 
+				} else {
+					alert(resultJson.msg);
+				};
+			},
+	    err : function(err) {
+	        alert(err.status);
+	    },
+	    async : async
+	});
+		e.preventDefault();
+});
 
 
 

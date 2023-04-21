@@ -333,29 +333,33 @@
             </div>
     {{/each}}
 </script>
-<!-- 
-	<script id="tripBoardCommentModifyAction" type="text/x-handlebars-template">
+<script id="tripBoardCommentModifyAction" type="text/x-handlebars-template">
     {{#each data}}
-            <div class="review_strip_single">
+		<div class="review_strip_single" id="tripboardcomment-detail"    >
+			
                 <div class="avatar">
-                    <a href="#"><img src="img/avatar1.jpg" alt="Image"></a>
+                     <a href="#"><img src="img/avatar1.jpg" alt="Image"></a>
                 </div>
+
                 <div>
-                    <small name="tCoDate2"
-                    >{{tcommentDate}}</small>
-                    <h4 name="tCoUserId2">{{userId}}</h4>
-                    <textarea name="tCoContent2">{{tcommentContent}}</textarea>
-                    <a class="btn_1" href="" role="button" data-value={{tcoNo}}
-                       id="tripboardcomment-modify-action-btn">수정완료</a>
-                    
-                    <input type="hidden" id="tBoNo-hidden-value2"
-                           value="{{tboNo}}"/>
-                    
-                </div>
-            </div>
+                     <small name="tCoDate">{{dateFormat tcommentDate}}</small>
+                       <h4 name="tCoUserId">{{userId}}</h4>
+                         <p name="tCoContent">{{tcommentContent}}</p>
+						{{#ifCond session.loginUser.userId "==" tripBoardComment.userId}}
+                           <a class="btn_1" href="" role="button" data-value={{tcoNo}}
+                                  id="tripboardcomment-modify-form-btn">수정</a>
+                             <input type="hidden" id="tCoNo-hidden-value"
+                                 value={{tcoNo}}/>
+                                <a class="btn_1" href="" role="button" data-value={{tcoNo}}
+                                id="comment_btn_delete">삭제</a>
+                             <input type="hidden" id="tBoNo-hidden-value2"
+                                   value={{tboNo}}/>
+						{{/ifCond}}
+                 </div>
+       </div>
     {{/each}}
+   
 </script>
- -->
 	<!-- Common scripts -->
 	<script src="js/jquery-2.2.4.min.js"></script>
 	<script src="js/common_scripts_min.js"></script>

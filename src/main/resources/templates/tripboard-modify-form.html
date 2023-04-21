@@ -228,18 +228,35 @@
 											</div>
 										</div>
 									</div>
-									
+									<div class="col-3">
+										<div class="form-group">
+											<label><i class="icon-user-2"></i> 모집상태</label>
+										</div>
+									</div>
+									<div class="col-3">
+										<div class="form-group">
+											<label class="switch-light switch-ios pull-right">
+												<input type="checkbox" name="tBoStatus" id="tBoStatus" checked value="0">
+													<span>
+													<span>모집완료</span>
+													<span>모집중</span>
+													</span>
+													<a></a>
+											</label>
+										</div>
+									</div>
 								</div>
 								<br>
-								<div class="form-group">
+								<div class="was-validated">
 									<label>제목</label>
-									<input class="form-control style_2" type="text" name="tBoTitle" id="tBoTitle" th:value="${tripBoard.tBoTitle}">
+									<input class="form-control style_2" type="text" name="tBoTitle" id="tBoTitle" th:value="${tripBoard.tBoTitle}" required>
 								</div>
 								<br>
-								<div class="form-group">
+								<div class="was-validated">
 									<label>내용</label>
-									<textarea class="form-control style_2" name="tBoContent" id="tBoContent" style="height:150px;" th:text="${tripBoard.tBoContent}"></textarea>
+									<textarea class="form-control style_2" name="tBoContent" id="tBoContent" style="height:150px;" th:text="${tripBoard.tBoContent}" required></textarea>
 								</div>
+								<br>
 								<div class="form-group">
 									<label><i class="icon-tag"></i> 해시태그</label>
 									<input class="form-control style_2" type="text" name="hashtag" id="hashtag" th:value="${tripBoard.hashtag}">

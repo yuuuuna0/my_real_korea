@@ -98,51 +98,58 @@ $(document).on('click', '#all-city-list', function(e) {
 
 //동행게시판 글쓰기 액션
 $(document).on('click', '#tripboard-write-action', function(e){
-	let url = 'tripboard';
-	let method = 'POST';
-	let formData = new FormData();
-	let tBoImg = "이미지";
-	let cityNo = $('input[name="cOptions"]:checked').val();
-	let tBoStyle = $('input[name="sOoptions"]:checked').val();
+	let form = $('#tripboardWriteForm');
 	
-	
-	formData.append('tBoTitle', $('#tBoTitle').val());
-	formData.append('tBoContent', $('#tBoContent').val());
-	formData.append('tBoPerson', $('#tBoPerson').val());
-	formData.append('tBoStartDate', $('#tBoStartDate').val());
-	formData.append('tBoEndDate', $('#tBoEndDate').val());
-	formData.append('tBoStyle', tBoStyle);
-	formData.append('hashtag', $('#hashtag').val());
-	formData.append('cityNo', cityNo);
-	formData.append('userId', $('#userId').val());
-	formData.append('tBoImg', tBoImg);
-	
-	
-	let async = true;
-	
-	$.ajax({
-		method : method,
-		url : url,
-		data : formData,
-		processData : false,
-		contentType: false,
-		success : function(resultJson){
-			if(resultJson.code == 1) {
-				window.location.href='tripboard-list';
-			}else {
-				alert(resultJson.msg);
-			}
-		},
-		error : function(err) {
-			alert(err.status);
-		},
-		async : async
-	});
-	e.preventDefault();
+	if(form.get(0).checkValidity() === false) {
+		form.find(':invalid').first().focus();
+		e.preventDefault();
+		e.stopPropagation();
+	} else {
+		let url = 'tripboard';
+		let method = 'POST';
+		let formData = new FormData();
+		let tBoImg = "이미지";
+		let cityNo = $('input[name="cOptions"]:checked').val();
+		let tBoStyle = $('input[name="sOoptions"]:checked').val();
+		
+		formData.append('tBoTitle', $('#tBoTitle').val());
+		formData.append('tBoContent', $('#tBoContent').val());
+		formData.append('tBoPerson', $('#tBoPerson').val());
+		formData.append('tBoStartDate', $('#tBoStartDate').val());
+		formData.append('tBoEndDate', $('#tBoEndDate').val());
+		formData.append('tBoStyle', tBoStyle);
+		formData.append('hashtag', $('#hashtag').val());
+		formData.append('cityNo', cityNo);
+		formData.append('userId', $('#userId').val());
+		formData.append('tBoImg', tBoImg);
+		
+		let async = true;
+		
+		$.ajax({
+			method : method,
+			url : url,
+			data : formData,
+			processData : false,
+			contentType: false,
+			success : function(resultJson){
+				if(resultJson.code == 1) {
+					window.location.href='tripboard-list';
+				}else {
+					alert(resultJson.msg);
+				}
+			},
+			error : function(err) {
+				alert(err.status);
+			},
+			async : async
+		});
+		e.preventDefault();
+	}
 });
 
 //동행게시판 수정 액션
 $(document).on('click', '#tripboard-modify-action', function(e){
+	let form = $('#tripboardWriteForm');
 	let tBoNo = $('#modify-tBoNo').val();
 	let url = `tripboard/${tBoNo}`;
 	let method = 'PUT';
@@ -150,6 +157,7 @@ $(document).on('click', '#tripboard-modify-action', function(e){
 	let tBoImg = "이미지";
 	let cityNo = $('input[name="cOptions"]:checked').val();
 	let tBoStyle = $('input[name="sOoptions"]:checked').val();
+	let tBoStatus = $('#tBoStatus').val();
 	
 	formData.append('tBoTitle', $('#tBoTitle').val());
 	formData.append('tBoContent', $('#tBoContent').val());
@@ -161,8 +169,9 @@ $(document).on('click', '#tripboard-modify-action', function(e){
 	formData.append('cityNo', cityNo);
 	formData.append('userId', $('#userId').val());
 	formData.append('tBoImg', tBoImg);
+	formData.append('tBoStatus', tBoStatus);
 	
-	
+	console.log(tBoStatus);
 	let async = true;
 	
 	$.ajax({
@@ -244,7 +253,7 @@ $(document).on('click', '#tripboardcomment-modify-form-btn', function(e) {
         function(resultJson) {
           
             if (resultJson.code == 1) {
-                View.render("#tripBoardCommentModifyForm", resultJson, '#tripboardcomment-detail');
+                View.render("#tripBoardCommentModifyForm", resultJson, '#comments');
             } else {
                 alert(resultJson.msg);
             }
@@ -254,9 +263,9 @@ $(document).on('click', '#tripboardcomment-modify-form-btn', function(e) {
     e.preventDefault();
 });
 
-// 동행게시판 댓글 폼 액션
+// 동행게시판 댓글 수정 액션
 $(document).on('click','#tripboardcomment-modify-action-btn',function(e){
-  
+   
     let tCoNo = $(this).data("value");
     let tBoNo = $('#tBoNo-hidden-value2').val();
     let tcommentContent = $('textarea[name="tCoContent2"]').val();
@@ -264,34 +273,37 @@ $(document).on('click','#tripboardcomment-modify-action-btn',function(e){
     let url = 'tripboardcommentupdateaction/'+tCoNo;
     let method = 'PUT';
     let contentType = 'application/json;charset=UTF-8';
+    let tcommentDate = $('#tCoDate2').val();
+    
     console.log('tCoNo'+tCoNo);
     console.log('tcommentContent'+tcommentContent);
     console.log('tBoNo'+tBoNo);
-    console.log('tCoDate'+$('#tCoDate2').val());
+    console.log('tCoDate'+ tcommentDate);
     console.log('userId'+userId);
 
     let sendData= {
         tcoNo: tCoNo,
-        tboNo:$('#tBoNo-hidden-value2').val(),
-        tcommentContent:conetent,
-        tcommentDate:$('#tCoDate2').val(),
+        tboNo: tBoNo,
+        tcommentContent:tcommentContent,
+        tcommentDate:tcommentDate,
         userId: userId
     };
     let async = true;
-    /*
+    
     // JSON.stringify() => 객체를 string 으로, JSON.parse() => string 을 객체로 만듬
     Request.ajaxRequest(url, method, contentType,
         JSON.stringify(sendData),
         function(resultJson){
             //code 1 일때 render, 아닐 때 msg 띄움
             if(resultJson.code == 1){
-                //window.location.href = 'tripboard-detail?tBoNo='+tBoNo;
-                 View.render("#tripBoardCommentModifyAction", resultJson, '#tripboardcomment-detail');
+                window.location.href = 'tripboard-detail?tBoNo='+tBoNo;
+                 console.log('###################');
+                // View.render("#tripBoardCommentModifyAction", resultJson, '#tripboardcomment-detail');
             } else {
                 alert(resultJson.msg);
             };
         }, async);
-*/
+
     e.preventDefault();
 });
 

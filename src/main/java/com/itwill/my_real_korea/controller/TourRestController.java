@@ -30,6 +30,7 @@ import com.itwill.my_real_korea.dto.tour.Tour;
 import com.itwill.my_real_korea.dto.tour.TourImg;
 import com.itwill.my_real_korea.dto.tour.TourReserve;
 import com.itwill.my_real_korea.dto.tour.TourReview;
+import com.itwill.my_real_korea.dto.user.User;
 import com.itwill.my_real_korea.dto.wishlist.Wishlist;
 import com.itwill.my_real_korea.service.city.CityService;
 import com.itwill.my_real_korea.service.tour.TourImgService;
@@ -111,10 +112,12 @@ public class TourRestController {
 		}
 	
 		//2. 투어 리뷰 남기기
+		@LoginCheck
 		@ApiOperation(value="투어상세보기(투어리뷰남기기)")
 		@PostMapping(value="/tour-review-action", produces="application/json;charset=UTF-8")
 		public Map<String, Object> tourReviewAction(@ModelAttribute TourReview tourReview,
-													@RequestParam(name="file",required=false) MultipartFile file){
+													@RequestParam(name="file",required=false) MultipartFile file,
+													HttpSession session){
 			Map<String,Object> resultMap=new HashMap<>();
 			int code=0;
 			int toScore=0;
@@ -122,6 +125,7 @@ public class TourRestController {
 			int toReviewCount=0;
 			String msg="성공";
 			List<TourReview> data=new ArrayList<>();
+			User loginUser=(User)session.getAttribute("loginUser");
 			try {
 				tourReview.setToReviewImg("");
 				tourReviewService.insertTourReview(tourReview);
@@ -161,10 +165,12 @@ public class TourRestController {
 			resultMap.put("toScore", toScore);
 			resultMap.put("toCount", toCount);
 			resultMap.put("toReviewCount", toReviewCount);
+			resultMap.put("loginUser",loginUser);
 			return resultMap;
 		}
 		
 		//3. 투어리뷰 수정하기
+		@LoginCheck
 		@ApiOperation(value="투어리뷰 수정하기")
 		@PutMapping(value="/tour-review-update-form", produces="application/json;charset=UTF-8")
 		public Map<String,Object> tourReviewUpdateForm(){
@@ -173,9 +179,10 @@ public class TourRestController {
 		}
 
 		//4. 투어리뷰 삭제하기
-		@ApiOperation(value="투어리뷰 수정하기")
+		@LoginCheck
+		@ApiOperation(value="투어리뷰 삭제하기")
 		@DeleteMapping(value="/tour-review-delete/{toNo}/{toReviewNo}", produces="application/json;charset=UTF-8")
-		public Map<String,Object> tourReviewDelete(@PathVariable int toReviewNo, @PathVariable int toNo){
+		public Map<String,Object> tourReviewDelete(@PathVariable int toReviewNo, @PathVariable int toNo,HttpSession session){
 			Map<String,Object> resultMap = new HashMap<>();
 			int code=0;
 			int toScore=0;
@@ -183,6 +190,7 @@ public class TourRestController {
 			int toReviewCount=0;
 			String msg="성공";
 			List<TourReview> data=new ArrayList<>();
+			User loginUser=(User)session.getAttribute("loginUser");
 			try {
 				tourReviewService.deleteTourReview(toReviewNo);
 				List<TourReview> tourReviewList=tourReviewService.findByToNo(toNo);
@@ -214,6 +222,7 @@ public class TourRestController {
 			resultMap.put("toCount", toCount);
 			resultMap.put("toReviewCount", toReviewCount);
 			resultMap.put("toNo", toNo);
+			resultMap.put("loginUser",loginUser);
 			return resultMap;
 		}
 	

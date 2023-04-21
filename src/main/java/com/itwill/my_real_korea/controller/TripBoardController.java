@@ -40,6 +40,7 @@ public class TripBoardController {
 		
 		try {
 			PageMakerDto<TripBoard> tripBoardListPage = tripBoardService.selectAllTb(pageNo);
+			
 			List<TripBoard> tempTripBoardList = tripBoardListPage.getItemList();
 			List<TripBoard> tripBoardList = new ArrayList<>();
 			

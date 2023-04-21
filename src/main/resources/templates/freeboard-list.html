@@ -181,6 +181,7 @@
 								</li>
 								<li class="page-item" ><a class="page-link"  th:if="${freeBoardList.pageMaker.curPage}!=2" href="?pageNo=2" >2</a>
 								</li>
+								<!-- 현재 위치 해 있는 페이지 & 블록  다음블록으로 이동은 안됨-->
 								<li class="page-item active" ><a class="page-link"  th:if="${freeBoardList.pageMaker.curPage}==3" href="?pageNo=3" >3</a></li>
 								
 								<li class="page-item" ><a class="page-link"  th:unless="${freeBoardList.pageMaker.curPage}==3" href="?pageNo=3" >3</a></li>

@@ -1,5 +1,6 @@
 package com.itwill.my_real_korea.service.freeboard;
 
+import com.itwill.FinalProjectTeam2MyRealKoreaApplication;
 import com.itwill.my_real_korea.dto.City;
 import com.itwill.my_real_korea.dto.freeboard.FreeBoard;
 import com.itwill.my_real_korea.util.PageMakerDto;
@@ -11,7 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@SpringBootTest
+@SpringBootTest( classes = FinalProjectTeam2MyRealKoreaApplication.class)
 @MapperScan(basePackages = "com.itwill.my_real_korea.mapper")
 class FreeBoardServiceImplTest {
 
@@ -78,24 +79,24 @@ class FreeBoardServiceImplTest {
 
     @Test
     void selectSearchFreeBoardList() throws Exception {
-        PageMakerDto freeBoardListPageMakerDto =
+        PageMakerDto<FreeBoard> freeBoardListPageMakerDto =
                 freeBoardService.selectSearchFreeBoardList(1, "맛집");
         System.out.println("freeBoardListPageMakerDto = " + freeBoardListPageMakerDto);
     }
     @Test
     void selectAllOrderByFBoNoDesc() throws Exception {
-        PageMakerDto freeBoardListPageMakerDto = freeBoardService.selectAllOrderByFBoNoDesc(1);
+        PageMakerDto<FreeBoard> freeBoardListPageMakerDto = freeBoardService.selectAllOrderByFBoNoDesc(1);
         System.out.println("freeBoardListPageMakerDto = " + freeBoardListPageMakerDto);
     }
     @Test
     void selectAllOrderByFBoNoAsc() throws Exception {
-        PageMakerDto freeBoardListPageMakerDto = freeBoardService.selectAllOrderByFBoNoAsc(1);
+        PageMakerDto<FreeBoard> freeBoardListPageMakerDto = freeBoardService.selectAllOrderByFBoNoAsc(1);
         System.out.println("freeBoardListPageMakerDto = " + freeBoardListPageMakerDto);
     }
 
     @Test
     void selectAllOrderByReadCountDesc() throws Exception {
-        PageMakerDto freeBoardListPageMakerDto = freeBoardService.selectAllOrderByReadCountDesc(1);
+        PageMakerDto<FreeBoard> freeBoardListPageMakerDto = freeBoardService.selectAllOrderByReadCountDesc(1);
         System.out.println("freeBoardListPageMakerDto = " + freeBoardListPageMakerDto);
     }
 

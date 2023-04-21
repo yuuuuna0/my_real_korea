@@ -186,6 +186,23 @@ $(document).on('click', '#tripboard-modify-action', function(e){
 	e.preventDefault();
 });
 
+//동행게시판 게시글 삭제
+$(document).on('click', '#tripboard-delete-action-btn', function(event) {
+	event.preventDefault();
+	let tBoNo = $('#delete-tBoNo').val();
+	
+	$.ajax({
+		type:'DELETE',
+		url:'tripboard/' + tBoNo,
+		success:function(result) {
+			window.location.href='tripboard-list';
+		},
+		error:function(xhr, status, error) {
+			console.log(error);
+		}
+	});
+});
+
 //동행게시판 댓글 삭제
 $(document).on('click', '#comment_btn_delete', function(event) {
     event.preventDefault();

@@ -140,7 +140,7 @@
 							<div th:if="${loginUser != null && loginUser.userId == tripBoard.userId}" style="text-align:right;" >
 							  	<a th:href="@{/tripboard-modify-form(tBoNo=${tripBoard.tBoNo})}" class="btn btn-primary">수정</a>
 							  	<a th:href="@{/tripboard_delete(tBoNo=${tripBoard.tBoNo})}" class="btn btn-danger" id="tripboard-delete-action-btn">삭제</a>
-					
+								<input type="hidden" id="delete-tBoNo" th:value=${tripBoard.tBoNo}>
 							</div>
 							
 						</div>

@@ -19,7 +19,7 @@ class FreeBoardDaoImplTest {
     private FreeBoardDao freeBoardDao;
     @Test
     void insertBoard() throws Exception {
-        FreeBoard freeBoard = new FreeBoard(2,"date test","content",new Date(2022/01/18),12, new City(3, "강원", 3, 3),"user2");
+        FreeBoard freeBoard = new FreeBoard(2,"date test","content",new Date(2022/01/18),12, new City(3, "강원", 3, 3),"user2",0);
         int insertBoard = freeBoardDao.insertBoard(freeBoard);
         assertThat(insertBoard).isEqualTo(1);
     }
@@ -52,7 +52,7 @@ class FreeBoardDaoImplTest {
 
     @Test
     void updateBoard() throws Exception {
-        FreeBoard freeBoard = new FreeBoard(2,"@update","content",new Date(),9,new City(3,"강원",1,1),"user2");
+        FreeBoard freeBoard = new FreeBoard(2,"@update","content",new Date(),9,new City(3,"강원",1,1),"user2",0);
         int updateBoard = freeBoardDao.updateBoard(freeBoard);
         assertThat(updateBoard).isEqualTo(1);
     }

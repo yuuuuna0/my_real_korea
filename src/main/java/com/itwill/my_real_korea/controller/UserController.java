@@ -227,7 +227,7 @@ public class UserController {
 		request.setAttribute("loginUser", loginUser);
 		return "user-modify";
 	}
-	 */
+	 
 	
 	//회원 정보 수정 액션
 	@LoginCheck
@@ -241,6 +241,7 @@ public class UserController {
 //		System.out.println(">> loginUser : "+loginUser);
 		return "redirect:user-view";
 	}
+	*/
 	
 	//회원 탈퇴 액션
 	@LoginCheck

@@ -10,7 +10,9 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -259,6 +261,7 @@ public class UserRestController {
  */
 
 	
+
 	@ApiOperation(value = "내 프로필 수정 폼 불러오기")
 	@LoginCheck
 	@GetMapping("/user-modify-form")
@@ -288,10 +291,37 @@ public class UserRestController {
 		return resultMap;
 	}
 	
-	
-	
+	// 프로필 수정 액션 
+	@ApiOperation(value = "내 프로필 수정 액션")
+	@LoginCheck
+	@PutMapping("/user-modify-form-action")
+	public Map<String, Object> user_modify_action(@ModelAttribute User user, HttpServletRequest request) throws Exception {
+		Map<String, Object> resultMap = new HashMap<>();
+		
+		int code = 1;
+		String msg = "성공";
+		List<User> data = new ArrayList<User>();
+		
+		try {
+			HttpSession session = request.getSession();
+			User loginUser = userService.findUser(user.getUserId());
+			userService.update(user);
+			session.setAttribute("loginUser", loginUser);
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+			code = 2;
+			msg = "업로드 실패";
+		}
+		resultMap.put("code", code);
+		resultMap.put("msg", msg);
+		resultMap.put("data", data);
+		return resultMap;
+	}
 
 }
+
+
 
 
 

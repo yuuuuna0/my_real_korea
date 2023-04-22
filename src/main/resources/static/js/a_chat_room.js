@@ -101,8 +101,8 @@ function session_check() {
 
 function connectServer(loginId) {
 	console.log("connectWS 실행 : " + loginId)
-	var url   "ws://localhost:80/brown_carrot_market/replyEcho?" +   loginId;
-	var ws   new WebSocket(url);
+	var url =  "ws://localhost:80/brown_carrot_market/replyEcho?" +   loginId;
+	var ws =  new WebSocket(url);
 	socket = ws;
 
 	ws.onopen = function() {
@@ -110,7 +110,7 @@ function connectServer(loginId) {
 
 	};
 
-	ws.onmessage   function(result  {
+	ws.onmessage  = function(result)  {
 
 
 		var msg = JSON.parse(result.data);
@@ -118,11 +118,11 @@ function connectServer(loginId) {
 		var id = msg.toastId;
 		var message = msg.c_content;
 
-		if (message.startsWith("@@image!#")  {
-			message   "사진 전송";
+		if (message.startsWith("@@image!#"))  {
+			message =  "사진 전송";
 		}
 
-		if (id == loginId  {
+		if (id == loginId)  {
 
 			reloadChatList();
 

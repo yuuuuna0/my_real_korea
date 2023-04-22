@@ -88,9 +88,12 @@
 						<div class="items-sorting">
 							<div class="row">
 								<div class="col-6">
-									<div class="results_shop">
-										Showing 1–9 of 15 results
-									</div>
+										<!-- 지역 페이징 갯수 보이게 하기 -->
+										<div id="page-info" class="results_shop" th:each="tripBoardPage:${tripBoardListPage}">
+										Showing 
+										<span id="cur-page" th:text="${tripBoardPage.pageMaker.curPage}"></span> of 
+										<span id="tot-record-count" th:text="${tripBoardPage.totRecordCount}"></span> results
+									    </div>
 								</div>
 								<div class="col-6">
 									<div class="form-group">
@@ -116,6 +119,11 @@
 											<a th:href="@{tripboard-detail(tBoNo=${tripBoard.tBoNo})}"><img src="img/products/image-1.jpg" alt="">
 											</a>
 										</figure>
+											<!-- 지역 보이게하기 -->
+											<div class="item-options clearfix"  style="top:10px; font:bold; color:red; opacity:100; visibility:visible; ">
+											<a th:text="${tripBoard.city.cityName}" class="AccompanyWebCard__LocationText-sc-ws5mjw-18 bFxAPJ">
+                                            </a>
+										   </div> 
 									</div>
 									<div class="product_description">
 										<div class="trip-title">
@@ -335,6 +343,10 @@
 					<a href="tripboard-detail?tBoNo={{tboNo}}"><img src="img/products/image-1.jpg" alt="">
 					</a>
 				</figure>
+			<!-- 지역보여주기 -->
+			<div class="item-options clearfix"  style="top:10px; font:bold; color:red; opacity:100; visibility:visible; ">
+				<a href ="tripboard-detail?tBoNo={{tbono}}" class="AccompanyWebCard__LocationText-sc-ws5mjw-18 bFxAPJ">{{city.cityName}}</a>
+			</div>   
 			</div>
 			<div class="product_description">
 				<div class="trip-title">

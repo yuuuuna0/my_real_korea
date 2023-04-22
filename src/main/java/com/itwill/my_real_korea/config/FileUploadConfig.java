@@ -15,7 +15,7 @@ public class FileUploadConfig {
 	@Bean
 	CommandLineRunner init(FileUploadService storageService) {
 		return (args) -> {
-			storageService.deleteAll();
+			//storageService.deleteAll();
 			storageService.init();
 		};
 	}

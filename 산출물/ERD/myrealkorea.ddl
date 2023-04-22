@@ -250,23 +250,16 @@ CREATE SEQUENCE wishlist_wish_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
 
 CREATE TABLE chat_room(
-		room_no                       		NUMBER		 NULL ,
-		room_name                     		VARCHAR2(100)		 NOT NULL,
-		from_id                       		VARCHAR2(50)		 NULL ,
-		to_id                         		VARCHAR2(50)		 NULL 
+		room_name                     		VARCHAR2(100)		 NOT NULL
 );
-
-DROP SEQUENCE chat_room_room_no_SEQ;
-
-CREATE SEQUENCE chat_room_room_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
 
 CREATE TABLE chat_msg(
 		msg_no                        		NUMBER		 NULL ,
 		msg_content                   		VARCHAR2(500)		 NOT NULL,
-		msg_send_time                 		DATE		 DEFAULT sysdate		 NULL ,
+		msg_send_time                 		VARCHAR2(500)		 NOT NULL ,
 		msg_read                      		NUMBER		 NULL ,
-		room_no                       		NUMBER		 NULL ,
+		room_name                       	VARCHAR2(100)		 NOT NULL,
 		user_id                       		VARCHAR2(50)		 NULL 
 );
 
@@ -395,12 +388,10 @@ ALTER TABLE wishlist ADD CONSTRAINT IDX_wishlist_FK0 FOREIGN KEY (user_id) REFER
 ALTER TABLE wishlist ADD CONSTRAINT IDX_wishlist_FK1 FOREIGN KEY (ti_no) REFERENCES ticket (ti_no) on delete cascade;
 ALTER TABLE wishlist ADD CONSTRAINT IDX_wishlist_FK2 FOREIGN KEY (to_no) REFERENCES tour (to_no) on delete cascade;
 
-ALTER TABLE chat_room ADD CONSTRAINT IDX_chat_room_PK PRIMARY KEY (room_no);
-ALTER TABLE chat_room ADD CONSTRAINT IDX_chat_room_FK0 FOREIGN KEY (from_id) REFERENCES user_info (user_id) on delete cascade;
-ALTER TABLE chat_room ADD CONSTRAINT IDX_chat_room_FK1 FOREIGN KEY (to_id) REFERENCES user_info (user_id) on delete cascade;
+ALTER TABLE chat_room ADD CONSTRAINT IDX_chat_room_PK PRIMARY KEY (room_name);
 
 ALTER TABLE chat_msg ADD CONSTRAINT IDX_chat_msg_PK PRIMARY KEY (msg_no);
-ALTER TABLE chat_msg ADD CONSTRAINT IDX_chat_msg_FK0 FOREIGN KEY (room_no) REFERENCES chat_room (room_no) on delete cascade;
+ALTER TABLE chat_msg ADD CONSTRAINT IDX_chat_msg_FK0 FOREIGN KEY (room_name) REFERENCES chat_room (room_name) on delete cascade;
 ALTER TABLE chat_msg ADD CONSTRAINT IDX_chat_msg_FK1 FOREIGN KEY (user_id) REFERENCES user_info (user_id) on delete cascade;
 
 ALTER TABLE notice ADD CONSTRAINT IDX_notice_PK PRIMARY KEY (n_no);

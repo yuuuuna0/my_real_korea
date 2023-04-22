@@ -33,24 +33,21 @@ TO_ID              VARCHAR2(50)
 @ToString
 public class ChatRoom {
 
-	private int roomNo;
+	//private int roomNo;
 	private String roomName;
-	/* FK */
-	private String fromId;
-	/* FK */
-	private String toId;
-	/* list<ChatMsg>  - ChatMsg 의 정보를 가져오기 위함 (1:N)*/
+//	/* FK */
+//	private String fromId;
+//	/* FK */
+//	private String toId;
+//	/* list<ChatMsg>  - ChatMsg 의 정보를 가져오기 위함 (1:N)*/
 	private List<ChatMsg> chatMsgList;
 	
 	// 해당 채팅방에 입장한 채팅 유저들의 세션 정보 리스트
 	private Set<WebSocketSession> sessions = new HashSet<>();
 	
-	public ChatRoom(int roomNo, String roomName, String fromId, String toId) {
+	public ChatRoom(String roomName) {
 		super();
-		this.roomNo = roomNo;
 		this.roomName = roomName;
-		this.fromId = fromId;
-		this.toId = toId;
 		this.chatMsgList = new ArrayList<>();
 	}
 	

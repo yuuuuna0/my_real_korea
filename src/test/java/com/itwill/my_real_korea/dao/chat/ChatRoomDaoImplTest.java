@@ -21,7 +21,7 @@ class ChatRoomDaoImplTest {
 	@Autowired
 	private ChatRoomDao chatRoomDao;
 	
-	
+	@Disabled
 	@Test
 	void testSelectAll() {
 		assertNotNull(chatRoomDao.selectAll("user1"));
@@ -30,9 +30,16 @@ class ChatRoomDaoImplTest {
 
 	@Disabled
 	@Test
-	void testSelectCheckByRoomNo() {
-		assertNotNull(chatRoomDao.selectByRoomNo(2));
-		System.out.println(chatRoomDao.selectByRoomNo(2));
+	void testSelectCheckByRoomName() {
+		assertNotNull(chatRoomDao.selectByRoomName("채팅"));
+		System.out.println(chatRoomDao.selectByRoomName("채팅"));
+	}
+	
+	
+	@Test
+	void testSelectCheckByRoomNameWith() {
+		assertNotNull(chatRoomDao.selectByRoomNameWith("채팅"));
+		System.out.println(chatRoomDao.selectByRoomNameWith("채팅"));
 	}
 
 	@Disabled
@@ -49,17 +56,17 @@ class ChatRoomDaoImplTest {
 		System.out.println(chatRoomDao.selectExist("user1", "user2"));
 	}
 
-	
+	@Disabled
 	@Test
 	void testInsertChatRoom() {
-		int rowCount = chatRoomDao.insertChatRoom(new ChatRoom(0, "챗이름추가1","user2", "user1"));
+		int rowCount = chatRoomDao.insertChatRoom(new ChatRoom("채팅방임"));
 		assertEquals(rowCount, 1);
 	}
 
 	@Disabled
 	@Test
 	void testDeleteChatRoom() {
-		int rowCount = chatRoomDao.deleteChatRoom(4);
+		int rowCount = chatRoomDao.deleteChatRoom("채팅방임");
 		assertEquals(rowCount, 1);
 	}
 

@@ -2,6 +2,8 @@ package com.itwill.my_real_korea.controller;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -73,26 +75,20 @@ public class ChatRestController {
 		int code = 1;
 		String msg = "";
 		String receiverId = "";
-		String roomNo = chatList.get("roomNo");
-		String userId = chatList.get("userId");
+		String roomName = chatList.get("roomName");
+		String senderId = chatList.get("senderId");
 		// 채팅방 번호로 채팅방 찾기
-		ChatRoom chatRoom = chatService.selectRoomByRoomNo(Integer.parseInt(roomNo));
+		ChatRoom chatRoom = chatService.selectByRoomName(roomName);
 
-		// 채팅유저아이디 = 채팅방 발신자라면 수신자 아이디 설정
-		if (chatRoom.getFromId().equals(userId)) {
-			receiverId = chatRoom.getToId();
-		} else {
-			receiverId = chatRoom.getFromId();
-		}
 		List<ChatMsg> resultList = new ArrayList<ChatMsg>();
 		try {
-			// 안읽은 메세지 있다면 상대의 기존 채팅 모두 읽음 처리
-			int notReadMsg = chatService.countNotReadInChatRoom(Integer.parseInt(roomNo), userId);
-			if (notReadMsg != 0) {
-				chatService.updateReadMsg(Integer.parseInt(roomNo), receiverId);
-			}
+//			// 안읽은 메세지 있다면 상대의 기존 채팅 모두 읽음 처리
+//			int notReadMsg = chatService.countNotReadInChatRoom(Integer.parseInt(roomNo), senderId);
+//			if (notReadMsg != 0) {
+//				chatService.updateReadMsg(Integer.parseInt(roomNo), receiverId);
+//			}
 			// 채팅 내역
-			List<ChatMsg> chatDetailList = chatService.selectByRoomNo(Integer.parseInt(roomNo));
+			List<ChatMsg> chatDetailList = chatService.selectChatByRoomName(roomName);
 			code = 1;
 			msg = "성공";
 			resultList = chatDetailList;
@@ -102,13 +98,14 @@ public class ChatRestController {
 			e.printStackTrace();
 
 		}
-		System.out.println("채팅아이디" + userId);
+		System.out.println("채팅아이디" + senderId);
 		System.out.println("상대아이디" + receiverId);
 
 		resultMap.put("code", code);
 		resultMap.put("msg", msg);
+		resultMap.put("senderId", senderId);
 		resultMap.put("receiverId", receiverId);
-		resultMap.put("roomNo", roomNo);
+		resultMap.put("roomName", roomName);
 		resultMap.put("data", resultList);
 
 		return resultMap;
@@ -146,42 +143,38 @@ public class ChatRestController {
 		String msg = "";
 		int msgNo = 0;
 		String msgContent = null;
-		Date msgSendTime = null;
+		String msgSendTime = "";
 		int msgRead = 0;
-		int roomNo = 0;
-		String userId = "";
-		String msgSendTimeStr = "";
+		String roomName ="";
+		String senderId = "";
 		// 채팅아이디 가져오기
-		System.out.println(String.valueOf(messages.get("userId")));
+		System.out.println(String.valueOf(messages.get("senderId")));
 		
 		try {
-			msgContent = String.valueOf(messages.get("msgContent"));
-			String newMsgSendTimeStr = messages.get("msgSendTime");
-			msgSendTime = new SimpleDateFormat("yyyy-MM-dd").parse(newMsgSendTimeStr);
+			msgContent = String.valueOf(messages.get("message"));
+			msgSendTime =String.valueOf(messages.get("time"));
 			msgRead = Integer.parseInt(messages.get("msgRead"));
-			roomNo = Integer.parseInt(messages.get("roomNo"));
-			userId = String.valueOf(messages.get("userId"));
-			ChatMsg newChatMsg;
+			roomName = String.valueOf(messages.get("roomName"));
+			senderId = String.valueOf(messages.get("senderId"));
 			
-			newChatMsg = new ChatMsg(0, msgContent, msgSendTime, msgRead, roomNo, userId);
+			ChatMsg newChatMsg;
+			newChatMsg = new ChatMsg(0, msgContent, msgSendTime, msgRead, roomName, senderId);
 			// 메세지 생성, DB 저장
 			int rowCount = chatService.insertChatMsg(newChatMsg);
-			Date msgSendTimeDate = chatService.selectByMsgNo(newChatMsg.getMsgNo()).getMsgSendTime();
-			msgSendTimeStr = new SimpleDateFormat("yyyy-MM-dd").format(msgSendTimeDate);
 			msgNo = newChatMsg.getMsgNo();
 			
 			// DB 저장 성공 시 insert 후 클라이언트에게 메세지 데이터 만들어서 보내기
 			if (rowCount != 0) {
 				resultMap.put("msgNo", msgNo);
 				resultMap.put("msgContent", msgContent);
-				resultMap.put("msgSendTime", msgSendTimeStr);
+				resultMap.put("msgSendTime", msgSendTime);
 				resultMap.put("msgRead", msgRead);
-				resultMap.put("roomNo", roomNo);
-				resultMap.put("userId", userId);
+				resultMap.put("roomName", roomName);
+				resultMap.put("senderId", senderId);
 			}
+			code = 1;
+			msg = "성공";
 		} catch (NumberFormatException e1) {
-			e1.printStackTrace();
-		} catch (ParseException e1) {
 			e1.printStackTrace();
 		} catch (Exception e) {
 			code = 2;
@@ -226,9 +219,9 @@ public class ChatRestController {
 	// 채팅방 목록 선택 기능 (roomNo로 채팅방 1개 보기) - session 빼고 성공
 	@LoginCheck
 	@ApiOperation(value = "채팅방 상세보기")
-	@ApiImplicitParam(name = "roomNo", value = "채팅방 번호")
-	@GetMapping(value = "/chatroom/{roomNo}", produces = "application/json;charset=UTF-8")
-	public Map<String, Object> chatroom_detail(@PathVariable(value = "roomNo") int roomNo,
+	@ApiImplicitParam(name = "roomName", value = "채팅방 번호")
+	@GetMapping(value = "/chatroom/{roomName}", produces = "application/json;charset=UTF-8")
+	public Map<String, Object> chatroom_detail(@PathVariable(value = "roomName") String roomName,
 												HttpSession session) {
 
 		Map<String, Object> resultMap = new HashMap<>();
@@ -238,15 +231,15 @@ public class ChatRestController {
 
 		try {
 			// roomNo로 채팅방 1개 찾기, 성공시 code 1
-			ChatRoom chatRoom = chatService.selectRoomByRoomNo(roomNo);
+			ChatRoom chatRoom = chatService.selectByRoomName(roomName);
 			// 요청한 userId : session에서 찾기
 			String userId = (String) session.getAttribute("sUserId");
 			if (chatRoom != null) {
 				// 읽지 않은 메세지가 있다면, 메세지 읽음으로 변경
-				int notReadMsg = chatService.countNotReadMsg(roomNo, userId);
-				if (notReadMsg != 0) {
-					chatService.updateReadMsg(roomNo, userId);
-				}
+//				int notReadMsg = chatService.countNotReadMsg(roomNo, userId);
+//				if (notReadMsg != 0) {
+//					chatService.updateReadMsg(roomNo, userId);
+//				}
 				code = 1;
 				data.add(chatRoom);
 			} else {
@@ -281,25 +274,25 @@ public class ChatRestController {
 		
 		// 채팅방 생성 요청하는 유저
 		String fromId = (String)session.getAttribute("sUserId");
-		// 채팅방 생성의 toId 로 설정된 유저
-		String toId = chatRoom.getToId();
-		// fromId와 toId가 동일한 채팅방 중복 확인
-		boolean isDuplicate = chatService.duplicateCheck(fromId, toId);
+//		// 채팅방 생성의 toId 로 설정된 유저
+//		String toId = chatRoom.getToId();
+//		// fromId와 toId가 동일한 채팅방 중복 확인
+//		boolean isDuplicate = chatService.duplicateCheck(fromId, toId);
 		
 		try {
 			// 채팅방 중복 시 code 2
-			if (isDuplicate) {
-				code = 2;
-				msg = "채팅방이 이미 존재합니다.";
-			} else {
+//			if (isDuplicate) {
+//				code = 2;
+//				msg = "채팅방이 이미 존재합니다.";
+//			} else {
 				// 채팅방 생성, 성공시 code 1
 				chatService.insertChatRoom(chatRoom);
 				code = 1;
 				msg = "성공";
 				// 채팅방 생성 후 그 채팅방 찾아서 데이터에 붙여줌
-				chatRoom = chatService.selectRoomByRoomNo(chatRoom.getRoomNo());
+				chatRoom = chatService.selectByRoomName(chatRoom.getRoomName());
 				data.add(chatRoom);
-			}
+//			}
 		} catch (Exception e) {
 			// 실패 시 code 3
 			e.printStackTrace();
@@ -316,9 +309,9 @@ public class ChatRestController {
 	// 채팅방 삭제 - 성공
 	@LoginCheck
 	@ApiOperation(value = "채팅방 삭제")
-	@ApiImplicitParam(name = "roomNo", value = "채팅방 번호")
-	@DeleteMapping(value = "/chatroom/{roomNo}", produces = "application/json;charset=UTF-8")
-	public Map<String, Object> chatroom_delete_action(@PathVariable(value="roomNo") int roomNo) {
+	@ApiImplicitParam(name = "roomName", value = "채팅방 이름")
+	@DeleteMapping(value = "/chatroom/{roomName}", produces = "application/json;charset=UTF-8")
+	public Map<String, Object> chatroom_delete_action(@PathVariable(value="roomName") String roomName) {
 
 		Map<String, Object> resultMap = new HashMap<>();
 		int code = 1;
@@ -327,7 +320,7 @@ public class ChatRestController {
 
 		try {
 			// roomNo로 채팅방 삭제, 성공시 code 1
-			int rowCount = chatService.deleteChatRoom(roomNo);
+			int rowCount = chatService.deleteChatRoom(roomName);
 			if (rowCount != 0) {
 				code = 1;
 				msg = "성공";
@@ -336,7 +329,7 @@ public class ChatRestController {
 				code = 2;
 				msg = "채팅방 삭제 실패";
 				// 삭제 실패한 roomNo 데이터에 붙여줌
-				ChatRoom failChatRoom = chatService.selectRoomByRoomNo(roomNo);
+				ChatRoom failChatRoom = chatService.selectByRoomName(roomName);
 				data.add(failChatRoom);
 			}
 		} catch (Exception e) {
@@ -360,7 +353,7 @@ public class ChatRestController {
 	@LoginCheck
 	@ApiOperation(value = "채팅방 1개의 메세지 리스트")
 	@GetMapping(value = "/chatmsg", produces = "application/json;charset=UTF-8")
-	public Map<String, Object> chatmsg_list(@RequestParam(required = true) int roomNo) {
+	public Map<String, Object> chatmsg_list(@RequestParam(required = true) String roomName) {
 
 		Map<String, Object> resultMap = new HashMap<>();
 		int code = 1;
@@ -368,9 +361,9 @@ public class ChatRestController {
 		List<ChatMsg> data = new ArrayList<>();
 		try {
 			// roomNo로 채팅방 1개의 메세지 리스트 찾기, 성공시 code 1
-			List<ChatMsg> chatMsgList = chatService.selectByRoomNo(roomNo);
+			List<ChatMsg> chatMsgList = chatService.selectChatByRoomName(roomName);
 			if (chatMsgList.size() != 0) {
-				data = chatService.selectByRoomNo(roomNo);
+				data = chatMsgList;
 				code = 1;
 				msg = "성공";
 			} else {
@@ -409,10 +402,10 @@ public class ChatRestController {
 			String userId = (String) session.getAttribute("sUserId");
 			if (chatMsg != null) {
 				// 읽지 않은 메세지가 있다면, 메세지 읽음으로 변경
-				int notReadMsg = chatService.countNotReadMsg(chatMsg.getRoomNo(), userId);
-				if (notReadMsg != 0) {
-					chatService.updateReadMsg(chatMsg.getRoomNo(), userId);
-				}
+//				int notReadMsg = chatService.countNotReadMsg(chatMsg.getRoomName(), userId);
+//				if (notReadMsg != 0) {
+//					chatService.updateReadMsg(chatMsg.getRoomNo(), userId);
+//				}
 				code = 1;
 				data.add(chatMsg);
 			} else {
@@ -434,39 +427,39 @@ public class ChatRestController {
 	}
 	
 	// 채팅방 1개의 읽지 않은 메세지 리스트 보기 - 성공
-	@LoginCheck
-	@ApiOperation(value = "채팅방 1개의 읽지 않은 메세지 리스트")
-	@GetMapping(value = "/chatmsg-not-read", produces = "application/json;charset=UTF-8")
-	public Map<String, Object> chatmsg_not_read_list(@RequestParam(required = true) int roomNo,
-													@RequestParam(required = true) String userId) {
-
-		Map<String, Object> resultMap = new HashMap<>();
-		int code = 1;
-		String msg = "성공";
-		List<ChatMsg> data = new ArrayList<>();
-		try {
-			int notReadMsgCount = chatService.countNotReadMsg(roomNo, userId);
-			// roomNo, userId로 채팅방 1개의 읽지 않은 메세지 수가 0 이 아니라면, 리스트 찾기, 성공시 code 1
-			if (notReadMsgCount != 0) {
-				data = chatService.selectNotReadMsg(roomNo, userId);
-				code = 1;
-				msg = "성공";
-			} else {
-				// 실패시 code 2
-				code = 2;
-				msg = "읽지 않은 메세지가 없습니다.";
-			}
-		} catch (Exception e) {
-			// 에러 발생시 code 3
-			e.printStackTrace();
-			code = 3;
-			msg = "관리자에게 문의하세요.";
-		}
-		resultMap.put("code", code);
-		resultMap.put("msg", msg);
-		resultMap.put("data", data);
-		return resultMap;
-	}
+//	@LoginCheck
+//	@ApiOperation(value = "채팅방 1개의 읽지 않은 메세지 리스트")
+//	@GetMapping(value = "/chatmsg-not-read", produces = "application/json;charset=UTF-8")
+//	public Map<String, Object> chatmsg_not_read_list(@RequestParam(required = true) String roomName,
+//													@RequestParam(required = true) String userId) {
+//
+//		Map<String, Object> resultMap = new HashMap<>();
+//		int code = 1;
+//		String msg = "성공";
+//		List<ChatMsg> data = new ArrayList<>();
+//		try {
+//			int notReadMsgCount = chatService.countNotReadMsg(roomNo, userId);
+//			// roomNo, userId로 채팅방 1개의 읽지 않은 메세지 수가 0 이 아니라면, 리스트 찾기, 성공시 code 1
+//			if (notReadMsgCount != 0) {
+//				data = chatService.selectNotReadMsg(roomNo, userId);
+//				code = 1;
+//				msg = "성공";
+//			} else {
+//				// 실패시 code 2
+//				code = 2;
+//				msg = "읽지 않은 메세지가 없습니다.";
+//			}
+//		} catch (Exception e) {
+//			// 에러 발생시 code 3
+//			e.printStackTrace();
+//			code = 3;
+//			msg = "관리자에게 문의하세요.";
+//		}
+//		resultMap.put("code", code);
+//		resultMap.put("msg", msg);
+//		resultMap.put("data", data);
+//		return resultMap;
+//	}
 
 	// 읽지 않은 메세지 전체 보기 - 성공
 	@LoginCheck

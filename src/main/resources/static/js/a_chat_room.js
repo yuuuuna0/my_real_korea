@@ -101,8 +101,8 @@ function session_check() {
 
 function connectServer(loginId) {
 	console.log("connectWS 실행 : " + loginId)
-	var url =  "ws://localhost:80/brown_carrot_market/replyEcho?" +   loginId;
-	var ws =  new WebSocket(url);
+	var url = "ws://localhost:80/brown_carrot_market/replyEcho?" + loginId;
+	var ws = new WebSocket(url);
 	socket = ws;
 
 	ws.onopen = function() {
@@ -110,7 +110,7 @@ function connectServer(loginId) {
 
 	};
 
-	ws.onmessage  = function(result)  {
+	ws.onmessage = function(result) {
 
 
 		var msg = JSON.parse(result.data);
@@ -118,11 +118,11 @@ function connectServer(loginId) {
 		var id = msg.toastId;
 		var message = msg.c_content;
 
-		if (message.startsWith("@@image!#"))  {
-			message =  "사진 전송";
+		if (message.startsWith("@@image!#")) {
+			message = "사진 전송";
 		}
 
-		if (id == loginId)  {
+		if (id == loginId) {
 
 			reloadChatList();
 
@@ -183,7 +183,7 @@ $(document).ready(function() {
 
 
 		var chat_detail = {
-			"c_room_no": newChatRoomNo,
+			"c_room_no": newChatRoo48mNo,
 			"loginId": myId
 		}
 
@@ -314,13 +314,8 @@ $(document).on('click', '[id^=btnCall]', function(e) {
 				c_app_lat = promiseData.c_app_lat;
 				c_app_lng = promiseData.c_app_lng;
 			}
-
-
-
-
 		}
 	});
-
 
 	e.stopPropagation();
 	e.preventDefault();
@@ -330,8 +325,6 @@ $(document).on('click', '[id^=btnCall]', function(e) {
 		"loginId": loginId
 	}
 	$.ajax({
-
-
 		url: "chat_detail_rest",
 		method: "POST",
 		//data:{"c_room_no":num},
@@ -339,8 +332,6 @@ $(document).on('click', '[id^=btnCall]', function(e) {
 		async: true,
 		contentType: "application/json; charset=utf-8", //헤더의 Content-Type을 설정
 		dataType: "JSON", //응답받을 데이터 타입 (XML,JSON,TEXT,HTML,JSONP)    			
-
-
 
 		success: function(jsonResult) {
 			connectWS();
@@ -365,8 +356,6 @@ $(document).on('click', '[id^=btnCall]', function(e) {
 				$("#chat").css({
 					"margin-left": "0px",
 					"border-left": "none"
-
-
 				});
 
 			});

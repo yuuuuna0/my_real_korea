@@ -15,11 +15,6 @@ insert into user_info(user_id,password,name,nickname,phone,email,birth,address,g
 insert into user_info(user_id,password,name,nickname,phone,email,birth,address,gender,point,is_admin,mail_auth,mail_key)
 	values('user4','user4444','회원4','마리코4','010-4444-4444','user4@gmail.com','2004-04-04','테헤란로4',1,0,1,0,123456);
     
-insert into user_info(user_id,password,name,nickname,phone,email,birth,address,gender,point,is_admin,mail_auth,mail_key)
-	values('aaa111','aaa111','회원4','마리코4','010-4444-4444','user4@gmail.com','2004-04-04','테헤란로4',1,0,1,0,123456);
-    
-insert into user_info(user_id,password,name,nickname,phone,email,birth,address,gender,point,is_admin,mail_auth,mail_key)
-	values('master','master','회원4','마리코4','010-4444-4444','user4@gmail.com','2004-04-04','테헤란로4',1,0,1,0,123456);
 
 select * from user_info;
 --user_img
@@ -110,34 +105,18 @@ insert into tour_review(to_review_no,to_review_date,to_review_title,to_review_co
 /*************** chat ***********************/
 
 -- chat_room
-insert into chat_room(room_no,room_name,from_id,to_id) values (chat_room_room_no_seq.nextval,'채팅방1','user1','user2');
-insert into chat_room(room_no,room_name,from_id,to_id) values (chat_room_room_no_seq.nextval,'채팅방2','user3','user2');
-insert into chat_room(room_no,room_name,from_id,to_id) values (chat_room_room_no_seq.nextval,'채팅방3','user2','user3');
+insert into chat_room(room_name) values ('채팅방1');
+insert into chat_room(room_name) values ('채팅방2');
+insert into chat_room(room_name) values ('채팅방3');
 
 --chat_msg
-insert into chat_msg(msg_no,msg_content,msg_send_time,msg_read,room_no,user_id)
-values(chat_msg_msg_no_seq.nextval,'안녕하세요1',sysdate,0,1,'user1');
+insert into chat_msg(msg_no,msg_content,msg_send_time,msg_read,room_name,user_id)
+values(chat_msg_msg_no_seq.nextval,'안녕하세요1','토요일',0,'채팅방1','aaa111');
 
-insert into chat_msg(msg_no,msg_content,msg_send_time,msg_read,room_no,user_id)
-values(chat_msg_msg_no_seq.nextval,'혹시1',sysdate,0,1,'user1');
+insert into chat_msg(msg_no,msg_content,msg_send_time,msg_read,room_name,user_id)
+values(chat_msg_msg_no_seq.nextval,'혹시1','토요일',0,'채팅방1','aaa111');
 
-insert into chat_msg(msg_no,msg_content,msg_send_time,msg_read,room_no,user_id)
-values(chat_msg_msg_no_seq.nextval,'네 안녕하세요2',sysdate,0,1,'user2');
 
-insert into chat_msg(msg_no,msg_content,msg_send_time,msg_read,room_no,user_id)
-values(chat_msg_msg_no_seq.nextval,'말씀하세요2',sysdate,0,1,'user2');
-
-insert into chat_msg(msg_no,msg_content,msg_send_time,msg_read,room_no,user_id)
-values(chat_msg_msg_no_seq.nextval,'반갑습니다3',sysdate,0,2,'user3');
-
-insert into chat_msg(msg_no,msg_content,msg_send_time,msg_read,room_no,user_id)
-values(chat_msg_msg_no_seq.nextval,'하이요2',sysdate,0,2,'user2');
-
-insert into chat_msg(msg_no,msg_content,msg_send_time,msg_read,room_no,user_id)
-values(chat_msg_msg_no_seq.nextval,'저기요2',sysdate,0,3,'user2');
-
-insert into chat_msg(msg_no,msg_content,msg_send_time,msg_read,room_no,user_id)
-values(chat_msg_msg_no_seq.nextval,'안녕하세요3',sysdate,0,3,'user3');
 
 /*************** freeBoard ***********************/
 -- freeboard

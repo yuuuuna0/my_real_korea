@@ -58,7 +58,7 @@ public class NoticeRestController {
 	}
 	// HTML <img>에 이미지 출력
 	@ResponseBody // 이 메소드는 HTTP응답의 body로 사용될 객체를 반환한다.
-	@GetMapping(value =  "/images/{filename}", 
+	@GetMapping(value =  "/noticeimages/{filename}", 
 				produces = {MediaType.IMAGE_JPEG_VALUE, MediaType.IMAGE_PNG_VALUE, MediaType.IMAGE_GIF_VALUE})
 	public Resource showImage(@PathVariable String filename) throws MalformedURLException {
 		// UrlResource로 이미지 파일을 읽어서 @ResponseBody로 이미지 바이너리 반환

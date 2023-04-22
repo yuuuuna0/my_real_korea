@@ -19,8 +19,12 @@
 	order by msg_send_time desc
 </select>
 
-<select id="selectByRoomNo" parameterType="java.lang.Integer" resultType="com.itwill.my_real_korea.dto.chat.ChatRoom">
-	select * from chat_room where room_no=#{roomNo}
+<select id="selectByRoomName" parameterType="java.lang.Integer" resultType="com.itwill.my_real_korea.dto.chat.ChatRoom">
+	select * from chat_room where room_name=#{roomName}
+</select>
+
+<select id="selectByRoomNameWith" parameterType="String" resultType="com.itwill.my_real_korea.dto.chat.ChatRoom">
+	select * from chat_room where room_name like '%'||#{roomName}||'%'
 </select>
 
 <select id="selectById" parameterType="java.util.Map" resultType="com.itwill.my_real_korea.dto.chat.ChatRoom">
@@ -32,15 +36,12 @@
 </select>
 
 <insert id="insertChatRoom" parameterType="com.itwill.my_real_korea.dto.chat.ChatRoom">
-	<selectKey resultType="java.lang.Integer" keyProperty="roomNo" order="BEFORE">
-		select chat_room_room_no_seq.nextval from dual
-	</selectKey>
-	insert into chat_room(room_no,room_name,from_id,to_id) 
-	values (#{roomNo},#{roomName},#{fromId},#{toId})
+	insert into chat_room(room_name) 
+	values (#{roomName})
 </insert>
 
-<delete id="deleteChatRoom"  parameterType="java.lang.Integer">
-	delete from chat_room where room_no=#{roomNo}
+<delete id="deleteChatRoom"  parameterType="String">
+	delete from chat_room where room_name=#{roomName}
 </delete>
 
 <select id="countNotReadInChatRoom" parameterType="java.util.Map" resultType="java.lang.Integer">

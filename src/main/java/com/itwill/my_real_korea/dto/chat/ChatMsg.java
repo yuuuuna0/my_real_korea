@@ -1,6 +1,8 @@
 package com.itwill.my_real_korea.dto.chat;
 
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 import lombok.AllArgsConstructor;
@@ -30,10 +32,10 @@ public class ChatMsg {
 
 	private int msgNo;
 	private String msgContent;
-	private Date msgSendTime;
+	private String msgSendTime;
 	private int msgRead;
 	/* FK */
-	private int roomNo;
+	private String roomName;
 	/* FK */
 	private String userId;
 	

@@ -1,14 +1,17 @@
 /************ chat_room *************/
 -- 채팅방 번호로 채팅방 보기(채팅방 선택 가능)
-select * from chat_room where room_no=1;
-
+--select * from chat_room where room_no=1;
+-- 채팅방 이름으로 채팅방 보기(채팅방 선택 가능)
+select * from chat_room where room_name='채팅방1';
+-- 채팅방 상대아이디 포함 이름으로 채팅방 찾기
+select * from chat_room where room_name like '%채팅%';
 -- from_id, to_id 로 채팅방 찾기 -> 채팅방 중복 체크 가능
 select * from chat_room where from_id='user2' and to_id='user3';
 
 -- 회원의 채팅방 목록 보기(room_no, room_name, msg_send_time, msg_content)
-select a.room_no, a.room_name, msg_no, msg_send_time, msg_content,msg_read, user_id
-from (select room_no, room_name from chat_room where from_id='user1' or to_id='user1') a
-inner join (select aa.msg_no, aa.msg_send_time, aa.room_no, aa.msg_content,aa.msg_read, aa.user_id from chat_msg aa
+select a.room_name, msg_no, msg_send_time, msg_content,msg_read, user_id
+from (select room_name from chat_room) a
+inner join (select aa.msg_no, aa.msg_send_time, aa.room_name, aa.msg_content,aa.msg_read, aa.user_id from chat_msg aa
             ) b 
 on a.room_no = b.room_no
 order by msg_send_time desc;
@@ -20,13 +23,13 @@ select count(*) from chat_msg where room_no=1 and msg_read=0 and user_id!='user1
 select room_no, from_id as you_id from chat_room where to_id='user2';
 
 -- 채팅방 삭제
-delete from chat_room where room_no=1;
+delete from chat_room where room_name='채팅방1';
 
 
 /************ chat_msg *************/
 
 -- 채팅방 1개 전체 대화 보기 
-select * from chat_msg where room_no=1 order by msg_no;
+select * from chat_msg where room_name='채팅방1' order by msg_no;
 
 -- 채팅 메세지 1개 보기
 select * from chat_msg where msg_no=4;

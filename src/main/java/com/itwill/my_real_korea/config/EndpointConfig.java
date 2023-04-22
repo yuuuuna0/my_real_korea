@@ -10,10 +10,10 @@ WebSocket이 생성될 때마다 인스턴스가 생성되고 JWA구현에 의�
 내부에 Autowired가 설정된 멤버들이 정상적으로 초기화가 되지 않는다.
 이때 이를 연결해 주고 초기화해 주는 클래스.
  */
-@Component
-public class EndpointConfig {
-	@Bean
-	public ServerEndpointExporter serverEndpointExporter() {
-		return new ServerEndpointExporter();
-	}
-}
+//@Component
+//public class EndpointConfig {
+//	@Bean
+//	public ServerEndpointExporter serverEndpointExporter() {
+//		return new ServerEndpointExporter();
+//	}
+//}

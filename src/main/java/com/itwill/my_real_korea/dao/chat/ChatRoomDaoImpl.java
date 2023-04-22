@@ -34,8 +34,8 @@ public class ChatRoomDaoImpl implements ChatRoomDao{
 	}
 
 	@Override
-	public ChatRoom selectByRoomNo(int roomNo) {
-		return chatRoomMapper.selectByRoomNo(roomNo);
+	public ChatRoom selectByRoomName(String roomName) {
+		return chatRoomMapper.selectByRoomName(roomName);
 	}
 
 	@Override
@@ -60,8 +60,8 @@ public class ChatRoomDaoImpl implements ChatRoomDao{
 	}
 
 	@Override
-	public int deleteChatRoom(int roomNo) {
-		return chatRoomMapper.deleteChatRoom(roomNo);
+	public int deleteChatRoom(String roomName) {
+		return chatRoomMapper.deleteChatRoom(roomName);
 	}
 
 	@Override
@@ -70,6 +70,10 @@ public class ChatRoomDaoImpl implements ChatRoomDao{
 		chatMap.put("roomNo", roomNo);
 		chatMap.put("userId", userId);
 		return chatRoomMapper.countNotReadInChatRoom(chatMap);
+	}
+	@Override
+	public List<ChatRoom> selectByRoomNameWith(String roomName) {
+		return chatRoomMapper.selectByRoomNameWith(roomName);
 	}
 
 }

@@ -28,19 +28,19 @@ class ChatServiceImplTest {
 		System.out.println(chatService.selectAll("user1"));
 	}
 
-	
-	@Test
-	void testSelectRoomByRoomNo() {
-		assertNotNull(chatService.selectRoomByRoomNo(2)); 
-		System.out.println(chatService.selectRoomByRoomNo(2));
-	}
-
 	@Disabled
 	@Test
-	void testChatRoomNoSearchById() {
-		int roomNo = chatService.chatRoomNoSearchById("user1", "user2");
-		System.out.println(roomNo);
+	void testSelectRoomByRoomName() {
+		assertNotNull(chatService.selectByRoomName("채팅")); 
+		System.out.println(chatService.selectByRoomName("채팅"));
 	}
+
+//	@Disabled
+//	@Test
+//	void testChatRoomNoSearchById() {
+//		int roomNo = chatService.chatRoomNoSearchById("user1", "user2");
+//		System.out.println(roomNo);
+//	}
 
 	@Disabled
 	@Test
@@ -53,14 +53,14 @@ class ChatServiceImplTest {
 	@Disabled
 	@Test
 	void testInsertChatRoom() {
-		int rowCount = chatService.insertChatRoom(new ChatRoom(0, "챗이름추가2", "user2", "user1"));
+		int rowCount = chatService.insertChatRoom(new ChatRoom("채팅방임"));
 		assertEquals(rowCount, 1);
 	}
 
 	@Disabled
 	@Test
 	void testDeleteChatRoom() {
-		int rowCount = chatService.deleteChatRoom(5);
+		int rowCount = chatService.deleteChatRoom("채팅방임");
 		assertEquals(rowCount, 1);
 	}
 
@@ -75,8 +75,8 @@ class ChatServiceImplTest {
 	@Disabled
 	@Test
 	void testSelectByRoomNo() {
-		assertNotNull(chatService.selectByRoomNo(1)); 
-		System.out.println(chatService.selectByRoomNo(1));
+		assertNotNull(chatService.selectChatByRoomName("채팅방1")); 
+		System.out.println(chatService.selectChatByRoomName("채팅방1"));
 	}
 
 	@Disabled
@@ -140,10 +140,10 @@ class ChatServiceImplTest {
 		System.out.println(rowCount);
 	}
 
-	@Disabled
+	
 	@Test
 	void testInsertChatMsg() {
-		int rowCount = chatService.insertChatMsg(new ChatMsg(0, "하이하이", null, 0, 1, "user1"));
+		int rowCount = chatService.insertChatMsg(new ChatMsg(0, "하이하이", "10시", 0, "채팅방1", "aaa111"));
 		assertEquals(rowCount, 1);
 	}
 

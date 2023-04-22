@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.jasper.tagplugins.jstl.core.If;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -38,21 +39,36 @@ public class ChatController {
 	@GetMapping("/chat")
 	public String getChat(HttpServletRequest request, 
 							Model model,
-							@RequestParam(required = false) String id) {
+							@RequestParam(required = false, value = "receiverId") String receiverId) {
 
 		HttpSession session = request.getSession();
 		User loginUser = (User)session.getAttribute("loginUser");
 		String userId = loginUser.getUserId();
-		System.out.println("chat param id 값 출력 : "  + id);
+		String senderId = userId;
+		String roomName = "";
+		/*
+		receiverId는 채팅 시작 클릭버튼에 hidden으로 해당 프로필유저의 아이디걸어놓은거 가져오기
+		 */
+		if (session != null) {
+			String name = session.toString().substring(session.toString().indexOf("@"));
+			session.setAttribute("sessionId", name);
+		} 
+		// 채팅방 이름 생성
+		roomName = senderId+receiverId;
 		
-		if (id != null && id.equals("guest")) {
-			String name = "guest" + session.toString().substring(session.toString().indexOf("@"));
-			session.setAttribute("sessionId", name);
-		} else if(id != null && id.equals("master")) {
-			String name = "master";
-			session.setAttribute("sessionId", name);
+		List<ChatRoom> findChatRoomList = chatService.selectByRoomNameWith(receiverId);
+		if (findChatRoomList.size() == 0) {
+			// 방 없다면 새로 생성
+			ChatRoom newChatRoom = new ChatRoom(roomName);
+			chatService.insertChatRoom(newChatRoom);
+			model.addAttribute("roomName", roomName);
+		} else {
+			// receiverId가 포함된 이름의 채팅방이 있다면, 그 채팅방 번호를 주기
+			model.addAttribute("roomName", findChatRoomList.get(0).getRoomName());
 		}
-		model.addAttribute("userId", userId);
+		System.out.println(">>>> roomName :"+ roomName);
+		model.addAttribute("receiverId", receiverId);
+		model.addAttribute("senderId", senderId);
 		log.info("@ChatController, getChat()");
 		return "chat";
 	}

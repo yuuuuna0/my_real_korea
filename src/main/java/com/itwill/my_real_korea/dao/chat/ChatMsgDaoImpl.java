@@ -29,8 +29,8 @@ public class ChatMsgDaoImpl implements ChatMsgDao{
 		this.chatMsgMapper = chatMsgMapper;
 	}
 	@Override
-	public List<ChatMsg> selectByRoomNo(int roomNo) {
-		return chatMsgMapper.selectByRoomNo(roomNo);
+	public List<ChatMsg> selectChatByRoomName(String roomName) {
+		return chatMsgMapper.selectChatByRoomName(roomName);
 	}
 	@Override
 	public ChatMsg selectByMsgNo(int msgNo) {

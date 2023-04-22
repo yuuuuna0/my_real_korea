@@ -10,7 +10,9 @@ public interface ChatRoomDao {
 		List<ChatRoom> selectAll(String userId);
 		
 		// 채팅방 목록 선택 기능 (roomNo로 채팅방 1개 보기)
-		ChatRoom selectByRoomNo(int roomNo);
+		public ChatRoom selectByRoomName(String roomName);
+		// 채팅방 목록 선택 기능 (roomName+receiveId로 채팅방 1개 보기)
+		public List<ChatRoom> selectByRoomNameWith(String roomName);
 		
 		// from_id, to_id로 채팅방 찾기
 		ChatRoom selectById(String fromId, String toId);
@@ -23,7 +25,7 @@ public interface ChatRoomDao {
 		int insertChatRoom(ChatRoom chatRoom);
 		
 		// 채팅방 삭제
-		int deleteChatRoom(int roomNo);
+		int deleteChatRoom(String roomName);
 		
 		// 1개의 채팅방 안 읽은 메세지 수
 		int countNotReadInChatRoom(int roomNo, String userId);

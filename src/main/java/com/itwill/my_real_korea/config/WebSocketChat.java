@@ -99,27 +99,24 @@ public class WebSocketChat {
 
 		JSONArray jsonArr = (JSONArray) jsonObj.get("data");
 		JSONObject jsonChat = (JSONObject) jsonArr.get(0);
-		Session myChatSession = userSessions.get(userId + "&" + jsonChat.getString("roomNo"));
+		Session myChatSession = userSessions.get(userId + "&" + jsonChat.getString("roomName"));
 
 		System.out.println("메세지 보내는 세션:" + myChatSession);
 		System.out.println("jsonData.data 채팅 내용:" + jsonChat.getString("msgContent"));
 		
-		String newMsgSendTimeStr = jsonChat.getString("msgSendTime");
 		ChatMsg newChat;
 		try {
 			newChat = new ChatMsg(0, jsonChat.getString("msgContent"), 
-										new SimpleDateFormat("yyyy-MM-dd").parse(newMsgSendTimeStr),
+										jsonChat.getString("msgSendTime"),
 										Integer.parseInt(jsonChat.getString("msgRead")), 
-										Integer.parseInt(jsonChat.getString("roomNo")),
+										jsonChat.getString(jsonChat.getString("roomName")),
 										jsonChat.getString("userId"));
 			System.out.println("채팅 DB 넣을 때 객체:" + newChat);
 		} catch (NumberFormatException e1) {
 			e1.printStackTrace();
 		} catch (JSONException e1) {
 			e1.printStackTrace();
-		} catch (ParseException e1) {
-			e1.printStackTrace();
-		}
+		} 
 		// code 가 1 일 때 session을 돌면서 메세지 돌리기(메세지 전송한 경우)
 		if (code.equals("1")) {
 			jsonChat.put("code", 1);

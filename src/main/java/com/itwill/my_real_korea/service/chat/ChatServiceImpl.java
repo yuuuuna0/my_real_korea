@@ -39,15 +39,15 @@ public class ChatServiceImpl implements ChatService{
 
 	// 채팅방 목록 선택 기능 (roomNo로 채팅방 1개 보기)
 	@Override
-	public ChatRoom selectRoomByRoomNo(int roomNo) {
-		return chatRoomDao.selectByRoomNo(roomNo);
+	public ChatRoom selectByRoomName(String roomName) {
+		return chatRoomDao.selectByRoomName(roomName);
 	}
 
 	/*
 	채팅방 번호 찾기
 	채팅방 존재 : 방번호 반환
 	채팅방 존재X : -999 반환
-	 */
+	
 	@Override
 	public int chatRoomNoSearchById(String fromId, String toId) {
 		ChatRoom chatRoom = chatRoomDao.selectById(fromId, toId);
@@ -58,7 +58,7 @@ public class ChatServiceImpl implements ChatService{
 			return -999;
 		}
 	}
-
+ */
 	/*
 	채팅방 중복 체크
 	 */
@@ -81,8 +81,8 @@ public class ChatServiceImpl implements ChatService{
 	
 	// 채팅방 삭제 
 	@Override
-	public int deleteChatRoom(int roomNo) {
-		return chatRoomDao.deleteChatRoom(roomNo);
+	public int deleteChatRoom(String roomName) {
+		return chatRoomDao.deleteChatRoom(roomName);
 	}
 
 	// 1개의 채팅방 안 읽은 메세지 수
@@ -108,8 +108,8 @@ public class ChatServiceImpl implements ChatService{
 	
 	// 채팅방 1개의 전체 대화보기 
 	@Override
-	public List<ChatMsg> selectByRoomNo(int roomNo) {
-		return chatMsgDao.selectByRoomNo(roomNo);
+	public List<ChatMsg> selectChatByRoomName(String roomName) {
+		return chatMsgDao.selectChatByRoomName(roomName);
 	}
 
 	// 채팅 메세지 1개 보기 
@@ -165,6 +165,10 @@ public class ChatServiceImpl implements ChatService{
 	@Override
 	public int insertChatMsg(ChatMsg chatMsg) {
 		return chatMsgDao.insertChatMsg(chatMsg);
+	}
+	@Override
+	public List<ChatRoom> selectByRoomNameWith(String roomName) {
+		return chatRoomDao.selectByRoomNameWith(roomName);
 	}
 
 	

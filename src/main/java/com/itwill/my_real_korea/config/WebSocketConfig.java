@@ -28,7 +28,6 @@ public class WebSocketConfig implements WebSocketConfigurer{
 	 */
     @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry webSocketHandlerRegistry) {
-    	System.out.println("######################");
     	webSocketHandlerRegistry.addHandler(chatHandler, "/ws/chat")
         .setAllowedOriginPatterns("*")
         .addInterceptors(new HttpSessionHandshakeInterceptor());

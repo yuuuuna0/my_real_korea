@@ -22,8 +22,8 @@ class ChatMsgDaoImplTest {
 	@Disabled
 	@Test
 	void testSelectByRoomNo() {
-		assertNotNull(chatMsgDao.selectByRoomNo(1)); 
-		System.out.println(chatMsgDao.selectByRoomNo(1));
+		assertNotNull(chatMsgDao.selectChatByRoomName("채팅")); 
+		System.out.println(chatMsgDao.selectChatByRoomName("채팅"));
 	}
 
 	@Disabled
@@ -87,7 +87,7 @@ class ChatMsgDaoImplTest {
 	@Disabled
 	@Test
 	void testInsertChatMsg() {
-		int rowCount = chatMsgDao.insertChatMsg(new ChatMsg(0, "하이이", null, 0, 1, "kms2"));
+		int rowCount = chatMsgDao.insertChatMsg(new ChatMsg(0, "하이이", null, 0, "채팅방1", "kms2"));
 		assertEquals(rowCount, 1);
 	}
 

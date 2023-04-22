@@ -11,7 +11,7 @@ import com.itwill.my_real_korea.dto.chat.ChatMsg;
 public interface ChatMsgMapper {
 
 	// 채팅방 1개의 전체 대화보기
-	public List<ChatMsg> selectByRoomNo(int roomNo);
+	public List<ChatMsg> selectChatByRoomName(String roomName);
 
 	// 채팅 메세지 1개 보기
 	public ChatMsg selectByMsgNo(int msgNo);

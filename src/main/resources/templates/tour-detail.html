@@ -289,13 +289,14 @@
 							<!-- End row -->
 							<hr>
 							<div class="review_strip_single" th:each="tourReview:${tourReviewList}">
+								<form id="singleReviewF">
 								<img src="img/products/image-1.jpg" alt="Image" class="rounded-circle" width="20%" height="30%">
 								<small th:text="${#dates.format(tourReview.toReviewDate,'yyyy. MM. dd')}"> - 10 March 2015 -</small>
 								<h4 th:text=${tourReview.userId}>Jhon Doe</h4>
 								<div class="row">
 									<div class="col-md-9">
 										<h6>
-											<strong th:text="${tourReview.toReviewTitle}">
+											<strong id="toReviewTitle" th:text="${tourReview.toReviewTitle}">
 											</strong>
 										</h6>
 									</div>
@@ -305,10 +306,11 @@
 									</div>
 								</div>
 								<br>
-								<p th:text=${tourReview.toReviewContent}>
+								<p id="toReviewContent" th:text=${tourReview.toReviewContent}>
 									"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed a lorem quis neque interdum consequat ut sed sem. Duis quis tempor nunc. Interdum et malesuada fames ac ante ipsum primis in faucibus."
 								</p>
 								<div class="rating" th:switch=${tourReview.toReviewStar}>
+									<input type="hidden" id="toReviewStar" th:value="${tourReview.toReviewStar}">
 									<div th:case="0">
 										<i class="icon-star-empty"></i>							
 										<i class="icon-star-empty"></i>							
@@ -324,14 +326,15 @@
 											<i class="icon-star voted"></i>
 									</div>
 									<div th:case="*">
-										<span th:each="i:${#numbers.sequence(0,tour.toScore-1)}">
+										<span th:each="i:${#numbers.sequence(0,tourReview.toReviewStar-1)}">
 												<i class="icon-star voted"></i>
 										</span>
-										<span th:each="i:${#numbers.sequence(tour.toScore,4)}">
+										<span th:each="i:${#numbers.sequence(tourReview.toReviewStar,4)}">
 												<i class="icon-star-empty"></i>
 										</span>
 									</div>
 								</div>
+								</form>
 							</div>
 							<!-- End review strip -->
 						</div>
@@ -573,6 +576,7 @@
 	<hr>
 {{#each data}}
 	<div class="review_strip_single">
+	<form id="singleReviewF">
 		<img src="img/products/image-1.jpg" alt="Image" class="rounded-circle" width="20%" height="30%">
 		<small> 
 			{{#dateFormat toReviewDate}}
@@ -589,10 +593,10 @@
 					</strong>
 				</h6>
 			</div>
-			{{#ifCond loginUser.userId '==' tourReview.userId}}
+			{{#ifCond @root.loginUser.userId '===' userId}}
 			<div class="col-md-3"> 
-				<button value="{toReviewNo}" name="updateToReview">수정</button>
-				<button value="{toReviewNo}" name="deleteToReview">삭제</button>
+				<button value="{{toReviewNo}}" name="updateToReview">수정</button>
+				<button value="{{toReviewNo}}" name="deleteToReview">삭제</button>
 			</div>
 			{{/ifCond}}
 		</div>
@@ -604,6 +608,7 @@
 	 		{{#generateStarHtml toReviewStar}}
 			{{/generateStarHtml}}
 		</div>
+		</form>
 	</div>
 	<!-- End review strip -->
 {{/each}}

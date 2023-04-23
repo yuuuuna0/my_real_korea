@@ -46,6 +46,15 @@
 	<script  defer type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.2/handlebars.min.js"></script>
 	
 	<style>
+	ul{
+	margin-left:-40px;	
+	}
+	li {
+	list-style-type: none;
+	}
+	.post-left {
+	float:none;
+	}
 	#chat-icon {
 		position: fixed;
 	    bottom: 100px;
@@ -117,7 +126,12 @@
 				<div class="col-lg-9">
 					<div class="box_style_1">
 						<div class="post nopadding">
-						<!-- <img th:src="@{img/tripboard/{tBoImg}(tBoImg=${tripBoard.tBoImg})}" alt="Image" class="img-fluid"> -->	
+						<img th:src="@{img/tripboard/{tBoImg}(tBoImg=${tripBoard.tBoImg})}" alt="Image" class="img-fluid">
+								<!-- 동행게시판 제목 들어가는 곳 -->
+								<ul>
+								<li><h2 th:text="${tripBoard.tBoTitle}"></h2></li>
+								</ul>
+								
 							<div class="post_info clearfix" >
 								<div class="post-left" >
 									<ul>
@@ -128,30 +142,38 @@
 										</li>
 										<li style="padding:5px 0px 5px 0px;" >
 											<i class="icon-users"></i>모집인원<span th:text="${tripBoard.tBoPerson}" style="padding:0px 10px 0px 10px;"></span>
-										   <i class="icon-calendar-empty"></i>여행일정<a th:text="${#dates.format(tripBoard.tBoStartDate, 'MM.dd')}" style="padding:0px 10px 0px 10px; color:red ;"></a><a> ~ </a><a th:text="${#dates.format(tripBoard.tBoEndDate, 'MM.dd')}" style="padding:0px 10px 0px 10px;color:red;"></a>
+										   <i class="icon-calendar-empty"></i>여행일정<a th:text="${#dates.format(tripBoard.tBoStartDate, 'MM.dd')}" 
+										   style="padding:0px 10px 0px 10px; color:red ;"></a><a> ~ </a><a th:text="${#dates.format(tripBoard.tBoEndDate, 'MM.dd')}" 
+										   style="padding:0px 10px 0px 10px;color:red;"></a>
 										   <i class="icon-map"></i>지역<span th:text="${tripBoard.city.cityName}" style="padding:0px 10px 0px 10px;">12 Nov 2020</span>
-										
 										</li>
 									</ul>
 								</div>
 							</div>
-			
-							<div>
-								<ul>
-									<li><h2 th:text="${tripBoard.tBoTitle}"></h2></li>
-									<li><p th:text="${tripBoard.tBoContent}"></p></li>
 							
-									<li>4</li>
+							<div> 
+								<ul>
+									<li style="padding:5px 0px; font-family: NotoSansKR, Noto Sans CJK KR, sans-serif; font-size:16px;">
+									<i class = "icon-ok" ></i>저는 <a th:text="${tripBoard.tBoStyle}" style="color:#e14d67; font-weight:600;"></a> 여행자 입니다.
+									</li>
 								</ul>
 							</div>
-							<div class="post-left">
+							
+							
+							<!-- 동행게시판 내용 들어가는 곳 -->
+							<div>
+								<ul>
+								
+									<li><p th:text="${tripBoard.tBoContent}" style="white-space:pre-line;"></p></li>
+								</ul>
+							</div>
+							
+							<div class="post-left" style="padding-bottom:20px;">
 									<ul>
 										<li style="padding:5px 0px;">
 										 <i class = "icon-tag"></i>태그-#<a th:text="${tripBoard.hashtag}"></a>
 										</li>
-										<li style="padding:5px 0px;">
-											<i class = "icon-tag"></i>여행스타일-#<a th:text="${tripBoard.tBoStyle}"></a>
-										</li>
+										
 										<li style="padding:5px 0px;">
 											<i class="icon-comment"></i>댓글<span th:text="${selectCommentCount}" style="padding:0px 10px 0px 10px;"></span>
 										</li>
@@ -183,14 +205,14 @@
                     	<li>
                         <div class="review_strip_single" id="tripboardcomment-detail" th:each="tripBoardComment:${tripBoardCommentList}">
                             <div class="avatar">
-                                <a href="#"><img src="img/avatar1.jpg" alt="Image"></a>
+                                <a href="user-view"><img src="img/avatar1.jpg" alt="Image"></a>
                             </div>
 
                             <div>
                                 <small name="tCoDate"
                                        th:text="${#dates.format(tripBoardComment.tCommentDate, 'yyyy-MM-dd')}"></small>
-                                <h4 name="tCoUserId" th:text="${tripBoardComment.userId}"></h4>
-                                <p name="tCoContent" th:text="${tripBoardComment.tCommentContent}"></p>
+                                <h4 style="font-size:15px;" name="tCoUserId" th:text="${tripBoardComment.userId}"></h4>
+                                <p name="tCoContent" th:text="${tripBoardComment.tCommentContent}" style="white-space:pre-line;"></p>
 
                                 <div th:if="${loginUser != null && loginUser.userId == tripBoardComment.userId}">
                                     <a class="btn_1" href="" role="button" th:data-value="${tripBoardComment.tCoNo}"
@@ -346,7 +368,7 @@
                     <small name="tCoDate2"
                     >{{dateFormat tcommentDate}}</small>
                     <h4 name="tCoUserId2">{{userId}}</h4>
-                    <textarea name="tCoContent2">{{tcommentContent}}</textarea>
+                    <textarea class="form-control style_2" style="margin-bottom:10px;"  name="tCoContent2">{{tcommentContent}}</textarea>
                     <a class="btn_1" href="" role="button" data-value={{tcoNo}}
                        id="tripboardcomment-modify-action-btn">수정완료</a>
                     
@@ -365,7 +387,7 @@
                      <a href="#"><img src="img/avatar1.jpg" alt="Image"></a>
                 </div>
 
-                <div>
+                <div class="form-group">
                      <small name="tCoDate">{{dateFormat tcommentDate}}</small>
                        <h4 name="tCoUserId">{{userId}}</h4>
                          <p name="tCoContent">{{tcommentContent}}</p>

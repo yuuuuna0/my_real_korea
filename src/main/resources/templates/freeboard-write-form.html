@@ -58,8 +58,8 @@
 	<section class="parallax-window" data-parallax="scroll" data-image-src="img/bg_blog.jpg" data-natural-width="1400" data-natural-height="470">
 		<div class="parallax-content-1">
 			<div class="animated fadeInDown">
-				<h1>Tour Blog</h1>
-				<p>Ridiculus sociosqu cursus neque cursus curae ante scelerisque vehicula.</p>
+				<h1>자유게시판</h1>
+				<p>글쓰기</p>
 			</div>
 		</div>
 	</section>
@@ -110,7 +110,7 @@
 							<div th:object="${freeBoard}"  class="" style='width:800px;'></div>
 							<span><input th:value="*{fBoTitle}" style='width:max;'></span><h2>제목</h2>
 							<span><input th:value="*{fBoContent}" style="flex:auto"></span><p>내용</p>
-							<a class="btn_1 green" type="submit" role="button">제출하기</a>
+							<a class="btn_1 green" type="submit" role="button" onclick="writeFreeBoard">제출하기</a>
 								
 							</form>
 							</div>
@@ -127,10 +127,12 @@
 				<aside class="col-lg-9 add_bottom_30">
 
 					<div class="widget">
-						<div class="input-group">
+						<div id="write-form" class="input-group" th:each="freeBoard:${freeBoardList}">
 							<input type="text" class="form-control" placeholder="Search...">
 							<span class="input-group-btn">
-						<button class="btn btn-default" type="button" style="margin-left:0;"><i class="icon-search"></i></button>
+						<!--<button th:if="${loginUser.userId}==null and ${freeBoard.userId}!=${loginUser.userId}" class="btn btn-default" type="button" style="margin-left:0;" ><i class="icon-search"></i></button>-->
+						<h class="btn btn-default" type="button" style="margin-left:0;"><i class="icon-search"></i></h>
+						<h class="btn btn-default" type="button" style="margin-left:0;" th:if="${freeBoard.fBoTitle}==null or ${freeBoard.fBoContent}==null" onclick="btnAlert()"><i class="icon-search"></i></h>
 						</span>
 						</div>
 						<!-- /input-group -->
@@ -140,8 +142,7 @@
 					<div class="widget" id="cat_blog">
 						<h4>Categories</h4>
 						<ul>
-							<li><a href="#">Places to visit</a>
-							</li>
+						<li><a id="freeboard-city1">전체보기</a></li>
 							<li><a href="#">Top tours</a>
 							</li>
 							<li><a href="#">Tips for travellers</a>
@@ -266,7 +267,18 @@
 	<script src="js/jquery-2.2.4.min.js"></script>
 	<script src="js/common_scripts_min.js"></script>
 	<script src="js/functions.js"></script>
-	
+	<script src="js/app.js" type="module"></script>
+	<script src="js/app_freeboard.js" type="module"></script>
+	<script>
+	function btnAlert(){
+		alert('내용을 입력하세요.')
+	}
+	function writeFreeBoard() {
+		document.getElementById('write-form').action = "freeboard-write-action";
+	    document.getElementById('write-form').submit();
+		windoow.location.href="freeboard-list"
+		}
+	</script>
 
 </body>
 

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <div th:fragment="include-common-top">
 <header>
 		<div id="top_line">
@@ -105,11 +106,12 @@
 					<ul id="top_tools">
 						<!-- Chat icon (수정해야함) -->
 						<th:block th:if="${session.loginUser!=null}">
-						<li><a th:href="@{chat(receiveId=${session.loginUser.userId})}" class="search-overlay-menu-btn">
+						<li>
+							<a href="#" th:data-user-id="${session.loginUser.userId}" id="chat-pop-up-click" onclick="openPopup();">
 							<img src="img/chat-icon-include-top.png"></a></li>
 						</th:block>
 						<th:block th:if="${session.loginUser==null}">
-						<li><a th:href="@{chat}" class="search-overlay-menu-btn">
+						<li><a href="chat">
 							<img src="img/chat-icon-include-top.png"></a></li>
 						</th:block>
 						<!-- End Chat icon -->
@@ -120,4 +122,13 @@
 		</div>
 		<!-- container -->
 	</header>
+	<script type="text/javascript">
+		function openPopup() {
+			let receiverId = $('#chat-pop-up-click').attr('data-user-id');
+			var url = 'chat?receiverId=' + receiverId;
+			window.open(url,
+						'target',
+						'top=100, left=500, width=800, height=800, toolbar=no, menubar=no, location=no, status=no, scrollbars=no, resizable=no');
+		}
+	</script>
 </div>

@@ -1,6 +1,7 @@
 package com.itwill.my_real_korea.controller;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -18,8 +19,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.itwill.my_real_korea.dto.Payment;
 import com.itwill.my_real_korea.dto.user.KakaoProfile;
 import com.itwill.my_real_korea.dto.user.User;
+import com.itwill.my_real_korea.service.payment.PaymentService;
 import com.itwill.my_real_korea.service.user.KaKaoService;
 import com.itwill.my_real_korea.service.user.UserService;
 
@@ -29,7 +32,10 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	@Autowired
-	private KaKaoService kakaoService;
+	private PaymentService paymentService;
+	@Autowired
+	private KaKaoService kakaoService; 
+
 	
 	//회원 가입 폼
 	@GetMapping(value = "/user-write", produces = "application/json;charset=UTF-8")
@@ -273,6 +279,14 @@ public class UserController {
 		}
 		loginUser = userService.findUser(loginUser.getUserId());
 		request.setAttribute("loginUser", loginUser);
+		System.out.println(loginUser);
+		
+		//1. 상세페이지 예약내역
+		List<Payment> paymentList=paymentService.selectAllUser(loginUser.getUserId());
+		request.setAttribute("paymentList", paymentList);
+		System.out.println(paymentList);
+		
+		
 		return "user-view";
 	}
 	

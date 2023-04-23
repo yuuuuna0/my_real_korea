@@ -43,8 +43,8 @@
     <select id="selectAllUser" parameterType="String" resultMap="paymentResultMap">
             SELECT P.*, TI.*, TR.*
             FROM PAYMENT P
-                     JOIN TICKET TI ON TI.TI_NO = P.TI_NO
-                     JOIN TOUR TR ON TR.TO_NO = P.TO_NO
+                     LEFT JOIN TICKET TI ON TI.TI_NO = P.TI_NO
+                     LEFT JOIN TOUR TR ON TR.TO_NO = P.TO_NO
             WHERE P.USER_ID=#{userId} ORDER BY P_NO DESC
     </select>
 

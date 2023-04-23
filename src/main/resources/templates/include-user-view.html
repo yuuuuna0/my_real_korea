@@ -27,90 +27,50 @@
 						</div>
 						<!--/tools -->
 						
-						<div class="strip_booking">
+						<div class="strip_booking" th:each="payment:${paymentList}">
 							<div class="row">
 								<div class="col-lg-2 col-md-2">
 									<div class="date">
-										<span class="month">Dec</span>
-										<span class="day"><strong>27</strong>Fri</span>
+										<span class="month" th:text="${#dates.format(payment.pDate,'MMM')}">Dec</span>
+										<span class="day">
+											<strong th:text="${#dates.format(payment.pDate,'dd')}">27</strong>
+											<th:block th:text="${#dates.format(payment.pDate,'EEE')}">Fri</th:block>
+										</span>
 									</div>
 								</div>
 								<div class="col-lg-6 col-md-5">
-									<h3 class="tours_booking">페이지<span>2 Adults / 2 Childs</span></h3>
+									<h3 class="tours_booking" th:if="${payment.Ticket != null}">
+										 <th:block th:text="${payment.Ticket.tiTitle}"></th:block>
+										<span th:text="${payment.pQty}">2 Adults / 2 Childs</span>
+									</h3>
+									<h3 class="tours_booking" th:if="${payment.Tour != null}">
+										 <th:block th:text="${payment.Tour.toName}"></th:block>
+										<span th:text="${payment.pQty}">2 Adults / 2 Childs</span>
+									</h3>
 								</div>
 								<div class="col-lg-2 col-md-3">
 									<ul class="info_booking">
-										<li><strong>Booking id</strong> 23442</li>
-										<li><strong>Booked on</strong> Sat. 20 Dec. 2015</li>
+										<li>
+											<strong>Booking id</strong> 
+											<span th:text="${#dates.format(payment.pDate, 'yyyyMMdd')+''+payment.pNo}">23442</span>
+										</li>
+										<li>
+											<strong>Booked on</strong> 
+											<span th:text="${#dates.format(payment.pStartDate,'yyyy MM dd . EEE')}">Sat. 20 Dec. 2015</span>
+										</li>
 									</ul>
 								</div>
 								<div class="col-lg-2 col-md-2">
 									<div class="booking_buttons">
-										<a href="#0" class="btn_2">Edit</a>
-										<a href="#0" class="btn_3">Cancel</a>
+										<a href="#0" class="btn_2">상세보기</a>
+										<a href="#0" class="btn_3">취소하기</a>
 									</div>
 								</div>
 							</div>
 							<!-- End row -->
 						</div>
 						<!-- End strip booking -->
-
-						<div class="strip_booking">
-							<div class="row">
-								<div class="col-lg-2 col-md-2">
-									<div class="date">
-										<span class="month">Dec</span>
-										<span class="day"><strong>28</strong>Fri</span>
-									</div>
-								</div>
-								<div class="col-lg-6 col-md-5">
-									<h3 class="tours_booking">Tour Eiffel<span>2 Adults</span></h3>
-								</div>
-								<div class="col-lg-2 col-md-3">
-									<ul class="info_booking">
-										<li><strong>Booking id</strong> 23442</li>
-										<li><strong>Booked on</strong> Sat. 20 Dec. 2015</li>
-									</ul>
-								</div>
-								<div class="col-lg-2 col-md-2">
-									<div class="booking_buttons">
-										<a href="#0" class="btn_2">Edit</a>
-										<a href="#0" class="btn_3">Cancel</a>
-									</div>
-								</div>
-							</div>
-							<!-- End row -->
-						</div>
-						<!-- End strip booking -->
-
-						<div class="strip_booking">
-							<div class="row">
-								<div class="col-lg-2 col-md-2">
-									<div class="date">
-										<span class="month">Dec</span>
-										<span class="day"><strong>30</strong>Fri</span>
-									</div>
-								</div>
-								<div class="col-lg-6 col-md-5">
-									<h3 class="transfers_booking">Orly Airport<span>2 Adults / 2Childs</span></h3>
-								</div>
-								<div class="col-lg-2 col-md-3">
-									<ul class="info_booking">
-										<li><strong>Booking id</strong> 23442</li>
-										<li><strong>Booked on</strong> Sat. 20 Dec. 2015</li>
-									</ul>
-								</div>
-								<div class="col-lg-2 col-md-2">
-									<div class="booking_buttons">
-										<a href="#0" class="btn_2">Edit</a>
-										<a href="#0" class="btn_3">Cancel</a>
-									</div>
-								</div>
-							</div>
-							<!-- End row -->
-						</div>
-						<!-- End strip booking -->
-						
+												
 					</section>
 <!-- End section 2 -->
 <!-- Start section 3 -->

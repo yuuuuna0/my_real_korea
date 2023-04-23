@@ -41,6 +41,14 @@
 			document.tt.method = 'POST';
 			document.tt.submit();
 		}
+		
+		function openPopup() {
+			let receiverId = $('#chat-pop-up-click').attr('data-user-id');
+			var url = 'chat?receiverId=' + receiverId;
+			window.open(url,
+						'target',
+						'top=100, left=500, width=800, height=800, toolbar=no, menubar=no, location=no, status=no, scrollbars=no, resizable=no');
+		}
 	</script>
 	<!-- Handlebars -->
 	<script  defer type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.2/handlebars.min.js"></script>
@@ -275,8 +283,17 @@
 					</div>
 					<!-- End widget -->
 					<hr>
+					<!-- Chat icon (민선) -->
+					<div id="chat-icon-top" class="chat-icon-top">
+						<div id="chat-img-top" class="chat-img-top">
+					   		<a href="#" th:data-user-id="${tripBoard.userId}" id="chat-pop-up-click" onclick="openPopup();">
+					   			<img src="img/messenger.png" id="messenger-icon"></a>
+						<span class="tooltiptext tooltip-left">1:1 채팅</span>
+						</div>
+					</div>
+					<!-- End Chat icon -->
+					
 					<div class="widget tags">
-						
 					</div>
 					<!-- End widget -->
 

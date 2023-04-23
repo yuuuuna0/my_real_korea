@@ -201,3 +201,90 @@ ul#profile_summary_user li span{
 	position:absolute;
 	left:200px;
 }
+
+.chat-img-top {
+  position: relative;
+  display: block;
+}
+
+.chat-img-top .tooltiptext {
+  visibility: hidden;       /* 이벤트가 없으면 툴팁 영역을 숨김 */
+  width: 80px;             /* 툴팁 영역의 넓이를 설정 */
+  background-color: #e14d67;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+
+  position: absolute;       /* 절대 위치를 사용 */
+  z-index: 1;
+}
+
+.chat-img-top:hover .tooltiptext {
+  visibility: visible;      /* hover 이벤트 발생시 영역을 보여줌 */
+}
+
+.chat-img-top .tooltip-left {
+  right: 40%;              /* 왼쪽에 생성해야하므로 영역을 오른쪽에서 105% 이동 */
+}
+
+.chat-img-top .tooltip-left::after {
+  top: 50%;                 /* 사각형 영역이 중앙에 오도록 위치 */
+  left: 100%;               /* 왼쪽에서 100% 위치에 오도록 위치 */
+  margin-top: -5px;
+
+  /* 사각형의 테두리에서 왼쪽만 노출 */
+  border-color: transparent transparent transparent black;
+  
+}
+ul#top_tools {
+    list-style: none;
+    padding: 0;
+    position: absolute;
+    right: 0px;
+    top: 0;
+    z-index: 999;
+}
+
+.chat .chat-history ul li {
+    list-style: none;
+    margin-right: 10px;
+    float: left;
+}
+
+.chat .chat-history .my-message {
+    background: #efefef;
+    margin-top: 10px;
+    margin-bottom: 0px;
+}
+
+.chat .chat-history .other-message {
+    background: #e8f1f3;
+    margin-top: 10px;
+    margin-bottom: 0px;
+}
+
+.float-right .message-data {
+	text-align: end;
+}
+
+.chat .chat-header .chat-about {
+    float: left;
+    padding-left: 10px;
+    padding-top: 10px;
+}
+
+.input-group-prepend #button-send{
+	background-color: #e14d67;
+	color: #fff;
+}
+
+#disconn {
+	margin-left: 270px;
+	background-color: #e14d67;
+	color: #fff;
+	font-size: 14px;
+}
+
+
+

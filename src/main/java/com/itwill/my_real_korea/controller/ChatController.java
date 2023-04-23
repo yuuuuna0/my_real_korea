@@ -69,6 +69,9 @@ public class ChatController {
 		System.out.println(">>>> roomName :"+ roomName);
 		model.addAttribute("receiverId", receiverId);
 		model.addAttribute("senderId", senderId);
+		//세션에 채팅방 이름 저장
+		session.setAttribute("chatRoomName", roomName);
+		
 		log.info("@ChatController, getChat()");
 		return "chat";
 	}

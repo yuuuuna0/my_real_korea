@@ -123,7 +123,7 @@ public class ChatHandler extends TextWebSocketHandler {
 		}
 		// 보내는 시간
 		LocalDateTime currentTime = LocalDateTime.now();
-		String time = currentTime.format(DateTimeFormatter.ofPattern("hh:mm a, E"));
+		String time = currentTime.format(DateTimeFormatter.ofPattern("hh:mm a E"));
 		// 메세지 데이터
 		String payload = message.getPayload();
 		// 보내는 사람
@@ -161,7 +161,7 @@ public class ChatHandler extends TextWebSocketHandler {
 //		String receiverId = (String) dataMap.get("receiverId");
 		log.info("handleTextMessage final dataMap >>> " + dataMap);
 		try {
-			session.sendMessage(message);
+			//session.sendMessage(message);
 			// 메세지 보내기
 			System.out.println("받는사람 세션 : receiver session >>> " + userSession.get(receiverId));
 			String msg;
@@ -262,7 +262,7 @@ public class ChatHandler extends TextWebSocketHandler {
 		}
 		// 보내는 시간
 		LocalDateTime currentTime = LocalDateTime.now();
-		String time = currentTime.format(DateTimeFormatter.ofPattern("hh:mm a, E"));
+		String time = currentTime.format(DateTimeFormatter.ofPattern("hh:mm a E"));
 		// 메세지 데이터
 		String payload = message.getPayload();
 

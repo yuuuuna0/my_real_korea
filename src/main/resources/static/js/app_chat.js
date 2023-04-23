@@ -30,23 +30,30 @@ if (myId != 'master') {
 
 /***************채팅 시작*******************/
 
-$(document).on('click', '#chat-start-btn', function(e) {
+$(document).on('click','#messenger-icon', function(e) {
+	
+});
+function onClose(evt) {
+        	 console.log("close event : " + evt);
+         }
+function onOpen(evt) {
+        	 console.log("open event : " + evt);
+        	 scrollDown();
+         }
+
+/**********페이지 로딩 시 - 소켓연결, DB내용 가져오기*********/
+$(document).ready(function(){
 	sock = new WebSocket("ws://localhost:80/final-project-team2-my-real-korea/ws/chat");
 	sock.onmessage = onMessage;
+	sock.onopen = onOpen;
+	sock.onClose = onClose;
 	
-	sock.onopen = function() {
-		alert('연결에 성공하였습니다.');
-		$('#chatConnect').hide();
-	}
-	sock.onerror = function() {
-		console.log('연결에 실패하였습니다.');
-	}
-	sock.onclose = function() {
-		console.log('연결을 종료합니다.');
-	};
+	// DB에 저장된 대화내용 가져오기
+	let receiverId = document.getElementById('receiverId').value;
+	getChatFromDB(myId,receiverId);
+	onOpen();
+	
 });
-
-
 
 /**********채팅메세지 보내기(버튼 클릭or엔터)*********/
 function sendMessage() {
@@ -67,6 +74,7 @@ $("#msg").keyup(e => {
 
 $(document).on('click','#button-send', function(e){
 	sendMessage();
+
 });
 
 $(document).on('click','#disconn', function(e){
@@ -92,10 +100,10 @@ function onMessage(msg) {
 	console.log('newOne >>> ', newOne);
 	console.log('outOne >>> ', outOne);
 	
-	
 	// 메세지 보내기
 	insertMessage(senderId, receiverId, time, message);
-	
+	// DB에 저장
+	saveChatDB(senderId, receiverId, message, time);
 	// scroll down
 	scrollDown();
 }
@@ -104,6 +112,7 @@ function onMessage(msg) {
 function insertMessage(senderId, receiverId,  time, message) {
 	console.log('insertMessage[myId] : '+myId);
 	console.log('insertMessage[senderId] : '+senderId);
+	console.log('insertMessage[receiverId] : '+receiverId);
 	let chatContent = document.querySelector("#chat-content");
 	if (senderId == myId) {
 		// 보내는 사람이 나 일 때(오른쪽 메세지)
@@ -122,7 +131,7 @@ function insertMessage(senderId, receiverId,  time, message) {
 		li.appendChild(msgDiv);
 
 		chatContent.appendChild(li);
-	} else if(senderId != receiverId){
+	} else {
 		// 보내는 사람 받는 사람 다를 때(왼쪽 메세지)
 		let li = document.createElement('li');
 		li.classList.add('message-li', 'clearfix');
@@ -141,56 +150,81 @@ function insertMessage(senderId, receiverId,  time, message) {
 		chatContent.appendChild(li);
 	}
 	
-	let jsonData = [{
-				senderId: senderId,
-				receiverId: receiverId,
-				message: message,
-				roomName : roomName,
-				msgRead: "0",
-				time: time
-			}]
-	// DB에 저장
-	saveChatDB(jsonData);
-	
+}
+
+/************ DB에서 메세지 가져오기 *************/
+function getMessage(senderId, userId,  time, message) {
+	console.log('insertMessage[myId] : '+myId);
+	console.log('insertMessage[senderId] : '+senderId);
+	console.log('insertMessage[userId] : '+userId);
+	let chatContent = document.querySelector("#chat-content");
+	if (senderId == userId) {
+		// 보낸사람과 현재 로그인한 유저 같을 때(오른쪽 메세지)
+		let li = document.createElement('li');
+		li.classList.add('message-li', 'clearfix', 'float-right');
+		let infoDiv = document.createElement('div');
+		infoDiv.classList.add('message-data');
+		li.appendChild(infoDiv);
+		let timeSpan = document.createElement('span');
+		timeSpan.classList.add('message-data-time');
+		timeSpan.textContent = time;
+		infoDiv.appendChild(timeSpan);
+		let msgDiv = document.createElement('div');
+		msgDiv.classList.add('message', 'my-message');
+		msgDiv.textContent = message;
+		li.appendChild(msgDiv);
+
+		chatContent.appendChild(li);
+	} else {
+		// 보내는 사람 받는 사람 다를 때(왼쪽 메세지)
+		let li = document.createElement('li');
+		li.classList.add('message-li', 'clearfix');
+		let infoDiv = document.createElement('div');
+		infoDiv.classList.add('message-data');
+		li.appendChild(infoDiv);
+		let timeSpan = document.createElement('span');
+		timeSpan.classList.add('message-data-time');
+		timeSpan.textContent = time;
+		infoDiv.appendChild(timeSpan);
+		let msgDiv = document.createElement('div');
+		msgDiv.classList.add('message', 'other-message');
+		msgDiv.textContent = message;
+		li.appendChild(msgDiv);
+
+		chatContent.appendChild(li);
+	}
 	
 }
 
+
 /************ 채팅 내용 DB에 저장 *************/
-function saveChatDB(jsonData){
-	/*
-	let value = [];
+function saveChatDB(senderId, receiverId, message, time){
+	let jsonData = {};
 	document.querySelectorAll('.message-li').forEach(item => {
-
-		let time = item.querySelector('.message-data > .message-data-time').textContent;
-		let message = item.querySelector('.message').textContent;
-		let senderId;
 		let type = item.querySelector('.message').classList[1];
-		if (type == 'my-message') {
-			senderId = myId;
-		} else {
-			senderId = receiverId;
-		};
-		let sendData = {
-			"time": time,
-			"message": message,
+		let time = item.querySelector('.message-data > .message-data-time').textContent;
+        let message = item.querySelector('.message').textContent;
+		jsonData = {
+			"myId":myId,
 			"senderId": senderId,
-			"receiverId" : receiverId
-		};
-
+			"receiverId": receiverId,
+			"message": message,
+			"roomName": roomName,
+			"time": time
+		}
 	})
-	*/
-	let url="save-chat";
-	let method="POST"
-	let contentType="application/json; charset=utf-8";
-	let sendData=JSON.stringify(jsonData[0]); // 메세지 전송데이터
-	console.log('[savechat]sendData'+sendData);
-	let async=true;
-	
-	Request.ajaxRequest(url, method, contentType, 
+	let url = 'save-chat';
+	let method = 'POST';
+	let contentType = 'application/json;charset=UTF-8';
+	let sendData = JSON.stringify(jsonData); // 메세지 전송데이터
+	console.log('[savechat]sendData' + sendData);
+	let async = true;
+
+	Request.ajaxRequest(url, method, contentType,
 						sendData,
-						function(resultJson){
-							//code 1 일때 session 에서 얻은 chatId 가져오기
-							if(resultJson.code == 1){
+						function(resultJson) {
+							console.log('>>>>>>>>>>saveChatDB 접근');
+							if (resultJson.code == 1) {
 								console.log('saveChatDB 성공');
 							} else {
 								alert(resultJson.msg);
@@ -199,29 +233,29 @@ function saveChatDB(jsonData){
 };
 
 /************ 채팅 내용 가져오기(DB연결) *************/
-function getChatFromDB(myId){
-	let url="chat-detail-rest";
-	let method="GET"
-	let contentType="application/json; charset=utf-8";
-	let sendData={
+function getChatFromDB(myId,receiverId){
+	let url='chat-detail-rest';
+	let method='POST';
+	let contentType='application/json;charset=UTF-8';
+	let sendData = {
 		"roomName":roomName,
-		"senderId":myId
+		"senderId":myId,
+		"receiverId":receiverId
 	};
 	let async=true;
 	
 	Request.ajaxRequest(url, method, contentType, 
-						sendData,
+						JSON.stringify(sendData),
 						function(resultJson){
-							//code 1 일때 session 에서 얻은 chatId 가져오기
+							console.log(">>>>>>>>>getChatFromDB 접근");
 							if(resultJson.code == 1){
-								userId = resultJson.userId;
 								let roomName = resultJson.roomName;
 								let senderId = resultJson.senderId;
 								let receiverId = resultJson.receiverId;
 								let chatList = resultJson.data;
 								
 								for (const item of chatList) {
-									insertMessage(senderId, receiverId, item.msgSendTime, item.msgContent);
+									getMessage(senderId, item.userId, item.msgSendTime, item.msgContent);
 								}
 								console.log("getChatFromDB senderId :" + senderId);
 							} else {
@@ -249,7 +283,6 @@ function getUserId(){
 	Request.ajaxRequest(url, method, contentType, 
 						sendData,
 						function(resultJson){
-							//code 1 일때 session 에서 얻은 chatId 가져오기
 							if(resultJson.code == 1){
 								userId = resultJson.userId;
 								console.log("채팅아이디 :" + userId);

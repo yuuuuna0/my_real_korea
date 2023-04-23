@@ -103,11 +103,17 @@
 					</div>
 					<!-- End main-menu -->
 					<ul id="top_tools">
-						<li><a href="javascript:void(0);"
-							class="search-overlay-menu-btn"><i class="icon_search"></i></a></li>
-						<li>
-							<!-- End dropdown-cart-->
-						</li>
+						<!-- Chat icon (수정해야함) -->
+						<th:block th:if="${session.loginUser!=null}">
+						<li><a th:href="@{chat(receiveId=${session.loginUser.userId})}" class="search-overlay-menu-btn">
+							<img src="img/chat-icon-include-top.png"></a></li>
+						</th:block>
+						<th:block th:if="${session.loginUser==null}">
+						<li><a th:href="@{chat}" class="search-overlay-menu-btn">
+							<img src="img/chat-icon-include-top.png"></a></li>
+						</th:block>
+						<!-- End Chat icon -->
+						<!-- End dropdown-cart-->
 					</ul>
 				</nav>
 			</div>

@@ -12,33 +12,14 @@ let preOnlineList;
 let masterStatusContent;  
 let preMasterStatus;
 let masterStatus;
-//let userId = getUserId();
-let jsonData = {
-			code:null,
-			url:null,
-			msg:null,
-			roomNo:null,
-			userId:null,
-			receiverId:null, // 상대 아이디 
-			data:null //chat_contents 
-};
-/*
-if (myId != 'master') {
-	receiverId = 'master';
-}
-*/
 
-/***************채팅 시작*******************/
 
-$(document).on('click','#messenger-icon', function(e) {
-	
-});
+/*****************소켓 연결/해제*******************/
 function onClose(evt) {
         	 console.log("close event : " + evt);
          }
 function onOpen(evt) {
         	 console.log("open event : " + evt);
-        	 scrollDown();
          }
 
 /**********페이지 로딩 시 - 소켓연결, DB내용 가져오기*********/
@@ -51,7 +32,7 @@ $(document).ready(function(){
 	// DB에 저장된 대화내용 가져오기
 	let receiverId = document.getElementById('receiverId').value;
 	getChatFromDB(myId,receiverId);
-	onOpen();
+	scrollDown();
 	
 });
 
@@ -77,10 +58,12 @@ $(document).on('click','#button-send', function(e){
 
 });
 
-$(document).on('click','#disconn', function(e){
-	window.location.href = 'index'; 
+/***************채팅방 나가기*******************/
+$(document).on('click','#disconn', function(e) {
+	onClose();
+	sock.onClose;
+	window.close();
 });
-
 /************ onMessage *************/
 function onMessage(msg) {
 	let data = JSON.parse(msg.data);
@@ -193,9 +176,7 @@ function getMessage(senderId, userId,  time, message) {
 
 		chatContent.appendChild(li);
 	}
-	
 }
-
 
 /************ 채팅 내용 DB에 저장 *************/
 function saveChatDB(senderId, receiverId, message, time){

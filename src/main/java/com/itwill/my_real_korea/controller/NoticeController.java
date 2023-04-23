@@ -19,9 +19,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.itwill.my_real_korea.dto.City;
 import com.itwill.my_real_korea.dto.notice.Notice;
 import com.itwill.my_real_korea.dto.user.User;
 import com.itwill.my_real_korea.exception.NoticeNotFoundException;
+import com.itwill.my_real_korea.service.city.CityService;
 import com.itwill.my_real_korea.service.notice.NoticeService;
 import com.itwill.my_real_korea.util.PageMakerDto;
 
@@ -35,6 +37,8 @@ public class NoticeController {
 	@Autowired
 	private NoticeService noticeService;
 
+	@Autowired
+	private CityService cityService;
 	
 	// 공지사항 리스트 보기 (공지사항 첫 화면)
 	@GetMapping(value = "/notice-list")
@@ -52,6 +56,9 @@ public class NoticeController {
 			model.addAttribute("noticeListPage", noticeListPage);
 			model.addAttribute("noticeList", noticeList);
 			model.addAttribute("pageNo", pageNo);
+			
+			List<City> cityList = cityService.findAllCity();
+			model.addAttribute("cityList", cityList);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return "error";

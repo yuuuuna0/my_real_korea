@@ -1,4 +1,42 @@
 @charset "UTF-8";
+/*폰트*/
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+body {
+    font-size: 16px;
+    font-family: "Pretendard-Regular", Arial, sans-serif;
+    color: #555;
+}
+#top_line {
+    font-size: 15px;
+}
+.main-menu > ul > li > a {
+    font-size: 20px;
+}
+a.btn_1, .btn_1 {
+    font-size: 16px;
+    font-weight: normal;
+    padding-top: 10px;
+}
+
+.main-menu ul ul li a {
+    font-size: 15px;
+    color: #666;
+    border-bottom: 1px solid #ededed;
+    display: block;
+}
+.shop-item h3 a {
+    font-size: 16px;
+}
+#notice-list-item > div.item-options.clearfix{
+	font-size: 13px;
+}
+
 /* CSS Document */
 
 /* logo home with h1 */
@@ -202,6 +240,42 @@ ul#profile_summary_user li span{
 	left:200px;
 }
 
+
+ul#top_tools {
+    list-style: none;
+    padding: 0;
+    position: absolute;
+    right: 0px;
+    top: 0;
+    z-index: 999;
+}
+
+#cat_shop ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-size: 18px;
+    text-align: center;
+}
+
+.widget h4 {
+    text-transform: uppercase;
+    font-size: 16px;
+    text-align: center;
+}
+
+#wishlist-help-icon{
+	margin-bottom: 20px;
+}
+
+.tooltip-content {
+    font-size: 15px;
+}
+
+#notice-write-wrap{
+	margin-left: 60px;
+}
+
 .chat-img-top {
   position: relative;
   display: block;
@@ -237,31 +311,12 @@ ul#profile_summary_user li span{
   border-color: transparent transparent transparent black;
   
 }
-ul#top_tools {
-    list-style: none;
-    padding: 0;
-    position: absolute;
-    right: 0px;
-    top: 0;
-    z-index: 999;
-}
+
 
 .chat .chat-history ul li {
     list-style: none;
     margin-right: 10px;
     float: left;
-}
-
-.chat .chat-history .my-message {
-    background: #efefef;
-    margin-top: 10px;
-    margin-bottom: 0px;
-}
-
-.chat .chat-history .other-message {
-    background: #e8f1f3;
-    margin-top: 10px;
-    margin-bottom: 0px;
 }
 
 .float-right .message-data {
@@ -280,11 +335,12 @@ ul#top_tools {
 }
 
 #disconn {
-	margin-left: 270px;
+	margin-left: 530px;
 	background-color: #e14d67;
 	color: #fff;
 	font-size: 14px;
 }
 
-
-
+.shop-item .inner-box {
+    height: 140px;
+}

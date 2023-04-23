@@ -93,65 +93,19 @@
 							<h4>TYPE</h4>
 							<p></p>
 							<ul>
-								<li><a href="" id="type-tour">투어</a>
+								<li><a href="" id="type-tour">위시리스트 - 투어</a>
 								<input type="hidden" id="wishlist-id" th:value=${loginUser.userId}>
 								</li><hr>
-								<li><a href="" id="type-ticket">티켓</a>
+								<li><a href="" id="type-ticket">위시리스트 - 티켓</a>
 								<input type="hidden" id="wishlist-id" th:value=${loginUser.userId}>
 								</li><hr>
-								<li><a href="wishlist" >투어&티켓</a>
+								<li><a href="wishlist" >위시리스트 전체보기</a>
 								</li>
 							</ul>
 						</div>
 						
 						</div>
 						
-							<div class="filter_type">
-								<h6>Rating</h6>
-								<ul>
-									<li>
-										<label>
-											<input type="checkbox">
-											<span class="rating">
-												<i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i>
-											</span>
-										</label>
-									</li>
-									<li>
-										<label>
-											<input type="checkbox">
-											<span class="rating">
-												<i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile"></i>
-											</span>
-										</label>
-									</li>
-									<li>
-										<label>
-											<input type="checkbox">
-											<span class="rating">
-												<i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile"></i><i class="icon-smile"></i>
-											</span>
-										</label>
-									</li>
-									<li>
-										<label>
-											<input type="checkbox">
-											<span class="rating">
-												<i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile"></i><i class="icon-smile"></i><i class="icon-smile"></i>
-											</span>
-										</label>
-									</li>
-									<li>
-										<label>
-											<input type="checkbox">
-											<span class="rating">
-												<i class="icon-smile voted"></i><i class="icon-smile"></i><i class="icon-smile"></i><i class="icon-smile"></i><i class="icon-smile"></i>
-											</span>
-										</label>
-									</li>
-								</ul>
-							</div>
-							
 						</div>
 						<!--End collapse -->
 					</div>
@@ -163,10 +117,10 @@
 					</div>
 					
 					<div class="box_style_2">
-						<i class="icon_set_1_icon-57"></i>
+						<i class="icon_set_1_icon-57" id="wishlist-help-icon"></i>
 						<h4>도움이 <span>필요하신가요?</span></h4>
-						<a href="tel://004542344599" class="phone">+45 423 445 99</a>
-						<small>Monday to Friday 9.00am - 7.30pm</small>
+						<a href="tel://004542344599" class="phone">02-000-0000</a>
+						<small>myrealkorea@myrealkorea.com</small>
 					</div>
 				</aside>
 				<!--End aside -->
@@ -192,11 +146,6 @@
 							<div class="col-lg-6 col-md-6">
 								<div class="tour_list_desc">
 									<div class="rating">
-										<i class="icon-smile voted"></i>
-										<i class="icon-smile  voted"></i>
-										<i class="icon-smile  voted"></i>
-										<i class="icon-smile  voted"></i>
-										<i class="icon-smile"></i>
 									</div>
 									<div th:if="${wishlist.tour != null}">
 									<h3><strong  th:text="${wishlist.tour.toName}"></strong> </h3>
@@ -207,16 +156,13 @@
 									<p th:text="${wishlist.ticket.tiInfo}"></p>
 									</div>
 									<ul class="add_info">
+										<th:block th:if="${wishlist.tour != null}">
 										<li>
 											<div class="tooltip_styled tooltip-effect-4">
 												<span class="tooltip-item"><i class="icon_set_1_icon-83"></i></span>
 												<div class="tooltip-content">
-													<h4>Schedule</h4>
-													<strong>Monday to Friday</strong> 09.00 AM - 5.30 PM
-													<br>
-													<strong>Saturday</strong> 09.00 AM - 5.30 PM
-													<br>
-													<strong>Sunday</strong> <span class="label label-danger">Closed</span>
+													<h4>투어 안내사항</h4>
+													<p th:text="${wishlist.tour.toNotice}"> </p>
 												</div>
 											</div>
 										</li>
@@ -224,18 +170,42 @@
 											<div class="tooltip_styled tooltip-effect-4">
 												<span class="tooltip-item"><i class="icon_set_1_icon-41"></i></span>
 												<div class="tooltip-content">
-													<h4>Address</h4> Musée du Louvre, 75058 Paris - France
+													<h4>만나는 장소</h4> 
+													<p th:text="${wishlist.tour.toMeet}"> </p>
 													<br>
 												</div>
 											</div>
 										</li>
+										</th:block>
+										<th:block th:if="${wishlist.ticket != null}">
+										<li>
+											<div class="tooltip_styled tooltip-effect-4">
+												<span class="tooltip-item"><i class="icon_set_1_icon-83"></i></span>
+												<div class="tooltip-content">
+													<h4>티켓 날짜</h4>
+													<p th:text="${#dates.format(wishlist.ticket.tiDate, 'yyyy.MM.dd')}"> </p>
+												</div>
+											</div>
+										</li>
+										<li>
+											<div class="tooltip_styled tooltip-effect-4">
+												<span class="tooltip-item"><i class="icon_set_1_icon-41"></i></span>
+												<div class="tooltip-content">
+													<h4>티켓 안내사항</h4> 
+													<p th:text="${wishlist.ticket.tiNotice}"> </p>
+													<br>
+												</div>
+											</div>
+										</li>
+										</th:block>
 									</ul>
 								</div>
 							</div>
 							<div class="col-lg-2 col-md-2">
 								<div class="price_list" id="wishlist-detail-btn">
 									<div th:if="${wishlist.tour != null}">
-										<div><sup th:text="${wishlist.tour.toPrice}"></sup><small>*Per person</small>
+										<div><sup th:text="${wishlist.tour.toPrice}"></sup>
+												<small>* 1인 기준</small>
 											<p><a th:href="@{tour-detail(toNo=${wishlist.tour.toNo})}" href="" class="btn_1">상세보기</a></p>
 											<a href="#"><i class="icon-trash" id="wishlist-delete-action-btn"></i></a>
 											<input type="hidden" id="wishlist-userId" th:value="${wishlist.userId}">
@@ -243,7 +213,7 @@
 										</div>
 									</div>
 									<div th:if="${wishlist.ticket != null}">
-										<div><sup th:text="${wishlist.ticket.tiPrice}"></sup><small>*Per person</small>
+										<div><sup th:text="${wishlist.ticket.tiPrice}"></sup><small>* 1인 기준</small>
 											<p><a th:href="@{ticket-detail(tiNo=${wishlist.ticket.tiNo})}" href="" class="btn_1">상세보기</a></p>
 											<a href="#"><i class="icon-trash" id="wishlist-delete-action-btn"></i></a>
 											<input type="hidden" id="wishlist-userId" th:value="${wishlist.userId}">

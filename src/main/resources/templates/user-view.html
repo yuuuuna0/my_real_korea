@@ -135,8 +135,11 @@
 
 <form method="post" name="f" id="user-detail-form">
 					<div class="row">
-								
+								<img th:src="@{img/user/{userImgUrl}(userImgUrl=${loginUser.userImg.userImgUrl})}" 
+								alt="Image" class="img-fluid styled profile_pic"/>
+								<!-- 
 								<img src="img/defaultImg.png" alt="Image" class="img-fluid styled profile_pic" width = "200px">
+								 -->
 							</div>
 							<div style="text-align: center;">
 							  <h2 style="margin-top: 0;"><a th:text="${session.loginUser.userId}"></a></h2>

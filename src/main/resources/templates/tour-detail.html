@@ -30,6 +30,9 @@
 	<!-- Handlebars-->
 	<script defer type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.2/handlebars.min.js"></script>
 	
+	<!-- Map -->
+	<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDaZG7q63JktxVWQ7LM9Fnc_JJXbt8QKAY&callback=initMap"></script>                      
+	<script src="js/map.js"></script>
 
 </head>
 
@@ -96,7 +99,7 @@
 		<!-- End Position -->
 
 		<div class="collapse" id="collapseMap">
-			<div id="map" class="map"></div>
+			<div id="map" class="map" style="width:100%;height:350px;"></div>
 		</div>
 		<!-- End Map -->
 
@@ -340,6 +343,7 @@
 						</div>
 					</div>
 				</div>
+
 				<!--End  single_tour_desc-->
 			</div>
 			<!--End row -->
@@ -411,7 +415,8 @@
 					</div>
 
 				</aside>        
-        <div id="overlay"></div>
+        <div id="overlay">
+        </div>
 		<!-- Mask on input focus -->
     
 	</main>
@@ -645,11 +650,7 @@
 		$('#pStartDate').datepicker('setDate', 'today');
 	</script>
 	
-	<!-- Map -->
-	<script src="http://maps.googleapis.com/maps/api/js"></script>                      
-	<script src="js/map.js"></script>
-	<script src="js/infobox.js"></script>
-	
+
 	<!-- Carousel -->
 	<script>
 		$('.carousel-thumbs-2').owlCarousel({
@@ -674,7 +675,7 @@
 	<!--Review modal validation -->
 	<script src="assets/validate.js"></script>
 	
-	
+	<script src="js/infobox.js"></script>
 </body>
 
 </html>

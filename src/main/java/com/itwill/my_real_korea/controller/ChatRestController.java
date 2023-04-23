@@ -69,16 +69,17 @@ public class ChatRestController {
 	}
 	
 	// 채팅 내용 불러오기
-	@GetMapping(value = "/chat-detail-rest")
+	@PostMapping(value = "/chat-detail-rest")
 	public Map<String, Object> chatDetailRest(@RequestBody Map<String, String> chatList) throws Exception {
 		Map<String, Object> resultMap = new HashMap<>();
 		int code = 1;
 		String msg = "";
-		String receiverId = "";
 		String roomName = chatList.get("roomName");
 		String senderId = chatList.get("senderId");
+		String receiverId = chatList.get("receiverId");
 		// 채팅방 번호로 채팅방 찾기
 		ChatRoom chatRoom = chatService.selectByRoomName(roomName);
+		String findChatRoomName = chatRoom.getRoomName();
 
 		List<ChatMsg> resultList = new ArrayList<ChatMsg>();
 		try {
@@ -87,16 +88,22 @@ public class ChatRestController {
 //			if (notReadMsg != 0) {
 //				chatService.updateReadMsg(Integer.parseInt(roomNo), receiverId);
 //			}
-			// 채팅 내역
-			List<ChatMsg> chatDetailList = chatService.selectChatByRoomName(roomName);
-			code = 1;
-			msg = "성공";
-			resultList = chatDetailList;
+			// 해당 채팅방 채팅 내역 찾기
+			List<ChatMsg> chatDetailList = chatService.selectChatByRoomName(findChatRoomName);
+			if (chatDetailList.size() > 0) {
+				code = 1;
+				msg = "성공";
+				resultList = chatDetailList;
+				System.out.println("chatDetailList" + chatDetailList);
+			} else {
+				code = 2;
+				msg = "채팅내용이 없습니다.";
+			}
+			
 		} catch (Exception e) {
-			code = 2;
-			msg = "채팅내용 불러오기 실패";
+			code = 3;
+			msg = "관리자에게 문의하세요";
 			e.printStackTrace();
-
 		}
 		System.out.println("채팅아이디" + senderId);
 		System.out.println("상대아이디" + receiverId);
@@ -105,7 +112,7 @@ public class ChatRestController {
 		resultMap.put("msg", msg);
 		resultMap.put("senderId", senderId);
 		resultMap.put("receiverId", receiverId);
-		resultMap.put("roomName", roomName);
+		resultMap.put("roomName", findChatRoomName);
 		resultMap.put("data", resultList);
 
 		return resultMap;
@@ -139,41 +146,41 @@ public class ChatRestController {
 	public Map<String, Object> saveChat(@RequestBody Map<String, String> messages) {
 	
 		Map<String, Object> resultMap = new HashMap<>();
+		List<ChatMsg> data = new ArrayList<>();
 		int code = 1;
 		String msg = "";
 		int msgNo = 0;
-		String msgContent = null;
+		String msgContent = "";
 		String msgSendTime = "";
 		int msgRead = 0;
 		String roomName ="";
 		String senderId = "";
-		// 채팅아이디 가져오기
-		System.out.println(String.valueOf(messages.get("senderId")));
+		String myId = "";
 		
 		try {
 			msgContent = String.valueOf(messages.get("message"));
 			msgSendTime =String.valueOf(messages.get("time"));
-			msgRead = Integer.parseInt(messages.get("msgRead"));
+			msgRead = 0;
 			roomName = String.valueOf(messages.get("roomName"));
 			senderId = String.valueOf(messages.get("senderId"));
-			
-			ChatMsg newChatMsg;
-			newChatMsg = new ChatMsg(0, msgContent, msgSendTime, msgRead, roomName, senderId);
-			// 메세지 생성, DB 저장
-			int rowCount = chatService.insertChatMsg(newChatMsg);
-			msgNo = newChatMsg.getMsgNo();
-			
-			// DB 저장 성공 시 insert 후 클라이언트에게 메세지 데이터 만들어서 보내기
-			if (rowCount != 0) {
-				resultMap.put("msgNo", msgNo);
-				resultMap.put("msgContent", msgContent);
-				resultMap.put("msgSendTime", msgSendTime);
-				resultMap.put("msgRead", msgRead);
-				resultMap.put("roomName", roomName);
-				resultMap.put("senderId", senderId);
+			myId = String.valueOf(messages.get("myId"));
+			System.out.println(msgContent);
+			System.out.println(msgSendTime);
+			System.out.println(msgRead);
+			System.out.println(roomName);
+			System.out.println(senderId);
+			// 로그인한 아이디와 채팅보내는 아이디 같을 때만 채팅 저장
+			if (myId.equals(senderId)) {
+				ChatMsg newChatMsg;
+				newChatMsg = new ChatMsg(0, msgContent, msgSendTime, msgRead, roomName, senderId);
+				// 메세지 생성, DB 저장
+				int rowCount = chatService.insertChatMsg(newChatMsg);
+				if (rowCount > 0) {
+					code = 1;
+					msg = "성공";
+					data.add(newChatMsg);
+				}
 			}
-			code = 1;
-			msg = "성공";
 		} catch (NumberFormatException e1) {
 			e1.printStackTrace();
 		} catch (Exception e) {
@@ -181,6 +188,9 @@ public class ChatRestController {
 			msg = "메세지 DB저장 실패";
 			e.printStackTrace();
 		}
+		resultMap.put("code", code);
+		resultMap.put("msg", msg);
+		resultMap.put("data", data);
 		return resultMap;
 	}
 	

@@ -38,7 +38,7 @@ function selectedTicketList(){
 };
 
 
-$(document).on('change',$('#ticket-sort,#city-checkbox'),selectedTicketList);
+$(document).on('change','#ticket-sort,#city-checkbox',selectedTicketList);
 $(document).on('click',"#ticket-search-btn",selectedTicketList);
 
 
@@ -54,10 +54,14 @@ $(document).on('show.bs.modal','#myReview',function(){
     let loginUser=$('#myReviewBtn').data('id');
     let tiNo=$('#myReviewBtn').data('tino');
     $('#myReview').find('#userId').val(loginUser);
-    $('#myReview').find('#hiddenTiNo').val(tiNo);
-    console.log(loginUser); // id....
-    console.log(tiNo);
+    $('#myReview').find('#hiddenTiNo').val(tiNo); // input에 hidden으로 들어가있는 id 값 vlaue에 
+    
+    //console.log(loginUser); // id....
+    //console.log(tiNo);
 });
+
+
+/* 리뷰 Action 
 
 $('#ticket-review-action').click(function(e){
 	  let sendData={
@@ -65,20 +69,20 @@ $('#ticket-review-action').click(function(e){
 					tiReviewTitle:document.ticketReview.tiReviewTitle.value,
 					tiReviewStar:document.ticketReview.tiReviewStar.value,
 					tiReviewContent:document.ticketReview.tiReviewContent.value,
-					tiReviewImg:'어쩌구.jpg', // 임의
+					tiReviewImg:document.ticketReview.tiReviewImg.value, // 임의
 					userId:document.ticketReview.userId.value
 					};
-					console.log($('#hiddenTiNo').val());
-		/*url,mehtod,contentType,sendData,callbakc,async*/
+					//console.log($('#hiddenTiNo').val());
+					console.log(document.ticketReview.tiReviewImg.value);
+		url,mehtod,contentType,sendData,callbakc,async
 	    Request.ajaxRequest('ticket-review-action',
 	    					'POST',
 	    					'application/json;charset=UTF-8',
 		       				 JSON.stringify(sendData),
 		       				 function(resultJson){
-							let tiNo = $('#hiddenTiNo').val();
+							 let tiNo = $('#hiddenTiNo').val();
 		           		 		if(resultJson.code==1){
-			window.location.href=`ticket-detail?tiNo=${tiNo}`;
-			/*아이디값? */
+									window.location.href=`ticket-detail?tiNo=${tiNo}`;
 		          			  } else{
 		               				 alert(resultJson.msg);
 		            }
@@ -86,3 +90,196 @@ $('#ticket-review-action').click(function(e){
 		            ,true);
         e.preventDefault();
 });
+
+
+
+파일업로드
+
+	//1. 리뷰 전송
+    $('#ticket-review-action').on('click', uploadImage);
+
+    function uploadImage() { //
+        let file = $('#tiReviewImg')[0].files[0]; //새파일 upload확인
+        let formData = new FormData();
+        formData.append('tiReviewImg', file);
+
+        $.ajax({
+            type: 'POST', // awsController 
+            url: '/api/v1/upload',
+            data: formData,
+            processData: false,
+            contentType: false
+        }).done(function (data) {
+            $('#result-image').attr("src", data);
+        }).fail(function (error) {
+            alert(error);
+        })
+    }	
+
+*/
+
+/***** 티켓 리뷰 작성 *****/
+
+$('#ticket-review-action').click(function(e){
+    let tiReviewImg = $('#tiReviewImg')[0].files[0]; //multi-part
+    let formData = new FormData();
+    if(tiReviewImg){
+        formData.append('file', tiReviewImg);
+    } else {
+		formData.append('file',null);
+	}
+    $.ajax({
+        type: 'POST',
+        url: 'upload',
+        data: formData,    
+        processData: false,
+        contentType: false
+    })
+    .done(function (data) {
+        let sendData = {
+            tiNo:$('#hiddenTiNo').val(),
+            tiReviewTitle:document.ticketReview.tiReviewTitle.value,
+            tiReviewStar:document.ticketReview.tiReviewStar.value,
+            tiReviewContent:document.ticketReview.tiReviewContent.value,
+            tiReviewImg: data, // url 뒷부분 안넘어옴
+            userId:document.ticketReview.userId.value
+        };
+        Request.ajaxRequest('ticket-review-action', 
+                            'POST', 
+                            'application/json;charset=UTF-8', 
+                            JSON.stringify(sendData), 
+                            function(resultJson) {
+            let tiNo = $('#hiddenTiNo').val();
+            if(resultJson.code==1){
+                window.location.href=`ticket-detail?tiNo=${tiNo}`;
+            } else {
+                alert(resultJson.msg);
+            }
+        }   
+        , true);
+        
+    })
+    
+    .fail(function (error) {
+        alert(error);
+    })
+    e.preventDefault();
+});
+
+
+
+/*티켓 삭제*/
+$(document).on('click', '#deleteTiReviewBtn',function(e){
+	
+	let tiReviewNo = $("#tiReviewNo input[name='tiReviewNo']").val();
+	console.log(tiReviewNo);
+	Request.ajaxRequest(`tiReviewNo/${tiReviewNo}`,
+						'DELETE',
+						'application/json;charset=UTF-8',
+						{},
+						function(resultJson){
+							if(resultJson.code==1){
+								window.location.href=`ticket-detail?tiNo=${tiNo}`;
+							} else {
+								alert(resultJson.msg);
+							}
+						},
+						ture);
+	e.preventDefault();
+	
+});
+
+
+
+/***** 티켓 수정 모달 ***
+
+$('#myReview').on('show.bs.modal', function(e) {
+  let tiReviewNo = $("#modifyTiReviewBtn").attr("modifyTiReviewNo"); //  리뷰넘버
+  console.log(tiReviewNo); // 확인용
+
+});*/
+//modifyTiReviewBtn
+// $(document).on('show.bs.modal','#myReview',function(e) { 
+//$(document).on('show.bs.modal','#myReview',function(e){
+$(".modifyTiReviewBtn").click(function(e) {
+	$('#myReview').modal('show');
+	let tiReviewNo = $(e.target).attr('tiReviewNo');
+	let f = 'f' + tiReviewNo; // 유니크 tiReviewNo
+	console.log(f);
+	let form = document.getElementsByName(f);
+	console.log(form)
+	let title = form[0].children.namedItem('tiReviewTitle').innerText; // 폼에서 가져오기..
+	let content = form[0].children.namedItem('tiReviewContent').innerText;
+	//console.log(title);
+	//console.log(content);
+	$('#myReview').find('#tiReviewNo').val(tiReviewNo);
+    $('#myReview').find('#tiReviewTitle').val(title); 
+    $('#myReview').find('#tiReviewContent').val(content);
+    //console.log(loginUser); // id....
+    //console.log(tiNo);
+});
+
+    
+$('#ticket-review-modify-action').click(function(e){
+		console.log(e);
+	    let tiReviewImg = $('#tiReviewImg')[0].files[0]; //multi-part
+	    let formData = new FormData();
+		    if(tiReviewImg){
+		        formData.append('file', tiReviewImg);
+		    } else {
+				formData.append('file',null);
+			}
+		let tiReviewNo = $('#tiReviewNo').val();
+		console.log(formData);
+	    $.ajax({
+	        type: 'POST',
+	        url: 'upload',
+	        data: formData,    
+	        processData: false,
+	        contentType: false
+	    })
+	    .done(function (data) {
+	        let sendData = {
+				tiReviewNo:tiReviewNo,
+	            tiReviewTitle:document.ticketReview.tiReviewTitle.value,
+	            tiReviewStar:document.ticketReview.tiReviewStar.value,
+	            tiReviewContent:document.ticketReview.tiReviewContent.value,
+	            tiReviewImg: data, // url 뒷부분 안넘어옴
+	            userId:document.ticketReview.userId.value
+	        };
+	        console.log(sendData);
+	        Request.ajaxRequest('ticketReview/'+ tiReviewNo, 
+	                            'PUT', 
+	                            'application/json;charset=UTF-8', 
+	                            JSON.stringify(sendData), 
+	                            function(resultJson) {
+	            if(resultJson.code==1){
+		            let tiNo = $('#hiddenTiNo').val();
+	                window.location.href=`ticket-detail?tiNo=${tiNo}`;
+	            } else {
+	                alert(resultJson.msg);
+	            }
+	        }   
+	        , true);
+	        
+	    })
+	    
+	    .fail(function (error) {
+	        alert(error);
+	    })
+	    e.preventDefault();
+});
+    
+    
+    
+
+
+
+
+
+
+
+
+
+
+

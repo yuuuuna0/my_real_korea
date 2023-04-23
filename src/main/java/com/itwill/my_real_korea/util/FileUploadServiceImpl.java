@@ -32,6 +32,7 @@ public class FileUploadServiceImpl implements FileUploadService {
 		this.rootLocation = Paths.get(properties.getLocation());
 	}
 	
+	// 1. original 파일 이름으로 업로드
 	// 업로드 된 파일 저장 (현재는 파일 1개 업로드만 가능하도록 설정해둠)
 	@Override
 	public void store(MultipartFile file) {
@@ -49,6 +50,25 @@ public class FileUploadServiceImpl implements FileUploadService {
 			throw new FileUploadException("파일 업로드에 실패했습니다.", e);
 		}
 	}
+	
+	// 2. 파일 이름 변경 후 업로드
+	// 업로드 된 파일 저장 (이름 변경 후 저장)
+	@Override
+	public void store(MultipartFile file, String newFileName) {
+		try {
+			if (file.isEmpty()) {
+				throw new FileUploadException("파일이 비었습니다.");
+			}
+
+			byte[] bytes = file.getBytes();
+	        Path path = Paths.get(this.rootLocation +"/"+ newFileName);
+	        Files.write(path, bytes);
+		}
+		catch (IOException e) {
+			throw new FileUploadException("파일 업로드에 실패했습니다.", e);
+		}
+	}
+	
 
 	// rootLocation 경로 아래 저장된 모든 파일의 경로 가져옴
 	@Override

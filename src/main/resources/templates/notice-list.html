@@ -85,10 +85,6 @@
 		<div class="container margin_60">
 			<div class="row">
 				<div class="col-lg-9">
-						
-				
-				
-				
 					<div class="shop-section" >
 
 						<!-- 페이지 정보 + 정렬 -->
@@ -184,7 +180,7 @@
 					<aside class="sidebar">
 						<div class="widget">
 							<div class="input-group">
-								<input id="notice-search-keyword" type="text" class="form-control" placeholder="Search...">
+								<input id="notice-search-keyword" type="text" class="form-control" placeholder="검색">
 								<span id="notice-search-btn"  class="input-group-btn">
 		                        <button class="btn btn-default" type="button" style="margin-left:0;"><i class="icon-search"></i></button>
 		                        </span>
@@ -195,11 +191,11 @@
 						<div class="widget" id="cat_shop">
 							<h4>Categories</h4>
 							<ul>
-								<li><a href="tour-list">투어 보러가기</a>
+								<li><a href="tour-list">투어 상품</a>
 								</li>
-								<li><a href="ticket-list">티켓 보러가기</a>
+								<li><a href="ticket-list">티켓 상품</a>
 								</li>
-								<li><a href="tripboard-list">여행 동행 찾기</a>
+								<li><a href="tripboard-list">동행 찾기</a>
 								</li>
 								<li><a href="freeboard-list">자유게시판</a>
 								</li>
@@ -207,7 +203,7 @@
 						</div>
 						<!-- End widget -->
 						<hr>
-						<div th:if="${loginUser != null && loginUser.userId == 'admin'}">
+						<div th:if="${loginUser != null && loginUser.userId == 'admin'}" id="notice-write-wrap">
 						<a class="btn_1" th:href=@{notice-write-form} role="button">공지사항 글쓰기</a>
 						</div>
 					</aside>

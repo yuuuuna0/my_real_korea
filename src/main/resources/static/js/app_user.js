@@ -52,13 +52,11 @@ $('#menu-user-find').click(function(e){
 
 // 프로필 수정 폼 
 $(document).on('click', '#btn-user-modify-form', function(e) {
-	console.log("click!! >> " + e.target)
 	Request.ajaxRequest('user-modify-form',
 						'GET',
 						'application/json;charset=UTF-8',
 						{},
 						function(resultJson) {
-							console.log(">>>>>>>>>>>>>>>>>>>>>>>>>> ")
 							if(resultJson.code == 1){
 								View.render('#user-modify-form-template', resultJson, '#user-detail-form');
 							} else {
@@ -72,11 +70,11 @@ $(document).on('click', '#btn-user-modify-form', function(e) {
 // 프로필 수정 완료 버튼 
 
 $(document).on('click','#btn-user-modify-action',function(e) {
-	let form = $('user-modify-form');
-	console.log(form);
 	let url = 'user-modify-form-action';
 	let method = 'PUT';
 	let formData = new FormData();
+	let alcohol = $('input[name="aOptions"]:checked').val();
+	let smoking = $('input[name="sOptions"]:checked').val();
 	
 	formData.append('userId', $('#userId').val());
 	formData.append('password', $('#password1').val());
@@ -85,12 +83,11 @@ $(document).on('click','#btn-user-modify-action',function(e) {
 	formData.append('email', $('#email').val());
 	formData.append('brith', $('#brith').val());
 	formData.append('address', $('#address').val());
-	formData.append('alcohol', $('#alcohol').val());
-	formData.append('smoking', $('#smoking').val());
+	formData.append('alcohol',alcohol);
+	formData.append('smoking',smoking);
 	formData.append('introduce', $('#introduce').val());
 	
 	let async = true;
-	console.log(formData);
 		
 	$.ajax({
 	    method : method,
@@ -100,7 +97,6 @@ $(document).on('click','#btn-user-modify-action',function(e) {
 	    contentType: false,
 	    success : function(resultJson){
 		
-		console.log(">>>>>>>");
 				//code 1 일때 render, 아닐 때 msg 띄움
 				if(resultJson.code == 1){
 						window.location.href = 'user-view'; 
@@ -115,6 +111,5 @@ $(document).on('click','#btn-user-modify-action',function(e) {
 	});
 		e.preventDefault();
 });
-
 
 

@@ -26,6 +26,11 @@ public interface TicketReviewMapper {
 
     //리뷰 삭제
     int deleteTicketReview(int TiReviewNo);
+    
+    int ticketReviewImg(String tiReviewImg, int tiReviewNo); // 기존 이미지
+    int tiReviewImgUpload(String tiReviewImgUpload, int tiReviewNo); // 업로드 이미지
+    int ticketReviewImgNull(int tiReviewNo);
+
 
  
     

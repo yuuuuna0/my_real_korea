@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <div th:fragment="include-common-top">
 <header>
 		<div id="top_line">
@@ -34,7 +35,7 @@
 				<div class="col-3">
 					<div id="logo_home">
 						<h1>
-							<a href="index" title="City tours travel template">City
+							<a href="index" title="마이리얼코리아 홈">City
 								Tours travel template</a>
 						</h1>
 					</div>
@@ -56,11 +57,9 @@
 									<li><a href="tour-list">투어 상품</a></li>
 									 <li class="third-level"><a href="javascript:void(0);">지역별</a>
                                         <ul>
-                                            <li><a href="index_24.html">서울</a></li>
-                                            <li><a href="index_20.html">경기</a></li>
-                                            <li><a href="index_14.html">강원</a></li>
-                                            <li><a href="index_15.html">제주</a></li>
-                                            <li><a href="index_15.html">예시로 넣어둠</a></li>
+                                            <li th:each="city:${cityList}">
+                                            	<a th:name="${city.cityNo}" th:text="${city.cityName}"  th:href="@{tripboard-city-bar-list(cityNo=${city.cityNo})}">서울</a>
+                                            </li>
                                         </ul>
                                     </li>
 								</ul></li>
@@ -70,11 +69,9 @@
 									<li><a href="ticket-list">티켓 상품</a></li>
 									<li class="third-level"><a href="javascript:void(0);">지역별</a>
                                         <ul>
-                                            <li><a href="index_24.html">서울</a></li>
-                                            <li><a href="index_20.html">경기</a></li>
-                                            <li><a href="index_14.html">강원</a></li>
-                                            <li><a href="index_15.html">제주</a></li>
-                                            <li><a href="index_15.html">예시로 넣어둠</a></li>
+                                            <li th:each="city:${cityList}">
+                                            	<a th:name="${city.cityNo}" th:text="${city.cityName}"  th:href="@{tripboard-city-bar-list(cityNo=${city.cityNo})}">서울</a>
+                                            </li>
                                         </ul>
                                     </li>
 								</ul></li>
@@ -103,15 +100,31 @@
 					</div>
 					<!-- End main-menu -->
 					<ul id="top_tools">
-						<li><a href="javascript:void(0);"
-							class="search-overlay-menu-btn"><i class="icon_search"></i></a></li>
+						<!-- Chat icon (수정해야함) -->
+						<th:block th:if="${session.loginUser!=null}">
 						<li>
-							<!-- End dropdown-cart-->
-						</li>
+							<a href="#" th:data-user-id="${session.loginUser.userId}" id="chat-pop-up-click" onclick="openPopup();">
+							<img src="img/chat-icon-include-top.png" title="채팅"></a></li>
+						</th:block>
+						<th:block th:if="${session.loginUser==null}">
+						<li><a href="chat">
+							<img src="img/chat-icon-include-top.png"></a></li>
+						</th:block>
+						<!-- End Chat icon -->
+						<!-- End dropdown-cart-->
 					</ul>
 				</nav>
 			</div>
 		</div>
 		<!-- container -->
 	</header>
+	<script type="text/javascript">
+		function openPopup() {
+			let receiverId = $('#chat-pop-up-click').attr('data-user-id');
+			var url = 'chat?receiverId=' + receiverId;
+			window.open(url,
+						'target',
+						'top=100, left=500, width=800, height=800, toolbar=no, menubar=no, location=no, status=no, scrollbars=no, resizable=no');
+		}
+	</script>
 </div>

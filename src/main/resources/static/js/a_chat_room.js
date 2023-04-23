@@ -838,6 +838,7 @@ function message_send_function() {
 	$('#chat_content_msg').focus();
 
 	$("#chat_content_msg").keydown(function(e) {
+		
 		if (e.keyCode == 13) {
 			console.log('Enter');
 			e.preventDefault();

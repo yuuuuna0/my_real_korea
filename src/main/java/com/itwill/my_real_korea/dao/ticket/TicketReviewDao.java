@@ -25,6 +25,13 @@ public interface TicketReviewDao {
 
     //리뷰 글 수 보기
     //int selectAllReviewCount() throws Exception;
+
+    /*파일*/
+    int ticketReviewImg(String tiReviewImg, int tiReviewNo); // 기존 이미지
+    //수정 이미지
+    int tiReviewImgUpload(String tiReviewImgUpload, int tiReviewNo); // 업로드 이미지
     
+    int ticketReviewImgNull(int tiReviewNo);
+
 
 }

@@ -21,7 +21,6 @@ public class CommonController {
 		
 		try {
 			List<City> cityList = cityService.findAllCity();
-			
 			model.addAttribute("cityList", cityList);
 		} catch (Exception e) {
 			e.printStackTrace();

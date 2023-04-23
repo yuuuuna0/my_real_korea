@@ -62,6 +62,8 @@ public class TicketReviewServiceImpl implements TicketReviewService{
         }
         return ticketScore;
     }
+
+
     /*	페이징
     @Override
     public PageMakerDto<TicketReview> selectByTicketReview(int currentPage, int tiReviewNo) throws Exception {
@@ -81,6 +83,22 @@ public class TicketReviewServiceImpl implements TicketReviewService{
         return new PageMakerDto<TicketReview>(ticketReviewUserList, pageMaker, totReviewCount);
     }
 */
+    @Override
+    public int ticketReviewImg(String tiReviewImg, int tiReviewNo) {
+        return ticketReviewDao.ticketReviewImg(tiReviewImg, tiReviewNo);
+    }
+
+    @Override
+    public int tiReviewImgUpload(String tiReviewImgUpload, int tiReviewNo) {
+        return ticketReviewDao.tiReviewImgUpload(tiReviewImgUpload, tiReviewNo);
+    }
+
+	@Override
+	public int ticketReviewImgNull(int tiReviewNo) {
+		// TODO Auto-generated method stub
+		return ticketReviewDao.ticketReviewImgNull(tiReviewNo);
+	}
+
 	
     
 }

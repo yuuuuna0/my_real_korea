@@ -23,6 +23,8 @@
 	href="https://fonts.googleapis.com/css?family=Gochi+Hand|Montserrat:300,400,700"
 	rel="stylesheet">
 
+
+
 <!-- COMMON CSS -->
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/style.css" rel="stylesheet">
@@ -55,7 +57,7 @@
 
 	<main>
 		<div id="carousel-home">
-			<div class="owl-carousel owl-theme">
+			<div class="owl-carousel owl-theme" >
 				<div class="owl-slide cover" style="background-image: url(img/index_main1.png);">
 					<div class="opacity-mask d-flex align-items-center" data-opacity-mask="rgba(0, 0, 0, 0.5)">
 						<div class="container">
@@ -63,11 +65,12 @@
 								<div class="col-lg-12 static">
 									<div class="slide-text text-center white">
 										<h2 class="owl-slide-animated owl-slide-title">
-											Welcome to<br>MY REAL KOREA
+											나다운 여행<br>My Real Korea
 										</h2>
-										<p class="owl-slide-animated owl-slide-subtitle">쉽고 편한 국내 여행은 마이리얼코리아</p>
+										<p class="owl-slide-animated owl-slide-subtitle">쉽고 편한 투어, 티켓 예약과 여행 동행 찾기 까지</p>
 										<div class="owl-slide-animated owl-slide-cta">
-											<a class="btn_1" href="chat?receiverId=admin" role="button">채팅</a>
+											<!-- 채팅 버튼 (지울거임) -->
+											<a class="btn_1" href="#" role="button" id="chat-pop-up-click" onclick="openPopup();">채팅</a>
 										</div>
 									</div>
 								</div>
@@ -84,13 +87,10 @@
 								<div class="col-lg-6 static">
 									<div class="slide-text text-right white">
 										<h2 class="owl-slide-animated owl-slide-title">
-											Discover<br>Vatican Museum
+											다양한 투어와 티켓까지<br>
 										</h2>
-										<p class="owl-slide-animated owl-slide-subtitle">Discover
-											hidden wonders on trips curated by Citytours Tours Experts</p>
+										<p class="owl-slide-animated owl-slide-subtitle">마이리얼코리아와 함께</p>
 										<div class="owl-slide-animated owl-slide-cta">
-											<a class="btn_1" href="all_tours_list.html" role="button">Read
-												more</a>
 										</div>
 									</div>
 								</div>
@@ -107,13 +107,10 @@
 								<div class="col-lg-6 static">
 									<div class="slide-text white">
 										<h2 class="owl-slide-animated owl-slide-title">
-											Love Paris<br>Arch de Triomphe
+											함께 하고 싶다면, 동행 찾기<br>
 										</h2>
-										<p class="owl-slide-animated owl-slide-subtitle">Discover
-											hidden wonders on trips curated by Citytours Tours Experts</p>
+										<p class="owl-slide-animated owl-slide-subtitle">나홀로 여행도 좋지만</p>
 										<div class="owl-slide-animated owl-slide-cta">
-											<a class="btn_1" href="all_tours_list.html" role="button">Read
-												more</a>
 										</div>
 									</div>
 								</div>
@@ -176,58 +173,33 @@
 			<!-- /container -->
 		</div>
 		<!-- /white_bg -->
-		<div class="container margin_60">
-
-		</div>
 		<!-- End container -->
 
 		<div class="white_bg">
 			<div class="container margin_60">
 				<div class="main_title">
 					<h2>
-						Plan <span>Your Tour</span> Easly
+						여행을 <span>쉽게</span> 계획해보세요!
 					</h2>
-					<p>Quisque at tortor a libero posuere laoreet vitae sed arcu.
-						Curabitur consequat.</p>
+					<p>마이리얼코리아와 함께</p>
 				</div>
 				<div class="row feature_home_2">
 					<div class="col-md-4 text-center">
 						<img src="img/adventure_icon_1.svg" alt="" width="75" height="75">
-						<h3>Itineraries studied in detail</h3>
-						<p>Suscipit invenire petentium per in. Ne magna assueverit
-							vel. Vix movet perfecto facilisis in, ius ad maiorum corrumpit,
-							his esse docendi in.</p>
+						<h3>내가 찾던 투어</h3>
+						<p>국내의 다양한 투어를 즐겨보세요.</p>
 					</div>
 					<div class="col-md-4 text-center">
 						<img src="img/adventure_icon_2.svg" alt="" width="75" height="75">
-						<h3>Room and food included</h3>
-						<p>Cum accusam voluptatibus at, et eum fuisset sententiae.
-							Postulant tractatos ius an, in vis fabulas percipitur, est audiam
-							phaedrum electram ex.</p>
+						<h3>나만을 위한 티켓</h3>
+						<p>국내 관광지들의 최신 티켓 정보를 확인해보세요.</p>
 					</div>
 					<div class="col-md-4 text-center">
 						<img src="img/adventure_icon_3.svg" alt="" width="75" height="75">
-						<h3>Everything organized</h3>
-						<p>Integre vivendo percipitur eam in, graece suavitate cu vel.
-							Per inani persius accumsan no. An case duis option est, pro ad
-							fastidii contentiones.</p>
+						<h3>혼자보다 함께하고 싶다면</h3>
+						<p>함께 여행할 동행을 찾아보세요.</p>
 					</div>
 				</div>
-
-				<div class="banner_2">
-					<div class="wrapper d-flex align-items-center opacity-mask"
-						style="background: #222 url(img/pattern.png) repeat 0 0; color: #fff">
-						<div>
-							<h3>
-								공지사항<br>
-							</h3>
-							<p>공지사항 확인하기</p>
-							<a href="notice-list" class="btn_1">Read more</a>
-						</div>
-					</div>
-					<!-- /wrapper -->
-				</div>
-				<!-- /banner_2 -->
 
 			</div>
 			<!-- End container -->
@@ -318,15 +290,21 @@
 		<!--form -->
 	</div>
 	<!-- Sign In Popup -->
+	<script type="text/javascript">
+	function openPopup() {
+		var url = 'chat?receiverId=admin';
+		window.open(url,
+					'target',
+					'top=100, left=500, width=800, height=800, toolbar=no, menubar=no, location=no, status=no, scrollbars=no, resizable=no');
+	}
+	</script>
+
 
 	<!-- Common scripts -->
 	<script src="js/jquery-2.2.4.min.js"></script>
 	<script src="js/common_scripts_min.js"></script>
 	<script src="js/functions.js"></script>
-
-	<!-- NOTIFY BUBBLES 
-	<script src="js/notify_func.js"></script>-->
-
+	
 </body>
 
 </html>

@@ -1,4 +1,42 @@
 @charset "UTF-8";
+/*폰트*/
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+body {
+    font-size: 16px;
+    font-family: "Pretendard-Regular", Arial, sans-serif;
+    color: #555;
+}
+#top_line {
+    font-size: 15px;
+}
+.main-menu > ul > li > a {
+    font-size: 20px;
+}
+a.btn_1, .btn_1 {
+    font-size: 16px;
+    font-weight: normal;
+    padding-top: 10px;
+}
+
+.main-menu ul ul li a {
+    font-size: 15px;
+    color: #666;
+    border-bottom: 1px solid #ededed;
+    display: block;
+}
+.shop-item h3 a {
+    font-size: 16px;
+}
+#notice-list-item > div.item-options.clearfix{
+	font-size: 13px;
+}
+
 /* CSS Document */
 
 /* logo home with h1 */
@@ -200,4 +238,109 @@ ul#profile_summary_user li span{
 	font-weight: normal;
 	position:absolute;
 	left:200px;
+}
+
+
+ul#top_tools {
+    list-style: none;
+    padding: 0;
+    position: absolute;
+    right: 0px;
+    top: 0;
+    z-index: 999;
+}
+
+#cat_shop ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-size: 18px;
+    text-align: center;
+}
+
+.widget h4 {
+    text-transform: uppercase;
+    font-size: 16px;
+    text-align: center;
+}
+
+#wishlist-help-icon{
+	margin-bottom: 20px;
+}
+
+.tooltip-content {
+    font-size: 15px;
+}
+
+#notice-write-wrap{
+	margin-left: 60px;
+}
+
+.chat-img-top {
+  position: relative;
+  display: block;
+}
+
+.chat-img-top .tooltiptext {
+  visibility: hidden;       /* 이벤트가 없으면 툴팁 영역을 숨김 */
+  width: 80px;             /* 툴팁 영역의 넓이를 설정 */
+  background-color: #e14d67;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+
+  position: absolute;       /* 절대 위치를 사용 */
+  z-index: 1;
+}
+
+.chat-img-top:hover .tooltiptext {
+  visibility: visible;      /* hover 이벤트 발생시 영역을 보여줌 */
+}
+
+.chat-img-top .tooltip-left {
+  right: 40%;              /* 왼쪽에 생성해야하므로 영역을 오른쪽에서 105% 이동 */
+}
+
+.chat-img-top .tooltip-left::after {
+  top: 50%;                 /* 사각형 영역이 중앙에 오도록 위치 */
+  left: 100%;               /* 왼쪽에서 100% 위치에 오도록 위치 */
+  margin-top: -5px;
+
+  /* 사각형의 테두리에서 왼쪽만 노출 */
+  border-color: transparent transparent transparent black;
+  
+}
+
+
+.chat .chat-history ul li {
+    list-style: none;
+    margin-right: 10px;
+    float: left;
+}
+
+.float-right .message-data {
+	text-align: end;
+}
+
+.chat .chat-header .chat-about {
+    float: left;
+    padding-left: 10px;
+    padding-top: 10px;
+}
+
+.input-group-prepend #button-send{
+	background-color: #e14d67;
+	color: #fff;
+}
+
+#disconn {
+	margin-left: 530px;
+	background-color: #e14d67;
+	color: #fff;
+	font-size: 14px;
+}
+
+.shop-item .inner-box {
+    height: 140px;
 }

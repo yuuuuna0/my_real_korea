@@ -1,37 +1,47 @@
 package com.itwill.my_real_korea.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.itwill.my_real_korea.dto.Payment;
 import com.itwill.my_real_korea.dto.RsPInfo;
 import com.itwill.my_real_korea.dto.ticket.Ticket;
 import com.itwill.my_real_korea.dto.ticket.TicketReview;
-import com.itwill.my_real_korea.dto.tour.TourReview;
 import com.itwill.my_real_korea.dto.user.User;
 import com.itwill.my_real_korea.service.payment.PaymentService;
 import com.itwill.my_real_korea.service.rspinfo.RsPInfoService;
 import com.itwill.my_real_korea.service.ticket.TicketReviewService;
 import com.itwill.my_real_korea.service.ticket.TicketService;
+import com.itwill.my_real_korea.service.ticket.aws.Aws3UploadService;
+import com.itwill.my_real_korea.util.FileUploadService;
 import com.itwill.my_real_korea.util.PageMakerDto;
+
 
 @Controller
 public class TicketController {
@@ -40,16 +50,19 @@ public class TicketController {
     private final TicketReviewService ticketReviewService;
     private final PaymentService paymentService;
     private final RsPInfoService rsPInfoService;
+    private final Aws3UploadService aws3UploadService;
+   
 
     @Autowired
     public TicketController(TicketService ticketService, TicketReviewService ticketReviewService,
-    						RsPInfoService rsPInfoService, PaymentService paymentService) {
+    						RsPInfoService rsPInfoService, PaymentService paymentService,
+    						Aws3UploadService aws3UploadService) {
         this.ticketService = ticketService;
         this.ticketReviewService = ticketReviewService;
         this.paymentService = paymentService;
         this.rsPInfoService = rsPInfoService;
+        this.aws3UploadService = aws3UploadService;
     }
-
     //티켓 리스트 - 페이지
     @GetMapping("/ticket-list")
     public String tickeList(@RequestParam(required = false, defaultValue = "1") int currentPage,
@@ -144,7 +157,7 @@ public class TicketController {
     		payment.setPStartDate(date); // 예약날짜
     		payment.setUserId(loginUser.getUserId()); // user 담기
     		payment.setTicket(ticket); // 티켓 담기
-    		
+    		//fail "F1002" 처리하기
     		paymentService.insertTicketPayment(payment);
     		session.setAttribute("payment", payment);
     		//System.out.println(payment); 
@@ -180,7 +193,7 @@ public class TicketController {
         	 // System.out.println(pMethodStr);
         	payment.setPMsg(pMsg);  
         	//payment.setPMethod(Integer.parseInt(pMethodStr));
-            // paymentService.insertTicketPayment(payment);
+        	paymentService.insertTicketPayment(payment);
         	paymentService.updatePayment(payment);
             ticket.setTiCount(ticket.getTiCount() + payment.getPQty());
             ticketService.updateTicket(ticket);
@@ -255,11 +268,25 @@ public class TicketController {
         ticketSortMap.put("data", data);
         return ticketSortMap;
     }
-
-	@PostMapping(value="/ticket-review-action", produces ="application/json;charset=UTF-8")
+    
+    
+    /*파일업로드*/
+    /*
+    //@LoginCheck
 	@ResponseBody
-	public Map<String, Object> ticketReviewAction(@RequestBody TicketReview ticketReview,
-													HttpSession session) {
+	@GetMapping(value = "/images/ticket/{filename}")
+	public Resource showImage(@PathVariable String filename) throws MalformedURLException {
+		return new UrlResource("file:" + storageService.getFullPath(filename));
+	}
+	*/
+    
+    
+    
+    
+	
+    @PostMapping(value="/ticket-review-action",  produces ="application/json;charset=UTF-8")
+	@ResponseBody
+	public Map<String, Object> ticketReviewAction(@RequestBody TicketReview ticketReview, HttpSession session) {
 		Map<String, Object> resultMap = new HashMap<>();
 		int code = 0;
 		String msg = "성공";
@@ -268,6 +295,12 @@ public class TicketController {
 		try {
 			User loginUser = (User) session.getAttribute("loginUser");
 			ticketReview.setUser(loginUser);
+			//System.out.println(uploadFile);
+			ticketReview.setTiReviewImg(ticketReview.getTiReviewImg());
+			// String uploadFile = aws3UploadService.getFileUrl(file.getName());
+			// System.out.println(">>>>>>>>>>>>>"+file.getName()); // null 업로드한 게 없음...?
+			// ticketReview.setTiReviewImg(uploadFile); // url
+			// System.out.println(">>>>>>>>>>>>>"+uploadFile); //
 			ticketReviewService.insertTicketReview(ticketReview);
 			//티켓에 리뷰 붙이기
 			ticketReview = ticketReviewService.selectByTicketReviewOne(ticketReview.getTiReviewNo());
@@ -287,8 +320,110 @@ public class TicketController {
 		
 		return resultMap;
 	}
+    /* 기존 내용 가져오기*/
+    @GetMapping(value="ticket-detail/ticketReview/{tiReviewNo}", produces="application/json;charset=UTF-8")
+    public Map<String, Object> ticketReviewModify(@PathVariable("modifyTiReviewNo")int tiReviewNo){
+    	Map<String, Object> resultMap = new HashMap<>();
+    	int code=1;
+    	String msg="";
+    	List<TicketReview> data = new ArrayList<>();
+    	TicketReview ticketReview = ticketReviewService.selectByTicketReviewOne(tiReviewNo);
+    	if(ticketReview!=null) {
+    		data.add(ticketReview);
+    	}else {
+    		code=2;
+    		msg = "게시물 존재 X";
+    	}
+    	resultMap.put("code", code);
+    	resultMap.put("msg", msg);
+    	resultMap.put("data", data);
+    	return resultMap;
+    }	
+    
+	@ResponseBody
+	//@LoginCheck 내가 써야 수정되게해야함
+	@PutMapping(value="/ticketReview/{tiReviewNo}", produces = "application/json;charset=UTF-8")
+	public Map<String, Object> ticketReviewModifyAction(@PathVariable(value="tiReviewNo") int tiReviewNo,
+														@RequestBody TicketReview ticketReview, 
+														HttpSession session) {
+			Map<String, Object> resultMap = new HashMap<>();
+			int code = 0;
+			String msg = "성공";
+			List<TicketReview> data = new ArrayList<>();
+			
+			try {
+				TicketReview findTicketReview = ticketReviewService.selectByTicketReviewOne(tiReviewNo); // tiNo에 있는 ticketReview 한 개.
+				if(findTicketReview != null) {
+				ticketReviewService.updateTicketReview(ticketReview);
+				code = 1;
+				msg = "성공";
+				data.add(ticketReview);
+				
+				}else {
+					code = 2;
+					msg = "리뷰 사진 수정 실패";
+				}
+			} catch(Exception e) {
+				e.printStackTrace();
+				code = 3;
+				msg = "관리자에게 문의하세요.";
+				
+			}
+		
+			resultMap.put("code", code);
+			resultMap.put("msg", msg);
+			resultMap.put("data", data);
+			
+			return resultMap;
+	}
 	
-
+	//@LoginCheck // 내가 써야 삭제
+	@DeleteMapping(value="/ticketReview/{tiReviewNo}", produces = "application/json;charset=UTF-8")
+	public Map<String, Object> ticketReviewDeleteAction(@PathVariable(value="tiReviewNo") int tiReivewNo, HttpServletRequest request){
+		
+		Map<String, Object> resultMap = new HashMap<>();
+		int code = 0;
+		String msg = "성공";
+		List <TicketReview> data = new ArrayList<>();
+		
+		try {
+			int rowCount = ticketReviewService.deleteTicketReview(tiReivewNo);
+			if(rowCount != 0) {
+				code = 1;
+				msg = "성공";
+			} else {
+				code = 2;
+				msg = "삭제 실패";
+				TicketReview failTicketReview = ticketReviewService.selectByTicketReviewOne(tiReivewNo);
+				data.add(failTicketReview);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+			code = 3;
+			msg = "관리자에게 문의바랍니다.";
+		}
+		
+		resultMap.put("code", code);
+		resultMap.put("msg", msg);
+		resultMap.put("data", data);
+		
+		return resultMap;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
 
 

@@ -51,6 +51,9 @@ public class FreeBoardController {
             model.addAttribute("freeBoardListPage", freeBoardListPage);
             model.addAttribute("freeBoardList", freeBoardList);
             model.addAttribute("pageNo", pageNo);
+            
+            List<City> cityList = cityService.findAllCity();
+			model.addAttribute("cityList", cityList);
         } catch (Exception e) {
             e.printStackTrace();
             return "error";

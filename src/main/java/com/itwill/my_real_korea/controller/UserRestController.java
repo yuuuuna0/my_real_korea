@@ -20,9 +20,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.itwill.my_real_korea.dto.user.User;
+import com.itwill.my_real_korea.dto.user.UserAddInfo;
 import com.itwill.my_real_korea.exception.ExistedUserException;
 import com.itwill.my_real_korea.exception.PasswordMismatchException;
 import com.itwill.my_real_korea.exception.UserNotFoundException;
+import com.itwill.my_real_korea.service.user.UserAddInfoService;
 import com.itwill.my_real_korea.service.user.UserService;
 
 import io.swagger.annotations.ApiOperation;
@@ -32,6 +34,9 @@ public class UserRestController {
 	
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private UserAddInfoService userAddInfoService;
+	
 	
 	
 	//회원 가입 액션
@@ -244,7 +249,6 @@ public class UserRestController {
  */
 
 	
-
 	@ApiOperation(value = "내 프로필 수정 폼 불러오기")
 	@LoginCheck
 	@GetMapping("/user-modify-form")
@@ -278,7 +282,7 @@ public class UserRestController {
 	@ApiOperation(value = "내 프로필 수정 액션")
 	@LoginCheck
 	@PutMapping("/user-modify-form-action")
-	public Map<String, Object> user_modify_action(@ModelAttribute User user, HttpServletRequest request) throws Exception {
+	public Map<String, Object> user_modify_action(@ModelAttribute User user, HttpServletRequest request , @ModelAttribute UserAddInfo userAddInfo) throws Exception {
 		Map<String, Object> resultMap = new HashMap<>();
 		
 		int code = 1;
@@ -289,6 +293,7 @@ public class UserRestController {
 			HttpSession session = request.getSession();
 			User loginUser = userService.findUser(user.getUserId());
 			userService.update(user);
+			userAddInfoService.updateUserAddInfo(userAddInfo);
 			session.setAttribute("loginUser", loginUser);
 			
 		} catch(Exception e) {
@@ -303,6 +308,7 @@ public class UserRestController {
 	}
 
 }
+
 
 
 

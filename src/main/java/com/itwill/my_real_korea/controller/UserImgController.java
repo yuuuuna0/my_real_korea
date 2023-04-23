@@ -1,17 +1,23 @@
 //userImg 수정에 사용되는 controller
 package com.itwill.my_real_korea.controller;
 
+import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -44,28 +50,67 @@ public class UserImgController {
 		this.storageService = storageService;
 	}
 
-	//이제 필요없는 메소드 (testForm)
-	@GetMapping("/uploadForm")
-	public String listUploadedFiles(Model model) throws IOException {
-
-		model.addAttribute("files", storageService.loadAll().map(
-				path -> MvcUriComponentsBuilder.fromMethodName(UserImgController.class,
-						"serveFile", path.getFileName().toString()).build().toUri().toString())
-				.collect(Collectors.toList()));
-
-		return "uploadForm";
+	//이미지 출력
+	@GetMapping(value = "/img/user/{filename}", produces = {MediaType.IMAGE_JPEG_VALUE, MediaType.IMAGE_PNG_VALUE, MediaType.IMAGE_GIF_VALUE})
+	@ResponseBody
+	public Resource showUserImage(@PathVariable String filename) throws MalformedURLException {
+		// 파일 경로에서 파일 이름 추출
+		String fname = new File(filename).getName();
+		// UrlResource로 이미지 파일을 읽어서 @ResponseBody로 이미지 바이너리 반환
+		return new UrlResource("file:" + storageService.getFullPath(fname));
 	}
-
+	
+	
+	/******************** 1. original 파일 이름으로 업로드 ********************/
+	
 	@GetMapping("/files/{filename:.+}")
 	@ResponseBody
 	public ResponseEntity<Resource> serveFile(@PathVariable String filename) {
-
 		Resource file = storageService.loadAsResource(filename);
 		return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION,
 				"attachment; filename=\"" + file.getFilename() + "\"").body(file);
 	}
-
 	
+	@PostMapping("/user-img-modify-action")
+	public String handleFileUpload(@RequestParam("file") MultipartFile file,
+			HttpSession session, RedirectAttributes redirectAttributes) throws Exception {
+		
+		User loginUser = (User) session.getAttribute("loginUser");
+		loginUser = userService.findUser(loginUser.getUserId());
+		System.out.println(">>> loginUser : "+loginUser);
+		storageService.store(file);
+		
+		//userImgUrl 수정
+		String imageUrl = file.getOriginalFilename();
+		System.out.println(">>> imageUrl : "+imageUrl);
+		UserImg userImg = userImgService.findUserImg(loginUser.getUserId());
+		userImg.setUserImgUrl(imageUrl);
+		userImgService.updateUserImg(userImg);
+		redirectAttributes.addFlashAttribute("message",
+				"You successfully uploaded " + file.getOriginalFilename() + "!");
+		
+		return "redirect:/user-view";
+	}
+	
+	/*********************************************************************/	
+
+	/******************** 2. 파일 이름 변경 후 업로드 ********************/
+/*	
+	@GetMapping("/files/{filename:.+}")
+//	@GetMapping("/images/upload/{filename:.+}")
+	@ResponseBody
+	public ResponseEntity<Resource> serveFile(@PathVariable String filename) throws IOException {
+	Resource file = storageService.loadAsResource(filename);
+	String extension = StringUtils.getFilenameExtension(file.getFilename());
+	String newFileName = "user_" + UUID.randomUUID().toString() + "." + extension;
+	File renamedFile = new File(file.getFile().getParent(), newFileName);
+	file.getFile().renameTo(renamedFile);
+	file = storageService.loadAsResource(newFileName);
+	return ResponseEntity.ok()
+		    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"")
+		    .body(file);
+	}
+
 	@PostMapping("/user-img-modify-action")
 	public String handleFileUpload(@RequestParam("file") MultipartFile file,
 	        HttpSession session, RedirectAttributes redirectAttributes) throws Exception {
@@ -73,10 +118,13 @@ public class UserImgController {
 	    User loginUser = (User) session.getAttribute("loginUser");
 	    loginUser = userService.findUser(loginUser.getUserId());
 	    System.out.println(">>> loginUser : "+loginUser);
-		storageService.store(file);
+	    
+	    String extension = StringUtils.getFilenameExtension(file.getOriginalFilename());
+	    String newFileName = "user_" + UUID.randomUUID().toString() + "." + extension;
+	    storageService.store(file, newFileName); // 변경된 파일 이름으로 저장
 
 	    //userImgUrl 수정
-	    String imageUrl = file.getOriginalFilename();
+	    String imageUrl = newFileName; // 변경된 파일 이름으로 userImgUrl 수정
 	    System.out.println(">>> imageUrl : "+imageUrl);
 	    UserImg userImg = userImgService.findUserImg(loginUser.getUserId());
 	    userImg.setUserImgUrl(imageUrl);
@@ -86,7 +134,21 @@ public class UserImgController {
 
 	    return "redirect:/user-view";
 	}
+*/	
+	/*********************************************************************/	
 
+
+	//이제 필요없는 메소드 (testForm)
+	@GetMapping("/uploadForm")
+	public String listUploadedFiles(Model model) throws IOException {
+		model.addAttribute("files", storageService.loadAll().map(
+				path -> MvcUriComponentsBuilder.fromMethodName(UserImgController.class,
+						"serveFile", path.getFileName().toString()).build().toUri().toString())
+				.collect(Collectors.toList()));
+
+		return "uploadForm";
+	}
+	
 	@ExceptionHandler(FileUploadNotFoundException.class)
 	public ResponseEntity<?> handleStorageFileNotFound(FileUploadNotFoundException exc) {
 		return ResponseEntity.notFound().build();

@@ -344,10 +344,10 @@
 		console.log("[[${session.payment}]]");
 	
       function ticket_payment_complete_action() {
-    	  var IMP = window.IMP; 
+    	  let IMP = window.IMP; 
           IMP.init("imp43548145"); 
           
-          var pMethod = "";
+          let pMethod = "";
           if($("#pMethod").val() == 1) {
         	  pMethod = "card";
           }

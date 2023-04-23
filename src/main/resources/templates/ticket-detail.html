@@ -14,7 +14,7 @@
     <link rel="apple-touch-icon" type="image/x-icon" href="img/apple-touch-icon-57x57-precomposed.png">
     <link rel="apple-touch-icon" type="image/x-icon" sizes="72x72" href="img/apple-touch-icon-72x72-precomposed.png">
     <link rel="apple-touch-icon" type="image/x-icon" sizes="114x114" href="img/apple-touch-icon-114x114-precomposed.png">
-    <link rel="apple-touch-icon" type="image/x-icon" sizes="144x144" href="img/apple-touch-icon-144x144-precomposed.png">
+    <link rel="apple-touch-icon" type="image/x-icon" sizes="144xaside 144" href="img/apple-touch-icon-144x144-precomposed.png">
 
     <!-- GOOGLE WEB FONT -->
     <link href="https://fonts.googleapis.com/css?family=Gochi+Hand|Montserrat:300,400,700" rel="stylesheet">
@@ -66,7 +66,7 @@
 					</div>
 					<div class="col-md-4">
 						<div id="price_single_main" class="hotel">
-							 <span th:text="${session.ticket.tiPrice}"></span>
+							 <span th:text="${session.ticket.tiPrice} +'원' "></span>
 						</div>
 					</div>
 				</div>
@@ -230,7 +230,7 @@
 					</div>
 					<!-- End row  -->
 
-
+					<!-- 리뷰 화면 -->
 					<div class="row" id="ticketReviewDiv">
 						<div class="col-lg-12">
 							<h3>Reviews</h3>
@@ -248,53 +248,52 @@
 							<!-- End general_rating -->
 							<div class="row" id="rating_summary">
 								<div class="col-md-6">
-									<ul>
-										<li>Position
-											<div class="rating">
-												<i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile"></i><i class="icon-smile"></i>
-											</div>
-										</li>
-										<li>Comfort
-											<div class="rating">
-												<i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile"></i>
-											</div>
-										</li>
-									</ul>
-								</div>
-								<div class="col-md-6">
-									<ul>
-										<li>Price
-											<div class="rating">
-												<i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile"></i><i class="icon-smile"></i>
-											</div>
-										</li>
-										<li>Quality
-											<div class="rating">
-												<i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i>
-											</div>
-										</li>
-									</ul>
-								</div>
+										<div class="rating">
+											<i class="icon-star voted"></i>
+											<i class="icon-star voted"></i>
+											<i class="icon-star voted"></i>
+											<i class="icon-star"></i>
+											<i class="icon-star"></i>
+										</div>
+									</div>
+								<div class="col-md-6"></div>
 							</div>
 							<!-- End row -->
 							<hr>
 							<div class="review_strip_single"  th:each="ticketReview:${ticketReviewList}">
+							<form th:name="f+${ticketReview.tiReviewNo}">
 								<img src="img/avatar1.jpg" alt="Image" class="rounded-circle">
 								<small th:text="${#dates.format(ticketReview.tiReviewDate, 'yyyy-MM-dd')}"> - 10 March 2015 -</small>
-								<h4 th:text="${ticketReview.user.userId}">Jhon Doe</h4>
+								<h4 th:text="${ticketReview.user.userId}" >Jhon Doe</h4>
 								<!-- 타이틀 추가 -->
-								<h5 th:text="${ticketReview.tiReviewTitle}"></h5>
-								<p th:text="${ticketReview.tiReviewContent}">
-									<!--리뷰내용-->
-									"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed a lorem quis neque interdum consequat ut sed sem. Duis quis tempor nunc. Interdum et malesuada fames ac ante ipsum primis in faucibus."
-								</p>
-								<div class="rating">
-									<i class="icon-smile voted"></i>
-									<i class="icon-smile voted"></i>
-									<i class="icon-smile voted"></i>
-									<i class="icon-smile"></i>
-									<i class="icon-smile"></i>
+								<h5 th:text="${ticketReview.tiReviewTitle}" name="tiReviewTitle"></h5>
+								<div class="col-md-3" th:if="${session.loginUser!=null && session.loginUser.userId == ticketReview.user.userId}"> 
+								 <!-- <button th:value="${ticketReview.tiReviewNo}" id="modifyTiReviewBtn" name="modifyTiReviewNo">수정</button>  -->
+								<!--  --> <button type="button" th:value="${ticketReview.tiReviewNo}" th:tiReviewNo="${ticketReview.tiReviewNo}" class="modifyTiReviewBtn">수정</button>
+        						 <button type="button" th:value="${ticketReview.tiReviewNo}" name="deleteTiReviewBtn">삭제</button>
 								</div>
+								<p th:text="${ticketReview.tiReviewContent}" th:name="tiReviewContent">
+									<!--리뷰내용-->
+									"Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+									Sed a lorem quis neque interdum consequat ut sed sem.
+									Duis quis tempor nunc. Interdum et malesuada fames ac ante ipsum primis in
+									faucibus."
+								</p>
+								
+								<!-- DB -->
+								 <div th:if="${ticketReview.tiReviewImg}">
+  								  <img th:src="${ticketReview.tiReviewImg}" width="20%" height="30%" style="position: sticky;">
+								</div>	
+								<!-- <p> <img src="" id="result-image"> </p> -->
+
+								<div class="rating">
+									<i class="icon-star voted"></i>
+									<i class="icon-star voted"></i>
+									<i class="icon-star voted"></i>
+									<i class="icon-star"></i>
+									<i class="icon-star"></i>
+								</div>
+								</form>
 							</div>
 							<!-- End review strip -->
 						</div>
@@ -481,8 +480,17 @@
 							<div class="col-md-6">
 								<div class="form-group">
 									<input readonly type="text" name="userId"  id="userId" class="form-control">
-									<input type="hidden" id="hiddenTiNo" class="form-control">
-									 
+									<input type="hidden" id="tiReviewNo" class="form-control" th:value="${tiReviewNo}">
+									<input type="hidden" id="hiddenTiNo" class="form-control" th:value="${session.ticket.tiNo}">
+									
+									<div>
+									 	
+									 	<input type="hidden" id="img" name="img">
+									 	<!-- 새 파일 -->
+									 	<br>
+									 	<!-- 파일 업로드 새 파일 값 value 넣기?-->
+              						<input type="file" id="tiReviewImg" value={{tiReviewImg}}>
+         						   </div>
 								</div>
 							</div>
 						</div>
@@ -517,13 +525,18 @@
 							<textarea name="tiReviewContent" id="tiReviewContent" class="form-control" style="height:100px" placeholder="내용을 적어주세요"></textarea>
 						</div>
 						<!--리뷰 버튼-->
+						<button type="button" class="btn_1" id="ticket-review-modify-action">수정</button>
 						<button type="button" class="btn_1" id="ticket-review-action">submit</button>
+						
 					</form>
 				</div>
 			</div>
 		</div>
 	</div>
 	<!-- End modal review -->
+	
+	
+	<!--모달 수정 -->
 
 	<!-- Common scripts -->
 	<script src="js/jquery-2.2.4.min.js"></script>
@@ -585,14 +598,17 @@
 		}
 	});
 	</script>
+	
+
+	
 
 	<!--Review modal validation -->
 	<script src="assets/validate.js"></script>
-	<!-- 리뷰 템플릿 -->	
+	<!-- 리뷰 템플릿 handlebar -->
 	 <script id="ticketReview-template" type="text/x-handlebars-template">
 	
 	{{#each data}}
-	<div class="modal fade" id="myReview" tabindex="1" role="dialog" aria-labelledby="myReviewLabel" aria-hidden="true" style="z-index:100000;">
+		<div class="modal fade" id="myReview" tabindex="1" role="dialog" aria-labelledby="myReviewLabel" aria-hidden="true" style="z-index:100000;">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -609,7 +625,15 @@
 								<div class="form-group">
 									<input readonly type="text" name="userId"  id="userId" class="form-control">
 									<input type="hidden" id="hiddenTiNo" class="form-control">
-									 
+									
+									<div>
+									 	<!-- 기존 파일
+									 	<input type="hidden" id="img" name="img"> -->
+									 	<!-- 새 파일 -->
+									 	<br>
+									 	<!-- 파일 업로드 새 파일 값 value 넣기?-->
+              						<input type="file" id="tiReviewImg" value={{tiReviewImg}}>
+         						   </div>
 								</div>
 							</div>
 						</div>
@@ -617,7 +641,7 @@
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
-									<input name="tiReviewTitle" id="tiReviewTitle" type="text" placeholder="제목을 적어주세요" class="form-control">
+									<input name="tiReviewTitle" id="tiReviewTitle" value="{{tiReviewTitle}}" type="text" placeholder="제목을 적어주세요" class="form-control">
 								</div>
 							</div>
 						</div>
@@ -641,17 +665,19 @@
 						</div>
 						<!-- End row -->
 						<div class="form-group">
-							<textarea name="tiReviewContent" id="{{tiReviewCount}}" class="form-control" style="height:100px" placeholder="내용을 적어주세요"></textarea>
+							<textarea name="tiReviewContent" id="tiReviewContent" value="{{tiReviewContent}}"class="form-control" style="height:100px" placeholder="내용을 적어주세요"></textarea>
 						</div>
 						<!--리뷰 버튼-->
+						<button type="button" class="btn_1" id="ticket-review-modify-action">수정</button>
 						<button type="button" class="btn_1" id="ticket-review-action">submit</button>
 					</form>
 				</div>
 			</div>
 		</div>
-	</div>
 {{/each}}
 	</script>
+	
+	
 	
 </body>
 

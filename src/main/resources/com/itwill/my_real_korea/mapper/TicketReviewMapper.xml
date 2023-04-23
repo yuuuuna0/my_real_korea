@@ -20,7 +20,7 @@
 
     <!--리뷰 보기 - 페이징 -->
     <select id="selectByTicketReviewNo" parameterType="java.lang.Integer" resultMap="ticketReviewResultMap">
-                 SELECT * FROM TICKET_REVIEW WHERE TI_NO=#{tiNo}
+                 SELECT * FROM TICKET_REVIEW WHERE TI_NO=#{tiNo} ORDER BY TI_REVIEW_NO DESC
     </select>
     <!--내 리뷰 보기 - 페이징 -->
     <select id="selectByTicketReviewUser" parameterType="java.lang.String" resultMap="ticketReviewResultMap">
@@ -29,9 +29,12 @@
 
     <!--리뷰 수정-->
     <update id="updateTicketReview" parameterType="com.itwill.my_real_korea.dto.ticket.TicketReview">
-                UPDATE TICKET_REVIEW SET TI_REVIEW_TITLE=#{tiReviewTitle},
-                                         TI_REVIEW_CONTENT=#{tiReviewContent},
-                                         TI_REVIEW_IMG=#{tiReviewImg}
+                UPDATE TICKET_REVIEW
+                SET TI_REVIEW_TITLE=#{tiReviewTitle},
+                	TI_REVIEW_CONTENT=#{tiReviewContent}
+                	<if test='!tiReviewImg.isEmpty()'>
+                	, TI_REVIEW_IMG=#{tiReviewImg}
+                	</if>
                 WHERE TI_REVIEW_NO=#{tiReviewNo}
     </update>
 
@@ -73,6 +76,15 @@
                     )
                     <![CDATA[WHERE IDX>=#{pageStart} AND IDX <=#{pageEnd}]]>
     </select> -->
-    
+    <update id="ticketReviewImgNull" parameterType="java.lang.Integer">
+    	 UPDATE TICKET_REVIEW SET TI_REVIEW_IMG=null WHERE TI_REVIEW_NO=#{tiReviewNo}
+    </update>
+    <update id="ticketReviewImg" parameterType="java.util.Map">
+        UPDATE TICKET_REVIEW SET TI_REVIEW_IMG=#{tiReviewImg} WHERE TI_REVIEW_NO=#{tiReviewNo}
+    </update>
+    <!--리뷰 사진 업로드 -->
+    <update id="tiReviewImgUpload" parameterType="java.util.Map">
+        UPDATE TICKET_REVIEW SET TI_REVIEW_IMG_UPLOAD=#{tiReviewImgUpload} WHERE TI_REVIEW_NO=#{tiReviewNo}
+    </update>
 
 </mapper>

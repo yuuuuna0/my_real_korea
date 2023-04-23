@@ -33,7 +33,10 @@ public class TicketReviewDaoImpl implements TicketReviewDao{
     public int deleteTicketReview(int tiReviewNo) {
         return ticketReviewMapper.deleteTicketReview(tiReviewNo);
     }
-	@Override
+
+
+
+    @Override
 	public List<TicketReview> selectByTicketReviewNo(int tiNo) {
 		return ticketReviewMapper.selectByTicketReviewNo(tiNo);
 	}
@@ -72,4 +75,19 @@ public class TicketReviewDaoImpl implements TicketReviewDao{
         return ticketReviewMapper.selectByTicketReviewUser(ticketReviewUserList);
     }
     */
+	
+    @Override
+    public int ticketReviewImg(String tiReviewImg, int tiReviewNo) {
+        return ticketReviewMapper.ticketReviewImg(tiReviewImg, tiReviewNo);
+    }
+
+    @Override
+    public int tiReviewImgUpload(String tiReviewImgUpload, int tiReviewNo) {
+        return ticketReviewMapper.tiReviewImgUpload(tiReviewImgUpload, tiReviewNo);
+    }
+	@Override
+	public int ticketReviewImgNull(int tiReviewNo) {
+		return ticketReviewMapper.ticketReviewImgNull(tiReviewNo);
+	}
+
 }

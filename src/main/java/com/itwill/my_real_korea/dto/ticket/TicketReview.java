@@ -18,6 +18,7 @@ public class TicketReview {
     private String tiReviewTitle;
     private String tiReviewContent;
     private String tiReviewImg;
+    private String tiReviewImgUpload;   //수정된 이미지
     private int tiReviewStar;
     private int tiNo;
     private User user;

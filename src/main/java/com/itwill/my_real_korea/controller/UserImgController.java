@@ -59,18 +59,10 @@ public class UserImgController {
 		// UrlResource로 이미지 파일을 읽어서 @ResponseBody로 이미지 바이너리 반환
 		return new UrlResource("file:" + storageService.getFullPath(fname));
 	}
-	
+
 	
 	/******************** 1. original 파일 이름으로 업로드 ********************/
 	/*
-	
-	@GetMapping("/files/{filename:.+}")
-	@ResponseBody
-	public ResponseEntity<Resource> serveFile(@PathVariable String filename) {
-		Resource file = storageService.loadAsResource(filename);
-		return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION,
-				"attachment; filename=\"" + file.getFilename() + "\"").body(file);
-	}
 	
 	@PostMapping("/user-img-modify-action")
 	public String handleFileUpload(@RequestParam("file") MultipartFile file,
@@ -98,21 +90,6 @@ public class UserImgController {
 
 	/******************** 2. 파일 이름 변경 후 업로드 ********************/
 	
-	@GetMapping("/files/{filename:.+}")
-//	@GetMapping("/images/upload/{filename:.+}")
-	@ResponseBody
-	public ResponseEntity<Resource> serveFile(@PathVariable String filename) throws IOException {
-	Resource file = storageService.loadAsResource(filename);
-	String extension = StringUtils.getFilenameExtension(file.getFilename());
-	String newFileName = "user_" + UUID.randomUUID().toString() + "." + extension;
-	File renamedFile = new File(file.getFile().getParent(), newFileName);
-	file.getFile().renameTo(renamedFile);
-	file = storageService.loadAsResource(newFileName);
-	return ResponseEntity.ok()
-		    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"")
-		    .body(file);
-	}
-
 	@PostMapping("/user-img-modify-action")
 	public String handleFileUpload(@RequestParam("file") MultipartFile file,
 	        HttpSession session, RedirectAttributes redirectAttributes) throws Exception {
@@ -151,6 +128,25 @@ public class UserImgController {
 		return "uploadForm";
 	}
 	
+	
+	/*
+	
+	//파일 다운로드
+	@GetMapping("/files/{filename:.+}")
+	@ResponseBody
+	public ResponseEntity<Resource> serveFile(@PathVariable String filename) throws IOException {
+	Resource file = storageService.loadAsResource(filename);
+	String extension = StringUtils.getFilenameExtension(file.getFilename());
+	String newFileName = "user_" + UUID.randomUUID().toString() + "." + extension;
+	File renamedFile = new File(file.getFile().getParent(), newFileName);
+	file.getFile().renameTo(renamedFile);
+	file = storageService.loadAsResource(newFileName);
+	return ResponseEntity.ok()
+		    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"")
+		    .body(file);
+	}
+	
+	*/
 	@ExceptionHandler(FileUploadNotFoundException.class)
 	public ResponseEntity<?> handleStorageFileNotFound(FileUploadNotFoundException exc) {
 		return ResponseEntity.notFound().build();

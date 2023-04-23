@@ -47,7 +47,13 @@
 	WHERE ui.user_id = #{userId}
 </update>
 	 -->
-	
+	 
+	<!-- 4-1. 유저 선택 정보 수정 -->
+	<update id="updateUserAddInfo" parameterType="com.itwill.my_real_korea.dto.user.UserAddInfo">
+		update user_add_info 
+		set introduce=#{introduce},alcohol=#{alcohol},smoking=#{smoking}
+		where user_id=#{userId}
+	</update>
 	
 	
 	<!-- 5. 회원 탈퇴 -->

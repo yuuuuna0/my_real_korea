@@ -120,7 +120,8 @@
 											</a>
 										</figure>
 											<!-- 지역 보이게하기 -->
-											<div class="item-options clearfix"  style="top:10px; font:bold; color:red; opacity:100; visibility:visible; ">
+											<div class="item-options clearfix"  style="top:10px; font-weight:bold; color:#e04f67; opacity:100; visibility:visible; background-color:white; border-radius: 5px; width:53px; height:23px; ">
+											<span class="icon-location-2"></span>
 											<a th:text="${tripBoard.city.cityName}" class="AccompanyWebCard__LocationText-sc-ws5mjw-18 bFxAPJ">
                                             </a>
 										   </div> 
@@ -209,55 +210,7 @@
 						<!-- End widget -->
 						<hr>
 						<a class="btn_1" href="tripboard-write-form" role="button">동행게시판 글쓰기</a>
-						<hr>
-						<div class="widget">
-							<h4>Filter</h4>
-							<input type="text" id="range" name="range" value="">
-						</div>
-						<!-- End widget -->
-						<hr>
-						<div class="widget related-products">
-							<h4>Top Related </h4>
-							<div class="post">
-								<figure class="post-thumb">
-									<a href="#"><img src="img/products/thumb-1.jpg" alt="">
-									</a>
-								</figure>
-								<h5><a href="#">Grunge Fashion</a></h5>
-								<div class="rating">
-									<i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star-empty"></i>
-								</div>
-								<div class="price">
-									$ 15.00
-								</div>
-							</div>
-							<div class="post">
-								<figure class="post-thumb">
-									<a href="#"><img src="img/products/thumb-2.jpg" alt="">
-									</a>
-								</figure>
-								<h5><a href="#">Office Kit</a></h5>
-								<div class="rating">
-									<i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star-empty"></i>
-								</div>
-								<div class="price">
-									$ 15.00
-								</div>
-							</div>
-							<div class="post">
-								<figure class="post-thumb">
-									<a href="#"><img src="img/products/thumb-3.jpg" alt="">
-									</a>
-								</figure>
-								<h5><a href="#">Crime &amp; Punishment</a></h5>
-								<div class="rating">
-									<i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star-empty"></i>
-								</div>
-								<div class="price">
-									$ 15.00
-								</div>
-							</div>
-						</div>
+						
 					</aside>
 				</div>
 				<!--Sidebar-->
@@ -344,7 +297,8 @@
 					</a>
 				</figure>
 			<!-- 지역보여주기 -->
-			<div class="item-options clearfix"  style="top:10px; font:bold; color:red; opacity:100; visibility:visible; ">
+			<div class="item-options clearfix"  style="top:10px; font-weight:bold; color:#e04f67; opacity:100; visibility:visible; background-color:white; border-radius: 5px; width:53px; height:23px; ">
+				<span class="icon-location-2"></span>
 				<a href ="tripboard-detail?tBoNo={{tbono}}" class="AccompanyWebCard__LocationText-sc-ws5mjw-18 bFxAPJ">{{city.cityName}}</a>
 			</div>   
 			</div>

@@ -158,7 +158,9 @@
 									</li>
 								</ul>
 							</div>
-							
+							<br>
+							<br>
+							<br>
 							
 							<!-- 동행게시판 내용 들어가는 곳 -->
 							<div>
@@ -167,15 +169,17 @@
 									<li><p th:text="${tripBoard.tBoContent}" style="white-space:pre-line;"></p></li>
 								</ul>
 							</div>
-							
+							<br>
+							<br>
+							<br>
 							<div class="post-left" style="padding-bottom:20px;">
 									<ul>
 										<li style="padding:5px 0px;">
-										 <i class = "icon-tag"></i>태그-#<a th:text="${tripBoard.hashtag}"></a>
+										 <i class = "icon-tag"></i><a th:text="${tripBoard.hashtag}"></a>
 										</li>
 										
 										<li style="padding:5px 0px;">
-											<i class="icon-comment"></i>댓글<span th:text="${selectCommentCount}" style="padding:0px 10px 0px 10px;"></span>
+											<i class="icon-comment"></i><span th:text="${selectCommentCount}" style="padding:0px 10px 0px 10px;"></span>
 										</li>
 									</ul>
 								</div>
@@ -251,33 +255,24 @@
 
 				<aside class="col-lg-3 add_bottom_30">
 
-					<div class="widget">
-	
-						<!-- /input-group -->
-					</div>
-					<!-- End Search -->
-					<hr>
 					<div class="widget" id="cat_blog">
-						<h4>Categories</h4>
+						<h4>CLICK</h4>
 						<ul>
-						<li><a href="tour-list">투어 보러가기</a></li>
-						<li><a href="ticket-list">티켓 보러가기</a></li>
-						<li><a href="tripboard-list">여행 동행 찾기</a></li>
-						<li><a href="freeboard-list">자유게시판</a></li>
+							<li><a href="tripboard-list">목록으로 돌아가기</a>
+							</li>
 						</ul>
 					</div>
-					<!-- End widget -->
-
-					
-
-					<div class="widget">
-						
-					</div>
-					<!-- End widget -->
 					<hr>
+				
 					<div class="widget tags">
-						
+						<h4>Tags</h4>
+						<a href="ticket-list">티켓</a>
+						<a href="tour-list">투어</a>
+						<a href="freeboard-list">자유게시판</a>
+						<a href="notice-list">공지사항</a>
+						<a href="user-view">마이페이지</a>
 					</div>
+					<hr>
 					<!-- End widget -->
 
 				</aside>

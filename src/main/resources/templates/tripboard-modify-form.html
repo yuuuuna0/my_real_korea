@@ -101,8 +101,8 @@
 	<section class="parallax-window" data-parallax="scroll" data-image-src="img/bg_blog.jpg" data-natural-width="1400" data-natural-height="470">
 		<div class="parallax-content-1">
 			<div class="animated fadeInDown">
-				<h1>Tour Blog</h1>
-				<p>Ridiculus sociosqu cursus neque cursus curae ante scelerisque vehicula.</p>
+				<h1>동행게시판 수정</h1>
+				<p>작성한 글을 수정해보아요.</p>
 			</div>
 		</div>
 	</section>
@@ -204,13 +204,13 @@
 									<div class="col-md-6">
 										<div class="form-group">
 											<label><i class="icon-calendar-7"></i> 여행 시작일</label>
-											<input class="start-date-pick form-control" data-date-format="yyyy-mm-dd, D" type="text" id="tBoStartDate" name="tBoStartDate" th:value="${#dates.format(tripBoard.tBoStartDate, 'yyyy-MM-dd')}" >
+											<input class="start-date-pick form-control" data-date-format="yyyy-mm-dd" type="date" id="tBoStartDate" name="tBoStartDate" th:value="${#dates.format(tripBoard.tBoStartDate, 'yyyy-MM-dd')}" >
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
 											<label><i class="icon-calendar-7"></i> 여행 종료일</label>
-											<input class="end-date-pick form-control" data-date-format="yyyy-mm-dd, D" type="text" id="tBoEndDate" name="tBoEndDate" th:value="${#dates.format(tripBoard.tBoEndDate, 'yyyy-MM-dd')}">
+											<input class="end-date-pick form-control" data-date-format="yyyy-mm-dd" type="date" id="tBoEndDate" name="tBoEndDate" th:value="${#dates.format(tripBoard.tBoEndDate, 'yyyy-MM-dd')}">
 										</div>
 									</div>
 								</div>
@@ -236,7 +236,7 @@
 									<div class="col-3">
 										<div class="form-group">
 											<label class="switch-light switch-ios pull-right">
-												<input type="checkbox" name="tBoStatus" id="tBoStatus" checked th:value="${tripBoard.tBoStatus}">
+												<input type="checkbox" name="tBoStatus" id="tBoStatus" th:value="${tripBoard.tBoStatus}" checked >
 													<span>
 													<span>모집완료</span>
 													<span>모집중</span>
@@ -278,66 +278,24 @@
 				<!-- end col-lg-9 -->
 
 				<aside class="col-lg-3 add_bottom_30">
-
-					<div class="widget">
-						<div class="input-group">
-							<input type="text" class="form-control" placeholder="Search...">
-							<span class="input-group-btn">
-						<button class="btn btn-default" type="button" style="margin-left:0;"><i class="icon-search"></i></button>
-						</span>
-						</div>
-						<!-- /input-group -->
-					</div>
-					<!-- End Search -->
-					<hr>
 					<div class="widget" id="cat_blog">
-						<h4>Categories</h4>
+						<h4>CLICK</h4>
 						<ul>
-							<li><a href="#">Places to visit</a>
-							</li>
-							<li><a href="#">Top tours</a>
-							</li>
-							<li><a href="#">Tips for travellers</a>
-							</li>
-							<li><a href="#">Events</a>
+							<li><a href="tripboard-list">목록으로 돌아가기</a>
 							</li>
 						</ul>
 					</div>
-					<!-- End widget -->
-
 					<hr>
-
-					<div class="widget">
-						<h4>Recent post</h4>
-						<ul class="recent_post">
-							<li>
-								<i class="icon-calendar-empty"></i> 16th July, 2020
-								<div><a href="#">It is a long established fact that a reader will be distracted </a>
-								</div>
-							</li>
-							<li>
-								<i class="icon-calendar-empty"></i> 16th July, 2020
-								<div><a href="#">It is a long established fact that a reader will be distracted </a>
-								</div>
-							</li>
-							<li>
-								<i class="icon-calendar-empty"></i> 16th July, 2020
-								<div><a href="#">It is a long established fact that a reader will be distracted </a>
-								</div>
-							</li>
-						</ul>
-					</div>
-					<!-- End widget -->
-					<hr>
+				
 					<div class="widget tags">
 						<h4>Tags</h4>
-						<a href="#">Lorem ipsum</a>
-						<a href="#">Dolor</a>
-						<a href="#">Long established</a>
-						<a href="#">Sit amet</a>
-						<a href="#">Latin words</a>
-						<a href="#">Excepteur sint</a>
+						<a href="ticket-list">티켓</a>
+						<a href="tour-list">투어</a>
+						<a href="freeboard-list">자유게시판</a>
+						<a href="notice-list">공지사항</a>
+						<a href="user-view">마이페이지</a>
 					</div>
+					<hr>
 					<!-- End widget -->
 
 				</aside>
@@ -443,7 +401,7 @@
 
 	<!-- Date and time pickers -->
 	<script>
-		$('#tBoStartDate').datepicker('setDate', 'today');
+		$('input.date-pick').datepicker('setDate', 'today');
 	</script>
 	
 	
@@ -470,15 +428,14 @@
 
 	<!-- Date and time pickers -->
 	<script>
-		$('#tBoEndDate').datepicker('setDate', 'today');
+		$('input.date-pick').datepicker('setDate', 'today');
 	</script>
 	<!-- 
 	<script>
 	function checkedStatus() {
 		if(document.f.tBoStatus.checked == true) {
 			document.f.tBoStatus.value == '0';
-		}
-		if(document.f.tBoStatus.checked == false) {
+		}else {
 			document.f.tBoStatus.value == '1';
 		}
 	}

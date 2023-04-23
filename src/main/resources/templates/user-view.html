@@ -43,7 +43,7 @@
 <script type="text/javascript">
 
 	function userModify() {
-		document.f.action = "user-modify";
+		document.f.action = "user-modify-plain";
 		document.f.submit();
 	}
 	
@@ -135,8 +135,8 @@
 
 <form method="post" name="f" id="user-detail-form">
 					<div class="row">
-								<img th:src="@{img/user/{userImgUrl}(userImgUrl=${loginUser.userImg.userImgUrl})}" 
-								alt="Image" class="img-fluid styled profile_pic"/>
+								<img th:src="@{upload-dir/{userImgUrl}(userImgUrl=${loginUser.userImg.userImgUrl})}" 
+								alt="Image" class="img-fluid styled profile_pic" width = "200px"/>
 								<!-- 
 								<img src="img/defaultImg.png" alt="Image" class="img-fluid styled profile_pic" width = "200px">
 								 -->
@@ -178,12 +178,16 @@
 					</ul>
 				</div>
 				
+				<ul id="profile_summary" th:object="${loginUser.userImg}">
+					<li>프로필 이미지 <span th:text="*{userImgUrl}"></span>
+					</li>
+				</ul>
 
 						
-					<input id="btn-user-modify-form" value="프로필 수정" class="btn_1 green" type="button"> 
+					<input id="btn-user-modify-form" value="프로필 수정 (REST)" class="btn_1 green" type="button"> 
 					<button class="btn_1 green" type="button" onclick="userRemove();">회원 탈퇴</button>	
 						</form>
-						<button class="btn_1 green" type="button" onclick="userModify();">프로필 수정 pg</button>
+						<button class="btn_1 green" type="button" onclick="userModify();">프로필 수정 (일반)</button>
 						
 <!-- 페이지 로드 하는 폼  
 <div class="row">
@@ -339,24 +343,34 @@ Handlebars.registerHelper('ifEquals', function(arg1, arg2, options) {
     return (arg1 == arg2) ? options.fn(this) : options.inverse(this);
 });
 </script>	 -->	
-
+<!-- 
+ -->
 <script id="user-modify-form-template" type="text/x-handlebars-template">
 {{#each data}}
-<form method="post" name="f" id="">
 
 		<div class="row" >
-		<img src="img/defaultImg.png" alt="Image" class="img-fluid styled profile_pic" width = "200px" style="margin-top: 0;">
+		<img th:src="@{img/user/{userImgUrl}(userImgUrl=${loginUser.userImg.userImgUrl})}" alt="Image" class="img-fluid styled profile_pic"/>
 		</div>
 		<div style="text-align: center;">
 		 <h3 style="margin-top: 0;"> <a>{{userId}}</a></h3>
-		<button class="btn_1 green" style="width: 140px; margin-top: 15px;">프로필 사진 수정</button>
 <ul id="profile_summary_user">
 			<li>프로필 이미지 {{userImg.userImgUrl}} </li>
 		</ul>
-					
 		</div>
 		
+	<form method="POST" enctype="multipart/form-data" name="i">
+		<div>
+			<h4>프로필 이미지</h4>
+			<ul id="profile_summary">
+				<li>File to upload:</li>
+				<li><input type="file" name="file" /></li>
+			</ul>
+			<button type="submit" class="btn_1 green" id="js-upload-submit" onclick="modifyImg();">이미지 수정</button>
+		</div>
+	</form>		
+		
 							<div class="col-md-12">
+<form method="post" name="f" id="">
 		<input type="hidden"  id="userId" value="{{userId}}" >
 		<input type="hidden" id="password1" value="{{password}}">
 
@@ -410,6 +424,7 @@ Handlebars.registerHelper('ifEquals', function(arg1, arg2, options) {
 	<input id="btn-user-modify-action" value="수정 완료" class="btn_1 green" type="button"> 
 	<input value="수정 취소" class="btn_1 green" type="button" onclick="userView();">
 	</form>
+	</div>
 {{/each}}
 </script> 
 
@@ -430,6 +445,7 @@ Handlebars.registerHelper('ifEquals', function(arg1, arg2, options) {
 		$('.wishlist_close_admin').on('click', function (c) {
 			$(this).parent().parent().parent().fadeOut('slow', function (c) {});
 		});
+
 	</script>
 </body>
 

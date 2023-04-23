@@ -51,7 +51,7 @@ public class UserImgController {
 	}
 
 	//이미지 출력
-	@GetMapping(value = "/img/user/{filename}", produces = {MediaType.IMAGE_JPEG_VALUE, MediaType.IMAGE_PNG_VALUE, MediaType.IMAGE_GIF_VALUE})
+	@GetMapping(value = "upload-dir/{filename}", produces = {MediaType.IMAGE_JPEG_VALUE, MediaType.IMAGE_PNG_VALUE, MediaType.IMAGE_GIF_VALUE})
 	@ResponseBody
 	public Resource showUserImage(@PathVariable String filename) throws MalformedURLException {
 		// 파일 경로에서 파일 이름 추출
@@ -62,6 +62,7 @@ public class UserImgController {
 	
 	
 	/******************** 1. original 파일 이름으로 업로드 ********************/
+	/*
 	
 	@GetMapping("/files/{filename:.+}")
 	@ResponseBody
@@ -92,10 +93,11 @@ public class UserImgController {
 		return "redirect:/user-view";
 	}
 	
+	*/
 	/*********************************************************************/	
 
 	/******************** 2. 파일 이름 변경 후 업로드 ********************/
-/*	
+	
 	@GetMapping("/files/{filename:.+}")
 //	@GetMapping("/images/upload/{filename:.+}")
 	@ResponseBody
@@ -134,7 +136,7 @@ public class UserImgController {
 
 	    return "redirect:/user-view";
 	}
-*/	
+
 	/*********************************************************************/	
 
 

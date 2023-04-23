@@ -10,7 +10,11 @@ public interface FileUploadService {
 
 	void init();
 
+	// 1. original 파일 이름으로 업로드
 	void store(MultipartFile file);
+	
+	// 2. 파일 이름 변경 후 업로드
+	void store(MultipartFile file, String newFileName);
 
 	Stream<Path> loadAll();
 

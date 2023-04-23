@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -291,22 +292,21 @@ public class UserController {
 	}
 	
 	
-	/*
 	//회원 정보 수정 폼
 	@LoginCheck
-	@PostMapping("/user-modify")
+	@PostMapping("/user-modify-plain")
 	public String user_modify(HttpServletRequest request) throws Exception {
 		HttpSession session = request.getSession();
 		User loginUser = (User) session.getAttribute("loginUser");
 		loginUser = userService.findUser(loginUser.getUserId());
 		request.setAttribute("loginUser", loginUser);
-		return "user-modify";
+		return "user-modify-plain";
 	}
 	 
 	
 	//회원 정보 수정 액션
 	@LoginCheck
-	@PostMapping("user-modify-action")
+	@PostMapping("user-modify-action-plain")
 	public String user_modify_action(@ModelAttribute User user,HttpServletRequest request) throws Exception {
 		HttpSession session = request.getSession();
 		userService.update(user);
@@ -316,7 +316,6 @@ public class UserController {
 //		System.out.println(">> loginUser : "+loginUser);
 		return "redirect:user-view";
 	}
-	*/
 	
 	//회원 탈퇴 액션
 	@LoginCheck

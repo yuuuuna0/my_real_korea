@@ -3,6 +3,7 @@ import * as Request from "./request.js";
 // JSON.stringify() => 객체를 string 으로, JSON.parse() => string 을 객체로 만듦 
 
 /********* function ********/
+//조건 넣어서 리스트 출력하기
 function selectedTourList(){
 	let keyword=$('#tour-search-keyword').val();
 	let cityNo;
@@ -42,6 +43,19 @@ function selectedTourList(){
 							}
 						},async);
 };
+// 로그인상태면 모달창 뜰 때  내 이름에 아이디 넣어주기
+$(document).on('show.bs.modal','#myReviewModal',function(){
+	let userId=$('#myReviewBtn').data('id');
+	  $('#myReviewModal').find('#userIdM').val(userId);
+});
+//모달창 닫힐 때 내용 다 지워주기
+$(document).on('click','#myReviewBtn',function(){
+	$('#toReviewNoM').val('0');
+	$('#toReviewTitleM').val('');
+	$('#toReviewStarM').val('');
+	$('#toReviewContentM').val('');
+});
+
 
 //1. 검색, 필터, 정렬 한 투어리스트 
 $(document).on('change','#sort-by,#city-checkbox,#toType-checkbox',selectedTourList);
@@ -63,17 +77,14 @@ $('input[type="checkbox"][name="toType-checkbox"]').click(function(){
 });
 
 //3. 투어리뷰 남기기
-// 3-1. 로그인상태면 모달 내 이름에 아이디 넣어주기
-$(document).on('show.bs.modal','#myReviewModal',function(){
-	let userId=$('#myReviewBtn').data('id');
-	  $('#myReviewModal').find('#userIdM').val(userId);
-});
-//3-2. 리뷰남기기 버튼 클릭시
 $(document).on('click','#submitReviewBtn',function(e){
 
 	/****************** 1. form으로 전달하는 방법 *************/
-	let form=$('tourReviewF');
-	if(/*form.get(0).checkValidity()===*/false){
+	let form=$('#tourReviewF');
+	let toReviewNo=$('#toReviewNoM').val();		//--> 왜자꾸 undefined?
+	let url;
+	let method;
+	if(form.get(0).checkValidity()===false){
 		//폼 유효성 검사 실패시 
 		form.find(':invalid').first().focus();	//폼 유효성 검사 실패한 요소에 커서 두기
 		//이벤트 중지
@@ -81,12 +92,17 @@ $(document).on('click','#submitReviewBtn',function(e){
 		e.stopPropagation();
 	} else{
 		//폼 유효성 검사 성공시
-		let url="tour-review-action";
-		let method="POST";
+		if(toReviewNo==0){
+			url="tour-review-action";
+			method="POST";	
+		} else{
+			url="tour-review-update";
+			method="PUT";	
+		}
 		let async=true;
 		let formData=new FormData();
 		let toReviewImg;
-		
+		formData.append('toReviewNo',toReviewNo);
 		formData.append('toNo',$('#toNoM').val());
 		formData.append('userId',$('#userIdM').val());
 		formData.append('toReviewTitle',$('#toReviewTitleM').val());
@@ -104,7 +120,6 @@ $(document).on('click','#submitReviewBtn',function(e){
 			formData.append('toReviewImg',toReviewImg);
 		}
 	$('#myReviewModal').modal('hide');	//모달 창 닫기
-	$('#tourReviewF')[0].reset();
 	
 	$.ajax({
 		method:method,
@@ -125,6 +140,7 @@ $(document).on('click','#submitReviewBtn',function(e){
 		},
 		async:async
 	});
+		//$('#toReviewNoM').val("0");
 		e.preventDefault();	////폼 제출 방지
 	}
 	
@@ -146,6 +162,7 @@ $(document).on('click','#submitReviewBtn',function(e){
 	};
 	******************************************************/
 });
+
 	
 //4. 투어리뷰 삭제
 $(document).on('click',"button[name='deleteToReview']",function(e){
@@ -171,51 +188,22 @@ $(document).on('click',"button[name='deleteToReview']",function(e){
 	e.preventDefault();
 });
 
-//4. 투어리뷰 수정
+//5. 투어리뷰 수정
+//4-1. 수정 모달 띄우기
 $(document).on('click',"button[name='updateToReview']",function(e){
-	$('#myReviewModal').modal('show');
-	
-	let selectedForm=e.target.closest('form');
 	e.preventDefault();
-	console.log(selectedForm);
-	
-	
+	$('#myReviewModal').modal('show');
+	let selectedForm=e.target.closest('form');
 	let toReviewTitle=selectedForm.querySelector('#toReviewTitle').textContent;
 	let toReviewStar=selectedForm.querySelector('#toReviewStar').value;
-	let toReviewContent=selectedForm.querySelector('#toReviewContent').textContent;
-	
-	console.log(toReviewTitle);
 	console.log(toReviewStar);
-	console.log(toReviewContent);
+	let toReviewContent=selectedForm.querySelector('#toReviewContent').textContent;
 	
 	$('#toReviewTitleM').val(toReviewTitle);
 	$('#toReviewStarM').val(toReviewStar);
 	$('#toReviewContentM').text(toReviewContent);
+	$('#toReviewNoM').val(e.target.value);
 	
 	e.preventDefault();
 });
 
-
-
-/*
-//1. 투어 검색하기
-$(document).on('click','#tour-search-btn',function(e){
-	let keyword=$('#tour-search-keyword').val();
-	let url=`tour-list-ajax/${keyword}`;
-	let method='GET';
-	let contentType='application/json;charset=UTF-8';
-	let sendData={};
-	let async= true;
-	//sendData -----> JSON.stringfy() => 객체를 string으로, JSON.parse() => string을 객체로 만듦
-	Request.ajaxRequest(url,method,contentType,sendData,
-						function(resultJson){
-							//code=1 성공 -> render , 아닐때 msg
-							if(resultJson.code==1){
-								View.render('#tour-search-list-template',resultJson,'#tour-list')
-							} else{
-								alert(resultJson.msg);
-							}
-						},async);
-	e.preventDefault();	//이벤트의 기본동작 취소 -> 이벤트버블링,캡쳐링 중단 / 기본동작 취소 (ex.rendering
-});
-*/

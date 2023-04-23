@@ -497,7 +497,7 @@
 					<!-- 모달 폼 -->
 				<form  method="post" name="tourReviewF" id="tourReviewF" class="was-validated" enctype​​="multipart/form-data">
 						<input name="toNo" id="toNoM" type="hidden" th:value="${tour.toNo}">
-						<input name="toReviewNo" id="toReviewNoM" type="hidden" th:value="${tourReview.toReviewNo}">
+						<input name="toReviewNo" id="toReviewNoM" type="hidden" value="0">
 						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
@@ -587,7 +587,7 @@
 		<div class="row">
 			<div class="col-md-9">
 				<h6>
-					<strong>
+					<strong id="toReviewTitle">
 						{{toReviewTitle}}
 					</strong>
 				</h6>
@@ -600,10 +600,10 @@
 			{{/ifCond}}
 		</div>
 		<br>
-		<p>
+		<p id="toReviewContent">
 			{{toReviewContent}}
 		</p>
-		<div class="rating" value="{{toReviewStar}}">
+		<div class="rating" id="toReviewStar" value="{{toReviewStar}}">
 	 		{{#generateStarHtml toReviewStar}}
 			{{/generateStarHtml}}
 		</div>
@@ -670,13 +670,6 @@
 			}
 		}
 	});
-	</script>
-	<!--  예약하기 -->
-	<script>
-		function tourDetail(){
-			document.detailF.action='tour-payment';
-			document.detailF.submit();
-		}
 	</script>
 	<!--Review modal validation -->
 	<script src="assets/validate.js"></script>

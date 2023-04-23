@@ -78,7 +78,7 @@ public class TourRestController {
 			Map<String, Object> resultMap = new HashMap<>();
 			int code = 1;
 			String msg = "성공";
-			List<Tour> data = null;
+			PageMakerDto<Tour> data = null;
 			int pageNo=Integer.parseInt(map.get("pageNo"));
 			int cityNo=Integer.parseInt(map.get("cityNo"));
 			int toType=Integer.parseInt(map.get("toType"));
@@ -89,14 +89,21 @@ public class TourRestController {
 			String sortOrder=map.get("sortOrder");
 			try {
 				PageMakerDto<Tour> tourListPage=tourService.findAll(pageNo,keyword, cityNo, toType, sortOrder);
-				List<Tour> tempTourList=tourListPage.getItemList();
 				List<Tour> tourList=new ArrayList<>();
-				for (Tour tour : tempTourList) {
-					int tourScore=tourReviewService.calculateTourScore(tour.getToNo());
-					tour.setToScore(tourScore);
-					tourList.add(tour);	//tourList에 후기 평점 평균 붙이기
+				for (Tour tour : tourListPage.getItemList()) {
+					if(tourReviewService.findByToNo(tour.getToNo()).size()==0) {
+						//후기가 없을 때
+						tour.setToScore(0);
+						tourList.add(tour);
+					} else {
+						//후기가 있을 때
+						int tourScore=tourReviewService.calculateTourScore(tour.getToNo());
+						tour.setToScore(tourScore);
+						tourList.add(tour);	//tourList에 후기 평점 평균 붙이기
+					}
 				}
-				data=tourList;
+				tourListPage.setItemList(tourList);
+				data=tourListPage;
 				code=1;
 				msg="성공";
 			}catch (Exception e) {

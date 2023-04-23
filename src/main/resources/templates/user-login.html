@@ -33,7 +33,7 @@
 <script>
 	
 // 사용하려는 앱의 JavaScript 키 입력
-Kakao.init('033833936fe6b95d5d87c91cde329685');
+Kakao.init('de088a236c96f21b86017ba109bbd84e');
 function kakaoLogin() {
 	Kakao.Auth.login({
 		success : function(response) {
@@ -58,10 +58,7 @@ function kakaoLogin() {
 		}
 	});
 }
-function kakaoLogout() {
-	//location.href = 'https://kauth.kakao.com/oauth/logout?client_id=d2863dba7035b2676678c151834a9978&logout_redirect_uri=http://localhost:80/practice_user_01/index';
-	location.href = 'https://kauth.kakao.com/oauth/logout?client_id=d2863dba7035b2676678c151834a9978&logout_redirect_uri=http://localhost/practice_user_01/index';
-}
+
 		
 </script>
 
@@ -97,10 +94,7 @@ function kakaoLogout() {
 <div id="login">
 <form id="user-login" th:object="${fuser!=null? fuser : new com.itwill.my_real_korea.dto.user.User()}" name="f" method="post">
 <input type="hidden" name="prevPage" value="${prevPage}">
-<!--  
-	<a href="https://kauth.kakao.com/oauth/authorize?client_id=d2863dba7035b2676678c151834a9978&redirect_uri=http://localhost:80/practice_user_01/kakao_login_action&response_type=code">
--->
-	<a href="user-login/oauth2/authorization/kakao" class="me-1" style="text-decoration:none;">
+	<a href="https://kauth.kakao.com/oauth/authorize?client_id=71c35cfe878062dbd05a31281b8ccf41&redirect_uri=http://localhost:80/final-project-team2-my-real-korea/kakao-login&response_type=code">
 		<img src="img/kakao_login_medium_wide.png" />
 	</a>
 	<div class="divider"><span>Or</span></div>

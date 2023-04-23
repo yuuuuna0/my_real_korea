@@ -244,7 +244,6 @@ public class UserRestController {
  */
 
 	
-
 	@ApiOperation(value = "내 프로필 수정 폼 불러오기")
 	@LoginCheck
 	@GetMapping("/user-modify-form")
@@ -301,7 +300,6 @@ public class UserRestController {
 		resultMap.put("data", data);
 		return resultMap;
 	}
-
 }
 
 

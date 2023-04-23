@@ -11,11 +11,11 @@
 	</insert>
 	<!-- 2. 투어상품번호로 후기 전체보기 -->
 	<select id="selectByToNo" parameterType="java.lang.Integer" resultType="com.itwill.my_real_korea.dto.tour.TourReview">
-		select * from tour_review where to_no=#{toNo} order by to_review_no asc
+		select * from tour_review where to_no=#{toNo} order by to_review_no desc
 	</select>
 	<!-- 3. 투어후기 수정 -->
 	<update id="updateTourReview" parameterType="com.itwill.my_real_korea.dto.tour.TourReview">
-		update tour_review set to_review_title=#{toReviewTitle}, to_review_content=#{toReviewContent}, to_review_img=#{toReviewImg}, to_review_star=#{toReviewStar} where to_review_no=#{toReviewNo}
+		update tour_review set to_review_title=#{toReviewTitle}, to_review_content=#{toReviewContent}, to_review_star=#{toReviewStar} where to_review_no=#{toReviewNo}
 	</update>
 	<!-- 4. 투어후기번호로 후기 삭제 -->
 	<delete id="deleteTourReview">
@@ -23,7 +23,7 @@
 	</delete>
 	<!-- 5. 사용자가 작성한 후기 전체보기 -->
 	<select id="selectByUserId" parameterType="java.lang.String" resultType="com.itwill.my_real_korea.dto.tour.TourReview">
-		select * from tour_review where user_id=#{userId} order by to_review_no asc
+		select * from tour_review where user_id=#{userId} order by to_review_no desc
 	</select>
 	<!-- 6. 투어상품번호로 찾은 투어 후기 갯수-->
 	<select id="findCountByToNo" parameterType="java.lang.Integer" resultType="java.lang.Integer">

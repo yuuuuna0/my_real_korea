@@ -172,10 +172,60 @@ public class TourRestController {
 		//3. 투어리뷰 수정하기
 		@LoginCheck
 		@ApiOperation(value="투어리뷰 수정하기")
-		@PutMapping(value="/tour-review-update-form", produces="application/json;charset=UTF-8")
-		public Map<String,Object> tourReviewUpdateForm(){
-			Map<String,Object> resultMap = new HashMap<>();
+		@PutMapping(value="/tour-review-update", produces="application/json;charset=UTF-8")
+		public Map<String,Object> tourReviewUpdate(@ModelAttribute TourReview tourReview,
+			  									   @RequestParam(name="file",required=false) MultipartFile file,
+			  									   HttpSession session){
+			Map<String,Object> resultMap=new HashMap<>();
+			int code=0;
+			int toScore=0;
+			int toCount=0; 
+			int toReviewCount=0;
+			String msg="성공";
+			List<TourReview> data=new ArrayList<>();
+			User loginUser=(User)session.getAttribute("loginUser");
+			try {
+				tourReview.setToReviewImg("");
+				tourReviewService.updateTourReview(tourReview);
+				if(file!=null) {
+					//업로드 파일 존재하면
+					fileUploadService.store(file);	//	파일 업로드 한다면 파일 저장
+					tourReviewService.updateToReviewUpload(file.getOriginalFilename(), tourReview.getToReviewNo());
+				} else if(tourReview.getToReviewImg()!=null) {
+					//기존 파일 사용한다면
+					tourReviewService.updateToReviewImg(tourReview.getToReviewImg(), tourReview.getToReviewNo());
+				}
+				List<TourReview> tourReviewList=tourReviewService.findByToNo(tourReview.getToNo());
+				data=tourReviewList;
+
+				//toScore 붙여서 리뷰쪽에 평균 찍기 위함
+				int totScore=0;
+				for (TourReview tempTourReview : tourReviewList) {
+					totScore+=tempTourReview.getToReviewStar();
+				}
+				toScore=totScore/tourReviewList.size();
+				
+				//toCount 붙여서 리뷰쪽에 구매 갯수 찍기 위함
+				toCount=tourService.findTourWithCityByToNo(tourReview.getToNo()).getToCount();
+				
+				//toReviewCount 붙여서 리뷰쪽에 리뷰 갯수 붙이기 위함
+				toReviewCount=tourReviewList.size();
+				code=1;
+				msg="성공";
+			}catch (Exception e) {
+				e.printStackTrace();
+				code=2;
+				msg="관리자에게 문의하세요";
+			}
+			resultMap.put("code", code);
+			resultMap.put("msg", msg);
+			resultMap.put("data", data);
+			resultMap.put("toScore", toScore);
+			resultMap.put("toCount", toCount);
+			resultMap.put("toReviewCount", toReviewCount);
+			resultMap.put("loginUser",loginUser);
 			return resultMap;
+
 		}
 
 		//4. 투어리뷰 삭제하기

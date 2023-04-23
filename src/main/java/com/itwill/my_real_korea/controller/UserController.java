@@ -1,5 +1,7 @@
 package com.itwill.my_real_korea.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -14,8 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.itwill.my_real_korea.dto.Payment;
 import com.itwill.my_real_korea.dto.user.User;
 import com.itwill.my_real_korea.exception.ExistedUserException;
+import com.itwill.my_real_korea.service.payment.PaymentService;
 import com.itwill.my_real_korea.service.user.UserService;
 
 @Controller
@@ -23,6 +27,8 @@ public class UserController {
 	
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private PaymentService paymentService;
 	
 	//회원 가입 폼
 	@GetMapping(value = "/user-write", produces = "application/json;charset=UTF-8")
@@ -212,6 +218,14 @@ public class UserController {
 		}
 		loginUser = userService.findUser(loginUser.getUserId());
 		request.setAttribute("loginUser", loginUser);
+		System.out.println(loginUser);
+		
+		//1. 상세페이지 예약내역
+		List<Payment> paymentList=paymentService.selectAllUser(loginUser.getUserId());
+		request.setAttribute("paymentList", paymentList);
+		System.out.println(paymentList);
+		
+		
 		return "user-view";
 	}
 	

@@ -61,10 +61,9 @@ class PaymentServiceImplTest {
 
 	}
 
-	@Disabled
 	@Test
 	void testSelectAllUser() {
-		List<Payment> paymentList = paymentService.selectAllUser("user1");
+		List<Payment> paymentList = paymentService.selectAllUser("qqqq1111");
 		System.out.println(paymentList);
 	}
 

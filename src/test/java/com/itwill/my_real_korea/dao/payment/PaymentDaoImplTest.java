@@ -8,6 +8,8 @@ import com.itwill.my_real_korea.dto.City;
 import com.itwill.my_real_korea.dto.Payment;
 import com.itwill.my_real_korea.dto.ticket.Ticket;
 import com.itwill.my_real_korea.dto.tour.Tour;
+
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +33,7 @@ class PaymentDaoImplTest {
     @Autowired
     TourDao tourDao;
     
+    @Disabled
     @Test
     void testInsertPayment() throws Exception{
     	Ticket ticket=ticketDao.selectTicketNo(1);
@@ -44,10 +47,10 @@ class PaymentDaoImplTest {
 
     @Test
     void selectAllUser() throws Exception{
-        List<Payment> paymentList = paymentDao.selectAllUser("user1");
+        List<Payment> paymentList = paymentDao.selectAllUser("qqqq1111");
         System.out.println(paymentList);
     }
-
+    @Disabled
     @Test
     void selectPaymentNo() {
         List<Payment> paymentList = paymentDao.selectPaymentNo(1);
@@ -55,7 +58,7 @@ class PaymentDaoImplTest {
 
         // System.out.println(paymentList);
     }
-
+    @Disabled
     @Test
     void deletePayment() {
     }

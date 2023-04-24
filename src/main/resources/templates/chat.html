@@ -50,7 +50,7 @@
                             <div class="chat-about">
                             	<span class="m-b-0">채팅</span>
                                 <span id="myId" class="m-b-0" th:text="${senderId}"></span>&
-                                <span name="receiverId" id="receiverId" class="m-b-0" th:text="${receiverId}"></span>
+                                <span id="receiverId" class="m-b-0" th:text="${receiverId}"></span>
                                 <input name="roomName" id="roomName" type="hidden" th:value=${roomName}>
                                <!-- <input name="receiverId" id="receiverId" type="hidden" th:value=${receiverId}> --> 
                                
@@ -61,6 +61,7 @@
                             <div id="chatConnect">
 						    <button id="chat-start-btn">채팅 시작하기</button>
 							</div>-->
+							
 						    <!-- End chat-start-btn -->
                         </div>
                         <div class="col-lg-6 hidden-sm text-right" >

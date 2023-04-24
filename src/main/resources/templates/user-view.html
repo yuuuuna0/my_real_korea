@@ -193,8 +193,8 @@
 						
 					<input id="btn-user-modify-form" value="프로필 수정 (REST)" class="btn_1 green" type="button"> 
 					<button class="btn_1 green" type="button" onclick="userRemove();">회원 탈퇴</button>	
-						</form>
 						<button class="btn_1 green" type="button" onclick="userModify();">프로필 수정 (일반)</button>
+						</form>
 						
 <!-- 페이지 로드 하는 폼  
 <div class="row">
@@ -351,8 +351,8 @@ Handlebars.registerHelper('ifEquals', function(arg1, arg2, options) {
 });
 </script>	 -->	
 <!-- 
- -->
 <script id="user-modify-form-template" type="text/x-handlebars-template">
+ -->
 {{#each data}}
 
 		<div class="row" >
@@ -374,15 +374,16 @@ Handlebars.registerHelper('ifEquals', function(arg1, arg2, options) {
 			<button type="submit" class="btn_1 green" id="js-upload-submit" onclick="modifyImg();">이미지 수정</button>
 		</div>
 	</form>		
-
+<form method="POST" name="f">
 		<div class="col-md-12">
 		<input type="hidden"  id="userId" value="{{userId}}" >
+<!--
 		<input type="hidden" id="password1" value="{{password}}">
-
+-->
 		<ul id="profile_summary_user">	   
 			<li>이름 <span>{{name}}</span></li>
-			<li>비밀번호 <span><input type="password" name="password"></span></li>
-			<li>비밀번호 확인<span><input type="password" name="password2"></span></li>
+			<li>비밀번호 <span><input type="password" name="password" id="password"></span></li>
+			<li>비밀번호 확인<span><input type="password" name="password2" id="password2"></span></li>
 			<li>닉네임 
 			<span><input id="nickname" class=" form-control-user " type="text" required="required" value="{{nickname}}"></span>
 			</li>
@@ -402,8 +403,8 @@ Handlebars.registerHelper('ifEquals', function(arg1, arg2, options) {
 			</li>
 			<li>성별 <span th:text="*{gender == 1} ? '남성' : '여성'"></span>
 		    <li>포인트 <span>{{point}}p</span></li>
-		</div>
 		</ul>
+		</div>
 	<hr>
 		<ul id="profile_summary_user">
 	

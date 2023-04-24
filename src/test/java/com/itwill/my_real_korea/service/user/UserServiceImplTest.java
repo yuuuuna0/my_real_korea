@@ -40,8 +40,8 @@ class UserServiceImplTest {
 	//4. 회원 정보 수정
 	@Test
 	void testUpdate() throws Exception {
-		User user = userService.findUser("admin");
-		user.setPassword("admin0000");
+		User user = userService.findUser("user11");
+		user.setPassword("1111");
 		System.out.println(">> updated :"+userService.update(user));
 	}
 	

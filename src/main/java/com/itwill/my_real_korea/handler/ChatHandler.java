@@ -69,8 +69,10 @@ public class ChatHandler extends TextWebSocketHandler {
 		
 		log.info("보내는 사람 : sessionId >>> " + senderId);
 		
-		// userSession 맵의 사이즈가 2이상일 때 (접속자 2명 이상일 때) 본인 senderId와 다른 Id가 receiverId 가
-		// 되도록
+		/*
+		userSession 맵의 사이즈가 2이상일 때 (접속자 2명 이상일 때) 
+		본인 senderId와 다른 Id가 receiverId 가 되도록
+		
 		String receiverId = "";
 		if (onlineList.size() >= 2) {
 			String tempId1 = onlineList.get(0);
@@ -83,11 +85,12 @@ public class ChatHandler extends TextWebSocketHandler {
 		} else {
 			receiverId = "master";
 		}
+		 */
 		// 받는 사람 = 마스터, 마스터에게 접속 성공 메세지 보내기
 		Map<String, Object> data = new HashMap<>();
 		data.put("senderId", senderId);
 		data.put("message", senderId + " 님이 접속했습니다.");
-		data.put("receiverId", receiverId);
+		//data.put("receiverId", receiverId);
 		data.put("newOne", senderId);
 
 		log.info("afterConnectionEstablished final data >>> " + data);

@@ -44,6 +44,7 @@
 		
 		function openPopup() {
 			let receiverId = $('#chat-pop-up-click').attr('data-user-id');
+			console.log('????????? openPopup'+receiverId);
 			var url = 'chat?receiverId=' + receiverId;
 			window.open(url,
 						'target',

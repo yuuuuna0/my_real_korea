@@ -36,3 +36,7 @@ out/
 
 ### VS Code ###
 .vscode/
+
+##AWS
+/src/main/resources/application-credentials.yml
+/src/main/resources/application-aws.yml

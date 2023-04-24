@@ -65,13 +65,13 @@ public class TourController {
 							@RequestParam(required = false, defaultValue = "0") int cityNo,
 							@RequestParam(required = false, defaultValue = "0") int toType,
 							@RequestParam(required = false) String sortOrder,
-								Model model) {
+							Model model,HttpSession session) {
 		String forwardPath="";
 		System.out.println(">>>>>>>>>>>>" +pageNo);
 		try{
 			PageMakerDto<Tour> tourListPage=tourService.findAll(pageNo,keyword,cityNo,toType,sortOrder);
 			List<Tour> tourList=new ArrayList<>();
-			System.out.println(tourListPage.getItemList().size());
+			User loginUser=(User)session.getAttribute("loginUser");
 			//평점 평균 구하기
 			for (Tour tour : tourListPage.getItemList()) {
 				if(tourReviewService.findByToNo(tour.getToNo()).size()==0) {
@@ -90,6 +90,7 @@ public class TourController {
 			List<City> cityList=cityService.findAllCity();
 			model.addAttribute("cityList", cityList);
 			model.addAttribute("tourListPage",tourListPage);
+			model.addAttribute("loginUser",loginUser);
 			forwardPath="tour-list";
 		} catch (Exception e){
 			e.printStackTrace();
@@ -222,6 +223,17 @@ public class TourController {
 		forwardPath="tour-payment-confirmation";
 		return forwardPath;
 	}
+ 	
+ 	//5. 예약상품 삭제하기
+ 	@LoginCheck
+ 	@RequestMapping(value="payment-delete")
+ 	public String paymentDelete(@RequestParam int pNo) {
+ 		System.out.println("!!!!!!!!!!!!!!!!!!!!!1 "+pNo);
+ 		String forwardPath="";
+		paymentService.deletePayment(pNo);
+		forwardPath="redirect:/user-view";
+ 		return forwardPath;
+ 	}
   	
 }
 

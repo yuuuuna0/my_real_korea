@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="utf-8">
@@ -35,11 +35,8 @@
 
     <!-- CUSTOM CSS -->
     <link href="css/custom.css" rel="stylesheet">
-    <script defer type="text/javascript"
-            src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.2/handlebars.min.js"></script>
-
     <script type="text/javascript">
-
+       
         function fBoCommentCreate() {
             if (document.f.fCommentContent.value == "") {
                 alert("내용을 입력하십시요.");
@@ -51,6 +48,11 @@
             document.f.submit();
         }
 
+        function fBoModify() {
+            document.f.action = "freeboard-modify-form";
+            document.f.method = 'GET';
+            document.f.submit();
+        }
 
         function fBoDelete() {
             document.f.action = "freeboard-delete-action";
@@ -58,20 +60,54 @@
             document.f.submit();
         }
 
-        function fBoModify() {
-            document.f.action = "freeboard-modify-form";
+        function fCoModify() {
+            document.f.action = "freeboard-comment-modify-form";
             document.f.method = 'GET';
             document.f.submit();
         }
 
+   
+        function fCoDelete() {
+            document.a.action = "freeboard-comment-delete-action";
+            document.a.method = 'POST';
+            document.a.submit();
+        }
+            
+
+        //
+        // $(document).on('click', '#fCoModifyForm', function (e) {
+        //     // ajax로 리스트 부분만 검색된 리스트로 변경
+        //     let url = 'fBoUpdate/{fBoNo}';
+        //     let method = 'GET';
+        //     let contentType = 'application/json;charset=UTF-8';
+        //     let sendData = {
+        //         fCoNo: $('#fCoNo').val(),
+        //         fCommentContent: $('#fCommentContent').val(),
+        //         fBoNo: $('#fBoNo').val(),
+        //         userId: $('#userId').val()
+        //     };
+        //     console.log($('#userId').val());
+        //     let async = true;
+        //     // JSON.stringify() => 객체를 string 으로, JSON.parse() => string 을 객체로 만듬
+        //     Request.ajaxRequest(url, method, contentType,
+        //         JSON.stringify(sendData),
+        //         function (resultJson) {
+        //             //code 1 일때 render, 아닐 때 msg 띄움
+        //             if (resultJson.code == 1) {
+        //                 View.render("#freeBoardCommentModifyForm", resultJson, '#notice-write-detail');
+        //             } else {
+        //                 alert(resultJson.msg);
+        //             }
+        //             ;
+        //         }, async);
+        //     e.preventDefault();
+        // });
 
     </script>
 </head>
 
 <body>
 
-
-<!-- End Preload -->
 
 <div class="layer"></div>
 <!-- Mobile menu overlay mask -->
@@ -94,103 +130,89 @@
 <main>
     <div id="position">
         <div class="container">
-            <ul>
-                <li><a href="#">Home</a>
-                </li>
-                <li><a href="#">Category</a>
-                </li>
-                <li>Page active</li>
-            </ul>
+           <ul>
+					<li><i class="icon-home" onclick="location.href='index'"></i><a href="index"></a>
+					</li>
+					<li><a href="freeboard-list">자유게시판</a>
+					</li>
+					<li>상세보기</li>
+				</ul>
         </div>
     </div>
     <!-- End position -->
     <div class="container margin_60">
         <div class="row">
 
-            <div id="fbo-detail" class="col-lg-9">
-
+            <div class="col-lg-9">
                 <div class="box_style_1">
-                    <form name="a">
-                        <div class="post nopadding">
-                            <!--                        <img src="img/blog-1.jpg" alt="Image" class="img-fluid">-->
-                            <div class="post_info clearfix">
-                                <div class="post-left">
-                                    <ul>
-                                        <li>
-                                            <i class="icon-user"></i>작성자
-                                            <span th:text="${freeBoard.userId}">12 Nov 2020</span>
-                                            <i class="icon-calendar-empty"></i>작성일
-                                            <span th:text="${#dates.format(freeBoard.getFBoDate(), 'yyyy.MM.dd')}">12 Nov 2020</span>
-                                            <i class="icon-map"></i>도시
-                                            <span th:text="${freeBoard.getCity().cityName}">12 Nov 2020</span>
+                    <div class="post nopadding">
+                        <!--                        <img src="img/blog-1.jpg" alt="Image" class="img-fluid">-->
+                        <div class="post_info clearfix">
+                            <div class="post-left">
+                                <ul>
+                                    <li>
+                                        <i class="icon-user"></i>작성자
+                                        <span th:text="${freeBoard.userId}">12 Nov 2020</span>
+                                        <i class="icon-calendar-empty"></i>작성일
+                                        <span th:text="${#dates.format(freeBoard.getFBoDate(), 'yyyy.MM.dd')}">12 Nov 2020</span>
+                                        <i class="icon-map"></i>도시
+                                        <span th:text="${freeBoard.getCity().cityName}">12 Nov 2020</span>
 
 
-                                        </li>
-                                        <!--                                    <li><i class="icon-inbox-alt"></i>In <a href="#">Top tours</a>-->
-                                        <!--                                    </li>-->
-                                        <!--                                    <li><i class="icon-tags"></i>Tags <a href="#">Works</a> <a href="#">Personal</a>-->
-                                        <!--                                    </li>-->
-                                    </ul>
-                                </div>
-                            </div>
-
-                            <h2 th:text="${freeBoard.getFBoTitle()}"></h2>
-                            <p th:text="${freeBoard.fBoContent}">
-                            </p>
-
-
-                            <blockquote class="styled">
-                            </blockquote>
-                            <div th:if="${loginUser != null && loginUser.userId == freeBoard.userId}">
-                                <input type="hidden" id="fBoNo-hidden"
-                                       th:value="${freeBoard.fBoNo}"/>
-                                <span style="float: right" type="button" onclick="fBoDelete();">삭제</span>
-                                <span style="float: right" type="button" onclick="fBoModify();">수정</span>
-                                <!--                                <span style="float: right"-->
-                                <!--                                   th:href="@{freeboard-modify-form(fBoNo=${freeBoard.fBoNo})}">수정</span>-->
-                                <!--                            <a id="title" th:href="@{freeboard-detail(fBoNo=${freeBoard.fBoNo})}"  th:text="${freeBoard.fBoTitle}" ></a>-->
+                                    </li>
+                                    <!--                                    <li><i class="icon-inbox-alt"></i>In <a href="#">Top tours</a>-->
+                                    <!--                                    </li>-->
+                                    <!--                                    <li><i class="icon-tags"></i>Tags <a href="#">Works</a> <a href="#">Personal</a>-->
+                                    <!--                                    </li>-->
+                                </ul>
                             </div>
                         </div>
-                    </form>
+                        <h2 th:text="${freeBoard.getFBoTitle()}"></h2>
+                        <p th:text="${freeBoard.fBoContent}">
+                        </p>
+
+
+                        <blockquote class="styled">
+                        </blockquote>
+                        <div th:if="${loginUser != null && loginUser.userId == freeBoard.userId}">
+                            <span style="float: right" type="button" onclick="fBoDelete();">삭제</span>
+                            <span style="float: right" type="button" onclick="fBoModify();">수정</span>
+                        </div>
+                    </div>
                     <!-- end post -->
                 </div>
-
                 <!-- end box_style_1 -->
                 <h4 style="display:inline" th:text="${selectCommentCount}"> comments </h4>
                 <h4 style="display:inline">개의 답변</h4>
 
                 <div id="comments">
                     <ol>
-                        <div class="review_strip_single" th:each="freeBoardComment:${freeBoardCommentList}">
-                            <div class="avatar">
-                                <a href="#"><img src="img/avatar1.jpg" alt="Image"></a>
-                            </div>
+                        <li>
+                            <form name="a" method="post">
+                                <div class="review_strip_single" th:each="freeBoardComment:${freeBoardCommentList}">
+                                    <div class="avatar">
+                                        <a href="#"><img src="img/avatar1.jpg" alt="Image"></a>
+                                    </div>
 
-                            <div>
-                                <small name="fCoDate"
-                                       th:text="${#dates.format(freeBoardComment.fCommentDate, 'yyyy-MM-dd')}"></small>
-                                <h4 name="fCoUserId" th:text="${freeBoardComment.userId}"></h4>
-                                <p name="fCoContent" th:text="${freeBoardComment.getFCommentContent()}"></p>
-                                <!--                                <p name="fCoContent" th:text="${freeBoardComment.fCoNo}"></p>-->
+                                    <div>
+                                        <small th:text="${#dates.format(freeBoardComment.fCommentDate, 'yyyy-MM-dd')}"></small>
+                                        <h4 th:text="${freeBoardComment.userId}"></h4>
+                                        <p th:text="${freeBoardComment.getFCommentContent()}"></p>
 
-                                <!--
-                                                                 <p style="float: right" type="button" onclick="fCoModifyForm();">수정</p>  onclick="fCoDelete();"-->
+                                        <div th:if="${loginUser != null && loginUser.userId == freeBoardComment.userId}">
+                                            <input type="hidden" name="fCoNo"
+                                                   th:value="${freeBoardComment.getFCoNo()}"/>
+                                            <input type="hidden" name="fBoNo"
+                                                   th:value="*{freeBoard.getFBoNo()}"/>
+                                            <p style="float: right" type="button" onclick="fCoDelete();">삭제</p>&nbsp;
+                                            <p style="float: right" type="button" onclick="fCoModifyForm();">수정</p>
+                                        </div>
 
-                                <!--                                                <input class="comment_btn_delete" type="button"  th:value="${freeBoardComment.fCoNo}">삭제</input>-->
-                                <!--                                                <a  th:href="@{freeboard-comment-delete-action(fCoNo=${freeBoardComment.fCoNo})}">삭제</a>-->
-                                <div th:if="${loginUser != null && loginUser.userId == freeBoardComment.userId}">
-                                    <a class="btn_1" href="" role="button" th:data-value="${freeBoardComment.fCoNo}"
-                                       id="freeboardcomment-modify-form-btn">수정</a>
-                                    <input type="hidden" id="fCoNo-hidden-value"
-                                           th:value="${freeBoardComment.fCoNo}"/>
-                                    <a class="btn_1" href="" role="button" th:data-value="${freeBoardComment.fCoNo}"
-                                       id="comment_btn_delete">삭제</a>
-                                    <!--                                </div>-->
-                                    <input type="hidden" id="fBoNo-hidden-value"
-                                           th:value="${freeBoard.fBoNo}"/>
+                                    </div>
+
+
                                 </div>
-                            </div>
-                        </div>
+                                </form>
                     </ol>
                 </div>
 
@@ -221,22 +243,22 @@
 
                 <div class="widget">
                     <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search...">
                         <span class="input-group-btn">
+						<button class="btn btn-default" type="button" style="margin-left:0;"><i class="icon-search"></i></button>
 						</span>
                     </div>
                     <!-- /input-group -->
                 </div>
                 <!-- End Search -->
                 <hr>
-                <div class="widget" id="cat_blog">
-                    <h4>Categories</h4>
-                    <ul>
-                        <li><a href="tour-list">투어 보러가기</a></li>
-                        <li><a href="ticket-list">티켓 보러가기</a></li>
-                        <li><a href="tripboard-list">여행 동행 찾기</a></li>
-                        <li><a href="freeboard-list">자유게시판</a></li>
-                    </ul>
-                </div>
+          		<div class="widget" id="cat_blog">
+					<h4>CLICK</h4>
+					<ul>
+						<li><a href="freeboard-list">목록으로 돌아가기</a>
+						</li>
+					</ul>
+				</div>
 
                 <hr>
 
@@ -282,7 +304,7 @@
             <a href="#0" class="social_bt google">Login with Google</a>
             <div class="divider"><span>Or</span></div>
             <div class="form-group">
-                <label>Email</label>ㅅ
+                <label>Email</label>
                 <input type="email" class="form-control" name="email" id="email">
                 <i class="icon_mail_alt"></i>
             </div>
@@ -318,42 +340,46 @@
 </div>
 <!-- /Sign In Popup -->
 <script id="freeBoardCommentModifyForm" type="text/x-handlebars-template">
-
     {{#each data}}
-    <div>
-        <ol>
-            <div class="review_strip_single">
-                <div class="avatar">
-                    <a href="#"><img src="img/avatar1.jpg" alt="Image"></a>
+    <div class="col-lg-12">
+        <div class="box_style_1">
+            <div class="post nopadding">
+                <!-- 이미지 일단 지움
+                <img alt="Image" class="img-fluid"> -->
+                <div class="post_info clearfix">
+                    <div class="post-left">
+                        <h2>{{ntitle}}</h2>
+                        <ul>
+                            <li><i class="icon-calendar-empty"></i>작성일 &nbsp;
+                                <span>{{dateFormat ndate}}</span>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-
-                <div>
-                    <!--                    <small name="fCoDate2">{{fcommentDate}}</small>-->
-                    <small name="fCoDate2"
-                    >{{dateFormat fcommentDate}}</small>
-                    <h4 name="fCoUserId2">{{userId}}</h4>
-                    <textarea name="fCoContent2">{{fcommentContent}}</textarea>
-
-
-                    <a class="btn_1" href="" role="button" data-value={{fcoNo}}
-                       id="freeboardcomment-modify-action-btn">수정완료</a>
-
-                    <input type="hidden" id="fBoNo-hidden-value2"
-                           value="{{fboNo}}"/>
-
-                </div>
+                <p>{{ncontent}}</p>
+                <p>
+                </p>
+                {{#if nimg}}
+                <img src="img/notice/{{nimg}}" alt="Image" class="img-fluid">
+                {{/if}}
             </div>
-        </ol>
+            <!-- end post -->
+            <a class="btn_1" href="notice-modify-form?nNo={{nno}}" role="button" id="notice-update-btn">수정</a> &nbsp;
+            &nbsp; &nbsp;
+            <a class="btn_1" href="" role="button" id="notice-delete-action-btn" data-nno="{{nno}}">삭제</a>
+            <input type="hidden" id="nNo-hidden-value" value="{{nno}}">
+        </div>
+        <!-- end box_style_1 -->
+        <!-- End Comments -->
     </div>
     {{/each}}
 </script>
-
 
 <!-- Common scripts -->
 <script src="js/jquery-2.2.4.min.js"></script>
 <script src="js/common_scripts_min.js"></script>
 <script src="js/functions.js"></script>
-<script src="js/freeboard.js" type="module"></script>
+<!--<script src="js/freeboard.js"></script>-->
 
 </body>
 

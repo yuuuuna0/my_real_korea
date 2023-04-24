@@ -117,16 +117,7 @@ values(chat_msg_msg_no_seq.nextval,'혹시1','토요일',0,'채팅방1','aaa111'
 
 /*************** freeBoard ***********************/
 -- freeboard
-insert into free_board values (free_board_f_bo_no_seq.nextval,'서울 맛집 추천','위생깔끔한곳 선호합니다','2023-01-11',0,1,'user1');
-insert into free_board values (free_board_f_bo_no_seq.nextval,'경기 맛집 추천','클린한 음식으로 추천부탁합니다','2023-01-19',3,2,'user2');
-insert into free_board values (free_board_f_bo_no_seq.nextval,'강원 맛집 추천','면류 좋아합니다','2023-01-22',0,3,'user3');
-insert into free_board values (free_board_f_bo_no_seq.nextval,'부산 해운대 1박2일 추천','자연보는거 좋아합니다','2022-01-19',7,4,'user1');
-insert into free_board values (free_board_f_bo_no_seq.nextval,'대전 여행코스 추천해주세요','2박 3일 코스로 여행 예정입니다','2023-02-12',1,5,'user2');
-insert into free_board values (free_board_f_bo_no_seq.nextval,'서울 핫플 추천받습니다','사람많은곳 선호합니다','2023-03-19',9,1,'user3');
-insert into free_board values (free_board_f_bo_no_seq.nextval,'경기도 풍경 좋은곳 추천해주세요','1박2일 여행가려고요','2022-01-03',6,2,'user1');
-insert into free_board values (free_board_f_bo_no_seq.nextval,'경기도 파주쪽 어죽맛집 추천해주세요','파주여행갑니다','2022-07-03',6,2,'user1');
-insert into free_board values (free_board_f_bo_no_seq.nextval,'강원도 벚꽃축제 하나요?','벚꽃좀 보고 싶네요','2022-09-03',13,3,'user2');
-insert into free_board values (free_board_f_bo_no_seq.nextval,'부산 국밥집 어디가 잘하나요','근본있는곳으로 추천부탁합니다','2022-11-03',11,4,'user3');
+
 insert into free_board values (free_board_f_bo_no_seq.nextval,'대전 유성온천 어떤가요','가보신분 후기좀 남겨주세요',sysdate,4,5,'user1');
 insert into free_board values (free_board_f_bo_no_seq.nextval,'서울 맛집리스트 부탁해요','점심 때 불고기 백반 먹고싶어요.','2023-04-11',1,1,'user1');
 insert into free_board values (free_board_f_bo_no_seq.nextval,'제주 고기국수 추천','제주 고기국수 유명한 집이요.','2023-01-18',1,6,'user3');
@@ -134,11 +125,68 @@ insert into free_board values (free_board_f_bo_no_seq.nextval,'서울말고 근�
 insert into free_board values (free_board_f_bo_no_seq.nextval,'통영 여행 코스 추천','뚜벅이여행입니다.','2022-01-10',1,5,'minyoung1');
 insert into free_board values (free_board_f_bo_no_seq.nextval,'동백꽃 볼 수 있는 곳 추천이요','제주도 여행가서 시간 남으면 보러 가려고요','2023-02-25',1,6,'user3');
 insert into free_board values (free_board_f_bo_no_seq.nextval,'서울 인근 핫플 추천받습니다','개인적으로 곱창 선호합니다','2023-03-10',1,2,'user3');
-insert into free_board values (free_board_f_bo_no_seq.nextval,'서울에서 놀러 갈 수 있는 곳 추천','가족, 친구들과 여행 갈 때 갈 수 있는 곳으로 부탁해요.'2022-01-03',6,2,'user1');
+insert into free_board values (free_board_f_bo_no_seq.nextval,'서울에서 놀러 갈 수 있는 곳 추천','가족, 친구들과 여행 갈 때 갈 수 있는 곳으로 부탁해요.','2022-01-03',6,2,'user1');
 insert into free_board values (free_board_f_bo_no_seq.nextval,'국내 호텔 비수기와 성수기가 언제인지 궁금합니다.','국내 호텔 성수기, 비수기에 대해서 검색해봐도 말도 다 다르고 그마저도 거의 나오지 않아서 (해외 호텔이 아닌 국내 호텔의 비수기, 성수기가 궁금합니다)  정확한 날짜 (몇월인지 이왕이면 더 구체적으로)가 언제인지 궁금합니다. 언제인가요? 그리고 지금은 비수기인가요?','2022-07-03',1,0,'user1');
 insert into free_board values (free_board_f_bo_no_seq.nextval,'임산부 국내여행','전 여행은 좋아하는데 계획을 너무 못짜서 부탁드립니다 일정은 2박3일이나 3박4일로 생각중이예요',1,0,'user2');
 insert into free_board values (free_board_f_bo_no_seq.nextval,'혼자 갈 생각인데 (1인) 국내 일본 느낌 물씬 나는 료칸 (온천) 없을까요','지역 상관 없구요 너무 비싸지만 않았으면 좋겠는데 개인노천탕이나 방에 탕 있었으면 좋겠어요 (없어도 일단은 추천받습니다) 굳이 료칸이 아니더라도 뭐 일본식 느낌나는 호텔이나 숙박 업계 소개 부탁드립니다 ~!','2023-04-24',1,0,'user3');
 insert into free_board values (free_board_f_bo_no_seq.nextval,'국내 1박2일 여행갈만한곳 추천좀','참고로 강릉,속초,양양,태안,안동,서산은 다 가봐서 안가본곳쪽으로 경험자분들 추천.부탁드려요',sysdate,1,0,'user1');
+
+
+
+
+insert into free_board values (free_board_f_bo_no_seq.nextval,'서울 여행가는데 추천좀 해주세요',
+                               '1박2일로 가는데 첫째날은 롯데월드가고 잠실쪽에 숙소 잡아놨는데 센트럴로 출발해야되서 지하철을 타도 오래걸리지 않는 지역주변으로 볼만한게 있을까요
+                                관심사가 헤어 인테리어 자동차라 박람회나 전시회장도 괜찮습니다','2023-01-11',10,1,'aaa111');
+insert into free_board values (free_board_f_bo_no_seq.nextval,'제주도 3박 4일 여행',
+                               '이번에 여자친구랑 제주도 3박4일 여행 가려고 하는데 여행코스랑 숙소 음식점 추천 부탁드립니다
+                               4.21~4.24일 3박 4일 여행으로 21일에 오후 4시 도착 24일에는 오후 2시 출발입니다.
+                               여행은 중문(서귀포)에서 애월 공항 이런 순으로 여행코스 짜고 싶습니다.'
+                                  ,'2023-01-19',3,7,'myrealkorea1');
+insert into free_board values (free_board_f_bo_no_seq.nextval,'제주도 여행 비용 문의',
+                               '제주도 여행 비용이 어떻게 될까요?
+                               가족 여행으로 5월 경 제주도 여행을 예정 중입니다.
+                               어르신들이 있어 김포공항에서 출발하는 조건으로 패키지 여행 경비가 어느정도 될까요?
+                               인원은 6인(성인)입니다.','2023-01-22',0,7,'myrealkorea2');
+insert into free_board values (free_board_f_bo_no_seq.nextval,'질문2박3일 아이와 부산여행',
+                               '이번주 급 부산여행을 계획하고 있는데
+                               서울에서 부산내려가서 아이와 가볼만한 여행코스나
+                               가기전 들릴만한 명소나
+                               혹은 다른코스라도 여행추천지 알려주세요~^^~','2022-01-19',7,2,'bbb111');
+insert into free_board values (free_board_f_bo_no_seq.nextval,'경기도 여행에 대한 질문입니다!',
+                               '안녕하세요! 이제 2023년도 20살 되는 학생 겸 청년입니다. 저희가 졸업하고 친구들과 여행 준비하고 있습니다.
+                                차마 저희가 운전을 잘 하지도 못하고 안전하지도 않아서 대중교통을 이용해서 여행을 가려고 합니다.
+                                하지만 찾아봐도 좋은 여행지가 보이지 않아 걱정이 됩니다. 2박 3일로 놀러갈 예정인데 좋은 경기도 여행지 추천 해주시면 감사하겠습니다.',sysdate,20,1,'aaa111');
+insert into free_board values (free_board_f_bo_no_seq.nextval,'강원도 여행....도와주세요',
+                               '언니랑 둘이 강원도 가는데 이제 중1되는 애랑 이제 고1되는 애 둘이서 들어갈수 있는 "따뜻한" 물이 있고 가성비 좋은 온천이나 수영장 있을까요? 아 참고로 호텔이나 숙박업소 아닌곳으로 알려주셨으면 좋겠어요 ',
+                               '2023-02-12',1,3,'qqqq1111');
+insert into free_board values (free_board_f_bo_no_seq.nextval,'부모님과 1박2일 여행 (전주)','5월 29.30일에 부모님과 1박2일 전주 여행을 하려고 합니다. ' ||
+                                                                                  '코스 추천좀 부탁드리겠습니다.','2023-03-19',9,4,'user11');
+
+
+insert into free_board values (free_board_f_bo_no_seq.nextval,'겨울 강원도 여행 3박4일 문의합니다','1월말쯤 통영에서 자차로 강원도 여행을 생각중입니다.
+숙소는 두군데로 생각중입니다
+1. 속초 온천
+2. 스카이베이 경포
+
+속초랑 경포(강릉쪽이죠?) 어느쪽을 2박으로 잡는게 나을까요?
+- 맛집이 더 많은 곳은 어디인가요?
+(대게..?홍게..? 무튼 이런거 먹고싶어요)
+- 신혼부부가 여행하며 구경하거나 볼거리 더 많은 곳은 어디 근처인가요?
+(경포쪽을 2박으로 생각했었는데 그 이유가 정동진 근처도 왕복 1시간이면 갔다올수 있어서 2박하면서 하슬라아트월드 갔다가 다시 숙소로 돌아와도 되겠다 싶었는데 그건 1박으로도 가능할것같아서 고민중입니다ㅠㅠ)
+
+위의 두 조건의 만족이 더 많은곳으로 2박을 하고싶어서요~
+
+제가 시간 여유가 없어 광고글은 신고들어갈꺼구요 정말 현지인분들이나 여행 다녀오셔서 추천하고싶다 하시는 분들 답변 부탁드립니다!!!!','2022-12-03',13,3,'test11');
+insert into free_board values (free_board_f_bo_no_seq.nextval,'전주여행 갈곳, 전시회 추천',
+                               '제가 이번달 말에 남자친구랑 전주여행을 가는데요. 전주한옥마을만 가기엔 그래서 갈만한 곳, 공방, 전시회같은거 있음 추천부탁드려요ㅠㅠ','2022-07-03',3,4,'qqqq1111');
+insert into free_board values (free_board_f_bo_no_seq.nextval,'	전주 여행코스 추천이요~!',
+                               '영화제 기간 일정으로 2박3일 전주여행 좀 가볼까 해서요.
+                                여행코스 추천 좀 해주세요
+                                어차피 주목적은 전주국제영화제니까 많은 곳을 둘러보지는 못할거에요
+                                그냥 전주하면 꼭 가볼만한 곳 알짜배기만 추천해주세욜~~!!
+                                전주 영화의 거리를 기점으로 최대한 이동이 편했으면 좋겠어요. :-)','2022-09-03',22,4,'qqqq1111');
+
+
 
 -- freeboard comment
 insert into free_board_comment values (FREE_BOARD_COMMENT_F_CO_NO_SEQ.nextval,'여의도 더현대서울 지하 1층 삼성혈해물탕, 호우섬 추천 드려요. ',sysdate,1,'user3');
@@ -163,6 +211,62 @@ insert into free_board_comment values (FREE_BOARD_COMMENT_F_CO_NO_SEQ.nextval,'�
 insert into free_board_comment values (FREE_BOARD_COMMENT_F_CO_NO_SEQ.nextval,'지역이 어딘신지 모르겠으나 가평, 강화도, 양평정도가 좋을것같습니다.',sysdate,0,'user3');
 insert into free_board_comment values (FREE_BOARD_COMMENT_F_CO_NO_SEQ.nextval,'4월 신규open 한 경주 당근료칸풀빌라 는 어떠실까요? 히노끼탕 과 개별수영장도 있구요^^ ',sysdate,2,'user1');
 insert into free_board_comment values (FREE_BOARD_COMMENT_F_CO_NO_SEQ.nextval,'제가 저렴한곳 위주로 데이트할만한곳 찾아봤어요~https://linkon.id/wonmart',sysdate,0,'user3');
+
+
+
+
+insert into free_board_comment values (FREE_BOARD_COMMENT_F_CO_NO_SEQ.nextval,'1인 50만원 전후로 생각하시면 되세요..
+항공권인 경우는 예약률에 따라 금액이 올라가는 구조로 고정 금액이 숙소, 렌트카와 달리 여행일정이 잡히시면 빨리 예약 진행을 하시는것이 좋으세요... 대한항공, 아시아나, 제주항공, 티웨이항공, 진에어 항공사에서 가격 비교 후 저렴한곳으로 이용하시면 좋답니다.','2022.01.23',3,'aaa111');
+insert into free_board_comment values (FREE_BOARD_COMMENT_F_CO_NO_SEQ.nextval,
+                                       '안녕하세요.
+                                       숙소가 잠실쪽이고 1박 2일이면...
+                                       그 근처에서 가장 가기 좋은 곳은 코엑스(COEX) 일거 같네요.
+                                       코엑스에서 다양한 전시회도 많이 하니 사이트 들어가서 한번 확인해보시구요,
+                                       전시회가 아니더라도 코엑스몰 자체에 볼거리, 먹을거리 등 많으니 한번 가보시길 추천드립니다~
+                                       (코엑스 한가운데 있는 별마루 도서관도 책 보기에 아주 좋아요~) ',sysdate,1,'admin');
+insert into free_board_comment values (FREE_BOARD_COMMENT_F_CO_NO_SEQ.nextval,
+                                       '안녕하세요
+                                       질문하신 [서울 여행 코스] 관련 답변 드리도록 하겠습니다.
+                                       서울에 가볼만한 곳들을 알아보고 계시는군요?
+                                       서울 여행 코스 중 둘러볼만한 곳들 중에서는
+                                       북촌한옥마을, 낙산공원,
+                                       서울숲, 쌈지길,
+                                       경의선 숲길, 청계광장 등
+                                       전시장으로는 그라운드시고 명동,
+                                       시간의 조각:계절, 섬세이 테라리움 등 있으니
+                                       여행하시는데 참고하시기 바랍니다.
+                                       도움이 되셨다면 채택 부탁드립니다!
+                                       감사합니다 :)','2023-01-11',1,'myrealkorea2');
+insert into free_board_comment values (FREE_BOARD_COMMENT_F_CO_NO_SEQ.nextval,
+                                       '제주도 여행코스는  서부,중부,동부 세곳으로 나누어서 1일씩 또는 2일 여행코스를 계획하시면됩니다.
+                                       서부일정
+                                       1.협재해수욕장-애월해안도로-용담해안도로-새별오름-점보빌리지-오설록녹차-카멜리아힐-곶자왈-제주항공우주박물관-테디베어뮤지엄-초콜릿박물관-유리의성-소인국테마파크
+                                       중부일정
+                                       2.중문관광단지-여미지식물원-천지연폭포-선녀와나무꾼-올레시장-쇠소깍-정방폭포-박물관이살아있다','2023-01-19',2,'aaa111');
+insert into free_board_comment values (FREE_BOARD_COMMENT_F_CO_NO_SEQ.nextval,
+                                       '안녕하세요 울릉도 사는 주민입니다.
+                                       울릉도 여행은 여행코스가 많지 않으니 조금 발품 파셔서 자유여행으로 오시는게
+                                       좋습니다.
+                                       김포공항에서 출발이면 강릉이 편하시겠군요. 강릉까지는 자차나 KTX를 이용하시면 편하게 오실 수 있습니다.
+                                       선박표는 "가보고 싶은섬"이라는 앱, 싸이트를 이용하시면 편하게 조회,예매까지 가능하십니다.
+                                       숙소는 차량 주차가 편한 저동, 사동, 천부쪽으로 알아보시면 좋고 "에어비앤비"라는 앱을 이용하시면
+                                       울릉도의 많은 숙박 업체를 검색해 보실 수 있습니다.(제일 많이 등록되어 있습니다.)
+                                       차량이용은 승합차를 렌트하시면 되는데 비용은 네이버에서 울릉도 렌트카로 검색하시면 금액까지
+                                       다 나와 있습니다.(자차 포함 12만원정도 예상)
+                                       여행 코스는 독도를 포함 2박 3일정도이면 충분히 다 돌아보실수 있습니다. 보토 육로관광은 A,B코스로 나뉘는데
+                                       이 역시 블로그 검색하시면 다 나와있습니다.
+                                       5월 여행이면 서둘러야 원하시는 일정과 숙소를 컨택하실수 있습니다. 조금 늦으셨습니다. ',sysdate,2,'aaa111');
+insert into free_board_comment values (FREE_BOARD_COMMENT_F_CO_NO_SEQ.nextval,
+                                       '이번주 부산여행을 떠나시나 보네요~^^
+                                        2박3일 간 다녀올만한 부산 여행지 중에서는
+                                        감천문화마을, 송도해상케이블카,
+                                        흰여울길, 오륙도 스카이워크,
+                                        기장 해동용궁사 , 루지 등
+                                        이 외에도 둘러볼만한 여행지들은 많으니
+                                        여행하시는데 참고하시기 바랍니다:)','2023.03.22',4,'myrealkorea2');
+insert into free_board_comment values (FREE_BOARD_COMMENT_F_CO_NO_SEQ.nextval,
+                                       '대전 여행지를 찾고 계시는군요. 참고로 저는 부산사람입니다.
+제가 거주하면서 느낀 것은 전국 최고의 노잼도시라고 알려져있는 대전은 사실 다른 도시와 다를 바가 없다는 것입니다. 사는 입장에서는 동일한데 왜 노잼이냐? 그건 관광객의 입장에서 추천드릴 만큼의 특색있는 도시는 또 아니거든요.','2023.02.14',5,'myrealkorea1');
 
 /*************** ticket ***********************/
 --TICKET 티켓 상품

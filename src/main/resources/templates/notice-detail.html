@@ -38,15 +38,6 @@
 
 <body>
 
-	<div id="preloader">
-		<div class="sk-spinner sk-spinner-wave">
-			<div class="sk-rect1"></div>
-			<div class="sk-rect2"></div>
-			<div class="sk-rect3"></div>
-			<div class="sk-rect4"></div>
-			<div class="sk-rect5"></div>
-		</div>
-	</div>
 	<!-- End Preload -->
 
 	<div class="layer"></div>
@@ -98,6 +89,15 @@
 									</ul>
 									
 								</div>
+								
+						<!-- 수정 & 삭제 -->
+						<div class="notice-detail-btns"  th:if="${loginUser != null && loginUser.userId == 'admin'}">
+							<a class="btn_1" th:href=@{notice-modify-form(nNo=${notice.nNo})} role="button" id="notice-update-btn">수정</a> &nbsp; &nbsp; &nbsp;
+							<a class="btn_1" href="" role="button" id="notice-delete-action-btn">삭제</a>
+							<input type="hidden"  id="nNo-hidden-value" th:value=${notice.nNo}>
+						</div>
+						<!-- End 수정 & 삭제 -->
+								
 							</div>
 							<p></p>
 							<p th:text=${notice.nContent}></p>
@@ -111,11 +111,7 @@
 								</div>
 							</div>
 						<!-- end post -->
-						<div th:if="${loginUser != null && loginUser.userId == 'admin'}">
-						<a class="btn_1" th:href=@{notice-modify-form(nNo=${notice.nNo})} role="button" id="notice-update-btn">수정</a> &nbsp; &nbsp; &nbsp;
-						<a class="btn_1" href="" role="button" id="notice-delete-action-btn">삭제</a>
-						<input type="hidden"  id="nNo-hidden-value" th:value=${notice.nNo}>
-						</div>
+						
 					</div>
 					<!-- end box_style_1 -->
 					</div>
@@ -124,7 +120,7 @@
 
 				<!-- End col-lg-9-->
 
-				<aside class="col-lg-3 add_bottom_30">
+				<aside class="col-lg-3 add_bottom_30 notice-category" >
 				
 					<div class="widget" id="cat_blog">
 						<h4>CLICK</h4>

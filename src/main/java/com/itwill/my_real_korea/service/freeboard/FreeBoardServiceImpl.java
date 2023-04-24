@@ -1,6 +1,8 @@
 package com.itwill.my_real_korea.service.freeboard;
 
+import com.itwill.my_real_korea.controller.FreeBoardController;
 import com.itwill.my_real_korea.dao.freeboard.FreeBoardDao;
+import com.itwill.my_real_korea.dto.City;
 import com.itwill.my_real_korea.dto.freeboard.FreeBoard;
 import com.itwill.my_real_korea.util.PageMaker;
 import com.itwill.my_real_korea.util.PageMakerDto;
@@ -31,7 +33,14 @@ public class FreeBoardServiceImpl implements FreeBoardService {
 
     @Override
     public int updateFreeBoard(FreeBoard freeBoard) throws Exception {
-        return freeBoardDao.updateBoard(freeBoard);
+        FreeBoard updateFreeBoard = FreeBoard.builder()
+                .fBoTitle(freeBoard.getFBoTitle())
+                .fBoContent(freeBoard.getFBoContent())
+                .fBoNo(freeBoard.getFBoNo())
+                .build();
+        City city = freeBoard.getCity();
+        updateFreeBoard.setCity(city);
+        return freeBoardDao.updateBoard(updateFreeBoard);
     }
 
     @Override

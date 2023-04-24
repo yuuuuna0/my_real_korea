@@ -38,16 +38,8 @@
 <body>
 
 
-	<div id="preloader">
-		<div class="sk-spinner sk-spinner-wave">
-			<div class="sk-rect1"></div>
-			<div class="sk-rect2"></div>
-			<div class="sk-rect3"></div>
-			<div class="sk-rect4"></div>
-			<div class="sk-rect5"></div>
-		</div>
-	</div>
-	<!-- End Preload -->
+
+
 
 	<div class="layer"></div>
 	<!-- Mobile menu overlay mask -->
@@ -71,7 +63,7 @@
 		<div id="position">
 			<div class="container">
 				<ul>
-					<li><a href="index">마이리얼코리아</a>
+					<li><i class="icon-home" onclick="location.href='index'"></i><a href="index"></a>
 					</li>
 					<li><a href="freeboard-list">게시판</a>
 					</li>
@@ -105,9 +97,12 @@
 									<div class="form-group">
 										<select id="sort" name="sort" onchange="if(this.value) location.href=(this.value);">
 											<option value="">정렬</option>
-											<option value="freeboard-list-fBoNo-desc" >최신순</option>
-											<option value="freeboard-list-fBoNo-asc">오래된순</option>
-											<option value="freeboard-list-readCount-desc">조회수높은순</option>
+											<option value="freeboard-list-fBoNo-desc?pageNo=1" >최신순:1</option>
+											<option value="freeboard-list-fBoNo-desc?pageNo=2" >최신순:2</option>
+											<option value="freeboard-list-fBoNo-asc?pageNo=1">오래된순:1</option>
+											<option value="freeboard-list-fBoNo-asc?pageNo=2">오래된순:2</option>
+											<option value="freeboard-list-readCount-desc?pageNo=1">조회수높은순:1</option>
+											<option value="freeboard-list-readCount-desc?pageNo=2">조회수높은순:2</option>
 										</select>
 									</div>
 								</div>
@@ -177,14 +172,14 @@
 								</li>
 								<li class="page-item" th:if="${freeBoardList.pageMaker.curPage!=1}"><a class="page-link"   th:href="'?pageNo=1'">1</a>
 								</li>
-								<li class="page-item active" ><a class="page-link" th:if="${freeBoardList.pageMaker.curPage}==2"  href="?pageNo=2" >2</a>
+								<!--  <li class="page-item active" ><a class="page-link" th:if="${freeBoardList.pageMaker.curPage}==2"  href="?pageNo=2" >2</a>
 								</li>
 								<li class="page-item" ><a class="page-link"  th:if="${freeBoardList.pageMaker.curPage}!=2" href="?pageNo=2" >2</a>
 								</li>
 								<!-- 현재 위치 해 있는 페이지 & 블록  다음블록으로 이동은 안됨-->
-								<li class="page-item active" ><a class="page-link"  th:if="${freeBoardList.pageMaker.curPage}==3" href="?pageNo=3" >3</a></li>
+								<!--  <li class="page-item active" ><a class="page-link"  th:if="${freeBoardList.pageMaker.curPage}==3" href="?pageNo=3" >3</a></li>
 								
-								<li class="page-item" ><a class="page-link"  th:unless="${freeBoardList.pageMaker.curPage}==3" href="?pageNo=3" >3</a></li>
+								<li class="page-item" ><a class="page-link"  th:unless="${freeBoardList.pageMaker.curPage}==3" href="?pageNo=3" >3</a></li>-->
 								<li class="page-item active" ><a class="page-link" th:if="${freeBoardList.pageMaker.curPage}==${freeBoardList.pageMaker.totPage}" th:href="'?pageNo='+${freeBoardList.pageMaker.totPage}" th:text="${freeBoardList.pageMaker.totPage}"></a>
 								</li>
 								<li class="page-item" ><a class="page-link" th:if="${freeBoardList.pageMaker.curPage}!=${freeBoardList.pageMaker.totPage}" th:href="'?pageNo='+${freeBoardList.pageMaker.totPage}" th:text="${freeBoardList.pageMaker.totPage}"></a>
@@ -230,14 +225,14 @@
 								<li><a id="freeboard-city5">대전</a></li>
 								<li><a id="freeboard-city6">부산</a>
 								<hr>
-									<h id="freeboard-write-form-btn" class="btn_1" style="color:white;  text-align:center"  th:if="${loginUser != null && loginUser.userId == freeBoard.userId}" role="button" th:text="'자유게시판 글쓰기'"></h>
-									<h  class="btn_1" style="color:white;  text-align:center" th:unless="${loginUser != null && loginUser.userId == freeBoard.userId}" role="button" onclick="window.alert('로그인하세요')" th:text="'자유게시판 글쓰기'"></h>
+									<h id="freeboard-write-form-btn" class="btn_1" style="color:white;  text-align:center"  th:if="${loginUser != null }" role="button" th:text="'자유게시판 글쓰기'"></h>
+									<h  class="btn_1" style="color:white;  text-align:center" th:unless="${loginUser != null}" role="button" onclick="window.alert('로그인하세요')" th:text="'자유게시판 글쓰기'"></h>
 									<hr>
 						</li>
 							
 							</ul>
-									<a class="sr-only" id="'fBoUserId'"  th:each="freeBoard:${freeBoardList}" th:if="${loginUser != null && loginUser.userId == freeBoard.userId}"  th:value="${loginUser.userId}"></a>
-							
+									<a class="sr-only" id="'fBoUserId'"  th:each="freeBoard:${freeBoardList}" th:if="${loginUser != null}"  th:value="${loginUser.userId}"></a>
+									<a href="freeboard-write-form">지금은 그냥 글쓰러가기</a>
 						</div>
 						<!-- End widget -->
 								</aside>
@@ -304,7 +299,7 @@
 								</tr>
 								<tr id='boardlist_tr2'> 
 {{#each data.itemList}}
-								        <td width=300> <a  href=freeboard-detail?fBoNo={{fboNo}}>{{fboTitle}}></a></td>
+								        <td width=300><a style="color:grey;" href=freeboard-detail?fBoNo={{fboNo}}>{{fboTitle}}</a></td>
 										<td width=5 class="icon-comment"></td>
 										<td width=10> {{commentCount}}</td> 
 										<td width=5 class="icon-map"></td>

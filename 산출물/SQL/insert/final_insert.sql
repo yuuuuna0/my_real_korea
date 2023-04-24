@@ -46,30 +46,27 @@ insert into city(city_no,city_name,latitude,longitude) values(city_city_no_seq.n
 /*************** notice ***********************/
 -- 공지사항 notice insert
 
-insert into notice(n_no,n_title,n_content,n_date,n_readcount,user_id) values (notice_n_no_seq.nextval,'공지사항은1','공지사항내용1',sysdate,1,'admin');
-insert into notice(n_no,n_title,n_content,n_date,n_readcount,user_id) values (notice_n_no_seq.nextval,'공지사항은2','공지사항내용2',sysdate,2,'admin');
-insert into notice(n_no,n_title,n_content,n_date,n_readcount,user_id) values (notice_n_no_seq.nextval,'공지사항삼3','공지사항내용3',sysdate,3,'admin');
-insert into notice(n_no,n_title,n_content,n_date,n_readcount,user_id) values (notice_n_no_seq.nextval,'공지사항이다4','공지사항내용4','2023/04/02',4,'admin');
-insert into notice(n_no,n_title,n_content,n_date,n_readcount,user_id) values (notice_n_no_seq.nextval,'공지사항이야5','공지사항내용5','2023/04/03',8,'admin');
-insert into notice(n_no,n_title,n_content,n_date,n_readcount,user_id) values (notice_n_no_seq.nextval,'공지사항안내6','공지사항내용6','2023/04/05',10,'admin');
-insert into notice(n_no,n_title,n_content,n_date,n_readcount,user_id) values (notice_n_no_seq.nextval,'공지사항안내7','공지사항내용7','2023/05/02',15,'admin');
-insert into notice(n_no,n_title,n_content,n_date,n_readcount,user_id) values (notice_n_no_seq.nextval,'공지사항결제8','공지사항내용8','2023/06/03',23,'admin');
-insert into notice(n_no,n_title,n_content,n_date,n_readcount,user_id) values (notice_n_no_seq.nextval,'공지사항결론9','공지사항내용9','2023/07/05',2,'admin');
-insert into notice(n_no,n_title,n_content,n_date,n_readcount,user_id) values (notice_n_no_seq.nextval,'공지사항이다10','공지사항내용4','2023/04/02',4,'admin');
-insert into notice(n_no,n_title,n_content,n_date,n_readcount,user_id) values (notice_n_no_seq.nextval,'공지사항이야11','공지사항내용5','2023/04/03',8,'admin');
-insert into notice(n_no,n_title,n_content,n_date,n_readcount,user_id) values (notice_n_no_seq.nextval,'공지사항안내12','공지사항내용6','2023/04/05',10,'admin');
-insert into notice(n_no,n_title,n_content,n_date,n_readcount,user_id) values (notice_n_no_seq.nextval,'공지사항안내13','공지사항내용7','2023/05/02',15,'admin');
-insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img, user_id) values (notice_n_no_seq.nextval,'[상품추첨]나의 여행스타일을 공유해주세요 ','공지사항내용8','2023/06/03',23, 'notice6.png','admin');
-insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img, user_id) values (notice_n_no_seq.nextval,'걷다보니 부평 역사투어 안내','공지사항내용9','2023/04/23',0, 'notice3.jpg','admin');
-insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img, user_id) values (notice_n_no_seq.nextval,'[할인]제주관광공사 면세점 할인쿠폰 이벤트','제주 면세점 할인쿠폰 이벤트를 진행합니다!','2023/04/02',0, 'notice4.jpg','admin');
-insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img, user_id) values (notice_n_no_seq.nextval,'마이리얼코리아 여행후기 이벤트','여행 후기 이벤트를 진행합니다!','2023/04/03', 0, 'notice1.png','admin');
-insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img, user_id) values (notice_n_no_seq.nextval,'한강 요트투어 참가자 모집','한강 요트투어 참가자를 모집합니다!','2023/04/05', 0, 'notice2.jpg','admin');
-insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img, user_id) values (notice_n_no_seq.nextval,'나만 알던 착한 가게 돈쭐내러 가자!','착한 가게를 알려주세요!','2023/04/08', 0, 'notice7.png','admin');
-insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img, user_id) values (notice_n_no_seq.nextval,'[할인]마이리얼 코리아 즉시 15만원 할인 이벤트 ','마이리얼코리아와 함께하는 할인이벤트입니다!','2023/04/12', 0, 'notice5.png','admin');
-insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img, user_id) values (notice_n_no_seq.nextval,'[할인]선착순 서울 투어 할인 이벤트','선착순 서울 투어 할인 이벤트입니다.','2023/05/02',0, 'notice_seoul.png','admin');
-insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img, user_id) values (notice_n_no_seq.nextval,'[할인]제주 투어 50% 파격 할인','마이리얼코리아에만 있는 제주투어 50% 할인!','2023/06/03',0,'notice_jeju.png' ,'admin');
-insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img, user_id) values (notice_n_no_seq.nextval,'[신규가입]마이리얼코리아 회원가입 이벤트 : 적립금 2000 쏜다!','마이리얼코리아 신규가입 이벤트입니다.','2023/07/05',0, 'notice_point.png','admin');
-insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img, user_id) values (notice_n_no_seq.nextval,'봄X섬 인증샷 이벤트','2023 찾아가고 싶은 섬과 함께 인증샷을 찍어주세요!','2023/04/15', 0, 'notice8.png','admin');
+insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img, user_id) values (notice_n_no_seq.nextval,'나만의 여행스타일 공유하고 상품 받자! ','나의 여행스타일을 공유해주세요','2023/03/03',23, 'notice6.png','admin');
+insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img, user_id) values (notice_n_no_seq.nextval,'새로운 투어, 역사 투어!','걷다보니 부평 역사투어 안내','2023/03/13',0, 'notice3.jpg','admin');
+insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img, user_id) values (notice_n_no_seq.nextval,'제주도 여행 계획있다면, 쿠폰 받아가세요~!','제주 면세점 할인쿠폰 이벤트를 진행합니다!','2023/03/17',8, 'notice4.jpg','admin');
+insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img, user_id) values (notice_n_no_seq.nextval,'여행 후기 잘 쓰고 상품 받자!','여행 후기 이벤트를 진행합니다!','2023/03/23', 0, 'notice1.png','admin');
+insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img, user_id) values (notice_n_no_seq.nextval,'[모집]요트 투어 가고싶은 분들 주목!','요트투어 참가자를 모집합니다!','2023/04/05', 0, 'notice2.jpg','admin');
+insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img, user_id) values (notice_n_no_seq.nextval,'[할인]마이리얼코리아 회원에게만 할인! ','마이리얼코리아와 함께하는 할인이벤트입니다!','2023/04/12', 16, 'notice5.png','admin');
+insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img, user_id) values (notice_n_no_seq.nextval,'나만 모르던 서울 투어, 친구와 함께해요','선착순 서울 투어 할인 이벤트입니다.','2023/04/12',0, 'notice_seoul.png','admin');
+insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img, user_id) values (notice_n_no_seq.nextval,'[할인]제주도 이색 투어, 할인 혜택 받아가세요!','마이리얼코리아에만 있는 제주투어 50% 할인!','2023/04/13',0,'notice_jeju.png' ,'admin');
+insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img, user_id) values (notice_n_no_seq.nextval,'[신규가입]오직 신규가입자에게만 : 적립금 2000 쏜다!','마이리얼코리아 신규가입 이벤트입니다.','2023/04/14',5, 'notice_point.png','admin');
+insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img, user_id) values (notice_n_no_seq.nextval,'여행가고 싶은 공간을 사진으로 올려주세요!','2023 찾아가고 싶은 섬과 함께 인증샷을 찍어주세요!','2023/04/15', 0, 'notice8.png','admin');
+insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img, user_id) values (notice_n_no_seq.nextval,'[상품추첨]나의 여행스타일을 공유해주세요 ','공지사항내용8','2023/04/16',13, 'notice6.png','admin');
+insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img, user_id) values (notice_n_no_seq.nextval,'걷다보니 부평 역사투어 안내','공지사항내용9','2023/04/17',0, 'notice3.jpg','admin');
+insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img, user_id) values (notice_n_no_seq.nextval,'[할인]제주관광공사 면세점 할인쿠폰 이벤트','제주 면세점 할인쿠폰 이벤트를 진행합니다!','2023/04/18',0, 'notice4.jpg','admin');
+insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img, user_id) values (notice_n_no_seq.nextval,'마이리얼코리아 여행후기 이벤트','여행 후기 이벤트를 진행합니다!','2023/04/18', 0, 'notice1.png','admin');
+insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img, user_id) values (notice_n_no_seq.nextval,'한강 요트투어 참가자 모집','한강 요트투어 참가자를 모집합니다!','2023/04/19', 15, 'notice2.jpg','admin');
+insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img, user_id) values (notice_n_no_seq.nextval,'나만 알던 착한 가게 돈쭐내러 가자!','착한 가게를 알려주세요!','2023/04/20', 0, 'notice7.png','admin');
+insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img, user_id) values (notice_n_no_seq.nextval,'[할인]마이리얼 코리아 즉시 15만원 할인 이벤트 ','마이리얼코리아와 함께하는 할인이벤트입니다!','2023/04/20', 0, 'notice5.png','admin');
+insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img, user_id) values (notice_n_no_seq.nextval,'[할인]선착순 서울 투어 할인 이벤트','선착순 서울 투어 할인 이벤트입니다.','2023/04/21',0, 'notice_seoul.png','admin');
+insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img, user_id) values (notice_n_no_seq.nextval,'[할인]제주 투어 50% 파격 할인','마이리얼코리아에만 있는 제주투어 50% 할인!','2023/04/22',10,'notice_jeju.png' ,'admin');
+insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img, user_id) values (notice_n_no_seq.nextval,'[신규가입]마이리얼코리아 회원가입 이벤트 : 적립금 2000 쏜다!','마이리얼코리아 신규가입 이벤트입니다.','2023/04/23',0, 'notice_point.png','admin');
+insert into notice(n_no,n_title,n_content,n_date,n_readcount,n_img, user_id) values (notice_n_no_seq.nextval,'봄X섬 이벤트 : 찾아가고싶은 섬을 찍어주세요!','2023 찾아가고 싶은 섬과 함께 인증샷을 찍어주세요!','2023/04/24', 0, 'notice8.png','admin');
 
 
 
@@ -215,7 +212,7 @@ insert into trip_board(t_bo_no,t_bo_title,t_bo_content,t_bo_date,t_bo_readcount,
             342,--조회수
             0,-- 모집상태
             1,--모집인원
-            'img1.png',
+            'jeju1.jpg',
             '2023-05-01','2023-05-10',
             '계획적인',--여행스타일
             '아무나다좋아',--해시태그
@@ -234,7 +231,7 @@ insert into trip_board(t_bo_no,t_bo_title,t_bo_content,t_bo_date,t_bo_readcount,
             39,--조회수
             0,-- 모집상태
             3,--모집인원
-            'img1.png',
+            'gangwon1.jpg',
             '2023-07-23','2023-07-26',
             '즉흥적인',--여행스타일
             '재밌게놀아요',--해시태그
@@ -252,7 +249,7 @@ insert into trip_board(t_bo_no,t_bo_title,t_bo_content,t_bo_date,t_bo_readcount,
             29,--조회수
             0,-- 모집상태
             5,--모집인원
-            'img1.png',
+            'daejeon1.jpg',
             '2023-05-21','2023-05-23',
             '느긋한',--여행스타일
             '좋은시간보냅시다.',--해시태그
@@ -271,7 +268,7 @@ insert into trip_board(t_bo_no,t_bo_title,t_bo_content,t_bo_date,t_bo_readcount,
             754,--조회수
             0,-- 모집상태
             4,--모집인원
-            'img1.png',
+            'gyeonggi1.jpg',
             '2023-08-29','2023-08-30',
             '사진찍는',--여행스타일
             '아무나다좋아',--해시태그
@@ -291,7 +288,7 @@ insert into trip_board(t_bo_no,t_bo_title,t_bo_content,t_bo_date,t_bo_readcount,
             32,--조회수
             0,-- 모집상태
             1,--모집인원
-            'img1.png',
+            'gyeonggi2.jpg',
             '2023-05-01','2023-05-10',
             '느긋한',--여행스타일
             '달려',--해시태그
@@ -312,7 +309,7 @@ insert into trip_board(t_bo_no,t_bo_title,t_bo_content,t_bo_date,t_bo_readcount,
             55,--조회수
             0,-- 모집상태
             3,--모집인원
-            'img1.png',
+            'seoul1.jpg',
             '2023-06-05','2023-06-05',
             '계획적인',--여행스타일
             '아무나다좋아',--해시태그
@@ -331,7 +328,7 @@ insert into trip_board(t_bo_no,t_bo_title,t_bo_content,t_bo_date,t_bo_readcount,
             239,--조회수
             0,-- 모집상태
             3,--모집인원
-            'img1.png',
+            'jeju2.jpg',
             '2023-05-03','2023-05-07',
             '사진찍는',--여행스타일
             '제주도여행',--해시태그
@@ -351,7 +348,7 @@ insert into trip_board(t_bo_no,t_bo_title,t_bo_content,t_bo_date,t_bo_readcount,
             65,--조회수
             0,-- 모집상태
             2,--모집인원
-            'img1.png',
+            'busan1.jpg',
             '2023-04-27','2023-05-10',
             '계획적인',--여행스타일
             '모험추구형',--해시태그
@@ -372,7 +369,7 @@ insert into trip_board(t_bo_no,t_bo_title,t_bo_content,t_bo_date,t_bo_readcount,
             98,--조회수
             0,-- 모집상태
             4,--모집인원
-            'img1.png',
+            'busan2.jpg',
             '2023-07-01','2023-07-05',
             '계획적인',--여행스타일
             '아무나다좋아',--해시태그
@@ -392,7 +389,7 @@ insert into trip_board(t_bo_no,t_bo_title,t_bo_content,t_bo_date,t_bo_readcount,
             42,--조회수
             0,-- 모집상태
             2,--모집인원
-            'img1.png',
+            'busan3.jpg',
             '2023-06-13','2023-06-14',
             '즉흥적인',--여행스타일
             '아무나다좋아',--해시태그
@@ -411,7 +408,7 @@ insert into trip_board(t_bo_no,t_bo_title,t_bo_content,t_bo_date,t_bo_readcount,
             32,--조회수
             0,-- 모집상태
             1,--모집인원
-            'img1.png',
+            'daejeon2.jpg',
             '2023-08-01','2023-08-10',
             '뚜벅이',--여행스타일
             '아무나다좋아',--해시태그
@@ -429,7 +426,7 @@ insert into trip_board(t_bo_no,t_bo_title,t_bo_content,t_bo_date,t_bo_readcount,
             76,--조회수
             0,-- 모집상태
             2,--모집인원
-            'img1.png',
+            'daejeon3.jpg',
             '2023-06-23','2023-06-23',
             '즉흥적인',--여행스타일
             '아무나다좋아',--해시태그
@@ -447,7 +444,7 @@ insert into trip_board(t_bo_no,t_bo_title,t_bo_content,t_bo_date,t_bo_readcount,
             40,--조회수
             0,-- 모집상태
             3,--모집인원
-            'img1.png',
+            'daejeon4.jpg',
             '2023-05-01','2023-05-02',
             '계획적인',--여행스타일
             '아무나다좋아',--해시태그
@@ -469,7 +466,7 @@ insert into trip_board(t_bo_no,t_bo_title,t_bo_content,t_bo_date,t_bo_readcount,
             13,--조회수
             1,-- 모집상태
             1,--모집인원
-            'img1.png',
+            'gangwon2.jpg',
             '2023-04-22','2023-04-23',
             '즉흥적인',--여행스타일
             '아무나다좋아',--해시태그
@@ -489,7 +486,7 @@ insert into trip_board(t_bo_no,t_bo_title,t_bo_content,t_bo_date,t_bo_readcount,
             76,--조회수
             1,-- 모집상태
             2,--모집인원
-            'img1.png',
+            'gangwon3.jpg',
             '2023-04-10','2023-04-14',
             '계획적인',--여행스타일
             '아무나다좋아',--해시태그
@@ -512,7 +509,7 @@ insert into trip_board(t_bo_no,t_bo_title,t_bo_content,t_bo_date,t_bo_readcount,
             45,--조회수
             1,-- 모집상태
             6,--모집인원
-            'img1.png',
+            'seoul2.jpg',
             '2023-04-01','2023-04-10',
             '계획적인',--여행스타일
             '아무나다좋아',--해시태그
@@ -533,7 +530,7 @@ insert into trip_board(t_bo_no,t_bo_title,t_bo_content,t_bo_date,t_bo_readcount,
             342,--조회수
             0,-- 모집상태
             2,--모집인원
-            'img1.png',
+            'seoul3.jpg',
             '2023-05-07','2023-05-10',
             '느긋한',--여행스타일
             '아무나다좋아',--해시태그
@@ -553,7 +550,7 @@ insert into trip_board(t_bo_no,t_bo_title,t_bo_content,t_bo_date,t_bo_readcount,
             342,--조회수
             0,-- 모집상태
             4,--모집인원
-            'img1.png',
+            'seoul4.jpg',
             '2023-06-24','2023-06-28',
             '뚜벅이',--여행스타일
             '아무나다좋아',--해시태그

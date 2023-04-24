@@ -4,10 +4,15 @@ import * as Request from "./request.js";
 /*
  */
 let sock;
-let myId = document.getElementById('myId').textContent;
-
-var roomName = document.getElementById('roomName').value;
+let myId = $('#myId').val();
+let roomName = document.getElementById('roomName').textContent;
+console.log(myId);
 console.log(roomName);
+
+const serializedList = $('#jsonMyChatRoomNameList').val();
+const myChatRoomNameList = JSON.parse(serializedList);
+console.log(myChatRoomNameList);
+
 let receiverId;
 let preOnlineList;
 let masterStatusContent;  
@@ -84,32 +89,12 @@ function onMessage(msg) {
 	console.log('time >>> ', time)
 	console.log('newOne >>> ', newOne);
 	console.log('outOne >>> ', outOne);
-/*
-	// 새로운 유저 접속했을 때 senderId가 포함된 roomName 가진 채팅방 목록 가져오기
+
+	// 새로운 유저 접속했을 때 senderId가 포함된 roomName 가진 채팅방 목록 가져오기 - myChatRoomNameList
 	if (newOne != null) {
 		console.log("새로운 접속자 있음");
-		if (myId == 'master' && newOne == "master") {
-			getOnlineList(onlineList);
-		} else if (myId == "master" && newOne != "master") {
-			console.log("new one login >>>> ", newOne);
-			insertOnlineList(newOne);
-		}
+		getOnlineList(myChatRoomNameList);
 	}
-	// when user disconnect
-	if (outOne != null && myId == 'master') {
-		console.log("user disconnect >>> ", outOne);
-		deleteOnlieList(outOne);
-	}
-
-	// save or show message
-	if (myId == 'master' && senderId != 'master' && receiverId != senderId) {
-		addStagingMessage(senderId, time, message);
-	} else {
-		insertMessage(senderId, time, message);
-	}
-
-*/
-	
 	
 	// 메세지 보내기
 	insertMessage(senderId, receiverId, time, message);
@@ -300,13 +285,14 @@ function activeToggle(element) {
 	console.log('receiverId >>> ', receiverId);
 	console.log('preReceiverId >>> ', preReceiverId);
 
-	if (receiverId != preReceiverId && preReceiverId != null)
+	if (receiverId != preReceiverId && preReceiverId != null) {
 		document.getElementById(preReceiverId).classList.remove('active');
-
+	}
 	setChatHistory(preReceiverId);
 	document.getElementById('chat-content').innerHTML = "";
 	getChatHistory(receiverId);
 	divideChatSection(receiverId);
+	
 	if (document.getElementById(receiverId).querySelector('.circle') != null) {
 		document.getElementById(receiverId).querySelector('.circle > .staging-count').textContent = "";
 		document.getElementById(receiverId).querySelector('.circle').classList.add('d-none');
@@ -314,13 +300,25 @@ function activeToggle(element) {
 }
 
 /************ 모든 채팅 사용자들 채팅방 목록에 넣기 *************/
-function getOnlineList(onlineList) {
+/*
+function getOnlineList(myChatRoomNameList) {
 	var onlineUser = document.querySelector("#online-user");
 	onlineUser.innerHTML = "";
-	onlineList.forEach(user => {
-		insertOnlineList(user);
+	myChatRoomNameList.forEach(chatRoomName => {
+		insertOnlineList(chatRoomName);
 	});
 }
+*/
+
+function getOnlineList(myChatRoomNameList) {
+	var onlineUser = document.querySelector("#online-user");
+	onlineUser.innerHTML = "";
+	for (var chatRoomName in myChatRoomNameList) {
+		insertOnlineList(myChatRoomNameList[chatRoomName]);
+	}
+}
+
+
 /************ 채팅방 목록 가져오기 *************/
 // insert online user list
 function insertOnlineList(user) {
@@ -347,18 +345,17 @@ function insertOnlineList(user) {
 		icon.classList.add('fa', 'fa-circle', 'online');
 		var span = document.createElement('span');
 		span.setAttribute('id', 'master-status-content');
-		span.textContent = 'online';
+		span.textContent = '채팅중';
 		statusDiv.appendChild(icon);
 		statusDiv.appendChild(span);
 
 		aboutDiv.appendChild(statusDiv);
 
-		li.appendChild(img);
 		li.appendChild(aboutDiv);
 
 		var alertDiv = document.createElement('div');
 		alertDiv.classList.add('circle', 'd-flex', 'align-items-center', 'justify-content-center', 'd-none');
-		aspan = document.createElement('span');
+		let aspan = document.createElement('span');
 		aspan.classList.add('staging-count');
 		alertDiv.appendChild(aspan);
 		li.appendChild(alertDiv);

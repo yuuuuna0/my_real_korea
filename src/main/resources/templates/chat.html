@@ -18,14 +18,9 @@
         <div class="card chat-app">
         	<!-- 채팅방 시작 --> 
             <div id="plist" class="people-list">
-                <div class="input-group">
-                  <div class="input-group-prepend">
-                        <span class="input-group-text"><i class="fa fa-search"></i></span> 
-                    </div> 
-                    <input type="text" class="form-control" placeholder="Search...">
-                </div>
                 <!-- 채팅방 목록 -->
                 <ul id="online-user" class="list-unstyled chat-list mt-2 mb-0">
+                	<th:block th:if="${myChatRoomList != null}">
                     <li class="clearfix" id="chat-room-list" th:each="chatRoom:${myChatRoomList}">
                         <div class="about">
                             <div class="name" id="master" th:text="${chatRoom.roomName}"></div>
@@ -35,6 +30,18 @@
                             </div>                                            
                         </div>
                     </li>
+                    </th:block>
+                    <th:block th:if="${myChatRoomList == null}">
+                    <li class="clearfix" id="chat-room-list" >
+                        <div class="about">
+                            <div class="name" id="master" th:text="${roomName}"></div>
+                            <div class="status" id="master-status"> 
+                            	<i id="master-status-icon" class="fa fa-circle offline"></i> 
+                            	<span id="master-status-content">offline </span> 
+                            </div>                                            
+                        </div>
+                    </li>
+                    </th:block>
                     <li class="clearfix active">
                         <div class="about">
                             <div class="name">Aiden Chavez</div>
@@ -55,10 +62,10 @@
                             <a href="index" onclick="toHome();"><img alt="" src="img/chat_logo_myrealkorea.png" title="홈으로 이동"></a>
                             <div class="chat-about">
                             	<span class="m-b-0">채팅</span>
-                                <span id="myId" class="m-b-0" th:text="${senderId}"></span>&
-                                <span id="receiverId" class="m-b-0" th:text="${receiverId}"></span>
-                                <input name="roomName" id="roomName" type="hidden" th:value=${roomName}>
-                               <!-- <input name="receiverId" id="receiverId" type="hidden" th:value=${receiverId}> --> 
+                                <span id="roomName"  class="m-b-0" th:text="${roomName}"></span>
+                                <input name="jsonMyChatRoomNameList" id="jsonMyChatRoomNameList" type="hidden" th:value=${jsonMyChatRoomNameList}>
+                                <input name="receiverId" class="m-b-0" id="receiverId" type="hidden" th:value=${receiverId}>
+                                <input id="myId" class="m-b-0" type="hidden" th:value=${senderId}>
                                
                                 <button class="input-group-text" type="button" id="disconn"
 								data-toggle="tooltip" data-placement="top" title="채팅방나가기">채팅방 나가기</button>

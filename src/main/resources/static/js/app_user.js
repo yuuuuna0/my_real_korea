@@ -3,44 +3,60 @@ import * as Request from "./request.js";
 
 /************ user-login *************/
 
+$(document).ready(function() {
+  toastr.options = {
+    "positionClass": "toast-bottom-right",
+    "timeOut": "3000",
+    "background-color": "rgba(0, 0, 0, 0)"
+    /*
+    "extendedTimeOut": "1000",
+    "showEasing": "swing",
+    "hideEasing": "linear",
+    "showMethod": "fadeIn",
+    "hideMethod": "fadeOut",
+    "progressBar": true,
+    */
+  }
+});
+
 	
 //로그인 액션
 $(document).ready(function() {
-	$('#login_btn').click(function() {
-	if (document.f.userId.value == "") {
-		alert("아이디를 입력하십시오.");
-		document.f.userId.focus();
-		return false;
-	}
-	if (document.f.password.value == "") {
-		alert("비밀번호를 입력하십시오.");
-		document.f.password.focus();
-		return false;
-	}
+  $('#login_btn').click(function() {
+    if (document.f.userId.value == "") {
+      toastr.error('아이디를 입력하십시오.');
+      document.f.userId.focus();
+      return false;
+    }
+    if (document.f.password.value == "") {
+      toastr.error('비밀번호를 입력하십시오.');
+      document.f.password.focus();
+      return false;
+    }
 
-	$.ajax({
-	  url: './user-login',
-	  type: 'POST',
-	  data: JSON.stringify({
-	    userId: document.f.userId.value,
-	    password: document.f.password.value
-	  }),
-	  contentType: 'application/json',
-	  success: function(data) {
-	    if (data.status == 0) {
-	      window.location.replace(data.data); //이전 페이지로 이동
-	    } else if (data.status == 1) {
-	      View.render('#user-auth-template', {}, '#user-login');
-	    } else {
-	      alert('로그인에 실패했습니다.');
-	    }
-	  },
-	  error: function(xhr, status, error) {
-	    console.error(error);
-	    alert('로그인에 실패했습니다.');
-	  }
-	});
-	});
+    $.ajax({
+      url: './user-login',
+      type: 'POST',
+      data: JSON.stringify({
+        userId: document.f.userId.value,
+        password: document.f.password.value
+      }),
+      contentType: 'application/json',
+      success: function(data) {
+        if (data.status == 0) {
+          window.location.replace(data.data); //이전 페이지로 이동
+        } else if (data.status == 1) {
+          View.render('#user-auth-template', {}, '#user-login');
+        } else {
+          toastr.error(data.message);
+        }
+      },
+      error: function(xhr, status, error) {
+        console.error(error);
+        toastr.error('로그인에 실패했습니다.');
+      }
+    });
+  });
 });
 
 

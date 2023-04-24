@@ -109,7 +109,7 @@ public class UserRestController {
 	        response.setStatus(3);
 	        response.setMessage(e.getMessage());
 	        response.setData("user-login");
-	        System.out.println(">> 패스워드 불일치 (3) :"+response.getStatus());
+	        System.out.println(">> 비밀번호 불일치 (3) :"+response.getStatus());
 	        return response;
 	    }
 	    return response;

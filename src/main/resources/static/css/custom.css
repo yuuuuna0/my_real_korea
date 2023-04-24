@@ -376,3 +376,29 @@ a.btn_1.green, .btn_1.green {
 .post h2 {
     font-size: 35px;
 }
+
+.profile_pic {
+	float: none;
+    margin-bottom: 15px;
+     display: block;
+    margin: 0 auto;
+}
+
+
+.filebox .upload-name {
+    display: inline-block;
+    height: 40px;
+    padding: 0 10px;
+    border: 1px solid #dddddd;
+    width: 30%;
+    color: #999999;
+    margin-bottom: 10px;
+}
+.filebox input[type="file"] {
+    position: absolute;
+    width: 0;
+    height: 0;
+    padding: 0;
+    overflow: hidden;
+    border: 0;
+}

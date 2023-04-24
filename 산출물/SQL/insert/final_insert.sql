@@ -212,7 +212,7 @@ insert into trip_board(t_bo_no,t_bo_title,t_bo_content,t_bo_date,t_bo_readcount,
             342,--조회수
             0,-- 모집상태
             1,--모집인원
-            'img1.png',
+            'jeju1.jpg',
             '2023-05-01','2023-05-10',
             '계획적인',--여행스타일
             '아무나다좋아',--해시태그
@@ -231,7 +231,7 @@ insert into trip_board(t_bo_no,t_bo_title,t_bo_content,t_bo_date,t_bo_readcount,
             39,--조회수
             0,-- 모집상태
             3,--모집인원
-            'img1.png',
+            'gangwon1.jpg',
             '2023-07-23','2023-07-26',
             '즉흥적인',--여행스타일
             '재밌게놀아요',--해시태그
@@ -249,7 +249,7 @@ insert into trip_board(t_bo_no,t_bo_title,t_bo_content,t_bo_date,t_bo_readcount,
             29,--조회수
             0,-- 모집상태
             5,--모집인원
-            'img1.png',
+            'daejeon1.jpg',
             '2023-05-21','2023-05-23',
             '느긋한',--여행스타일
             '좋은시간보냅시다.',--해시태그
@@ -268,7 +268,7 @@ insert into trip_board(t_bo_no,t_bo_title,t_bo_content,t_bo_date,t_bo_readcount,
             754,--조회수
             0,-- 모집상태
             4,--모집인원
-            'img1.png',
+            'gyeonggi1.jpg',
             '2023-08-29','2023-08-30',
             '사진찍는',--여행스타일
             '아무나다좋아',--해시태그
@@ -288,7 +288,7 @@ insert into trip_board(t_bo_no,t_bo_title,t_bo_content,t_bo_date,t_bo_readcount,
             32,--조회수
             0,-- 모집상태
             1,--모집인원
-            'img1.png',
+            'gyeonggi2.jpg',
             '2023-05-01','2023-05-10',
             '느긋한',--여행스타일
             '달려',--해시태그
@@ -309,7 +309,7 @@ insert into trip_board(t_bo_no,t_bo_title,t_bo_content,t_bo_date,t_bo_readcount,
             55,--조회수
             0,-- 모집상태
             3,--모집인원
-            'img1.png',
+            'seoul1.jpg',
             '2023-06-05','2023-06-05',
             '계획적인',--여행스타일
             '아무나다좋아',--해시태그
@@ -328,7 +328,7 @@ insert into trip_board(t_bo_no,t_bo_title,t_bo_content,t_bo_date,t_bo_readcount,
             239,--조회수
             0,-- 모집상태
             3,--모집인원
-            'img1.png',
+            'jeju2.jpg',
             '2023-05-03','2023-05-07',
             '사진찍는',--여행스타일
             '제주도여행',--해시태그
@@ -408,7 +408,7 @@ insert into trip_board(t_bo_no,t_bo_title,t_bo_content,t_bo_date,t_bo_readcount,
             32,--조회수
             0,-- 모집상태
             1,--모집인원
-            'img1.png',
+            'daejeon2.jpg',
             '2023-08-01','2023-08-10',
             '뚜벅이',--여행스타일
             '아무나다좋아',--해시태그
@@ -426,7 +426,7 @@ insert into trip_board(t_bo_no,t_bo_title,t_bo_content,t_bo_date,t_bo_readcount,
             76,--조회수
             0,-- 모집상태
             2,--모집인원
-            'img1.png',
+            'daejeon3.jpg',
             '2023-06-23','2023-06-23',
             '즉흥적인',--여행스타일
             '아무나다좋아',--해시태그
@@ -444,7 +444,7 @@ insert into trip_board(t_bo_no,t_bo_title,t_bo_content,t_bo_date,t_bo_readcount,
             40,--조회수
             0,-- 모집상태
             3,--모집인원
-            'img1.png',
+            'daejeon4.jpg',
             '2023-05-01','2023-05-02',
             '계획적인',--여행스타일
             '아무나다좋아',--해시태그
@@ -466,7 +466,7 @@ insert into trip_board(t_bo_no,t_bo_title,t_bo_content,t_bo_date,t_bo_readcount,
             13,--조회수
             1,-- 모집상태
             1,--모집인원
-            'img1.png',
+            'gangwon2.jpg',
             '2023-04-22','2023-04-23',
             '즉흥적인',--여행스타일
             '아무나다좋아',--해시태그
@@ -486,7 +486,7 @@ insert into trip_board(t_bo_no,t_bo_title,t_bo_content,t_bo_date,t_bo_readcount,
             76,--조회수
             1,-- 모집상태
             2,--모집인원
-            'img1.png',
+            'gangwon3.jpg',
             '2023-04-10','2023-04-14',
             '계획적인',--여행스타일
             '아무나다좋아',--해시태그
@@ -509,7 +509,7 @@ insert into trip_board(t_bo_no,t_bo_title,t_bo_content,t_bo_date,t_bo_readcount,
             45,--조회수
             1,-- 모집상태
             6,--모집인원
-            'img1.png',
+            'seoul2.jpg',
             '2023-04-01','2023-04-10',
             '계획적인',--여행스타일
             '아무나다좋아',--해시태그
@@ -530,7 +530,7 @@ insert into trip_board(t_bo_no,t_bo_title,t_bo_content,t_bo_date,t_bo_readcount,
             342,--조회수
             0,-- 모집상태
             2,--모집인원
-            'img1.png',
+            'seoul3.jpg',
             '2023-05-07','2023-05-10',
             '느긋한',--여행스타일
             '아무나다좋아',--해시태그
@@ -550,7 +550,7 @@ insert into trip_board(t_bo_no,t_bo_title,t_bo_content,t_bo_date,t_bo_readcount,
             342,--조회수
             0,-- 모집상태
             4,--모집인원
-            'img1.png',
+            'seoul4.jpg',
             '2023-06-24','2023-06-28',
             '뚜벅이',--여행스타일
             '아무나다좋아',--해시태그

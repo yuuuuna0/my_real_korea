@@ -112,7 +112,7 @@ public class UserServiceImpl implements UserService{
 	    
 	    //저장된 비밀번호와 암호화된 비밀번호를 비교
 	    if (!bCryptPasswordEncoder.matches(password, user.getPassword())) {
-	        throw new PasswordMismatchException("패스워드가 일치하지 않습니다.");
+	        throw new PasswordMismatchException("비밀번호가 일치하지 않습니다.");
 	    }
 	    return user;
 	}

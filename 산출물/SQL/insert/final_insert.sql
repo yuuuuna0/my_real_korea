@@ -128,17 +128,17 @@ insert into free_board values (free_board_f_bo_no_seq.nextval,'경기도 파주�
 insert into free_board values (free_board_f_bo_no_seq.nextval,'강원도 벚꽃축제 하나요?','벚꽃좀 보고 싶네요','2022-09-03',13,3,'user2');
 insert into free_board values (free_board_f_bo_no_seq.nextval,'부산 국밥집 어디가 잘하나요','근본있는곳으로 추천부탁합니다','2022-11-03',11,4,'user3');
 insert into free_board values (free_board_f_bo_no_seq.nextval,'대전 유성온천 어떤가요','가보신분 후기좀 남겨주세요',sysdate,4,5,'user1');
-insert into free_board values (free_board_f_bo_no_seq.nextval,'자유게시판12','2박3일 여행 가려는데 명소 추천좀 해주세요',sysdate,4,5,'user1');
-insert into free_board values (free_board_f_bo_no_seq.nextval,'자유게시판13','2박3일 여행 가려는데 명소 추천좀 해주세요',sysdate,4,1,'user2');
-insert into free_board values (free_board_f_bo_no_seq.nextval,'자유게시판14','2박3일 여행 가려는데 명소 추천좀 해주세요',sysdate,4,1,'user3');
-insert into free_board values (free_board_f_bo_no_seq.nextval,'자유게시판15','2박3일 여행 가려는데 명소 추천좀 해주세요',sysdate,4,1,'user1');
-insert into free_board values (free_board_f_bo_no_seq.nextval,'자유게시판16','2박3일 여행 가려는데 명소 추천좀 해주세요',sysdate,4,3,'user2');
-insert into free_board values (free_board_f_bo_no_seq.nextval,'자유게시판17','2박3일 여행 가려는데 명소 추천좀 해주세요',sysdate,4,5,'user3');
-insert into free_board values (free_board_f_bo_no_seq.nextval,'자유게시판18','2박3일 여행 가려는데 명소 추천좀 해주세요',sysdate,4,5,'user1');
-insert into free_board values (free_board_f_bo_no_seq.nextval,'자유게시판19','2박3일 여행 가려는데 명소 추천좀 해주세요',sysdate,4,4,'user2');
-insert into free_board values (free_board_f_bo_no_seq.nextval,'자유게시판20','2박3일 여행 가려는데 명소 추천좀 해주세요',sysdate,4,3,'user2');
-insert into free_board values (free_board_f_bo_no_seq.nextval,'자유게시판21','2박3일 여행 가려는데 명소 추천좀 해주세요',sysdate,4,3,'user3');
-insert into free_board values (free_board_f_bo_no_seq.nextval,'자유게시판22','2박3일 여행 가려는데 명소 추천좀 해주세요',sysdate,4,2,'user3');
+insert into free_board values (free_board_f_bo_no_seq.nextval,'서울 맛집리스트 부탁해요','점심 때 불고기 백반 먹고싶어요.','2023-04-11',1,1,'user1');
+insert into free_board values (free_board_f_bo_no_seq.nextval,'제주 고기국수 추천','제주 고기국수 유명한 집이요.','2023-01-18',1,6,'user3');
+insert into free_board values (free_board_f_bo_no_seq.nextval,'서울말고 근교에서 괜찮은 고깃집 있나요.','웨이팅 있어도 괜찮아요. 고기면 다 좋습니다.','2023-01-20',1,2,'user1');
+insert into free_board values (free_board_f_bo_no_seq.nextval,'통영 여행 코스 추천','뚜벅이여행입니다.','2022-01-10',1,5,'minyoung1');
+insert into free_board values (free_board_f_bo_no_seq.nextval,'동백꽃 볼 수 있는 곳 추천이요','제주도 여행가서 시간 남으면 보러 가려고요','2023-02-25',1,6,'user3');
+insert into free_board values (free_board_f_bo_no_seq.nextval,'서울 인근 핫플 추천받습니다','개인적으로 곱창 선호합니다','2023-03-10',1,2,'user3');
+insert into free_board values (free_board_f_bo_no_seq.nextval,'서울에서 놀러 갈 수 있는 곳 추천','가족, 친구들과 여행 갈 때 갈 수 있는 곳으로 부탁해요.'2022-01-03',6,2,'user1');
+insert into free_board values (free_board_f_bo_no_seq.nextval,'국내 호텔 비수기와 성수기가 언제인지 궁금합니다.','국내 호텔 성수기, 비수기에 대해서 검색해봐도 말도 다 다르고 그마저도 거의 나오지 않아서 (해외 호텔이 아닌 국내 호텔의 비수기, 성수기가 궁금합니다)  정확한 날짜 (몇월인지 이왕이면 더 구체적으로)가 언제인지 궁금합니다. 언제인가요? 그리고 지금은 비수기인가요?','2022-07-03',1,0,'user1');
+insert into free_board values (free_board_f_bo_no_seq.nextval,'임산부 국내여행','전 여행은 좋아하는데 계획을 너무 못짜서 부탁드립니다 일정은 2박3일이나 3박4일로 생각중이예요',1,0,'user2');
+insert into free_board values (free_board_f_bo_no_seq.nextval,'혼자 갈 생각인데 (1인) 국내 일본 느낌 물씬 나는 료칸 (온천) 없을까요','지역 상관 없구요 너무 비싸지만 않았으면 좋겠는데 개인노천탕이나 방에 탕 있었으면 좋겠어요 (없어도 일단은 추천받습니다) 굳이 료칸이 아니더라도 뭐 일본식 느낌나는 호텔이나 숙박 업계 소개 부탁드립니다 ~!','2023-04-24',1,0,'user3');
+insert into free_board values (free_board_f_bo_no_seq.nextval,'국내 1박2일 여행갈만한곳 추천좀','참고로 강릉,속초,양양,태안,안동,서산은 다 가봐서 안가본곳쪽으로 경험자분들 추천.부탁드려요',sysdate,1,0,'user1');
 
 -- freeboard comment
 insert into free_board_comment values (FREE_BOARD_COMMENT_F_CO_NO_SEQ.nextval,'여의도 더현대서울 지하 1층 삼성혈해물탕, 호우섬 추천 드려요. ',sysdate,1,'user3');
@@ -152,7 +152,17 @@ insert into free_board_comment values (FREE_BOARD_COMMENT_F_CO_NO_SEQ.nextval,'�
 insert into free_board_comment values (FREE_BOARD_COMMENT_F_CO_NO_SEQ.nextval,'벚꽃 많은 곳은 춘천 의암 호수 추천해요.',sysdate,1,'user3');
 insert into free_board_comment values (FREE_BOARD_COMMENT_F_CO_NO_SEQ.nextval,'부산 진구 송정3대국밥 추천합니다.',sysdate,2,'user1');
 insert into free_board_comment values (FREE_BOARD_COMMENT_F_CO_NO_SEQ.nextval,'다양한 레저 시설이 있어요. 대전역에서는 20분 걸려요.',sysdate,1,'user3');
-
+insert into free_board_comment values (FREE_BOARD_COMMENT_F_CO_NO_SEQ.nextval,'딸부자네 돼지불백이요.  ',sysdate,1,'user3');
+insert into free_board_comment values (FREE_BOARD_COMMENT_F_CO_NO_SEQ.nextval,'제주도 고기국수 맛집 새물국수요. 비빔국수도 맛있고 가성비 갑이요.',sysdate,6,'user1');
+insert into free_board_comment values (FREE_BOARD_COMMENT_F_CO_NO_SEQ.nextval,'서울 근교 오리진흙구이 맛집입니다. 워낙 유명해서 예약을 안하면 1시간정도 웨이팅이 걸릴때도 있습니다. 카페도 같이 운영해서, 식사 후 할인가로 커피를 마실수 있으며 한강이 옆에 있다보니 짧게 산책하면 좋더라구요!',sysdate,2,'user2');
+insert into free_board_comment values (FREE_BOARD_COMMENT_F_CO_NO_SEQ.nextval,'충무 김밥 사서 먹어보고 스카이라인 루지 타시면 돼요. 그리고 한려수도 케이블카도 타보세요 ',sysdate,5,'user3');
+insert into free_board_comment values (FREE_BOARD_COMMENT_F_CO_NO_SEQ.nextval,'눈내리는 날 동백꽃 카멜리아 힐에 갔었는데, 사람이 없고 한적했어요.',sysdate,6,'user1');
+insert into free_board_comment values (FREE_BOARD_COMMENT_F_CO_NO_SEQ.nextval,'별내역 부근 소곱창 맛있는 집이에요. 황소곱창 곱돌이네',sysdate,2,'user2');
+insert into free_board_comment values (FREE_BOARD_COMMENT_F_CO_NO_SEQ.nextval,'서울로7017에 가보세요. 서울 시청광장에서 가까운 거리에 있어요. ',sysdate,1,'user3');
+insert into free_board_comment values (FREE_BOARD_COMMENT_F_CO_NO_SEQ.nextval,'보통 호텔은 3월과 9월이 비수기이죠~3월 개학시즌이라 학부모들 아이들 입학 시킨다고 바쁘고~대학생들 새학년 개강해서 바쁘고~직장인들 겨울 휴가때 돈 많이 써서 긴축하고~9월도 2학기 시작이라 비슷한 이유로 비수기로 보고 있습니다~',sysdate,0,'user2');
+insert into free_board_comment values (FREE_BOARD_COMMENT_F_CO_NO_SEQ.nextval,'지역이 어딘신지 모르겠으나 가평, 강화도, 양평정도가 좋을것같습니다.',sysdate,0,'user3');
+insert into free_board_comment values (FREE_BOARD_COMMENT_F_CO_NO_SEQ.nextval,'4월 신규open 한 경주 당근료칸풀빌라 는 어떠실까요? 히노끼탕 과 개별수영장도 있구요^^ ',sysdate,2,'user1');
+insert into free_board_comment values (FREE_BOARD_COMMENT_F_CO_NO_SEQ.nextval,'제가 저렴한곳 위주로 데이트할만한곳 찾아봤어요~https://linkon.id/wonmart',sysdate,0,'user3');
 
 /*************** ticket ***********************/
 --TICKET 티켓 상품

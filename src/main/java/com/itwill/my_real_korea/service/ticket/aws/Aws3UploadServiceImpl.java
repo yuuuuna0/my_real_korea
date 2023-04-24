@@ -11,10 +11,10 @@ import com.amazonaws.services.s3.model.PutObjectRequest;
 
 import lombok.RequiredArgsConstructor;
 
-@RequiredArgsConstructor
-@Component
+//@RequiredArgsConstructor
+//@Component
 public class Aws3UploadServiceImpl implements Aws3UploadService{
-	
+/*	
 	private final AmazonS3 amazonS3;
 	private final S3Component component;
 
@@ -29,6 +29,6 @@ public class Aws3UploadServiceImpl implements Aws3UploadService{
 	public String getFileUrl(String fileName) { //업로드한 파일의 URI를 가져오는 메소드
 		
 		return amazonS3.getUrl(component.getBucket(), fileName).toString();
-	}
+	}*/
 
 }

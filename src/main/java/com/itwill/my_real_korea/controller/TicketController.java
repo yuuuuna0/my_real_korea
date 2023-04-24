@@ -50,18 +50,18 @@ public class TicketController {
     private final TicketReviewService ticketReviewService;
     private final PaymentService paymentService;
     private final RsPInfoService rsPInfoService;
-    private final Aws3UploadService aws3UploadService;
+    //private final Aws3UploadService aws3UploadService;
    
 
     @Autowired
     public TicketController(TicketService ticketService, TicketReviewService ticketReviewService,
-    						RsPInfoService rsPInfoService, PaymentService paymentService,
-    						Aws3UploadService aws3UploadService) {
+    						RsPInfoService rsPInfoService, PaymentService paymentService/*,
+    						Aws3UploadService aws3UploadService*/) {
         this.ticketService = ticketService;
         this.ticketReviewService = ticketReviewService;
         this.paymentService = paymentService;
         this.rsPInfoService = rsPInfoService;
-        this.aws3UploadService = aws3UploadService;
+       // this.aws3UploadService = aws3UploadService;
     }
     //티켓 리스트 - 페이지
     @GetMapping("/ticket-list")

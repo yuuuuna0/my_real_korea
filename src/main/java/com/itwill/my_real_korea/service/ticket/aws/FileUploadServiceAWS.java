@@ -12,10 +12,11 @@ import com.amazonaws.services.s3.model.ObjectMetadata;
 
 import lombok.RequiredArgsConstructor;
 
-@RequiredArgsConstructor
-@Service
+//@RequiredArgsConstructor
+//@Service
 public class FileUploadServiceAWS {
-	
+
+	/*
 	private final Aws3UploadService s3Service;
 	
 	public String uploadImage(MultipartFile file) { 
@@ -54,6 +55,6 @@ public class FileUploadServiceAWS {
 		}
 		
 	}
-	
+	*/
 
 }

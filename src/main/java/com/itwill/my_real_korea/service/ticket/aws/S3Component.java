@@ -7,11 +7,11 @@ import org.springframework.stereotype.Component;
 import lombok.Data;
 
 
-@Data
-@ConfigurationProperties(prefix = "cloud.aws.s3")
-@Component
+//@Data
+//@ConfigurationProperties(prefix = "cloud.aws.s3")
+//@Component
 public class S3Component {
 	
-	String bucket; // 버킷
+	//String bucket; // 버킷
 
 }

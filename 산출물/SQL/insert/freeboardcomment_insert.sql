@@ -1,15 +1,56 @@
 --insert
-insert into free_board_comment values (FREE_BOARD_COMMENT_F_CO_NO_SEQ.nextval,'여의도 더현대서울 지하 1층 삼성혈해물탕, 호우섬 추천 드려요. ',sysdate,1,'user3');
-insert into free_board_comment values (FREE_BOARD_COMMENT_F_CO_NO_SEQ.nextval,'연평도에서 잡은 싱싱한 게로 만든 백년게장 추천드려요. 경기도 화성입니다.',sysdate,2,'user1');
-insert into free_board_comment values (FREE_BOARD_COMMENT_F_CO_NO_SEQ.nextval,'면류 좋아하시면 삼척시 장호감자탕문어막국수 추천해요.',sysdate,3,'user2');
-insert into free_board_comment values (FREE_BOARD_COMMENT_F_CO_NO_SEQ.nextval,'엘시티에 있는 연화리해물천국에서 와인과 저녁 식사 한 끼 추천합니다. ',sysdate,1,'user3');
-insert into free_board_comment values (FREE_BOARD_COMMENT_F_CO_NO_SEQ.nextval,'연평도에서 잡은 싱싱한 게로 만든 백년게장 추천 드려요. 경기도 화성입니다.',sysdate,2,'user1');
-insert into free_board_comment values (FREE_BOARD_COMMENT_F_CO_NO_SEQ.nextval,'청와대, 삼청동, 국립현대미술관 코스 추천해요.',sysdate,3,'user2');
-insert into free_board_comment values (FREE_BOARD_COMMENT_F_CO_NO_SEQ.nextval,'어린이와 함께라면  아쿠아리움 관광, 과학관 관람을 추천해요. 티켓예약 플랫폼을 통해 할인된 가격으로 입장하실 수 있어요.',sysdate,1,'user3');
-insert into free_board_comment values (FREE_BOARD_COMMENT_F_CO_NO_SEQ.nextval,'인천 지역 추천해요. 드라이브 가려면 영종도에 가보세요.',sysdate,3,'user2');
-insert into free_board_comment values (FREE_BOARD_COMMENT_F_CO_NO_SEQ.nextval,'벚꽃 많은 곳은 춘천 의암 호수 추천해요.',sysdate,1,'user3');
-insert into free_board_comment values (FREE_BOARD_COMMENT_F_CO_NO_SEQ.nextval,'부산 진구 송정3대국밥 추천합니다.',sysdate,2,'user1');
-insert into free_board_comment values (FREE_BOARD_COMMENT_F_CO_NO_SEQ.nextval,'다양한 레저 시설이 있어요. 대전역에서는 20분 걸려요.',sysdate,1,'user3');
+insert into free_board_comment values (FREE_BOARD_COMMENT_F_CO_NO_SEQ.nextval,
+                                       '안녕하세요.
+                                       숙소가 잠실쪽이고 1박 2일이면...
+                                       그 근처에서 가장 가기 좋은 곳은 코엑스(COEX) 일거 같네요.
+                                       코엑스에서 다양한 전시회도 많이 하니 사이트 들어가서 한번 확인해보시구요,
+                                       전시회가 아니더라도 코엑스몰 자체에 볼거리, 먹을거리 등 많으니 한번 가보시길 추천드립니다~
+                                       (코엑스 한가운데 있는 별마루 도서관도 책 보기에 아주 좋아요~) ',sysdate,1,'admin');
+insert into free_board_comment values (FREE_BOARD_COMMENT_F_CO_NO_SEQ.nextval,
+                                       '안녕하세요
+                                       질문하신 [서울 여행 코스] 관련 답변 드리도록 하겠습니다.
+                                       서울에 가볼만한 곳들을 알아보고 계시는군요?
+                                       서울 여행 코스 중 둘러볼만한 곳들 중에서는
+                                       북촌한옥마을, 낙산공원,
+                                       서울숲, 쌈지길,
+                                       경의선 숲길, 청계광장 등
+                                       전시장으로는 그라운드시고 명동,
+                                       시간의 조각:계절, 섬세이 테라리움 등 있으니
+                                       여행하시는데 참고하시기 바랍니다.
+                                       도움이 되셨다면 채택 부탁드립니다!
+                                       감사합니다 :)','2023-01-11',1,'myrealkorea2');
+insert into free_board_comment values (FREE_BOARD_COMMENT_F_CO_NO_SEQ.nextval,
+                                       '제주도 여행코스는  서부,중부,동부 세곳으로 나누어서 1일씩 또는 2일 여행코스를 계획하시면됩니다.
+                                       서부일정
+                                       1.협재해수욕장-애월해안도로-용담해안도로-새별오름-점보빌리지-오설록녹차-카멜리아힐-곶자왈-제주항공우주박물관-테디베어뮤지엄-초콜릿박물관-유리의성-소인국테마파크
+                                       중부일정
+                                       2.중문관광단지-여미지식물원-천지연폭포-선녀와나무꾼-올레시장-쇠소깍-정방폭포-박물관이살아있다','2023-01-19',2,'aaa111');
+
+insert into free_board_comment values (FREE_BOARD_COMMENT_F_CO_NO_SEQ.nextval,
+                                       '안녕하세요 울릉도 사는 주민입니다.
+                                       울릉도 여행은 여행코스가 많지 않으니 조금 발품 파셔서 자유여행으로 오시는게
+                                       좋습니다.
+                                       김포공항에서 출발이면 강릉이 편하시겠군요. 강릉까지는 자차나 KTX를 이용하시면 편하게 오실 수 있습니다.
+                                       선박표는 "가보고 싶은섬"이라는 앱, 싸이트를 이용하시면 편하게 조회,예매까지 가능하십니다.
+                                       숙소는 차량 주차가 편한 저동, 사동, 천부쪽으로 알아보시면 좋고 "에어비앤비"라는 앱을 이용하시면
+                                       울릉도의 많은 숙박 업체를 검색해 보실 수 있습니다.(제일 많이 등록되어 있습니다.)
+                                       차량이용은 승합차를 렌트하시면 되는데 비용은 네이버에서 울릉도 렌트카로 검색하시면 금액까지
+                                       다 나와 있습니다.(자차 포함 12만원정도 예상)
+                                       여행 코스는 독도를 포함 2박 3일정도이면 충분히 다 돌아보실수 있습니다. 보토 육로관광은 A,B코스로 나뉘는데
+                                       이 역시 블로그 검색하시면 다 나와있습니다.
+                                       5월 여행이면 서둘러야 원하시는 일정과 숙소를 컨택하실수 있습니다. 조금 늦으셨습니다. ',sysdate,2,'aaa111');
+insert into free_board_comment values (FREE_BOARD_COMMENT_F_CO_NO_SEQ.nextval,
+                                       '이번주 부산여행을 떠나시나 보네요~^^
+                                        2박3일 간 다녀올만한 부산 여행지 중에서는
+                                        감천문화마을, 송도해상케이블카,
+                                        흰여울길, 오륙도 스카이워크,
+                                        기장 해동용궁사 , 루지 등
+                                        이 외에도 둘러볼만한 여행지들은 많으니
+                                        여행하시는데 참고하시기 바랍니다:)','2023.03.22',4,'myrealkorea2');
+insert into free_board_comment values (FREE_BOARD_COMMENT_F_CO_NO_SEQ.nextval,
+                                       '대전 여행지를 찾고 계시는군요. 참고로 저는 부산사람입니다.
+제가 거주하면서 느낀 것은 전국 최고의 노잼도시라고 알려져있는 대전은 사실 다른 도시와 다를 바가 없다는 것입니다. 사는 입장에서는 동일한데 왜 노잼이냐? 그건 관광객의 입장에서 추천드릴 만큼의 특색있는 도시는 또 아니거든요.','2023.02.14',5,'myrealkorea1');
+
 
 
 

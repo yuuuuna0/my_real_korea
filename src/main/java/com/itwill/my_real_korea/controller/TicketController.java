@@ -97,7 +97,8 @@ public class TicketController {
     	String forwardPath = "";
         try {
         	
-            List<Ticket> ticketList = ticketService.selectByTicketNoCityWithImg(tiNo);
+            List<Ticket> ticketList = ticketService.selectByTicketNoCityWithImg(tiNo); // 이미지 list로
+            //List<TicketImg> ticketImgList = ticketService.selectByTicketNoCityWithImg(tiNo);
             List<TicketReview> ticketReviewList = ticketReviewService.selectByTicketReviewNo(tiNo);
 //            User loginUser = (User)session.getAttribute("loginUser");
 //			if(loginUser!=null) {
@@ -377,6 +378,7 @@ public class TicketController {
 			return resultMap;
 	}
 	
+	@ResponseBody
 	//@LoginCheck // 내가 써야 삭제
 	@DeleteMapping(value="/ticketReview/{tiReviewNo}", produces = "application/json;charset=UTF-8")
 	public Map<String, Object> ticketReviewDeleteAction(@PathVariable(value="tiReviewNo") int tiReivewNo, HttpServletRequest request){

@@ -2,6 +2,7 @@ import * as View from "./view.js";
 import * as Request from "./request.js";
 // JSON.stringify() => 객체를 string 으로, JSON.parse() => string 을 객체로 만듦
 
+
 /********* function ********/
 function selectedTicketList(){
     let keyword=$('#ticket-search-keyword').val();
@@ -24,7 +25,6 @@ function selectedTicketList(){
         sortOrder:sortOrder
     };
     let async=true;
-
     Request.ajaxRequest(url,method,contentType,
         JSON.stringify(sendData),
         function(resultJson){
@@ -56,10 +56,16 @@ $(document).on('show.bs.modal','#myReview',function(){
     $('#myReview').find('#userId').val(loginUser);
     $('#myReview').find('#hiddenTiNo').val(tiNo); // input에 hidden으로 들어가있는 id 값 vlaue에 
     
+    $("#ticket-review-modify-action").hide();
+	$("#ticket-review-action").show();
     //console.log(loginUser); // id....
     //console.log(tiNo);
 });
 
+$(document).on('hidden.bs.modal','#myReview',function(){
+    $("#tiReviewTitle").val("");
+    $("#tiReviewContent").val("");
+});
 
 /* 리뷰 Action 
 
@@ -168,23 +174,24 @@ $('#ticket-review-action').click(function(e){
 
 
 
-/*티켓 삭제*/
-$(document).on('click', '#deleteTiReviewBtn',function(e){
-	
-	let tiReviewNo = $("#tiReviewNo input[name='tiReviewNo']").val();
-	console.log(tiReviewNo);
-	Request.ajaxRequest(`tiReviewNo/${tiReviewNo}`,
+/*티켓 리뷰 삭제 삭제*/
+$('.deleteTiReviewBtn').click(function(e) {
+	let tiReviewNo = $(e.target).attr('tiReviewNo');
+	console.log(tiReviewNo); // 61
+	Request.ajaxRequest('ticketReview/'+ tiReviewNo,
 						'DELETE',
 						'application/json;charset=UTF-8',
 						{},
 						function(resultJson){
+							/*url, method, contentType, sendData, callBackFunction, async*/
 							if(resultJson.code==1){
+								let tiNo = $('#hiddenTiNo').val();
 								window.location.href=`ticket-detail?tiNo=${tiNo}`;
 							} else {
 								alert(resultJson.msg);
 							}
 						},
-						ture);
+						true);
 	e.preventDefault();
 	
 });
@@ -203,11 +210,14 @@ $('#myReview').on('show.bs.modal', function(e) {
 //$(document).on('show.bs.modal','#myReview',function(e){
 $(".modifyTiReviewBtn").click(function(e) {
 	$('#myReview').modal('show');
+	$("#ticket-review-modify-action").show();
+	$("#ticket-review-action").hide();
+	
 	let tiReviewNo = $(e.target).attr('tiReviewNo');
 	let f = 'f' + tiReviewNo; // 유니크 tiReviewNo
-	console.log(f);
+	//console.log(f);
 	let form = document.getElementsByName(f);
-	console.log(form)
+	//console.log(form)
 	let title = form[0].children.namedItem('tiReviewTitle').innerText; // 폼에서 가져오기..
 	let content = form[0].children.namedItem('tiReviewContent').innerText;
 	//console.log(title);
@@ -230,7 +240,7 @@ $('#ticket-review-modify-action').click(function(e){
 				formData.append('file',null);
 			}
 		let tiReviewNo = $('#tiReviewNo').val();
-		console.log(formData);
+		//console.log(formData);
 	    $.ajax({
 	        type: 'POST',
 	        url: 'upload',
@@ -247,7 +257,7 @@ $('#ticket-review-modify-action').click(function(e){
 	            tiReviewImg: data, // url 뒷부분 안넘어옴
 	            userId:document.ticketReview.userId.value
 	        };
-	        console.log(sendData);
+	        //console.log(sendData);
 	        Request.ajaxRequest('ticketReview/'+ tiReviewNo, 
 	                            'PUT', 
 	                            'application/json;charset=UTF-8', 

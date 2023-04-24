@@ -69,11 +69,11 @@
 		<div id="position">
 			<div class="container">
 				<ul>
-					<li><a href="index">Home</a>
+					<li><i class="icon-home" onclick="location.href='index'"></i><a href="index"></a>
 					</li>
 					<li><a href="freeboard-list">게시판</a>
 					</li>
-					<li>자유 게시판</li>
+					<li>자유게시판</li>
 				</ul>
 			</div>
 		</div>
@@ -86,8 +86,9 @@
 						<div class="post nopadding" >
 							<form name="f" method="GET">
 							<div class="post_info clearfix" >
-								<div class="post-left">
-									50번 게시물
+								<div class="post-left" >
+								<a th:each="freeBoardList:${freeBoardListPage}" th:text="${freeBoardList.pageMaker.totPage}+1"></a>
+									번 게시물
 									<ul >
 								
 										<li><i class="icon-inbox-alt"></i> 
@@ -100,17 +101,17 @@
 								<div class="post-right"><a ></a>  today
 								<br>
 								<div id="city-list" >
-										<input type="checkbox" value="{1,2,3}">전국
-										<input type="checkbox" value=1>서울
-										<input type="checkbox" value=2>경기
-										<input type="checkbox" value=3>강원
+										<input type="radio" name="city-radio" value="{1,2,3}" th:object="${freeBoard}"/>전국
+										<input type="radio" name="city-radio" value=2 />서울
+										<!--  <input type="radio" name="city-radio" value=2/>경기
+										<input type="radio" name="city-radio" value=3/>강원-->
 								</div>
 								</div>
 								</div>
-							<div th:object="${freeBoard}"  class="" style='width:800px;'></div>
-							<span><input th:value="*{fBoTitle}" style='width:max;'></span><h2>제목</h2>
-							<span><input th:value="*{fBoContent}" style="flex:auto"></span><p>내용</p>
-							<a class="btn_1 green" type="submit" role="button" onclick="writeFreeBoard">제출하기</a>
+							<div th:object="${freeBoard}"  class="col-lg" style='width:flex;'></div>
+							<span>제목  <input th:value="*{fBoTitle}" style='list-style: disc; height: 30px; width: 550px'/></span><br><br>
+							<span>내용  <input th:value="*{fBoContent}" style="white-space:pre-line; height:50px; width:550px"/></span><br><br>
+							<a class="btn_1 green " style="margin-right: 0px" type="submit" role="button" onclick="writeFreeBoard" >제출하기</a>
 								
 							</form>
 							</div>
@@ -142,13 +143,7 @@
 					<div class="widget" id="cat_blog">
 						<h4>Categories</h4>
 						<ul>
-						<li><a id="freeboard-city1">전체보기</a></li>
-							<li><a href="#">Top tours</a>
-							</li>
-							<li><a href="#">Tips for travellers</a>
-							</li>
-							<li><a href="#">Events</a>
-							</li>
+						<li><a href="freeboard-list">전체보기</a></li>
 						</ul>
 					</div>
 					<!-- End widget -->
@@ -157,14 +152,10 @@
 
 					<div class="widget">
 						<h4>Recent post</h4>
-						<ul class="recent_post">
+						<ul class="recent_post" >
+				
 							<li>
-								<i class="icon-calendar-empty"></i> 16th July, 2020
-								<div><a href="#">It is a long established fact that a reader will be distracted </a>
-								</div>
-							</li>
-							<li>
-								<i class="icon-calendar-empty"></i> 16th July, 2020
+								<i class="icon-calendar-empty"></i> <a th:text="*{#dates.format(fBoDate,'yyyy-MM-dd')}"></a>
 								<div><a href="#">It is a long established fact that a reader will be distracted </a>
 								</div>
 							</li>
@@ -177,15 +168,7 @@
 					</div>
 					<!-- End widget -->
 					<hr>
-					<div class="widget tags">
-						<h4>Tags</h4>
-						<a href="#">Lorem ipsum</a>
-						<a href="#">Dolor</a>
-						<a href="#">Long established</a>
-						<a href="#">Sit amet</a>
-						<a href="#">Latin words</a>
-						<a href="#">Excepteur sint</a>
-					</div>
+		
 					<!-- End widget -->
 
 				</aside>
@@ -273,13 +256,30 @@
 	function btnAlert(){
 		alert('내용을 입력하세요.')
 	}
+	
+	</script>
+	<script>
 	function writeFreeBoard() {
 		document.getElementById('write-form').action = "freeboard-write-action";
 	    document.getElementById('write-form').submit();
-		windoow.location.href="freeboard-list"
+		location.href="freeboard-list"
 		}
 	</script>
+	<script id="freeboard-list-template" type="text/x-handlebars-template">
+	{
+		<h4>Recent post</h4>
+						<ul class="recent_post" >
+				{#each data.itemList}}
+							<li>
+								<i class="icon-calendar-empty"></i> <a>{{dateFormat fboDate}}</a>
+								<div><a href="#">{{fboTitle}}</a>
+								</div>
+							</li>
+						{{/each}}
+						</ul>
 
+
+</script>
 </body>
 
 </html>

@@ -136,7 +136,7 @@
 							</ul>
 						</div>
 					</div>
-					<form id="freeboardWriteForm" name="freeboardWriteForm" action="#" enctype="multipart/form-data">
+					<form id="freeboardWriteForm" name="freeboardWriteForm" action="#" enctype="multipart/form-data" class="was-validated" >
 
 
 						<!--						<div th:each="city:${cityList}" th:inline="text">-->
@@ -189,21 +189,16 @@
 								</div>
 							</div>
 						</div>
-						<div class="form-group">
+						<div class="form-group" >
 							<label>제목</label>
-							<!--							<input class="form-control style_2" type="text" name="fBoTitle" id="fBoTitle" placeholder="제목을 입력하세요.">-->
 							<textarea class="form-control style_2" name="fBoTitle" id="fBoTitle"  style="height:30px;"
-									  th:text="${freeBoard.getFBoTitle()}"></textarea>
-							<!--                            <div th:if="${loginUser != null }">-->
+									  th:text="${freeBoard.getFBoTitle()}" required="required" ></textarea>
 							<input type="hidden" id="userId" value="user1" th:value="${loginUser.userId}"/>
-							<!--								<input type="hidden" name="userId" id="userId" value="testid1"/>-->
-							<!--                            </div>-->
-							<!--                            <input type="hidden" name="cityNo" id="cityNo" value="1"/>-->
 						</div>
 						<div class="form-group">
 							<label>내용</label>
 							<textarea class="form-control style_2" name="fBoContent" id="fBoContent"
-									  style="height:200px;" th:text="${freeBoard.getFBoContent()}" ></textarea>
+									  style="height:200px;" th:text="${freeBoard.getFBoContent()}" required="required" ></textarea>
 						</div>
 						<div class="form-group">
 						</div>
@@ -226,65 +221,19 @@
 
 			<aside class="col-lg-3 add_bottom_30">
 
-				<div class="widget">
-					<div class="input-group">
-						<input type="text" class="form-control" placeholder="Search...">
-						<span class="input-group-btn">
-						<button class="btn btn-default" type="button" style="margin-left:0;"><i class="icon-search"></i></button>
-						</span>
-					</div>
-					<!-- /input-group -->
-				</div>
-				<!-- End Search -->
-				<hr>
 				<div class="widget" id="cat_blog">
-					<h4>Categories</h4>
+					<h4>CLICK</h4>
 					<ul>
-						<li><a href="#">Places to visit</a>
-						</li>
-						<li><a href="#">Top tours</a>
-						</li>
-						<li><a href="#">Tips for travellers</a>
-						</li>
-						<li><a href="#">Events</a>
+						<li><a href="freeboard-list">목록으로 돌아가기</a>
 						</li>
 					</ul>
 				</div>
 				<!-- End widget -->
 
-				<hr>
 
-				<div class="widget">
-					<h4>Recent post</h4>
-					<ul class="recent_post">
-						<li>
-							<i class="icon-calendar-empty"></i> 16th July, 2020
-							<div><a href="#">It is a long established fact that a reader will be distracted </a>
-							</div>
-						</li>
-						<li>
-							<i class="icon-calendar-empty"></i> 16th July, 2020
-							<div><a href="#">It is a long established fact that a reader will be distracted </a>
-							</div>
-						</li>
-						<li>
-							<i class="icon-calendar-empty"></i> 16th July, 2020
-							<div><a href="#">It is a long established fact that a reader will be distracted </a>
-							</div>
-						</li>
-					</ul>
-				</div>
 				<!-- End widget -->
-				<hr>
-				<div class="widget tags">
-					<h4>Tags</h4>
-					<a href="#">Lorem ipsum</a>
-					<a href="#">Dolor</a>
-					<a href="#">Long established</a>
-					<a href="#">Sit amet</a>
-					<a href="#">Latin words</a>
-					<a href="#">Excepteur sint</a>
-				</div>
+
+
 				<!-- End widget -->
 
 			</aside>

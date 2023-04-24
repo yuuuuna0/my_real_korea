@@ -112,7 +112,7 @@
         </div>
     </div>
     <!-- End position -->
-    <div class="container margin_60">
+    <div class="container margin_70">
         <div class="row">
 
             <div id="fbo-detail" class="col-lg-9">
@@ -120,7 +120,6 @@
                 <div class="box_style_1">
                     <form name="a">
                         <div class="post nopadding">
-                            <!--                        <img src="img/blog-1.jpg" alt="Image" class="img-fluid">-->
                             <div class="post_info clearfix">
                                 <div class="post-left">
                                     <ul>
@@ -132,31 +131,23 @@
                                             <i class="icon-map"></i>도시
                                             <span th:text="${freeBoard.getCity().cityName}">12 Nov 2020</span>
 
-
                                         </li>
-                                        <!--                                    <li><i class="icon-inbox-alt"></i>In <a href="#">Top tours</a>-->
-                                        <!--                                    </li>-->
-                                        <!--                                    <li><i class="icon-tags"></i>Tags <a href="#">Works</a> <a href="#">Personal</a>-->
-                                        <!--                                    </li>-->
                                     </ul>
                                 </div>
                             </div>
 
-                            <h2 th:text="${freeBoard.getFBoTitle()}"></h2>
+                            <h4 th:text="${freeBoard.getFBoTitle()}"></h4>
                             <p style="white-space:pre-line;" th:text="${freeBoard.fBoContent}">
                             </p>
 
 
                             <blockquote class="styled">
                             </blockquote>
-                            <div th:if="${loginUser != null && loginUser.userId == freeBoard.userId}">
+                            <div th:if="${loginUser != null && loginUser.userId == freeBoard.userId}" style="text-align:right;">
                                 <input type="hidden" id="fBoNo-hidden"
                                        th:value="${freeBoard.fBoNo}"/>
-                                <span style="float: right" type="button" onclick="fBoDelete();">삭제</span>
-                                <span style="float: right" type="button" onclick="fBoModify();">수정</span>
-                                <!--                                <span style="float: right"-->
-                                <!--                                   th:href="@{freeboard-modify-form(fBoNo=${freeBoard.fBoNo})}">수정</span>-->
-                                <!--                            <a id="title" th:href="@{freeboard-detail(fBoNo=${freeBoard.fBoNo})}"  th:text="${freeBoard.fBoTitle}" ></a>-->
+                                <a class="btn btn-danger" type="button" onclick="fBoModify();">수정</a>
+                                <a class="btn btn-danger" type="button" onclick="fBoDelete();">삭제</a>
                             </div>
                         </div>
                     </form>
@@ -198,7 +189,6 @@
                 <h4>댓글 달기</h4>
                 <form name="f" method="post">
                     <input type="hidden" name="fCoNo" value="1"/>
-                    <!--                    <input type="hidden" name="fCommentDate" th:value="${#dates.format(#calendars.createNow(), 'yyyy.MM.dd')}"/>-->
                     <input type="hidden" name="fBoNo" value="206" th:value="*{freeBoard.getFBoNo()}"/>
                     <div th:if="${loginUser != null }">
                         <input type="hidden" name="userId" value="user1" th:value="${loginUser.userId}"/>
@@ -209,9 +199,7 @@
 
                     </div>
                     <div class="form-group">
-                        <!--                        <input type="button" class="btn_1" value="댓글 쓰기" onClick="fBoCommentCreate();"> &nbsp;-->
                         <button class="btn_1" type="button" onclick="fBoCommentCreate();">댓글 달기</button>
-                        <!--                        <input type="submit" class="btn_1" value="댓글 달기" onClick="fBoCommentCreate();/>-->
                     </div>
                 </form>
 
@@ -329,7 +317,6 @@
                 </div>
 
                 <div>
-                    <!--                    <small name="fCoDate2">{{fcommentDate}}</small>-->
                     <small name="fCoDate2"
                     >{{dateFormat fcommentDate}}</small>
                     <h4 name="fCoUserId2">{{userId}}</h4>

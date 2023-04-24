@@ -46,17 +46,29 @@ public class ChatController {
 		} 
 		// 채팅방 이름 생성
 		roomName = senderId+"&"+receiverId;
-		
-		List<ChatRoom> findChatRoomList = chatService.selectByRoomNameWith(receiverId);
-		if (findChatRoomList.size() == 0) {
-			// 방 없다면 새로 생성
+		// receiverId가 포함된 이름의 채팅방들
+		//List<ChatRoom> findChatRoomList = chatService.selectByRoomNameWith(receiverId);
+		ChatRoom findChatRoom = chatService.selectByRoomName(roomName);
+		if (findChatRoom == null) {
+			// receiverId 포함된 방 없다면 새로 생성
+			// roomName 같은 거 없으면 방 생성
 			ChatRoom newChatRoom = new ChatRoom(roomName);
 			chatService.insertChatRoom(newChatRoom);
 			model.addAttribute("roomName", roomName);
 		} else {
-			// receiverId가 포함된 이름의 채팅방이 있다면, 그 채팅방 번호를 주기
-			model.addAttribute("roomName", findChatRoomList.get(0).getRoomName());
+			// receiverId가 포함된 이름의 채팅방이 있다면, 그 채팅방 이름을 주기 (임의로)
+			//model.addAttribute("roomName", findChatRoomList.get(0).getRoomName());
+			model.addAttribute("roomName", findChatRoom.getRoomName());
 		}
+		
+		// senderId 가 포함된 이름의 채팅방들 
+		List<ChatRoom> myChatRoomList = chatService.selectByRoomNameWith(senderId);
+		
+		if(myChatRoomList.size() != 0) {
+			// senderId 가 포함된 이름의 채팅방들 
+			model.addAttribute("myChatRoomList", myChatRoomList);
+		}
+		
 		System.out.println(">>>> roomName :"+ roomName);
 		model.addAttribute("receiverId", receiverId);
 		model.addAttribute("senderId", senderId);

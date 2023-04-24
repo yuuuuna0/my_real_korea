@@ -22,7 +22,8 @@ function onClose(evt) {
 function onOpen(evt) {
         	 console.log("open event : " + evt);
          }
-         
+    
+     
 
 /**********페이지 로딩 시 - 소켓연결, DB내용 가져오기*********/
 $(document).ready(function(){
@@ -35,8 +36,6 @@ $(document).ready(function(){
 	let receiverId = document.getElementById('receiverId').value;
 	getChatFromDB(myId,receiverId);
 	scrollDown();
-	
-	
 });
 
 /**********채팅메세지 보내기(버튼 클릭or엔터)*********/
@@ -85,6 +84,32 @@ function onMessage(msg) {
 	console.log('time >>> ', time)
 	console.log('newOne >>> ', newOne);
 	console.log('outOne >>> ', outOne);
+/*
+	// 새로운 유저 접속했을 때 senderId가 포함된 roomName 가진 채팅방 목록 가져오기
+	if (newOne != null) {
+		console.log("새로운 접속자 있음");
+		if (myId == 'master' && newOne == "master") {
+			getOnlineList(onlineList);
+		} else if (myId == "master" && newOne != "master") {
+			console.log("new one login >>>> ", newOne);
+			insertOnlineList(newOne);
+		}
+	}
+	// when user disconnect
+	if (outOne != null && myId == 'master') {
+		console.log("user disconnect >>> ", outOne);
+		deleteOnlieList(outOne);
+	}
+
+	// save or show message
+	if (myId == 'master' && senderId != 'master' && receiverId != senderId) {
+		addStagingMessage(senderId, time, message);
+	} else {
+		insertMessage(senderId, time, message);
+	}
+
+*/
+	
 	
 	// 메세지 보내기
 	insertMessage(senderId, receiverId, time, message);
@@ -245,7 +270,7 @@ function getChatFromDB(myId,receiverId){
 							} else {
 								alert(resultJson.msg);
 							};
-						}, async);
+		}, async);
 };
 
 
@@ -254,6 +279,104 @@ function scrollDown() {
 	var chatContent = document.querySelector("#chat-content");
 	chatContent.scrollTop = chatContent.scrollHeight;
 };
+
+    
+/*
+1. 채팅방 목록(로그인한 아이디(senderId)가 roomName 에 있는 방들만)
+2. 채팅방 클릭 시 해당 채팅방으로 이동, DB내용 가져오기
+3. 로그인 한 유저가 메세지 아이콘 클릭 시 본인의 채팅방 목록과 채팅창 보이게
+*/
+
+/************ 채팅방 목록의 채팅방 클릭 *************/
+function activeToggle(element) {
+	if (!element.classList.contains('active')) {
+		element.classList.add('active');
+	} else {
+		element.classList.remove('active');
+	};
+	var preReceiverId = receiverId;
+	receiverId = element.querySelector('.about > .name').textContent;
+	console.log('<<<< toggleAction >>>>>')
+	console.log('receiverId >>> ', receiverId);
+	console.log('preReceiverId >>> ', preReceiverId);
+
+	if (receiverId != preReceiverId && preReceiverId != null)
+		document.getElementById(preReceiverId).classList.remove('active');
+
+	setChatHistory(preReceiverId);
+	document.getElementById('chat-content').innerHTML = "";
+	getChatHistory(receiverId);
+	divideChatSection(receiverId);
+	if (document.getElementById(receiverId).querySelector('.circle') != null) {
+		document.getElementById(receiverId).querySelector('.circle > .staging-count').textContent = "";
+		document.getElementById(receiverId).querySelector('.circle').classList.add('d-none');
+	}
+}
+
+/************ 모든 채팅 사용자들 채팅방 목록에 넣기 *************/
+function getOnlineList(onlineList) {
+	var onlineUser = document.querySelector("#online-user");
+	onlineUser.innerHTML = "";
+	onlineList.forEach(user => {
+		insertOnlineList(user);
+	});
+}
+/************ 채팅방 목록 가져오기 *************/
+// insert online user list
+function insertOnlineList(user) {
+
+	if (document.getElementById(user) == null) {
+		var onlineUser = document.querySelector("#online-user");
+
+		var li = document.createElement('li');
+		li.classList.add('clearfix');
+		li.setAttribute('onclick', 'activeToggle(this)');
+		li.setAttribute('id', user);
+
+		var aboutDiv = document.createElement('div');
+		aboutDiv.classList.add('about');
+		var name = document.createElement('div');
+		name.classList.add('name');
+		name.textContent = user;
+		aboutDiv.appendChild(name);
+
+		var statusDiv = document.createElement('div');
+		statusDiv.classList.add('status');
+		var icon = document.createElement('i');
+		icon.setAttribute('id', 'master-status-icon');
+		icon.classList.add('fa', 'fa-circle', 'online');
+		var span = document.createElement('span');
+		span.setAttribute('id', 'master-status-content');
+		span.textContent = 'online';
+		statusDiv.appendChild(icon);
+		statusDiv.appendChild(span);
+
+		aboutDiv.appendChild(statusDiv);
+
+		li.appendChild(img);
+		li.appendChild(aboutDiv);
+
+		var alertDiv = document.createElement('div');
+		alertDiv.classList.add('circle', 'd-flex', 'align-items-center', 'justify-content-center', 'd-none');
+		aspan = document.createElement('span');
+		aspan.classList.add('staging-count');
+		alertDiv.appendChild(aspan);
+		li.appendChild(alertDiv);
+
+		onlineUser.appendChild(li);
+	}
+};
+
+
+
+
+
+
+
+
+
+
+
 
 /**************채팅 아이디 가져오기****************/
 

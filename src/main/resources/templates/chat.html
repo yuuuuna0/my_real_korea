@@ -16,7 +16,7 @@
 <div class="row clearfix">
     <div class="col-lg-12">
         <div class="card chat-app">
-        	<!-- 
+        	<!-- 채팅방 시작 --> 
             <div id="plist" class="people-list">
                 <div class="input-group">
                   <div class="input-group-prepend">
@@ -24,11 +24,15 @@
                     </div> 
                     <input type="text" class="form-control" placeholder="Search...">
                 </div>
+                <!-- 채팅방 목록 -->
                 <ul id="online-user" class="list-unstyled chat-list mt-2 mb-0">
-                    <li class="clearfix">
+                    <li class="clearfix" id="chat-room-list" th:each="chatRoom:${myChatRoomList}">
                         <div class="about">
-                            <div class="name">Vincent Porter</div>
-                            <div class="status"> <i class="fa fa-circle offline"></i> left 7 mins ago </div>                                            
+                            <div class="name" id="master" th:text="${chatRoom.roomName}"></div>
+                            <div class="status" id="master-status"> 
+                            	<i id="master-status-icon" class="fa fa-circle offline"></i> 
+                            	<span id="master-status-content">offline </span> 
+                            </div>                                            
                         </div>
                     </li>
                     <li class="clearfix active">
@@ -38,7 +42,9 @@
                         </div>
                     </li>
                 </ul>
-            </div> -->
+                 <!-- 채팅방 목록 끝 -->
+            </div> 
+            <!-- 채팅방 끝 --> 
             <!-- chat section -->
             <div class="chat">
 				<div class="chat-header clearfix">

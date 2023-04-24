@@ -94,14 +94,11 @@
 
 
     <update id="updateBoard" parameterType="com.itwill.my_real_korea.dto.freeboard.FreeBoard">
-    update FREE_BOARD
-    set f_bo_title=#{fBoTitle},
-        f_bo_content=#{fBoContent},
-        f_bo_date=sysdate,
-        f_bo_readcount=#{fBoCount},
-        city_no=#{city.cityNo},
-        user_id=#{userId}
-    where f_bo_no = #{fBoNo}
+        update FREE_BOARD
+        set f_bo_title=#{fBoTitle},
+            f_bo_content=#{fBoContent},
+            city_no=#{city.cityNo}
+        where f_bo_no = #{fBoNo}
     </update>
 
     <!--  자유게시판 게시글 총 개수 조회 -->

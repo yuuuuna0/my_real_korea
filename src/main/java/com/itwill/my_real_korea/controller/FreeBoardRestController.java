@@ -166,7 +166,7 @@ public class FreeBoardRestController {
     //    @LoginCheck
     @ApiOperation(value = "자유게시판 글쓰기")
     @PostMapping(value = "/freeboard", produces = "application/json;charset=UTF-8")
-    public Map<String, Object> fBoWriteAction(@ModelAttribute FreeBoard freeBoard,  @RequestParam Integer cityNo) {
+    public Map<String, Object> fBoWriteAction(@ModelAttribute FreeBoard freeBoard, @RequestParam Integer cityNo) {
 
         Map<String, Object> resultMap = new HashMap<>();
         int code = 1;
@@ -204,37 +204,35 @@ public class FreeBoardRestController {
 
 
     //자유게시판 등록된 글 수정
-    @LoginCheck
+//    @LoginCheck
     @ApiOperation(value = "자유게시판 글 수정")
     @ApiImplicitParam(name = "fBoNo", value = "자유게시판 번호")
-    @PutMapping(value = "/fBoUpdate/{fBoNo}", produces = "application/json;charset=UTF-8")
-    public Map<String, Object> fBoModifyAction(@PathVariable(value = "fBoNo") int fBoNo,
-                                               @RequestBody FreeBoard freeBoard) {
+    @PutMapping(value = "/freeboardModify", produces = "application/json;charset=UTF-8")
+    public Map<String, Object> fBoModifyAction(@ModelAttribute FreeBoard freeBoard,  @RequestParam Integer cityNo) {
 
         Map<String, Object> resultMap = new HashMap<>();
         int code = 1;
         String msg = "성공";
         List<FreeBoard> data = new ArrayList<FreeBoard>();
+        System.out.println(freeBoard.getFBoContent());
+        System.out.println(freeBoard.getFBoTitle());
+        System.out.println(cityNo);
+
         try {
-            // fBoNo로 자유게시판  1개 찾기, 수정 성공시 code 1
-            FreeBoard findfreeBoard = freeBoardService.selectByNo(fBoNo);
-            if (findfreeBoard != null) {
-                freeBoard.setFBoNo(fBoNo);
-                freeBoardService.updateFreeBoard(freeBoard);
-                code = 1;
-                msg = "성공";
-                // 수정 성공한 자유게시판  객체 데이터에 붙여줌
-                data.add(freeBoard);
-            } else {
-                // 실패시 code 2
-                code = 2;
-                msg = "자유게시판 수정 실패";
-            }
+            City city = cityService.findByCityNo(cityNo);
+            freeBoard.setCity(city);
+            // 자유게시판 글쓰기, 성공시 code 1
+            freeBoardService.updateFreeBoard(freeBoard);
+            code = 1;
+            msg = "성공";
+            // 자유게시판 글쓰기 후  자유게시판 찾아서 데이터에 붙여줌
+            freeBoard = freeBoardService.selectByNo(freeBoard.getFBoNo());
+            data.add(freeBoard);
         } catch (Exception e) {
-            // 에러 발생 시 code 3
+            // 실패 시 code 2
             e.printStackTrace();
-            code = 3;
-            msg = "관리자에게 문의하세요.";
+            code = 2;
+            msg = "자유게시판 글쓰기 실패";
         }
         resultMap.put("code", code);
         resultMap.put("msg", msg);

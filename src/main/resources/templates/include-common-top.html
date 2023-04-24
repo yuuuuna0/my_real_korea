@@ -103,7 +103,7 @@
 						<!-- Chat icon (수정해야함) -->
 						<th:block th:if="${session.loginUser!=null}">
 						<li>
-							<a href="#" th:data-user-id="${session.loginUser.userId}" id="chat-pop-up-click" onclick="openPopup();">
+							<a href="#" th:data-user-id="${session.loginUser.userId}" id="chat-pop-up-click" >
 							<img src="img/chat-icon-include-top.png" title="채팅"></a></li>
 						</th:block>
 						<th:block th:if="${session.loginUser==null}">
@@ -118,13 +118,5 @@
 		</div>
 		<!-- container -->
 	</header>
-	<script type="text/javascript">
-		function openPopup() {
-			let receiverId = $('#chat-pop-up-click').attr('data-user-id');
-			var url = 'chat?receiverId=' + receiverId;
-			window.open(url,
-						'target',
-						'top=100, left=500, width=800, height=800, toolbar=no, menubar=no, location=no, status=no, scrollbars=no, resizable=no');
-		}
-	</script>
+<script src="js/app_chat_tripboard.js" type="module"></script>
 </div>

@@ -45,7 +45,7 @@
 		function openPopup() {
 			let receiverId = $('#chat-pop-up-click').attr('data-user-id');
 			console.log('????????? openPopup'+receiverId);
-			var url = 'chat?receiverId=' + receiverId;
+			var url = `chat/${receiverId}`;
 			window.open(url,
 						'target',
 						'top=100, left=500, width=800, height=800, toolbar=no, menubar=no, location=no, status=no, scrollbars=no, resizable=no');
@@ -87,7 +87,15 @@
 
 <body>
 
-
+	<div id="preloader">
+		<div class="sk-spinner sk-spinner-wave">
+			<div class="sk-rect1"></div>
+			<div class="sk-rect2"></div>
+			<div class="sk-rect3"></div>
+			<div class="sk-rect4"></div>
+			<div class="sk-rect5"></div>
+		</div>
+	</div>
 	<!-- End Preload -->
 
 	<div class="layer"></div>
@@ -266,8 +274,9 @@
 					<hr>
 					<!-- Chat icon (민선) -->
 					<div id="chat-icon-top" class="chat-icon-top">
-						<div id="chat-img-top" class="chat-img-top">
-					   		<a href="#" th:data-user-id="${tripBoard.userId}" id="chat-pop-up-click" onclick="openPopup();">
+						<div id="chat-img-top" class="chat-img-top" >
+							<input id="chat-tripboard-userId" type="hidden" th:value="${tripBoard.userId}">
+					   		<a href="#" id="chat-pop-up-click" >
 					   			<img src="img/messenger.png" id="messenger-icon"></a>
 						<span class="tooltiptext tooltip-left">1:1 채팅</span>
 						</div>
@@ -418,6 +427,7 @@
 	<script src="js/common_scripts_min.js"></script>
 	<script src="js/functions.js"></script>
 	<script src="js/app_tripboard.js" type="module"></script>
+	<script src="js/app_chat_tripboard.js" type="module"></script>
 
 </body>
 

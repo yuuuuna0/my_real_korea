@@ -5,6 +5,7 @@ import * as Request from "./request.js";
  */
 let sock;
 let myId = document.getElementById('myId').textContent;
+
 var roomName = document.getElementById('roomName').value;
 console.log(roomName);
 let receiverId;
@@ -30,10 +31,8 @@ $(document).ready(function(){
 	sock.onopen = onOpen;
 	sock.onClose = onClose;
 	
-	let receiverId = $('#chat-pop-up-click').attr('data-user-id');
-	console.log('????????? openPopup'+receiverId);
 	// DB에 저장된 대화내용 가져오기
-	//let receiverId = document.getElementById('receiverId').value;
+	let receiverId = document.getElementById('receiverId').value;
 	getChatFromDB(myId,receiverId);
 	scrollDown();
 	

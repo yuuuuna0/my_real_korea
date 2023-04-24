@@ -449,59 +449,52 @@
 	<!-- End col-md-6 -->
 {{/each}}
 	<div class="col-md-4"></div>
-	<div class="col-md-4">
-<!--  pagination -->
-	<nav aria-label="Page navigation">
-		<ul class="pagination justify-content-center">
-			<!-- 이전블록으로 이동 -->
-			{{#ifCond data.pageMaker.prevGroupStartPage <= 0}}
-			<li class="page-item">
-				<a class="page-link" href="tour-list?pageNo=1"  aria-label="Previous">
-					<span aria-hidden="true">&laquo;</span>
-					<span class="sr-only">Previous</span>
-				</a>
-			</li>
-			{{/ifCond}}
-			{{#ifCond data.pageMaker.prevGroupStartPage > 0}}
-			<li class="page-item">
-				<a class="page-link" href="tour-list?pageNo={{data.pageMaker.prevGroupStartPage}}" aria-label="Previous">
-					<span aria-hidden="true">&laquo;</span>
-					<span class="sr-only">Previous</span>
-				</a>
-			</li>
-			{{/ifCond}}
-			<!-- 현재 위치 해 있는 페이지 & 블록 -->
-			{{each (numbers.sequence data.pageMaker.blockBegin,data.pageMaker.blockEnd)}}
-				{{#ifCond this < data.pageMaker.totPage}}
-					<li class="page-item">
-						<a class="page-link" href="tour-list?pageNo={{this}}">
-							<span th:text="${num}"></span>
-						</a>
-					</li>
-				{{/ifCond}}
-			{{/each}}
-			<!-- 다음블록으로 이동 -->
-			{{#ifCond data.pageMaker.nextGroupStartPage >= data.pageMaker.totPage}}
-			<li class="page-item">
-				<a class="page-link" href="tour-list?pageNo={{data.pageMaker.totPage}}" aria-label="Next">
-					<span aria-hidden="true">&raquo;</span>
-					<span class="sr-only">Next</span>
-				</a>
-			</li>
-			{{/ifCond}}
-			{{#ifCond data.pageMaker.nextGroupStartPage < data.pageMaker.totPage}}
-			<li class="page-item">
-				<a class="page-link" href="tour-list?pageNo={{data.pageMaker.nextGroupStartPage}}"  aria-label="Next">
-					<span aria-hidden="true">&raquo;</span>
-					<span class="sr-only">Next</span>
-				</a>
-			</li>
-		</ul>
-	</nav>
-	<!-- end pagination-->
-	
-	</div>
-<div class="col-md-4"></div>
+					<div class="col-md-4">
+					
+					<!--  pagination -->
+					<nav aria-label="Page navigation">
+						<ul class="pagination justify-content-center">
+							<!-- 이전블록으로 이동 -->
+							<li class="page-item" th:if="${tourListPage.pageMaker.prevGroupStartPage lt 0}">
+								<a class="page-link" href="tour-list?pageNo=1"  aria-label="Previous">
+									<span aria-hidden="true">&laquo;</span>
+									<span class="sr-only">Previous</span>
+								</a>
+							</li>
+							<li class="page-item" th:if="${tourListPage.pageMaker.prevGroupStartPage gt 0}">
+								<a class="page-link" th:href="@{tour-list(pageNo=${tourListPage.pageMaker.prevGroupStartPage})}" href="#"  aria-label="Previous">
+									<span aria-hidden="true">&laquo;</span>
+									<span class="sr-only">Previous</span>
+								</a>
+							</li>
+							<!-- 현재 위치 해 있는 페이지 & 블록 -->
+							<th:block th:each="num : ${#numbers.sequence(tourListPage.pageMaker.blockBegin,tourListPage.pageMaker.blockEnd)}">
+								<th:block th:if="${num le tourListPage.pageMaker.totPage}">	
+									<li class="page-item" th:classappend="${tourListPage.pageMaker.curPage == num} ? 'active'">
+										<a class="page-link" th:href="@{tour-list(pageNo=${num})}">
+											<span th:text="${num}"></span>
+										</a>
+									</li>
+								</th:block>
+							</th:block>
+							<!-- 다음블록으로 이동 -->
+							<li class="page-item" th:if="${tourListPage.pageMaker.nextGroupStartPage gt tourListPage.pageMaker.totPage}">
+								<a class="page-link" th:href="@{tour-list(pageNo=${tourListPage.pageMaker.totPage})}" href="#" aria-label="Next">
+									<span aria-hidden="true">&raquo;</span>
+									<span class="sr-only">Next</span>
+								</a>
+							</li>
+							<li class="page-item" th:if="${tourListPage.pageMaker.nextGroupStartPage le tourListPage.pageMaker.totPage}">
+								<a class="page-link" th:href="@{tour-list(pageNo=${tourListPage.pageMaker.nextGroupStartPage})}" href="#" aria-label="Next">
+									<span aria-hidden="true">&raquo;</span>
+									<span class="sr-only">Next</span>
+								</a>
+							</li>
+						</ul>
+					</nav>
+					<!-- end pagination-->
+					</div>
+					<div class="col-md-4"></div>
 </script>
 
 

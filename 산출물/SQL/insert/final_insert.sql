@@ -348,7 +348,7 @@ insert into trip_board(t_bo_no,t_bo_title,t_bo_content,t_bo_date,t_bo_readcount,
             65,--조회수
             0,-- 모집상태
             2,--모집인원
-            'img1.png',
+            'busan1.jpg',
             '2023-04-27','2023-05-10',
             '계획적인',--여행스타일
             '모험추구형',--해시태그
@@ -369,7 +369,7 @@ insert into trip_board(t_bo_no,t_bo_title,t_bo_content,t_bo_date,t_bo_readcount,
             98,--조회수
             0,-- 모집상태
             4,--모집인원
-            'img1.png',
+            'busan2.jpg',
             '2023-07-01','2023-07-05',
             '계획적인',--여행스타일
             '아무나다좋아',--해시태그
@@ -389,7 +389,7 @@ insert into trip_board(t_bo_no,t_bo_title,t_bo_content,t_bo_date,t_bo_readcount,
             42,--조회수
             0,-- 모집상태
             2,--모집인원
-            'img1.png',
+            'busan3.jpg',
             '2023-06-13','2023-06-14',
             '즉흥적인',--여행스타일
             '아무나다좋아',--해시태그

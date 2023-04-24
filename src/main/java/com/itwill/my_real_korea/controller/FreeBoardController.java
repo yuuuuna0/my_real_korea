@@ -51,9 +51,6 @@ public class FreeBoardController {
             model.addAttribute("freeBoardListPage", freeBoardListPage);
             model.addAttribute("freeBoardList", freeBoardList);
             model.addAttribute("pageNo", pageNo);
-            
-            List<City> cityList = cityService.findAllCity();
-			model.addAttribute("cityList", cityList);
         } catch (Exception e) {
             e.printStackTrace();
             return "error";
@@ -145,15 +142,13 @@ public class FreeBoardController {
         return "freeboard-detail";
     }
 
-    //    @LoginCheck
+   // @LoginCheck
     @GetMapping("/freeboard-write-form")
     public String freeBoardWriteForm(HttpSession session, Model model) throws Exception {
         if (session != null) {
             User loginUser = (User) session.getAttribute("loginUser");
             model.addAttribute("loginUser", loginUser);
         }
-        List<City> allCity = cityService.findAllCity();
-        model.addAttribute(allCity);
 
 
 ////
@@ -173,13 +168,15 @@ public class FreeBoardController {
         return "redirect:/freeboard-detail";
     }
 
-    @LoginCheck
+    //    @LoginCheck
     @GetMapping("/freeboard-modify-form")
-    public String freeBoardModifyForm(Integer fBoNo, Model model) throws Exception {
-        if (fBoNo == null) {
-            return "freeboard-list";
-        }
+    public String freeBoardModifyForm(@RequestParam Integer fBoNo, HttpSession session, Model model) throws Exception {
+
         try {
+            if (session != null) {
+                User loginUser = (User) session.getAttribute("loginUser");
+                model.addAttribute("loginUser", loginUser);
+            }
             FreeBoard freeBoard = freeBoardService.selectByNo(fBoNo);
             model.addAttribute("freeBoard", freeBoard);
 
@@ -190,15 +187,6 @@ public class FreeBoardController {
         return "freeboard-modify-form";
     }
 
-    @LoginCheck
-    @PatchMapping("/freeboard-modify-action")
-    public String freeBoardModifyAction(@ModelAttribute FreeBoard freeBoard, RedirectAttributes redirectAttributes) throws Exception {
-
-        freeBoardService.updateFreeBoard(freeBoard);
-        redirectAttributes.addAttribute("fBoNo", freeBoard.getFBoNo());
-
-        return "redirect:freeboard-detail";
-    }
 
     @LoginCheck
     @PostMapping("/freeboard-delete-action")

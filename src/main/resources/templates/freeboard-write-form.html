@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,7 +8,7 @@
 
 	<meta name="description" content="Citytours - Premium site template for city tours agencies, transfers and tickets.">
 	<meta name="author" content="Ansonika">
-	<title>CITY TOURS - City tours and travel site template by Ansonika</title>
+	<title>자유게시판 새글쓰기</title>
 
 	<!-- Favicons-->
 	<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
@@ -16,269 +17,351 @@
 	<link rel="apple-touch-icon" type="image/x-icon" sizes="114x114" href="img/apple-touch-icon-114x114-precomposed.png">
 	<link rel="apple-touch-icon" type="image/x-icon" sizes="144x144" href="img/apple-touch-icon-144x144-precomposed.png">
 
-    <!-- GOOGLE WEB FONT -->
-    <link href="https://fonts.googleapis.com/css?family=Gochi+Hand|Montserrat:300,400,700" rel="stylesheet">
-	
+	<!-- GOOGLE WEB FONT -->
+	<link href="https://fonts.googleapis.com/css?family=Gochi+Hand|Montserrat:300,400,700" rel="stylesheet">
+
 	<!-- COMMON CSS -->
 	<link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
+	<link href="css/style.css" rel="stylesheet">
 	<link href="css/vendors.css" rel="stylesheet">
-	
+
 	<!-- CSS -->
 	<link href="css/blog.css" rel="stylesheet">
-	
+
 	<!-- CUSTOM CSS -->
 	<link href="css/custom.css" rel="stylesheet">
+
+	<!-- Handlebars -->
+	<script  defer type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.2/handlebars.min.js"></script>
+
+	<title>Button</title>
+	<style>
+		#city_btn{
+			border-radius: 5px;
+			border: 2px solid #626262;
+			background-color: rgba(0,0,0,0);
+			color: #626262;
+			font-weight: bold;
+			font-size: 14px;
+			padding: 9px;
+			width: 90px;
+		}
+		#city_btn:hover{
+			border-radius: 5px;
+			border: 2px solid #626262;
+			background-color: #626262;
+			color: #FFFFFF;
+			font-weight: bold;
+			font-size: 14px;
+			padding: 9px;
+			width: 90px;
+		}
+		#style_btn{
+			border-radius: 5px;
+			border: 2px solid #F089A4;
+			background-color: rgba(0,0,0,0);
+			color: #F089A4;
+			font-weight: bold;
+			font-size: 14px;
+			padding: 7px;
+			width: 80px;
+		}
+		#style_btn:hover{
+			border-radius: 5px;
+			border: 2px solid #F089A4;
+			background-color: #F089A4;
+			color: #FFFFFF;
+			font-weight: bold;
+			font-size: 14px;
+			padding: 7px;
+			width: 80px;
+		}
+	</style>
 
 </head>
 
 <body>
 
-	<div id="preloader">
-		<div class="sk-spinner sk-spinner-wave">
-			<div class="sk-rect1"></div>
-			<div class="sk-rect2"></div>
-			<div class="sk-rect3"></div>
-			<div class="sk-rect4"></div>
-			<div class="sk-rect5"></div>
+<!-- End Preload -->
+
+<div class="layer"></div>
+<!-- Mobile menu overlay mask -->
+
+<!--======================== Header========================== -->
+<div id="header" th:include="include-common-top::include-common-top"></div>
+<!--======================== End Header======================== -->
+
+
+<section class="parallax-window" data-parallax="scroll" data-image-src="img/bg_blog.jpg" data-natural-width="1400" data-natural-height="470">
+	<div class="parallax-content-1">
+		<div class="animated fadeInDown">
+			<h1>자유게시판 글쓰기</h1>
 		</div>
 	</div>
-	<!-- End Preload -->
+</section>
+<!-- End section -->
 
-	<div class="layer"></div>
-	<!-- Mobile menu overlay mask -->
-
-	<!-- Header================================================== -->
-	<!--======================== Header========================== -->
-	<div id="header" th:include="include-common-top::include-common-top"></div>
-	<!--======================== End Header======================== -->
-	<!-- End Header -->
-
-
-	<section class="parallax-window" data-parallax="scroll" data-image-src="img/bg_blog.jpg" data-natural-width="1400" data-natural-height="470">
-		<div class="parallax-content-1">
-			<div class="animated fadeInDown">
-				<h1>자유게시판</h1>
-				<p>글쓰기</p>
-			</div>
+<main>
+	<div id="position">
+		<div class="container">
+			<ul>
+				<li><i class="icon-home" onclick="location.href='index'"></i><a href="index"></a>
+				</li>
+				<li><a href="freeboard-list">게시판</a>
+				</li>
+				<li>자유게시판</li>
+			</ul>
 		</div>
-	</section>
-	<!-- End section -->
-
-	<main>
-		<div id="position">
-			<div class="container">
-				<ul>
-					<li><a href="index">Home</a>
-					</li>
-					<li><a href="freeboard-list">게시판</a>
-					</li>
-					<li>자유 게시판</li>
-				</ul>
-			</div>
-		</div>
-		<!-- End position -->
-		<div class="container margin_60">
-			<div class="row">
-
-				<div class="col-lg-9">
-					<div class="box_style_1">
-						<div class="post nopadding" >
-							<form name="f" method="GET">
-							<div class="post_info clearfix" >
-								<div class="post-left">
-									50번 게시물
-									<ul >
-								
-										<li><i class="icon-inbox-alt"></i> 
-										
-										</li>
-										
-										</ul>
-								</div>
-								
-								<div class="post-right"><a ></a>  today
-								<br>
-								<div id="city-list" >
-										<input type="checkbox" value="{1,2,3}">전국
-										<input type="checkbox" value=1>서울
-										<input type="checkbox" value=2>경기
-										<input type="checkbox" value=3>강원
-								</div>
-								</div>
-								</div>
-							<div th:object="${freeBoard}"  class="" style='width:800px;'></div>
-							<span><input th:value="*{fBoTitle}" style='width:max;'></span><h2>제목</h2>
-							<span><input th:value="*{fBoContent}" style="flex:auto"></span><p>내용</p>
-							<a class="btn_1 green" type="submit" role="button" onclick="writeFreeBoard">제출하기</a>
-								
-							</form>
-							</div>
-						
-						
-						<!-- end post -->
-					</div>
-					<!-- end box_style_1 -->
-		</div>
-	
-				<!-- End col-md-8-->
 	</div>
-</div>
-				<aside class="col-lg-9 add_bottom_30">
+	<!-- End position -->
+	<div class="container margin_60">
+		<div class="row">
 
-					<div class="widget">
-						<div id="write-form" class="input-group" th:each="freeBoard:${freeBoardList}">
-							<input type="text" class="form-control" placeholder="Search...">
-							<span class="input-group-btn">
-						<!--<button th:if="${loginUser.userId}==null and ${freeBoard.userId}!=${loginUser.userId}" class="btn btn-default" type="button" style="margin-left:0;" ><i class="icon-search"></i></button>-->
-						<h class="btn btn-default" type="button" style="margin-left:0;"><i class="icon-search"></i></h>
-						<h class="btn btn-default" type="button" style="margin-left:0;" th:if="${freeBoard.fBoTitle}==null or ${freeBoard.fBoContent}==null" onclick="btnAlert()"><i class="icon-search"></i></h>
-						</span>
+			<div class="col-lg-9">
+				<div class="box_style_1">
+					<div class="post_info clearfix">
+						<div class="post-left">
+							<ul>
+								<li>
+									<h2>자유게시판 글쓰기</h2>
+								</li>
+							</ul>
 						</div>
-						<!-- /input-group -->
 					</div>
-					<!-- End Search -->
-					<hr>
-					<div class="widget" id="cat_blog">
-						<h4>Categories</h4>
-						<ul>
-						<li><a id="freeboard-city1">전체보기</a></li>
-							<li><a href="#">Top tours</a>
-							</li>
-							<li><a href="#">Tips for travellers</a>
-							</li>
-							<li><a href="#">Events</a>
-							</li>
-						</ul>
-					</div>
-					<!-- End widget -->
+					<form id="freeboardWriteForm" name="freeboardWriteForm" action="#" enctype="multipart/form-data">
 
-					<hr>
 
-					<div class="widget">
-						<h4>Recent post</h4>
-						<ul class="recent_post">
-							<li>
-								<i class="icon-calendar-empty"></i> 16th July, 2020
-								<div><a href="#">It is a long established fact that a reader will be distracted </a>
+						<!--						<div th:each="city:${cityList}" th:inline="text">-->
+						<!--							<button id="city_btn1" th:text="${city.getCityName()}"></button>-->
+
+						<!--						</div>-->
+
+						<div class="btn-group btn-group-toggle" data-toggle="buttons">
+							<label class="btn btn-secondary active">
+								<input type="radio" name="options" value="1" id="option1" checked> 서울
+							</label>
+							<label class="btn btn-secondary">
+								<input type="radio" name="options" value="2" id="option2"> 경기
+							</label>
+							<label class="btn btn-secondary">
+								<input type="radio" name="options" value="3" id="option3"> 강원
+							</label>
+							<label class="btn btn-secondary">
+								<input type="radio" name="options" value="4" id="option4"> 부산
+							</label>
+							<label class="btn btn-secondary">
+								<input type="radio" name="options" value="5" id="option5"> 대전
+							</label>
+							<label class="btn btn-secondary">
+								<input type="radio" name="options" value="6" id="option6"> 전주
+							</label>
+							<label class="btn btn-secondary">
+								<input type="radio" name="options" value="7" id="option7"> 제주
+							</label>
+						</div>
+
+
+
+
+
+						<div class="form-group">
+						</div>
+						<div class="row">
+							<div class="col-md-4">
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-4">
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-2">
+								<div class="form-group">
 								</div>
-							</li>
-							<li>
-								<i class="icon-calendar-empty"></i> 16th July, 2020
-								<div><a href="#">It is a long established fact that a reader will be distracted </a>
+							</div>
+							<div class="col-2">
+								<div class="form-group">
 								</div>
-							</li>
-							<li>
-								<i class="icon-calendar-empty"></i> 16th July, 2020
-								<div><a href="#">It is a long established fact that a reader will be distracted </a>
-								</div>
-							</li>
-						</ul>
+							</div>
+						</div>
+						<div class="form-group">
+							<label>제목</label>
+							<!--							<input class="form-control style_2" type="text" name="fBoTitle" id="fBoTitle" placeholder="제목을 입력하세요.">-->
+							<textarea class="form-control style_2" name="fBoTitle" id="fBoTitle" style="height:30px;" placeholder="내용을 입력하세요."></textarea>
+							<div th:if="${loginUser != null }">
+								<input type="hidden" id="userId" value="user1" th:value="${loginUser.userId}"/>
+								<!--								<input type="hidden" name="userId" id="userId" value="testid1"/>-->
+							</div>
+							<!--							<input type="hidden" name="cityNo" id="cityNo" value="1"/>-->
+						</div>
+						<div class="form-group">
+							<label>내용</label>
+							<textarea class="form-control style_2" name="fBoContent" id="fBoContent" style="height:200px;" placeholder="내용을 입력하세요."></textarea>
+						</div>
+						<div class="form-group">
+						</div>
+					</form>
+					<br>
+					<br>
+					<div class="form-group">
+						<button type="submit" class="btn_1 green" id="freeboard-write-action">글쓰기</button>
+						<a href="freeboard-list" class="btn_1 green">취소</a>
 					</div>
-					<!-- End widget -->
-					<hr>
-					<div class="widget tags">
-						<h4>Tags</h4>
-						<a href="#">Lorem ipsum</a>
-						<a href="#">Dolor</a>
-						<a href="#">Long established</a>
-						<a href="#">Sit amet</a>
-						<a href="#">Latin words</a>
-						<a href="#">Excepteur sint</a>
-					</div>
-					<!-- End widget -->
-
-				</aside>
-				<!-- End aside -->
-
+				</div>
+				<!-- End box_style_1-->
 			</div>
-			<!-- End row-->
-		</div>
-		<!-- End container -->
-	</main>
-	<!-- End main -->
-	<!--========================= footer ========================-->
-	<footer class="revealed">
-		<div id="footer" th:include="include-common-bottom::include-common-bottom"></div>
-	</footer>
-		<!-- End container -->
-	<!--========================= End footer ========================-->
+			<!-- End col-lg-9-->
+
+			<aside class="col-lg-3 add_bottom_30">
+
+				<!-- End Search -->
+				<div class="widget" id="cat_blog">
+					<h4>CLICK</h4>
+					<ul>
+						<li><a href="freeboard-list">목록으로 돌아가기</a>
+						</li>
+					</ul>
+				</div>
+				<!-- End widget -->
 
 
-	<div id="toTop"></div><!-- Back to top button -->
-	
-	<!-- Search Menu -->
-	<div class="search-overlay-menu">
-		<span class="search-overlay-close"><i class="icon_set_1_icon-77"></i></span>
-		<form role="search" id="searchform" method="get">
-			<input value="" name="q" type="search" placeholder="Search..." />
-			<button type="submit"><i class="icon_set_1_icon-78"></i>
-			</button>
-		</form>
-	</div><!-- End Search Menu -->
-	
-	<!-- Sign In Popup -->
-	<div id="sign-in-dialog" class="zoom-anim-dialog mfp-hide">
-		<div class="small-dialog-header">
-			<h3>Sign In</h3>
+				<!-- End widget -->
+				<!-- End widget -->
+
+			</aside>
+			<!-- End aside -->
+
 		</div>
-		<form>
-			<div class="sign-in-wrapper">
-				<a href="#0" class="social_bt facebook">Login with Facebook</a>
-				<a href="#0" class="social_bt google">Login with Google</a>
-				<div class="divider"><span>Or</span></div>
+		<!-- End row-->
+	</div>
+	<!-- End container -->
+</main>
+<!-- End main -->
+<!--========================= footer ========================-->
+<footer class="revealed">
+	<div id="footer" th:include="include-common-bottom::include-common-bottom"></div>
+</footer>
+<!-- End container -->
+<!--========================= End footer ========================-->
+
+<div id="toTop"></div><!-- Back to top button -->
+
+<!-- Search Menu -->
+<div class="search-overlay-menu">
+	<span class="search-overlay-close"><i class="icon_set_1_icon-77"></i></span>
+	<form role="search" id="searchform" method="get">
+		<input value="" name="q" type="search" placeholder="Search..." />
+		<button type="submit"><i class="icon_set_1_icon-78"></i>
+		</button>
+	</form>
+</div><!-- End Search Menu -->
+
+<!-- Sign In Popup -->
+<div id="sign-in-dialog" class="zoom-anim-dialog mfp-hide">
+	<div class="small-dialog-header">
+		<h3>Sign In</h3>
+	</div>
+	<form>
+		<div class="sign-in-wrapper">
+			<a href="#0" class="social_bt facebook">Login with Facebook</a>
+			<a href="#0" class="social_bt google">Login with Google</a>
+			<div class="divider"><span>Or</span></div>
+			<div class="form-group">
+				<label>Email</label>
+				<input type="email" class="form-control" name="email" id="email">
+				<i class="icon_mail_alt"></i>
+			</div>
+			<div class="form-group">
+				<label>Password</label>
+				<input type="password" class="form-control" name="password" id="password" value="">
+				<i class="icon_lock_alt"></i>
+			</div>
+			<div class="clearfix add_bottom_15">
+				<div class="checkboxes float-left">
+					<input id="remember-me" type="checkbox" name="check">
+					<label for="remember-me">Remember Me</label>
+				</div>
+				<div class="float-right"><a id="forgot" href="javascript:void(0);">Forgot Password?</a></div>
+			</div>
+			<div class="text-center"><input type="submit" value="Log In" class="btn_login"></div>
+			<div class="text-center">
+				Don’t have an account? <a href="javascript:void(0);">Sign up</a>
+			</div>
+			<div id="forgot_pw">
 				<div class="form-group">
-					<label>Email</label>
-					<input type="email" class="form-control" name="email" id="email">
+					<label>Please confirm login email below</label>
+					<input type="email" class="form-control" name="email_forgot" id="email_forgot">
 					<i class="icon_mail_alt"></i>
 				</div>
-				<div class="form-group">
-					<label>Password</label>
-					<input type="password" class="form-control" name="password" id="password" value="">
-					<i class="icon_lock_alt"></i>
-				</div>
-				<div class="clearfix add_bottom_15">
-					<div class="checkboxes float-left">
-						<input id="remember-me" type="checkbox" name="check">
-						<label for="remember-me">Remember Me</label>
-					</div>
-					<div class="float-right"><a id="forgot" href="javascript:void(0);">Forgot Password?</a></div>
-				</div>
-				<div class="text-center"><input type="submit" value="Log In" class="btn_login"></div>
-				<div class="text-center">
-					Don’t have an account? <a href="javascript:void(0);">Sign up</a>
-				</div>
-				<div id="forgot_pw">
-					<div class="form-group">
-						<label>Please confirm login email below</label>
-						<input type="email" class="form-control" name="email_forgot" id="email_forgot">
-						<i class="icon_mail_alt"></i>
-					</div>
-					<p>You will receive an email containing a link allowing you to reset your password to a new preferred one.</p>
-					<div class="text-center"><input type="submit" value="Reset Password" class="btn_1"></div>
-				</div>
+				<p>You will receive an email containing a link allowing you to reset your password to a new preferred one.</p>
+				<div class="text-center"><input type="submit" value="Reset Password" class="btn_1"></div>
 			</div>
-		</form>
-		<!--form -->
-	</div>
-	<!-- /Sign In Popup -->
+		</div>
+	</form>
+	<!--form -->
+</div>
+<!-- /Sign In Popup -->
 
-	<!-- Common scripts -->
-	<script src="js/jquery-2.2.4.min.js"></script>
-	<script src="js/common_scripts_min.js"></script>
-	<script src="js/functions.js"></script>
-	<script src="js/app.js" type="module"></script>
-	<script src="js/app_freeboard.js" type="module"></script>
-	<script>
-	function btnAlert(){
-		alert('내용을 입력하세요.')
-	}
-	function writeFreeBoard() {
-		document.getElementById('write-form').action = "freeboard-write-action";
-	    document.getElementById('write-form').submit();
-		windoow.location.href="freeboard-list"
-		}
-	</script>
+
+<!-- Common scripts -->
+<script src="js/freeboard.js" type="module"></script>
+<script src="js/jquery-2.2.4.min.js"></script>
+<script src="js/common_scripts_min.js"></script>
+<script src="js/functions.js"></script>
+<script src="js/app_freeboard.js" type="module"></script>
+
+<!-- Date and time pickers -->
+<script src="js/jquery.sliderPro.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function ($) {
+		$('#Img_carousel').sliderPro({
+			width: 960,
+			height: 500,
+			fade: true,
+			arrows: true,
+			buttons: false,
+			fullScreen: false,
+			smallSize: 500,
+			startSlide: 0,
+			mediumSize: 1000,
+			largeSize: 3000,
+			thumbnailArrows: true,
+			autoplay: false
+		});
+	});
+</script>
+
+<!-- Date and time pickers -->
+<script>
+	$('#tBoStartDate').datepicker('setDate', 'today');
+</script>
+
+
+<!-- Date and time pickers -->
+<script src="js/jquery.sliderPro.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function ($) {
+		$('#Img_carousel').sliderPro({
+			width: 960,
+			height: 500,
+			fade: true,
+			arrows: true,
+			buttons: false,
+			fullScreen: false,
+			smallSize: 500,
+			startSlide: 0,
+			mediumSize: 1000,
+			largeSize: 3000,
+			thumbnailArrows: true,
+			autoplay: false
+		});
+	});
+</script>
+
+<!-- Date and time pickers -->
+<script>
+	$('#tBoEndDate').datepicker('setDate', 'today');
+</script>
 
 </body>
 

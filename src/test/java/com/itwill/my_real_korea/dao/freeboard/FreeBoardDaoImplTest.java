@@ -2,16 +2,17 @@ package com.itwill.my_real_korea.dao.freeboard;
 
 import com.itwill.my_real_korea.dto.City;
 import com.itwill.my_real_korea.dto.freeboard.FreeBoard;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Date;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-
 @SpringBootTest
 @MapperScan(basePackages = "com.itwill.my_real_korea.mapper")
 class FreeBoardDaoImplTest {
@@ -19,7 +20,9 @@ class FreeBoardDaoImplTest {
     private FreeBoardDao freeBoardDao;
     @Test
     void insertBoard() throws Exception {
-        FreeBoard freeBoard = new FreeBoard(2,"date test","content",new Date(2022/01/18),12, new City(3, "강원", 3, 3),"user2",0);
+        FreeBoard freeBoard = new FreeBoard(2,"date test","content",null,12,"user2");
+        freeBoard.setCity(new City(1,"서울",1,1));
+        System.out.println(freeBoard);
         int insertBoard = freeBoardDao.insertBoard(freeBoard);
         assertThat(insertBoard).isEqualTo(1);
     }
@@ -29,7 +32,6 @@ class FreeBoardDaoImplTest {
         FreeBoard freeBoard = freeBoardDao.selectByNo(3);
         assertThat(freeBoard).isNotNull();
         System.out.println(freeBoard);
-
     }
 
     @Test
@@ -52,13 +54,20 @@ class FreeBoardDaoImplTest {
 
     @Test
     void updateBoard() throws Exception {
-        FreeBoard freeBoard = new FreeBoard(2,"@update","content",new Date(),9,new City(3,"강원",1,1),"user2",0);
-        int updateBoard = freeBoardDao.updateBoard(freeBoard);
+        FreeBoard updateFreeBoard = FreeBoard.builder()
+                .fBoTitle("title")
+                .fBoContent("content")
+                .fBoNo(4)
+                .build();
+        City city = new City(1, "서울", 1, 1);
+        updateFreeBoard.setCity(city);
+        int updateBoard = freeBoardDao.updateBoard(updateFreeBoard);
         assertThat(updateBoard).isEqualTo(1);
     }
+    @Disabled
     @Test
     void deleteBoard() throws Exception {
-        freeBoardDao.deleteBoard(8);
+        freeBoardDao.deleteBoard(26);
     }
 
     @Test

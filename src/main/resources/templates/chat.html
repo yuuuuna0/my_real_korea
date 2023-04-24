@@ -18,15 +18,17 @@
         <div class="card chat-app">
         	<!-- 채팅방 시작 --> 
             <div id="plist" class="people-list">
+                                        <a href="index" onclick="toHome();"><img alt="" src="img/chat_logo_myrealkorea.png" title="홈으로 이동"></a>
+            
                 <!-- 채팅방 목록 -->
                 <ul id="online-user" class="list-unstyled chat-list mt-2 mb-0">
                 	<th:block th:if="${myChatRoomList != null}">
-                    <li class="clearfix" id="chat-room-list" th:each="chatRoom:${myChatRoomList}">
+                    <li class="clearfix"  id="chat-room-list" th:each="chatRoom:${myChatRoomList}">
                         <div class="about">
                             <div class="name" id="master" th:text="${chatRoom.roomName}"></div>
                             <div class="status" id="master-status"> 
                             	<i id="master-status-icon" class="fa fa-circle offline"></i> 
-                            	<span id="master-status-content">offline </span> 
+                            	<span id="master-status-content">채팅방 이동 click </span> 
                             </div>                                            
                         </div>
                     </li>
@@ -42,12 +44,6 @@
                         </div>
                     </li>
                     </th:block>
-                    <li class="clearfix active">
-                        <div class="about">
-                            <div class="name">Aiden Chavez</div>
-                            <div class="status"> <i class="fa fa-circle online"></i> online </div>
-                        </div>
-                    </li>
                 </ul>
                  <!-- 채팅방 목록 끝 -->
             </div> 
@@ -59,9 +55,8 @@
                         <div class="col-lg-6">
                             <a href="javascript:void(0);" data-toggle="modal" data-target="#view_info">
                             </a>
-                            <a href="index" onclick="toHome();"><img alt="" src="img/chat_logo_myrealkorea.png" title="홈으로 이동"></a>
                             <div class="chat-about">
-                            	<span class="m-b-0">채팅</span>
+                            	<span class="m-b-0">채팅방 : </span>
                                 <span id="roomName"  class="m-b-0" th:text="${roomName}"></span>
                                 <input name="jsonMyChatRoomNameList" id="jsonMyChatRoomNameList" type="hidden" th:value=${jsonMyChatRoomNameList}>
                                 <input name="receiverId" class="m-b-0" id="receiverId" type="hidden" th:value=${receiverId}>
@@ -70,21 +65,6 @@
                                 <button class="input-group-text" type="button" id="disconn"
 								data-toggle="tooltip" data-placement="top" title="채팅방나가기">채팅방 나가기</button>
                             </div>
-                            <!-- chat-start-btn 
-                            <div id="chatConnect">
-						    <button id="chat-start-btn">채팅 시작하기</button>
-							</div>-->
-							
-						    <!-- End chat-start-btn -->
-                        </div>
-                        <div class="col-lg-6 hidden-sm text-right" >
-                        <!-- 
-                            <a href="javascript:void(0);" class="btn btn-outline-secondary"><i class="fa fa-camera"></i></a>
-                            <a href="javascript:void(0);" class="btn btn-outline-primary"><i class="fa fa-image"></i></a>
-                            <a href="javascript:void(0);" class="btn btn-outline-info"><i class="fa fa-cogs"></i></a>
-                            <a href="javascript:void(0);" class="btn btn-outline-warning"><i class="fa fa-question"></i></a>
-                         -->
-                        
                         </div>
                     </div>
                 </div>

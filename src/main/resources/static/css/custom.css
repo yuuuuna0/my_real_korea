@@ -326,8 +326,10 @@ ul#top_tools {
 
 .chat .chat-header .chat-about {
     float: left;
-    padding-left: 10px;
-    padding-top: 10px;
+    padding-left: 0px;
+    padding-top: 15px;
+    font-size: 20px;
+    font-weight: 700;
 }
 
 .input-group-prepend #button-send{
@@ -336,10 +338,11 @@ ul#top_tools {
 }
 
 #disconn {
-	margin-left: 530px;
+	margin-left: 470px;
 	background-color: #e14d67;
 	color: #fff;
 	font-size: 14px;
+	cursor: pointer;
 }
 
 .shop-item .inner-box {

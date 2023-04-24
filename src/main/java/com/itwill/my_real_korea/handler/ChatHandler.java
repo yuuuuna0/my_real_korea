@@ -54,12 +54,6 @@ public class ChatHandler extends TextWebSocketHandler {
 	/* 채팅 유저 접속 시 호출되는 메소드 */
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) {
-		// 세션아이디 : 세션 맵에 저장
-//		log.info("#ChattingHandler, afterConnectionEstablished");
-//		String sessionId = session.getId();
-//		userSession.put(sessionId, session);
-//		log.info(session.getId() + " 채팅 유저 접속");
-
 		// 보내는 사람 아이디(세션아이디) : 세션 리스트에 저장
 		User loginUser = (User) session.getAttributes().get("loginUser");
 		String senderId = loginUser.getUserId();
@@ -69,23 +63,6 @@ public class ChatHandler extends TextWebSocketHandler {
 		
 		log.info("보내는 사람 : sessionId >>> " + senderId);
 		
-		/*
-		userSession 맵의 사이즈가 2이상일 때 (접속자 2명 이상일 때) 
-		본인 senderId와 다른 Id가 receiverId 가 되도록
-		
-		String receiverId = "";
-		if (onlineList.size() >= 2) {
-			String tempId1 = onlineList.get(0);
-			String tempId2 = onlineList.get(1);
-			if (tempId1.equals(senderId)) {
-				receiverId = tempId2;
-			} else if (tempId2.equals(senderId)) {
-				receiverId = tempId1;
-			}
-		} else {
-			receiverId = "master";
-		}
-		 */
 		// 받는 사람 = 마스터, 마스터에게 접속 성공 메세지 보내기
 		Map<String, Object> data = new HashMap<>();
 		data.put("senderId", senderId);
@@ -101,14 +78,11 @@ public class ChatHandler extends TextWebSocketHandler {
 				TextMessage msg = new TextMessage(senderId + " 님이 접속했습니다.");
 				sendToAll(msg, senderId);
 			}
-			// msgToMaster = new TextMessage(json.writeValueAsString(data));
-			// handleMessage(session, msgToMaster);
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-//		}
 		log.info(session + " 세션접속 성공");
 	}
 
@@ -160,11 +134,8 @@ public class ChatHandler extends TextWebSocketHandler {
 		dataMap.put("masterStatus", masterStatus);
 		dataMap.put("onlineList", onlineList);
 
-//		String senderId = (String) dataMap.get("senderId");
-//		String receiverId = (String) dataMap.get("receiverId");
 		log.info("handleTextMessage final dataMap >>> " + dataMap);
 		try {
-			//session.sendMessage(message);
 			// 메세지 보내기
 			System.out.println("받는사람 세션 : receiver session >>> " + userSession.get(receiverId));
 			String msg;
@@ -189,10 +160,6 @@ public class ChatHandler extends TextWebSocketHandler {
 	/* 채팅 유저 접속 해제 시 호출되는 메소드 */
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) {
-//		log.info("#ChattingHandler, afterConnectionClosed");
-//		userSession.remove(session.getId());
-//		log.info(session.getId() + " 채팅 유저 접속 해제");
-//		
 		User loginUser = (User) session.getAttributes().get("loginUser");
 		String senderId = loginUser.getUserId();
 		// 받는 사람

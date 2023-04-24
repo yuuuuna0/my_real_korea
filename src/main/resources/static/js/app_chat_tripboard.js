@@ -10,6 +10,6 @@ $(document).on('click','#chat-pop-up-click', function(e) {
 	
 	window.open(url,
 				'target',
-				'top=100, left=500, width=800, height=800, toolbar=no, menubar=no, location=no, status=no, scrollbars=no, resizable=no');
+				'top=100, left=200, width=1000, height=800, toolbar=no, menubar=no, location=no, status=no, scrollbars=no, resizable=no');
 
 });

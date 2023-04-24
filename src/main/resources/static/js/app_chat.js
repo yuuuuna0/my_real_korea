@@ -1,3 +1,4 @@
+
 import * as View from "./view.js";
 import * as Request from "./request.js";
  
@@ -27,6 +28,8 @@ function onClose(evt) {
 function onOpen(evt) {
         	 console.log("open event : " + evt);
          }
+         
+ 
     
      
 
@@ -69,6 +72,7 @@ $(document).on('click','#button-send', function(e){
 $(document).on('click','#disconn', function(e) {
 	onClose();
 	sock.onClose;
+	console.log('채팅방 나가기');
 	window.close();
 });
 /************ onMessage *************/
@@ -91,10 +95,12 @@ function onMessage(msg) {
 	console.log('outOne >>> ', outOne);
 
 	// 새로운 유저 접속했을 때 senderId가 포함된 roomName 가진 채팅방 목록 가져오기 - myChatRoomNameList
+	/*
 	if (newOne != null) {
 		console.log("새로운 접속자 있음");
 		getOnlineList(myChatRoomNameList);
 	}
+	*/
 	
 	// 메세지 보내기
 	insertMessage(senderId, receiverId, time, message);
@@ -149,7 +155,7 @@ function insertMessage(senderId, receiverId,  time, message) {
 }
 
 /************ DB에서 메세지 가져오기 *************/
-function getMessage(senderId, userId,  time, message) {
+function getMessage(senderId, receiverId, userId,  time, message) {
 	console.log('insertMessage[myId] : '+myId);
 	console.log('insertMessage[senderId] : '+senderId);
 	console.log('insertMessage[userId] : '+userId);
@@ -221,7 +227,7 @@ function saveChatDB(senderId, receiverId, message, time){
 							if (resultJson.code == 1) {
 								console.log('saveChatDB 성공');
 							} else {
-								alert(resultJson.msg);
+								console.log(resultJson.msg);
 							};
 						}, async);
 };
@@ -249,11 +255,11 @@ function getChatFromDB(myId,receiverId){
 								let chatList = resultJson.data;
 								
 								for (const item of chatList) {
-									getMessage(senderId, item.userId, item.msgSendTime, item.msgContent);
+									getMessage(senderId, receiverId, item.userId, item.msgSendTime, item.msgContent);
 								}
 								console.log("getChatFromDB senderId :" + senderId);
 							} else {
-								alert(resultJson.msg);
+								console.log(resultJson.msg);
 							};
 		}, async);
 };
@@ -299,17 +305,20 @@ function activeToggle(element) {
 	}
 }
 
-/************ 모든 채팅 사용자들 채팅방 목록에 넣기 *************/
-/*
-function getOnlineList(myChatRoomNameList) {
-	var onlineUser = document.querySelector("#online-user");
-	onlineUser.innerHTML = "";
-	myChatRoomNameList.forEach(chatRoomName => {
-		insertOnlineList(chatRoomName);
-	});
-}
-*/
+/************ 채팅방 목록의 채팅방 클릭 ************/
+$(document).on('click','#chat-room-list', function(e) {
+	// DB에 저장된 대화내용 가져오기
+	let chatRoomName = $(this).find('#master').text();
+	console.log('채팅방클릭-chatRoomName:'+chatRoomName);
+	let receiverIdFromRoom = chatRoomName.substr(chatRoomName.indexOf("&") + 1);
+	console.log('채팅방클릭-receiverIdFromRoom:'+receiverIdFromRoom);
+	window.location.href='chat?receiverId='+receiverIdFromRoom;
+	getChatFromDB(myId,receiverId);
+	scrollDown();
+});
 
+
+/************ 모든 채팅 사용자들 채팅방 목록에 넣기 ***********
 function getOnlineList(myChatRoomNameList) {
 	var onlineUser = document.querySelector("#online-user");
 	onlineUser.innerHTML = "";
@@ -317,10 +326,8 @@ function getOnlineList(myChatRoomNameList) {
 		insertOnlineList(myChatRoomNameList[chatRoomName]);
 	}
 }
-
-
-/************ 채팅방 목록 가져오기 *************/
-// insert online user list
+**/
+/************ 채팅방 목록 가져오기 ************
 function insertOnlineList(user) {
 
 	if (document.getElementById(user) == null) {
@@ -328,7 +335,7 @@ function insertOnlineList(user) {
 
 		var li = document.createElement('li');
 		li.classList.add('clearfix');
-		li.setAttribute('onclick', 'activeToggle(this)');
+		//li.setAttribute('onclick', 'activeToggle(this)');
 		li.setAttribute('id', user);
 
 		var aboutDiv = document.createElement('div');
@@ -363,16 +370,7 @@ function insertOnlineList(user) {
 		onlineUser.appendChild(li);
 	}
 };
-
-
-
-
-
-
-
-
-
-
+*/
 
 
 /**************채팅 아이디 가져오기****************/

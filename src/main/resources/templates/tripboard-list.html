@@ -37,16 +37,6 @@
 <body>
 
 
-	<div id="preloader">
-		<div class="sk-spinner sk-spinner-wave">
-			<div class="sk-rect1"></div>
-			<div class="sk-rect2"></div>
-			<div class="sk-rect3"></div>
-			<div class="sk-rect4"></div>
-			<div class="sk-rect5"></div>
-		</div>
-	</div>
-	<!-- End Preload -->
 
 	<div class="layer"></div>
 	<!-- Mobile menu overlay mask -->
@@ -111,7 +101,11 @@
 						<div class="row" id="tripboard-list">
 						
 							<div class="shop-item col-lg-4 col-md-6 col-sm-6" th:each="tripBoard:${tripBoardList}" style="margin-bottom:280px">
-								<div class="ribbon_3"><span>모집중</span>
+								<div class="ribbon_3" th:if="${tripBoard.tBoStatus == 0}">
+									<span>모집중</span>
+								</div>
+								<div class="ribbon_3 popular" th:if="${tripBoard.tBoStatus == 1}">
+									<span>모집완료</span>
 								</div>
 								<div class="inner-box">
 									<div class="image-box">
@@ -309,7 +303,7 @@
 					<h3><a href="tripboard-detail?tBoNo={{tboNo}}">{{tboTitle}}</a></h3>
 				</div>
 				<div class="trip-date">
-					<h3><a>{{dateFormat tboStartDate}}</a><a> ~ </a><a>{{dateFormat tboEndDate}}</a></h3>
+					<h3><a>{{dateFormat2 tboStartDate}}</a><a> ~ </a><a>{{dateFormat2 tboEndDate}}</a></h3>
 				</div>
 				<div class="icons">
 					<span class="icon-eye"></span>

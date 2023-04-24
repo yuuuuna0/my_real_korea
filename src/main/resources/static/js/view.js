@@ -18,6 +18,10 @@ export function render(templateId, jsonResult={}, contentId){
 	  var date = new Date(dateString);
 	  return date.toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit' });
 	});
+	Handlebars.registerHelper('dateFormat2', function(dateString) {
+	  var date = new Date(dateString);
+	  return date.toLocaleDateString('ko-KR', { month: '2-digit', day: '2-digit' });
+	});
 	//if함수 (if else 아님)
 	Handlebars.registerHelper('ifCond',function(v1,operator,v2,options){
 		switch(operator){

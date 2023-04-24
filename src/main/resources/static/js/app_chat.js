@@ -21,6 +21,7 @@ function onClose(evt) {
 function onOpen(evt) {
         	 console.log("open event : " + evt);
          }
+         
 
 /**********페이지 로딩 시 - 소켓연결, DB내용 가져오기*********/
 $(document).ready(function(){
@@ -29,10 +30,13 @@ $(document).ready(function(){
 	sock.onopen = onOpen;
 	sock.onClose = onClose;
 	
+	let receiverId = $('#chat-pop-up-click').attr('data-user-id');
+	console.log('????????? openPopup'+receiverId);
 	// DB에 저장된 대화내용 가져오기
-	let receiverId = document.getElementById('receiverId').value;
+	//let receiverId = document.getElementById('receiverId').value;
 	getChatFromDB(myId,receiverId);
 	scrollDown();
+	
 	
 });
 

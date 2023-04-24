@@ -97,9 +97,12 @@
 									<div class="form-group">
 										<select id="sort" name="sort" onchange="if(this.value) location.href=(this.value);">
 											<option value="">정렬</option>
-											<option value="freeboard-list-fBoNo-desc" >최신순</option>
-											<option value="freeboard-list-fBoNo-asc">오래된순</option>
-											<option value="freeboard-list-readCount-desc">조회수높은순</option>
+											<option value="freeboard-list-fBoNo-desc?pageNo=1" >최신순:1</option>
+											<option value="freeboard-list-fBoNo-desc?pageNo=2" >최신순:2</option>
+											<option value="freeboard-list-fBoNo-asc?pageNo=1">오래된순:1</option>
+											<option value="freeboard-list-fBoNo-asc?pageNo=2">오래된순:2</option>
+											<option value="freeboard-list-readCount-desc?pageNo=1">조회수높은순:1</option>
+											<option value="freeboard-list-readCount-desc?pageNo=2">조회수높은순:2</option>
 										</select>
 									</div>
 								</div>
@@ -222,8 +225,8 @@
 								<li><a id="freeboard-city5">대전</a></li>
 								<li><a id="freeboard-city6">부산</a>
 								<hr>
-									<h id="freeboard-write-form-btn" class="btn_1" style="color:white;  text-align:center"  th:if="${loginUser != null && loginUser.userId == freeBoard.userId}" role="button" th:text="'자유게시판 글쓰기'"></h>
-									<h  class="btn_1" style="color:white;  text-align:center" th:unless="${loginUser != null && loginUser.userId == freeBoard.userId}" role="button" onclick="window.alert('로그인하세요')" th:text="'자유게시판 글쓰기'"></h>
+									<h id="freeboard-write-form-btn" class="btn_1" style="color:white;  text-align:center"  th:if="${loginUser != null }" role="button" th:text="'자유게시판 글쓰기'"></h>
+									<h  class="btn_1" style="color:white;  text-align:center" th:unless="${loginUser != null}" role="button" onclick="window.alert('로그인하세요')" th:text="'자유게시판 글쓰기'"></h>
 									<hr>
 						</li>
 							
@@ -296,7 +299,7 @@
 								</tr>
 								<tr id='boardlist_tr2'> 
 {{#each data.itemList}}
-								        <td width=300> <a  href=freeboard-detail?fBoNo={{fboNo}}>{{fboTitle}}></a></td>
+								        <td width=300><a style="color:grey;" href=freeboard-detail?fBoNo={{fboNo}}>{{fboTitle}}</a></td>
 										<td width=5 class="icon-comment"></td>
 										<td width=10> {{commentCount}}</td> 
 										<td width=5 class="icon-map"></td>

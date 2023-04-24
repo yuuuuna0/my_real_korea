@@ -86,6 +86,7 @@ public class TripBoardRestController {
 			// tBoNo로 동행 게시글 1개 찾기, 수정 성공시 code 1
 			City city=cityService.findByCityNo(cityNo);
 			tripBoard.setCity(city);
+			
 			TripBoard findTripBoard = tripBoardService.selectByTbNo(tBoNo);
 			if(findTripBoard != null) {
 				tripBoard.setTBoNo(tBoNo);
@@ -99,6 +100,7 @@ public class TripBoardRestController {
 				code = 2;
 				msg = "게시글 수정 실패";
 			}
+		
 		} catch (Exception e) {
 			// 에러 발생 시 code 3
 			e.printStackTrace();

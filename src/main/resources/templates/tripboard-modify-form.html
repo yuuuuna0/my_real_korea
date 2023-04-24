@@ -204,13 +204,13 @@
 									<div class="col-md-6">
 										<div class="form-group">
 											<label><i class="icon-calendar-7"></i> 여행 시작일</label>
-											<input class="start-date-pick form-control" data-date-format="yyyy-mm-dd" type="date" id="tBoStartDate" name="tBoStartDate" th:value="${#dates.format(tripBoard.tBoStartDate, 'yyyy-MM-dd')}" >
+											<input class="start-date-pick form-control" data-date-format="yyyy-MM-dd" type="date" id="tBoStartDate" name="tBoStartDate" th:value="${#dates.format(tripBoard.tBoStartDate, 'yyyy-MM-dd')}" >
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
 											<label><i class="icon-calendar-7"></i> 여행 종료일</label>
-											<input class="end-date-pick form-control" data-date-format="yyyy-mm-dd" type="date" id="tBoEndDate" name="tBoEndDate" th:value="${#dates.format(tripBoard.tBoEndDate, 'yyyy-MM-dd')}">
+											<input class="end-date-pick form-control" data-date-format="yyyy-MM-dd" type="date" id="tBoEndDate" name="tBoEndDate" th:value="${#dates.format(tripBoard.tBoEndDate, 'yyyy-MM-dd')}">
 										</div>
 									</div>
 								</div>
@@ -236,8 +236,9 @@
 									<div class="col-3">
 										<div class="form-group">
 											<label class="switch-light switch-ios pull-right">
-												<input type="checkbox" name="tBoStatus" id="tBoStatus" th:value="${tripBoard.tBoStatus}" checked >
-													<span>
+												<input type="checkbox" name="tBoStatus" id="tBoStatus" value="0" checked />
+												<input type="hidden" name="tBoStatus" id="tBoStatus_hidden" value="1" />
+													<span class="status1">
 													<span>모집완료</span>
 													<span>모집중</span>
 													</span>
@@ -430,18 +431,37 @@
 	<script>
 		$('input.date-pick').datepicker('setDate', 'today');
 	</script>
+	
 	<!-- 
-	<script>
-	function checkedStatus() {
-		if(document.f.tBoStatus.checked == true) {
-			document.f.tBoStatus.value == '0';
+	<script type="text/javascript">
+	function checkedStatus(event) {
+		let result = '';
+		if(event.target.checked) {
+			result == '0';
 		}else {
-			document.f.tBoStatus.value == '1';
+			result == '1';
 		}
+		console.log(result);
 	}
 	</script>
-	
 	 -->
+	
+	 <!-- 
+	 <script type="text/javascript">
+	 	function checkedStatus(event) {
+	 		let result='';
+	 		if(event.target.checked) {
+	 			result = '0';
+	 		}else {
+	 			result = '1';
+	 		}
+	 		
+	 		console.log(result);
+	 		result = document.f.tBoStatus.value;
+	 	}
+	 </script>
+	  -->
+	 
 	
 </body>
 

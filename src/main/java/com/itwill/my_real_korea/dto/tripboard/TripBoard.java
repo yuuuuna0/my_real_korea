@@ -19,15 +19,15 @@ public class TripBoard {
 	private int tBoNo;
 	private String tBoTitle;
 	private String tBoContent;
-	@DateTimeFormat(pattern = "yyyy-mm-dd")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date tBoDate;
 	private int tBoReadcount;
 	private int tBoStatus;
 	private int tBoPerson;
 	private String tBoImg;
-	@DateTimeFormat(pattern = "yyyy-mm-dd")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date tBoStartDate;
-	@DateTimeFormat(pattern = "yyyy-mm-dd")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date tBoEndDate;
 	private String tBoStyle;
 	private String hashtag;

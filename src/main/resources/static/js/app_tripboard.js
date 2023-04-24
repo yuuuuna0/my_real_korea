@@ -147,9 +147,21 @@ $(document).on('click', '#tripboard-write-action', function(e){
 	}
 });
 
+function checkedStatus(event) {
+ 		let result='';
+ 		if(event.target.checked) {
+ 			result = '0';
+ 		}else {
+ 			result = '1';
+ 		}
+ 		
+ 		console.log(result);
+ 		result = document.f.tBoStatus.value;
+ 		return result;
+ 	}
+
 //동행게시판 수정 액션
 $(document).on('click', '#tripboard-modify-action', function(e){
-	
 	let form = $('#tripboardWriteForm');
 	let tBoNo = $('#modify-tBoNo').val();
 	let url = `tripboard/${tBoNo}`;
@@ -158,6 +170,13 @@ $(document).on('click', '#tripboard-modify-action', function(e){
 	let tBoImg = "이미지";
 	let cityNo = $('input[name="cOptions"]:checked').val();
 	let tBoStyle = $('input[name="sOoptions"]:checked').val();
+	let tBoStatus;
+	
+	if(document.getElementById("tBoStatus").checked) {
+		tBoStatus = '0';
+	}else {
+		tBoStatus = '1';
+	}
 	
 	formData.append('tBoTitle', $('#tBoTitle').val());
 	formData.append('tBoContent', $('#tBoContent').val());
@@ -169,9 +188,8 @@ $(document).on('click', '#tripboard-modify-action', function(e){
 	formData.append('cityNo', cityNo);
 	formData.append('userId', $('#userId').val());
 	formData.append('tBoImg', tBoImg);
-	formData.append('tBoStatus', $('#tBoStatus').val());
+	formData.append('tBoStatus', tBoStatus);
 	
-	console.log(tBoStatus);
 	let async = true;
 	
 	$.ajax({

@@ -20,7 +20,7 @@
 <!--  동행게시판 게시글 수정 -->
 <update id="updateTripBoard" parameterType="com.itwill.my_real_korea.dto.tripboard.TripBoard">
 	update trip_board set t_bo_title=#{tBoTitle},t_bo_content=#{tBoContent},t_bo_person=#{tBoPerson},
-                        	t_bo_img=#{tBoImg},t_bo_start_date=#{tBoStartDate},t_bo_end_date=#{tBoEndDate},
+                        	t_bo_status=#{tBoStatus},t_bo_img=#{tBoImg},t_bo_start_date=#{tBoStartDate},t_bo_end_date=#{tBoEndDate},
                         	t_bo_style=#{tBoStyle},hashtag=#{hashtag},city_no=#{city.cityNo} where t_bo_no=#{tBoNo}
 </update>
 
@@ -71,7 +71,7 @@
 	select * from
 	(select rownum idx, s.* from
 		(select * from trip_board t join city c on t.city_no = c.city_no 
-		order by t.t_bo_date desc) s
+		order by t.t_bo_date asc) s
 	)
 		<![CDATA[ where idx >= #{pageStart} and idx <= #{pageEnd} ]]> 
 </select>
@@ -87,11 +87,11 @@
 	<![CDATA[ where idx >= #{pageStart} and idx <= #{pageEnd} ]]>
 </select>
 
-<!--  게시판 리스트(게시물 시작번호~끝번호) - 페이징 처리 -->
+<!--  게시판 리스트(최신순) - 페이징 처리 -->
 <select id="selectAllTb" parameterType="java.util.Map" resultMap="CitywithTripBoardResultMap">
 	select * from
 	(select rownum idx, s.* from
-		(select * from trip_board t join city c on t.city_no = c.city_no order by t.t_bo_no asc) s
+		(select * from trip_board t join city c on t.city_no = c.city_no order by t.t_bo_no desc) s
 	)
 	<![CDATA[ where idx >= #{pageStart} and idx <= #{pageEnd} ]]>
 </select>

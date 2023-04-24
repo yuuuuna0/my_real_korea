@@ -77,7 +77,7 @@ $(document).on('click','#btn-user-modify-action',function(e) {
 	let smoking = $('input[name="sOptions"]:checked').val();
 	
 	formData.append('userId', $('#userId').val());
-	formData.append('password', $('#password1').val());
+	formData.append('password', $('#password').val());
 	formData.append('nickname', $('#nickname').val());
 	formData.append('phone', $('#phone').val());
 	formData.append('email', $('#email').val());

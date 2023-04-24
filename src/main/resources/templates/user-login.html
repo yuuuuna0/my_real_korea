@@ -26,6 +26,7 @@
 	
 	<!-- CUSTOM CSS -->
 	<link href="css/custom.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
  
 <script defer type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.2/handlebars.min.js"></script>
 
@@ -65,15 +66,7 @@ function kakaoLogin() {
 </head>
 <body>
 
-    <div id="preloader">
-        <div class="sk-spinner sk-spinner-wave">
-            <div class="sk-rect1"></div>
-            <div class="sk-rect2"></div>
-            <div class="sk-rect3"></div>
-            <div class="sk-rect4"></div>
-            <div class="sk-rect5"></div>
-        </div>
-    </div>
+
     <!-- End Preload -->
 
     <div class="layer"></div>
@@ -99,12 +92,12 @@ function kakaoLogin() {
 	</a>
 	<div class="divider"><span>Or</span></div>
     <div class="form-group">
-        <label>ID</label>
+        <label>아이디</label>
         <input type="text" class=" form-control " placeholder="Username" name="userId">
         <font color="red" th:text="${msg1}"></font>
     </div>
     <div class="form-group">
-        <label>Password</label>
+        <label>비밀번호</label>
         <input type="password" class=" form-control" placeholder="Password" name="password">
         <font color="red" th:text="${msg2}"></font>
     </div>
@@ -201,6 +194,7 @@ function kakaoLogin() {
 	<script src="js/common_scripts_min.js"></script>
 	<script src="js/functions.js"></script>
 	<script src="js/app_user.js" type="module"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script> 
 
 <script type="text/javascript">
 
@@ -218,12 +212,12 @@ function findId() {
     
     
     if (name == "") {
-        alert("이름을 입력하세요.");
+    	toastr.error("이름을 입력하세요.");
         document.i.name.focus();
         return false;
     }
     if (email == "") {
-        alert("이메일을 입력하세요.");
+    	toastr.error("이메일을 입력하세요.");
         document.i.email.focus();
         return false;
     }
@@ -255,13 +249,13 @@ function findPassword() {
   const email = document.p.email.value;
 
   if (userId === "") {
-    alert("아이디를 입력하십시오.");
+	  toastr.error("아이디를 입력하십시오.");
     document.p.name.focus();
     return false;
   }
 
   if (email === "") {
-    alert("이메일을 입력하십시오.");
+	  toastr.error("이메일을 입력하십시오.");
     document.p.email.focus();
     return false;
   }
@@ -303,9 +297,10 @@ function submitAuthCode() {
             if (response.status === 0) {
                 // 인증 성공
                 window.location.replace(response.data);
+                toastr("인증 성공! 로그인 페이지로 이동합니다.")
             } else {
                 // 인증 실패
-                alert("인증 코드가 일치하지 않습니다.");
+                toastr.error("인증 코드가 일치하지 않습니다.");
             }
         },
         error: function(xhr) {

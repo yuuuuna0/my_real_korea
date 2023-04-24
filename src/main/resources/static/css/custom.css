@@ -377,6 +377,7 @@ a.btn_1.green, .btn_1.green {
     font-size: 35px;
 }
 
+
 .profile_pic {
 	float: none;
     margin-bottom: 15px;
@@ -402,3 +403,8 @@ a.btn_1.green, .btn_1.green {
     overflow: hidden;
     border: 0;
 }
+
+a.btn_1:hover, .btn_1:hover {
+    background-color: #333;
+}
+

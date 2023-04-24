@@ -33,6 +33,7 @@ public class ChatController {
 
 		HttpSession session = request.getSession();
 		User loginUser = (User)session.getAttribute("loginUser");
+		
 		String userId = loginUser.getUserId();
 		String senderId = userId;
 		String roomName = "";

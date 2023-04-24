@@ -12,8 +12,14 @@ $(document).on('click','#tripboard-search-btn',function(e){
 	let sendData = {};
 	let async = true;
 	
+	let curPage = $('#cur-page');
+	let totRecordCount = $('#tot-record-count');
+	
 	Request.ajaxRequest(url, method, contentType, sendData,
 						function(resultJson){
+							curPage.text(resultJson.data.pageMaker.curPage);
+							totRecordCount.text(resultJson.data.pageMaker.totCount);
+							
 							if(resultJson.code == 1){
 								View.render('#tripboard-search-list-template', resultJson, '#tripboard-list');
 							}else {
@@ -35,8 +41,14 @@ $(document).on('change', '#sort-by', function(e) {
 		let sendData = {};
 		let async = true;
 		
+		let curPage = $('#cur-page');
+		let totRecordCount = $('#tot-record-count');
+		
 		Request.ajaxRequest(url, method, contentType, sendData,
 							function(resultJson){
+								curPage.text(resultJson.data.pageMaker.curPage);
+								totRecordCount.text(resultJson.data.pageMaker.totCount);
+								
 								if(resultJson.code == 1){
 									View.render('#tripboard-search-list-template', resultJson, '#tripboard-list');
 								}else {
@@ -53,8 +65,14 @@ $(document).on('change', '#sort-by', function(e) {
 		let sendData = {};
 		let async = true;
 		
+		let curPage = $('#cur-page');
+		let totRecordCount = $('#tot-record-count');
+		
 		Request.ajaxRequest(url, method, contentType, sendData,
 							function(resultJson){
+								curPage.text(resultJson.data.pageMaker.curPage);
+								totRecordCount.text(resultJson.data.pageMaker.totCount);
+								
 								if(resultJson.code == 1){
 									View.render('#tripboard-search-list-template', resultJson, '#tripboard-list');
 								}else {
@@ -84,9 +102,15 @@ $(document).on('click', '#all-city-list', function(e) {
 		}
 		let async = true;
 		
+		let curPage = $('#cur-page');
+		let totRecordCount = $('#tot-record-count');
+		
 		Request.ajaxRequest(url, method, contentType, 
 							sendData,
 							function(resultJson){
+								curPage.text(resultJson.data.pageMaker.curPage);
+								totRecordCount.text(resultJson.data.pageMaker.totCount);
+								
 								if(resultJson.code == 1){
 									View.render('#tripboard-search-list-template', resultJson, '#tripboard-list');
 								}else {
@@ -167,7 +191,6 @@ $(document).on('click', '#tripboard-modify-action', function(e){
 	let url = `tripboard/${tBoNo}`;
 	let method = 'PUT';
 	let formData = new FormData();
-	let tBoImg = "이미지";
 	let cityNo = $('input[name="cOptions"]:checked').val();
 	let tBoStyle = $('input[name="sOoptions"]:checked').val();
 	let tBoStatus;
@@ -187,7 +210,7 @@ $(document).on('click', '#tripboard-modify-action', function(e){
 	formData.append('hashtag', $('#hashtag').val());
 	formData.append('cityNo', cityNo);
 	formData.append('userId', $('#userId').val());
-	formData.append('tBoImg', tBoImg);
+	formData.append('tBoImg', $('#userId').val());
 	formData.append('tBoStatus', tBoStatus);
 	
 	let async = true;

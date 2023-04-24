@@ -10,6 +10,8 @@
 		</collection>
 	</resultMap>
 
+
+
 	<!-- 1. 투어상품 추가 -->
 	<insert id="insertTour" parameterType="com.itwill.my_real_korea.dto.tour.Tour">
 		<selectKey resultType="java.lang.Integer" keyProperty="toNo" order="BEFORE">

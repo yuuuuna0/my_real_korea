@@ -67,10 +67,10 @@
 							<i class="icon-star voted"></i>
 							<i class="icon-star voted"></i>
 							<i class="icon-star voted"></i>
-							<i class=" icon-star-empty"></i>
+							<i class="icon-star-empty"></i>
 						</span>
 						<h1 th:text=${tour.toName}>Mariott Hotel</h1>
-						<span>Champ de Mars, 5 Avenue Anatole, 75007 Paris.</span>
+						<span>수정수정수정수정ㅊㅌㅊㅌㅊ.</span>
 					</div>
 					<div class="col-md-4">
 						<div id="price_single_main" class="hotel">
@@ -132,114 +132,34 @@
 					<p class="d-none d-md-block d-block d-lg-none"><a class="btn_map" data-toggle="collapse" href="#collapseMap" aria-expanded="false" aria-controls="collapseMap" data-text-swap="Hide map" data-text-original="View on map">View on map</a>
 					</p>
 					<!-- Map button for tablets/mobiles -->
-					<div id="Img_carousel" class="slider-pro" th:each="tourImg:${tour.tourImgList}">
+					<div id="Img_carousel" class="slider-pro">
 						<div class="sp-slides">
-
+							<!--투  이미지 -->
 							<div class="sp-slide">
-								<img alt="Image" class="sp-image" th:src="${tourImg}" data-src="img/slider_single_tour/1_medium.jpg" data-small="img/slider_single_tour/1_small.jpg" data-medium="img/slider_single_tour/1_medium.jpg" data-large="img/slider_single_tour/1_large.jpg" data-retina="img/slider_single_tour/1_large.jpg">
+							<th:block th:each="tourImg:${tour.tourImgList}">
+								<img alt="Image" class="sp-image" style="width:100%" th:src="@{img/tour/{toImgUrl}(toImgUrl=${tourImg.toImgUrl})}" th:data-src="@{img/tour/{toImgUrl}(toImgUrl=${tourImg.toImgUrl})}" th:data-small="@{img/tour/{toImgUrl}(toImgUrl=${tourImg.toImgUrl})}" th:data-medium="@{img/tour/{toImgUrl}(toImgUrl=${tourImg.toImgUrl})}" th:data-large="@{img/tour/{toImgUrl}(toImgUrl=${tourImg.toImgUrl})}" th:data-retina="@{img/tour/{toImgUrl}(toImgUrl=${tourImg.toImgUrl})}">
+							</th:block>
 							</div>
-							
+
 						</div>
 						<div class="sp-thumbnails">
-							<img alt="Image" class="sp-thumbnail" th:src="${tourImg}">
+							<th:block th:each="tourImg:${tour.tourImgList}">
+							<img alt="Image" class="sp-thumbnail" th:src="@{img/tour/{toImgUrl}(toImgUrl=${tourImg.toImgUrl})}">
+							</th:block>
 						</div>
 					</div>
 
 					<hr>
-
+					
 					<div class="row">
-						<div class="col-lg-3">
-							<h3>Description</h3>
-						</div>
-						<div class="col-lg-9">
-							<p th:text="${tour.toInfo}">
-								Lorem ipsum dolor sit amet, at omnes deseruisse pri. Quo aeterno legimus insolens ad. Sit cu detraxit constituam, an mel iudico constituto efficiendi. Eu ponderum mediocrem has, vitae adolescens in pro. Mea liber ridens inermis ei, mei legendos vulputate an, labitur tibique te qui.
-							</p>
-							<h4>Hotel facilities</h4>
-							<p>
-								Lorem ipsum dolor sit amet, at omnes deseruisse pri. Quo aeterno legimus insolens ad. Sit cu detraxit constituam, an mel iudico constituto efficiendi.
-							</p>
-							<div class="row">
-								<div class="col-md-6">
-									<ul class="list_ok">
-										<li>Lorem ipsum dolor sit amet</li>
-										<li>No scripta electram necessitatibus sit</li>
-										<li>Quidam percipitur instructior an eum</li>
-										<li>Ut est saepe munere ceteros</li>
-										<li>No scripta electram necessitatibus sit</li>
-										<li>Quidam percipitur instructior an eum</li>
-									</ul>
-								</div>
-								<div class="col-md-6">
-									<ul class="list_ok">
-										<li>Lorem ipsum dolor sit amet</li>
-										<li>No scripta electram necessitatibus sit</li>
-										<li>Quidam percipitur instructior an eum</li>
-										<li>No scripta electram necessitatibus sit</li>
-									</ul>
-								</div>
-							</div>
+						<div class="col-lg-12">
+							<img alt="Image" style="width:100%" th:src="@{img/tour/{toInfo}(toInfo=${tour.toInfo})}">
 							<!-- End row  -->
 						</div>
 						<!-- End col-md-9  -->
 					</div>
 					<!-- End row  -->
 
-					<hr>
-
-					<div class="row">
-						<div class="col-lg-3">
-							<h3>Tour Types</h3>
-						</div>
-						<div class="col-lg-9">
-							<h4 th:text=${tour.toType}>Single Room</h4>
-							<p>
-								Lorem ipsum dolor sit amet, at omnes deseruisse pri. Quo aeterno legimus insolens ad. Sit cu detraxit constituam, an mel iudico constituto efficiendi.
-							</p>
-
-							<div class="row">
-								<div class="col-md-6">
-									<ul class="list_icons">
-										<li><i class="icon_set_1_icon-86"></i> Free wifi</li>
-										<li><i class="icon_set_2_icon-116"></i> Plasma Tv</li>
-										<li><i class="icon_set_2_icon-106"></i> Safety box</li>
-									</ul>
-								</div>
-								<div class="col-md-6">
-									<ul class="list_ok">
-										<li>Lorem ipsum dolor sit amet</li>
-										<li>No scripta electram necessitatibus sit</li>
-										<li>Quidam percipitur instructior an eum</li>
-									</ul>
-								</div>
-							</div>
-							<!-- End row  -->
-							<div class="owl-carousel owl-theme carousel-thumbs-2 magnific-gallery">
-								<div class="item">
-									<a href="img/carousel/1.jpg" data-effect="mfp-zoom-in"><img src="img/carousel/1.jpg" alt="Image">
-									</a>
-								</div>
-								<div class="item">
-									<a href="img/carousel/2.jpg" data-effect="mfp-zoom-in"><img src="img/carousel/2.jpg" alt="Image">
-									</a>
-								</div>
-								<div class="item">
-									<a href="img/carousel/3.jpg" data-effect="mfp-zoom-in"><img src="img/carousel/3.jpg" alt="Image">
-									</a>
-								</div>
-								<div class="item">
-									<a href="img/carousel/4.jpg" data-effect="mfp-zoom-in"><img src="img/carousel/4.jpg" alt="Image">
-									</a>
-								</div>
-							</div>
-							<!-- End photo carousel  -->
-						</div>
-						<!-- End col-md-9  -->
-					</div>
-					<!-- End row  -->
-							
-
-							<hr>
 
 					<hr>
 
@@ -336,10 +256,10 @@
 								</div>
 								<div class="col-md-4 row">
 									<div class="col-md-12" style="height:90px" th:if="${tourReview.toReviewImg != null}">
- 									<img src="@{img/tourReview/{toReviewImg}(toReviewImg=${tourReview.toReviewImg})}" alt="Image" width="100%" height="110%">
+ 									<img th:src="@{img/tourReview/{toReviewImg}(toReviewImg=${tourReview.toReviewImg})}" alt="Image" width="100%" height="110%">
 									</div>
 									<div class="col-md-12" style="height:90px" th:if="${tourReview.toReviewUpload != null}">
-										<img src="@{tourReviewImage/{uploadFile}(toReviewUpload=${tourReview.toReviewUpload})}" alt="Image" width="100%" height="100%">	
+										<img th:src="@{tourReviewImage/{uploadFile}(toReviewUpload=${tourReview.toReviewUpload})}" alt="Image" width="100%" height="100%">	
 									</div>
 								<div class="col-md-12 text-center" style="height:1px" th:if="${loginUser!=null && loginUser.userId == tourReview.userId}"> 
 									<button th:value="${tourReview.toReviewNo}" name="updateToReview">수정</button>

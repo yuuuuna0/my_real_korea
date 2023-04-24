@@ -2,6 +2,7 @@
   font-size: 11pt;
 }
 
+
 .terms-content {
   height: 70px; /* 박스의 높이를 설정합니다. */
   overflow-y: scroll; /* 세로 스크롤이 생기도록 합니다. */

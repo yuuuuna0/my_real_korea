@@ -304,6 +304,7 @@ CREATE TABLE ticket_review(
 		ti_review_title               		VARCHAR2(1000)		 NOT NULL,
 		ti_review_content             		VARCHAR2(2000)		 NOT NULL,
 		ti_review_img                 		VARCHAR2(500)		 NULL ,
+		ti_review_star                		NUMBER		 NOT NULL,
 		ti_no                         		NUMBER		 NULL ,
 		user_id                       		VARCHAR2(50)		 NULL 
 );

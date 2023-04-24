@@ -39,17 +39,6 @@
 
 <body>
 
-	<div id="preloader">
-		<div class="sk-spinner sk-spinner-wave">
-			<div class="sk-rect1"></div>
-			<div class="sk-rect2"></div>
-			<div class="sk-rect3"></div>
-			<div class="sk-rect4"></div>
-			<div class="sk-rect5"></div>
-		</div>
-	</div>
-	<!-- End Preload -->
-
 	<div class="layer"></div>
 	<!-- Mobile menu overlay mask -->
 
@@ -119,26 +108,19 @@
 						<p></p>
 						<p></p>
 						<h4>파일 업로드</h4>
-						<div class="form-inline upload_1">
+						<div class="form-inline upload_1 notice-upload">
 							<div class="form-group">
 								<input type="file" id="imageFile" name="imageFile" multiple=""/>
 								<input type="hidden" id="nImg" th:value="${nImg}">
 							</div>
 						</div>
 						</form>
-						<p></p>
-						<p></p>
-						<p></p>
-						<p></p>
-						<p></p>
-						<p></p>  
-						<p></p>
-						<p></p>
-						<p></p>
-							<button type="submit" class="btn_1 green" id="notice-modify-action-btn">수정</button> &nbsp;&nbsp;&nbsp;&nbsp;
+						<div class="notice-write-btns">
+							<button type="submit" class="btn_1 green" id="notice-modify-action-btn">수정 완료</button> &nbsp;&nbsp;&nbsp;&nbsp;
 							<input type="hidden" id="modify-nNo" th:value=${notice.nNo}>
 							<a th:href=@{notice-detail(nNo=${notice.nNo})} class="btn_1 green">취소</a>
 						</div>
+					</div>
 						<!-- end post -->
 					</div>
 					<!-- end box_style_1 -->
@@ -147,7 +129,7 @@
 
 				</div>
 				<!-- End col-lg-9-->
-				<aside class="col-lg-3 add_bottom_30">
+				<aside class="col-lg-3 add_bottom_30 notice-category">
 				
 					<div class="widget" id="cat_blog">
 						<h4>CLICK</h4>
@@ -159,7 +141,7 @@
 					<hr>
 				
 					<div class="widget tags">
-						<h4>Tags</h4>
+						<h4></h4>
 						<a href="tripboard-list">동행</a>
 						<a href="ticket-list">티켓</a>
 						<a href="tour-list">투어</a>

@@ -197,6 +197,11 @@
 							</li>
 						</ul>
 					</div>
+				<div class="notice-detail-btns">
+					<a class="btn_1" href="notice-modify-form?nNo={{nno}}"  role="button" id="notice-update-btn">수정</a> &nbsp; &nbsp; &nbsp;
+					<a class="btn_1" href="" role="button" id="notice-delete-action-btn" data-nno="{{nno}}">삭제</a>
+					<input type="hidden"  id="nNo-hidden-value" value="{{nno}}">
+				</div>
 				</div>
 				<p>{{ncontent}}</p>
 				<p>
@@ -205,13 +210,11 @@
 					<img src="img/notice/{{nimg}}" alt="Image" class="img-fluid">
 					{{/if}}
 					{{#if uploadFile}}
-					<img src="images/{{uploadFile}}" alt="Image" class="img-fluid">
+					<img src="noticeimages/{{uploadFile}}" alt="Image" class="img-fluid">
 					{{/if}}
 			</div>
 			<!-- end post -->
-			<a class="btn_1" href="notice-modify-form?nNo={{nno}}"  role="button" id="notice-update-btn">수정</a> &nbsp; &nbsp; &nbsp;
-			<a class="btn_1" href="" role="button" id="notice-delete-action-btn" data-nno="{{nno}}">삭제</a>
-			<input type="hidden"  id="nNo-hidden-value" value="{{nno}}">
+			
 		</div>
 		<!-- end box_style_1 -->
 		<!-- End Comments -->

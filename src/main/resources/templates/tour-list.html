@@ -189,7 +189,7 @@
 					<div class="row">
 						<div class="col-md-4 wow zoomIn" data-wow-delay="0.1s" th:each="tour:${tourListPage.itemList}">
 							<div class="hotel_container">
-								<div class="img_container">
+								<div class="img_container" >
 									<a th:href="@{tour-detail(toNo=${tour.toNo})}">
 									<img th:src="@{img/tour/{toImgUrl}(toImgUrl=${tour.tourImgList.get(0).toImgUrl})}" width="800" height="533" class="img-fluid" alt="Image"/>
 											<div class="score" >
@@ -429,10 +429,11 @@
 	</div>
 	<!-- End col-md-6 -->
 {{/each}}
+</div>
+<div class="row">
 	<div class="col-md-4"></div>
-					<div class="col-md-4">
-					
-					<!--  pagination -->
+	<div class="col-md-4">
+					<!--  pagination 아작스란다 -->
 					<nav aria-label="Page navigation">
 						<ul class="pagination justify-content-center">
 							<!-- 이전블록으로 이동 -->

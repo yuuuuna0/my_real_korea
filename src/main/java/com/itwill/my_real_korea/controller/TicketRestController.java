@@ -44,14 +44,6 @@ public class TicketRestController {
         try {
             PageMakerDto<Ticket> ticketPage
                     = ticketService.selectByTicketAllSort(currentPage,keyword, cityNo, sortOrder);
-            List<Ticket> tempTicketList = ticketPage.getItemList();
-            List<Ticket> ticketList = new ArrayList<>();
-            for(Ticket ticket : tempTicketList) {
-                int ticketScore = ticketReviewService.calculateTourScore(ticket.getTiNo());
-                ticket.setTiScore(ticketScore);
-                ticketList.add(ticket);
-            }
-            ticketPage.setItemList(ticketList);
             data = ticketPage;
             code = 1;
             msg = "성공";

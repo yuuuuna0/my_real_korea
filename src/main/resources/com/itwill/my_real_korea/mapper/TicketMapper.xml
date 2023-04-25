@@ -69,12 +69,14 @@
 					AND T.CITY_NO=#{cityNo}	
 				</if>
 				
-				<if test="sortOrder!=null">
+				<if test="sortOrder !=null and sortOrder!=''">
 				<!--TI_NO 최신순, TI_PIRCE 가격순 정렬-->
 					<choose>
 						<when test="sortOrder == 'tiNoDESC'"> ORDER BY T.TI_NO DESC </when>
 						<when test="sortOrder == 'tiPriASC'"> ORDER BY T.TI_PRICE ASC</when>
 						<when test="sortOrder == 'tiPriDESC'"> ORDER BY T.TI_PRICE DESC</when>
+						<when test="sortOrder == 'tiCountAsc'"> ORDER BY T.TI_COUNT ASC</when>
+						<when test="sortOrder == 'tiCountAsc'"> ORDER BY T.TI_COUNT DESC</when>
 						<otherwise>ORDER BY T.TI_NO ASC</otherwise>
 					</choose>
 				</if>

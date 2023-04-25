@@ -28,7 +28,6 @@ function selectedTicketList(){
     Request.ajaxRequest(url,method,contentType,
         JSON.stringify(sendData),
         function(resultJson){
-            //code=1 성공 -> render , 아닐때 msg
             if(resultJson.code==1){
                 View.render('#ticket-search-list-template',resultJson,'#ticket-list')
             } else{
@@ -177,7 +176,7 @@ $('#ticket-review-action').click(function(e){
 /*티켓 리뷰 삭제 삭제*/
 $('.deleteTiReviewBtn').click(function(e) {
 	let tiReviewNo = $(e.target).attr('tiReviewNo');
-	console.log(tiReviewNo); // 61
+	//console.log(tiReviewNo); // 61
 	Request.ajaxRequest('ticketReview/'+ tiReviewNo,
 						'DELETE',
 						'application/json;charset=UTF-8',
@@ -187,6 +186,7 @@ $('.deleteTiReviewBtn').click(function(e) {
 							if(resultJson.code==1){
 								let tiNo = $('#hiddenTiNo').val();
 								window.location.href=`ticket-detail?tiNo=${tiNo}`;
+								//View.render("#ticketReview-template",resultJson,"#ticketReviewDiv")
 							} else {
 								alert(resultJson.msg);
 							}
@@ -231,7 +231,7 @@ $(".modifyTiReviewBtn").click(function(e) {
 
     
 $('#ticket-review-modify-action').click(function(e){
-		console.log(e);
+		//console.log(e);
 	    let tiReviewImg = $('#tiReviewImg')[0].files[0]; //multi-part
 	    let formData = new FormData();
 		    if(tiReviewImg){

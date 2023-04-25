@@ -65,7 +65,7 @@
                     </div>
                     <div class="col-md-4">
                         <div id="price_single_main" class="hotel">
-                            <span th:text="${session.ticket.tiPrice} +'원' "></span>
+                            <span data-th-text="${#numbers.formatInteger(session.ticket.tiPrice ,3, 'COMMA')} +'원' "></span>
                         </div>
                     </div>
                 </div>
@@ -156,31 +156,22 @@
 						</div>
 						<div class="col-lg-9">
 							<p th:text="${session.ticket.tiInfo}">
-								Lorem ipsum dolor sit amet, at omnes deseruisse pri. Quo aeterno legimus insolens ad. Sit cu detraxit constituam, an mel iudico constituto efficiendi. Eu ponderum mediocrem has, vitae adolescens in pro. Mea liber ridens inermis ei, mei legendos vulputate an, labitur tibique te qui.
 							</p>
-							<h4 th:text="${session.ticket.tiNotice}">어쩌구 저쩌구 저쩌구 </h4>
+							<h4 th:text="${session.ticket.tiNotice}">어쩌구 저쩌구 저쩌구 </h4> 
+							<th:block th:each="ticketImg, iterStat : ${ticketImgList}">
+  							 	 <th:block th:if="${!iterStat.first}">
+       								 <img alt="Image" style="width:100%" class="sp-thumbnail" th:src="@{{tiImgUrl}(tiImgUrl=${ticketImg.tiImgUrl})}">
+   								</th:block>
+							</th:block>
+
 							<p>
-								Lorem ipsum dolor sit amet, at omnes deseruisse pri. Quo aeterno legimus insolens ad. Sit cu detraxit constituam, an mel iudico constituto efficiendi.
+				
 							</p>
 							<div class="row">
 								<div class="col-md-6">
-									<ul class="list_ok">
-										<th:src>
-										<li>Lorem ipsum dolor sit amet</li>
-										<li>No scripta electram necessitatibus sit</li>
-										<li>Quidam percipitur instructior an eum</li>
-										<li>Ut est saepe munere ceteros</li>
-										<li>No scripta electram necessitatibus sit</li>
-										<li>Quidam percipitur instructior an eum</li>
-									</ul>
+						
 								</div>
 								<div class="col-md-6">
-									<ul class="list_ok">
-										<li>Lorem ipsum dolor sit amet</li>
-										<li>No scripta electram necessitatibus sit</li>
-										<li>Quidam percipitur instructior an eum</li>
-										<li>No scripta electram necessitatibus sit</li>
-									</ul>
 								</div>
 							</div>
 							<!-- End row  -->
@@ -614,7 +605,7 @@
 								<div class="form-group">
 									<label>평점</label>
 									<select class="form-control" name="tiReviewStar" id="tiReviewStar">
-										<option value="0">Please review</option>
+										<option value="0">평점을 남겨주세요</option>
 										<option value="1">Low</option>
 										<option value="2">Sufficient</option>
 										<option value="3">Good</option>

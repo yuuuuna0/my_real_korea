@@ -1,14 +1,11 @@
 package com.itwill.my_real_korea.controller;
 
-import java.io.File;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -26,20 +23,21 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.itwill.my_real_korea.dto.City;
 import com.itwill.my_real_korea.dto.Payment;
 import com.itwill.my_real_korea.dto.RsPInfo;
 import com.itwill.my_real_korea.dto.ticket.Ticket;
+import com.itwill.my_real_korea.dto.ticket.TicketImg;
 import com.itwill.my_real_korea.dto.ticket.TicketReview;
 import com.itwill.my_real_korea.dto.user.User;
+import com.itwill.my_real_korea.service.city.CityService;
 import com.itwill.my_real_korea.service.payment.PaymentService;
 import com.itwill.my_real_korea.service.rspinfo.RsPInfoService;
+import com.itwill.my_real_korea.service.ticket.TicketImgService;
 import com.itwill.my_real_korea.service.ticket.TicketReviewService;
 import com.itwill.my_real_korea.service.ticket.TicketService;
-import com.itwill.my_real_korea.service.ticket.aws.Aws3UploadService;
-import com.itwill.my_real_korea.util.FileUploadService;
 import com.itwill.my_real_korea.util.PageMakerDto;
 
 
@@ -50,26 +48,33 @@ public class TicketController {
     private final TicketReviewService ticketReviewService;
     private final PaymentService paymentService;
     private final RsPInfoService rsPInfoService;
+    private final TicketImgService ticketImgService;
+    private final CityService cityService;
     //private final Aws3UploadService aws3UploadService;
    
 
     @Autowired
     public TicketController(TicketService ticketService, TicketReviewService ticketReviewService,
-    						RsPInfoService rsPInfoService, PaymentService paymentService/*,
+    						RsPInfoService rsPInfoService, PaymentService paymentService,
+    						TicketImgService ticketImgService,
+    						CityService cityService/*,
     						Aws3UploadService aws3UploadService*/) {
         this.ticketService = ticketService;
         this.ticketReviewService = ticketReviewService;
         this.paymentService = paymentService;
         this.rsPInfoService = rsPInfoService;
+        this.ticketImgService = ticketImgService;
+        this.cityService = cityService;
        // this.aws3UploadService = aws3UploadService;
     }
     //티켓 리스트 - 페이지
     @GetMapping("/ticket-list")
     public String tickeList(@RequestParam(required = false, defaultValue = "1") int currentPage,
-    						@ModelAttribute Payment payment, Model model,
-    						HttpSession session) {
-    	
-        try {
+				    		@RequestParam(required = false) String keyword,
+							@RequestParam(required = false, defaultValue = "0") int cityNo,
+							@RequestParam(required = false) String sortOrder, Model model, HttpSession session) {
+        String forwardPath = "";
+    	try {
         	// 위시리스트 추가 코드 시작
             // 로그인 한 유저면 userId model에 붙이기
  			User loginUser = (User)session.getAttribute("loginUser");
@@ -79,15 +84,17 @@ public class TicketController {
  			}
  			// 위시리스트 추가 코드 끝
         	
-            PageMakerDto<Ticket> ticketList = ticketService.selectAllTicket(currentPage);
-            
-            model.addAttribute("ticketList", ticketList.getItemList());
-            model.addAttribute("currentPage", currentPage);
+            PageMakerDto<Ticket> ticketPage = ticketService.selectByTicketAllSort(currentPage,keyword,cityNo,sortOrder);
+            List<City> cityList=cityService.findAllCity();
+            model.addAttribute("ticketPage", ticketPage);
+            model.addAttribute("cityList", cityList);
+            forwardPath = "ticket-list";
            // System.out.println(payment.getPQty());
         } catch (Exception e) {
             e.printStackTrace();
+            forwardPath = "error";
         }
-        return "ticket-list";
+        return forwardPath;
     }
 
     //티켓 -- 상세보기 detail
@@ -96,16 +103,14 @@ public class TicketController {
     	
     	String forwardPath = "";
         try {
-        	
             List<Ticket> ticketList = ticketService.selectByTicketNoCityWithImg(tiNo); // 이미지 list로
-            //List<TicketImg> ticketImgList = ticketService.selectByTicketNoCityWithImg(tiNo);
+            List<TicketImg> ticketImgList = ticketImgService.selectTicketImgList(tiNo);
             List<TicketReview> ticketReviewList = ticketReviewService.selectByTicketReviewNo(tiNo);
 //            User loginUser = (User)session.getAttribute("loginUser");
 //			if(loginUser!=null) {
 //				model.addAttribute("loginUser",loginUser);
 //				model.addAttribute("userId", loginUser.getUserId());
 //			}
-            
             // 위시리스트 추가 코드 시작
             // 로그인 한 유저면 userId model에 붙이기
  			User loginUser = (User)session.getAttribute("loginUser");
@@ -114,12 +119,18 @@ public class TicketController {
  				model.addAttribute("userId", userId);
  			}
  			// 위시리스트 추가 코드 끝
-            model.addAttribute("ticketList", ticketList); // 티켓
-            model.addAttribute("ticketReviewList",ticketReviewList); // 리뷰
-            model.addAttribute("tiNo", tiNo);
             
+           model.addAttribute("ticketList", ticketList); // 티켓
+           model.addAttribute("ticketImgList", ticketImgList); // 티켓이미지
+           model.addAttribute("ticketReviewList",ticketReviewList); // 리뷰
+           model.addAttribute("tiNo", tiNo);
+            
+         //  System.out.println(">>>>>>>>"+ticketImgList);
             // 사진을 제외한 공통된 하나의 티켓 정보
             Ticket ticket = ticketList.get(0);
+          // String img = ticketImgList.get(0).getTiImgUrl();
+          // System.out.println("dgfasjgsdalkdajsgkla"+img);
+           
             // 세션에 티켓 정보 담기
             session.setAttribute("ticket", ticket);
         	// System.out.println(ticket);
@@ -240,14 +251,14 @@ public class TicketController {
         int code = 1;
         String msg = "성공";
         List<Ticket> data = null;
-        int currentPage = Integer.parseInt(map.get("currentPage"));
+        int pageNo = Integer.parseInt(map.get("pageNo"));
         int cityNo = Integer.parseInt(map.get("cityNo"));
         String keyword = map.get("keyword");
         String sortOrder = map.get("sortOrder");
 
         try {
             PageMakerDto<Ticket> ticketPage
-                    = ticketService.selectByTicketAllSort(currentPage,keyword, cityNo, sortOrder);
+                    = ticketService.selectByTicketAllSort(pageNo,keyword, cityNo, sortOrder);
             List<Ticket> tempTicketList = ticketPage.getItemList();
             List<Ticket> ticketList = new ArrayList<>();
             for(Ticket ticket : tempTicketList) {
@@ -410,19 +421,6 @@ public class TicketController {
 		
 		return resultMap;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 }

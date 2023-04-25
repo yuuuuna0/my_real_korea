@@ -92,7 +92,7 @@
 	<!--======================== End Header======================== -->
 
 
-	<section class="parallax-window" data-parallax="scroll" data-image-src="img/bg_blog.jpg" data-natural-width="1400" data-natural-height="470">
+	<section class="parallax-window" data-parallax="scroll" data-image-src="img/tripboard/tripboard_big.png" data-natural-width="1400" data-natural-height="470">
 		<div class="parallax-content-1">
 			<div class="animated fadeInDown">
 				<h1>동행게시판 글쓰기</h1>
@@ -241,6 +241,15 @@
 								<label><i class="icon-tag"></i> 해시태그</label>
 								<input class="form-control style_2" type="text" name="hashtag" id="hashtag" placeholder="해시태그를 입력하세요.">
 							</div>
+							<br>
+							<label><i class=" icon-folder-open"></i> 파일업로드</label>
+							<div class="form-inline upload_1 tripboard-upload">
+								<div class="form-group">
+									<input type="file" id="imageFile" name="imageFile" multiple=""/>
+									<input type="hidden" id="tBoImg" th:value="${tBoImg}">
+								</div>
+							</div>
+						</div>
 						</form>
 						<br>
 						<br>

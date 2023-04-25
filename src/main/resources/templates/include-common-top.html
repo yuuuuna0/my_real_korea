@@ -58,7 +58,7 @@
 									 <li class="third-level"><a href="javascript:void(0);">지역별</a>
                                         <ul>
                                             <li th:each="city:${cityList}">
-                                            	<a th:name="${city.cityNo}" th:text="${city.cityName}"  th:href="@{tripboard-city-bar-list(cityNo=${city.cityNo})}">서울</a>
+                                            	<a th:name="${city.cityNo}" th:text="${city.cityName}"  th:href="@{tour-list(cityNo=${city.cityNo})}">서울</a>
                                             </li>
                                         </ul>
                                     </li>
@@ -70,7 +70,7 @@
 									<li class="third-level"><a href="javascript:void(0);">지역별</a>
                                         <ul>
                                             <li th:each="city:${cityList}">
-                                            	<a th:name="${city.cityNo}" th:text="${city.cityName}"  th:href="@{tripboard-city-bar-list(cityNo=${city.cityNo})}">서울</a>
+                                            	<a th:name="${city.cityNo}" th:text="${city.cityName}"  th:href="@{ticket-list(cityNo=${city.cityNo})}">서울</a>
                                             </li>
                                         </ul>
                                     </li>

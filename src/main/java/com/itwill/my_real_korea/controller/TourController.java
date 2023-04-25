@@ -119,6 +119,8 @@ public class TourController {
 				forwardPath="error";
 			}
 			List<TourReview> tourReviewList=tourReviewService.findByToNo(toNo);
+			List<City> cityList=cityService.findAllCity();
+			model.addAttribute("cityList", cityList);
 			model.addAttribute("tourReviewList", tourReviewList);
 		} catch (Exception e){
 			e.printStackTrace();

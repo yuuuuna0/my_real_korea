@@ -51,11 +51,11 @@
 
 	<section id="hero_2">
 		<div class="intro_title">
-			<h1>Place your order</h1>
+			<h1> 투어 예약하기 </h1>
 			<div class="bs-wizard row">
 
 				<div class="col-4 bs-wizard-step complete">
-					<div class="text-center bs-wizard-stepnum">Your cart</div>
+					<div class="text-center bs-wizard-stepnum">투어 상세보기</div>
 					<div class="progress">
 						<div class="progress-bar"></div>
 					</div>
@@ -63,7 +63,7 @@
 				</div>
 
 				<div class="col-4 bs-wizard-step active">
-					<div class="text-center bs-wizard-stepnum">Your details</div>
+					<div class="text-center bs-wizard-stepnum">투어 예약하기</div>
 					<div class="progress">
 						<div class="progress-bar"></div>
 					</div>
@@ -71,7 +71,7 @@
 				</div>
 
 				<div class="col-4 bs-wizard-step disabled">
-					<div class="text-center bs-wizard-stepnum">Finish!</div>
+					<div class="text-center bs-wizard-stepnum">투어 예약완료!!</div>
 					<div class="progress">
 						<div class="progress-bar"></div>
 					</div>
@@ -89,11 +89,13 @@
 		<div id="position">
 			<div class="container">
 				<ul>
-					<li><a href="#">Home</a>
+					<li><a href="./">메인페이지</a>
 					</li>
-					<li><a href="#">Category</a>
+					<li><a href="./tour-list">투어리스트</a>
 					</li>
-					<li>Page active</li>
+					<li><a th:href="@{tour-detail(toNo=${session.tour.toNo})}">투어상세보기</a>
+					</li>
+					<li>투어예약하기</li>
 				</ul>
 			</div>
 		</div>
@@ -106,7 +108,7 @@
 						<div class="row" >
 							<div class="col-lg-4 col-md-4">
 								<div  class="img_list">
-									<a th:href="@{tour-detail(toNo=${session.tour.toNo})}" href="">
+									<a th:href="@{tour-detail(toNo=${session.tour.toNo})}">
 										<img th:src="@{img/tour/{toImgUrl}(toImgUrl=${session.tour.tourImgList.get(0).toImgUrl})}" alt="Image">
 									</a>
 								</div>
@@ -116,8 +118,10 @@
 									<div class="rating">
 									</div>
 									<div>
+									<br>
+									<br>
 									<h3><strong  th:text="${session.tour.toName}"></strong> </h3>
-									<p th:text="${session.tour.toInfo}"></p>
+									<br>
 									</div>
 									<ul class="add_info">
 										<li>
@@ -145,16 +149,15 @@
 							<div class="col-lg-2 col-md-2">
 								<div class="price_list" id="wishlist-detail-btn">
 									<div>
-										<div><sup th:text="${session.tour.toPrice}"></sup>
+										<div><sup th:text="'&nbsp;&nbsp;'+${session.tour.toPrice}"></sup>
 												<small>* 1인 기준</small>
-											<p><a th:href="@{tour-detail(toNo=${session.tour.toNo})}" href="" class="btn_1">상세보기</a></p>
 										</div>
 									</div>
 							</div>
 						</div>
 					</div>
 					</div>
-					<form name="rsPInfoF" method="POST" >
+					<form name="tourPaymentF" method="POST" class="was-validated" >
 					<div class="form_title">
 						<h3><strong>1</strong>예약확인</h3>
 						<p>
@@ -166,7 +169,7 @@
 							<div class="col-sm-8">
 								<div class="form-group">
 									<label> 성함 </label>
-									<input type="text" class="form-control" name="rsPName">
+									<input type="text" class="form-control" name="rsPName" placeholder="이름을 입력해주세요" required>
 								</div>
 							</div>
 						</div>
@@ -174,13 +177,13 @@
 							<div class="col-sm-6">
 								<div class="form-group">
 									<label> 이메일 </label>
-									<input type="email" id="email_booking" name="rsPEmail" class="form-control">
+									<input type="email" id="email_booking" name="rsPEmail" class="form-control" placeholder="이메일을 입력해주세요" required>
 								</div>
 							</div>
 							<div class="col-sm-6">
 								<div class="form-group">
 									<label> 이메일 확인 </label>
-									<input type="email" id="email_booking_2" name="email_booking_2" class="form-control">
+									<input type="email" id="email_booking_2" name="email_booking_2" class="form-control"placeholder="이메일을 입력해주세요" required>
 								</div>
 							</div>
 						</div>
@@ -188,7 +191,7 @@
 							<div class="col-sm-6">
 								<div class="form-group">
 									<label> 전화번호 </label>
-									<input type="text" id="telephone_booking" name="rsPPhone" class="form-control">
+									<input type="text" id="telephone_booking" name="rsPPhone" class="form-control" placeholder="전화번호를 입력해주세요" required>
 								</div>
 							</div>
 						</div>
@@ -203,12 +206,15 @@
 						<div class="row">
 							<div class="col-lg-12">
 								<div class="form-group">
-									<label> 요청사항을 작성 해 주세요 </label>
-									<textarea id="city_booking" name="pMsg" class="form-control"></textarea>
+									<textarea id="city_booking" name="pMsg" class="form-control" placeholder="요청사항을 작성 해 주세요(선택사항)"></textarea>
 								</div>
 							</div>
 							<br>
 							<br>
+							<div class="col-lg-12">
+								<input type="text" style="width:70%" placeholder="포인트는 1000p 단위로 사용 가능합니다">
+								<small th:text="${session.loginUser.name}'+'님의 사용 가능한 포인트는 '+${session.loginUser.point}+ '입니다'"></small>
+							</div>
 							<div class="col-lg-2" style="padding:10px 0px 0px 18px;">
 								<label> 결제수단 </label>
 							</div>
@@ -223,15 +229,26 @@
 							</div>
 						</div>
 						<!--End row -->
+						<br>
+						<br>
+						<br>
+						<div id="policy" style="padding:0px;">
+						<h4>취소 및 환불 규정</h4>
+						<div class="form-group">
+							<label>
+								<input type="checkbox" name="policy_terms" id="policy_terms" required>아래의 취소 및 환불 규정을 확인 후 동의하였습니다.
+							</label>
+						</div>
+					</div>
 					</div>
 					<!--End step -->
-</div>
-				
 			</form>
+		</div>
+				
 			
 				<aside class="col-lg-4">
 					<div class="box_style_1">
-						<h3 class="inner">- Summary -</h3>
+						<h3 class="inner">- 상세보기 -</h3>
 						<table class="table table_summary">
 							<tbody>
 								<tr>
@@ -267,6 +284,14 @@
 								</tr>
 								<tr>
 									<td>
+										예약 인원 수 
+									</td>
+									<td class="text-right" th:text="${session.payment.pQty}">
+										0
+									</td>
+								</tr>
+								<tr>
+									<td>
 										금액
 									</td>
 									<td class="text-right" th:text="${session.payment.tour.toPrice}">
@@ -275,10 +300,10 @@
 								</tr>
 								<tr>
 									<td>
-										예약 인원 수 
+										사용포인트
 									</td>
-									<td class="text-right" th:text="${session.payment.pQty}">
-										0
+									<td class="text-right" th:text="${session.payment.tour.toPrice}">
+										2
 									</td>
 								</tr>
 								<tr class="total">
@@ -291,8 +316,8 @@
 								</tr>
 							</tbody>
 						</table>
-						<button class="btn_full" type="button" id="tourPayment" onclick="tourPaymentAction()">Book now</button>
-						<a class="btn_full_outline" href="single_hotel.html"><i class="icon-right"></i> Modify your search</a>
+						<button class="btn_full" type="button" id="tourPayment" onclick="tourPaymentAction()">예약하기 </button>
+						<a class="btn_full_outline" th:href="@{tour-detail(toNo=${session.tour.toNo})}"><i class="icon-right"></i> 투어상세보기</a>
 					</div>
 					<div class="box_style_4">
 						<i class="icon_set_1_icon-57"></i>
@@ -303,14 +328,7 @@
 				</aside>
 			</div>
 			<!--End row -->
-								<div id="policy">
-						<h4>취소 및 환불 규정</h4>
-						<div class="form-group">
-							<label>
-								<input type="checkbox" name="policy_terms" id="policy_terms">아래의 취소 및 환불 규정을 확인 후 동의하였습니다.
-							</label>
-						</div>
-					</div>
+					
 		</div>
 		<!--End container -->
 	</main>
@@ -350,37 +368,44 @@
 	</script>
 	<script type="text/javascript">
 		function tourPaymentAction(e){
-
-			let IMP = window.IMP; // 생략 가능
-			IMP.init("imp43548145"); // 예: imp00000000a
-			
-			let pMethod;
-			if('#pMethod'.val==2){
-				pMethod='card';
-			}
-			/********** 자바스크립트에서 세션 값 가져오는거 먼저 해야 함!!  ***** */
-		    IMP.request_pay({
-		      pg: "html5_inicis",
-		      pay_method: pMethod,
-		      merchant_uid: 'MRK_'+new Date().getTime(),   // 주문번호 -> insert 전이라서 번호가 0번으로 생성됨,,, 개짱난다
-		      name: "[[${session.tour.toName}]]",
-		      //amount: "[[${{session.payment.pPrice}}]]",                         // 숫자 타입
-		      amount: 100,                        // 숫자 타입
-		      buyer_email: "[[${session.loginUser.email}]]",
-		      buyer_name: "[[${session.loginUser.name}]]",
-		      buyer_tel: "[[${session.loginUser.phone}]]",
-		      buyer_addr: "[[${session.loginUser.address}]]"
-		    }, function (rsp) { // callback
-		    	console.log(rsp);
-		      	if (rsp.success) {
-		        // 결제 성공 시 로직
-					document.rsPInfoF.action='tour-payment-action';
-					document.rsPInfoF.submit();
-		      	} else {
-		        // 결제 실패 시 로직
-		        	console.log(rsp);
-		      	}
-				});
+			let form=$('#tourPaymentF');
+			console.log(form);
+			if(form.get(0).checkValidity()===false){
+				form.find(':invalid').first().focus();
+				e.preventDefault();
+				e.stopPropagation();
+			}else{
+				let IMP = window.IMP; // 생략 가능
+				IMP.init("imp43548145"); // 예: imp00000000a
+				
+				let pMethod;
+				if('#pMethod'.val==2){
+					pMethod='card';
+				}
+				/********** 자바스크립트에서 세션 값 가져오는거 먼저 해야 함!!  ***** */
+			    IMP.request_pay({
+			      pg: "html5_inicis",
+			      pay_method: pMethod,
+			      merchant_uid: 'MRK_'+new Date().getTime(),   // 주문번호 -> insert 전이라서 번호가 0번으로 생성됨,,, 개짱난다
+			      name: "[[${session.tour.toName}]]",
+			      //amount: "[[${{session.payment.pPrice}}]]",                         // 숫자 타입
+			      amount: 100,                        // 숫자 타입
+			      buyer_email: "[[${session.loginUser.email}]]",
+			      buyer_name: "[[${session.loginUser.name}]]",
+			      buyer_tel: "[[${session.loginUser.phone}]]",
+			      buyer_addr: "[[${session.loginUser.address}]]"
+			    }, function (rsp) { // callback
+			    	console.log(rsp);
+			      	if (rsp.success) {
+			        // 결제 성공 시 로직
+						document.rsPInfoF.action='tour-payment-action';
+						document.rsPInfoF.submit();
+			      	} else {
+			        // 결제 실패 시 로직
+			        	console.log(rsp);
+			      	}
+					});
+				}
 			}
 	</script>
 

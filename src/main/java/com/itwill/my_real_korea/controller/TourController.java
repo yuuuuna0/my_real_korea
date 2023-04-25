@@ -86,7 +86,7 @@ public class TourController {
 				}
 			}
 			tourListPage.setItemList(tourList);
-			System.out.println(tourListPage.getItemList().size());
+			System.out.println(">>>>>>>>>>>>"+tourListPage.getItemList().get(0).getTourImgList().get(0).getToImgUrl());
 			List<City> cityList=cityService.findAllCity();
 			model.addAttribute("cityList", cityList);
 			model.addAttribute("tourListPage",tourListPage);

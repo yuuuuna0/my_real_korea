@@ -164,10 +164,10 @@
 							<div class="items-sorting">
 								<div class="row">
 									<div class="col-6">
-										<div id="page-info" class="results_shop" th:each="noticePage:${noticeListPage}">
+										<div id="page-info" class="results_shop">
 											Showing 
-											<span id="cur-page" th:text="${noticePage.pageMaker.curPage}"></span> of 
-											<span id="tot-record-count" th:text="${noticePage.totRecordCount}"></span> results
+											<span id="cur-page" th:text="${tourListPage.pageMaker.curPage}"></span> of 
+											<span id="tot-record-count" th:text="${tourListPage.totRecordCount}"></span> results
 										</div>
 									</div>
 									<div class="col-6">
@@ -189,11 +189,10 @@
 					<div class="row" id="tour-list">
 						<div class="col-md-4 wow zoomIn" data-wow-delay="0.1s" th:each="tour:${tourListPage.itemList}">
 							<div class="hotel_container">
-								<div class="ribbon_3 popular"><span>Popular</span>
-								</div>
 								<div class="img_container">
 									<a th:href="@{tour-detail(toNo=${tour.toNo})}">
-										<img src="img/products/image-1.jpg" width="800" height="533" class="img-fluid" alt="Image"/>
+										<img src="img/tour/1-1.png" width="800" height="533" class="img-fluid" alt="Image"/>
+<!-- 									<img th:src="@{img/tour/{toImgUrl}(toImgUrl=${tourListPage.itemList.get(0).tourImgList.get(0).toImgUrl})" width="800" height="533" class="img-fluid" alt="Image"/> -->
 											<div class="score" >
 												<span th:text="${tour.toCount}">
 													7.5
@@ -208,7 +207,8 @@
 										</div>
 									</a>
 								</div>
-								<div class="hotel_title">
+								<div class="hotel_title row">
+								<div class="col-md-9" style="padding:1px 1px 1px 15px">
 									<h3><strong  th:text="${tour.toName}">Park Hyatt</strong></h3>
 										<div class="rating" th:switch="${tour.toScore}">
 											<div th:case="0">
@@ -234,29 +234,9 @@
 												</span>
 											</div>
 										</div>
-<!--									<div class="rating" th:if="${tour.toScore==0}">
-											<i class="icon-star-empty"></i>							
-											<i class="icon-star-empty"></i>							
-											<i class="icon-star-empty"></i>							
-											<i class="icon-star-empty"></i>							
 									</div>
-									<div class="rating" th:if="${tour.toScore==5}">
- 											<i class="icon-star voted"></i>
- 											<i class="icon-star voted"></i>
- 											<i class="icon-star voted"></i>
- 											<i class="icon-star voted"></i>
- 											<i class="icon-star voted"></i>
-									</div>
-									<div class="rating" th:unless="${tour.toScore==0 or tour.toScore==5}">
-											<span  th:each="i:${#numbers.sequence(0,tour.toScore-1)}">
- 											<i class="icon-star voted"></i>
-											</span>
-											<span  th:each="i:${#numbers.sequence(tour.toScore,4)}">
-											<i class="icon-star-empty"></i>							
-											</span>
-									</div>
--->									<!-- end rating -->
-									<div class="wishlist" th:if="${userId != null}">
+									<!-- end rating -->
+									<div class="wishlist col-md-3" th:if="${userId != null}" style="top:50px; right:25px;">
 										<a class="tooltip_flip tooltip-effect-1" id="tour-add-to-wishlist-btn" href="#" 
 										th:data-toNo="${tour.toNo}" th:data-toName="${tour.toName}" th:data-toTime="${tour.toTime}"
 										th:data-toPerson="${tour.toPerson}" th:data-toMeet="${tour.toMeet}" th:data-toPrice="${tour.toPrice}"
@@ -266,7 +246,7 @@
 										<span class="tooltip-content-flip"><span class="tooltip-back">위시리스트 담기</span></span></a>
 									</div>
 									<!-- userId null 일 때는 위시리스트 추가 버튼 클릭 시 로그인 페이지로 -->
-									<div class="wishlist" th:if="${userId == null}">
+									<div class="wishlist " th:if="${userId == null}" style="top:50px; right:25px;">
 										<a class="tooltip_flip tooltip-effect-1" th:href="@{user-login}">+
 										<span class="tooltip-content-flip"><span class="tooltip-back">위시리스트 담기</span></span></a>
 									</div>
@@ -276,6 +256,9 @@
 							<!-- End box tour -->
 						</div>
 						<!-- End col-md-6 -->
+						</div>
+					<!-- End row -->
+					<div class="row">
 					<div class="col-md-4"></div>
 					<div class="col-md-4">
 					

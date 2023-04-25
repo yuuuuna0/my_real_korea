@@ -110,11 +110,11 @@
 								<div class="inner-box">
 									<div class="image-box">
 										<figure class="image">
-											<a th:href="@{tripboard-detail(tBoNo=${tripBoard.tBoNo})}"><img src="img/products/image-1.jpg" alt="">
+											<a th:href="@{tripboard-detail(tBoNo=${tripBoard.tBoNo})}"><img src="img/tripboard/jeonju2.jpeg" alt="">
 											</a>
 										</figure>
 											<!-- 지역 보이게하기 -->
-											<div class="item-options clearfix"  style="top:10px; color:#e04f67; opacity:100; visibility:visible; background-color:white; border-radius: 5px; width:58px; height:25px; font-weight:bold;">
+											<div class="item-options clearfix"  style="top:10px; color:#e04f67; opacity:100; visibility:visible; background-color:white; border-radius: 5px; width:auto; height:28px; font-weight:bold; line-height:29px; padding-right:4px;">
 											<span class="icon-location"></span>
 											<a th:text="${tripBoard.city.cityName}" class="AccompanyWebCard__LocationText-sc-ws5mjw-18 bFxAPJ">
                                             </a>
@@ -293,7 +293,7 @@
 					</a>
 				</figure>
 			<!-- 지역보여주기 -->
-			<div class="item-options clearfix"  style="top:10px; color:#e04f67; opacity:100; visibility:visible; background-color:white; border-radius: 5px; width:58px; height:25px; font-weight:bold;">
+			<div class="item-options clearfix"  style="top:10px; color:#e04f67; opacity:100; visibility:visible; background-color:white; border-radius: 5px; width:auto; height:28px; font-weight:bold; line-height:29px; padding-right:4px;">
 				<span class="icon-location"></span>
 				<a href ="tripboard-detail?tBoNo={{tbono}}" class="AccompanyWebCard__LocationText-sc-ws5mjw-18 bFxAPJ">{{city.cityName}}</a>
 			</div>   

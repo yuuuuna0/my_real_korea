@@ -22,6 +22,15 @@ export function render(templateId, jsonResult={}, contentId){
 	  var date = new Date(dateString);
 	  return date.toLocaleDateString('ko-KR', { month: '2-digit', day: '2-digit' });
 	});
+	Handlebars.registerHelper('dateFormat3', function(dateString) {
+ 	  var date = new Date(dateString);
+	  var year = date.getFullYear();
+	  var month = ('0' + (date.getMonth() + 1)).slice(-2);
+	  var day = ('0' + date.getDate()).slice(-2);
+	  return year + '년 ' + month + '월 ' + day + '일';
+});
+
+	
 	//if함수 (if else 아님)
 	Handlebars.registerHelper('ifCond',function(v1,operator,v2,options){
 		switch(operator){

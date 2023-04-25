@@ -213,6 +213,7 @@ header.sticky#colored #logo_home h1 a{
 	font-size: 13px;
     color: #333;
     height: 30px;
+    whith: 200px;
     border-radius: 3px;
     margin-bottom: 10px;
     border: 1px solid #ced4da;
@@ -231,7 +232,7 @@ ul#profile_summary_user{
 ul#profile_summary_user li{
 	padding:4px 0;
 	position:relative;
-	 margin-top: 10px;
+	margin-top: 15px;
     margin-bottom: 10px;
 }
 ul#profile_summary_user li span{
@@ -240,7 +241,6 @@ ul#profile_summary_user li span{
 	position:absolute;
 	left:200px;
 }
-
 
 ul#top_tools {
     list-style: none;
@@ -394,7 +394,7 @@ a.btn_1.green, .btn_1.green {
     height: 40px;
     padding: 0 10px;
     border: 1px solid #dddddd;
-    width: 30%;
+    width: 25%;
     color: #999999;
     margin-bottom: 10px;
 }
@@ -410,4 +410,30 @@ a.btn_1.green, .btn_1.green {
 a.btn_1:hover, .btn_1:hover {
     background-color: #333;
 }
+
+a.btn_1.green, .btn_1.user_address {
+    height: 35px;
+    position: relative;
+    padding: 0 10px;
+    top: 3px;
+}
+
+.btn-secondary {
+    color: #fff;
+    background-color: #9E9E9E;
+    border-color: white;
+}
+
+.btn-secondary:hover {
+  background-color: #F89595;
+  border-color: white;
+}
+
+.btn-secondary:not(:disabled):not(.disabled).active, .btn-secondary:not(:disabled):not(.disabled):active, .show>.btn-secondary.dropdown-toggle {
+    color: #fff;
+    background-color: #e14d67;
+    border-color: white;
+}
+
+
 

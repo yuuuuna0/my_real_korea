@@ -355,7 +355,7 @@ insert into trip_board(t_bo_no,t_bo_title,t_bo_content,t_bo_date,t_bo_readcount,
 insert into trip_board(t_bo_no,t_bo_title,t_bo_content,t_bo_date,t_bo_readcount,t_bo_status,t_bo_person,
                     t_bo_img,t_bo_start_date,t_bo_end_date,t_bo_style,hashtag,city_no,user_id) 
             values (trip_board_t_bo_no_seq.nextval,
-            '오늘 저녁 대전에서 같이 술한잔 하실분들 모셔요',--제목
+            '오늘 저녁 아산에서 같이 술한잔 하실분들 모셔요',--제목
             '현재 동행은 없구요 
              이곳에온지 몇일 안되서 술은 먹고싶은데 혼술은 못해요 그래서 술 같이드실분 모셔요  
              성별나이 전혀 무관합니다.',--내용
@@ -386,7 +386,7 @@ insert into trip_board(t_bo_no,t_bo_title,t_bo_content,t_bo_date,t_bo_readcount,
             '2023-08-29','2023-08-30',
             '사진찍는',--여행스타일
             '아무나다좋아',--해시태그
-            2,--city
+            1,--city
             'myrealkorea1');
             
 insert into trip_board(t_bo_no,t_bo_title,t_bo_content,t_bo_date,t_bo_readcount,t_bo_status,t_bo_person,
@@ -406,7 +406,7 @@ insert into trip_board(t_bo_no,t_bo_title,t_bo_content,t_bo_date,t_bo_readcount,
             '2023-05-01','2023-05-10',
             '느긋한',--여행스타일
             '달려',--해시태그
-            2,--city
+            1,--city
             'myrealkorea2');
             
 insert into trip_board(t_bo_no,t_bo_title,t_bo_content,t_bo_date,t_bo_readcount,t_bo_status,t_bo_person,
@@ -466,7 +466,7 @@ insert into trip_board(t_bo_no,t_bo_title,t_bo_content,t_bo_date,t_bo_readcount,
             '2023-04-27','2023-05-10',
             '계획적인',--여행스타일
             '모험추구형',--해시태그
-            4,--city
+            2,--city
             'myrealkorea2');
             
 insert into trip_board(t_bo_no,t_bo_title,t_bo_content,t_bo_date,t_bo_readcount,t_bo_status,t_bo_person,
@@ -487,7 +487,7 @@ insert into trip_board(t_bo_no,t_bo_title,t_bo_content,t_bo_date,t_bo_readcount,
             '2023-07-01','2023-07-05',
             '계획적인',--여행스타일
             '아무나다좋아',--해시태그
-            4,--city
+            2,--city
             'myrealkorea3');
             
 insert into trip_board(t_bo_no,t_bo_title,t_bo_content,t_bo_date,t_bo_readcount,t_bo_status,t_bo_person,
@@ -507,15 +507,15 @@ insert into trip_board(t_bo_no,t_bo_title,t_bo_content,t_bo_date,t_bo_readcount,
             '2023-06-13','2023-06-14',
             '즉흥적인',--여행스타일
             '아무나다좋아',--해시태그
-            4,--city
+            2,--city
             'myrealkorea1');
             
 insert into trip_board(t_bo_no,t_bo_title,t_bo_content,t_bo_date,t_bo_readcount,t_bo_status,t_bo_person,
                     t_bo_img,t_bo_start_date,t_bo_end_date,t_bo_style,hashtag,city_no,user_id) 
             values (trip_board_t_bo_no_seq.nextval,
-            '대전 여행 처음입니다.',--제목
+            '서산 여행 처음입니다.',--제목
             '올해 31 여자입니다!
-            대전 여행 처음인데 동행해서 즐거운 시간 보내실 분
+            서산 여행 처음인데 동행해서 즐거운 시간 보내실 분
             댓글이나 채팅 걸어주세요~
             ',--내용
             sysdate,
@@ -673,7 +673,7 @@ insert into trip_board(t_bo_no,t_bo_title,t_bo_content,t_bo_date,t_bo_readcount,
                     
 
 
-
+/*
 -- 동행게시판 댓글 insert
 insert into trip_board_comment(t_co_no, t_comment_content, t_comment_date, t_bo_no, user_id)
                         values(TRIP_BOARD_COMMENT_T_CO_NO_SEQ.nextval, '댓글1', sysdate, 1, 'user2');
@@ -681,7 +681,7 @@ insert into trip_board_comment(t_co_no, t_comment_content, t_comment_date, t_bo_
                         values(TRIP_BOARD_COMMENT_T_CO_NO_SEQ.nextval, '댓글2', sysdate, 2, 'user3');
 insert into trip_board_comment(t_co_no, t_comment_content, t_comment_date, t_bo_no, user_id)
                         values(TRIP_BOARD_COMMENT_T_CO_NO_SEQ.nextval, '댓글3', sysdate, 3, 'user1');
-
+*/
 /*************** wishlist ***********************/
 -- 티켓 상품 위시리스트에 추가
 insert into wishlist(wish_no,user_id,ti_no,to_no) values(WISHLIST_WISH_NO_SEQ.nextval,'admin',1,null);

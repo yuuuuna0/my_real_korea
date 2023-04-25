@@ -57,7 +57,7 @@
                             </a>
                             <div class="chat-about">
                             	<span class="m-b-0">채팅방 : </span>
-                                <span id="roomName"  class="m-b-0" th:text="${roomName}"></span>
+                                <span id="roomName"  class="m-b-0" th:text="${roomName}"></span> <!-- 채팅방이름만 바꾸면됨 -->
                                 <input name="jsonMyChatRoomNameList" id="jsonMyChatRoomNameList" type="hidden" th:value=${jsonMyChatRoomNameList}>
                                 <input name="receiverId" class="m-b-0" id="receiverId" type="hidden" th:value=${receiverId}>
                                 <input id="myId" class="m-b-0" type="hidden" th:value=${senderId}>

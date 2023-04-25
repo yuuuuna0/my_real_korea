@@ -2,10 +2,9 @@
 import * as View from "./view.js";
 import * as Request from "./request.js";
  
-/*
- */
 let sock;
 let myId = $('#myId').val();
+let receiverId = $('#receiverId').val();
 let roomName = document.getElementById('roomName').textContent;
 console.log(myId);
 console.log(roomName);
@@ -13,12 +12,6 @@ console.log(roomName);
 const serializedList = $('#jsonMyChatRoomNameList').val();
 const myChatRoomNameList = JSON.parse(serializedList);
 console.log(myChatRoomNameList);
-
-let receiverId;
-let preOnlineList;
-let masterStatusContent;  
-let preMasterStatus;
-let masterStatus;
 
 
 /*****************소켓 연결/해제*******************/
@@ -28,10 +21,6 @@ function onClose(evt) {
 function onOpen(evt) {
         	 console.log("open event : " + evt);
          }
-         
- 
-    
-     
 
 /**********페이지 로딩 시 - 소켓연결, DB내용 가져오기*********/
 $(document).ready(function(){
@@ -80,7 +69,6 @@ function onMessage(msg) {
 	let data = JSON.parse(msg.data);
 	let onlineList = data.onlineList;
 	let senderId = data.senderId;
-	let receiverId = data.receiverId;
 	let message = data.message;
 	let time = data.time;
 	let newOne = data.newOne;
@@ -88,24 +76,16 @@ function onMessage(msg) {
 	console.log('msg.data >>> ', msg.data);
 	console.log('onlineList >>>> ', onlineList);
 	console.log('senderId >>> ', senderId)
-	console.log('receiverId >>> ', receiverId)
+	console.log('receiverId >>> ', senderIdFromRoom)
 	console.log('message >>> ', message)
 	console.log('time >>> ', time)
 	console.log('newOne >>> ', newOne);
 	console.log('outOne >>> ', outOne);
 
-	// 새로운 유저 접속했을 때 senderId가 포함된 roomName 가진 채팅방 목록 가져오기 - myChatRoomNameList
-	/*
-	if (newOne != null) {
-		console.log("새로운 접속자 있음");
-		getOnlineList(myChatRoomNameList);
-	}
-	*/
-	
 	// 메세지 보내기
-	insertMessage(senderId, receiverId, time, message);
+	insertMessage(senderId, senderIdFromRoom, time, message);
 	// DB에 저장
-	saveChatDB(senderId, receiverId, message, time);
+	saveChatDB(senderId, senderIdFromRoom, message, time);
 	// scroll down
 	scrollDown();
 }
@@ -156,9 +136,9 @@ function insertMessage(senderId, receiverId,  time, message) {
 
 /************ DB에서 메세지 가져오기 *************/
 function getMessage(senderId, receiverId, userId,  time, message) {
-	console.log('insertMessage[myId] : '+myId);
-	console.log('insertMessage[senderId] : '+senderId);
-	console.log('insertMessage[userId] : '+userId);
+	console.log('getMessage[myId] : '+myId);
+	console.log('getMessage[senderId] : '+senderId);
+	console.log('getMessage[userId] : '+userId);
 	let chatContent = document.querySelector("#chat-content");
 	if (senderId == userId) {
 		// 보낸사람과 현재 로그인한 유저 같을 때(오른쪽 메세지)
@@ -209,7 +189,7 @@ function saveChatDB(senderId, receiverId, message, time){
 			"senderId": senderId,
 			"receiverId": receiverId,
 			"message": message,
-			"roomName": roomName,
+			"roomName": clickChatRoomName,
 			"time": time
 		}
 	})
@@ -233,7 +213,7 @@ function saveChatDB(senderId, receiverId, message, time){
 };
 
 /************ 채팅 내용 가져오기(DB연결) *************/
-function getChatFromDB(myId,receiverId){
+function getChatFromDB(roomName, myId,receiverId){
 	let url='chat-detail-rest';
 	let method='POST';
 	let contentType='application/json;charset=UTF-8';
@@ -243,7 +223,7 @@ function getChatFromDB(myId,receiverId){
 		"receiverId":receiverId
 	};
 	let async=true;
-	
+	console.log(">>>>>>>>>getChatFromDB sendData"+JSON.stringify(sendData));
 	Request.ajaxRequest(url, method, contentType, 
 						JSON.stringify(sendData),
 						function(resultJson){
@@ -270,13 +250,6 @@ function scrollDown() {
 	var chatContent = document.querySelector("#chat-content");
 	chatContent.scrollTop = chatContent.scrollHeight;
 };
-
-    
-/*
-1. 채팅방 목록(로그인한 아이디(senderId)가 roomName 에 있는 방들만)
-2. 채팅방 클릭 시 해당 채팅방으로 이동, DB내용 가져오기
-3. 로그인 한 유저가 메세지 아이콘 클릭 시 본인의 채팅방 목록과 채팅창 보이게
-*/
 
 /************ 채팅방 목록의 채팅방 클릭 *************/
 function activeToggle(element) {
@@ -305,18 +278,29 @@ function activeToggle(element) {
 	}
 }
 
+let receiverIdFromRoom;
+let senderIdFromRoom;
+let clickChatRoomName;
 /************ 채팅방 목록의 채팅방 클릭 ************/
 $(document).on('click','#chat-room-list', function(e) {
 	// DB에 저장된 대화내용 가져오기
-	let chatRoomName = $(this).find('#master').text();
-	console.log('채팅방클릭-chatRoomName:'+chatRoomName);
-	let receiverIdFromRoom = chatRoomName.substr(chatRoomName.indexOf("&") + 1);
+	clickChatRoomName = $(this).find('#master').text();
+	console.log('채팅방클릭-clickChatRoomName:'+clickChatRoomName);
+	receiverIdFromRoom = clickChatRoomName.substr(clickChatRoomName.indexOf("&") + 1);
+	senderIdFromRoom = clickChatRoomName.substring(0, clickChatRoomName.indexOf('&'));
 	console.log('채팅방클릭-receiverIdFromRoom:'+receiverIdFromRoom);
-	window.location.href='chat?receiverId='+receiverIdFromRoom;
-	getChatFromDB(myId,receiverId);
+	//window.location.href='chat?receiverId='+receiverIdFromRoom;
+	document.getElementById('chat-content').innerHTML = "";
+	getChatFromDB(clickChatRoomName, myId,receiverIdFromRoom);
+	changeRoomName(clickChatRoomName);
 	scrollDown();
 });
 
+/************ 채팅방 목록 클릭 시 해당 채팅방 이름 변경 ************/
+function changeRoomName(chatRoomName) {
+	let roomNamediv = document.querySelector('#roomName');
+	roomNamediv.textContent = chatRoomName;
+};
 
 /************ 모든 채팅 사용자들 채팅방 목록에 넣기 ***********
 function getOnlineList(myChatRoomNameList) {

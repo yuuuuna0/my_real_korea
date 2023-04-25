@@ -164,48 +164,50 @@ public class ChatHandler extends TextWebSocketHandler {
 		String senderId = loginUser.getUserId();
 		// 받는 사람
 		String receiverId = "";
-		if (onlineList.size() >= 2) {
-			String tempId1 = onlineList.get(0);
-			String tempId2 = onlineList.get(1);
-			if (tempId1.equals(senderId)) {
-				receiverId = tempId2;
-			} else if (tempId2.equals(senderId)) {
-				receiverId = tempId1;
-			}
-		} else {
-			receiverId = "master";
-		}
-		// 마스터가 모두에게 메세지 보내기
-		if (senderId.equals("master")) {
-			TextMessage msg = new TextMessage(senderId + " 님이 퇴장했습니다.");
-			try {
-				sendToAll(msg, senderId);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			
-		} else {
-			Map<String, Object> data = new HashMap<>();
-			
-			data.put("message", senderId + " 님이 퇴장했습니다.");
-			data.put("receiverId", receiverId);
-			data.put("outOne", senderId );
-			
-			TextMessage msg;
-			try {
-				msg = new TextMessage(json.writeValueAsString(data));
-				handleMessage(session, msg);
-			} catch (JsonProcessingException e) {
-				e.printStackTrace();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
+//		if (onlineList.size() >= 2) {
+//			String tempId1 = onlineList.get(0);
+//			String tempId2 = onlineList.get(1);
+//			if (tempId1.equals(senderId)) {
+//				receiverId = tempId2;
+//			} else if (tempId2.equals(senderId)) {
+//				receiverId = tempId1;
+//			}
+//		} else {
+//			receiverId = "master";
+//		}
+//		// 마스터가 모두에게 메세지 보내기
+//		if (senderId.equals("master")) {
+//			TextMessage msg = new TextMessage(senderId + " 님이 퇴장했습니다.");
+//			try {
+//				sendToAll(msg, senderId);
+//			} catch (Exception e) {
+//				e.printStackTrace();
+//			}
+//			
+//		} else {
+//			Map<String, Object> data = new HashMap<>();
+//			
+//			data.put("message", senderId + " 님이 퇴장했습니다.");
+//			data.put("receiverId", receiverId);
+//			data.put("outOne", senderId );
+//			
+//			TextMessage msg;
+//			try {
+//				msg = new TextMessage(json.writeValueAsString(data));
+//				handleMessage(session, msg);
+//			} catch (JsonProcessingException e) {
+//				e.printStackTrace();
+//			} catch (Exception e) {
+//				e.printStackTrace();
+//			}
+//		}
 		// 저장되었던 세션 관련 정보 삭제
 		sessionList.remove(session);
 		onlineList.remove(senderId);
 		userSession.remove(senderId);
 		log.info(session + "세션 접속 해제");
+		log.info(senderId + " 님이 퇴장했습니다.>>>>>>>>>>>>>>>>>>>>>");
+		
 		
 	}
 

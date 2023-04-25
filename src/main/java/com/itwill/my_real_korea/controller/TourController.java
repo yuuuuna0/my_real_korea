@@ -114,8 +114,8 @@ public class TourController {
 			} else{
 				forwardPath="error";
 			}
+			System.out.println("투어이미지가 붙어있을까요 아닐까요~~~~"+tour);
 			List<TourReview> tourReviewList=tourReviewService.findByToNo(toNo);
-			
 			model.addAttribute("tourReviewList", tourReviewList);
 		} catch (Exception e){
 			e.printStackTrace();

@@ -26,10 +26,12 @@
 	
 	<!-- CUSTOM CSS -->
 	<link href="css/custom.css" rel="stylesheet">
+	<link href="css/user.css" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
+	
  
 <script defer type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.2/handlebars.min.js"></script>
-
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script>
 	
@@ -101,7 +103,7 @@ function kakaoLogin() {
         <input type="password" class=" form-control" placeholder="Password" name="password">
         <font color="red" th:text="${msg2}"></font>
     </div>
-		<p class="small">
+		<p>
 		    <a href="user-find" id="menu-user-find">아이디 / 비밀번호 찾기</a><br/>
 		</p>
 	<a class="btn_full" id="login_btn">로그인</a>
@@ -109,9 +111,7 @@ function kakaoLogin() {
 </form><br/>
 </div>
 <!-- 로그인 폼 끝 -->
-<!-- 
- 
- -->
+
 <script id="user-find-template" type="text/x-handlebars-template">
 
 <!-- 아이디 찾기 폼 시작 -->
@@ -195,6 +195,7 @@ function kakaoLogin() {
 	<script src="js/functions.js"></script>
 	<script src="js/app_user.js" type="module"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script> 
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
 
 <script type="text/javascript">
 
@@ -202,7 +203,6 @@ function kakaoLogin() {
 function userCreate() {
 	location.href="user-write";
 }
-
 
 //아이디 찾기 액션
 function findId() {
@@ -232,9 +232,9 @@ function findId() {
         },
         success: function(response) {
             if (response.status == 1) {
-                alert(response.message);
+            	alert(response.message);
             } else if (response.status == 2) {
-                alert(response.message);
+            	alert(response.message);
             }
         },
         error: function(jqXHR, textStatus, errorThrown) {

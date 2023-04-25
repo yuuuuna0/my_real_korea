@@ -137,8 +137,8 @@
                             <div th:if="${loginUser != null && loginUser.userId == freeBoard.userId}" style="text-align:right;">
                                 <input type="hidden" id="fBoNo-hidden"
                                        th:value="${freeBoard.fBoNo}"/>
-                                <a class="btn btn-danger" type="button" onclick="fBoModify();">수정</a>
-                                <a class="btn btn-danger" type="button" onclick="fBoDelete();">삭제</a>
+                                <a class="btn btn-danger" style="color:light;" type="button" onclick="fBoModify();">수정</a>
+                                <a class="btn btn-danger" style="color:light;" type="button" onclick="fBoDelete();">삭제</a>
                             </div>
                         </div>
                     </form>

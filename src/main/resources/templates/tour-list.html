@@ -185,11 +185,11 @@
 							</div>
 						</div>
 					<!--End shop-section -->
-
-					<div class="row" id="tour-list">
+					<div id="tour-list">
+					<div class="row">
 						<div class="col-md-4 wow zoomIn" data-wow-delay="0.1s" th:each="tour:${tourListPage.itemList}">
 							<div class="hotel_container">
-								<div class="img_container">
+								<div class="img_container" >
 									<a th:href="@{tour-detail(toNo=${tour.toNo})}">
 									<img th:src="@{img/tour/{toImgUrl}(toImgUrl=${tour.tourImgList.get(0).toImgUrl})}" width="800" height="533" class="img-fluid" alt="Image"/>
 											<div class="score" >
@@ -235,7 +235,7 @@
 										</div>
 									</div>
 									<!-- end rating -->
-									<div class="wishlist col-md-3" th:if="${loginUser.userId != null}" style="top:40px; right:25px;">
+									<div class="wishlist col-md-3" th:if="${loginUser != null}" style="top:40px; right:25px;">
 										<a class="tooltip_flip tooltip-effect-1" id="tour-add-to-wishlist-btn" href="#" 
 										th:data-toNo="${tour.toNo}" th:data-toName="${tour.toName}" th:data-toTime="${tour.toTime}"
 										th:data-toPerson="${tour.toPerson}" th:data-toMeet="${tour.toMeet}" th:data-toPrice="${tour.toPrice}"
@@ -245,7 +245,7 @@
 										<span class="tooltip-content-flip"><span class="tooltip-back">위시리스트 담기</span></span></a>
 									</div>
 									<!-- userId null 일 때는 위시리스트 추가 버튼 클릭 시 로그인 페이지로 -->
-									<div class="wishlist " th:if="${loginUser.userId == null}" style="top:40px; right:25px;">
+									<div class="wishlist " th:if="${loginUser == null}" style="top:40px; right:25px;">
 										<a class="tooltip_flip tooltip-effect-1" th:href="@{user-login}">+
 										<span class="tooltip-content-flip"><span class="tooltip-back">위시리스트 담기</span></span></a>
 									</div>
@@ -386,14 +386,13 @@
 	<!-- ##################### template ###################### -->
 	<!-- <script> 태그에 코드 적으면 화면에 안 보임 -->
 <script id="tour-search-list-template" type="text/x-handlebars-template">
+<div class="row">
 {{#each data.itemList}}
 	<div class="col-md-4 wow zoomIn" data-wow-delay="0.1s">
 		<div class="hotel_container">
-			<div class="ribbon_3 popular"><span>Popular</span>
-			</div>
 			<div class="img_container">
 				<a href="tour-detail?toNo={{toNo}}">
-					<img src="img/products/image-1.jpg" width="800" height="533" class="img-fluid" alt="Image">
+					<img src="img/tour/{{tourImgList.[0].toImgUrl}}" width="800" height="533" class="img-fluid" alt="Image"/>
 					<div class="score" >
 						<span>
 							{{toCount}}
@@ -430,10 +429,11 @@
 	</div>
 	<!-- End col-md-6 -->
 {{/each}}
+</div>
+<div class="row">
 	<div class="col-md-4"></div>
-					<div class="col-md-4">
-					
-					<!--  pagination -->
+	<div class="col-md-4">
+					<!--  pagination 아작스란다 -->
 					<nav aria-label="Page navigation">
 						<ul class="pagination justify-content-center">
 							<!-- 이전블록으로 이동 -->
@@ -477,6 +477,7 @@
 					<!-- end pagination-->
 					</div>
 					<div class="col-md-4"></div>
+</div>
 </script>
 
 

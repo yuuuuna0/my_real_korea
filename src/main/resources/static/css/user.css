@@ -1,31 +1,139 @@
+/* 라벨 */
 .form-group label{
   font-size: 11pt;
 }
+/******************* 회원가입 ***********************/
 
-#btn-user-login.btn_1.outline {
-  width: 100%;
-}
-#btn-user-join.btn_1.white {
-  width: 100%;
-  border: thin black;
-}
-
-#btn-user-find-id.btn_1.outline {
-  width: 100%;
+/* 버튼 */
+#btn-user-id-check.btn_1.outline, #btn-user-address.btn_1.outline{
+	font-size: 10pt;	
+	margin-top: 3px;
+	padding-top:5px;
+	padding-bottom:5px;
 }
 
-#btn-user-find-pw.btn_1.outline {
+#btn-user-create.btn_1.outline {
   width: 100%;
 }
 
+
+/* pass-info */
+#pass-info {
+	width: 98.5%;
+	margin-bottom: 15px;
+	color: #829CBD;
+	text-align: center;
+	font-family: S-CoreDream-5Medium;
+	font-size: 12px;
+}
+
+#pass-info.weakpass {
+	border: 1px solid #FF9191;
+	background: #FFC7C7;
+	color: #555;
+	text-shadow: none;
+}
+
+#pass-info.stillweakpass {
+	border: 1px solid #FBB;
+	background: #FDD;
+	color: #555;
+	text-shadow: none;
+}
+
+#pass-info.goodpass {
+	border: 1px solid #C4EEC8;
+	background: #E4FFE4;
+	color: #555;
+	text-shadow: none;
+}
+
+#pass-info.strongpass {
+	border: 1px solid #6ED66E;
+	background: #79F079;
+	color: #555;
+	text-shadow: none;
+}
+
+#pass-info.vrystrongpass {
+	border: 1px solid #379137;
+	background: #48B448;
+	color: #CDFFCD;
+}
+
+
+/* 이용 약관 */
+.terms-content {
+  height: 70px;
+  overflow-y: scroll;
+}
+
+/***** 이용 약관 체크 박스 *****/
+/* input 숨겨준다 */
+input[type='checkbox'] {
+  display:none;
+}
+
+input[type='checkbox'] + label {
+  cursor:pointer;
+  font-size: 11pt;
+}
+
+input[type='checkbox'] + label > span {
+  vertical-align: middle;
+  padding-left: 5px;
+}
+
+/* label:before에 체크하기 전 상태 CSS */
+input[type='checkbox'] + label:before {
+  content:"";
+  display:inline-block;
+  width:17px;
+  height:17px;
+  border:2px solid #F47C7C;
+  border-radius: 4px;
+  vertical-align:middle;
+}
+
+/* label:before에 체크 된 상태 CSS */
+input[type='checkbox']:checked + label:before {
+  content:"";
+  background-color:#F47C7C;
+  border-color:#F47C7C;
+  /*
+  background-image: url('check_btn.png');
+  */
+  background-repeat: no-repeat;
+  background-position: 50%;
+}
+
+/* 첫 번째 체크박스 스타일 */
+input[id='termsService'] + label:before {
+}
+
+/* 두 번째 체크박스 스타일 */
+input[id='termsPrivacy'] + label:before {
+}
+
+/******************* 로그인 ***********************/
+
+/* 버튼 */
+#btn-user-login.btn_1.white {
+  width: 100%;
+  border:2px solid #e04f67;
+  margin-bottom: 5px;
+}
+
+
+#btn-user-join.btn_1.outline,
+#btn-user-find-id.btn_1.outline,
+#btn-user-find-pw.btn_1.outline,
 #btn-user-auth.btn_1.outline {
   width: 100%;
 }
 
-.terms-content {
-  height: 70px; /* 박스의 높이를 설정합니다. */
-  overflow-y: scroll; /* 세로 스크롤이 생기도록 합니다. */
-}
+
+
 
 @font-face {
      font-family: 'S-CoreDream-3Light';

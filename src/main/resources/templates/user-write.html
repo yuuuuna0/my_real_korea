@@ -37,7 +37,15 @@ function kakaopost() {
         }
     }).open();
 }
+
+const phoneNumber = (target) => {
+    target.value = target.value.replace(/[^0-9]/g, '').replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`)
+}
+
 </script>
+<style type="text/css">
+
+</style>
         
 </head>
 <body>
@@ -67,69 +75,75 @@ function kakaopost() {
 				<div class="col-xl-4 col-lg-5 col-md-6 col-sm-8">
 				
 <div id="login">
-<!-- 
-	<div class="text-center">
-		<img src="img/logo_myrealkorea_main2.png" alt="Image" data-retina="true" >
-	</div>
-	<hr>
- -->	
 	<form th:object="${user}" name="f" method="post">
 
         <div class="form-group">
 			<label>아이디</label>
-			<input type="text" class="form-control" id="userId" name="userId" placeholder="6 - 12글자의 영어 소문자와 숫자의 조합">
-			<input type="button" class="btn_1 border" onclick="idCheck();" value="아이디 중복 확인">
+			<input type="text" id="userId" name="userId" placeholder="6 - 12글자의 영어 소문자와 숫자의 조합" class="form-control">
+			<input type="button" id="btn-user-id-check" value="아이디 중복 확인" class="btn_1 outline">
+			
         </div>
 		<div class="form-group">
 			<label>비밀번호</label>
-			<input type="password" class="form-control" id="password1" placeholder="8 - 12글자의 영어, 숫자, 특수문자의 조합" name="password"
-			onkeyup="validatePassword();">
+			<input type="password" id="password1" name="password" placeholder="8 - 12글자의 영어, 숫자, 특수문자의 조합" class="form-control">
 			<span id="passwordMsg"></span>
 		</div>
 		<div class="form-group">
 			<label>비밀번호 확인</label>
-		    <input type="password" class="form-control" id="password2" placeholder="Confirm password"  name="password2">
+		    <input type="password" id="password2" name="password2" class="form-control">
 		</div>
+		<div id="pass-info" class="clearfix"></div>
 		<div class="form-group">
 			<label>이름</label>
-		    <input type="text" class="form-control" name="name" placeholder="Name">
+		    <input type="text" id="name" name="name" class="form-control">
 		</div>
 		<div class="form-group">
 			<label>닉네임</label>
-		    <input type="text" class="form-control" name="nickname" placeholder="NickName">
+		    <input type="text"id="nickname" name="nickname" class="form-control" >
 		</div>
 		<div class="form-group">
 			<label>휴대폰 번호</label>
-		    <input type="text" class="form-control" name="phone" placeholder="Phone">
+			<input type="text" id="phone" class="form-control" maxlength="13" oninput="phoneNumber(this)">
 		</div>
 		<div class="form-group">
 			<label>이메일</label>
-		    <input type="email" class="form-control" name="email" placeholder="Email">
+		    <input type="email" id="email" name="email" class="form-control">
 		</div>
-		
 		<div class="form-group">
 			<label>생년월일</label>
-		    <input type="date" class="form-control" name="birth" min="1950-01-01" max="2007-12-31"> 
+		    <input type="date" id="birth" name="birth" min="1950-01-01" max="2007-12-31" class="form-control"> 
 		</div>
 		<div class="form-group">
 			<label>주소</label>
-		    <input type="text" class="form-control" name="address" id="address">
-		    <input type="button" class="btn_1 outline" value="우편번호찾기" onclick="kakaopost()">
+		    <input type="text" id="address" name="address" class="form-control" readOnly>
+		    <input type="button" id="btn-user-address" class="btn_1 outline" value="우편번호찾기" onclick="kakaopost()">
 		</div>
 		<div class="form-group">
-			<label>성별</label><br/><br/>
+			<label>성별</label><br/>
+			<span>
+				<div class="btn-group btn-group-toggle" data-toggle="buttons">
+					<label class="btn btn-secondary active">
+						<input type="radio" name="gOptions" id="gender1" checked value="1"> 남
+					</label>
+
+					<label class="btn btn-secondary">
+						<input type="radio" name="gOptions" id="gender2" value="2"> 여
+					</label>
+				</div>
+			</span>						
+			<!-- 
 		    <input type="radio" name="gender" value="1"> 남&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		    <input type="radio" name="gender" value="2"> 여
+		     -->
 		</div>
 	</form>
-		<div id="pass-info" class="clearfix"></div>
 		<hr>
 		
 <div class="terms">
-	<label>
-		<input type="checkbox" id="termsService" onclick="checkTerms();">
-		마이 리얼 코리아 이용 약관 동의 (필수)
-	</label>
+		<input type="checkbox" id="termsService">
+		<label for="termsService">
+			<span>마이 리얼 코리아 이용 약관 동의 (필수)</span>
+		</label>
 	<div class="terms-content">
 	여러분을 환영합니다.
 	마이 리얼 코리아 서비스 및 제품(이하 ‘서비스’)을 이용해 주셔서 감사합니다. 
@@ -138,10 +152,10 @@ function kakaopost() {
 	마이 리얼 코리아 서비스를 이용하시거나 마이 리얼 코리아 서비스 회원으로 가입하실 경우 여러분은 본 약관 및 관련 운영 정책을 확인하거나 동의하게 되므로, 잠시 시간을 내시어 주의 깊게 살펴봐 주시기 바랍니다.
 	</div><br/>
 	
-	<label> 
-		<input type="checkbox" id="termsPrivacy" onclick="checkTerms();">
-		개인정보 수집 및 이용 동의 (필수)
-	</label>
+	<input type="checkbox" id="termsPrivacy">
+		<label for="termsPrivacy">
+			<span>개인정보 수집 및 이용 동의 (필수)</span>
+		</label>
 	<div class="terms-content">
 	개인정보보호법에 따라 마이 리얼 코리아에 회원가입 신청하시는 분께 수집하는 개인정보의 항목, 개인정보의 수집 및 이용목적, 개인정보의 보유 및 이용기간, 동의 거부권 및 동의 거부 시 불이익에 관한 사항을 안내 드리오니 자세히 읽은 후 동의하여 주시기 바랍니다.
 	
@@ -160,7 +174,8 @@ function kakaopost() {
 	마이 리얼 코리아 의 회원관리, 서비스 개발・제공 및 향상, 안전한 인터넷 이용환경 구축 등 아래의 목적으로만 개인정보를 이용합니다.
 	</div>
 	</div><br/>
-	 	<input type="button" class="btn_full" value="회원 가입" onclick="userCreate();">
+		<input type="button" id="btn-user-create" value="회원 가입" class="btn_1 outline">
+	 	
 </div>
 </div>
 				</div>
@@ -190,176 +205,5 @@ function kakaopost() {
 	<script src="js/app_user.js" type="module"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script> 
 	
-
-	<!-- Specific scripts -->
-	<script src="js/pw_strenght.js"></script>
-	
-<script>
-
-
-
-//비밀번호 유효성 검사
-function validatePassword() {
-	const password = document.getElementById("password1").value;
-	const passwordMsg = document.getElementById("passwordMsg");
-
-	if (/([^a-zA-Z0-9~!@#$%^&*()_+,.?])/.test(password)) {
-		const invalidChar = password.match(/([^a-zA-Z0-9~!@#$%^&*()_+,.?])/)[1];
-		passwordMsg.textContent = "허용되지 않는 문자 " + invalidChar + " 가 포함되어 있습니다.";
-		passwordMsg.style.color = "red";
-		return false;
-	} else if (/(.)\1\1/.test(password)) {
-		passwordMsg.textContent =
-		"같은 문자를 연속으로 3개 이상 사용할 수 없습니다.";
-		passwordMsg.style.color = "red";
-		return false;
-	} else if (password.length < 8 || password.length > 12) {
-		passwordMsg.textContent =
-		"비밀번호는 8글자 이상 12글자 이하여야 합니다.";
-		passwordMsg.style.color = "red";
-		return false;
-	} else if (!/^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[~!@#$%^&*()_+,.?])/.test(password)) {
-		passwordMsg.textContent =
-		"비밀번호는 영어, 숫자, 특수문자를 모두 포함해야 합니다.";
-		passwordMsg.style.color = "red";
-		return false;
-	} else {
-		passwordMsg.textContent = "";
-		return true;
-	}
-}
-
-//아이디 중복검사 후 true 반환
-let isIdChecked = false;
-
-
-//아이디 유효성 검사, 중복 체크
-function idCheck() {
-	const idValidate = /^[a-z][-_.a-z0-9]{5,11}$/g;
-	const userId = $('#userId').val().trim();
-
-	if (!idValidate.test(userId)) {
-		toastr.error('사용 불가능한 아이디 형식입니다.');
-		return $('#userId').val('');
-	}
-	if (userId === '') {
-		toastr.error('아이디를 입력해주세요.');
-		return;
-	}
-
-		$.ajax({
-			url: './idCheck',
-			type: 'post',
-    	    data: { userId: userId },
-    	    success: function(cnt) {
-				if (cnt == 0) {
-					alert('사용 가능한 아이디입니다.');
-					isIdChecked = true;
-				} else {
-					alert('이미 사용중인 아이디입니다.');
-					$('#userId').val('');
-				}
-			},
-			error: function() {
-				alert('에러입니다.');
-    	    }
-		});
-};
-    	
-//회원 가입    	
-function userCreate() {
-	  var user = {};
-	  user.userId = $("#userId").val();
-	  user.password = $("#password1").val();
-	  user.password2 = $("#password2").val();
-	  user.name = $("input[name=name]").val();
-	  user.nickname = $("input[name=nickname]").val();
-	  user.phone = $("input[name=phone]").val();
-	  user.email = $("input[name=email]").val();
-	  user.birth = $("input[name=birth]").val();
-	  user.address = $("input[name=address]").val();
-	  user.gender = $("input[name=gender]:checked").val();
-	  
-	const serviceTerms = document.getElementById("termsService");
-	const privacyTerms = document.getElementById("termsPrivacy");
-		  
-	if (!serviceTerms.checked || !privacyTerms.checked) {
-		toastr.error("이용 약관에 모두 동의해주세요.");
-		return false;
-	}
-	if (user.userId === "") {
-		toastr.error("사용자 아이디를 입력하세요.");
-	    $("#userId").focus();
-	    return false;
-	}
-	if (!isIdChecked) {
-		toastr.error("아이디 중복 확인 버튼을 클릭해주세요.");
-	    return false;
-	}
-	if (user.password !== user.password2) {
-		toastr.error("비밀번호와 비밀번호 확인은 일치해야 합니다.");
-	    $("#password1").focus().select();
-	    return false;
-	}
-	if (!validatePassword()) {
-		return false;
-	}
-	if (user.name === "") {
-		toastr.error("이름을 입력하세요.");
-	    $("input[name=name]").focus();
-	    return false;
-	}
-	if (user.nickname === "") {
-		toastr.error("닉네임을 입력하세요.");
-	    $("input[name=nickname]").focus();
-	    return false;
-	}
-	if (user.phone === "") {
-		toastr.error("휴대폰 번호를 입력하세요.");
-	    $("input[name=phone]").focus();
-		return false;
-	}
-	if (user.email === "") {
-		toastr.error("이메일 주소를 입력하세요.");
-	    $("input[name=email]").focus();
-		return false;
-	}
-	if (user.birth === "") {
-		toastr.error("생년월일을 입력하세요.");
-	    $("input[name=birth]").focus();
-		return false;
-	}
-	if (user.address === "") {
-		toastr.error("주소를 입력하세요.");
-	    $("input[name=address]").focus();
-		return false;
-	}
-	if (user.gender === "") {
-		toastr.error("성별을 선택하세요.");
-	    $("input[name=gender]").focus();
-		return false;
-	}
-	$.ajax({
-	    type: "POST",
-	    url: "./user-write-action",
-	    data: JSON.stringify(user),
-	    dataType: "json",
-	    contentType: "application/json;charset=UTF-8",
-	    success: function (data) {
-	        if (data.status == 0) {
-	            toastr(data.message);
-	            window.location.href = "./index";
-	        } else {
-	            alert(data.message);
-	        }
-	    },
-	    error: function (xhr, status, error) {
-	        console.error(error);
-	        alert("회원가입에 실패했습니다.");
-	    }
-	}); 	
-};
-
-</script>
   </body>
 </html>

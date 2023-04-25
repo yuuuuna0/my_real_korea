@@ -29,6 +29,9 @@ public class KakaoProfile {
 		public Boolean is_email_valid;
 		public Boolean is_email_verified;
 		public String email;
+		public Boolean gender_needs_agreement;
+		public Boolean has_gender;
+		public String gender;
 		
 		@Data
 		public class Profile {

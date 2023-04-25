@@ -76,8 +76,17 @@ public class UserController {
 	    String userId = "K_"+kakaoProfile.getId();
 	    String password = "k"+kakaoProfile.getId()+"!";
 	    String name = kakaoProfile.getProperties().getNickname();
-	    String nickname = kakaoProfile.getProperties().getNickname();
+	    String nickname = "kakao_"+kakaoProfile.getProperties().getNickname();
 	    String email = kakaoProfile.getKakao_account().getEmail();
+	    int gender = 0;
+		    if(kakaoProfile.getKakao_account().getGender().equals("male")) {
+		        gender = 1;
+		    } else if(kakaoProfile.getKakao_account().getGender().equals("female")) {
+		        gender = 2;
+		    } else {
+		        gender = 0;
+		    }
+		
 	    
 	    System.out.println(">>> login_action userId : "+userId);
 	    User kakaoUser = userService.findUser(userId);
@@ -92,7 +101,7 @@ public class UserController {
 	        User loginUser = userService.findUser(kakaoUser.getUserId());
 	        session.setAttribute("loginUser", loginUser);
 	    } else {
-	    	User newUser = new User(userId, password, name, nickname, "010", email, new Date(), "제주도", 0, 0, 1, 1, 0);
+	    	User newUser = new User(userId, password, name, nickname, null, email, new Date(), "제주", gender, 0, 1, 1, 0);
 	        userService.create(newUser);
 	        session.setAttribute("user_id", userId);
 	    }

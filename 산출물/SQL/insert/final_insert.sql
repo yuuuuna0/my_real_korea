@@ -35,13 +35,13 @@ insert into user_add_info(introduce,alcohol,smoking,user_id) values('안녕4',0,
 
 /*************** city ***********************/
 -- city
-insert into city(city_no,city_name,latitude,longitude) values(city_city_no_seq.nextval,'서울',1,1);
-insert into city(city_no,city_name,latitude,longitude) values(city_city_no_seq.nextval,'경기',2,2);
-insert into city(city_no,city_name,latitude,longitude) values(city_city_no_seq.nextval,'강원',3,3);
-insert into city(city_no,city_name,latitude,longitude) values(city_city_no_seq.nextval,'부산',4,4);
-insert into city(city_no,city_name,latitude,longitude) values(city_city_no_seq.nextval,'대전',5,5);
-insert into city(city_no,city_name,latitude,longitude) values(city_city_no_seq.nextval,'전주',6,6);
-insert into city(city_no,city_name,latitude,longitude) values(city_city_no_seq.nextval,'제주',7,7);
+insert into city(city_no,city_name,latitude,longitude) values(city_city_no_seq.nextval,'서울/경기',1,1);
+insert into city(city_no,city_name,latitude,longitude) values(city_city_no_seq.nextval,'부산/경상도',2,2);
+insert into city(city_no,city_name,latitude,longitude) values(city_city_no_seq.nextval,'강원도',3,3);
+insert into city(city_no,city_name,latitude,longitude) values(city_city_no_seq.nextval,'전라도',4,4);
+insert into city(city_no,city_name,latitude,longitude) values(city_city_no_seq.nextval,'충청도',5,5);
+insert into city(city_no,city_name,latitude,longitude) values(city_city_no_seq.nextval,'울릉도',6,6);
+insert into city(city_no,city_name,latitude,longitude) values(city_city_no_seq.nextval,'제주도',7,7);
 
 /*************** notice ***********************/
 -- 공지사항 notice insert

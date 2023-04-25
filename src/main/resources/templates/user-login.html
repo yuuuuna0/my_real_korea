@@ -33,41 +33,9 @@
  
 <script defer type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.2/handlebars.min.js"></script>
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-<script>
-	
-// 사용하려는 앱의 JavaScript 키 입력
-Kakao.init('de088a236c96f21b86017ba109bbd84e');
-function kakaoLogin() {
-	Kakao.Auth.login({
-		success : function(response) {
-			Kakao.API.request({ // 사용자 정보 가져오기 
-				url : '/v2/user/me',
-				success : function(response) {
-					console.log(response);
-					console.log(response.id);
-					// ID중복체크를 통해 회원가입 유무를 결정한다.
-					// 존재하는 경우 로그인 처리
-					let kakaoId = response.id
-					// 회원가입
-					alert(kakaoId);
-					$('#kakao-login-btn').hide();
-					$('#kakao-logout-btn').show();
-					
-				}
-			});
-		},
-		fail : function(error) {
-			alert(error);
-		}
-	});
-}
-
-		
-</script>
 
 </head>
 <body>
-
 
     <!-- End Preload -->
 
@@ -95,19 +63,19 @@ function kakaoLogin() {
 	<div class="divider"><span>Or</span></div>
     <div class="form-group">
         <label>아이디</label>
-        <input type="text" class=" form-control " placeholder="Username" name="userId">
+        <input type="text" class=" form-control " name="userId">
         <font color="red" th:text="${msg1}"></font>
     </div>
     <div class="form-group">
         <label>비밀번호</label>
-        <input type="password" class=" form-control" placeholder="Password" name="password">
+        <input type="password" class=" form-control" name="password">
         <font color="red" th:text="${msg2}"></font>
     </div>
 		<p>
 		    <a href="user-find" id="menu-user-find">아이디 / 비밀번호 찾기</a><br/>
 		</p>
-	<input type="button" id="btn-user-login" value="로그인" class="btn_1 outline">
-	<input type="button" id="btn-user-join" value="회원 가입" class="btn_1 white">
+	<input type="button" id="btn-user-login" value="로그인" class="btn_1 white">
+	<input type="button" id="btn-user-join" value="회원 가입" class="btn_1 outline">
 </form><br/>
 </div>
 <!-- 로그인 폼 끝 -->
@@ -119,11 +87,11 @@ function kakaoLogin() {
 <form name="i" method="post">
     <div class="form-group">
         <label>이름</label>
-        <input type="text" class="form-control" placeholder="Username" name="name" id="name">
+        <input type="text" class="form-control" name="name" id="name">
     </div>
     <div class="form-group">
         <label>이메일</label>
-        <input type="text" class="form-control" placeholder="Email" name="email" id="email">
+        <input type="text" class="form-control" name="email" id="email">
     </div>
 		<input type="button" id="btn-user-find-id" value="아이디 찾기" class="btn_1 outline">
 </form>
@@ -135,11 +103,11 @@ function kakaoLogin() {
 <form name="p" method="post">
     <div class="form-group">
         <label>ID</label>
-        <input type="text" class=" form-control " placeholder="ID" name="userId">
+        <input type="text" class=" form-control " name="userId">
     </div>
     <div class="form-group">
         <label>이메일</label>
-        <input type="text" class=" form-control" placeholder="Email" name="email">
+        <input type="text" class=" form-control" name="email">
     </div>
 		<input type="button" id="btn-user-find-pw" value="비밀번호 찾기" class="btn_1 outline">
 
@@ -180,15 +148,7 @@ function kakaoLogin() {
 	<div id="toTop"></div><!-- Back to top button -->
 	
 	<!-- Search Menu -->
-	<div class="search-overlay-menu">
-		<span class="search-overlay-close"><i class="icon_set_1_icon-77"></i></span>
-		<form role="search" id="searchform" method="get">
-			<input value="" name="q" type="search" placeholder="Search..." />
-			<button type="submit"><i class="icon_set_1_icon-78"></i>
-			</button>
-		</form>
-	</div><!-- End Search Menu -->
-	
+	<!-- End Search Menu -->
 
 	<!-- Common scripts -->
 	<script src="js/jquery-2.2.4.min.js"></script>
@@ -197,119 +157,6 @@ function kakaoLogin() {
 	<script src="js/app_user.js" type="module"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script> 
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
-
-<script type="text/javascript">
-
-
-/*
-//아이디 찾기 액션
-function findId() {
-	
-    var name = $('#name').val();
-    var email = $('#email').val();
-    
-    
-    if (name == "") {
-    	toastr.error("이름을 입력하세요.");
-        document.i.name.focus();
-        return false;
-    }
-    if (email == "") {
-    	toastr.error("이메일을 입력하세요.");
-        document.i.email.focus();
-        return false;
-    }
-
-    $.ajax({
-        type: "POST",
-        url: "./user-find-id-action",
-        dataType: "json",
-        data: {
-            name: name,
-            email: email
-        },
-        success: function(response) {
-            if (response.status == 1) {
-            	alert(response.message);
-            } else if (response.status == 2) {
-            	alert(response.message);
-            }
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-            console.log(textStatus, errorThrown);
-        }
-    });
-}
-*/
-/*
-//비밀번호 찾기 액션
-function findPassword() {
-  const userId = document.p.userId.value;
-  const email = document.p.email.value;
-
-  if (userId === "") {
-	  toastr.error("아이디를 입력하십시오.");
-    document.p.name.focus();
-    return false;
-  }
-
-  if (email === "") {
-	  toastr.error("이메일을 입력하십시오.");
-    document.p.email.focus();
-    return false;
-  }
-
-  const data = {
-    userId: userId,
-    email: email,
-  };
-
-  $.ajax({
-    type: "POST",
-    url: "./user-find-pw-action",
-    data: data,
-    dataType: "json",
-    success: function (response) {
-      if (response.status == 1) {
-        alert(response.message);
-        window.location.replace("user-login");
-      } else {
-        alert(response.message);
-      }
-    },
-    error: function (xhr, status, error) {
-      console.error(error);
-      alert("오류가 발생했습니다.");
-    },
-  });
-
-  return true;
-}
-*/
-/*
-//이메일 인증 액션
-function submitAuthCode() {
-    var mailAuthKey = $("input[name='mailAuthKey']").val();
-    $.post({
-        url: "./user-auth-action",
-        data: { mailAuthKey: mailAuthKey },
-        success: function(response) {
-            if (response.status === 0) {
-                // 인증 성공
-                window.location.replace(response.data);
-                toastr("인증 성공! 로그인 페이지로 이동합니다.")
-            } else {
-                // 인증 실패
-                toastr.error("인증 코드가 일치하지 않습니다.");
-            }
-        },
-        error: function(xhr) {
-            alert("서버 오류가 발생했습니다.");
-        }
-    });
-}
-*/
-</script>	
 
   </body>
 </html>

@@ -1,8 +1,9 @@
 import * as View from "./view.js";
 import * as Request from "./request.js";
 
-/************ user-login *************/
+/************************* login *************************/
 
+//토스트
 $(document).ready(function() {
   toastr.options = {
     "positionClass": "toast-bottom-right",
@@ -18,6 +19,7 @@ $(document).ready(function() {
     */
   }
 });
+
 //회원 가입 폼
 $(document).on('click','#btn-user-join',function() {
 	location.href="user-write";
@@ -58,6 +60,7 @@ $(document).on('click','#btn-user-login',function(e) {
         toastr.error('로그인에 실패했습니다.');
       }
     });
+    e.preventDefault();	
 });
 
 
@@ -151,8 +154,9 @@ $(document).on('click','#btn-user-find-pw',function(e) {
   return true;
 });
 
+//이메일 인증 액션
 $(document).on('click','#btn-user-auth',function(e) {
-    var mailAuthKey = $("input[name='mailAuthKey']").val();
+    let mailAuthKey = $("input[name='mailAuthKey']").val();
     $.post({
         url: "./user-auth-action",
         data: { mailAuthKey: mailAuthKey },
@@ -175,9 +179,198 @@ $(document).on('click','#btn-user-auth',function(e) {
 });
 
 
+/************************* write *************************/
 
-/*************************/
+//아이디 중복검사 후 true 반환
+let isIdChecked = false;
 
+
+//아이디 유효성 검사, 중복 체크
+$(document).on('click','#btn-user-id-check',function(e) {
+	const idValidate = /^[a-z][-_.a-z0-9]{5,11}$/g;
+	const userId = $('#userId').val().trim();
+
+	if (!idValidate.test(userId)) {
+		toastr.error('사용 불가능한 아이디 형식입니다.');
+		return $('#userId').val('');
+	}
+	if (userId === '') {
+		toastr.error('아이디를 입력해주세요.');
+		return;
+	}
+
+		$.ajax({
+			url: './idCheck',
+			type: 'post',
+    	    data: { userId: userId },
+    	    success: function(cnt) {
+				if (cnt == 0) {
+					alert('사용 가능한 아이디입니다.');
+					isIdChecked = true;
+				} else {
+					alert('이미 사용중인 아이디입니다.');
+					$('#userId').val('');
+				}
+			},
+			error: function() {
+				alert('에러입니다.');
+    	    }
+		});
+		e.preventDefault();	
+});
+
+
+
+
+//비밀번호 유효성 검사
+$(document).ready(function() {
+	let password1 		= $('#password1');
+	let password2		= $('#password2');
+	let passwordsInfo 	= $('#pass-info');
+	
+	validatePassword(password1,password2,passwordsInfo);
+	
+});
+
+function validatePassword(password1, password2, passwordsInfo){
+
+	$(password1).on('keyup', function(e) {
+	let password = document.getElementById("password1").value;
+	
+		if(/[^a-zA-Z0-9~!@#$%^&*()_+,.?]/.test(password)) {
+			const invalidChar = password.match(/([^a-zA-Z0-9~!@#$%^&*()_+,.?])/)[1];
+			passwordsInfo.removeClass().addClass('stillweakpass')
+			.html("허용되지 않는 문자 "+invalidChar+" 가 포함되어 있습니다.");
+		}	
+		else if(/(.)\1\1/.test(password)) {
+			passwordsInfo.removeClass().addClass('stillweakpass')
+			.html("같은 문자를 연속으로 3개 이상 사용할 수 없습니다.");
+		}	
+		else if(password.length < 8 || password.length > 12) {
+			passwordsInfo.removeClass().addClass('weakpass')
+			.html("비밀번호는 8글자 이상 12글자 이하여야 합니다.");
+		}
+		else if(!/^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[~!@#$%^&*()_+,.?])/.test(password)) {
+			passwordsInfo.removeClass().addClass('stillweakpass')
+			.html("영어, 숫자, 특수문자를 모두 포함해야 합니다.");
+    	}
+		else {
+			passwordsInfo.removeClass().addClass('goodpass')
+			.html("사용 가능한 비밀번호 입니다.");
+			return true;
+		}
+		e.preventDefault();	
+	});
+	
+	$(password2).on('keyup', function(e) {
+		
+		if(password1.val() !== password2.val()) {
+			passwordsInfo.removeClass().addClass('weakpass').html("비밀번호 확인이 일치하지 않습니다.");	
+		}else{
+			passwordsInfo.removeClass().addClass('goodpass').html("비밀번호 확인이 일치합니다.");	
+		}
+		e.preventDefault();	
+	});
+}
+
+//회원 가입
+$(document).on('click','#btn-user-create',function(e) {
+    	
+	  const user = {
+	  userId: $("#userId").val(),
+	  password: $("#password1").val(),
+	  password2: $("#password2").val(),
+	  name: $("#name").val(),
+	  nickname: $("#nickname").val(),
+	  phone: $("#phone").val(),
+	  email: $("#email").val(),
+	  birth: $("#birth").val(),
+	  address: $("#address").val(),
+	  gender: $("#gender:checked").val()
+	  };
+	  
+	const termsService = document.getElementById("termsService");
+	const termsPrivacy = document.getElementById("termsPrivacy");
+		  
+	if (!termsService.checked || !termsPrivacy.checked) {
+		toastr.error("이용 약관에 모두 동의해주세요.");
+		return false;
+	}
+	if (user.userId === "") {
+		toastr.error("사용자 아이디를 입력하세요.");
+	    $("#userId").focus();
+	    return false;
+	}
+	if (!isIdChecked) {
+		toastr.error("아이디 중복 확인 버튼을 클릭해주세요.");
+	    return false;
+	}
+	if (user.password !== user.password2) {
+		toastr.error("비밀번호와 비밀번호 확인은 일치해야 합니다.");
+	    $("#password2").focus().select();
+	    return false;
+	}
+	if (!validatePassword()) {
+		return false;
+	}
+	if (user.name === "") {
+		toastr.error("이름을 입력하세요.");
+	    $("#name").focus();
+	    return false;
+	}
+	if (user.nickname === "") {
+		toastr.error("닉네임을 입력하세요.");
+	    $("#nickname").focus();
+	    return false;
+	}
+	if (user.phone === "") {
+		toastr.error("휴대폰 번호를 입력하세요.");
+	    $("#phone").focus();
+		return false;
+	}
+	if (user.email === "") {
+		toastr.error("이메일 주소를 입력하세요.");
+	    $("#email").focus();
+		return false;
+	}
+	if (user.birth === "") {
+		toastr.error("생년월일을 입력하세요.");
+	    $("#birth").focus();
+		return false;
+	}
+	if (user.address === "") {
+		toastr.error("주소를 입력하세요.");
+	    $("#address").focus();
+		return false;
+	}
+	if (user.gender === "") {
+		toastr.error("성별을 선택하세요.");
+	    $("#gender").focus();
+		return false;
+	}
+	$.ajax({
+	    type: "POST",
+	    url: "./user-write-action",
+	    data: JSON.stringify(user),
+	    dataType: "json",
+	    contentType: "application/json;charset=UTF-8",
+	    success: function (data) {
+	        if (data.status == 0) {
+	            toastr(data.message);
+	            window.location.href = "./index";
+	        } else {
+	            alert(data.message);
+	        }
+	    },
+	    error: function (xhr, status, error) {
+	        console.error(error);
+	        alert("회원가입에 실패했습니다.");
+	    }
+	}); 
+	e.preventDefault();		
+});
+
+/******************************************************************/
 
 
 // 프로필 수정 폼 

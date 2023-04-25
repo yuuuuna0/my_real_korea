@@ -100,8 +100,10 @@
 			</div>
 		</div>
 		<!-- End position -->
-
 		<div class="container margin_60">
+<form id="f" name="f" method="POST" class="was-validated" >
+<input type="hidden" name="pPrice" id="pPrice" th:value="${session.payment.pPrice}">
+<input type="hidden" name="pPoint" id="pPoint" th:value="${session.payment.pPoint}">
 			<div class="row" >
 				<div class="col-lg-8 add_bottom_15">
 					<div  class="strip_all_tour_list wow fadeIn" data-wow-delay="0.1s" >
@@ -157,7 +159,7 @@
 						</div>
 					</div>
 					</div>
-					<form name="tourPaymentF" method="POST" class="was-validated" >
+					
 					<div class="form_title">
 						<h3><strong>1</strong>예약확인</h3>
 						<p>
@@ -211,14 +213,18 @@
 							</div>
 							<br>
 							<br>
-							<div class="col-lg-12">
-								<input type="text" style="width:70%" placeholder="포인트는 1000p 단위로 사용 가능합니다">
-								<small th:text="${session.loginUser.name}'+'님의 사용 가능한 포인트는 '+${session.loginUser.point}+ '입니다'"></small>
+							<div class="col-lg-8">
+								<div>
+									<input id="usedPoint" type="number" style="width:40%" value="0" min="0" th:max="${session.loginUser.point}" step="1000">
+									<input id="nowPoint" type="hidden" th:value="${session.loginUser.point}">
+									<input id="totPrice" type="hidden" th:value="${session.payment.pPrice}">
+									<button id="usePointBtn">사용</button>
+									<span>&nbsp;&nbsp;사용 가능한 포인트 : </span>
+									<span id="nowPoint2" th:text="${session.loginUser.point}"></span>
+								</div>
+									<span style="font-size:12px; color:#898484;">(포인트는 1000p 단위로 사용 가능합니다)</span>
 							</div>
-							<div class="col-lg-2" style="padding:10px 0px 0px 18px;">
-								<label> 결제수단 </label>
-							</div>
-							<div class="col-lg-3" style="padding:5px 0px 0px 0px">
+							<div class="col-lg-4" >
 								<div class="form-group">
 										<select class="form-control" name="pMethod" id="pMethod" required>
 											<option value="" selected disabled hidden>결제방법</option>
@@ -227,7 +233,7 @@
 										</select>
 								</div>
 							</div>
-						</div>
+							</div>
 						<!--End row -->
 						<br>
 						<br>
@@ -242,80 +248,57 @@
 					</div>
 					</div>
 					<!--End step -->
-			</form>
 		</div>
-				
-			
 				<aside class="col-lg-4">
 					<div class="box_style_1">
 						<h3 class="inner">- 상세보기 -</h3>
-						<table class="table table_summary">
+						<table class="table table_summary"  id="tableSummaryH">
 							<tbody>
 								<tr>
-									<td>
-										여행 시작일
-									</td>
-									<td class="text-right" th:text="${#dates.format(session.payment.pStartDate,'yyyy-MM-dd')}">
-									</td>
+									<td>여행 시작일</td>
+									<td class="text-right" th:text="${#dates.format(session.payment.pStartDate,'yyyy-MM-dd')}"></td>
 								</tr>
 								<tr>
-									<td>
-										여행 종료
-									</td> 
-									<td class="text-right" text="출력안되어서 개짱남">
-										출력안되어서 개짱남
-									</td>
+									<td>여행 종료</td> 
+									<td class="text-right" text="출력안되어서 개짱남">출력안되어서 개짱남</td>
 								</tr>
 								<tr>
-									<td>
-										여행일수
-									</td>
-									<td class="text-right" th:text="${session.payment.tour.toTime}">
-										1 double room
-									</td>
+									<td>여행일수</td>
+									<td class="text-right" th:text="${session.payment.tour.toTime}">1 double room</td>
 								</tr>
 								<tr>
-									<td>
-										여행타입
-									</td>
-									<td class="text-right" th:text="${session.payment.tour.toType}">
-										2
-									</td>
+									<td>여행타입</td>
+									<td class="text-right" th:text="${session.payment.tour.toType}">2</td>
 								</tr>
 								<tr>
-									<td>
-										예약 인원 수 
-									</td>
-									<td class="text-right" th:text="${session.payment.pQty}">
-										0
-									</td>
+									<td>예약 인원 수 </td>
+									<td class="text-right" th:text="${session.payment.pQty}">0</td>
 								</tr>
 								<tr>
-									<td>
-										금액
-									</td>
-									<td class="text-right" th:text="${session.payment.tour.toPrice}">
-										2
-									</td>
+									<td>금액</td>
+									<td class="text-right" th:text="${session.payment.pPrice}"></td>
 								</tr>
 								<tr>
-									<td>
-										사용포인트
-									</td>
-									<td class="text-right" th:text="${session.payment.tour.toPrice}">
-										2
-									</td>
+									<td>사용포인트</td>
+									<td class="text-right" id="usingPoint2">0</td>
+								</tr>
+								<tr>
+									<td></td>
+									<td class="text-right"><p></p></td>
 								</tr>
 								<tr class="total">
-									<td>
-										총 금액
+									<td>총 금액</td>
+									<td class="text-right" id="totPrice2" th:text="${session.payment.pPrice}">$154
 									</td>
-									<td class="text-right" th:text="${session.payment.pPrice}">
-										$154
+								</tr>
+								<tr>
+									<td>적립 포인트</td>
+									<td class="text-right" id="savePoint2" th:text="${session.payment.pPoint}">0
 									</td>
 								</tr>
 							</tbody>
 						</table>
+						
 						<button class="btn_full" type="button" id="tourPayment" onclick="tourPaymentAction()">예약하기 </button>
 						<a class="btn_full_outline" th:href="@{tour-detail(toNo=${session.tour.toNo})}"><i class="icon-right"></i> 투어상세보기</a>
 					</div>
@@ -327,6 +310,7 @@
 					</div>
 				</aside>
 			</div>
+		</form>
 			<!--End row -->
 					
 		</div>
@@ -368,8 +352,13 @@
 	</script>
 	<script type="text/javascript">
 		function tourPaymentAction(e){
-			let form=$('#tourPaymentF');
+			let form=$('#f');
 			console.log(form);
+			console.log($('#pPoint').val());
+			console.log($('#pPrice').val());
+			document.f.action='tour-payment-action';
+			document.f.submit();
+/*			
 			if(form.get(0).checkValidity()===false){
 				form.find(':invalid').first().focus();
 				e.preventDefault();
@@ -382,7 +371,7 @@
 				if('#pMethod'.val==2){
 					pMethod='card';
 				}
-				/********** 자바스크립트에서 세션 값 가져오는거 먼저 해야 함!!  ***** */
+				********* 자바스크립트에서 세션 값 가져오는거 먼저 해야 함!!  ***** 
 			    IMP.request_pay({
 			      pg: "html5_inicis",
 			      pay_method: pMethod,
@@ -398,14 +387,15 @@
 			    	console.log(rsp);
 			      	if (rsp.success) {
 			        // 결제 성공 시 로직
-						document.rsPInfoF.action='tour-payment-action';
-						document.rsPInfoF.submit();
+						document.f.action='tour-payment-action';
+						document.f.submit();
 			      	} else {
 			        // 결제 실패 시 로직
 			        	console.log(rsp);
 			      	}
 					});
 				}
+*/
 			}
 	</script>
 

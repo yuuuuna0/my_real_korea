@@ -125,7 +125,10 @@ $(document).on('click', '#tripboard-write-action', function(e){
 	let form = $('#tripboardWriteForm');
 	
 	if(form.get(0).checkValidity() === false) {
+		// 폼의 유효성 검사에서 실패한 요소에 커서 두기
 		form.find(':invalid').first().focus();
+		
+		// 폼 유효성 검사 실패 시 이벤트 중지
 		e.preventDefault();
 		e.stopPropagation();
 	} else {
@@ -146,6 +149,19 @@ $(document).on('click', '#tripboard-write-action', function(e){
 		formData.append('cityNo', cityNo);
 		formData.append('userId', $('#userId').val());
 		formData.append('tBoImg', tBoImg);
+		
+		//업로드 파일 선택이 되었을 때만 FormData에 추가
+		let inputFile = $("input[type='file']");
+		//파일이 선택되면 tBoImg가 선택된 파일로 지정
+		if(inputFile.prop('files') && inputFile.prop('files').length > 0) {
+			formData.append('file', inputFile.prop('files')[0]);
+			let inputFileName = inputFile.prop('files')[0].name;
+			console.log(inputFileName);
+		}else {
+			//파일 선택이 안 되면 hidden으로 넣어 놓은 tBoImg 이미지로 선택
+			tBoImg = $('#tBoImg').val();
+			formData.append('tBoImg', tBoImg);
+		}
 		
 		let async = true;
 		
@@ -187,53 +203,76 @@ function checkedStatus(event) {
 //동행게시판 수정 액션
 $(document).on('click', '#tripboard-modify-action', function(e){
 	let form = $('#tripboardWriteForm');
-	let tBoNo = $('#modify-tBoNo').val();
-	let url = `tripboard/${tBoNo}`;
-	let method = 'PUT';
-	let formData = new FormData();
-	let cityNo = $('input[name="cOptions"]:checked').val();
-	let tBoStyle = $('input[name="sOoptions"]:checked').val();
-	let tBoStatus;
 	
-	if(document.getElementById("tBoStatus").checked) {
-		tBoStatus = '0';
-	}else {
-		tBoStatus = '1';
+	if(form.get(0).checkValidity() === false) {
+		// 폼의 유효성 검사에서 실패한 요소에 커서 두기
+		form.find(':invalid').first().focus();
+		
+		// 폼 유효성 검사 실패 시 이벤트 중지
+		e.preventDefault();
+		e.stopPropagation();
+	} else {
+		let tBoNo = $('#modify-tBoNo').val();
+		let url = `tripboard/${tBoNo}`;
+		let method = 'PUT';
+		let formData = new FormData();
+		let cityNo = $('input[name="cOptions"]:checked').val();
+		let tBoStyle = $('input[name="sOoptions"]:checked').val();
+		let tBoStatus;
+		
+		if(document.getElementById("tBoStatus").checked) {
+			tBoStatus = '0';
+		}else {
+			tBoStatus = '1';
+		}
+	
+		formData.append('tBoTitle', $('#tBoTitle').val());
+		formData.append('tBoContent', $('#tBoContent').val());
+		formData.append('tBoPerson', $('#tBoPerson').val());
+		formData.append('tBoStartDate', $('#tBoStartDate').val());
+		formData.append('tBoEndDate', $('#tBoEndDate').val());
+		formData.append('tBoStyle', tBoStyle);
+		formData.append('hashtag', $('#hashtag').val());
+		formData.append('cityNo', cityNo);
+		formData.append('userId', $('#userId').val());
+		formData.append('tBoImg', $('#userId').val());
+		formData.append('tBoStatus', tBoStatus);
+		
+		//업로드 파일 선택이 되었을 때만 FormData에 추가
+		let inputFile = $("input[type='file']");
+		//파일이 선택되면 tBoImg가 선택된 파일로 지정
+		if(inputFile.prop('files') && inputFile.prop('files').length > 0) {
+			formData.append('file', inputFile.prop('files')[0]);
+			let inputFileName = inputFile.prop('files')[0].name;
+			console.log(inputFileName);
+		}else {
+			//파일 선택이 안 되면 hidden으로 넣어 놓은 tBoImg 이미지로 선택
+			tBoImg = $('#tBoImg').val();
+			formData.append('tBoImg', tBoImg);
+		}
+		
+		let async = true;
+	
+		$.ajax({
+			method : method,
+			url : url,
+			data : formData,
+			processData : false,
+			contentType: false,
+			success : function(resultJson){
+				if(resultJson.code == 1) {
+					window.location.href=`tripboard-detail?tBoNo=${tBoNo}`;
+				}else {
+					alert(resultJson.msg);
+				}
+			},
+			error : function(err) {
+				alert(err.status);
+			},
+			async : async
+		});
+		e.preventDefault();
 	}
-	
-	formData.append('tBoTitle', $('#tBoTitle').val());
-	formData.append('tBoContent', $('#tBoContent').val());
-	formData.append('tBoPerson', $('#tBoPerson').val());
-	formData.append('tBoStartDate', $('#tBoStartDate').val());
-	formData.append('tBoEndDate', $('#tBoEndDate').val());
-	formData.append('tBoStyle', tBoStyle);
-	formData.append('hashtag', $('#hashtag').val());
-	formData.append('cityNo', cityNo);
-	formData.append('userId', $('#userId').val());
-	formData.append('tBoImg', $('#userId').val());
-	formData.append('tBoStatus', tBoStatus);
-	
-	let async = true;
-	
-	$.ajax({
-		method : method,
-		url : url,
-		data : formData,
-		processData : false,
-		contentType: false,
-		success : function(resultJson){
-			if(resultJson.code == 1) {
-				window.location.href=`tripboard-detail?tBoNo=${tBoNo}`;
-			}else {
-				alert(resultJson.msg);
-			}
-		},
-		error : function(err) {
-			alert(err.status);
-		},
-		async : async
-	});
-	e.preventDefault();
 });
 
 //동행게시판 게시글 삭제
@@ -273,6 +312,7 @@ $(document).on('click', '#comment_btn_delete', function(event) {
             console.log(error);
         }
     });
+    
 });
 
 

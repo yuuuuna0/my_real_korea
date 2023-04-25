@@ -176,6 +176,8 @@ public class TourController {
 	public String tourPaymentAction(@ModelAttribute RsPInfo rsPInfo,
 									@RequestParam(required = false, defaultValue = "") String pMsg,
 									@RequestParam int pMethod,
+									@RequestParam int pPrice,
+									@RequestParam int pPoint,
 									HttpSession session,
 									RedirectAttributes redirectAttributes) {
 		String forwardPath="";
@@ -187,14 +189,21 @@ public class TourController {
 			//	페이지에서 받아온 값 payment에 넣어주기
 			payment.setPMsg(pMsg);
 			payment.setPMethod(pMethod);
+			payment.setPPoint(pPoint);
+			payment.setPPrice(pPrice);
 			paymentService.insertTourPayment(payment);
-			
-			tour.setToCount(tour.getToCount()+payment.getPQty());	//tour에 구매수량만큼 올리기
+			//포인트 적립하기
+			int newPoint=loginUser.getPoint()+pPoint;
+			loginUser.setPoint(newPoint);
+			System.out.println(loginUser);
+			userService.update(loginUser);
+			//tour에 구매수량만큼 올리기
+			tour.setToCount(tour.getToCount()+payment.getPQty());	
 			tourService.updateTour(tour);
 			
-			Tour updatedTour=tourService.findTourWithCityByToNo(tour.getToNo());
-			Payment findPayment=paymentService.findLatestPaymentByUserId(loginUser.getUserId());
-			findPayment.setTour(updatedTour);
+			Tour updatedTour=tourService.findTourWithCityByToNo(tour.getToNo());	//업데이트 된 투어 찾기
+			Payment findPayment=paymentService.findLatestPaymentByUserId(loginUser.getUserId());	//insert된 payment 찾기
+			findPayment.setTour(updatedTour);	//payment에 업데이트 된 tour 붙이
 			
 			rsPInfo.setPNo(findPayment.getPNo());
 			rsPInfo.setUserId(loginUser.getUserId());

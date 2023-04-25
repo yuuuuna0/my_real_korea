@@ -56,7 +56,7 @@
 	<div id="header" th:include="include-common-top::include-common-top"></div>
 	<!--======================== End Header======================== -->
 
-	<section class="parallax-window" data-parallax="scroll" th:data-image-src="@{img/tour/${tour.tourImgList.get(0).toImgUrl}}" data-natural-width="1400" data-natural-height="470">
+	<section class="parallax-window" data-parallax="scroll" th:data-image-src="@{img/tour/{toImgUrl}(toImgUrl=${tour.tourImgList.get(0).toImgUrl})}" data-natural-width="1400" data-natural-height="470">
 		<div class="parallax-content-2">
 			<div class="container">
 				<div class="row">
@@ -74,7 +74,14 @@
 					</div>
 					<div class="col-md-4">
 						<div id="price_single_main" class="hotel">
-							<span th:text="${tour.toType}" style="color: white; font-size: 20px;">from/per night</span>
+							<span style="color: white; font-size: 20px;">
+							<th:block th:if="${tour.toType ==1}">
+								패키지여행
+							</th:block>
+							<th:block th:if="${tour.toType ==2}">
+								자유여행 
+							</th:block>
+							</span>
 							<span th:text="${tour.toPrice}">95</span><sup>원</sup>
 						</div>
 					</div>

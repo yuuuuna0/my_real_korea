@@ -157,7 +157,7 @@
 				<form method="POST" enctype="multipart/form-data" name="i">
 				
 				<div class="filebox">
-				    <input class="upload-name" value="첨부파일" placeholder="첨부파일">
+				    <input class="upload-name" value="첨부파일" placeholder="첨부파일" disabled="disabled">
 			
 				    <label class="btn_1 green" for="file"> 파일 찾기</label> 
 				    <input type="file" id="file"  name="file" >
@@ -194,7 +194,7 @@
 							</ul>
 							<ul id="profile_summary" th:object="${loginUser.userAddInfo}">
 								<li>음주 여부 
-								<span th:text="*{alcohol == 1} ? '음주 선호' : (*{alcohol == 2} ? '음주 선호하지 않음' : null)"></span>
+								<span th:text="*{alcohol == 1} ? '선호함' : (*{alcohol == 2} ? '선호하지 않음' : null)"></span>
 								</li>
 								<li>흡연 여부 
 								<span th:text="*{smoking == 1} ? '흡연' : (*{smoking == 2} ? '비흡연' :  null)"></span>
@@ -429,7 +429,7 @@ Handlebars.registerHelper('ifEquals', function(arg1, arg2, options) {
 
 		<ul id="profile_summary_user">
 	<br><br><br>
-	<h5 style ="margin-left:200px;" > 나를 표현 해주세요 </h5>
+	<h5 style ="margin-left:200px;" class = "icon-vcard" > 나를 표현 해주세요 ! </h5>
 	<br>	
 			<li>음주 여부 
 			<span> 

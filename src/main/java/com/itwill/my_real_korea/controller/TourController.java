@@ -179,8 +179,6 @@ public class TourController {
 			Payment payment=(Payment)session.getAttribute("payment");
 			Tour tour=(Tour)session.getAttribute("tour");
 			
-			
-			
 			//	페이지에서 받아온 값 payment에 넣어주기
 			payment.setPMsg(pMsg);
 			payment.setPMethod(pMethod);

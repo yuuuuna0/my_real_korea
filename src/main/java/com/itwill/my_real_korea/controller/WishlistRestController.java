@@ -17,12 +17,18 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.itwill.my_real_korea.dto.City;
 import com.itwill.my_real_korea.dto.notice.Notice;
 import com.itwill.my_real_korea.dto.ticket.Ticket;
+import com.itwill.my_real_korea.dto.ticket.TicketImg;
 import com.itwill.my_real_korea.dto.tour.Tour;
+import com.itwill.my_real_korea.dto.tour.TourImg;
 import com.itwill.my_real_korea.dto.user.User;
 import com.itwill.my_real_korea.dto.wishlist.Wishlist;
+import com.itwill.my_real_korea.service.city.CityService;
+import com.itwill.my_real_korea.service.ticket.TicketImgService;
 import com.itwill.my_real_korea.service.ticket.TicketService;
+import com.itwill.my_real_korea.service.tour.TourImgService;
 import com.itwill.my_real_korea.service.tour.TourService;
 import com.itwill.my_real_korea.service.wishlist.WishlistService;
 import com.itwill.my_real_korea.util.PageMakerDto;
@@ -36,18 +42,16 @@ public class WishlistRestController {
 	@Autowired
 	private WishlistService wishlistService;
 	@Autowired
-	private TicketService ticketService;
+	private TourImgService  tourImgService;
 	@Autowired
-	private TourService tourService;
-	
-	
+	private TicketImgService ticketImgService;
 	/*
 	 * 티켓 상품 위시리스트에 추가
 	 */
 	@LoginCheck
 	@ApiOperation(value = "위시리스트에 티켓 상품 추가")
 	@PostMapping(value = "/wishlist-ticket", produces = "application/json;charset=UTF-8")
-	public Map<String, Object> wishlist_ticket_add_action(@RequestBody Map<String, String> map,
+	public Map<String, Object> wishlist_ticket_add_action(@RequestBody Wishlist wishlist,
 														HttpSession session) {
 
 		Map<String, Object> resultMap = new HashMap<>();
@@ -58,35 +62,15 @@ public class WishlistRestController {
 			// 세션에서 가져온 유저의 아이디로 위시리스트 userId 설정
 			User loginUser = (User)session.getAttribute("loginUser");
 			String userId = loginUser.getUserId();
+			wishlist.setUserId(userId);
+			// 위시리스트에 티켓 상품추가, 성공시 code 1
+			wishlistService.insertTicketToWishlist(wishlist);
+			// 위시리스트에 투어 상품추가 후 그 위시리스트 데이터에 붙여줌
+			wishlist = wishlistService.selectByWishNo(wishlist.getWishNo());
 			
-			// 현재 위시리스트에 담긴 제품과 동일하면 담지 못하게 막기
-			List<Wishlist> wishlistList = wishlistService.selectAll(userId);
-			
-			// 추가하려는 티켓 번호
-			int addTiNo = Integer.parseInt(map.get("tiNo"));
-			Ticket newTicket = ticketService.selectTicketNo(addTiNo);
-			// 위시리스트 티켓,투어추가, 추가된건 다시 안되도록 수정 해야함 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-			
-			System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>"+addTiNo);
-			if (wishlistList != null) {
-				for (Wishlist wish : wishlistList) {
-					if (wish.getTicket() != null && wish.getTicket().getTiNo() == addTiNo) {
-						// 이미 위시리스트에 담긴 상품
-						code = 3;
-						break;
-					} 
-				}
-			} else if(wishlistList == null){
-				Wishlist newWishlist = new Wishlist(0, userId, newTicket, null);
-				// 위시리스트에 티켓 상품추가, 성공시 code 1
-				wishlistService.insertTicketToWishlist(newWishlist);
-				// 위시리스트에 티켓 상품추가 후 그 위시리스트 데이터에 붙여줌
-				Wishlist wishlist = wishlistService.selectByWishNo(newWishlist.getWishNo());
-				code = 1;
-				msg = "성공";
-				data.add(wishlist);
-			}
-			
+			code = 1;
+			msg = "성공";
+			data.add(wishlist);
 		} catch (Exception e) {
 			// 실패 시 code 2
 			e.printStackTrace();
@@ -258,14 +242,17 @@ public class WishlistRestController {
 		try {
 			// userId로 위시리스트(티켓+투어) 리스트 찾기, 성공시 code 1
 			List<Wishlist> wishlistList = wishlistService.selectAllWithTicketAndTour(userId);
+			
 			for (Wishlist wishlist : wishlistList) {
-				Tour tour = wishlist.getTour();
-				if (tour != null) {
+				if(wishlist.getTour()!=null) {
+					List<TourImg> tourImgList=tourImgService.findTourImgList(wishlist.getTour().getToNo());
+					wishlist.setTourImgList(tourImgList);
+					
 					data.add(wishlist);
 					code = 1;
 					msg = "성공";
 				}
-			}
+			} 
 		} catch (Exception e) {
 			// 에러 발생시 code 2
 			e.printStackTrace();
@@ -294,13 +281,15 @@ public class WishlistRestController {
 			// userId로 위시리스트(티켓+투어) 리스트 찾기, 성공시 code 1
 			List<Wishlist> wishlistList = wishlistService.selectAllWithTicketAndTour(userId);
 			for (Wishlist wishlist : wishlistList) {
-				Ticket ticket = wishlist.getTicket();
-				if (ticket != null) {
+				if(wishlist.getTicket()!=null) {
+					List<TicketImg> ticketImgList=ticketImgService.selectTicketImgList(wishlist.getTicket().getTiNo());
+					wishlist.setTicketImgList(ticketImgList);
+					
 					data.add(wishlist);
 					code = 1;
 					msg = "성공";
 				}
-			}
+			} 
 		} catch (Exception e) {
 			// 에러 발생시 code 2
 			e.printStackTrace();

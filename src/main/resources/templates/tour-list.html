@@ -242,12 +242,12 @@
 										th:data-toInfo="${tour.toInfo}" th:data-toNotice="${tour.toNotice}" th:data-toCount="${tour.toCount}"
 										th:data-cityNo="${tour.city.cityNo}" th:data-cityName="${tour.city.cityName}"
 										th:data-latitude="${tour.city.latitude}" th:data-longitude="${tour.city.longitude}">+
-										<span class="tooltip-content-flip"><span class="tooltip-back">위시리스트 담기</span></span></a>
+										<span class="tooltip-content-flip"><span class="tooltip-back">위시리스트<br>추가</span></span></a>
 									</div>
 									<!-- userId null 일 때는 위시리스트 추가 버튼 클릭 시 로그인 페이지로 -->
 									<div class="wishlist " th:if="${loginUser == null}" style="top:40px; right:25px;">
 										<a class="tooltip_flip tooltip-effect-1" th:href="@{user-login}">+
-										<span class="tooltip-content-flip"><span class="tooltip-back">위시리스트 담기</span></span></a>
+										<span class="tooltip-content-flip"><span class="tooltip-back">위시리스트 추가</span></span></a>
 									</div>
 									<!-- End wish list-->
 								</div>

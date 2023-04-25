@@ -1,5 +1,6 @@
 package com.itwill.my_real_korea.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -56,19 +57,25 @@ public class WishlistController {
 //			model.addAttribute("tourImgList", tourImgList);
 //			model.addAttribute("ticketImgList", ticketImgList);
 //		}
+		List<Wishlist> tourWishList = new ArrayList<Wishlist>();
+		List<Wishlist> ticketWishList = new ArrayList<Wishlist>();
 		for (Wishlist wishlist : wishlistList) {
 			if(wishlist.getTour()!=null) {
 				List<TourImg> tourImgList=tourImgService.findTourImgList(wishlist.getTour().getToNo());
 				wishlist.setTourImgList(tourImgList);
+				// 투어가 존재하는 위시리스트들만 모음
+				tourWishList.add(wishlist);
 			} else if(wishlist.getTicket()!=null) {
 				List<TicketImg> ticketImgList=ticketImgService.selectTicketImgList(wishlist.getTicket().getTiNo());
 				wishlist.setTicketImgList(ticketImgList);
+				// 티켓이 존재하는 위시리스트들만 모음
+				ticketWishList.add(wishlist);
 			}
 		}
-		for (Wishlist wishlist : wishlistList) {
-			System.out.println(wishlist);
-		}
+		
 		model.addAttribute("wishlistList", wishlistList);
+		model.addAttribute("tourWishList", tourWishList);
+		model.addAttribute("ticketWishList", ticketWishList);
 		model.addAttribute("loginUser", loginUser);
 	
 		return "wishlist";

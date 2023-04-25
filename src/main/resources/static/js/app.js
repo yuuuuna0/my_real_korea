@@ -470,7 +470,7 @@ $(document).on('click', '#ticket-add-to-wishlist-btn', function(e) {
 	console.log(cityName);
 	console.log(latitude);
 	console.log(longitude);
-	/*
+	
 	let sendData = {
 		ticket : {
 			tiNo : tiNo,
@@ -488,10 +488,12 @@ $(document).on('click', '#ticket-add-to-wishlist-btn', function(e) {
 			}
 		}
 	};
-	*/
+	/*
 	let sendData = {
-		"tiNo" : tiNo
+		"tiNo" : tiNo,
+		"cityNo" : cityNo
 	}
+	*/
 	let async = true;
 	console.log('[ticket add!!!!!]'+JSON.stringify(sendData));
 	Request.ajaxRequest(url, 

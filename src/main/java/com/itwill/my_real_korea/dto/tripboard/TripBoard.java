@@ -37,6 +37,8 @@ public class TripBoard {
 	
 	private int commentCount;
 	
+	private String tUploadFile;
+	
 	public TripBoard(int tBoNo, String tBoTitle, String tBoContent, Date tBoDate, int tBoReadcount, int tBoStatus,
 			int tBoPerson, String tBoImg, Date tBoStartDate, Date tBoEndDate, String tBoStyle, String hashtag,
 			/*City city,*/ String userId) {

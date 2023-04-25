@@ -17,6 +17,21 @@
                     #{tBoImg},#{tBoStartDate},#{tBoEndDate},#{tBoStyle},#{hashtag},#{city.cityNo},#{userId})
 </insert>
 
+<!--  동행게시판 게시글 이미지 변경(추가) -->
+<update id="updateTripBoardImg" parameterType="java.util.Map">
+	update trip_board set t_bo_img = #{tBoImg} where t_bo_no = #{tBoNo}
+</update>
+
+<!--  동행게시판 게시글 업로드된 파일 변경(추가) -->
+<update id="updateUploadFile" parameterType="java.util.Map">
+	update trip_board set t_upload_file = #{tUploadFile} where t_bo_no = #{tBoNo}
+</update>
+
+<!--  동행게시판 게시글 이미지 null 로 변경 -->
+<update id="updateTripBoardImgNull" parameterType="java.lang.Integer">
+	update trip_board set t_bo_img = null where t_bo_no = #{tBoNo}
+</update>
+
 <!--  동행게시판 게시글 수정 -->
 <update id="updateTripBoard" parameterType="com.itwill.my_real_korea.dto.tripboard.TripBoard">
 	update trip_board set t_bo_title=#{tBoTitle},t_bo_content=#{tBoContent},t_bo_person=#{tBoPerson},
@@ -40,7 +55,7 @@
 	(select rownum idx, s.* from
 		(select * from trip_board t join city c on t.city_no = c.city_no 
 		where t.t_bo_status = #{tBoStatus} 
-		order by t.t_bo_no asc) s
+		order by t.t_bo_no desc) s
 	)
 	<![CDATA[ where idx >= #{pageStart} and idx <= #{pageEnd} ]]> 
 </select>
@@ -50,7 +65,7 @@
 	select * from
 	(select rownum idx, s.* from
 		(select * from trip_board t join city c on t.city_no = c.city_no  
-		where t.city_no = #{cityNo} order by t.t_bo_no asc) s
+		where t.city_no = #{cityNo} order by t.t_bo_no desc) s
 	)
 	<![CDATA[ where idx >= #{pageStart} and idx <= #{pageEnd} ]]> 
 </select>
@@ -61,12 +76,12 @@
 	(select rownum idx, s.* from
 		(select * from trip_board t join city c on t.city_no = c.city_no 
 		where t.hashtag = #{hashtag}
-		order by t.t_bo_no asc) s
+		order by t.t_bo_no desc) s
 	)
 	<![CDATA[ where idx >= #{pageStart} and idx <= #{pageEnd} ]]> 
 </select>
 
-<!--  게시판 리스트 정렬(게시글 작성 날짜 기준 내림차순) - 페이징 처리  -->
+<!--  게시판 리스트 정렬(오래된순) - 페이징 처리  -->
 <select id="selectAllOrderByDate" parameterType="map" resultMap="CitywithTripBoardResultMap">
 	select * from
 	(select rownum idx, s.* from

@@ -29,7 +29,7 @@
 				 FROM TICKET T
 						  JOIN CITY C
 							   ON T.CITY_NO=C.CITY_NO
-						  LEFT JOIN  TICKET_IMG TI
+						 LEFT JOIN  TICKET_IMG TI
 							   ON T.TI_NO = TI.TI_NO
 				 ORDER BY T.TI_NO
 			<!--<if test="sortOrder != null">
@@ -47,12 +47,18 @@
 	<select id="selectByTicketAllSort" parameterType="java.util.Map" resultMap="ticketResultMap">
 		SELECT * FROM (
 			SELECT ROWNUM IDX, TIKE.* FROM (
-				SELECT T.*, TI_IMG_NO, C.CITY_NAME
+				SELECT T.*, TI.TI_IMG_URL, C.CITY_NAME
 				FROM TICKET T
 					JOIN CITY C
 						ON T.CITY_NO = C.CITY_NO
-					LEFT JOIN TICKET_IMG TI
-						ON T.TI_NO = TI.TI_NO
+					LEFT JOIN 
+						(SELECT A.TI_NO, B.TI_IMG_URL
+						FROM
+					(SELECT TI_NO, MIN(TI_IMG_NO) AS MIN_IMG
+						FROM TICKET_IMG
+						GROUP BY TI_NO) A
+						JOIN TICKET_IMG B ON A.MIN_IMG=B.TI_IMG_NO) TI
+				ON T.TI_NO = TI.TI_NO
 				WHERE 1=1
 				  <!--키워드-->
 				<if test="keyword != null">

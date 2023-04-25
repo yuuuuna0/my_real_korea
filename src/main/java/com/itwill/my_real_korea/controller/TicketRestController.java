@@ -35,7 +35,7 @@ public class TicketRestController {
         Map<String, Object> ticketMap = new HashMap<>();
         int code = 1;
         String msg = "성공";
-        List<Ticket> data = null;
+        PageMakerDto<Ticket> data = null;
         int currentPage = Integer.parseInt(map.get("currentPage"));
         int cityNo = Integer.parseInt(map.get("cityNo"));
         String keyword = map.get("keyword");
@@ -51,7 +51,8 @@ public class TicketRestController {
                 ticket.setTiScore(ticketScore);
                 ticketList.add(ticket);
             }
-            data = ticketList;
+            ticketPage.setItemList(ticketList);
+            data = ticketPage;
             code = 1;
             msg = "성공";
         } catch (Exception e){

@@ -47,23 +47,6 @@ public class TicketReviewServiceImpl implements TicketReviewService{
         return ticketReviewDao.deleteTicketReview(tiReviewNo);
     }
 
-    @Override
-    public int calculateTourScore(int tiNo) throws Exception {
-        int ticketScore = 0;
-        int totScore = 0;
-        List<TicketReview> ticketReviewList = ticketReviewDao.selectByTicketReviewNo(tiNo);
-        if(ticketReviewList.size()!=0){
-            for(TicketReview ticketReview : ticketReviewList){
-                totScore+=ticketReview.getTiReviewStar();
-            }
-            ticketScore=totScore/(ticketReviewList.size());
-        }else if (ticketReviewList.size()==0){
-            ticketScore=0;
-        }
-        return ticketScore;
-    }
-
-
     /*	페이징
     @Override
     public PageMakerDto<TicketReview> selectByTicketReview(int currentPage, int tiReviewNo) throws Exception {
@@ -99,6 +82,20 @@ public class TicketReviewServiceImpl implements TicketReviewService{
 		return ticketReviewDao.ticketReviewImgNull(tiReviewNo);
 	}
 
-	
+	@Override
+	public int calculateTourScore(int tiNo) throws Exception {
+		 int ticketScore = 0;
+	        int totScore = 0;
+	        List<TicketReview> ticketReviewList = ticketReviewDao.selectByTicketReviewNo(tiNo);
+	        if(ticketReviewList.size()!=0){
+	            for(TicketReview ticketReview : ticketReviewList){
+	                totScore+=ticketReview.getTiReviewStar();
+	            }
+	            ticketScore=totScore/(ticketReviewList.size());
+	        }else if (ticketReviewList.size()==0){
+	            ticketScore=0;
+	        }
+	        return ticketScore;
+	    }
     
 }

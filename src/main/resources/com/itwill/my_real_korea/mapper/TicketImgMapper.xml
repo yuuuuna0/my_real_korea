@@ -13,7 +13,9 @@
 
     <!--티켓 이미지 출력 -->
     <select id="selectTicketImgList" parameterType="java.lang.Integer" resultType="com.itwill.my_real_korea.dto.ticket.TicketImg">
-            SELECT * FROM TICKET_IMG WHERE TI_NO=#{tiNo}
+            SELECT * FROM TICKET_IMG WHERE TI_NO=#{tiNo} ORDER BY TI_IMG_NO
+          
+            
     </select>
 
     <!--티켓 이미지 수정-->

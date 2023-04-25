@@ -2,6 +2,7 @@ package com.itwill.my_real_korea.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -21,6 +22,8 @@ import com.itwill.my_real_korea.dto.ticket.Ticket;
 import com.itwill.my_real_korea.dto.tour.Tour;
 import com.itwill.my_real_korea.dto.user.User;
 import com.itwill.my_real_korea.dto.wishlist.Wishlist;
+import com.itwill.my_real_korea.service.ticket.TicketService;
+import com.itwill.my_real_korea.service.tour.TourService;
 import com.itwill.my_real_korea.service.wishlist.WishlistService;
 import com.itwill.my_real_korea.util.PageMakerDto;
 
@@ -32,13 +35,19 @@ public class WishlistRestController {
 
 	@Autowired
 	private WishlistService wishlistService;
+	@Autowired
+	private TicketService ticketService;
+	@Autowired
+	private TourService tourService;
+	
+	
 	/*
 	 * 티켓 상품 위시리스트에 추가
 	 */
 	@LoginCheck
 	@ApiOperation(value = "위시리스트에 티켓 상품 추가")
 	@PostMapping(value = "/wishlist-ticket", produces = "application/json;charset=UTF-8")
-	public Map<String, Object> wishlist_ticket_add_action(@RequestBody Wishlist wishlist,
+	public Map<String, Object> wishlist_ticket_add_action(@RequestBody Map<String, String> map,
 														HttpSession session) {
 
 		Map<String, Object> resultMap = new HashMap<>();
@@ -49,14 +58,35 @@ public class WishlistRestController {
 			// 세션에서 가져온 유저의 아이디로 위시리스트 userId 설정
 			User loginUser = (User)session.getAttribute("loginUser");
 			String userId = loginUser.getUserId();
-			wishlist.setUserId(userId);
-			// 위시리스트에 티켓 상품추가, 성공시 code 1
-			wishlistService.insertTicketToWishlist(wishlist);
-			code = 1;
-			msg = "성공";
-			// 위시리스트에 티켓 상품추가 후 그 위시리스트 데이터에 붙여줌
-			wishlist = wishlistService.selectByWishNo(wishlist.getWishNo());
-			data.add(wishlist);
+			
+			// 현재 위시리스트에 담긴 제품과 동일하면 담지 못하게 막기
+			List<Wishlist> wishlistList = wishlistService.selectAll(userId);
+			
+			// 추가하려는 티켓 번호
+			int addTiNo = Integer.parseInt(map.get("tiNo"));
+			Ticket newTicket = ticketService.selectTicketNo(addTiNo);
+			// 위시리스트 티켓,투어추가, 추가된건 다시 안되도록 수정 해야함 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+			
+			System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>"+addTiNo);
+			if (wishlistList != null) {
+				for (Wishlist wish : wishlistList) {
+					if (wish.getTicket() != null && wish.getTicket().getTiNo() == addTiNo) {
+						// 이미 위시리스트에 담긴 상품
+						code = 3;
+						break;
+					} 
+				}
+			} else if(wishlistList == null){
+				Wishlist newWishlist = new Wishlist(0, userId, newTicket, null);
+				// 위시리스트에 티켓 상품추가, 성공시 code 1
+				wishlistService.insertTicketToWishlist(newWishlist);
+				// 위시리스트에 티켓 상품추가 후 그 위시리스트 데이터에 붙여줌
+				Wishlist wishlist = wishlistService.selectByWishNo(newWishlist.getWishNo());
+				code = 1;
+				msg = "성공";
+				data.add(wishlist);
+			}
+			
 		} catch (Exception e) {
 			// 실패 시 code 2
 			e.printStackTrace();

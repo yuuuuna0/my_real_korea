@@ -138,11 +138,9 @@
 									</div>
 									<div th:if="${wishlist.tour != null}">
 									<h3><strong  th:text="${wishlist.tour.toName}"></strong> </h3>
-									<p th:text="${wishlist.tour.toInfo}"></p>
 									</div>
 									<div th:if="${wishlist.ticket != null}">
 									<h3 ><strong th:text="${wishlist.ticket.tiTitle}"></strong> </h3>
-									<p th:text="${wishlist.ticket.tiInfo}"></p>
 									</div>
 									<ul class="add_info">
 										<th:block th:if="${wishlist.tour != null}">

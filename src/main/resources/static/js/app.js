@@ -425,11 +425,14 @@ $(document).on('click', '#tour-add-to-wishlist-btn', function(e) {
 						method, contentType,
 						JSON.stringify(sendData),
 						function(resultJson) {
-							console.log(">>>>>>>>>>>>>>>>>>>>");
+							console.log("tour add>>>>>>>>>>>>>>>>>>>>");
 							//성공시 toast로 성공메세지 띄우기
 							if (resultJson.code == 1) {
 								$('#wishlist-add-toast').toast('show');
 								$('#wishlist-add-toast').toast({delay: 4000});
+							} else if (resultJson.code == 3){
+								$('#wishlist-added-toast').toast('show');
+								$('#wishlist-added-toast').toast({delay: 4000});
 							} else {
 								alert(resultJson.msg);
 							};
@@ -467,7 +470,7 @@ $(document).on('click', '#ticket-add-to-wishlist-btn', function(e) {
 	console.log(cityName);
 	console.log(latitude);
 	console.log(longitude);
-	
+	/*
 	let sendData = {
 		ticket : {
 			tiNo : tiNo,
@@ -485,18 +488,25 @@ $(document).on('click', '#ticket-add-to-wishlist-btn', function(e) {
 			}
 		}
 	};
+	*/
+	let sendData = {
+		"tiNo" : tiNo
+	}
 	let async = true;
-	
+	console.log('[ticket add!!!!!]'+JSON.stringify(sendData));
 	Request.ajaxRequest(url, 
 						method, contentType,
 						JSON.stringify(sendData),
 						function(resultJson) {
-							console.log(">>>>>>>>>>>>>>>>>>>>");
+							console.log("ticket add>>>>>>>>>>>>>>>>>>>>");
 							//성공시 toast로 성공메세지 띄우기
 							if (resultJson.code == 1) {
 								$('#wishlist-add-toast').toast('show');
 								$('#wishlist-add-toast').toast({delay: 4000});
-							} else {
+							}else if (resultJson.code == 3){
+								$('#wishlist-added-toast').toast('show');
+								$('#wishlist-added-toast').toast({delay: 4000});
+							}else {
 								alert(resultJson.msg);
 							};
 						}, async);

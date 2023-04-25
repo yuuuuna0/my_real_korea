@@ -111,6 +111,7 @@
                 <div class="box_style_1">
                     <form name="a">
                         <div class="post nopadding">
+                            <h2 th:text="${freeBoard.getFBoTitle()}"></h2>
                             <div class="post_info clearfix">
                                 <div class="post-left">
                                     <ul>
@@ -127,7 +128,6 @@
                                 </div>
                             </div>
 
-                            <h4 th:text="${freeBoard.getFBoTitle()}"></h4>
                             <p style="white-space:pre-line;" th:text="${freeBoard.fBoContent}">
                             </p>
 
@@ -197,7 +197,7 @@
             </div>
             <!-- End col-md-8-->
 
-            <aside class="col-lg-3 add_bottom_30">
+            <aside class="col-lg-3 add_bottom_30" id="fbo-category">
 
                 <div class="widget">
                     <div class="input-group">

@@ -570,3 +570,20 @@ a:not([href]):not([tabindex]) {
     font-size: 22px;
     font-family: "MBC1961M";
 }
+.categories_grid a .wrapper p{
+	font-size: 30px;
+	font-family: "MBC1961M";
+    line-height: 1;
+}
+h2 {
+    font-size: 35px;
+    font-family: "MBC1961M";
+    margin-bottom: 20px;
+}
+#fbo-detail{
+	margin-top: 50px;
+}
+#fbo-category{
+	margin-top: 50px;
+	
+}

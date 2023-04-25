@@ -163,7 +163,7 @@ public class FreeBoardController {
         return "freeboard-detail";
     }
 
-   // @LoginCheck
+    @LoginCheck
     @GetMapping("/freeboard-write-form")
     public String freeBoardWriteForm(HttpSession session, Model model) throws Exception {
         if (session != null) {

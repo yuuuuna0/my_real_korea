@@ -126,7 +126,7 @@
 								</tr>
 								
 								<tr id="boardlist_tr2"   th:each="freeBoard:${freeBoardList}">
-									<td width=280  style='padding-left: 10px;' align='left' >
+									<td width=330  style='padding-left: 10px;' align='left' >
 										<a id="title" th:href="@{freeboard-detail(fBoNo=${freeBoard.fBoNo})}"  th:text="${freeBoard.fBoTitle}" ></a>
 										<span class="icon-comment"></span>
 										<span th:text="   ${freeBoard.commentCount}"></span> 
@@ -172,17 +172,14 @@
 								</li>
 								<li class="page-item" th:if="${freeBoardList.pageMaker.curPage!=1}"><a class="page-link"   th:href="'?pageNo=1'">1</a>
 								</li>
-								<!--  <li class="page-item active" ><a class="page-link" th:if="${freeBoardList.pageMaker.curPage}==2"  href="?pageNo=2" >2</a>
-								</li>
-								<li class="page-item" ><a class="page-link"  th:if="${freeBoardList.pageMaker.curPage}!=2" href="?pageNo=2" >2</a>
-								</li>
 								<!-- 현재 위치 해 있는 페이지 & 블록  다음블록으로 이동은 안됨-->
-								<!--  <li class="page-item active" ><a class="page-link"  th:if="${freeBoardList.pageMaker.curPage}==3" href="?pageNo=3" >3</a></li>
-								
-								<li class="page-item" ><a class="page-link"  th:unless="${freeBoardList.pageMaker.curPage}==3" href="?pageNo=3" >3</a></li>-->
-								<li class="page-item active" ><a class="page-link" th:if="${freeBoardList.pageMaker.curPage}==${freeBoardList.pageMaker.totPage}" th:href="'?pageNo='+${freeBoardList.pageMaker.totPage}" th:text="${freeBoardList.pageMaker.totPage}"></a>
+								<li class="page-item active" th:if="${freeBoardList.pageMaker.curPage==2}"><a class="page-link"   th:href="'?pageNo=2'">2</a>
+								</li>
+								<li class="page-item" th:if="${freeBoardList.pageMaker.curPage!=2}"><a class="page-link"   th:href="'?pageNo=2'">2</a>
 								</li>
 								<li class="page-item" ><a class="page-link" th:if="${freeBoardList.pageMaker.curPage}!=${freeBoardList.pageMaker.totPage}" th:href="'?pageNo='+${freeBoardList.pageMaker.totPage}" th:text="${freeBoardList.pageMaker.totPage}"></a>
+								</li>
+								<li class="page-item active" ><a class="page-link" th:if="${freeBoardList.pageMaker.curPage}==${freeBoardList.pageMaker.totPage}" th:href="'?pageNo='+${freeBoardList.pageMaker.totPage}" th:text="${freeBoardList.pageMaker.totPage}"></a>
 								</li>
 								<li class="page-item">
 									<a class="page-link" th:href="'?pageNo='+${freeBoardList.pageMaker.nextPage}" aria-label="Next">
@@ -225,14 +222,11 @@
 								<li><a id="freeboard-city5">대전</a></li>
 								<li><a id="freeboard-city6">부산</a>
 								<hr>
-									<h id="freeboard-write-form-btn" class="btn_1" style="color:white;  text-align:center"  th:if="${loginUser != null }" role="button" th:text="'자유게시판 글쓰기'"></h>
-									<h  class="btn_1" style="color:white;  text-align:center" th:unless="${loginUser != null}" role="button" onclick="window.alert('로그인하세요')" th:text="'자유게시판 글쓰기'"></h>
+									<a id="freeboard-write-form-btn" class="btn_1" style="color:white;" href="freeboard-write-form" role="button" >자유게시판 글쓰기</a>
 									<hr>
 						</li>
 							
 							</ul>
-									<a class="sr-only" id="'fBoUserId'"  th:each="freeBoard:${freeBoardList}" th:if="${loginUser != null}"  th:value="${loginUser.userId}"></a>
-									<a href="freeboard-write-form">지금은 그냥 글쓰러가기</a>
 						</div>
 						<!-- End widget -->
 								</aside>
@@ -282,7 +276,7 @@
 <form name='boardlistform' style='width:flex;  '>
 						<div class="row" style='color:grey; width:max-flex; margin-left:15px; margin-right:15px;'>
 							<table id='boardlist' cellpadding='5px' cellspacing='1px' style='flex:auto; '>
-								<tr height=5px id='boardlist_tr1' >
+								<tr id='boardlist_tr1' >
 									<td   width=500; align='right'>제 목</td>
 <td></td>
 <td></td>
@@ -293,16 +287,16 @@
 <td></td>
 <td></td>
 <td></td>
-									<td   width=5 align=center>조회수</td>
-									<td   width=20 align=center>작성일</td>
-									<td   align=center>작성자</td>
+									<td   width=100 align=center>조회수</td>
+									<td   width=100 align=center>작성일</td>
+									<td    width=100 align=left>작성자</td>
 								</tr>
-								<tr id='boardlist_tr2'> 
+								<tr height=15px id='boardlist_tr2'> 
 {{#each data.itemList}}
-								        <td width=520><a style="color:grey;" href=freeboard-detail?fBoNo={{fboNo}}>{{fboTitle}}</a></td>
-										<td width=5 class="icon-comment"></td>
+								        <td width=60><a style="color:grey;" href=freeboard-detail?fBoNo={{fboNo}}>{{fboTitle}}</a></td>
+										<td width=50 class="icon-comment"></td>
 										<td width=10> {{commentCount}}</td> 
-										<td width=5 class="icon-map"></td>
+										<td width=10 class="icon-map"></td>
 										<td width=200> {{city.cityName}}</td>
 <td></td>
 <td></td>
@@ -311,7 +305,7 @@
 <td></td>
 									<td  width=80>{{fboCount}}</td>
 									<td  width=200>{{dateFormat fboDate}}</td>
-									<td  width=150>{{userId}}</td>
+									<td  width=50>{{userId}}</td>
 									</li><br>
 								</tr>
 <br>

@@ -34,7 +34,7 @@
 	<!-- 4. 회원 정보 수정 -->	
 	<update id="update" parameterType="com.itwill.my_real_korea.dto.user.User">
 		UPDATE  user_info 
-		SET password=  #{password}, nickname = #{nickname}, phone = #{phone}, email = #{email}, address = #{address}
+		SET password=  #{password}, nickname = #{nickname}, phone = #{phone}, email = #{email}, address = #{address} , gender = #{gender}
 		WHERE user_id = #{userId}
 	</update>
 	<!-- 4. 회원 정보 수정 조인 -->	

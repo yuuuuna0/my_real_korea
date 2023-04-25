@@ -212,11 +212,13 @@ header.sticky#colored #logo_home h1 a{
 .form-control-user {
 	font-size: 13px;
     color: #333;
-    height: 30px;
-    whith: 200px;
+    height: 35px;
+    width: 180px;
     border-radius: 3px;
     margin-bottom: 10px;
     border: 1px solid #ced4da;
+ 	padding: 5px 5px;
+
 }
 
 ul#profile_summary_user{
@@ -384,8 +386,11 @@ a.btn_1.green, .btn_1.green {
 .profile_pic {
 	float: none;
     margin-bottom: 15px;
-     display: block;
+    display: block;
     margin: 0 auto;
+    height: 200px;
+    width: 200px;
+    
 }
 
 
@@ -415,6 +420,7 @@ a.btn_1:hover, .btn_1:hover {
     color: #fff;
     background-color: #9E9E9E;
     border-color: white;
+    margin-bottom: 10px;
 }
 
 .btn-secondary:hover {
@@ -427,7 +433,6 @@ a.btn_1:hover, .btn_1:hover {
     background-color: #e14d67;
     border-color: white;
 }
-
 
 .form-group-tripboard {
 display: inline-block;

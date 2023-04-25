@@ -194,7 +194,7 @@
 							</ul>
 							<ul id="profile_summary" th:object="${loginUser.userAddInfo}">
 								<li>음주 여부 
-								<span th:text="*{alcohol == 1} ? '선호함' : (*{alcohol == 2} ? '선호하지 않음' : null)"></span>
+								<span th:text="*{alcohol == 1} ? '선호함' : (*{alcohol == 2} ? '음주 선호하지 않음' : null)"></span>
 								</li>
 								<li>흡연 여부 
 								<span th:text="*{smoking == 1} ? '흡연' : (*{smoking == 2} ? '비흡연' :  null)"></span>
@@ -399,29 +399,32 @@ Handlebars.registerHelper('ifEquals', function(arg1, arg2, options) {
 				<li>이메일 
 				<span><input id="email" class=" form-control-user " type="text" required="required" value="{{email}}"></span>
 				</li>
-
-			<div> 
 				<li>생일
-					<span><input id="birth" class = " form-control-user " type="text" value="{{dateFormat3 birth}}" disabled >
-					  	 &nbsp;&nbsp; <input type="date" class = " form-control-user " name="birth" min="1950-01-01" max="2007-12-31"> 
-					</span>
+				<span><input class="start-date-pick form-control-user" type="date" id="birth" name="birth" min="1950-01-01" max="2007-12-31" required="required"></span>
 				</li>
-			</div>
 
 				<div> 
 					<li>주소 
 						<span><input id="address" class=" form-control-user " type="text" required="required" value="{{address}}" disabled > 
-							&nbsp;&nbsp; <input type="button" class="btn_1 user_address" value=" 주소 찾기 " onclick="kakaopost()">
+							&nbsp;&nbsp; <input type="button" class="btn_1 user_address" value="주소 찾기" onclick="kakaopost()">
 						</span>
 					</li>
 				</div>
 
-			{{#ifCond gender '==' 1}}
-			<li>성별 <span>남성</span></li>
-			{{/ifCond}}
-			{{#ifCond gender '==' 2}}
-			<li>성별 <span>여성</span></li>
-			{{/ifCond}}
+			<li>성별 
+			<span> 
+				<div class="btn-group btn-group-toggle" data-toggle="buttons">
+					<label class="btn btn-secondary active">
+						<input type="radio" name="gOptions" id="gender1" checked value="1"> 남
+					</label>
+
+					<label class="btn btn-secondary">
+						<input type="radio" name="gOptions" id="gender2" value="2"> 여
+					</label>
+				</div>						
+			</span>
+			</li>
+
 
 		    <li>포인트 <span>{{point}}p</span></li>
 		</ul>
@@ -429,7 +432,7 @@ Handlebars.registerHelper('ifEquals', function(arg1, arg2, options) {
 
 		<ul id="profile_summary_user">
 	<br><br><br>
-	<h5 style ="margin-left:200px;" class = "icon-vcard" > 나를 표현 해주세요 ! </h5>
+	<h5 style ="margin-left:160px;" class = "icon-vcard" > 나를 표현 해주세요 ! </h5>
 	<br>	
 			<li>음주 여부 
 			<span> 
@@ -445,7 +448,7 @@ Handlebars.registerHelper('ifEquals', function(arg1, arg2, options) {
 			</span>
 			</li>
 
-			<li>흡연 여부 
+			<li style="margin-top: 20px;" >흡연 여부 
 			<span> 
 				<div class="btn-group btn-group-toggle" data-toggle="buttons">
 					<label class="btn btn-secondary active">
@@ -459,7 +462,7 @@ Handlebars.registerHelper('ifEquals', function(arg1, arg2, options) {
 			</span>
 			</li>	
 
-			<li>소개글 
+			<li style="margin-top: 30px;">소개글 
 	<span><textarea id="introduce" class="form-control" rows="4" cols="40" required="required">{{userAddInfo.introduce}}</textarea></span>
 </li>
 
@@ -499,6 +502,34 @@ Handlebars.registerHelper('ifEquals', function(arg1, arg2, options) {
 		});
 
 	</script>
+	
+		<!-- Date and time pickers -->
+	<script>
+		$('input.date-pick').datepicker('setDate', 'birth');
+	</script>
+	
+	
+	<!-- Date and time pickers -->
+	<script src="js/jquery.sliderPro.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function ($) {
+			$('#Img_carousel').sliderPro({
+				width: 960,
+				height: 500,
+				fade: true,
+				arrows: true,
+				buttons: false,
+				fullScreen: false,
+				smallSize: 500,
+				startSlide: 0,
+				mediumSize: 1000,
+				largeSize: 3000,
+				thumbnailArrows: true,
+				autoplay: false
+			});
+		});
+	</script>
+	
 </body>
 
 </html>

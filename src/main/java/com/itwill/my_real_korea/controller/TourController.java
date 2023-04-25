@@ -137,6 +137,7 @@ public class TourController {
 		String forwardPath="";		
 		try {
 			Tour tour=tourService.findTourWithCityByToNo(toNo);
+			tour.setTourImgList(tourImgService.findTourImgList(tour.getToNo()));
 			User loginUser=(User)session.getAttribute("loginUser");
 			SimpleDateFormat dateFormat= new SimpleDateFormat("yyyy-MM-dd");
 			Date date=dateFormat.parse(pStartDate);
@@ -151,6 +152,7 @@ public class TourController {
 			//1. session에 붙이기
 			session.setAttribute("payment", payment);
 			session.setAttribute("tour", tour);
+			System.out.println("야야야ㅑㅑㅑㅑㅑㅑㅑㅑ"+tour);
 			//2. model에 붙이기
 			//model.addAttribute("payment",payment);
 			forwardPath="tour-payment";

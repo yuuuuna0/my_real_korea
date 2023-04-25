@@ -191,8 +191,7 @@
 							<div class="hotel_container">
 								<div class="img_container">
 									<a th:href="@{tour-detail(toNo=${tour.toNo})}">
-										<img src="img/tour/1-1.png" width="800" height="533" class="img-fluid" alt="Image"/>
-<!-- 									<img th:src="@{img/tour/{toImgUrl}(toImgUrl=${tourListPage.itemList.get(0).tourImgList.get(0).toImgUrl})" width="800" height="533" class="img-fluid" alt="Image"/> -->
+									<img th:src="@{img/tour/{toImgUrl}(toImgUrl=${tour.tourImgList.get(0).toImgUrl})}" width="800" height="533" class="img-fluid" alt="Image"/>
 											<div class="score" >
 												<span th:text="${tour.toCount}">
 													7.5
@@ -236,7 +235,7 @@
 										</div>
 									</div>
 									<!-- end rating -->
-									<div class="wishlist col-md-3" th:if="${userId != null}" style="top:50px; right:25px;">
+									<div class="wishlist col-md-3" th:if="${loginUser.userId != null}" style="top:40px; right:25px;">
 										<a class="tooltip_flip tooltip-effect-1" id="tour-add-to-wishlist-btn" href="#" 
 										th:data-toNo="${tour.toNo}" th:data-toName="${tour.toName}" th:data-toTime="${tour.toTime}"
 										th:data-toPerson="${tour.toPerson}" th:data-toMeet="${tour.toMeet}" th:data-toPrice="${tour.toPrice}"
@@ -246,7 +245,7 @@
 										<span class="tooltip-content-flip"><span class="tooltip-back">위시리스트 담기</span></span></a>
 									</div>
 									<!-- userId null 일 때는 위시리스트 추가 버튼 클릭 시 로그인 페이지로 -->
-									<div class="wishlist " th:if="${userId == null}" style="top:50px; right:25px;">
+									<div class="wishlist " th:if="${loginUser.userId == null}" style="top:40px; right:25px;">
 										<a class="tooltip_flip tooltip-effect-1" th:href="@{user-login}">+
 										<span class="tooltip-content-flip"><span class="tooltip-back">위시리스트 담기</span></span></a>
 									</div>

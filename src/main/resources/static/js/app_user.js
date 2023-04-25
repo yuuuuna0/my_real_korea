@@ -18,11 +18,13 @@ $(document).ready(function() {
     */
   }
 });
-
+//회원 가입 폼
+$(document).on('click','#btn-user-join',function() {
+	location.href="user-write";
+});
 	
 //로그인 액션
-$(document).ready(function() {
-  $('#login_btn').click(function() {
+$(document).on('click','#btn-user-login',function(e) {
     if (document.f.userId.value == "") {
       toastr.error('아이디를 입력하십시오.');
       document.f.userId.focus();
@@ -56,7 +58,6 @@ $(document).ready(function() {
         toastr.error('로그인에 실패했습니다.');
       }
     });
-  });
 });
 
 
@@ -65,6 +66,119 @@ $('#menu-user-find').click(function(e){
 	View.render('#user-find-template', {}, '#user-login');
 	e.preventDefault();
 });
+
+//아이디 찾기 액션
+$(document).on('click','#btn-user-find-id',function(e) {
+
+    let name = $('#name').val();
+    let email = $('#email').val();
+    
+    
+    if (name == "") {
+    	toastr.error("이름을 입력하세요.");
+        document.i.name.focus();
+        return false;
+    }
+    if (email == "") {
+    	toastr.error("이메일을 입력하세요.");
+        document.i.email.focus();
+        return false;
+    }
+
+    $.ajax({
+        type: "POST",
+        url: "./user-find-id-action",
+        dataType: "json",
+        data: {
+            name: name,
+            email: email
+        },
+        success: function(response) {
+            if (response.status == 1) {
+            	alert(response.message);
+            } else if (response.status == 2) {
+            	alert(response.message);
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.log(textStatus, errorThrown);
+        }
+    });
+    e.preventDefault();
+});
+
+//비밀번호 찾기 액션
+$(document).on('click','#btn-user-find-pw',function(e) {
+  const userId = document.p.userId.value;
+  const email = document.p.email.value;
+
+  if (userId === "") {
+	  toastr.error("아이디를 입력하십시오.");
+    document.p.name.focus();
+    return false;
+  }
+
+  if (email === "") {
+	  toastr.error("이메일을 입력하십시오.");
+    document.p.email.focus();
+    return false;
+  }
+
+  const data = {
+    userId: userId,
+    email: email,
+  };
+
+  $.ajax({
+    type: "POST",
+    url: "./user-find-pw-action",
+    data: data,
+    dataType: "json",
+    success: function (response) {
+      if (response.status == 1) {
+        alert(response.message);
+        window.location.replace("user-login");
+      } else {
+        alert(response.message);
+      }
+    },
+    error: function (xhr, status, error) {
+      console.error(error);
+      alert("오류가 발생했습니다.");
+    },
+  });
+  e.preventDefault();
+  return true;
+});
+
+$(document).on('click','#btn-user-auth',function(e) {
+    var mailAuthKey = $("input[name='mailAuthKey']").val();
+    $.post({
+        url: "./user-auth-action",
+        data: { mailAuthKey: mailAuthKey },
+        success: function(response) {
+            if (response.status === 0) {
+                // 인증 성공
+                window.location.replace(response.data);
+                toastr("인증 성공! 로그인 페이지로 이동합니다.")
+            } else {
+                // 인증 실패
+                toastr.error("인증 코드가 일치하지 않습니다.");
+            }
+        },
+        error: function(xhr) {
+            alert("서버 오류가 발생했습니다.");
+        }
+
+    });
+      e.preventDefault();
+});
+
+
+
+/*************************/
+
+
 
 // 프로필 수정 폼 
 $(document).on('click', '#btn-user-modify-form', function(e) {

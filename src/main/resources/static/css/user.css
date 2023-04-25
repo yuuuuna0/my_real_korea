@@ -2,6 +2,25 @@
   font-size: 11pt;
 }
 
+#btn-user-login.btn_1.outline {
+  width: 100%;
+}
+#btn-user-join.btn_1.white {
+  width: 100%;
+  border: thin black;
+}
+
+#btn-user-find-id.btn_1.outline {
+  width: 100%;
+}
+
+#btn-user-find-pw.btn_1.outline {
+  width: 100%;
+}
+
+#btn-user-auth.btn_1.outline {
+  width: 100%;
+}
 
 .terms-content {
   height: 70px; /* 박스의 높이를 설정합니다. */

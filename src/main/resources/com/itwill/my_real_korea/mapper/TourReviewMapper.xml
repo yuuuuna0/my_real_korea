@@ -7,7 +7,7 @@
 			select tour_review_to_review_no_seq.nextval from dual
 		</selectKey>
 		insert into tour_review(to_review_no,to_review_date,to_review_title,to_review_content,to_review_img,to_review_star,to_no,user_id)
-		values(#{toReviewNo},sysdate,#{toReviewTitle},#{toReviewContent},#{toReviewImg},#{toReviewStar},#{toNo},#{userId})
+		values(#{toReviewNo},sysdate,#{toReviewTitle},#{toReviewContent},#{toReviewImg},#{toReviewStar},#{toNo},#{users.userId})
 	</insert>
 	<!-- 2. 투어상품번호로 후기 전체보기 -->
 	<select id="selectByToNo" parameterType="java.lang.Integer" resultType="com.itwill.my_real_korea.dto.tour.TourReview">

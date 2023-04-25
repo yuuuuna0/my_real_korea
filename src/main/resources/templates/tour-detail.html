@@ -219,10 +219,10 @@
 							<!-- End row -->
 							<hr>
 							<div class="review_strip_single" th:each="tourReview:${tourReviewList}">
-								<img src="upload-dir/defaultImg.png" alt="Image" class="rounded-circle" width="15%" height="35%">
+								<img th:src="@{upload-dir/{userImgUrl}(userImgUrl=${tourReview.users.userImg.userImgUrl})}" alt="Image" class="rounded-circle" width="15%" height="35%">
 								<form id="singleReviewF">
 								<small th:text="${#dates.format(tourReview.toReviewDate,'yyyy. MM. dd')}"> - 10 March 2015 -</small>
-								<h4 th:text=${tourReview.userId}>Jhon Doe</h4>
+								<h4 th:text="${tourReview.users.userId}">Jhon Doe</h4>
 								<div class="row">
 								<div class="col-md-8">
 										<h6>
@@ -270,7 +270,7 @@
 									<div class="col-md-12" style="height:90px" th:if="${tourReview.toReviewUpload == null && tourReview.toReviewImg == null}">
 									</div>
 								<div class="col-md-12 text-center">
-									<th:block th:if="${loginUser!=null && loginUser.userId == tourReview.userId}">
+									<th:block th:if="${loginUser!=null && loginUser.userId == tourReview.users.userId}">
 									<button class="btn_1" style="width:30%; font-size:13px; padding:5px;" th:value="${tourReview.toReviewNo}" name="updateToReview">수정</button>
 									<button class="btn_1" style="width:30%; font-size:13px; padding:5px;" th:value="${tourReview.toReviewNo}" name="deleteToReview">삭제</button>
 									</th:block>
@@ -527,7 +527,7 @@
 				{{/dateFormat}}
 			</small>
 			<h4>
-				{{userId}}
+				{{users.userId}}
 			</h4>
 			<div class="row">
 				<div class="col-md-8">
@@ -557,7 +557,7 @@
 					</div>
 					<div class="col-md-12 text-center">
 					{{#if @root.loginUser}}
-						{{#ifCond @root.loginUser.userId '==' userId}}
+						{{#ifCond @root.loginUser.userId '==' users.userId}}
 							<button style="width:30%; font-size:13px; padding:5px;" value="{{toReviewNo}}" name="updateToReview">수정</button>
 							<button style="width:30%; font-size:13px; padding:5px;" value="{{toReviewNo}}" name="deleteToReview">삭제</button>	
 						{{/ifCond}}

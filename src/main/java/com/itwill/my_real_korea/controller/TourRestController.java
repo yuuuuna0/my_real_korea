@@ -137,6 +137,7 @@ public class TourRestController {
 			User loginUser=(User)session.getAttribute("loginUser");
 			try {
 				tourReview.setToReviewImg("");
+				tourReview.setUsers(loginUser);
 				tourReviewService.insertTourReview(tourReview);
 				if(file!=null) {
 					//업로드 파일 존재하면

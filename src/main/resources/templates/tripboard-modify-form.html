@@ -118,7 +118,6 @@
 				<div class="col-lg-9">
 					<div class="box_style_1">
 						<div class="post nopadding">
-							<img th:src="@{img/tripboard/{tBoImg}(tBoImg=${tripBoard.tBoImg})}" alt="Image" class="img-fluid">
 							<div class="post_info clearfix">
 								<div class="post-left">
 									<ul>
@@ -252,6 +251,14 @@
 								<div class="form-group">
 									<label><i class="icon-tag"></i> 해시태그</label>
 									<input class="form-control style_2" type="text" name="hashtag" id="hashtag" th:value="${tripBoard.hashtag}">
+								</div>
+								<br>
+								<label><i class=" icon-folder-open"></i> 파일업로드</label>
+								<div class="form-inline upload_1 tripboard-upload">
+									<div class="form-group">
+										<input type="file" id="imageFile" name="imageFile" multiple=""/>
+										<input type="hidden" id="tBoImg" th:value="${tBoImg}">
+									</div>
 								</div>
 							</form>
 							<br>

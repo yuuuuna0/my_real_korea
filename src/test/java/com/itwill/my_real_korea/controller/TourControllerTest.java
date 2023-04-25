@@ -23,6 +23,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import com.itwill.my_real_korea.dto.tour.Tour;
 import com.itwill.my_real_korea.dto.tour.TourImg;
 import com.itwill.my_real_korea.dto.tour.TourReview;
+import com.itwill.my_real_korea.dto.user.User;
 import com.itwill.my_real_korea.service.tour.TourImgService;
 import com.itwill.my_real_korea.service.tour.TourReviewService;
 import com.itwill.my_real_korea.service.tour.TourService;
@@ -70,9 +71,9 @@ class TourControllerTest {
 		TourImg tourImg1=new TourImg(1, null, 1);
 		TourImg tourImg2=new TourImg(2, null, 1);
 		TourImg tourImg3=new TourImg(3, null, 1);
-		TourReview tourReview1=new TourReview(1, null, "집", "보내주세요", null, 5, 1, "user1");
-		TourReview tourReview2=new TourReview(2, null, "가", "보내주세요", null, 5, 1, "user2");
-		TourReview tourReview3=new TourReview(3, null, "자", "보내주세요", null, 5, 1, "user3");
+		TourReview tourReview1=new TourReview(1, null, "집", "보내주세요", null, 5, 1, new User());
+		TourReview tourReview2=new TourReview(2, null, "가", "보내주세요", null, 5, 1, new User());
+		TourReview tourReview3=new TourReview(3, null, "자", "보내주세요", null, 5, 1, new User());
 		
 		List<TourImg> tourImgList=tourImgService.findTourImgList(1);
 		tourImgList.add(tourImg1);

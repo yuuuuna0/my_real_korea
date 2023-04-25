@@ -27,6 +27,27 @@ public class TripBoardServiceImpl implements TripBoardService {
 		return tripBoardDao.insertTripBoard(tripBoard);
 	}
 	/*
+	 * 게시글 이미지 변경(추가)
+	 */
+	@Override
+	public int updateTripBoardImg(String tBoImg, int tBoNo) throws Exception {
+		return tripBoardDao.updateTripBoardImg(tBoImg, tBoNo);
+	}
+	/*
+	 * 게시글 업로드된 파일 변경(추가)
+	 */
+	@Override
+	public int updateUploadFile(String tUploadFile, int tBoNo) throws Exception {
+		return tripBoardDao.updateUploadFile(tUploadFile, tBoNo);
+	}
+	/*
+	 * 게시글 이미지 null 로 만들기
+	 */
+	@Override
+	public int updateTripBoardImgNull(int tBoNo) throws Exception {
+		return tripBoardDao.updateTripBoardImgNull(tBoNo);
+	}
+	/*
 	 * 게시글 수정
 	 */
 	@Override

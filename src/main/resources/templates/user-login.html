@@ -26,10 +26,12 @@
 	
 	<!-- CUSTOM CSS -->
 	<link href="css/custom.css" rel="stylesheet">
+	<link href="css/user.css" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
+	
  
 <script defer type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.2/handlebars.min.js"></script>
-
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script>
 	
@@ -101,17 +103,15 @@ function kakaoLogin() {
         <input type="password" class=" form-control" placeholder="Password" name="password">
         <font color="red" th:text="${msg2}"></font>
     </div>
-		<p class="small">
+		<p>
 		    <a href="user-find" id="menu-user-find">아이디 / 비밀번호 찾기</a><br/>
 		</p>
-	<a class="btn_full" id="login_btn">로그인</a>
-	<a class="btn_full_outline" onclick="userCreate();">회원 가입</a>
+	<input type="button" id="btn-user-login" value="로그인" class="btn_1 outline">
+	<input type="button" id="btn-user-join" value="회원 가입" class="btn_1 white">
 </form><br/>
 </div>
 <!-- 로그인 폼 끝 -->
-<!-- 
- 
- -->
+
 <script id="user-find-template" type="text/x-handlebars-template">
 
 <!-- 아이디 찾기 폼 시작 -->
@@ -125,7 +125,7 @@ function kakaoLogin() {
         <label>이메일</label>
         <input type="text" class="form-control" placeholder="Email" name="email" id="email">
     </div>
-    <a class="btn_full_outline" onclick="findId();">아이디 찾기</a><br/>
+		<input type="button" id="btn-user-find-id" value="아이디 찾기" class="btn_1 outline">
 </form>
 <!-- 아이디 찾기 폼 끝 -->
 
@@ -141,7 +141,8 @@ function kakaoLogin() {
         <label>이메일</label>
         <input type="text" class=" form-control" placeholder="Email" name="email">
     </div>
-	<a class="btn_full_outline" onclick="findPassword();">비밀번호 찾기</a>
+		<input type="button" id="btn-user-find-pw" value="비밀번호 찾기" class="btn_1 outline">
+
 </form>
 <!-- 비밀번호 찾기 폼 끝 -->
 
@@ -157,7 +158,7 @@ function kakaoLogin() {
 	        <input type="text" class="form-control" name="mailAuthKey">
 	    </div>
 <br/><br/>
-		<input type="button" class="btn_full" value="인증 확인" onclick="submitAuthCode();">
+		<input type="button" id="btn-user-auth" value="인증 확인" class="btn_1 outline">
 	</form><br/>
 </script>
 
@@ -195,15 +196,12 @@ function kakaoLogin() {
 	<script src="js/functions.js"></script>
 	<script src="js/app_user.js" type="module"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script> 
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
 
 <script type="text/javascript">
 
-//회원 가입 폼
-function userCreate() {
-	location.href="user-write";
-}
 
-
+/*
 //아이디 찾기 액션
 function findId() {
 	
@@ -232,9 +230,9 @@ function findId() {
         },
         success: function(response) {
             if (response.status == 1) {
-                alert(response.message);
+            	alert(response.message);
             } else if (response.status == 2) {
-                alert(response.message);
+            	alert(response.message);
             }
         },
         error: function(jqXHR, textStatus, errorThrown) {
@@ -242,7 +240,8 @@ function findId() {
         }
     });
 }
-
+*/
+/*
 //비밀번호 찾기 액션
 function findPassword() {
   const userId = document.p.userId.value;
@@ -286,7 +285,8 @@ function findPassword() {
 
   return true;
 }
-
+*/
+/*
 //이메일 인증 액션
 function submitAuthCode() {
     var mailAuthKey = $("input[name='mailAuthKey']").val();
@@ -308,7 +308,7 @@ function submitAuthCode() {
         }
     });
 }
-
+*/
 </script>	
 
   </body>

@@ -16,6 +16,21 @@ public interface TripBoardMapper {
 	int insertTripBoard(TripBoard tripBoard) throws Exception;
 	
 	/*
+	 * 게시글 이미지 변경(추가)
+	 */
+	int updateTripBoardImg(Map<String, Object> map) throws Exception;
+	
+	/*
+	 * 게시글 업로드된 파일 변경(추가)
+	 */
+	int updateUploadFile(Map<String, Object> map) throws Exception;
+	
+	/*
+	 * 게시글 이미지 null 로 만들기
+	 */
+	int updateTripBoardImgNull(int nNo) throws Exception;
+	
+	/*
 	 * 게시글 수정
 	 */
 	int updateTripBoard(TripBoard tripBoard) throws Exception;

@@ -9,6 +9,10 @@ let roomName = document.getElementById('roomName').textContent;
 console.log(myId);
 console.log(roomName);
 
+let receiverIdFromRoom;
+let senderIdFromRoom;
+let clickChatRoomName;
+
 const serializedList = $('#jsonMyChatRoomNameList').val();
 const myChatRoomNameList = JSON.parse(serializedList);
 console.log(myChatRoomNameList);
@@ -16,11 +20,13 @@ console.log(myChatRoomNameList);
 
 /*****************소켓 연결/해제*******************/
 function onClose(evt) {
-        	 console.log("close event : " + evt);
-         }
+	console.log("소켓 연결 해제 : " + evt);
+}
 function onOpen(evt) {
-        	 console.log("open event : " + evt);
-         }
+	document.getElementById('chat-content').innerHTML = "";
+	document.querySelector('#roomName').textContent = "";
+	console.log("소켓 연결 성공 : " + evt);
+}
 
 /**********페이지 로딩 시 - 소켓연결, DB내용 가져오기*********/
 $(document).ready(function(){
@@ -29,10 +35,10 @@ $(document).ready(function(){
 	sock.onopen = onOpen;
 	sock.onClose = onClose;
 	
+	scrollDown();
 	// DB에 저장된 대화내용 가져오기
 	let receiverId = document.getElementById('receiverId').value;
 	getChatFromDB(myId,receiverId);
-	scrollDown();
 });
 
 /**********채팅메세지 보내기(버튼 클릭or엔터)*********/
@@ -242,45 +248,16 @@ function getChatFromDB(roomName, myId,receiverId){
 								console.log(resultJson.msg);
 							};
 		}, async);
+		
 };
 
 
-/************ 스크롤 내릴 때 *************/
+/************ 스크롤 하단 고정 *************/
 function scrollDown() {
 	var chatContent = document.querySelector("#chat-content");
 	chatContent.scrollTop = chatContent.scrollHeight;
 };
 
-/************ 채팅방 목록의 채팅방 클릭 *************/
-function activeToggle(element) {
-	if (!element.classList.contains('active')) {
-		element.classList.add('active');
-	} else {
-		element.classList.remove('active');
-	};
-	var preReceiverId = receiverId;
-	receiverId = element.querySelector('.about > .name').textContent;
-	console.log('<<<< toggleAction >>>>>')
-	console.log('receiverId >>> ', receiverId);
-	console.log('preReceiverId >>> ', preReceiverId);
-
-	if (receiverId != preReceiverId && preReceiverId != null) {
-		document.getElementById(preReceiverId).classList.remove('active');
-	}
-	setChatHistory(preReceiverId);
-	document.getElementById('chat-content').innerHTML = "";
-	getChatHistory(receiverId);
-	divideChatSection(receiverId);
-	
-	if (document.getElementById(receiverId).querySelector('.circle') != null) {
-		document.getElementById(receiverId).querySelector('.circle > .staging-count').textContent = "";
-		document.getElementById(receiverId).querySelector('.circle').classList.add('d-none');
-	}
-}
-
-let receiverIdFromRoom;
-let senderIdFromRoom;
-let clickChatRoomName;
 /************ 채팅방 목록의 채팅방 클릭 ************/
 $(document).on('click','#chat-room-list', function(e) {
 	// DB에 저장된 대화내용 가져오기
@@ -290,10 +267,10 @@ $(document).on('click','#chat-room-list', function(e) {
 	senderIdFromRoom = clickChatRoomName.substring(0, clickChatRoomName.indexOf('&'));
 	console.log('채팅방클릭-receiverIdFromRoom:'+receiverIdFromRoom);
 	//window.location.href='chat?receiverId='+receiverIdFromRoom;
+	scrollDown();
 	document.getElementById('chat-content').innerHTML = "";
 	getChatFromDB(clickChatRoomName, myId,receiverIdFromRoom);
 	changeRoomName(clickChatRoomName);
-	scrollDown();
 });
 
 /************ 채팅방 목록 클릭 시 해당 채팅방 이름 변경 ************/
@@ -401,9 +378,5 @@ function getChatNum(userId) {
 						};
 						}, async);
 }
-
-
-
-
 
 

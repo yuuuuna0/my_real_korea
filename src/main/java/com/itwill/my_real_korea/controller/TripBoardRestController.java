@@ -1,5 +1,7 @@
 package com.itwill.my_real_korea.controller;
 
+import java.io.File;
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -9,7 +11,12 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Required;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,13 +24,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.itwill.my_real_korea.dto.City;
 import com.itwill.my_real_korea.dto.notice.Notice;
 import com.itwill.my_real_korea.dto.tripboard.TripBoard;
 import com.itwill.my_real_korea.service.city.CityService;
 import com.itwill.my_real_korea.service.tripboard.TripBoardService;
+import com.itwill.my_real_korea.util.FileUploadNotFoundException;
+import com.itwill.my_real_korea.util.FileUploadService;
 import com.itwill.my_real_korea.util.PageMakerDto;
 
 import io.swagger.annotations.ApiImplicitParam;
@@ -32,17 +43,39 @@ import io.swagger.annotations.ApiOperation;
 @RestController
 public class TripBoardRestController {
 	
+	private final FileUploadService storageService;
+	
 	@Autowired
 	private TripBoardService tripBoardService;
 	@Autowired
 	private CityService cityService;
+	
+	//TripBoardRestController 객체 생성 시 storaeService 사용, 파일 업로드 기능 구현가능하도록
+	@Autowired
+	public TripBoardRestController(FileUploadService storageService) {
+		this.storageService = storageService;
+	}
+	
+	// HTML <img>에 이미지 출력
+	@ResponseBody // 이 메소드는 HTTP응답의 body로 사용될 객체를 반환한다.
+	@GetMapping(value =  "/tripboardimages/{filename}", 
+				produces = {MediaType.IMAGE_JPEG_VALUE, MediaType.IMAGE_PNG_VALUE, MediaType.IMAGE_GIF_VALUE})
+	public Resource showImage(@PathVariable String filename) throws MalformedURLException {
+		// 파일 경로에서 파일 이름 추출
+				String fname = new File(filename).getName();
+		// UrlResource로 이미지 파일을 읽어서 @ResponseBody로 이미지 바이너리 반환
+		return new UrlResource("file:" + storageService.getFullPath(fname));
+	}
+	
+	
 	/*
 	* 동행 게시글 추가 
 	*/
 	@LoginCheck
 	@ApiOperation(value = "동행게시글 추가")
 	@PostMapping(value = "/tripboard", produces = "application/json;charset=UTF-8")
-	public Map<String, Object> tripboard_write_action(@ModelAttribute TripBoard tripBoard, @RequestParam int cityNo){
+	public Map<String, Object> tripboard_write_action(@ModelAttribute TripBoard tripBoard, @RequestParam int cityNo,
+														@RequestParam(name="file", required = false) MultipartFile file){
 		Map<String, Object> resultMap = new HashMap<>();
 		int code = 1;
 		String msg = "성공";
@@ -53,10 +86,23 @@ public class TripBoardRestController {
 			City city=cityService.findByCityNo(cityNo);
 			tripBoard.setCity(city);
 			tripBoardService.insertTripBoard(tripBoard);
-			code = 1;
-			msg = "성공";
+			
+			//파일업로드
+			if(file != null) {
+				//선택된 파일이 있다면, 파일 저장
+				storageService.store(file);
+				//업로드된 파일로 tUploadFile update
+				tripBoardService.updateUploadFile(file.getOriginalFilename(), tripBoard.getTBoNo());
+				System.out.println(">>>>>>>>>>>>" + file.getOriginalFilename());
+			}
+			//이미지 있다면 tBoImg update
+			if(tripBoard.getTBoImg() != null) {
+				tripBoardService.updateTripBoardImg(tripBoard.getTBoImg(), tripBoard.getTBoNo());
+			}			
 			// 동행 게시글 쓰기 후 데이터 자동 붙여줌
 			tripBoard = tripBoardService.selectByTbNo(tripBoard.getTBoNo());
+			code = 1;
+			msg = "성공";
 			data.add(tripBoard);
 		} catch (Exception e) {
 			// 실패 시 code 2
@@ -77,7 +123,10 @@ public class TripBoardRestController {
 	@ApiOperation(value = "동행게시글 수정")
 	@ApiImplicitParam(name = "tBoNo", value = "동행게시글 번호")/*Api 의 파라미터(하나)만 가지고 오려고 사용*/
 	@PutMapping(value = "/tripboard/{tBoNo}", produces = "application/json;charset=UTF-8")/*text*/
-	public Map<String,Object> tripboard_modify_action(@PathVariable(value = "tBoNo")int tBoNo,@ModelAttribute TripBoard tripBoard, @RequestParam int cityNo){
+	public Map<String,Object> tripboard_modify_action(@PathVariable(value = "tBoNo")int tBoNo, 
+														@ModelAttribute TripBoard tripBoard, 
+														@RequestParam int cityNo,
+														@RequestParam(name = "file" ,required = false) MultipartFile file){
 		Map<String, Object> resultMap = new HashMap<>();
 		int code = 1;
 		String msg = "성공";
@@ -90,6 +139,15 @@ public class TripBoardRestController {
 			TripBoard findTripBoard = tripBoardService.selectByTbNo(tBoNo);
 			if(findTripBoard != null) {
 				tripBoard.setTBoNo(tBoNo);
+				//파일업로드
+				if(file != null) {
+					//선택된 파일이 있다며, 파일 저장
+					storageService.store(file);
+					//업로드 된 파일로 tUploadFile update, 기존의 tBoImg null만들기
+					tripBoardService.updateTripBoardImgNull(tBoNo);
+					tripBoardService.updateUploadFile(file.getOriginalFilename(), tBoNo);
+					System.out.println(">>>>>>>>>>>>" + file.getOriginalFilename());
+				}
 				tripBoardService.updateTripBoard(tripBoard);
 				code = 1;
 				msg = "성공";
@@ -362,6 +420,11 @@ public class TripBoardRestController {
 		resultMap.put("data", tripBoardList);
 		return resultMap;
 		
+	}
+	
+	@ExceptionHandler(FileUploadNotFoundException.class)
+	public ResponseEntity<?> handleStorageFileNotFound(FileUploadNotFoundException exc) {
+		return ResponseEntity.notFound().build();
 	}
 	
 }

@@ -20,12 +20,51 @@ public class TripBoardDaoImpl implements TripBoardDao{
 		System.out.println("TripBoardDaoImpl 기본 생성자 호출");
 	}
 	
+	public TripBoardMapper getTipBoardMapper() {
+		return tripBoardMapper;
+	}
+	
+	public void setTripBoardMapper(TripBoardMapper tripBoardMapper) {
+		System.out.println(">>> tripBoardDaoImp() : setTripBoardMapper()호출");
+		this.tripBoardMapper = tripBoardMapper;
+	}
+	
 	/*
 	 * 게시글 추가
 	 */
 	@Override
 	public int insertTripBoard(TripBoard tripBoard) throws Exception {
 		return tripBoardMapper.insertTripBoard(tripBoard);
+	}
+	
+	/*
+	 * 게시글 이미지 변경(추가)
+	 */
+	@Override
+	public int updateTripBoardImg(String tBoImg, int tBoNo) throws Exception {
+		Map<String, Object> map = new HashMap<>();
+		map.put("tBoImg", tBoImg);
+		map.put("tBoNo", tBoNo);
+		return tripBoardMapper.updateTripBoardImg(map);
+	}
+	
+	/*
+	 * 게시글 업로드된 파일 변경(추가)
+	 */
+	@Override
+	public int updateUploadFile(String tUploadFile, int tBoNo) throws Exception {
+		Map<String, Object> map = new HashMap<>();
+		map.put("tUploadFile", tUploadFile);
+		map.put("tBoNo", tBoNo);
+		return tripBoardMapper.updateUploadFile(map);
+	}
+	
+	/*
+	 * 게시글 이미지 null 로 만들기
+	 */
+	@Override
+	public int updateTripBoardImgNull(int tBoNo) throws Exception {
+		return tripBoardMapper.updateTripBoardImgNull(tBoNo);
 	}
 	
 	/*

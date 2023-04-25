@@ -19,12 +19,12 @@ class TourReviewServiceImplTest {
 	private TourReviewService tourReviewService;
 
 	void testInsertTourReview() throws Exception{
-		int rowCount=tourReviewService.insertTourReview(new TourReview(0, null, "후기", "후기남겨용","review.jpg", 4, 3, new User()));
+		int rowCount=tourReviewService.insertTourReview(new TourReview(0, null, "후기", "후기남겨용","review.jpg", 4, 3));
 		assertEquals(rowCount, 1);
 	}
 
 	void testUpdateTourReview() throws Exception{
-		int rowCount=tourReviewService.updateTourReview(new TourReview(4, null, "큰일났다", "컨트롤러언제해요", "controller.jpg", 5, 5, new User()));
+		int rowCount=tourReviewService.updateTourReview(new TourReview(4, null, "큰일났다", "컨트롤러언제해요", "controller.jpg", 5, 5));
 		assertEquals(rowCount, 1);
 	}
 

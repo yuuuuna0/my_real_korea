@@ -71,9 +71,9 @@ class TourControllerTest {
 		TourImg tourImg1=new TourImg(1, null, 1);
 		TourImg tourImg2=new TourImg(2, null, 1);
 		TourImg tourImg3=new TourImg(3, null, 1);
-		TourReview tourReview1=new TourReview(1, null, "집", "보내주세요", null, 5, 1, new User());
-		TourReview tourReview2=new TourReview(2, null, "가", "보내주세요", null, 5, 1, new User());
-		TourReview tourReview3=new TourReview(3, null, "자", "보내주세요", null, 5, 1, new User());
+		TourReview tourReview1=new TourReview(1, null, "집", "보내주세요", null, 5, 1);
+		TourReview tourReview2=new TourReview(2, null, "가", "보내주세요", null, 5, 1);
+		TourReview tourReview3=new TourReview(3, null, "자", "보내주세요", null, 5, 1);
 		
 		List<TourImg> tourImgList=tourImgService.findTourImgList(1);
 		tourImgList.add(tourImg1);

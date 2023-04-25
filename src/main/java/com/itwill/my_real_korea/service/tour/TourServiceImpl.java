@@ -21,8 +21,6 @@ public class TourServiceImpl implements TourService {
 	private TourDao tourDao;
 	@Autowired
 	private TourImgDao tourImgDao;
-	@Autowired
-	private TourReviewDao tourReviewDao;
 	
 	@Override
 	public int insertTour(Tour tour) throws Exception {

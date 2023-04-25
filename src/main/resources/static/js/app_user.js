@@ -86,6 +86,23 @@ $(document).on('click', '#btn-user-modify-form', function(e) {
 // 프로필 수정 완료 버튼 
 
 $(document).on('click','#btn-user-modify-action',function(e) {
+	
+	
+	if (document.f.password.value == "") {
+		alert("비밀번호를 입력하세요.");
+		f.password.focus();
+		return false;
+	}
+	if (document.f.password2.value == "") {
+		alert("비밀번호확인을 입력하세요.");
+		f.password2.focus();
+		return false;
+	} 
+	if (document.getElementsByName("password")[0].value !== document.getElementsByName("password2")[0].value) {
+	    alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
+	    return;
+	  }
+	
 	let url = 'user-modify-form-action';
 	let method = 'PUT';
 	let formData = new FormData();

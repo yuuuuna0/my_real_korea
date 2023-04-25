@@ -123,7 +123,7 @@
 								<div class="wishlist_close">-</div>
 								<div th:if="${wishlist.tour != null}" class="img_list">
 									<a th:href="@{tour-detail(toNo=${wishlist.tour.toNo})}" href="">
-										<img src="img/tour_box_1.jpg" alt="Image">
+										<img th:src="@{img/tour/{toImgUrl}(toImgUrl=${wishlist.tourImgList.get(0).toImgUrl})}" alt="Image">
 									</a>
 								</div>
 								<div th:if="${wishlist.ticket != null}" class="img_list">

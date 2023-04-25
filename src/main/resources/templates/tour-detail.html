@@ -259,7 +259,7 @@
  									<img th:src="@{img/tourReview/{toReviewImg}(toReviewImg=${tourReview.toReviewImg})}" alt="Image" width="100%" height="110%">
 									</div>
 									<div class="col-md-12" style="height:90px" th:if="${tourReview.toReviewUpload != null}">
-										<img th:src="@{tourReviewImage/{uploadFile}(toReviewUpload=${tourReview.toReviewUpload})}" alt="Image" width="100%" height="100%">	
+										<img th:src="@{tourReviewImage/{toReviewUpload}(toReviewUpload=${tourReview.toReviewUpload})}" alt="Image" width="100%" height="100%">	
 									</div>
 								<div class="col-md-12 text-center" style="height:1px" th:if="${loginUser!=null && loginUser.userId == tourReview.userId}"> 
 									<button th:value="${tourReview.toReviewNo}" name="updateToReview">수정</button>

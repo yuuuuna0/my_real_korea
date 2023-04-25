@@ -100,57 +100,72 @@
 		<!-- End position -->
 
 		<div class="container margin_60">
-		<form name="rsPInfoF" method="POST" >
-			<div class="row">
+			<div class="row" >
 				<div class="col-lg-8 add_bottom_15">
-					<div class="form_title">
-						<h3><strong>1</strong>Tour Details</h3>
-						<p>
-							예약하신 투어 내용입니다.
-						</p>
-					</div>
-					<div class="step">
-						<div class="row">
-							<div class="col-sm-12">
-								<div class="form-group">
-									<label> 여행명 </label>
-									<input type="readonly" th:value="${session.payment.tour.toName}" class="form-control">
+					<div  class="strip_all_tour_list wow fadeIn" data-wow-delay="0.1s" >
+						<div class="row" >
+							<div class="col-lg-4 col-md-4">
+								<div  class="img_list">
+									<a th:href="@{tour-detail(toNo=${session.tour.toNo})}" href="">
+										<img th:src="@{img/tour/{toImgUrl}(toImgUrl=${session.tour.tourImgList.get(0).toImgUrl})}" alt="Image">
+									</a>
 								</div>
 							</div>
-							<div class="col-sm-12">
-								<div class="form-group">
-									<label> 여행타입 </label>
-									<input type="text" th:value="${session.payment.tour.toType}" class="form-control" >
+							<div class="col-lg-6 col-md-6">
+								<div class="tour_list_desc">
+									<div class="rating">
+									</div>
+									<div>
+									<h3><strong  th:text="${session.tour.toName}"></strong> </h3>
+									<p th:text="${session.tour.toInfo}"></p>
+									</div>
+									<ul class="add_info">
+										<li>
+											<div class="tooltip_styled tooltip-effect-4">
+												<span class="tooltip-item"><i class="icon_set_1_icon-83"></i></span>
+												<div class="tooltip-content">
+													<h4>투어 안내사항</h4>
+													<p th:text="${session.tour.toNotice}"> </p>
+												</div>
+											</div>
+										</li>
+										<li>
+											<div class="tooltip_styled tooltip-effect-4">
+												<span class="tooltip-item"><i class="icon_set_1_icon-41"></i></span>
+												<div class="tooltip-content">
+													<h4>만나는 장소</h4> 
+													<p th:text="${session.tour.toMeet}"> </p>
+													<br>
+												</div>
+											</div>
+										</li>
+									</ul>
 								</div>
+							</div>
+							<div class="col-lg-2 col-md-2">
+								<div class="price_list" id="wishlist-detail-btn">
+									<div>
+										<div><sup th:text="${session.tour.toPrice}"></sup>
+												<small>* 1인 기준</small>
+											<p><a th:href="@{tour-detail(toNo=${session.tour.toNo})}" href="" class="btn_1">상세보기</a></p>
+										</div>
+									</div>
 							</div>
 						</div>
-						<div class="row">
-							<div class="col-sm-12">
-								<div class="form-group">
-									<label> 여행설명 </label>
-									<input type="text" th:value="${#strings.substring(session.payment.tour.toInfo,0,3)}"class="form-control">
-								</div>
-							</div>
-							<div class="col-sm-12">
-								<div class="form-group">
-									<label> 도시 </label>
-									<input type="text" th:value="${session.payment.tour.city.cityName}"class="form-control">
-								</div>
-							</div>
-						</div>
 					</div>
+					</div>
+					<form name="rsPInfoF" method="POST" >
 					<div class="form_title">
-						<h3><strong>1</strong>Your Details</h3>
+						<h3><strong>1</strong>예약확인</h3>
 						<p>
-							Mussum ipsum cacilds, vidis litro abertis.
+							예약자의 정보를 입력 해 주세요. 
 						</p>
 					</div>
-					
 					<div class="step">
 						<div class="row">
 							<div class="col-sm-8">
 								<div class="form-group">
-									<label> 이름 </label>
+									<label> 성함 </label>
 									<input type="text" class="form-control" name="rsPName">
 								</div>
 							</div>
@@ -164,7 +179,7 @@
 							</div>
 							<div class="col-sm-6">
 								<div class="form-group">
-									<label>Confirm email</label>
+									<label> 이메일 확인 </label>
 									<input type="email" id="email_booking_2" name="email_booking_2" class="form-control">
 								</div>
 							</div>
@@ -172,55 +187,45 @@
 						<div class="row">
 							<div class="col-sm-6">
 								<div class="form-group">
-									<label>Telephone</label>
+									<label> 전화번호 </label>
 									<input type="text" id="telephone_booking" name="rsPPhone" class="form-control">
 								</div>
 							</div>
 						</div>
 					</div>
-					</form>
+					
 					<!--End step -->
 					
 					<div class="form_title">
-						<h3><strong>2</strong> 예약 특이사항 </h3>
-						<p>
-							예약시 특이사항을 적어주세요
-						</p>
+						<h3><strong>2</strong> 요청사항 </h3>
 					</div>
 					<div class="step">
 						<div class="row">
 							<div class="col-lg-12">
 								<div class="form-group">
-									<label>특이사항 </label>
-									<input type="text" id="city_booking" name="pMsg" class="form-control">
+									<label> 요청사항을 작성 해 주세요 </label>
+									<textarea id="city_booking" name="pMsg" class="form-control"></textarea>
+								</div>
+							</div>
+							<br>
+							<br>
+							<div class="col-lg-2" style="padding:10px 0px 0px 18px;">
+								<label> 결제수단 </label>
+							</div>
+							<div class="col-lg-3" style="padding:5px 0px 0px 0px">
+								<div class="form-group">
+										<select class="form-control" name="pMethod" id="pMethod" required>
+											<option value="" selected disabled hidden>결제방법</option>
+											<option value="1">계좌이체</option>
+											<option value="2">카드결제</option>
+										</select>
 								</div>
 							</div>
 						</div>
 						<!--End row -->
 					</div>
 					<!--End step -->
-
-					<div class="form_title">
-						<h3><strong>3</strong>Payment Information</h3>
-						<p>
-							Mussum ipsum cacilds, vidis litro abertis.
-						</p>
-					</div>
-					<div class="step">
-						<div class="form-group">
-							<select class="form-control" name="pMethod" id="pMethod" required>
-								<option value="" selected disabled hidden>결제방법</option>
-								<option value="1">계좌이체</option>
-								<option value="2">카카오페이</option>
-								<option value="3">카드결제</option>
-							</select>
-						</div>
-							
-					</div>
-						<!--End row -->
-					</div>
-					<!--End step -->
-
+</div>
 				
 			</form>
 			
@@ -233,15 +238,15 @@
 									<td>
 										여행 시작일
 									</td>
-									<td class="text-right" th:text="${session.payment.pStartDate}">
+									<td class="text-right" th:text="${#dates.format(session.payment.pStartDate,'yyyy-MM-dd')}">
 									</td>
 								</tr>
 								<tr>
 									<td>
 										여행 종료
-									</td>
-									<td class="text-right" th:text="${session.payment.pStartDate}">
-										10 April 2015
+									</td> 
+									<td class="text-right" text="출력안되어서 개짱남">
+										출력안되어서 개짱남
 									</td>
 								</tr>
 								<tr>
@@ -299,10 +304,10 @@
 			</div>
 			<!--End row -->
 								<div id="policy">
-						<h4>Cancellation policy</h4>
+						<h4>취소 및 환불 규정</h4>
 						<div class="form-group">
 							<label>
-								<input type="checkbox" name="policy_terms" id="policy_terms">I accept terms and conditions and general policy.
+								<input type="checkbox" name="policy_terms" id="policy_terms">아래의 취소 및 환불 규정을 확인 후 동의하였습니다.
 							</label>
 						</div>
 					</div>
@@ -350,7 +355,7 @@
 			IMP.init("imp43548145"); // 예: imp00000000a
 			
 			let pMethod;
-			if('#pMethod'.val==3){
+			if('#pMethod'.val==2){
 				pMethod='card';
 			}
 			/********** 자바스크립트에서 세션 값 가져오는거 먼저 해야 함!!  ***** */

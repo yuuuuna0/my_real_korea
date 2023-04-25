@@ -411,13 +411,6 @@ a.btn_1:hover, .btn_1:hover {
     background-color: #333;
 }
 
-a.btn_1.green, .btn_1.user_address {
-    height: 35px;
-    position: relative;
-    padding: 0 10px;
-    top: 3px;
-}
-
 .btn-secondary {
     color: #fff;
     background-color: #9E9E9E;
@@ -436,4 +429,13 @@ a.btn_1.green, .btn_1.user_address {
 }
 
 
+.form-group-tripboard {
+display: inline-block;
+ vertical-align: top;
+}
 
+  .form-group button-tripboard,
+  .form-group a {
+    display: inline-block;
+    margin-right: 10px;
+  }

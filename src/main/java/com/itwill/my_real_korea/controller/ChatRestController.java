@@ -83,11 +83,6 @@ public class ChatRestController {
 
 		List<ChatMsg> resultList = new ArrayList<ChatMsg>();
 		try {
-//			// 안읽은 메세지 있다면 상대의 기존 채팅 모두 읽음 처리
-//			int notReadMsg = chatService.countNotReadInChatRoom(Integer.parseInt(roomNo), senderId);
-//			if (notReadMsg != 0) {
-//				chatService.updateReadMsg(Integer.parseInt(roomNo), receiverId);
-//			}
 			// 해당 채팅방 채팅 내역 찾기
 			List<ChatMsg> chatDetailList = chatService.selectChatByRoomName(findChatRoomName);
 			if (chatDetailList.size() > 0) {
@@ -169,17 +164,24 @@ public class ChatRestController {
 			System.out.println(msgRead);
 			System.out.println(roomName);
 			System.out.println(senderId);
-			// 로그인한 아이디와 채팅보내는 아이디 같을 때만 채팅 저장
-			if (myId.equals(senderId)) {
-				ChatMsg newChatMsg;
-				newChatMsg = new ChatMsg(0, msgContent, msgSendTime, msgRead, roomName, senderId);
-				// 메세지 생성, DB 저장
-				int rowCount = chatService.insertChatMsg(newChatMsg);
-				if (rowCount > 0) {
-					code = 1;
-					msg = "성공";
-					data.add(newChatMsg);
+			// 채팅방 존재여부 판별
+			ChatRoom findChatRoom = chatService.selectByRoomName(roomName);
+			if (findChatRoom != null) {
+				// 로그인한 아이디와 채팅보내는 아이디 같을 때만 채팅 저장
+				if (myId.equals(senderId)) {
+					ChatMsg newChatMsg;
+					newChatMsg = new ChatMsg(0, msgContent, msgSendTime, msgRead, roomName, senderId);
+					// 메세지 생성, DB 저장
+					int rowCount = chatService.insertChatMsg(newChatMsg);
+					if (rowCount > 0) {
+						code = 1;
+						msg = "성공";
+						data.add(newChatMsg);
+					}
 				}
+			} else {
+				code = 3;
+				msg = "채팅방 존재하지 않습니다.";
 			}
 		} catch (NumberFormatException e1) {
 			e1.printStackTrace();

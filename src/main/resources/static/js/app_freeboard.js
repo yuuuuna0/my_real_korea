@@ -222,30 +222,3 @@ $('input[type="radio"][name="city-radio"]').click(function(){
 $(document).on('click','#btn-submit',function(e){
 		e.preventDefault();
 });
-$(document,ready(function(e){
-	let method = 'POST';
-	let url='fBoList';
-	let contentType = 'application/json;charset=UTF-8';
-	let sendData;
-	let async = true;
-	
-	// 키워드 결과, 현재 페이지 숫자 표시
-	let curPage=$('#cur-page');
-	let totRecordCount=$('#tot-record-count');
-	// JSON.stringify() => 객체를 string 으로, JSON.parse() => string 을 객체로 만듬
-	Request.ajaxRequest(url, method, contentType, 
-						JSON.stringify(sendData),
-						function(resultJson){
-							//페이지 정보 변경
-							
-							//code 1 일때 render, 아닐 때 msg 띄움
-							if(resultJson.code == 1){
-								View.render("#freeboard-write-recent-post-template", resultJson, '#recent-post');
-							} else {
-								alert(resultJson.msg);
-							};
-						}, async);
-
-	
-	e.preventDefault();
-}));

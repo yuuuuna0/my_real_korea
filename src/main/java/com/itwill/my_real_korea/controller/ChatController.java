@@ -48,30 +48,34 @@ public class ChatController {
 		}
 		// 채팅방 이름 생성
 		roomName = senderId + "&" + receiverId;
-
-		// senderId 와 receiverId 를 포함하는 이름의 채팅방이 있다면, 새로운 방 생성 X
-		boolean containsSameChatIds = true;
-		String chatIds = senderId + receiverId;
-		for (int i = 0; i < chatIds.length(); i++) {
-			if (roomName.indexOf(chatIds.charAt(i)) == -1) {
-				containsSameChatIds = false;
-				break;
-			}
-		}
-		if (containsSameChatIds) {
-			List<ChatRoom> findRoomList = chatService.selectByRoomNameWith(receiverId);
-			for (ChatRoom chatRoom : findRoomList) {
-				if (chatRoom.getRoomName().contains(senderId)) {
-					roomName = chatRoom.getRoomName();
-				}
-			}
+		
+		ChatRoom thisChatRoom = chatService.selectByRoomName(roomName);
+		if (thisChatRoom != null) {
+			roomName = thisChatRoom.getRoomName();
 		} else {
-			// 포함하는 채팅방 존재 X, 새로운 방 생성
-			ChatRoom newChatRoom = new ChatRoom(roomName);
-			chatService.insertChatRoom(newChatRoom);
-			roomName = newChatRoom.getRoomName();
+			// receiverId 포함된 채팅방 리스트
+			List<ChatRoom> findRoomListWithR = chatService.selectByRoomNameWith(receiverId);
+			// receiverId 포함된 채팅방 중에 senderId 를 포함하는 방 찾기
+			if(findRoomListWithR.size() > 0) {
+				for (ChatRoom chatRoom : findRoomListWithR) {
+					if (chatRoom.getRoomName().contains(senderId)) {
+						ChatRoom findRoomWithRS = chatService.selectByRoomName(chatRoom.getRoomName()); 
+						roomName = findRoomWithRS.getRoomName();
+					} else {
+						// 채팅방 중에 senderId를 함께 포함하는 채팅방 존재 X, 새로운 방 생성
+						ChatRoom newChatRoom = new ChatRoom(roomName);
+						chatService.insertChatRoom(newChatRoom);
+						roomName = newChatRoom.getRoomName();
+					}
+				}
+			} else {
+				// receiverId 포함하는 채팅방 존재 X, 새로운 방 생성
+				ChatRoom newChatRoom = new ChatRoom(roomName);
+				chatService.insertChatRoom(newChatRoom);
+				roomName = newChatRoom.getRoomName();
+			}
 		}
-
+		
 		// 채팅방 이름 파라미터로 넣어줬을 때는 그걸로 roomName 설정
 		if (chatRoomName != null) {
 			ChatRoom findChatRoom = chatService.selectByRoomName(chatRoomName);

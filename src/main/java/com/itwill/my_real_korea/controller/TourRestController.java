@@ -159,6 +159,7 @@ public class TourRestController {
 				
 				//toCount 붙여서 리뷰쪽에 구매 갯수 찍기 위함
 				toCount=tourService.findTourWithCityByToNo(tourReview.getToNo()).getToCount();
+				System.out.println(data);
 				
 				//toReviewCount 붙여서 리뷰쪽에 리뷰 갯수 붙이기 위함
 				toReviewCount=tourReviewList.size();

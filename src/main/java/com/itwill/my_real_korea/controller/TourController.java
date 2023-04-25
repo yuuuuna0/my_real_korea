@@ -25,6 +25,7 @@ import com.itwill.my_real_korea.service.rspinfo.RsPInfoService;
 import com.itwill.my_real_korea.service.tour.TourImgService;
 import com.itwill.my_real_korea.service.tour.TourReviewService;
 import com.itwill.my_real_korea.service.tour.TourService;
+import com.itwill.my_real_korea.service.user.UserService;
 import com.itwill.my_real_korea.util.PageMakerDto;
 
 import org.springframework.web.bind.annotation.RequestParam;
@@ -47,15 +48,18 @@ public class TourController {
 	private TourReviewService tourReviewService;
 	private PaymentService paymentService;
 	private RsPInfoService rsPInfoService;
+	private UserService userService;
 
 	@Autowired
-	public TourController(TourService tourService, TourImgService tourImgService, CityService cityService,TourReviewService tourReviewService,PaymentService payService,RsPInfoService rsPInfoService) {
+	public TourController(TourService tourService, TourImgService tourImgService, CityService cityService,TourReviewService tourReviewService,
+						  PaymentService payService,RsPInfoService rsPInfoService, UserService userService) {
 		this.tourService=tourService;
 		this.tourImgService=tourImgService;
 		this.cityService=cityService;
 		this.tourReviewService=tourReviewService;
 		this.paymentService=payService;
 		this.rsPInfoService=rsPInfoService;
+		this.userService=userService;
 	}
 
 	//1. 투어상품 전체 리스트 보기
@@ -114,11 +118,7 @@ public class TourController {
 			} else{
 				forwardPath="error";
 			}
-			System.out.println("투어이미지가 붙어있을까요 아닐까요~~~~"+tour);
 			List<TourReview> tourReviewList=tourReviewService.findByToNo(toNo);
-			for (TourReview tourReview : tourReviewList) {
-				System.out.println("아아아아아ㅏ아아"+tourReview);
-			}
 			model.addAttribute("tourReviewList", tourReviewList);
 		} catch (Exception e){
 			e.printStackTrace();

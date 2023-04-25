@@ -36,7 +36,7 @@ public class TourReview {
 	private String toReviewUpload;
 	
 	public TourReview(int toReviewNo, Date toReviewDate, String toReviewTitle, String toReviewContent,
-			String toReviewImg, int toReviewStar, int toNo, User users) {
+			String toReviewImg, int toReviewStar, int toNo) {
 		this.toReviewNo = toReviewNo;
 		this.toReviewDate = toReviewDate;
 		this.toReviewTitle = toReviewTitle;
@@ -44,7 +44,7 @@ public class TourReview {
 		this.toReviewImg = toReviewImg;
 		this.toReviewStar = toReviewStar;
 		this.toNo = toNo;
-		this.users = users;
+		this.users = new User();
 	}
 	
 }

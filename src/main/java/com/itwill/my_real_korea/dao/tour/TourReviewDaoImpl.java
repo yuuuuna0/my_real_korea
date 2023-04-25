@@ -9,11 +9,14 @@ import org.springframework.stereotype.Repository;
 
 import com.itwill.my_real_korea.dto.tour.TourReview;
 import com.itwill.my_real_korea.mapper.TourReviewMapper;
+import com.itwill.my_real_korea.mapper.UserMapper;
 
 @Repository
 public class TourReviewDaoImpl implements TourReviewDao {
 	@Autowired
 	private TourReviewMapper tourReviewMapper;
+	@Autowired
+	private UserMapper userMapper;
 	
 	public TourReviewDaoImpl() {
 		System.out.println("TourReviewDaoImp 기본생성자 호출");

@@ -114,7 +114,6 @@ public class TicketController {
  				model.addAttribute("userId", userId);
  			}
  			// 위시리스트 추가 코드 끝
-            
             model.addAttribute("ticketList", ticketList); // 티켓
             model.addAttribute("ticketReviewList",ticketReviewList); // 리뷰
             model.addAttribute("tiNo", tiNo);

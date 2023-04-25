@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.itwill.my_real_korea.dto.tour.TourReview;
+import com.itwill.my_real_korea.dto.user.User;
 import com.itwill.my_real_korea.util.PageMakerDto;
 
 public interface TourReviewService {

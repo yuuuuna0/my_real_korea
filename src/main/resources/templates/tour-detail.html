@@ -70,7 +70,6 @@
 							<i class="icon-star-empty"></i>
 						</span>
 						<h1 th:text=${tour.toName}></h1>
-						<span>수정수정수정수정ㅊㅌㅊㅌㅊ.</span>
 					</div>
 					<div class="col-md-4">
 						<div id="price_single_main" class="hotel">
@@ -95,11 +94,11 @@
 		<div id="position">
 			<div class="container">
 				<ul>
-					<li><a href="#">Home</a>
+					<li><a href="./">메인페이지</a>
 					</li>
-					<li><a href="#">Category</a>
+					<li><a href="./tour-list">투어리스트</a>
 					</li>
-					<li>Page active</li>
+					<li><a href="#">투어상세보기</a></li>
 				</ul>
 			</div>
 		</div>
@@ -127,13 +126,13 @@
 				<div class="col-lg-8" id="single_tour_desc">
 					<div id="single_tour_feat">
 						<ul>
-							<li><i class="icon_set_2_icon-116"></i>Plasma TV</li>
-							<li><i class="icon_set_1_icon-86"></i>Free Wifi</li>
-							<li><i class="icon_set_2_icon-110"></i>Poll</li>
-							<li><i class="icon_set_1_icon-59"></i>Breakfast</li>
-							<li><i class="icon_set_1_icon-22"></i>Pet allowed</li>
-							<li><i class="icon_set_1_icon-13"></i>Accessibiliy</li>
-							<li><i class="icon_set_1_icon-27"></i>Parking</li>
+							<li><i class="icon_set_2_icon-116"></i>TV</li>
+							<li><i class="icon_set_1_icon-86"></i>무료 Wifi</li>
+							<li><i class="icon_set_2_icon-110"></i>수영장</li>
+							<li><i class="icon_set_1_icon-59"></i>조식</li>
+							<li><i class="icon_set_1_icon-22"></i>반려동물 허용</li>
+							<li><i class="icon_set_1_icon-13"></i>장애인</li>
+							<li><i class="icon_set_1_icon-27"></i>주차가능</li>
 						</ul>
 					</div>
 					<p class="d-none d-md-block d-block d-lg-none"><a class="btn_map" data-toggle="collapse" href="#collapseMap" aria-expanded="false" aria-controls="collapseMap" data-text-swap="Hide map" data-text-original="View on map">View on map</a>
@@ -212,14 +211,19 @@
 													<i class="icon-star-empty"></i>
 											</span>
 										</div>
-										<small th:text="'(Based on '+ ${tourReviewList.size()}+' reviews)'"></small>
+										<small th:text="${tourReviewList.size()}+'개의 후기가 작성되었습니다.'"></small>
 									<div>
 								</div>
 							</div>
 							<!-- End row -->
 							<hr>
 							<div class="review_strip_single" th:each="tourReview:${tourReviewList}">
+								<th:block th:if="${tourReview.users.userImg != null}">
 								<img th:src="@{upload-dir/{userImgUrl}(userImgUrl=${tourReview.users.userImg.userImgUrl})}" alt="Image" class="rounded-circle" width="15%" height="35%">
+								</th:block>
+								<th:block th:if="${tourReview.users.userImg == null}">
+								<img src="upload-dir/defaultImg.png" alt="Image" class="rounded-circle" width="15%" height="35%">
+								</th:block>
 								<form id="singleReviewF">
 								<small th:text="${#dates.format(tourReview.toReviewDate,'yyyy. MM. dd')}"> - 10 March 2015 -</small>
 								<h4 th:text="${tourReview.users.userId}">Jhon Doe</h4>
@@ -520,7 +524,12 @@
 	<hr>
 {{#each data}}
 	<div class="review_strip_single">
-		<img src="upload-dir/defaultImg.png" alt="Image" class="rounded-circle" width="15%" height="30%">
+		{{#ifCond users.userImg.userImgUrl '!=' 'defaultImg.png'}}
+			<img src="upload-dir/{{users.userImg.userImgUrl}}" alt="Image" class="rounded-circle" width="15%" height="35%">
+		{{/ifCond}}
+		{{#ifCond users.userImg.userImgUrl '==' 'defaultImg.png'}}
+			<img src="upload-dir/defaultImg.png" alt="Image" class="rounded-circle" width="15%" height="35%">
+		{{/ifCond}}
 		<form id="singleReviewF">
 			<small> 
 				{{#dateFormat toReviewDate}}
@@ -558,8 +567,8 @@
 					<div class="col-md-12 text-center">
 					{{#if @root.loginUser}}
 						{{#ifCond @root.loginUser.userId '==' users.userId}}
-							<button style="width:30%; font-size:13px; padding:5px;" value="{{toReviewNo}}" name="updateToReview">수정</button>
-							<button style="width:30%; font-size:13px; padding:5px;" value="{{toReviewNo}}" name="deleteToReview">삭제</button>	
+							<button class="btn_1" style="width:30%; font-size:13px; padding:5px;" value="{{toReviewNo}}" name="updateToReview">수정</button>
+							<button class="btn_1" style="width:30%; font-size:13px; padding:5px;" value="{{toReviewNo}}" name="deleteToReview">삭제</button>	
 						{{/ifCond}}
 					{{/if}}
 					</div>

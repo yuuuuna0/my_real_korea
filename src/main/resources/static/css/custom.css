@@ -393,6 +393,16 @@ a.btn_1.green, .btn_1.green {
     
 }
 
+.profile_pic2 {
+	float: none;
+    margin-bottom: 15px;
+    display: block;
+    margin: 0 auto;
+    height: 68px;
+    width: 68px;
+    
+}
+
 
 .filebox .upload-name {
     display: inline-block;

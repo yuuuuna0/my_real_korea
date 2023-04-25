@@ -140,8 +140,11 @@
 								
 							<div class="post_info clearfix" >
 								<div class="post-left" >
+									<div class="avatar">
+		                                <a href="user-view"><img src="img/defaultImg_s.png" class="img-fluid styled profile_pic2 rounded-circle" alt="Image" style="margin-top: 0px"></a>
+		                            </div>
 									<ul>
-										<li style="padding:5px 0px 5px 0px;">
+										<li style="padding:9px 0px 5px 0px;">
 										 <i class = "icon-user"></i>작성자<span th:text="${tripBoard.userId}" style="padding:0px 10px 0px 10px;"></span>
 										   <i class="icon-calendar-empty"></i> 작성일  
 										   <span th:text="${#dates.format(tripBoard.tBoDate,'yyyy.MM.dd')}" style="padding:0px 10px 0px 10px;">12 Nov 2020</span>
@@ -149,18 +152,18 @@
 										<li style="padding:5px 0px 5px 0px;" >
 											<i class="icon-users"></i>모집인원<span th:text="${tripBoard.tBoPerson}" style="padding:0px 10px 0px 10px;"></span>
 										   <i class="icon-calendar-empty"></i>여행일정<a th:text="${#dates.format(tripBoard.tBoStartDate, 'MM.dd')}" 
-										   style="padding:0px 10px 0px 10px; color:red ;"></a><a> ~ </a><a th:text="${#dates.format(tripBoard.tBoEndDate, 'MM.dd')}" 
-										   style="padding:0px 10px 0px 10px;color:red;"></a>
+										   style="padding:0px 10px 0px 10px; color:#ff6666;"></a><a> ~ </a><a th:text="${#dates.format(tripBoard.tBoEndDate, 'MM.dd')}" 
+										   style="padding:0px 10px 0px 10px;color:#ff6666;"></a>
 										   <i class="icon-map"></i>지역<span th:text="${tripBoard.city.cityName}" style="padding:0px 10px 0px 10px;">12 Nov 2020</span>
 										</li>
 									</ul>
 								</div>
 							</div>
-							
+							<br>
 							<div> 
 								<ul>
 									<li style="padding:5px 0px; font-family: NotoSansKR, Noto Sans CJK KR, sans-serif; font-size:16px;">
-									<i class = "icon-ok" ></i>저는 <a th:text="${tripBoard.tBoStyle}" style="color:#e14d67; font-weight:600;"></a> 여행자 입니다.
+									<i class = "icon-ok" ></i>저는 <a th:text="${tripBoard.tBoStyle}" style="color:#ff6666; font-weight:600;"></a> 여행자 입니다.
 									</li>
 								</ul>
 							</div>
@@ -172,7 +175,7 @@
 							<div>
 								<ul>
 								
-									<li><p th:text="${tripBoard.tBoContent}" style="white-space:pre-line;"></p></li>
+									<li><p th:text="${tripBoard.tBoContent}" style="white-space:pre-line; font-size:18px;"></p></li>
 								</ul>
 							</div>
 							<br>
@@ -215,15 +218,16 @@
                     	<li>
                         <div class="review_strip_single" id="tripboardcomment-detail" th:each="tripBoardComment:${tripBoardCommentList}">
                             <div class="avatar">
-                                <a href="user-view"><img src="img/avatar1.jpg" alt="Image"></a>
+                                <a href="user-view"><img src="img/defaultImg_s.png" class="img-fluid styled profile_pic2 rounded-circle" alt="Image"></a>
                             </div>
 
                             <div>
                                 <small name="tCoDate"
                                        th:text="${#dates.format(tripBoardComment.tCommentDate, 'yyyy-MM-dd')}"></small>
-                                <h4 style="font-size:15px;" name="tCoUserId" th:text="${tripBoardComment.userId}"></h4>
-                                <p name="tCoContent" th:text="${tripBoardComment.tCommentContent}" style="white-space:pre-line;"></p>
-
+                                <h4 style="font-size:20px; line-height:35px;" name="tCoUserId" th:text="${tripBoardComment.userId}"></h4>
+                                <br>
+                                <p name="tCoContent" th:text="${tripBoardComment.tCommentContent}" style="white-space:pre-line; font-size:17px;"></p>
+								<br>
                                 <div th:if="${loginUser != null && loginUser.userId == tripBoardComment.userId}">
                                     <a class="btn_1" href="" role="button" th:data-value="${tripBoardComment.tCoNo}"
                                        id="tripboardcomment-modify-form-btn">수정</a>
@@ -374,7 +378,7 @@
     {{#each data}}
             <div class="review_strip_single">
                 <div class="avatar">
-                    <a href="#"><img src="img/avatar1.jpg" alt="Image"></a>
+                    <a href="#"><img src="img/defaultImg_s.png" class="img-fluid styled profile_pic2 rounded-circle" alt="Image"></a>
                 </div>
                 <div>
                     <small name="tCoDate2"

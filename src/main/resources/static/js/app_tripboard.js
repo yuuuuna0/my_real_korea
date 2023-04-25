@@ -135,7 +135,7 @@ $(document).on('click', '#tripboard-write-action', function(e){
 		let url = 'tripboard';
 		let method = 'POST';
 		let formData = new FormData();
-		let tBoImg = "이미지";
+		let tBoImg = null;
 		let cityNo = $('input[name="cOptions"]:checked').val();
 		let tBoStyle = $('input[name="sOoptions"]:checked').val();
 		
@@ -148,7 +148,6 @@ $(document).on('click', '#tripboard-write-action', function(e){
 		formData.append('hashtag', $('#hashtag').val());
 		formData.append('cityNo', cityNo);
 		formData.append('userId', $('#userId').val());
-		formData.append('tBoImg', tBoImg);
 		
 		//업로드 파일 선택이 되었을 때만 FormData에 추가
 		let inputFile = $("input[type='file']");
@@ -216,6 +215,7 @@ $(document).on('click', '#tripboard-modify-action', function(e){
 		let url = `tripboard/${tBoNo}`;
 		let method = 'PUT';
 		let formData = new FormData();
+		let tBoImg = null;
 		let cityNo = $('input[name="cOptions"]:checked').val();
 		let tBoStyle = $('input[name="sOoptions"]:checked').val();
 		let tBoStatus;
@@ -235,7 +235,6 @@ $(document).on('click', '#tripboard-modify-action', function(e){
 		formData.append('hashtag', $('#hashtag').val());
 		formData.append('cityNo', cityNo);
 		formData.append('userId', $('#userId').val());
-		formData.append('tBoImg', $('#userId').val());
 		formData.append('tBoStatus', tBoStatus);
 		
 		//업로드 파일 선택이 되었을 때만 FormData에 추가

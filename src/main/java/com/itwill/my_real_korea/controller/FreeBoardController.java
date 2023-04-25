@@ -62,7 +62,14 @@ public class FreeBoardController {
     public String freeBoardListFBoNoAsc(@RequestParam(required = false, defaultValue = "1") int pageNo, Model model) {
         try {
             PageMakerDto<FreeBoard> freeBoardListPage = freeBoardService.selectAllOrderByFBoNoAsc(pageNo);
-            List<FreeBoard> freeBoardList = freeBoardListPage.getItemList();
+            List<FreeBoard> tempFreeBoardList = freeBoardListPage.getItemList();
+            List<FreeBoard> freeBoardList = new ArrayList<>();
+            for (FreeBoard freeBoard : tempFreeBoardList) {
+                int commentCount = freeBoardCommentService.selectByfBoNo(freeBoard.getFBoNo()).size();
+                freeBoard.setCommentCount(commentCount);
+                freeBoardList.add(freeBoard);
+            }
+            model.addAttribute("freeBoardListPage", freeBoardListPage);
             model.addAttribute("freeBoardList", freeBoardList);
             model.addAttribute("pageNo", pageNo);
         } catch (Exception e) {
@@ -76,7 +83,14 @@ public class FreeBoardController {
     public String freeBoardListFBoNoDesc(@RequestParam(required = false, defaultValue = "1") int pageNo, Model model) {
         try {
             PageMakerDto<FreeBoard> freeBoardListPage = freeBoardService.selectAllOrderByFBoNoDesc(pageNo);
-            List<FreeBoard> freeBoardList = freeBoardListPage.getItemList();
+            List<FreeBoard> tempFreeBoardList = freeBoardListPage.getItemList();
+            List<FreeBoard> freeBoardList = new ArrayList<>();
+            for (FreeBoard freeBoard : tempFreeBoardList) {
+                int commentCount = freeBoardCommentService.selectByfBoNo(freeBoard.getFBoNo()).size();
+                freeBoard.setCommentCount(commentCount);
+                freeBoardList.add(freeBoard);
+            }
+            model.addAttribute("freeBoardListPage", freeBoardListPage);
             model.addAttribute("freeBoardList", freeBoardList);
             model.addAttribute("pageNo", pageNo);
         } catch (Exception e) {
@@ -90,7 +104,14 @@ public class FreeBoardController {
     public String freeBoardListReadCountDesc(@RequestParam(required = false, defaultValue = "1") int pageNo, Model model) {
         try {
             PageMakerDto<FreeBoard> freeBoardListPage = freeBoardService.selectAllOrderByReadCountDesc(pageNo);
-            List<FreeBoard> freeBoardList = freeBoardListPage.getItemList();
+            List<FreeBoard> tempFreeBoardList = freeBoardListPage.getItemList();
+            List<FreeBoard> freeBoardList = new ArrayList<>();
+            for (FreeBoard freeBoard : tempFreeBoardList) {
+                int commentCount = freeBoardCommentService.selectByfBoNo(freeBoard.getFBoNo()).size();
+                freeBoard.setCommentCount(commentCount);
+                freeBoardList.add(freeBoard);
+            }
+            model.addAttribute("freeBoardListPage", freeBoardListPage);
             model.addAttribute("freeBoardList", freeBoardList);
             model.addAttribute("pageNo", pageNo);
         } catch (Exception e) {

@@ -271,8 +271,8 @@
 									</div>
 								<div class="col-md-12 text-center">
 									<th:block th:if="${loginUser!=null && loginUser.userId == tourReview.userId}">
-									<button th:value="${tourReview.toReviewNo}" name="updateToReview">수정</button>
-									<button th:value="${tourReview.toReviewNo}" name="deleteToReview">삭제</button>
+									<button class="btn_1" style="width:30%; font-size:13px; padding:5px;" th:value="${tourReview.toReviewNo}" name="updateToReview">수정</button>
+									<button class="btn_1" style="width:30%; font-size:13px; padding:5px;" th:value="${tourReview.toReviewNo}" name="deleteToReview">삭제</button>
 									</th:block>
 								</div>
 								</div>
@@ -558,8 +558,8 @@
 					<div class="col-md-12 text-center">
 					{{#if @root.loginUser}}
 						{{#ifCond @root.loginUser.userId '==' userId}}
-							<button value="{{toReviewNo}}" name="updateToReview">수정</button>
-							<button value="{{toReviewNo}}" name="deleteToReview">삭제</button>	
+							<button style="width:30%; font-size:13px; padding:5px;" value="{{toReviewNo}}" name="updateToReview">수정</button>
+							<button style="width:30%; font-size:13px; padding:5px;" value="{{toReviewNo}}" name="deleteToReview">삭제</button>	
 						{{/ifCond}}
 					{{/if}}
 					</div>

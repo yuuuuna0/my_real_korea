@@ -40,3 +40,4 @@ out/
 ##AWS
 /src/main/resources/application-credentials.yml
 /src/main/resources/application-aws.yml
+/src/main/java/com/itwill/my_real_korea/config/EmailConfig.java

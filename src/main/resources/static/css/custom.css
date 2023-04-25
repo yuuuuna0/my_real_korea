@@ -7,6 +7,57 @@
     font-style: normal;
 }
 
+@font-face {
+    font-family: 'MBC1961M';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-01@1.0/MBC1961M.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.slide-text h2, .slide-text h3 {
+    font-size: 50px;
+    font-weight: 300;
+    text-transform: uppercase;
+    line-height: 1;
+    font-family: "MBC1961M";
+}
+
+.categories_grid a .wrapper h5 {
+    color: #fff;
+    font-family: "MBC1961M";
+    font-size: 30px;
+    text-transform: uppercase;
+    margin: 0px 0px 20px 10px;
+    -webkit-transform: translateY(20px) translateZ(0);
+    -moz-transform: translateY(20px) translateZ(0);
+    -ms-transform: translateY(20px) translateZ(0);
+    -o-transform: translateY(20px) translateZ(0);
+    transform: translateY(20px) translateZ(0);
+    -webkit-transition: all 0.3s cubic-bezier(0.77, 0, 0.175, 1);
+    -moz-transition: all 0.3s cubic-bezier(0.77, 0, 0.175, 1);
+    -ms-transition: all 0.3s cubic-bezier(0.77, 0, 0.175, 1);
+    -o-transition: all 0.3s cubic-bezier(0.77, 0, 0.175, 1);
+    transition: all 0.3s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+.main_title h2 {
+    font-family: "MBC1961M";
+    font-size: 40px;
+    margin-bottom: 10px;
+    margin-top: 0;
+}
+.parallax-content-1 div h1, .parallax-content-1 div h3 {
+    font-size: 48px;
+    text-transform: uppercase;
+    color: #fff;
+    font-family: "MBC1961M";
+    font-weight: normal;
+    cursor: pointer;
+}
+.parallax-content-1 div h1:hover {
+	color: #e14d67;
+}
+
 body {
     font-size: 16px;
     font-family: "Pretendard-Regular", Arial, sans-serif;
@@ -152,7 +203,8 @@ header.sticky#colored #logo_home h1 a{
 }
 
 #wishlist-detail-btn p{
-    margin-bottom: 30px;
+    margin-bottom: 20px;
+    margin-top: 20px;
 }
 
 #wishlist-all-delete{
@@ -449,8 +501,72 @@ display: inline-block;
  vertical-align: top;
 }
 
-  .form-group button-tripboard,
-  .form-group a {
-    display: inline-block;
-    margin-right: 10px;
-  }
+.form-group button-tripboard, .form-group a {
+	display: inline-block;
+	margin-right: 10px;
+}
+
+#filters_col_wishlist {
+    background-color: #fff;
+    padding: 15px 10px 30px 15px;
+    border: 1px solid #ddd;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    margin-bottom: 40px;
+}
+#wishlist_name{
+	margin-bottom: 30px;
+}
+#wishlist_name h3{
+	font-size: 22px;
+}
+#rating_blank{
+    margin: 40px 0 3px -3px;
+    font-size: 15px;
+}
+ul.add_info li {
+    margin-right: 20px;
+    margin-left: 10px;
+}
+#freeboard-list-main{
+	color: #fff;
+}
+#freeboard-list-main:hover {
+	color: #e14d67;
+}
+#cat_shop #freeboard-write-form-btn{
+	padding-bottom: 10px;
+}
+#boardlist_tr2 td{
+	padding: 10px 0px 10px 20px;
+}
+#boardlist_tr2 td a{
+	padding: 0px 20px 0px 0px;
+}
+#boardlist_tr2 .icon-map{
+	padding: 0px 0px 0px 10px;
+}
+#cat_blog ul li a {
+    border-bottom: 1px solid #ededed;
+    padding: 10px 0;
+    display: block;
+    color: #888;
+    text-align: center;
+}
+a:not([href]):not([tabindex]) {
+    text-decoration: none;
+    color : #fff;
+}
+.main-menu ul li{
+    position: relative;
+    margin-bottom: 0;
+    margin: 0;
+    padding: 0;
+    margin-right: 5px;
+}
+.main-menu ul li a:hover{
+    color: #e14d67;
+    font-size: 22px;
+    font-family: "MBC1961M";
+}

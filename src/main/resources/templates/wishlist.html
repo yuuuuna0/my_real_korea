@@ -41,7 +41,7 @@
 	<div id="header" th:include="include-common-top::include-common-top"></div>
 	<!--======================== End Header======================== -->
 
-	<section class="parallax-window" data-parallax="scroll" data-image-src="img/wishlist_main.png" data-natural-width="1400" data-natural-height="470">
+	<section class="parallax-window" data-parallax="scroll" data-image-src="img/wishlist/wishlist_main.jpg" data-natural-width="1400" data-natural-height="470">
 		<div class="parallax-content-1">
 			<div class="animated fadeInDown">
 				<h1><a id="wishlist-main" href="wishlist">위시리스트</a></h1>
@@ -75,7 +75,7 @@
 			<div class="row">
 				<aside class="col-lg-3">
 					
-					<div id="filters_col">
+					<div id="filters_col_wishlist">
 						<div class="collapse show" id="collapseFilters">
 						<div class="filter_type">
 						<div class="widget" id="cat_shop">
@@ -120,7 +120,6 @@
 					<div  class="strip_all_tour_list wow fadeIn"  th:each="wishlist:${wishlistList}" data-wow-delay="0.1s" >
 						<div class="row" >
 							<div class="col-lg-4 col-md-4">
-								<div class="wishlist_close">-</div>
 								<div th:if="${wishlist.tour != null}" class="img_list">
 									<a th:href="@{tour-detail(toNo=${wishlist.tour.toNo})}" href="">
 										<img th:src="@{img/tour/{toImgUrl}(toImgUrl=${wishlist.tourImgList.get(0).toImgUrl})}" alt="Image">
@@ -134,12 +133,11 @@
 							</div>
 							<div class="col-lg-6 col-md-6">
 								<div class="tour_list_desc">
-									<div class="rating">
-									</div>
-									<div th:if="${wishlist.tour != null}">
+									<div class="rating" id="rating_blank"></div>
+									<div id="wishlist_name" th:if="${wishlist.tour != null}">
 									<h3><strong  th:text="${wishlist.tour.toName}"></strong> </h3>
 									</div>
-									<div th:if="${wishlist.ticket != null}">
+									<div id="wishlist_name" th:if="${wishlist.ticket != null}">
 									<h3 ><strong th:text="${wishlist.ticket.tiTitle}"></strong> </h3>
 									</div>
 									<ul class="add_info">
@@ -255,7 +253,6 @@
 <div class="strip_all_tour_list wow fadeIn" data-wow-delay="0.1s" >
 <div class="row">
 	<div class="col-lg-4 col-md-4">
-		<div class="wishlist_close">-</div>
 		<div class="img_list">
 			<a href="tour-detail?toNo={{tour.toNo}}">
 				<img src="img/tour/{{tourImgList.[0].toImgUrl}}" alt="Image">
@@ -264,7 +261,10 @@
 	</div>
 	<div class="col-lg-6 col-md-6">
 		<div class="tour_list_desc">
+			<div class="rating" id="rating_blank"></div>
+			<div id="wishlist_name" >
 			<h3><strong>{{tour.toName}}</strong> </h3>
+			</div>
 			<ul class="add_info">
 				<li>
 					<div class="tooltip_styled tooltip-effect-4">
@@ -312,7 +312,6 @@
 <div class="strip_all_tour_list wow fadeIn" data-wow-delay="0.1s" >
 <div class="row">
 	<div class="col-lg-4 col-md-4">
-		<div class="wishlist_close">-</div>
 		<div class="img_list">
 				<a href="ticket-detail?tiNo={{ticket.tiNo}}">
 				<img src="img/tour/{{ticketImgList.[0].tiImgUrl}}" alt="Image">
@@ -321,7 +320,10 @@
 	</div>
 	<div class="col-lg-6 col-md-6">
 		<div class="tour_list_desc">
+		<div class="rating" id="rating_blank"></div>
+			<div id="wishlist_name" >
 			<h3><strong>{{ticket.tiTitle}}</strong> </h3>
+			</div>
 			<ul class="add_info">
 				<li>
 					<div class="tooltip_styled tooltip-effect-4">

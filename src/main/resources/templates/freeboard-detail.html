@@ -81,7 +81,7 @@
 <!--======================== End Header======================== -->
 
 
-<section class="parallax-window" data-parallax="scroll" data-image-src="img/main_freeboard.jpg" data-natural-width="1400">
+<section class="parallax-window" data-parallax="scroll" data-image-src="img/freeboard/freeboard_main.jpg" data-natural-width="1400">
     <div class="parallax-content-1">
         <div class="animated fadeInDown">
             <h1>자유게시판 상세보기</h1>
@@ -137,8 +137,8 @@
                             <div th:if="${loginUser != null && loginUser.userId == freeBoard.userId}" style="text-align:right;">
                                 <input type="hidden" id="fBoNo-hidden"
                                        th:value="${freeBoard.fBoNo}"/>
-                                <a class="btn btn-danger" style="color:light;" type="button" onclick="fBoModify();">수정</a>
-                                <a class="btn btn-danger" style="color:light;" type="button" onclick="fBoDelete();">삭제</a>
+                                <a class="btn_1" type="button" onclick="fBoModify();">수정</a>
+                                <a class="btn_1" type="button" onclick="fBoDelete();">삭제</a>
                             </div>
                         </div>
                     </form>

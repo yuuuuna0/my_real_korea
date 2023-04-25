@@ -179,7 +179,7 @@
 						</div>
 						<div class="form-group">
 							<label>제목</label>
-							<textarea class="form-control style_2" name="fBoTitle" id="fBoTitle" style="height:30px;" placeholder="내용을 입력하세요." required="required"></textarea>
+							<textarea class="form-control style_2" name="fBoTitle" id="fBoTitle" style="height:35px;" placeholder="내용을 입력하세요." required="required"></textarea>
 							<div class="invalid-feedback">제목을 작성해주세요.</div>
 							<div th:if="${loginUser != null }">
 								<input type="hidden" id="userId" value="user1" th:value="${loginUser.userId}"/>
@@ -196,8 +196,8 @@
 					<br>
 					<br>
 					<div class="form-group">
-						<button type="submit" class="btn_1 green" id="freeboard-write-action">글쓰기</button>
-						<a href="freeboard-list" class="btn_1 green">취소</a>
+						<a type="submit" class="btn_1" style="color:white;" id="freeboard-write-action">글쓰기</a>
+						<a href="freeboard-list" class="btn_1" >취소</a>
 					</div>
 				</div>
 				<!-- End box_style_1-->

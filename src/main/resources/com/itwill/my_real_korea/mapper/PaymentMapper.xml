@@ -45,7 +45,7 @@
             FROM PAYMENT P
                      LEFT JOIN TICKET TI ON TI.TI_NO = P.TI_NO
                      LEFT JOIN TOUR TR ON TR.TO_NO = P.TO_NO
-            WHERE P.USER_ID=#{userId} ORDER BY P_NO DESC
+            WHERE P.USER_ID=#{userId} ORDER BY P_start_date DESC
     </select>
 
     <!--예약 상세보기 - 번호 누르면 -->

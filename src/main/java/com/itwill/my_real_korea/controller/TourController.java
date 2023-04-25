@@ -114,8 +114,8 @@ public class TourController {
 			} else{
 				forwardPath="error";
 			}
+			System.out.println("투어이미지가 붙어있을까요 아닐까요~~~~"+tour);
 			List<TourReview> tourReviewList=tourReviewService.findByToNo(toNo);
-			
 			model.addAttribute("tourReviewList", tourReviewList);
 		} catch (Exception e){
 			e.printStackTrace();
@@ -137,6 +137,7 @@ public class TourController {
 		String forwardPath="";		
 		try {
 			Tour tour=tourService.findTourWithCityByToNo(toNo);
+			tour.setTourImgList(tourImgService.findTourImgList(tour.getToNo()));
 			User loginUser=(User)session.getAttribute("loginUser");
 			SimpleDateFormat dateFormat= new SimpleDateFormat("yyyy-MM-dd");
 			Date date=dateFormat.parse(pStartDate);
@@ -151,6 +152,7 @@ public class TourController {
 			//1. session에 붙이기
 			session.setAttribute("payment", payment);
 			session.setAttribute("tour", tour);
+			System.out.println("야야야ㅑㅑㅑㅑㅑㅑㅑㅑ"+tour);
 			//2. model에 붙이기
 			//model.addAttribute("payment",payment);
 			forwardPath="tour-payment";
@@ -176,8 +178,6 @@ public class TourController {
 			User loginUser=(User)session.getAttribute("loginUser");
 			Payment payment=(Payment)session.getAttribute("payment");
 			Tour tour=(Tour)session.getAttribute("tour");
-			
-			
 			
 			//	페이지에서 받아온 값 payment에 넣어주기
 			payment.setPMsg(pMsg);

@@ -56,7 +56,7 @@
 	<div id="header" th:include="include-common-top::include-common-top"></div>
 	<!--======================== End Header======================== -->
 
-	<section class="parallax-window" data-parallax="scroll" data-image-src="img/single_hotel_bg_1.jpg" data-natural-width="1400" data-natural-height="470">
+	<section class="parallax-window" data-parallax="scroll" th:data-image-src="@{img/tour/{toImgUrl}(toImgUrl=${tour.tourImgList.get(0).toImgUrl})}" data-natural-width="1400" data-natural-height="470">
 		<div class="parallax-content-2">
 			<div class="container">
 				<div class="row">
@@ -69,12 +69,19 @@
 							<i class="icon-star voted"></i>
 							<i class="icon-star-empty"></i>
 						</span>
-						<h1 th:text=${tour.toName}>Mariott Hotel</h1>
+						<h1 th:text=${tour.toName}></h1>
 						<span>수정수정수정수정ㅊㅌㅊㅌㅊ.</span>
 					</div>
 					<div class="col-md-4">
 						<div id="price_single_main" class="hotel">
-							<span th:text="${tour.toType}" style="color: white; font-size: 20px;">from/per night</span>
+							<span style="color: white; font-size: 20px;">
+							<th:block th:if="${tour.toType ==1}">
+								패키지여행
+							</th:block>
+							<th:block th:if="${tour.toType ==2}">
+								자유여행 
+							</th:block>
+							</span>
 							<span th:text="${tour.toPrice}">95</span><sup>원</sup>
 						</div>
 					</div>
@@ -134,7 +141,7 @@
 					<!-- Map button for tablets/mobiles -->
 					<div id="Img_carousel" class="slider-pro">
 						<div class="sp-slides">
-							<!--투  이미지 -->
+							<!--투어 이미지 -->
 							<div class="sp-slide">
 							<th:block th:each="tourImg:${tour.tourImgList}">
 								<img alt="Image" class="sp-image" style="width:100%" th:src="@{img/tour/{toImgUrl}(toImgUrl=${tourImg.toImgUrl})}" th:data-src="@{img/tour/{toImgUrl}(toImgUrl=${tourImg.toImgUrl})}" th:data-small="@{img/tour/{toImgUrl}(toImgUrl=${tourImg.toImgUrl})}" th:data-medium="@{img/tour/{toImgUrl}(toImgUrl=${tourImg.toImgUrl})}" th:data-large="@{img/tour/{toImgUrl}(toImgUrl=${tourImg.toImgUrl})}" th:data-retina="@{img/tour/{toImgUrl}(toImgUrl=${tourImg.toImgUrl})}">
@@ -165,13 +172,13 @@
 
 					<div class="row" >
 						<div class="col-lg-3">
-							<h3>Reviews</h3>
+							<h3>&nbsp;&nbsp;여행 후기</h3>
 							<div th:if="${loginUser!=null}">
-								<button class="btn_1 add_bottom_30" id="myReviewBtn" data-toggle="modal" data-target="#myReviewModal" th:data-id="${loginUser.userId}">Leave a review
+								<button class="btn_1 add_bottom_30" id="myReviewBtn" data-toggle="modal" data-target="#myReviewModal" th:data-id="${loginUser.userId}">리뷰 남기기
 								</button>
 							</div>
 							<div th:if="${loginUser==null}">
-								<button class="btn_1 add_bottom_30" onclick="location.href='./user-login'" >Leave a review
+								<button class="btn_1 add_bottom_30" onclick="location.href='./user-login'" >리뷰 남기기
 								</button>
 							</div>
 						</div>
@@ -212,8 +219,7 @@
 							<!-- End row -->
 							<hr>
 							<div class="review_strip_single" th:each="tourReview:${tourReviewList}">
-								<img src="img/products/image-1.jpg" alt="Image" class="rounded-circle" width="10%" height="30%">
-								<div>
+								<img src="upload-dir/defaultImg.png" alt="Image" class="rounded-circle" width="15%" height="35%">
 								<form id="singleReviewF">
 								<small th:text="${#dates.format(tourReview.toReviewDate,'yyyy. MM. dd')}"> - 10 March 2015 -</small>
 								<h4 th:text=${tourReview.userId}>Jhon Doe</h4>
@@ -259,16 +265,19 @@
  									<img th:src="@{img/tourReview/{toReviewImg}(toReviewImg=${tourReview.toReviewImg})}" alt="Image" width="100%" height="110%">
 									</div>
 									<div class="col-md-12" style="height:90px" th:if="${tourReview.toReviewUpload != null}">
-										<img th:src="@{tourReviewImage/{uploadFile}(toReviewUpload=${tourReview.toReviewUpload})}" alt="Image" width="100%" height="100%">	
+										<img th:src="@{tourReviewImage/{toReviewUpload}(toReviewUpload=${tourReview.toReviewUpload})}" alt="Image" width="100%" height="110%">	
 									</div>
-								<div class="col-md-12 text-center" style="height:1px" th:if="${loginUser!=null && loginUser.userId == tourReview.userId}"> 
+									<div class="col-md-12" style="height:90px" th:if="${tourReview.toReviewUpload == null && tourReview.toReviewImg == null}">
+									</div>
+								<div class="col-md-12 text-center">
+									<th:block th:if="${loginUser!=null && loginUser.userId == tourReview.userId}">
 									<button th:value="${tourReview.toReviewNo}" name="updateToReview">수정</button>
 									<button th:value="${tourReview.toReviewNo}" name="deleteToReview">삭제</button>
+									</th:block>
 								</div>
 								</div>
 								</div>
 								</form>
-								</div>
 							</div>
 							<!-- End review strip -->
 						</div>
@@ -511,38 +520,51 @@
 	<hr>
 {{#each data}}
 	<div class="review_strip_single">
-	<form id="singleReviewF">
-		<img src="img/products/image-1.jpg" alt="Image" class="rounded-circle" width="20%" height="30%">
-		<small> 
-			{{#dateFormat toReviewDate}}
-			{{/dateFormat}}
-		</small>
-		<h4>
-			{{userId}}
-		</h4>
-		<div class="row">
-			<div class="col-md-9">
-				<h6>
-					<strong id="toReviewTitle">
-						{{toReviewTitle}}
-					</strong>
-				</h6>
+		<img src="upload-dir/defaultImg.png" alt="Image" class="rounded-circle" width="15%" height="30%">
+		<form id="singleReviewF">
+			<small> 
+				{{#dateFormat toReviewDate}}
+				{{/dateFormat}}
+			</small>
+			<h4>
+				{{userId}}
+			</h4>
+			<div class="row">
+				<div class="col-md-8">
+					<h6>
+						<strong id="toReviewTitle">
+							{{toReviewTitle}}
+						</strong>
+					</h6>
+					<br>
+					<p id="toReviewContent">
+						{{toReviewContent}}
+					</p>
+					<div class="rating" id="toReviewStar" value="{{toReviewStar}}">
+						<input type="hidden" id="toReviewStar" value="{{toReviewStar}}">
+	 					{{#generateStarHtml toReviewStar}}
+						{{/generateStarHtml}}
+					</div>
+				</div>
+				<div class="col-md-4 row">
+					<div class="col-md-12" style="height:90px">	
+					{{#if toReviewImg}}
+	 					<img src="img/tourReview/{{toReviewImg}}" alt="Image" width="100%" height="110%">
+					{{/if}}
+					{{#if toReviewUpload}}
+						<img src="tourReviewImage/{{toReviewUpload}}" alt="Image" width="100%" height="110%">	
+					{{/if}}
+					</div>
+					<div class="col-md-12 text-center">
+					{{#if @root.loginUser}}
+						{{#ifCond @root.loginUser.userId '==' userId}}
+							<button value="{{toReviewNo}}" name="updateToReview">수정</button>
+							<button value="{{toReviewNo}}" name="deleteToReview">삭제</button>	
+						{{/ifCond}}
+					{{/if}}
+					</div>
+				</div>
 			</div>
-			{{#ifCond @root.loginUser.userId '===' userId}}
-			<div class="col-md-3"> 
-				<button value="{{toReviewNo}}" name="updateToReview">수정</button>
-				<button value="{{toReviewNo}}" name="deleteToReview">삭제</button>
-			</div>
-			{{/ifCond}}
-		</div>
-		<br>
-		<p id="toReviewContent">
-			{{toReviewContent}}
-		</p>
-		<div class="rating" id="toReviewStar" value="{{toReviewStar}}">
-	 		{{#generateStarHtml toReviewStar}}
-			{{/generateStarHtml}}
-		</div>
 		</form>
 	</div>
 	<!-- End review strip -->

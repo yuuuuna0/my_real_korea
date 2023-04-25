@@ -31,10 +31,10 @@
 							<div class="row">
 								<div class="col-lg-2 col-md-2">
 									<div class="date">
-										<span class="month" th:text="${#dates.format(payment.pDate,'MMM')}">Dec</span>
+										<span class="month" th:text="${#dates.format(payment.pStartDate,'MMM')}">Dec</span>
 										<span class="day">
-											<strong th:text="${#dates.format(payment.pDate,'dd')}">27</strong>
-											<th:block th:text="${#dates.format(payment.pDate,'EEE')}">Fri</th:block>
+											<strong th:text="${#dates.format(payment.pStartDate,'dd')}">27</strong>
+											<th:block th:text="${#dates.format(payment.pStartDate,'EEE')}">Fri</th:block>
 										</span>
 									</div>
 								</div>

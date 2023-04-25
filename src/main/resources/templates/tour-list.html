@@ -103,7 +103,7 @@
 				<aside class="col-lg-3">
 					<div class="widget">
 						<div class="input-group">
-							<input id="tour-search-keyword" type="text" class="form-control" placeholder="Search...">
+							<input id="tour-search-keyword" type="text" class="form-control" placeholder="키워드를 검색하세요...">
 							<span id="tour-search-btn"  class="input-group-btn">
 		                    <button class="btn btn-default" type="button" style="margin-left:0;"><i class="icon-search"></i></button>
 		                    </span>
@@ -113,10 +113,10 @@
 					<hr>
 
 					<div id="filters_col">
-						<a data-toggle="collapse" href="#collapseFilters" aria-expanded="false" aria-controls="collapseFilters" id="filters_col_bt"><i class="icon_set_1_icon-65"></i>Filters</a>
+						<a data-toggle="collapse" href="#collapseFilters" aria-expanded="false" aria-controls="collapseFilters" id="filters_col_bt"><i class="icon_set_1_icon-65"></i>필터</a>
 						<div class="collapse show" id="collapseFilters">
 							<div class="filter_type">
-								<h6>Price</h6>
+								<h6>가격</h6>
 								<input type="text" id="range" name="range" value="">
 							</div>
 							<div class="filter_type" id="cityListDiv">
@@ -165,9 +165,9 @@
 								<div class="row">
 									<div class="col-6">
 										<div id="page-info" class="results_shop">
-											Showing 
-											<span id="cur-page" th:text="${tourListPage.pageMaker.curPage}"></span> of 
-											<span id="tot-record-count" th:text="${tourListPage.totRecordCount}"></span> results
+											전체 &nbsp;:&nbsp;<span th:text="${tourListPage.totRecordCount}"></span>&nbsp;건 중&nbsp;&nbsp;||
+											&nbsp;&nbsp;<span id="tot-record-count" th:text="${tourListPage.pageMaker.pageBegin}"></span> >>
+											<span id="tot-record-count" th:text="${tourListPage.itemList.size()+9*tourListPage.pageMaker.prevPage}"></span>
 										</div>
 									</div>
 									<div class="col-6">

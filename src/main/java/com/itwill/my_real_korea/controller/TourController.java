@@ -116,6 +116,9 @@ public class TourController {
 			}
 			System.out.println("투어이미지가 붙어있을까요 아닐까요~~~~"+tour);
 			List<TourReview> tourReviewList=tourReviewService.findByToNo(toNo);
+			for (TourReview tourReview : tourReviewList) {
+				System.out.println("아아아아아ㅏ아아"+tourReview);
+			}
 			model.addAttribute("tourReviewList", tourReviewList);
 		} catch (Exception e){
 			e.printStackTrace();

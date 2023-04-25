@@ -2,6 +2,8 @@ package com.itwill.my_real_korea.dto.tour;
 
 import java.util.Date;
 
+import com.itwill.my_real_korea.dto.user.User;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -30,11 +32,11 @@ public class TourReview {
 	private String toReviewImg;
 	private int toReviewStar;
 	private int toNo;	//FK
-	private String userId;	//FK
+	private User users;	//FK
 	private String toReviewUpload;
 	
 	public TourReview(int toReviewNo, Date toReviewDate, String toReviewTitle, String toReviewContent,
-			String toReviewImg, int toReviewStar, int toNo, String userId) {
+			String toReviewImg, int toReviewStar, int toNo, User users) {
 		this.toReviewNo = toReviewNo;
 		this.toReviewDate = toReviewDate;
 		this.toReviewTitle = toReviewTitle;
@@ -42,7 +44,7 @@ public class TourReview {
 		this.toReviewImg = toReviewImg;
 		this.toReviewStar = toReviewStar;
 		this.toNo = toNo;
-		this.userId = userId;
+		this.users = users;
 	}
 	
 }

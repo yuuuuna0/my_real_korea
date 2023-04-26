@@ -92,10 +92,10 @@
 									</div>
 								</div>
 								<div class="col-lg-6 col-md-5">
-									<h3 class="tours_booking" th:if = "${tripBoard.userId != null}" style="font-weight:bold; line-height:0px">
+									<h3 class="tours_booking" th:if = "${tripBoard.userId != null}" style="font-weight:bold; line-height:0px; font-size:21px;">
 										 <th:block th:text="${tripBoard.tBoTitle}"></th:block>
 									</h3>
-									<h3 th:if = "${tripBoard.userId != null}" style="font-size:13px;">
+									<h3 th:if = "${tripBoard.userId != null}" style="font-size:15px;">
 										 <th:block th:text="${tripBoard.tBoContent}"></th:block>
 									</h3>
 								</div>
@@ -103,14 +103,14 @@
 								<div class="col-lg-2 col-md-3">
 									
 									
-									<ul class="info_booking">
+									<ul class="info_booking" style="font-size:13px;">
 											
 										<li>
-											<strong>여행시작일</strong>
+											<strong style="margin-bottom:3px;">여행시작일</strong>
 											<span th:text="${#dates.format(tripBoard.tBoStartDate, 'yyyy-MM-dd')}">23442</span>
 										</li>
 										<li>
-											<strong>여행종료일</strong>
+											<strong style="margin-bottom:3px;">여행종료일</strong>
 											<span th:text="${#dates.format(tripBoard.tBoEndDate, 'yyyy-MM-dd')}">23442</span>
 										</li>
 											
@@ -118,8 +118,9 @@
 								</div>
 								<div class="col-lg-2 col-md-2">
 								<form>
-									<div class="booking_buttons" style="margin-top:30px; margin-left:35px">
-										<button th:href="@{tripboard-detail(tBoNo=${tripBoard.tBoNo})}" class="btn_2">보러가기</button>
+									<div class="booking_buttons" style="margin-top:30px;">
+										<a class="btn_2" th:href="@{tripboard-detail(tBoNo=${tripBoard.tBoNo})}" role="button">보러가기
+										</a>
 									</div>
 									</form>
 								</div>

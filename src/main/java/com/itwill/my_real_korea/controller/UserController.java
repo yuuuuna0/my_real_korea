@@ -105,7 +105,7 @@ public class UserController {
 	        User loginUser = userService.findUser(kakaoUser.getUserId());
 	        session.setAttribute("loginUser", loginUser);
 	    } else {
-	    	User newUser = new User(userId, password, name, nickname, null, email, new Date(), "제주", gender, 0, 1, 1, 0);
+	    	User newUser = new User(userId, password, name, nickname, " ", email, new Date(), "제주", gender, 0, 1, 1, 0);
 	        userService.create(newUser);
 	        session.setAttribute("user_id", userId);
 	    }

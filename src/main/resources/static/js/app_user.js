@@ -272,22 +272,21 @@ function validatePassword(password1, password2, passwordsInfo){
 		e.preventDefault();	
 	});
 }
-
 //회원 가입
 $(document).on('click','#btn-user-create',function(e) {
     	
-	  const user = {
-	  userId: $("#userId").val(),
-	  password: $("#password1").val(),
-	  password2: $("#password2").val(),
-	  name: $("#name").val(),
-	  nickname: $("#nickname").val(),
-	  phone: $("#phone").val(),
-	  email: $("#email").val(),
-	  birth: $("#birth").val(),
-	  address: $("#address").val(),
-	  gender: $("#gender:checked").val()
-	  };
+	  var user = {};
+	  user.userId = $("#userId").val();
+	  user.password = $("#password1").val();
+	  user.password2 = $("#password2").val();
+	  user.name = $("input[name=name]").val();
+	  user.nickname = $("input[name=nickname]").val();
+	  user.phone = $("input[name=phone]").val();
+	  user.email = $("input[name=email]").val();
+	  user.birth = $("input[name=birth]").val();
+	  user.address = $("input[name=address]").val();
+	  user.gender = $("input[name=gender]:checked").val();
+	  
 	  
 	const termsService = document.getElementById("termsService");
 	const termsPrivacy = document.getElementById("termsPrivacy");
@@ -314,38 +313,38 @@ $(document).on('click','#btn-user-create',function(e) {
 		return false;
 	}
 	if (user.name === "") {
-		toastr.error("이름을 입력하세요.");
-	    $("#name").focus();
+	    toastr.error("이름을 입력하세요.");
+	    $("input[name=name]").focus();
 	    return false;
 	}
 	if (user.nickname === "") {
-		toastr.error("닉네임을 입력하세요.");
-	    $("#nickname").focus();
+	    toastr.error("닉네임을 입력하세요.");
+	    $("input[name=nickname]").focus();
 	    return false;
 	}
 	if (user.phone === "") {
 		toastr.error("휴대폰 번호를 입력하세요.");
-	    $("#phone").focus();
+	    $("input[name=phone]").focus();
 		return false;
 	}
 	if (user.email === "") {
 		toastr.error("이메일 주소를 입력하세요.");
-	    $("#email").focus();
+	    $("input[name=email]").focus();
 		return false;
 	}
 	if (user.birth === "") {
 		toastr.error("생년월일을 입력하세요.");
-	    $("#birth").focus();
+	    $("input[name=birth]").focus();
 		return false;
 	}
 	if (user.address === "") {
 		toastr.error("주소를 입력하세요.");
-	    $("#address").focus();
+	    $("input[name=address]").focus();
 		return false;
 	}
 	if (user.gender === "") {
 		toastr.error("성별을 선택하세요.");
-	    $("#gender").focus();
+	    $("input[name=gender]").focus();
 		return false;
 	}
 	$.ajax({
@@ -369,7 +368,6 @@ $(document).on('click','#btn-user-create',function(e) {
 	}); 
 	e.preventDefault();		
 });
-
 /******************************************************************/
 
 

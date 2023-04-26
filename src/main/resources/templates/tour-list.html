@@ -56,7 +56,7 @@
 	<div id="header" th:include="include-common-top::include-common-top"></div>
 	<!--======================== End Header======================== -->
 
-	<section class="parallax-window" data-parallax="scroll" data-image-src="img/hotels_bg.jpg" data-natural-width="1400" data-natural-height="470">
+	<section class="parallax-window" data-parallax="scroll" data-image-src="img/tour/tour_list_main.jpg" data-natural-width="1400" data-natural-height="470">
 		<div class="parallax-content-1">
 			<div class="animated fadeInDown">
 				<h1>투어상품목록</h1>
@@ -87,12 +87,19 @@
 
 		<div class="container margin_60">
 		
-				<!-- 위시리스트 성공시 toast (민선)-->
-			<div class="toast align-items-center" role="alert" id="wishlist-add-toast" 
-						aria-live="assertive" aria-atomic="true" >
+			<!-- 위시리스트 성공시 toast (민선)-->
+			<div class="toast align-items-center" role="alert" id="wishlist-add-toast" aria-live="assertive" aria-atomic="true" >
 			  <div class="d-flex">
 			    <div class="toast-body">
 			    위시리스트에 상품이 추가되었습니다!
+			   </div>
+			  </div>
+			</div>
+			<!-- 위시리스트 이미 담긴 상품일 시 toast (민선)-->
+			<div class="toast align-items-center" role="alert" id="wishlist-added-toast" aria-live="assertive" aria-atomic="true" >
+			  <div class="d-flex">
+			    <div class="toast-body">
+			    이미 위시리스트에 추가된 상품입니다.
 			   </div>
 			  </div>
 			</div>

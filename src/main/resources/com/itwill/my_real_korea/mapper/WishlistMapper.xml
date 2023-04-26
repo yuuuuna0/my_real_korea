@@ -32,6 +32,16 @@
 </select>
 
 <!--  위시리스트 담겨있는 티켓/투어 상품의 수   -->
+<select id="selectWishlistTourCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+	select count(*) from wishlist where user_id=#{userId} and to_no=#{toNo}
+</select>
+
+<!--  위시리스트 담겨있는 티켓/투어 상품의 수   -->
+<select id="selectWishlistTicketCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+	select count(*) from wishlist where user_id=#{userId}and ti_no=#{tiNo}
+</select>
+
+<!--  위시리스트 담겨있는 티켓/투어 상품의 수   -->
 <select id="selectWishlistCount" parameterType="String" resultType="java.lang.Integer">
 	select count(*) from wishlist where user_id=#{userId}
 </select>

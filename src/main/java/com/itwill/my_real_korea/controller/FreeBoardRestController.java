@@ -35,20 +35,26 @@ public class FreeBoardRestController {
 
     @ApiOperation(value = "자유게시판 리스트 최신순")
     @GetMapping(value = "/fBoList", produces = "application/json;charset=UTF-8")
-    public Map<String, Object> fBoListFBoNoDesc(@RequestParam(required = false, defaultValue = "1") Integer pageno) {
+    public Map<String, Object> fBoListFBoNoDesc(@RequestParam(required = false, defaultValue = "1") Integer pageno, Integer cityNo) throws Exception {
         Map<String, Object> resultMap = new HashMap<>();
         PageMakerDto<FreeBoard> freeBoardList = null;
+        List<City> cityList = cityService.findAllCity();
+        
         try {
             freeBoardList = freeBoardService.selectAllOrderByFBoNoDesc(pageno);
             List<FreeBoard> data = new ArrayList<FreeBoard>();
+           
             for (FreeBoard freeBoard : data) {
             	int commentCount = freeBoardCommentService.selectByfBoNo(freeBoard.getFBoNo()).size();
             	freeBoard.setCommentCount(commentCount);
+            	cityNo=freeBoard.getCity().getCityNo();
+            	freeBoard.setCity(cityService.findByCityNo(cityNo));
             	data.add(freeBoard);
             }
             resultMap.put("errorCode", 1);
             resultMap.put("errorMsg", "성공");
             resultMap.put("data", freeBoardList);
+            resultMap.put("data.itemList.city", cityList);
         } catch (Exception e) {
             e.printStackTrace();
             resultMap.put("errorCode", -1);

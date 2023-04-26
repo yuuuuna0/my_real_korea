@@ -519,7 +519,7 @@ display: inline-block;
 	margin-bottom: 30px;
 }
 #wishlist_name h3{
-	font-size: 22px;
+	font-size: 20px;
 }
 #rating_blank{
     margin: 40px 0 3px -3px;
@@ -554,10 +554,6 @@ ul.add_info li {
     color: #888;
     text-align: center;
 }
-a:not([href]):not([tabindex]) {
-    text-decoration: none;
-    color : #fff;
-}
 .main-menu ul li{
     position: relative;
     margin-bottom: 0;
@@ -586,4 +582,22 @@ h2 {
 #fbo-category{
 	margin-top: 50px;
 	
+}
+.room-name-about{
+	font-size: 25px;
+    font-family: "MBC1961M";
+}
+.price_list {
+    display: table;
+    height: 220px;
+    font-size: 38px;
+    color: #e74c3c;
+    width: 100%;
+    margin-left: -5px;
+}
+.category li{
+	font-family: "MBC1961M";
+	font-size: 22px;
+	margin-bottom: 10px;
+    margin-top: 10px;
 }

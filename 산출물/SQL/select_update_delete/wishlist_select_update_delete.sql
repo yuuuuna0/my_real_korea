@@ -26,7 +26,9 @@ select * from wishlist where wish_no=3;
 
 -- 위시리스트 담겨있는 티켓/투어 상품의 수 
 select count(*) from wishlist where user_id='user1';
-
+-- 위시리스트 티켓/투어 담겨있는 지 여부 (중복확인) 
+select count(*) from wishlist where user_id='admin' and to_no=1;
+select count(*) from wishlist where user_id='aaa111' and ti_no=1;
 -- 위시리스트 전체 삭제 
 delete wishlist where user_id='user1';
 

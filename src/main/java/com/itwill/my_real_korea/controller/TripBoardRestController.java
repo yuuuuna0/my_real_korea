@@ -82,6 +82,7 @@ public class TripBoardRestController {
 		List<TripBoard> data = new ArrayList<TripBoard>();
 		
 		try {
+			tripBoard.setTBoImg("gyeonggi.jpg");
 			// 동행 게시글 쓰기, 성공시 code 1
 			City city=cityService.findByCityNo(cityNo);
 			tripBoard.setCity(city);
@@ -94,6 +95,7 @@ public class TripBoardRestController {
 				//업로드된 파일로 tUploadFile update
 				tripBoardService.updateUploadFile(file.getOriginalFilename(), tripBoard.getTBoNo());
 				System.out.println(">>>>>>>>>>>>" + file.getOriginalFilename());
+				tripBoard.setTBoImg("");
 			}
 			//이미지 있다면 tBoImg update
 			if(tripBoard.getTBoImg() != null) {
@@ -132,6 +134,7 @@ public class TripBoardRestController {
 		String msg = "성공";
 		List<TripBoard> data = new ArrayList<TripBoard>();
 		try {
+			tripBoard.setTBoImg("gyeonggi.jpg");
 			// tBoNo로 동행 게시글 1개 찾기, 수정 성공시 code 1
 			City city=cityService.findByCityNo(cityNo);
 			tripBoard.setCity(city);

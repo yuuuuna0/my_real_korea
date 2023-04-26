@@ -8,7 +8,7 @@
 
 	<meta name="description" content="Citytours - Premium site template for city tours agencies, transfers and tickets.">
 	<meta name="author" content="Ansonika">
-	<title>CITY TOURS - City tours and travel site template by Ansonika</title>
+	<title>마이리얼코리아-동행게시판 상세</title>
 
 	<!-- Favicons-->
 	<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
@@ -127,12 +127,11 @@
 					<div class="box_style_1">
 						<div class="post nopadding">
 						<div th:if="${tripBoard.tBoImg}">
-						<img src="upload-dir/default_tBoImg.png"  alt="Image" class="img-fluid">
+							<img th:src="@{img/tripboard/{tBoImg}(tBoImg=${tripBoard.tBoImg})}"  alt="Image" class="img-fluid">
 						</div>
 						<div th:if="${tripBoard.tUploadFile}">
-						<img th:src="@{tripboardimages/{tUploadFile}(tUploadFile=${tripBoard.tUploadFile})}"  alt="Image" class="img-fluid">
-						
-								</div>
+							<img th:src="@{tripboardimages/{tUploadFile}(tUploadFile=${tripBoard.tUploadFile})}"  alt="Image" class="img-fluid">
+						</div>
 								<!-- 동행게시판 제목 들어가는 곳 -->
 								<ul>
 								<li><h2 th:text="${tripBoard.tBoTitle}"></h2></li>
@@ -288,12 +287,10 @@
 					<hr>
 					<!-- Chat icon (민선) -->
 					<div id="chat-icon-top" class="chat-icon-top">
-						<div id="chat-img-top" class="chat-img-top" >
 							<input id="chat-tripboard-userId" type="hidden" th:value="${tripBoard.userId}">
 					   		<a href="#" id="chat-pop-up-click" >
 					   			<img src="img/messenger2.png" id="messenger-icon"></a>
-						<span class="tooltiptext tooltip-left">1:1 채팅</span>
-						</div>
+						<h1>1:1 채팅</h1>
 					</div>
 					<!-- End Chat icon -->
 					<!-- End widget -->

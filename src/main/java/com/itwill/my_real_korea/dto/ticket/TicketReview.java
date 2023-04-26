@@ -20,7 +20,22 @@ public class TicketReview {
     private String tiReviewImg;
     private String tiReviewImgUpload;   //수정된 이미지
     private int tiReviewStar;
-    private int tiNo;
+	private int tiNo;
     private User user;
+    private Ticket ticket;
+    public TicketReview(int tiReviewNo, Date tiReviewDate, String tiReviewTitle, String tiReviewContent,
+    		String tiReviewImg, String tiReviewImgUpload, int tiReviewStar, int tiNo, User user) {
+    	super();
+    	this.tiReviewNo = tiReviewNo;
+    	this.tiReviewDate = tiReviewDate;
+    	this.tiReviewTitle = tiReviewTitle;
+    	this.tiReviewContent = tiReviewContent;
+    	this.tiReviewImg = tiReviewImg;
+    	this.tiReviewImgUpload = tiReviewImgUpload;
+    	this.tiReviewStar = tiReviewStar;
+    	this.tiNo = tiNo;
+    	this.user = user;
+    	this.ticket=new Ticket();
+    }
 
 }

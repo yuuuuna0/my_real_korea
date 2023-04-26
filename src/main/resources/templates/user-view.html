@@ -8,7 +8,7 @@
 
 	<meta name="description" content="Citytours - Premium site template for city tours agencies, transfers and tickets.">
 	<meta name="author" content="Ansonika">
-	<title>CITY TOURS - City tours and travel site template by Ansonika</title>
+	<title>마이리얼코리아-회원정보</title>
 
 	<!-- Favicons-->
 	<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
@@ -30,6 +30,7 @@
 	
 	<!-- CUSTOM CSS -->
 	<link href="css/custom.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
 <!-- ajax, handlebars 
 <script  defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
 <script  defer src="js/jquery.validate.js"></script>
@@ -44,44 +45,32 @@
 	
 <script type="text/javascript">
 
-	function userModify() {
-		document.f.action = "user-modify-plain";
-		document.f.submit();
+const phoneNumber = (target) => {
+	 target.value = target.value
+	   .replace(/[^0-9]/g, '')
+	   .replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`);
+	}
+	  
+	function kakaopost() {
+		    new daum.Postcode({
+		        oncomplete: function(data) {
+		           document.querySelector("#address").value = data.address
+		        }
+		    }).open();
 	}
 	
+
 	function userRemove() {
 		if (confirm("정말 탈퇴하시겠습니까?")) {
 			document.f.action = "user-remove-action";
 			document.f.submit();
 		}
 	}
-		
-	function userView() {
-		if (confirm("정말 취소하시겠습니까?")) {
-			location.href = "user-view";
-		}
-	}
-	
-	  const hypenTel = (target) => {
-	 target.value = target.value
-	   .replace(/[^0-9]/g, '')
-	   .replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`);
-	}
-	  
-	 function kakaopost() {
-		    new daum.Postcode({
-		        oncomplete: function(data) {
-		           document.querySelector("#address").value = data.address
-		        }
-		    }).open();
-		}
-	  
+  
 	 function modifyImg() {
 			document.i.action = "user-img-modify-action";
 			document.i.submit();
 		} 
-	 
-		
 		
 </script>
 <script th:inline="javascript">
@@ -91,16 +80,6 @@
 
 <body>
 
-
-	<div id="preloader">
-		<div class="sk-spinner sk-spinner-wave">
-			<div class="sk-rect1"></div>
-			<div class="sk-rect2"></div>
-			<div class="sk-rect3"></div>
-			<div class="sk-rect4"></div>
-			<div class="sk-rect5"></div>
-		</div>
-	</div>
 	<!-- End Preload -->
 
 	<div class="layer"></div>
@@ -213,6 +192,8 @@
 							<br><br><br>
 					<div style="text-align: center;">
 					<input id="btn-user-modify-form" value="프로필 수정" class="btn_1 green" type="button"> 
+					<input id="btn-user-remove" value="회원 탈퇴" class="btn_1 green" type="button"> 
+					
 					<button class="btn_1 green" type="button" onclick="userRemove();">회원 탈퇴</button>	
 					</div>
 			</form>
@@ -241,73 +222,13 @@
 	<div id="toTop"></div><!-- Back to top button -->
 	
 	<!-- Search Menu -->
-	<div class="search-overlay-menu">
-		<span class="search-overlay-close"><i class="icon_set_1_icon-77"></i></span>
-		<form role="search" id="searchform" method="get">
-			<input value="" name="q" type="search" placeholder="Search..." />
-			<button type="submit"><i class="icon_set_1_icon-78"></i>
-			</button>
-		</form>
-	</div><!-- End Search Menu -->
-	
+	<!-- End Search Menu -->
 	<!-- Sign In Popup -->
-	<div id="sign-in-dialog" class="zoom-anim-dialog mfp-hide">
-		<div class="small-dialog-header">
-			<h3>Sign In</h3>
-		</div>
-		<form>
-			<div class="sign-in-wrapper">
-				<a href="#0" class="social_bt facebook">Login with Facebook</a>
-				<a href="#0" class="social_bt google">Login with Google</a>
-				<div class="divider"><span>Or</span></div>
-				<div class="form-group">
-					<label>Email</label>
-					<input type="email" class="form-control" name="email" id="email">
-					<i class="icon_mail_alt"></i>
-				</div>
-				<div class="form-group">
-					<label>Password</label>
-					<input type="password" class="form-control" name="password" id="password" value="">
-					<i class="icon_lock_alt"></i>
-				</div>
-				<div class="clearfix add_bottom_15">
-					<div class="checkboxes float-left">
-						<input id="remember-me" type="checkbox" name="check">
-						<label for="remember-me">Remember Me</label>
-					</div>
-					<div class="float-right"><a id="forgot" href="javascript:void(0);">Forgot Password?</a></div>
-				</div>
-				<div class="text-center"><input type="submit" value="Log In" class="btn_login"></div>
-				<div class="text-center">
-					Don’t have an account? <a href="javascript:void(0);">Sign up</a>
-				</div>
-				<div id="forgot_pw">
-					<div class="form-group">
-						<label>Please confirm login email below</label>
-						<input type="email" class="form-control" name="email_forgot" id="email_forgot">
-						<i class="icon_mail_alt"></i>
-					</div>
-					<p>You will receive an email containing a link allowing you to reset your password to a new preferred one.</p>
-					<div class="text-center"><input type="submit" value="Reset Password" class="btn_1"></div>
-				</div>
-			</div>
-		</form>
 		<!--form -->
-	</div>
 	<!-- /Sign In Popup -->
-<!-- 
-<script type="text/javascript">
 
-Handlebars.registerHelper('ifEquals', function(arg1, arg2, options) {
-    return (arg1 == arg2) ? options.fn(this) : options.inverse(this);
-});
-</script>	 -->	
-<!-- 
- -->
 <script id="user-modify-form-template" type="text/x-handlebars-template">
 {{#each data}}
-
-
 <form method = "POST" name = "f" id = "user-modify-form">
 		<input type="hidden"  id="userId" value="{{userId}}" >
 		<div class="row" >
@@ -319,29 +240,29 @@ Handlebars.registerHelper('ifEquals', function(arg1, arg2, options) {
 				<li>이름
 				<span>{{name}}</span>
 				</li>
-
+	<div class="form-group">
 				<li>비밀번호
-				<span><input type = "password" class ="form-control-user" name = "password" id = "password"></span>
+				<span><input type = "password" class ="form-control-user" name = "password1" id = "password1" placeholder="8 - 12글자의 영어, 숫자, 특수문자" ></span>
 				</li>
+</div>
+	<div class="form-group">
 				<li>비밀번호 확인
 				<span><input type = "password" class= "form-control-user" name = "password2" id = "password2"></span>
 				</li>
+</div>
+				<div id="pass-info" class="clearfix"></div>
 				<li>닉네임 
 				<span><input class = "form-control-user" type = "text" required="required" value="{{nickname}}" id = "nickname"></span>
 				</li>
 				<li>휴대폰
-				<span><input class = "form-control-user" type = "text" oninput="hypenTel(this)" maxlength="13" required="required" value="{{phone}}" id = "phone"></span>
+				<span><input class = "form-control-user" type = "text" oninput="phoneNumber(this)" maxlength="13" required="required" value="{{phone}}" id = "phone"></span>
 				</li>
 				<li>이메일 
 				<span><input id="email" class=" form-control-user " type="text" required="required" value="{{email}}"></span>
 				</li>
-
 				<li>생일
-					<span>
-			<input class="start-date-pick form-control" data-date-format="yyyy-MM-dd" type="date" id="birth" name="birth" value="{{dateFormat3 birth}}" >
-					</span>
+				<span><input class="start-date-pick form-control-user" data-date-format="yyyy-MM-dd" type="date" id="birth" name="birth" value="{{dateFormat3 birth}}" ></span>
 				</li>
-
 				<div> 
 					<li>주소 
 						<span><input id="address" class=" form-control-user " type="text" required="required" value="{{address}}" disabled > 
@@ -350,10 +271,10 @@ Handlebars.registerHelper('ifEquals', function(arg1, arg2, options) {
 					</li>
 				</div>
 
-			<li>성별 <span th:text="*{gender == 1} ? '남' : '여'"></span></li>
+				<li>성별 <span th:text="*{gender == 1} ? '남' : '여'"></span></li>
 
-		    <li>포인트 <span>{{point}}p</span></li>
-		</ul>
+		    	<li>포인트 <span>{{point}}p</span></li>
+			</ul>
 	
 
 		<ul id="profile_summary_user">
@@ -400,7 +321,7 @@ Handlebars.registerHelper('ifEquals', function(arg1, arg2, options) {
 
 	<div style="text-align: center;">
 	<input id="btn-user-modify-action" value="수정 완료" class="btn_1 green" type="button"> 
-	<input value="수정 취소" class="btn_1 green" type="button" onclick="userView();">
+	<input id="btn-user-modify-cancle" value="수정 취소" class="btn_1 green" type="button"> 
 	</div>	
 </div>	
 </div>
@@ -414,11 +335,12 @@ Handlebars.registerHelper('ifEquals', function(arg1, arg2, options) {
 	<script src="js/jquery-2.2.4.min.js"></script>
 	<script src="js/common_scripts_min.js"></script>
 	<script src="js/functions.js"></script>
+	<script src="js/app_user.js" type="module"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script> 
 
 	<!-- Specific scripts -->
 	<script src="js/tabs.js"></script>
-	<script src="js/app_user.js" type="module"></script>
-	<script src="js/view.js" type="module"></script>
+	
 	
 	<script>
 		new CBPFWTabs(document.getElementById('tabs'));

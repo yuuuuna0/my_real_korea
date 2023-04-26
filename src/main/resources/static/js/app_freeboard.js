@@ -1,21 +1,27 @@
 import * as View from "./view.js";
 import * as Request from "./request.js";
 
-
+//동행게시판 필터(사이드바 전체보기, 지역별 보기)
+$(document).on('click', '#all-city-list', function getCityList(e) {
+	let cityNo=$(this).attr('name');
+	let pageNo=1;
+		location.href=`freeboard-city-list?cityNo=${cityNo}&pageNo=${pageNo}`;
+				e.preventDefault();
+});
 
 $("#freeboard-search-keyword").keyup(e => {
 	if (e.keyCode == 13) {
-		getSearchList();
+		getSearchList(e);
 		e.preventDefault();
 	}
 });
 // 검색창 입력 후 직접 검색버튼 클릭 => 검색
 $(document).on('click','#freeboard-search-btn',function(e){
-	getSearchList();
+	getSearchList(e);
 	e.preventDefault();
 });
 
-function getSearchList(){
+function getSearchList(e){
 	// ajax로 리스트 부분만 검색된 리스트로 변경
 	let keyword = $('#freeboard-search-keyword').val();
 	let url = `freeBoard-search?pageNo=1&keyword=${keyword}`;
@@ -26,6 +32,7 @@ function getSearchList(){
 	
 	// 키워드 결과, 현재 페이지 숫자 표시
 	let curPage=$('#cur-page');
+	console.log(curPage);
 	let totRecordCount=$('#tot-record-count');
 	// JSON.stringify() => 객체를 string 으로, JSON.parse() => string 을 객체로 만듬
 	Request.ajaxRequest(url, method, contentType, 
@@ -52,6 +59,4 @@ $('input[type="radio"][name="city-radio"]').click(function(){
 		$(this).prop('checked',true);
 	}
 });
-$(document).on('click','#btn-submit',function(e){
-		e.preventDefault();
-});
+

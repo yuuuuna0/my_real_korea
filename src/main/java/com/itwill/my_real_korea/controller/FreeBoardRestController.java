@@ -35,70 +35,42 @@ public class FreeBoardRestController {
 
     @ApiOperation(value = "자유게시판 리스트 최신순")
     @GetMapping(value = "/fBoList", produces = "application/json;charset=UTF-8")
-    public Map<String, Object> fBoListFBoNoDesc(@RequestParam(required = false, defaultValue = "1") Integer pageno, Integer cityNo) throws Exception {
+    public Map<String, Object> fBoListFBoNoDesc(@RequestParam(required = false, defaultValue = "1") Integer pageNo, @RequestParam(required = true)Integer cityNo) throws Exception {
         Map<String, Object> resultMap = new HashMap<>();
-        PageMakerDto<FreeBoard> freeBoardList = null;
-        List<City> cityList = cityService.findAllCity();
-        
+        int code = 1;
+		String msg = "성공";
+        PageMakerDto<FreeBoard> freeBoardListPage = null;
+        List<FreeBoard> data1 = new ArrayList<FreeBoard>();
         try {
-            freeBoardList = freeBoardService.selectAllOrderByFBoNoDesc(pageno);
-            List<FreeBoard> data = new ArrayList<FreeBoard>();
-           
-            for (FreeBoard freeBoard : data) {
+            freeBoardListPage=freeBoardService.selectFreeBoardCityList(pageNo,cityNo);
+            System.out.println(freeBoardListPage);
+            for (FreeBoard freeBoard : freeBoardListPage.getItemList()) {
             	int commentCount = freeBoardCommentService.selectByfBoNo(freeBoard.getFBoNo()).size();
             	freeBoard.setCommentCount(commentCount);
-            	cityNo=freeBoard.getCity().getCityNo();
-            	freeBoard.setCity(cityService.findByCityNo(cityNo));
-            	data.add(freeBoard);
+            	data1.add(freeBoard);
+            	
             }
-            resultMap.put("errorCode", 1);
-            resultMap.put("errorMsg", "성공");
-            resultMap.put("data", freeBoardList);
-            resultMap.put("data.itemList.city", cityList);
+        	if(freeBoardListPage.getPageMaker().getTotCount() != 0 && freeBoardListPage != null) {
+				code = 1;
+				msg = "성공";
+			}else {
+				code = 2;
+				msg = "해당 지역과 일치하는 게시글이 없습니다.";
+			}
+        
         } catch (Exception e) {
             e.printStackTrace();
             resultMap.put("errorCode", -1);
             resultMap.put("errorMsg", "관리자에게 문의하세요");
         }
+        resultMap.put("code", code);
+        resultMap.put("msg", msg);
+        resultMap.put("data", data1);
+        resultMap.put("freeBoardListPage", freeBoardListPage);
         return resultMap;
     }
 
-    @ApiOperation(value = "자유게시판 리스트 오래된순")
-    @GetMapping(value = "/fBoList-fBoNo-asc", produces = "application/json;charset=UTF-8")
-    public Map<String, Object> fBoListFBoNoAsc(@RequestParam(required = false, defaultValue = "1") Integer pageno) {
-        Map<String, Object> resultMap = new HashMap<>();
-        PageMakerDto<FreeBoard> freeBoardList = null;
-        try {
-            freeBoardList = freeBoardService.selectAllOrderByFBoNoAsc(pageno);
-            resultMap.put("errorCode", 1);
-            resultMap.put("errorMsg", "성공");
-            resultMap.put("data", freeBoardList);
-        } catch (Exception e) {
-            e.printStackTrace();
-            resultMap.put("errorCode", -1);
-            resultMap.put("errorMsg", "관리자에게 문의하세요");
-        }
-        return resultMap;
-    }
-
-    @ApiOperation(value = "자유게시판 조회수 많은순")
-    @GetMapping(value = "/fBoList-readcount-desc", produces = "application/json;charset=UTF-8")
-    public Map<String, Object> fBoListReadCountDesc(@RequestParam(required = false, defaultValue = "1") Integer pageno) {
-        Map<String, Object> resultMap = new HashMap<>();
-        PageMakerDto<FreeBoard> freeBoardList = null;
-        try {
-            freeBoardList = freeBoardService.selectAllOrderByReadCountDesc(pageno);
-            resultMap.put("errorCode", 1);
-            resultMap.put("errorMsg", "성공");
-            resultMap.put("data", freeBoardList);
-        } catch (Exception e) {
-            e.printStackTrace();
-            resultMap.put("errorCode", -1);
-            resultMap.put("errorMsg", "관리자에게 문의하세요");
-        }
-        return resultMap;
-    }
-
+   
     /*
      * 자유게시판 title 키워드로 검색
      */
@@ -138,6 +110,7 @@ public class FreeBoardRestController {
         resultMap.put("code", code);
         resultMap.put("msg", msg);
         resultMap.put("data", freeBoardList);
+        resultMap.put("freeBoard", freeBoard);
         return resultMap;
     }
 

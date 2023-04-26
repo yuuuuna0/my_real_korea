@@ -59,6 +59,28 @@ public class FreeBoardController {
         }
         return "freeboard-list";
     }
+    @GetMapping(value = "/freeboard-city-list")
+    public String freeBoardList(@RequestParam(required = false, defaultValue = "1") int pageNo,  Model model, @RequestParam(required=true)int cityNo) throws Exception {
+    	
+    	try {
+    		PageMakerDto<FreeBoard> freeBoardListPage = freeBoardService.selectFreeBoardCityList(pageNo,cityNo);
+    		List<FreeBoard> tempFreeBoardList = freeBoardListPage.getItemList();
+    		List<FreeBoard> freeBoardList = new ArrayList<>();
+    		for (FreeBoard freeBoard : tempFreeBoardList) {
+    			int commentCount = freeBoardCommentService.selectByfBoNo(freeBoard.getFBoNo()).size();
+    			freeBoard.setCommentCount(commentCount);
+    			freeBoardList.add(freeBoard);
+    		}
+    		List<City> cityList = cityService.findAllCity();
+    		model.addAttribute("cityList", cityList);
+    		model.addAttribute("freeBoardListPage", freeBoardListPage);
+    		model.addAttribute("freeBoardList", freeBoardList);
+    	} catch (Exception e) {
+    		e.printStackTrace();
+    		return "error";
+    	}
+    	return "freeboard-list";
+    }
 
     @GetMapping(value = "/freeboard-list-fBoNo-asc")
     public String freeBoardListFBoNoAsc(@RequestParam(required = false, defaultValue = "1") int pageNo, Model model) {
@@ -129,22 +151,6 @@ public class FreeBoardController {
         return "freeboard-list";
     }
 
-    @GetMapping(value = "/freeboard-list-search")
-    public String freeBoardSearchList(@RequestParam(required = false, defaultValue = "1") int pageNo, Model model) {
-        try {
-            PageMakerDto<FreeBoard> freeBoardListPage = freeBoardService.selectAllOrderByReadCountDesc(pageNo);
-            freeBoardListPage.getItemList();
-            model.addAttribute("freeBoardList", freeBoardListPage);
-            model.addAttribute("pageNo", pageNo);
-            List<City> cityList = cityService.findAllCity();
-			model.addAttribute("cityList", cityList);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return "error";
-        }
-        return "freeboard-list";
-    }
-
     @GetMapping("/freeboard-detail")
     public String freeBoardDetail(@RequestParam Integer fBoNo, Model model, HttpSession session) throws Exception {
         if (fBoNo == null) {
@@ -155,7 +161,6 @@ public class FreeBoardController {
                 User loginUser = (User) session.getAttribute("loginUser");
                 model.addAttribute("loginUser", loginUser);
             }
-////
             FreeBoard freeBoard = freeBoardService.selectByNo(fBoNo);
             List<FreeBoardComment> freeBoardCommentList = freeBoardCommentService.selectByfBoNo(fBoNo);
             freeBoardService.increaseReadCount(freeBoard.getFBoNo());
@@ -185,7 +190,6 @@ public class FreeBoardController {
         }
 
 
-////
         return "freeboard-write-form";
     }
 

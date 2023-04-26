@@ -23,6 +23,8 @@ public interface FreeBoardService {
 
     // 검색된 게시글 총 개수 조회
     int selectSearchCount(String keyword) throws Exception;
+    // 검색된 게시글 총 개수 조회
+    int selectCityNoCount(int cityNo) throws Exception;
 
 
     //자유게시판 리스트 보기 (게시글 시작번호, 게시글 끝번호) - 페이징 처리
@@ -38,6 +40,8 @@ public interface FreeBoardService {
 
     //title 키워드로 검색
     PageMakerDto<FreeBoard> selectSearchFreeBoardList(int currentPage, String keyword) throws Exception;
+    //title 키워드로 검색
+    PageMakerDto<FreeBoard> selectFreeBoardCityList(int currentPage, int cityNo) throws Exception;
     //자유게시판 타이틀 14글자 제한
     String getTitleString(FreeBoard freeBoard) throws Exception;
 

@@ -16,16 +16,39 @@ $(document).on('click',"button[name='deletePayement']",function(e){
 							//code=1 성공 -> render , 아닐때 msg
 							if(resultJson.code==1){
 								$('.content-current').find("#"+pNo).parent().remove();
-								e.target.closest('#paymentD'+pNo).parent().remove();
+								//e.target.closest('#paymentD'+pNo).parent().remove();
 							} else{
 								alert(resultJson.msg);
 							}
 						},async);
 	e.preventDefault();
 });
-
-
-
+/*
+//2. 예약 상세보기
+$(document).on('click',"button[name='paymentDetail']",function(e){
+	let pNo=e.target.value;
+	console.log(pNo);
+		let url= 'payment-detail?pNo='+pNo;
+	let method='GET';
+	let contentType='application/json;charset=UTF-8';
+	let sendData={};
+	let async=true;
+	Request.ajaxRequest(url,method,contentType,
+						sendData,
+						function(resultJson){
+							//code=1 성공 -> render , 아닐때 msg
+							alert('막');
+							if(resultJson.code==1){
+								window.location.href="tour-payment-confirmation";
+							}else if(resultJson.code==2){
+								window.location.href="ticket-payment-confirmation";
+							}else{
+								alert(resultJson.msg);
+							}
+						},async);
+	e.preventDefault();
+});
+*/
 
 
 
@@ -423,17 +446,17 @@ $(document).on('click','#btn-user-modify-action',function(e) {
 	
 	
 	if (document.f.password.value == "") {
-		alert("비밀번호를 입력하세요.");
+		 toastr.error('비밀번호를 입력하십시오.');
 		f.password.focus();
 		return false;
 	}
 	if (document.f.password2.value == "") {
-		alert("비밀번호확인을 입력하세요.");
+		 toastr.error('비밀번호 확인을 입력하십시오.');
 		f.password2.focus();
 		return false;
 	} 
 	if (document.getElementsByName("password")[0].value !== document.getElementsByName("password2")[0].value) {
-	    alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
+	    toastr.error('비밀번호와 비밀번호 확인이 일치하지 않습니다.');
 	    return;
 	  }
 	
@@ -479,6 +502,17 @@ $(document).on('click','#btn-user-modify-action',function(e) {
 		e.preventDefault();
 });
 
+//회원탈퇴
+$(document).on('click','#btn-user-remove',function() {
+	location.href="user-remove-action";
+});
+
+//프로필 수정 취소
+$(document).on('click','#btn-user-modify-cancle',function() {
+	location.href="user-view";
+});
+
+//첨부파일에 이름 나오게 
 $("#file").on('change',function(){
   var fileName = $("#file").val();
   $(".upload-name").val(fileName);

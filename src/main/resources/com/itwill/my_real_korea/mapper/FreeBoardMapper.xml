@@ -2,7 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper
         namespace="com.itwill.my_real_korea.mapper.FreeBoardMapper">
-
+<resultMap id="CitywithFreeBoardResultMap" type="com.itwill.my_real_korea.dto.freeboard.FreeBoard" autoMapping="true">
+	<association property="city" javaType="com.itwill.my_real_korea.dto.City" autoMapping="true">
+	</association>
+</resultMap>
 
 
 
@@ -14,7 +17,7 @@
         insert into FREE_BOARD (f_bo_no,f_bo_title,f_bo_content,f_bo_date,f_bo_readcount,city_no,user_id)
         values( #{fBoNo},#{fBoTitle},
         #{fBoContent},sysdate,
-        #{fBoCount},#{city.cityNo},
+        #{fBoCount},#{cityNo},
         #{userId})
     </insert>
 
@@ -33,7 +36,7 @@
         </association>
     </resultMap>
 
-    <select id="selectAllOrderByFBoNoDesc" parameterType="java.util.Map" resultMap="freeBoardResultMap">
+    <select id="selectAllOrderByFBoNoDesc" parameterType="java.util.Map" resultMap="CitywithFreeBoardResultMap">
         select ss.* from
             (select rownum idx, s.* from
                 (select f.f_bo_no,f.f_bo_title,f.f_bo_content,f.f_bo_date,f.f_bo_readcount,f.user_id, c.*
@@ -45,7 +48,7 @@
     <![CDATA[ where idx >= #{pageStart} and idx <= #{pageEnd} ]]>
     </select>
 
-    <select id="selectAllOrderByFBoNoAsc" parameterType="java.util.Map" resultMap="freeBoardResultMap">
+    <select id="selectAllOrderByFBoNoAsc" parameterType="java.util.Map" resultMap="CitywithFreeBoardResultMap">
         select ss.* from
             (select rownum idx, s.* from
                 (select f.f_bo_no,f.f_bo_title,f.f_bo_content,f.f_bo_date,f.f_bo_readcount,f.user_id, c.*
@@ -58,14 +61,14 @@
     </select>
 
 
-    <select id="selectAllOrderByReadCountDesc" parameterType="java.util.Map" resultMap="freeBoardResultMap">
+    <select id="selectAllOrderByReadCountDesc" parameterType="java.util.Map" resultMap="CitywithFreeBoardResultMap">
         select ss.* from
             (select rownum idx, s.* from
                 (select f.f_bo_no,f.f_bo_title,f.f_bo_content,f.f_bo_date,f.f_bo_readcount,f.user_id, c.*
                  from free_board f
                           join city c
                                on f.city_no = c.city_no
-                 order by f_bo_readcount desc)s
+                 order by f.f_bo_readcount desc)s
             )ss
     <![CDATA[ where idx >= #{pageStart} and idx <= #{pageEnd} ]]>
     </select>
@@ -73,7 +76,7 @@
 
     <select id="selectByNo"
         parameterType="java.lang.Integer"
-        resultMap="freeBoardResultMap">
+        resultMap="CitywithFreeBoardResultMap">
     select f.* , c.*
 --         f.f_bo_no,f.f_bo_title,f.f_bo_content, f.f_bo_date, f.f_bo_readcount,  c.city_no, c.city_name, c.latitude ,c.longitude , f.user_id
             from free_board f
@@ -83,7 +86,7 @@
 
     <select id="selectByUserId"
             parameterType="java.lang.String"
-            resultMap="freeBoardResultMap">
+            resultMap="CitywithFreeBoardResultMap">
         select f.* , c.*
         from free_board f
                  join city c
@@ -98,7 +101,7 @@
 
 
     <delete id="deleteBoard" parameterType="java.lang.Integer">
-    delete from FREE_BOARD where f_bo_no = #{freeBoardNo}
+    delete from FREE_BOARD where f_bo_no = #{fBoNo}
     </delete>
 
 
@@ -106,7 +109,7 @@
         update FREE_BOARD
         set f_bo_title=#{fBoTitle},
             f_bo_content=#{fBoContent},
-            city_no=#{city.cityNo}
+            city_no=#{cityNo}
         where f_bo_no = #{fBoNo}
     </update>
 
@@ -119,17 +122,34 @@
     <select id="selectSearchCount" parameterType="String" resultType="java.lang.Integer">
         select count(*) cnt from free_board where f_bo_title like '%'||#{keyword}||'%'
     </select>
+    <!--  검색된 게시글 총 개수 조회 -->
+    <select id="selectCityCount" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+        select count(*) cnt from free_board where city_no=#{cityNo}
+    </select>
 
     <!--   자유게시판 title 키워드로 검색 -->
-    <select id="selectSearchFreeBoardList" parameterType="map" resultMap="freeBoardResultMap">
+    <select id="selectSearchFreeBoardList" parameterType="map" resultMap="CitywithFreeBoardResultMap">
         select ss.* from
             (select rownum idx, s.* from
                 (select f.f_bo_no,f.f_bo_title,f.f_bo_content,f.f_bo_date,f.f_bo_readcount,f.user_id, c.city_no,c.city_name
                  from free_board f
                           join city c
                                on f.city_no = c.city_no
-                 where f_bo_title like '%'||#{keyword}||'%'
-                 order by f_bo_no desc) s
+                 where f.f_bo_title like '%'||#{keyword}||'%'
+                 order by f.f_bo_no desc) s
+            )ss
+	<![CDATA[ where idx >= #{pageStart} and idx <= #{pageEnd} ]]>
+    </select>
+    <!--   자유게시판 title 키워드로 검색 -->
+    <select id="selectFreeBoardCityList" parameterType="map" resultMap="CitywithFreeBoardResultMap">
+        select ss.* from
+            (select rownum idx, s.* from
+                (select f.f_bo_no,f.f_bo_title,f.f_bo_content,f.f_bo_date,f.f_bo_readcount,f.user_id, c.city_no,c.city_name
+                 from free_board f
+                          join city c
+                               on f.city_no = c.city_no
+                 where f.city_no =#{cityNo}
+                 order by f.f_bo_no desc) s
             )ss
 	<![CDATA[ where idx >= #{pageStart} and idx <= #{pageEnd} ]]>
     </select>

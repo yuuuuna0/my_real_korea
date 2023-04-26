@@ -7,7 +7,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Citytours - Premium site template for city tours agencies, transfers and tickets.">
     <meta name="author" content="Ansonika">
-    <title>CITY TOURS - City tours and travel site template by Ansonika</title>
+    <title>마이리얼코리아-동행게시판</title>
 
     <!-- Favicons-->
     <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
@@ -102,17 +102,25 @@
 						<div class="row" id="tripboard-list">
 						
 							<div class="shop-item col-lg-4 col-md-6 col-sm-6" th:each="tripBoard:${tripBoardList}" style="margin-bottom:280px">
-								<div class="ribbon_3" th:if="${tripBoard.tBoStatus == 0}">
+								<div class="ribbon_4" th:if="${tripBoard.tBoStatus == 0}">
 									<span>모집중</span>
 								</div>
-								<div class="ribbon_3 popular" th:if="${tripBoard.tBoStatus == 1}">
+								<div class="ribbon_3 popular2" th:if="${tripBoard.tBoStatus == 1}">
 									<span>모집완료</span>
 								</div>
 								<div class="inner-box">
 									<div class="image-box">
 										<figure class="image">
-											<a th:href="@{tripboard-detail(tBoNo=${tripBoard.tBoNo})}"><img src="img/tripboard/jeonju2.jpeg" alt="">
-											</a>
+											<div th:if="${tripBoard.tBoImg}">
+												<a th:href="@{tripboard-detail(tBoNo=${tripBoard.tBoNo})}">
+													<img th:src="@{img/tripboard/{tBoImg}(tBoImg=${tripBoard.tBoImg})}"  alt="Image" class="img-fluid">
+												</a>
+											</div>
+											<div th:if="${tripBoard.tUploadFile}">
+												<a th:href="@{tripboard-detail(tBoNo=${tripBoard.tBoNo})}">
+													<img th:src="@{tripboardimages/{tUploadFile}(tUploadFile=${tripBoard.tUploadFile})}"  alt="Image" class="img-fluid">
+												</a>
+											</div>
 										</figure>
 											<!-- 지역 보이게하기 -->
 											<div class="item-options clearfix"  style="top:10px; color:#e04f67; opacity:100; visibility:visible; background-color:white; border-radius: 5px; width:auto; height:28px; font-weight:bold; line-height:29px; padding-right:4px;">
@@ -285,18 +293,38 @@
 	<script id="tripboard-search-list-template" type="text/x-handlebars-template">
 	{{#each data.itemList}}
 	<div class="shop-item col-lg-4 col-md-6 col-sm-6" style="margin-bottom:280px">
-		<div class="ribbon_3"><span>모집중</span>
-		</div>
+		{{#ifCond tboStatus '==' 0}}
+			<div class="ribbon_4">
+				<span>모집중</span>
+			</div>
+		{{/ifCond}}
+		{{#ifCond tboStatus '==' 1}}
+			<div class="ribbon_3 popular2">
+				<span>모집완료</span>
+			</div>
+		{{/ifCond}}
 		<div class="inner-box">
 			<div class="image-box">
 				<figure class="image">
-					<a href="tripboard-detail?tBoNo={{tboNo}}"><img src="img/products/image-1.jpg" alt="">
-					</a>
+				{{#if tboImg}}
+					<div>
+						<a href="tripboard-detail?tBoNo={{tboNo}}">
+							<img src="img/tripboard/{{tboImg}}"  alt="Image" class="img-fluid">
+						</a>
+					</div>
+				{{/if}}
+				{{#if tuploadFile}}
+					<div >
+						<a href="tripboard-detail?tBoNo={{tboNo}}">
+							<img src="tripboardimages/{{tuploadFile}}"  alt="Image" class="img-fluid">
+						</a>
+					</div>
+				{{/if}}
 				</figure>
 			<!-- 지역보여주기 -->
 			<div class="item-options clearfix"  style="top:10px; color:#e04f67; opacity:100; visibility:visible; background-color:white; border-radius: 5px; width:auto; height:28px; font-weight:bold; line-height:29px; padding-right:4px;">
 				<span class="icon-location"></span>
-				<a href ="tripboard-detail?tBoNo={{tbono}}" class="AccompanyWebCard__LocationText-sc-ws5mjw-18 bFxAPJ">{{city.cityName}}</a>
+				<a href ="tripboard-detail?tBoNo={{tboNo}}" class="AccompanyWebCard__LocationText-sc-ws5mjw-18 bFxAPJ">{{city.cityName}}</a>
 			</div>   
 			</div>
 			<div class="product_description">

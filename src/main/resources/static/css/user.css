@@ -2,6 +2,27 @@
 .form-group label{
   font-size: 11pt;
 }
+
+/******************* 관리자 ***********************/
+#admin-body-tr {
+	font-size: 11pt;
+}
+
+#admin-head-tr {
+	font-size: 13pt;
+	font-family: S-CoreDream-5Medium;
+}
+
+#admin-table.table.table-striped {
+	height: 40px;
+}
+
+.btn-admin-remove.btn_1.outline {
+	font-size: 10pt;
+	padding-top:5px;
+	padding-bottom:5px;
+}
+
 /******************* 회원가입 ***********************/
 
 /* 버튼 */
@@ -15,7 +36,6 @@
 #btn-user-create.btn_1.outline {
   width: 100%;
 }
-
 
 /* pass-info */
 #pass-info {
@@ -131,8 +151,6 @@ input[id='termsPrivacy'] + label:before {
 #btn-user-auth.btn_1.outline {
   width: 100%;
 }
-
-
 
 
 @font-face {

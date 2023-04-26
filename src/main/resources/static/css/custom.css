@@ -685,3 +685,14 @@ a.btn_full_outline {
     background: none;
     border: 2px solid #e14d67;
 }
+.img_container {
+    position: relative;
+    overflow: hidden;
+    width: 254px;
+    height: 170px;
+}
+.hotel_container .hotel_title {
+    padding: 15px;
+    position: relative;
+    height: 100px;
+}

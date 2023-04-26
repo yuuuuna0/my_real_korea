@@ -190,7 +190,7 @@
 								</div>-->
 								<div class="img_container">
 									<a th:href="@{ticket-detail(tiNo=${ticket.tiNo})}">
-										<img th:src="@{{tiImgUrl}(tiImgUrl=${ticket.ticketImgList.get(0).tiImgUrl})}" width="800" height="533" class="img-fluid" alt="Image"/>
+										<img th:src="@{{tiImgUrl}(tiImgUrl=${ticket.ticketImgList.get(0).tiImgUrl})}"  class="img-fluid" alt="Image"/>
 										
 										<div class="score" ><span  th:text="${ticket.tiCount}">7.5</span>구매 </div>
 										<div class="short_info hotel">
@@ -198,7 +198,8 @@
 										</div>
 									</a>
 								</div>
-								<div class="hotel_title"> <!-- 타이틀 -->
+								<div class="hotel_title row"> <!-- 타이틀 -->
+									<div class="col-md-9" style="padding:1px 1px 1px 15px">
 									<h3><strong th:text="${ticket.tiTitle}">Park Hyatt</strong> </h3>
 									<div class="rating" th:switch="${ticket.tiScore}">
 											<div th:case="0">
@@ -225,10 +226,11 @@
 										</span>
 									</div>
 								</div>
+								</div>
 									<!-- end rating -->
 									<!-- 위시리스트 추가 작업 (민선) -->
 									<!-- userId null 이 아닐때 위시리스트 추가 버튼 실행 -->
-									<div class="wishlist" th:if="${userId != null}">
+									<div class="wishlist" th:if="${userId != null}" style="top:20px; right:25px;">
 										<a class="tooltip_flip tooltip-effect-1" id="ticket-add-to-wishlist-btn" href="#" 
 										th:data-tiNo="${ticket.tiNo}" th:data-tiTitle="${ticket.tiTitle}" th:data-tiDate="${#dates.format(ticket.tiDate, 'yyyy-MM-dd')}"
 										th:data-tiPrice="${ticket.tiPrice}" th:data-tiInfo="${ticket.tiInfo}" th:data-tiNotice="${ticket.tiNotice}"
@@ -238,9 +240,9 @@
 										<span class="tooltip-content-flip"><span class="tooltip-back">위시리스트<br>추가</span></span></a>
 									</div>
 									<!-- userId null 일 때는 위시리스트 추가 버튼 클릭 시 로그인 페이지로 -->
-									<div class="wishlist" th:if="${userId == null}">
+									<div class="wishlist" th:if="${userId == null}" style="top:20px; right:25px;">
 										<a class="tooltip_flip tooltip-effect-1"  th:href="@{user-login}">+
-										<span class="tooltip-content-flip"><span class="tooltip-back">위시리스트 담기</span></span></a>
+										<span class="tooltip-content-flip"><span class="tooltip-back">위시리스트<br>추가</span></span></a>
 									</div>
 									<!-- End wish list-->
 								</div>
@@ -408,9 +410,23 @@
 					</div>
 
 					<!-- end rating -->
+					{{#if userId}}
 					<div class="wishlist">
-						<a class="tooltip_flip tooltip-effect-1" href="#">+<span class="tooltip-content-flip"><span class="tooltip-back">Add to wishlist</span></span></a>
+						<a class="tooltip_flip tooltip-effect-1" id="ticket-add-to-wishlist-btn" href="#" 
+						data-tiNo="{{tiNo}}" data-tiName="{{tiName}}" data-tiTime="{{tiTime}}"
+						data-tiPerson="{{tiPerson}}" data-tiMeet="{{tiMeet}}" data-tiPrice="{{tiPrice}}"
+						data-tiInfo="{{tiInfo}}" data-tiNotice="{{tiNotice}}" data-tiCount="{{tiCount}}"
+						data-cityNo="{{city.cityNo}}" data-cityName="{{city.cityName}}"
+						data-latitude="{{city.latitude}}" data-longitude="{{city.longitude}}">+
+						<span class="tooltip-content-flip"><span class="tooltip-back">위시리스트<br>추가</span></span></a>
 					</div>
+					{{/if}}
+					{{#unless userId}}
+					<div class="wishlist">
+						<a class="tooltip_flip tooltip-effect-1" id="ticket-add-to-wishlist-btn" href="user-login">+
+						<span class="tooltip-content-flip"><span class="tooltip-back">위시리스트<br>추가</span></span></a>
+					</div>
+					{{/unless}}
 					<!-- End wish list-->
 				</div>
 			</div>

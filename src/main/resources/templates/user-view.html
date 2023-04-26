@@ -30,13 +30,8 @@
 	
 	<!-- CUSTOM CSS -->
 	<link href="css/custom.css" rel="stylesheet">
+	<link href="css/user.css" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
-<!-- ajax, handlebars 
-<script  defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
-<script  defer src="js/jquery.validate.js"></script>
-<script  defer type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.2/handlebars.min.js"></script>
--->	
-
 	
 	<!-- Handlebars -->
 	<script  defer type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.2/handlebars.min.js"></script>
@@ -59,18 +54,10 @@ const phoneNumber = (target) => {
 		    }).open();
 	}
 	
-
-	function userRemove() {
-		if (confirm("정말 탈퇴하시겠습니까?")) {
-			document.f.action = "user-remove-action";
-			document.f.submit();
-		}
-	}
-  
-	 function modifyImg() {
-			document.i.action = "user-img-modify-action";
-			document.i.submit();
-		} 
+	function modifyImg() {
+		document.i.action = "user-img-modify-action";
+		document.i.submit();
+	} 
 		
 </script>
 <script th:inline="javascript">
@@ -193,8 +180,14 @@ const phoneNumber = (target) => {
 					<div style="text-align: center;">
 					<input id="btn-user-modify-form" value="프로필 수정" class="btn_1 green" type="button"> 
 					<input id="btn-user-remove" value="회원 탈퇴" class="btn_1 green" type="button"> 
-					
-					<button class="btn_1 green" type="button" onclick="userRemove();">회원 탈퇴</button>	
+					<!-- 
+					<button class="btn_1 green" type="button" onclick="userRemove();">회원 탈퇴</button>
+					 -->
+                    	<th:block th:if="${session.loginUser.isAdmin==0}">
+                            <input id="btn-user-admin" value="관리자 페이지" class="btn_1 green" type="button">
+                        </th:block>
+                        <th:block th:unless="${session.loginUser.isAdmin==0}">
+                        </th:block>
 					</div>
 			</form>
 </section>
@@ -328,7 +321,38 @@ const phoneNumber = (target) => {
 			
 </form>
 {{/each}}
-</script> 
+</script>
+
+<script id="user-admin-template" type="text/x-handlebars-template">
+<table class="table table-striped">
+	<thead>
+		<tr id="admin-head-tr">
+			<td>아이디</td>
+			<td>이름</td>
+			<td>닉네임</td>
+			<td>연락처</td>
+			<td>이메일</td>
+			<td>포인트</td>
+			<td>메일 인증</td>
+			<td>회원 탈퇴</td>
+		</tr>
+	</thead>
+	<tbody>				
+		{{#each data}}
+		<tr id="admin-body-tr">
+			<td data-user-id="{{userId}}">{{userId}}</td>
+			<td>{{name}}</td>
+			<td>{{nickname}}</td>
+			<td>{{phone}}</td>
+			<td>{{email}}</td>
+			<td>{{point}}</td>
+			<td align="center">{{#if mailAuth}}인증{{else}}미인증{{/if}}</td>
+			<td><input class="btn-admin-remove btn_1 outline" data-user-Id="{{userId}}" value="회원 탈퇴" type="button"></td>
+		</tr>
+		{{/each}}
+	</tbody>
+</table>
+</script>
 
 
 	<!-- Common scripts -->

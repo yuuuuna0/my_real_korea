@@ -32,7 +32,7 @@ class UserServiceImplTest {
 	}
 	
 	//3. 전체 회원 정보 보기 (관리자 페이지)
-	//@Test
+	@Test
 	void testFindUserList() throws Exception {
 		System.out.println(">> findUserList :"+userService.findUserList());
 	}

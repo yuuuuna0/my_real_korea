@@ -8,8 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.itwill.my_real_korea.dto.freeboard.FreeBoard;
-import com.itwill.my_real_korea.service.freeboard.FreeBoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,13 +19,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.itwill.my_real_korea.dto.City;
 import com.itwill.my_real_korea.dto.Payment;
+import com.itwill.my_real_korea.dto.freeboard.FreeBoard;
 import com.itwill.my_real_korea.dto.tripboard.TripBoard;
 import com.itwill.my_real_korea.dto.user.KakaoProfile;
 import com.itwill.my_real_korea.dto.user.User;
 import com.itwill.my_real_korea.service.city.CityService;
+import com.itwill.my_real_korea.service.freeboard.FreeBoardService;
 import com.itwill.my_real_korea.service.payment.PaymentService;
 import com.itwill.my_real_korea.service.tripboard.TripBoardService;
 import com.itwill.my_real_korea.service.user.KaKaoService;
@@ -127,8 +128,8 @@ public class UserController {
 
 	/******************************************************************************/
 
-    /*
- * REST로 변경
+/*
+ * REST
  * 	
 	//회원 가입 액션
 	@PostMapping(value = "user-write-action", produces = "application/json;charset=UTF-8")
@@ -161,7 +162,7 @@ public class UserController {
 	}
 
 /*
- * REST로 변경
+ * REST
  * 
 	//로그인 액션
 	@PostMapping(value = "user-login-action", produces = "application/json;charset=UTF-8")
@@ -202,7 +203,7 @@ public class UserController {
 
 
 /*
- * REST로 변경
+ * REST
  * 
 	//회원 인증 폼 (이메일로 전송된 인증코드)
 	@LoginCheck
@@ -265,7 +266,6 @@ public class UserController {
 		return "user-find-id";
 	}
  */
-
 
 /*
  * REST	

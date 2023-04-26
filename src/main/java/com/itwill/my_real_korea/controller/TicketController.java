@@ -124,7 +124,10 @@ public class TicketController {
            model.addAttribute("ticketImgList", ticketImgList); // 티켓이미지
            model.addAttribute("ticketReviewList",ticketReviewList); // 리뷰
            model.addAttribute("tiNo", tiNo);
-            
+            // 상단 지역별 카테고리 때문에 넣음
+           List<City> cityList = cityService.findAllCity();
+			model.addAttribute("cityList", cityList);
+         //  System.out.println(">>>>>>>>"+ticketImgList);
             // 사진을 제외한 공통된 하나의 티켓 정보
             Ticket ticket = ticketList.get(0);
            

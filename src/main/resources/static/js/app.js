@@ -429,10 +429,10 @@ $(document).on('click', '#tour-add-to-wishlist-btn', function(e) {
 							//성공시 toast로 성공메세지 띄우기
 							if (resultJson.code == 1) {
 								$('#wishlist-add-toast').toast('show');
-								$('#wishlist-add-toast').toast({delay: 4000});
+								$('#wishlist-add-toast').toast({delay: 5000});
 							} else if (resultJson.code == 3){
 								$('#wishlist-added-toast').toast('show');
-								$('#wishlist-added-toast').toast({delay: 4000});
+								$('#wishlist-added-toast').toast({delay: 5000});
 							} else {
 								alert(resultJson.msg);
 							};
@@ -504,10 +504,10 @@ $(document).on('click', '#ticket-add-to-wishlist-btn', function(e) {
 							//성공시 toast로 성공메세지 띄우기
 							if (resultJson.code == 1) {
 								$('#wishlist-add-toast').toast('show');
-								$('#wishlist-add-toast').toast({delay: 4000});
+								$('#wishlist-add-toast').toast({delay: 5000});
 							}else if (resultJson.code == 3){
 								$('#wishlist-added-toast').toast('show');
-								$('#wishlist-added-toast').toast({delay: 4000});
+								$('#wishlist-added-toast').toast({delay: 5000});
 							}else {
 								alert(resultJson.msg);
 							};

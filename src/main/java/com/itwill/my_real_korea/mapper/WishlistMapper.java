@@ -27,6 +27,14 @@ public interface WishlistMapper {
 	 */
 	int selectWishlistCount(String userId);
 	/*
+	 * 위시리스트 투어 담긴 여부 확인
+	 */
+	int selectWishlistTourCount(Map<String, Object> map);
+	/*
+	 * 위시리스트 티켓 담긴 여부 확인
+	 */
+	int selectWishlistTicketCount(Map<String, Object> map);
+	/*
 	 * 티켓 상품 위시리스트에 추가
 	 */
 	int insertTicketToWishlist(Wishlist wishlist);
@@ -34,12 +42,10 @@ public interface WishlistMapper {
 	 * 투어 상품 위시리스트에 추가
 	 */
 	int insertTourToWishlist(Wishlist wishlist);
-	
 	/*
 	 * 위시리스트 전체 삭제 
 	 */
 	int deleteWishlist(String userId);
-
 	/*
 	 * 위시리스트 한 개 삭제
 	 */

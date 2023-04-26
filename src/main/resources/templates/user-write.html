@@ -103,7 +103,7 @@ const phoneNumber = (target) => {
 		</div>
 		<div class="form-group">
 			<label>휴대폰 번호</label>
-			<input type="text" id="phone" class="form-control" maxlength="13" oninput="phoneNumber(this)">
+			<input type="text" id="phone" name="phone" class="form-control" maxlength="13" oninput="phoneNumber(this)">
 		</div>
 		<div class="form-group">
 			<label>이메일</label>
@@ -123,18 +123,14 @@ const phoneNumber = (target) => {
 			<span>
 				<div class="btn-group btn-group-toggle" data-toggle="buttons">
 					<label class="btn btn-secondary active">
-						<input type="radio" name="gOptions" id="gender1" checked value="1"> 남
+						<input type="radio" name="gender" id="gender1" value="1"> 남
 					</label>
 
 					<label class="btn btn-secondary">
-						<input type="radio" name="gOptions" id="gender2" value="2"> 여
+						<input type="radio" name="gender" id="gender2" value="2"> 여
 					</label>
 				</div>
 			</span>						
-			<!-- 
-		    <input type="radio" name="gender" value="1"> 남&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		    <input type="radio" name="gender" value="2"> 여
-		     -->
 		</div>
 	</form>
 		<hr>
@@ -174,8 +170,9 @@ const phoneNumber = (target) => {
 	마이 리얼 코리아 의 회원관리, 서비스 개발・제공 및 향상, 안전한 인터넷 이용환경 구축 등 아래의 목적으로만 개인정보를 이용합니다.
 	</div>
 	</div><br/>
+		<!-- 
+	 	 -->
 		<input type="button" id="btn-user-create" value="회원 가입" class="btn_1 outline">
-	 	
 </div>
 </div>
 				</div>
@@ -204,6 +201,8 @@ const phoneNumber = (target) => {
 	<script src="js/functions.js"></script>
 	<script src="js/app_user.js" type="module"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script> 
+	
+	
 	
   </body>
 </html>

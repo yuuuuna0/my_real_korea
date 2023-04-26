@@ -98,7 +98,7 @@ $(document).on('click','#btn-user-find-id',function(e) {
         },
         success: function(response) {
             if (response.status == 1) {
-            	alert(response.message);
+            	toastr.success(response.message);
             } else if (response.status == 2) {
             	alert(response.message);
             }
@@ -139,7 +139,7 @@ $(document).on('click','#btn-user-find-pw',function(e) {
     dataType: "json",
     success: function (response) {
       if (response.status == 1) {
-        alert(response.message);
+        toastr.success(response.message);
         window.location.replace("user-login");
       } else {
         alert(response.message);
@@ -163,8 +163,8 @@ $(document).on('click','#btn-user-auth',function(e) {
         success: function(response) {
             if (response.status === 0) {
                 // 인증 성공
+                toastr.success("인증 성공! 로그인 페이지로 이동합니다.")
                 window.location.replace(response.data);
-                toastr("인증 성공! 로그인 페이지로 이동합니다.")
             } else {
                 // 인증 실패
                 toastr.error("인증 코드가 일치하지 않습니다.");
@@ -181,8 +181,10 @@ $(document).on('click','#btn-user-auth',function(e) {
 
 /************************* write *************************/
 
-//아이디 중복검사 후 true 반환
+//아이디 중복 검사 후 true 반환
 let isIdChecked = false;
+//비밀번호 유효성 검사 후 true 반환
+let isValidPassword = false;
 
 
 //아이디 유효성 검사, 중복 체크
@@ -219,9 +221,6 @@ $(document).on('click','#btn-user-id-check',function(e) {
 		e.preventDefault();	
 });
 
-
-
-
 //비밀번호 유효성 검사
 $(document).ready(function() {
 	let password1 		= $('#password1');
@@ -257,7 +256,7 @@ function validatePassword(password1, password2, passwordsInfo){
 		else {
 			passwordsInfo.removeClass().addClass('goodpass')
 			.html("사용 가능한 비밀번호 입니다.");
-			return true;
+			isValidPassword = true;
 		}
 		e.preventDefault();	
 	});
@@ -268,26 +267,28 @@ function validatePassword(password1, password2, passwordsInfo){
 			passwordsInfo.removeClass().addClass('weakpass').html("비밀번호 확인이 일치하지 않습니다.");	
 		}else{
 			passwordsInfo.removeClass().addClass('goodpass').html("비밀번호 확인이 일치합니다.");	
+			isValidPassword = true;
 		}
 		e.preventDefault();	
 	});
-}
+	return isValidPassword;
+};
 
 //회원 가입
 $(document).on('click','#btn-user-create',function(e) {
     	
-	  const user = {
-	  userId: $("#userId").val(),
-	  password: $("#password1").val(),
-	  password2: $("#password2").val(),
-	  name: $("#name").val(),
-	  nickname: $("#nickname").val(),
-	  phone: $("#phone").val(),
-	  email: $("#email").val(),
-	  birth: $("#birth").val(),
-	  address: $("#address").val(),
-	  gender: $("#gender:checked").val()
-	  };
+	  var user = {};
+	  user.userId = $("#userId").val();
+	  user.password = $("#password1").val();
+	  user.password2 = $("#password2").val();
+	  user.name = $("#name").val();
+	  user.nickname = $("#nickname").val();
+	  user.phone = $("#phone").val();
+	  user.email = $("#email").val();
+	  user.birth = $("#birth").val();
+	  user.address = $("#address").val();
+	  user.gender = $("input[name=gender]:checked").val();
+	  
 	  
 	const termsService = document.getElementById("termsService");
 	const termsPrivacy = document.getElementById("termsPrivacy");
@@ -310,7 +311,7 @@ $(document).on('click','#btn-user-create',function(e) {
 	    $("#password2").focus().select();
 	    return false;
 	}
-	if (!validatePassword()) {
+	if (!isValidPassword) {
 		return false;
 	}
 	if (user.name === "") {
@@ -329,7 +330,7 @@ $(document).on('click','#btn-user-create',function(e) {
 		return false;
 	}
 	if (user.email === "") {
-		toastr.error("이메일 주소를 입력하세요.");
+		alert("이메일 주소를 입력하세요.");
 	    $("#email").focus();
 		return false;
 	}
@@ -345,18 +346,18 @@ $(document).on('click','#btn-user-create',function(e) {
 	}
 	if (user.gender === "") {
 		toastr.error("성별을 선택하세요.");
-	    $("#gender").focus();
+	    $("input[name=gender]").focus();
 		return false;
 	}
 	$.ajax({
-	    type: "POST",
-	    url: "./user-write-action",
-	    data: JSON.stringify(user),
-	    dataType: "json",
+	    type: 'POST',
+		url: './user-write-action',
+		data: JSON.stringify(user),
+		dataType: "json",
 	    contentType: "application/json;charset=UTF-8",
 	    success: function (data) {
 	        if (data.status == 0) {
-	            toastr(data.message);
+	            alert(data.message);
 	            window.location.href = "./index";
 	        } else {
 	            alert(data.message);
@@ -367,9 +368,7 @@ $(document).on('click','#btn-user-create',function(e) {
 	        alert("회원가입에 실패했습니다.");
 	    }
 	}); 
-	e.preventDefault();		
 });
-
 /******************************************************************/
 
 

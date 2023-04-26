@@ -48,6 +48,8 @@ public class FreeBoardController {
                 freeBoard.setCommentCount(commentCount);
                 freeBoardList.add(freeBoard);
             }
+            List<City> cityList = cityService.findAllCity();
+			model.addAttribute("cityList", cityList);
             model.addAttribute("freeBoardListPage", freeBoardListPage);
             model.addAttribute("freeBoardList", freeBoardList);
             model.addAttribute("pageNo", pageNo);
@@ -69,6 +71,8 @@ public class FreeBoardController {
                 freeBoard.setCommentCount(commentCount);
                 freeBoardList.add(freeBoard);
             }
+            List<City> cityList = cityService.findAllCity();
+			model.addAttribute("cityList", cityList);
             model.addAttribute("freeBoardListPage", freeBoardListPage);
             model.addAttribute("freeBoardList", freeBoardList);
             model.addAttribute("pageNo", pageNo);
@@ -90,6 +94,8 @@ public class FreeBoardController {
                 freeBoard.setCommentCount(commentCount);
                 freeBoardList.add(freeBoard);
             }
+            List<City> cityList = cityService.findAllCity();
+			model.addAttribute("cityList", cityList);
             model.addAttribute("freeBoardListPage", freeBoardListPage);
             model.addAttribute("freeBoardList", freeBoardList);
             model.addAttribute("pageNo", pageNo);
@@ -111,6 +117,8 @@ public class FreeBoardController {
                 freeBoard.setCommentCount(commentCount);
                 freeBoardList.add(freeBoard);
             }
+            List<City> cityList = cityService.findAllCity();
+			model.addAttribute("cityList", cityList);
             model.addAttribute("freeBoardListPage", freeBoardListPage);
             model.addAttribute("freeBoardList", freeBoardList);
             model.addAttribute("pageNo", pageNo);
@@ -128,6 +136,8 @@ public class FreeBoardController {
             freeBoardListPage.getItemList();
             model.addAttribute("freeBoardList", freeBoardListPage);
             model.addAttribute("pageNo", pageNo);
+            List<City> cityList = cityService.findAllCity();
+			model.addAttribute("cityList", cityList);
         } catch (Exception e) {
             e.printStackTrace();
             return "error";
@@ -156,6 +166,9 @@ public class FreeBoardController {
             model.addAttribute("freeBoardCommentList", freeBoardCommentList);
             model.addAttribute("fBoNo", fBoNo);
             model.addAttribute("selectCommentCount", selectCommentCount);
+            
+            List<City> cityList = cityService.findAllCity();
+			model.addAttribute("cityList", cityList);
         } catch (Exception e) {
             e.printStackTrace();
             return "error";

@@ -58,4 +58,14 @@ public class WishlistServiceImpl implements WishlistService{
 		return wishlistDao.deleteWishlistByNoAndId(wishNo, userId);
 	}
 
+	@Override
+	public int selectWishlistTourCount(String userId, int toNo) {
+		return wishlistDao.selectWishlistTourCount(userId, toNo);
+	}
+
+	@Override
+	public int selectWishlistTicketCount(String userId, int tiNo) {
+		return wishlistDao.selectWishlistTicketCount(userId, tiNo);
+	}
+
 }

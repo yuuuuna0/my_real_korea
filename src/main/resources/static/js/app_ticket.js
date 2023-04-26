@@ -282,7 +282,11 @@ $('#ticket-review-modify-action').click(function(e){
     
     
     
-
+/* test */
+$(document).ready(function() {
+	
+  $('.box_style_1 expose').after('<script>$("#ticketReviewDiv").hide();</script>');
+});
 
 
 

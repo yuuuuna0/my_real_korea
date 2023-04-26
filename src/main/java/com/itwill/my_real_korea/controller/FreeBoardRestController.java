@@ -3,6 +3,7 @@ package com.itwill.my_real_korea.controller;
 import com.itwill.my_real_korea.dto.City;
 import com.itwill.my_real_korea.dto.freeboard.FreeBoard;
 import com.itwill.my_real_korea.dto.freeboard.FreeBoardComment;
+import com.itwill.my_real_korea.dto.tripboard.TripBoard;
 import com.itwill.my_real_korea.service.city.CityService;
 import com.itwill.my_real_korea.service.freeboard.FreeBoardCommentService;
 import com.itwill.my_real_korea.service.freeboard.FreeBoardService;
@@ -34,14 +35,26 @@ public class FreeBoardRestController {
 
     @ApiOperation(value = "자유게시판 리스트 최신순")
     @GetMapping(value = "/fBoList", produces = "application/json;charset=UTF-8")
-    public Map<String, Object> fBoListFBoNoDesc(@RequestParam(required = false, defaultValue = "1") Integer pageno) {
+    public Map<String, Object> fBoListFBoNoDesc(@RequestParam(required = false, defaultValue = "1") Integer pageno, Integer cityNo) throws Exception {
         Map<String, Object> resultMap = new HashMap<>();
         PageMakerDto<FreeBoard> freeBoardList = null;
+        List<City> cityList = cityService.findAllCity();
+        
         try {
             freeBoardList = freeBoardService.selectAllOrderByFBoNoDesc(pageno);
+            List<FreeBoard> data = new ArrayList<FreeBoard>();
+           
+            for (FreeBoard freeBoard : data) {
+            	int commentCount = freeBoardCommentService.selectByfBoNo(freeBoard.getFBoNo()).size();
+            	freeBoard.setCommentCount(commentCount);
+            	cityNo=freeBoard.getCity().getCityNo();
+            	freeBoard.setCity(cityService.findByCityNo(cityNo));
+            	data.add(freeBoard);
+            }
             resultMap.put("errorCode", 1);
             resultMap.put("errorMsg", "성공");
             resultMap.put("data", freeBoardList);
+            resultMap.put("data.itemList.city", cityList);
         } catch (Exception e) {
             e.printStackTrace();
             resultMap.put("errorCode", -1);
@@ -98,9 +111,16 @@ public class FreeBoardRestController {
         int code = 1;
         String msg = "성공";
         PageMakerDto<FreeBoard> freeBoardList = null;
+        List<FreeBoard> freeBoard = new ArrayList<>();
         try {
             // 페이지 번호(default 값 1)와 검색 keyword로 자유게시판 검색결과 리스트 찾기, 성공시 code 1
             freeBoardList = freeBoardService.selectSearchFreeBoardList(pageNo, keyword);
+            List<FreeBoard> tempFreeBoardList = freeBoardList.getItemList();
+            for (FreeBoard freeboard : tempFreeBoardList) {
+                int commentCount = freeBoardCommentService.selectByfBoNo(freeboard.getFBoNo()).size();
+                freeboard.setCommentCount(commentCount);
+                freeBoard.add(freeboard);
+            }
             if (freeBoardList.getPageMaker().getTotCount() != 0 && freeBoardList != null) {
                 code = 1;
                 msg = "성공";

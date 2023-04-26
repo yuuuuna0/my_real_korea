@@ -192,11 +192,11 @@ public class TourController {
 			payment.setPPoint(pPoint);
 			payment.setPPrice(pPrice);
 			paymentService.insertTourPayment(payment);
-			//포인트 적립하기
+			//포인트 적립하기 ----> 사용한 만큼 빼야함
 			int newPoint=loginUser.getPoint()+pPoint;
 			loginUser.setPoint(newPoint);
 			System.out.println(loginUser);
-			userService.update(loginUser);
+			userService.updatePoint(loginUser);
 			//tour에 구매수량만큼 올리기
 			tour.setToCount(tour.getToCount()+payment.getPQty());	
 			tourService.updateTour(tour);
@@ -212,6 +212,7 @@ public class TourController {
 			//redirect하는 곳으로 붙여줄 객체 --> 객체 붙일깨는 FlashAttribute
 			redirectAttributes.addFlashAttribute("payment",findPayment);
 			redirectAttributes.addFlashAttribute("rsPInfo",rsPInfo);
+			redirectAttributes.addFlashAttribute("tour",tour);
 			
 			session.removeAttribute("payment");
 			session.removeAttribute("tour");
@@ -228,11 +229,13 @@ public class TourController {
 	@RequestMapping(value="tour-payment-confirmation")
 	public String tourPaymentConfirmation(@ModelAttribute Payment payment,
 										  @ModelAttribute RsPInfo rsPInfo,
+										  @ModelAttribute Tour tour,
 										  Model model) {
 		String forwardPath="";
 		
 		model.addAttribute(payment);
 		model.addAttribute(rsPInfo);
+		model.addAttribute(tour);
 		forwardPath="tour-payment-confirmation";
 		return forwardPath;
 	}

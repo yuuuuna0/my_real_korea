@@ -7,7 +7,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Citytours - Premium site template for city tours agencies, transfers and tickets.">
     <meta name="author" content="Ansonika">
-    <title>CITY TOURS - City tours and travel site template by Ansonika</title>
+    <title>마이리얼코리아-예약</title>
 
     <!-- Favicons-->
     <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
@@ -100,160 +100,190 @@
 
 <!-- ------------------------------- -->
 <!-- Start  Payment Form                    	티켓 결제 액션-->
-		<form th:object="${rsPInfo}" name="f" method="POST" >
+		<form th:object="${rsPInfo}" name="f" id="pForm" method="POST" class="was-validated">
 		<input type="hidden" name="userId" th:value="${session.loginUser.userId}">
+		<input type="hidden" name="pPrice" th:value="${session.payment.pPrice}">
+		<input type="hidden" name="pPoint" th:value="${session.payment.pPoint}">
 		<div class="container margin_60">
-			<div class="row">
-				<div class="col-lg-8">
-					<div class="form_title">
-						<h3><strong>1</strong>예약 확인</h3>
-						<br><br>
-						<h4 th:text="${session.ticket.tiTitle}"></h4>
+						<div class="row" >
+				<div class="col-lg-8 add_bottom_15">
+					<div  class="strip_all_tour_list wow fadeIn" data-wow-delay="0.1s" >
+						<div class="row" >
+							<div class="col-lg-4 col-md-4">
+								<div  class="img_list">
+									<a th:href="@{ticket-detail(tiNo=${session.ticket.tiNo})}">
+										<img th:src="@{{tiImgUrl}(tiImgUrl=${session.ticketImgList.get(0).tiImgUrl})}" alt="Image">
+									</a>
+								</div>
+							</div>
+							<div class="col-lg-6 col-md-6">
+								<div class="tour_list_desc">
+									<div class="rating">
+									</div>
+									<div>
+									<br>
+									<br>
+									<h3><strong  th:text="${session.ticket.tiTitle}"></strong> </h3>
+									<br>
+									</div>
+									<ul class="add_info">
+										<li>
+											<div class="tooltip_styled tooltip-effect-4">
+												<span class="tooltip-item"><i class="icon_set_1_icon-83"></i></span>
+												<div class="tooltip-content">
+													<h4>티켓 안내사항</h4>
+													<p th:text="${session.ticket.tiNotice}"> </p>
+												</div>
+											</div>
+										</li>
+									</ul>
+								</div>
+							</div>
+							<div class="col-lg-2 col-md-2" style="padding: 0px;">
+								<div class="price_list" id="wishlist-detail-btn">
+									<div>
+										<div><sup th:text="'&nbsp;&nbsp;'+${#numbers.formatInteger(session.ticket.tiPrice,3,'COMMA') + '원'} " style="font-size:20px"></sup>
+												<small>* 1인 기준</small>
+										</div>
+									</div>
+							</div>
+						</div>
 					</div>
-					<div class="step">
-						<div class="row">
-							<div class="col-sm-5">
-								<div class="form-group">
-									<label>예약자명</label>
-									<input type="text" class="form-control" name="rsPName" th:value="${session.loginUser.name}">
-								</div>
-							</div>
-							<div class="col-sm-5">
-								<div class="form-group">
-									<label>휴대폰 번호</label>
-									<input type="text" class="form-control" name="rsPPhone" th:value="${session.loginUser.phone}">
-								</div>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-sm-5">
-								<div class="form-group">
-									<label>Email</label>
-									<input type="email" class="form-control" name="rsPEmail" th:value="${session.loginUser.email}">
-								</div>
-							</div>
-							
-						</div>
 					</div>
 					
 					<div class="form_title">
-						<h3><strong>2</strong>요청 사항</h3>
+						<h3><strong>1</strong>예약확인</h3>
+						<p>
+							예약자의 정보를 입력 해 주세요. 
+						</p>
 					</div>
 					<div class="step">
 						<div class="row">
-							<div class="col-sm-6">
+							<div class="col-sm-8">
 								<div class="form-group">
-									<label>입력창</label>
-									<input type ="text" class="form-control" name="pMsg">
-								</div>
-							</div>
-							<!-- 아래 쪽 삭제하기 -->
-							<div class="col-sm-6">
-								<div class="form-group">
-									<label>결제 수단</label>
-									<!-- radio -->
-								<select id="pMethod" name="pMethod">
-								  <option value="" selected> 선택해주세요</option>
-								  <option value="1">카드결제</option>
-								  <option value="2">현장결제</option>
-								</select>
+									<label> 성함 </label>
+									<input type="text" class="form-control" name="rsPName" placeholder="이름을 입력해주세요" required>
 								</div>
 							</div>
 						</div>
 						<div class="row">
 							<div class="col-sm-6">
 								<div class="form-group">
-									<label>Email</label>
-									<input type ="text" id="email_booking" name="email_booking" class="form-control">
+									<label> 이메일 </label>
+									<input type="email" id="email_booking" name="rsPEmail" class="form-control" placeholder="이메일을 입력해주세요" required>
 								</div>
 							</div>
 							<div class="col-sm-6">
 								<div class="form-group">
-									<label>Confirm email</label>
-									<input type="email" id="email_booking_2" name="email_booking_2" class="form-control">
+									<label> 이메일 확인 </label>
+									<input type="email" id="email_booking_2" name="email_booking_2" class="form-control"placeholder="이메일을 입력해주세요" required>
 								</div>
 							</div>
 						</div>
 						<div class="row">
 							<div class="col-sm-6">
 								<div class="form-group">
-									<label>Telephone</label>
-									<input type="text" id="telephone_booking" name="telephone_booking" class="form-control">
+									<label> 전화번호 </label>
+									<input type="text" id="telephone_booking" name="rsPPhone" class="form-control" placeholder="전화번호를 입력해주세요" required>
 								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-													<!--------------------------결제창 시작-------------------------------->
-			<aside class="col-lg-4">
+					
+					<!--End step -->
+					
+					<div class="form_title">
+						<h3><strong>2</strong> 요청사항 </h3>
+					</div>
+					<div class="step">
+						<div class="row">
+							<div class="col-lg-12">
+								<div class="form-group">
+									<textarea id="city_booking" name="pMsg" class="form-control" placeholder="요청사항을 작성 해 주세요(선택사항)"></textarea>
+								</div>
+							</div>
+							<br>
+							<br>
+							<div class="col-lg-8">
+								<div>
+									<input id="usedPoint" type="number" class="form-control" style="width:40%; display:inline-block;" value="0" min="0" th:max="${session.loginUser.point}" step="1000">
+									<input id="nowPoint" type="hidden" th:value="${session.loginUser.point}">
+									<input id="totPrice" type="hidden" th:value="${session.payment.pPrice}">
+									<button id="usePointBtn" type="button" class="btn btn-warning">사용</button>
+									<span>&nbsp;&nbsp;사용 가능한 포인트 : </span>
+									<span id="nowPoint2" th:text="${session.loginUser.point}"></span>
+								</div>
+									<span style="font-size:12px; color:#898484;">(포인트는 1000p 단위로 사용 가능합니다)</span>
+							</div>
+							<div class="col-lg-4" >
+								<div class="form-group">
+										<select class="form-control" name="pMethod" id="pMethod" required>
+											<option value="" disabled hidden>결제방법</option>
+											<option value="1">계좌이체</option>
+											<option value="2" selected>카드결제</option>
+										</select>
+								</div>
+							</div>
+							</div>
+						<!--End row -->
+						<br>
+						<br>
+						<br>
+						<div id="policy" style="padding:0px;">
+						<h4>취소 및 환불 규정</h4>
+						<div class="form-group">
+							<label>
+								<input type="checkbox" name="policy_terms" id="policy_terms" required>아래의 취소 및 환불 규정을 확인 후 동의하였습니다.
+							</label>
+						</div>
+					</div>
+					</div>
+					<!--End step -->
+		</div>
+				<aside class="col-lg-4">
 					<div class="box_style_1">
-						<h3 class="inner">결제 예상 내역</h3>
-						<table class="table table_summary">
+						<h3 class="inner">- 상세보기 -</h3>
+						<table class="table table_summary"  id="tableSummaryH">
 							<tbody>
 								<tr>
-									<td>
-										예약 날짜
-									</td>
-									<td class="text-right" th:text="${#dates.format(session.payment.pStartDate, 'yyyy-MM-dd')}">
-										10 April 2015
-									</td>
+									<td>예약 날짜</td>
+									<td class="text-right" th:text="${#dates.format(session.payment.pStartDate,'yyyy-MM-dd')}"></td>
 								</tr>
-								
 								<tr>
-									<td>
-										티켓 가격 (개)
-									</td>
-									<td class="text-right" data-th-text="${#numbers.formatInteger(session.ticket.tiPrice ,3, 'COMMA')} +'원'">
-										$34
-									</td>
+									<td>금액</td>
+									<td class="text-right" th:text="${#numbers.formatInteger(session.payment.pPrice,3,'COMMA')} + '원' "></td>
 								</tr>
-							
 								<tr>
-									<td>
-										수량
-									</td>
-									<td class="text-right" th:text="${session.payment.pQty}">
-										2
-									</td>
+									<td>사용포인트</td>
+									<td class="text-right" id="usingPoint2">0</td>
 								</tr>
-								
 								<tr class="total">
-									<td>
-										총 금액
+									<td>총 금액</td>
+									<td class="text-right" id="totPrice2" th:text="${#numbers.formatInteger(session.payment.pPrice,3,'COMMA')} + '원' ">
 									</td>
-									<td class="text-right" th:text="${#numbers.formatInteger(session.payment.pPrice,3, 'COMMA')} +'원'">
-										$154
+								</tr>
+								<tr>
+									<td>적립 포인트</td>
+									<td class="text-right" id="savePoint2" th:text="${session.payment.pPoint}">0
 									</td>
 								</tr>
 							</tbody>
 						</table>
-						<button class = "btn_full" type="button" onclick="ticket_payment_complete_action()">결제하기</button>
-						<a class="btn_full_outline" href="single_hotel.html"><i class="icon-right"></i> Modify your search</a>
-					  </div>
-					
-				</aside>
-	<!-- ------------------------결제창----------------------------------------------------------------------------------------------------------->
-		
-			</div>
-			</div>
-	<!-------------------------------------------------------------------------------------------------------------------------------------------->
-					
-		<!--  추가 정보 폼 
-			<div class="row">
-				<div class="col-lg-8 add_bottom_15">
-					
-					<div id="policy">
-						<h4>Cancellation policy</h4>
-						<div class="form-group">
-							<label>
-								<input type="checkbox" name="policy_terms" id="policy_terms">I accept terms and conditions and general policy.</label>
-						</div>
-						<a href="ticket-payment-confirmation.html" class="btn_1 green medium">결제 하기</a>
+						
+						<button class="btn_full" type="button" id="ticketPayment" onclick="ticket_payment_complete_action()">예약하기 </button>
+						<a class="btn_full_outline" th:href="@{ticket-detail(tiNo=${session.ticket.tiNo})}"><i class="icon-right"></i> 티켓상세보기</a>
 					</div>
-				</div>
+					<div class="box_style_4">
+						<i class="icon_set_1_icon-57"></i>
+						<h4>Need <span>Help?</span></h4>
+						<a href="tel://004542344599" class="phone">+45 423 445 99</a>
+						<small>Monday to Friday 9.00am - 7.30pm</small>
+					</div>
+				</aside>
 			</div>
-		-->
+			</div>
 		</form>
+			<!--End row -->
 		<!-- End Form -->
 		<!--End container -->
 	</main>
@@ -327,6 +357,8 @@
 	<script src="js/jquery-2.2.4.min.js"></script>
 	<script src="js/common_scripts_min.js"></script>
 	<script src="js/functions.js"></script>
+	<script src="js/app_ticket.js" type="module"></script>
+	<script src="js/app.js" type="module"></script>
 	
 	<!-- Check box and radio style iCheck -->
 	<script>
@@ -356,7 +388,7 @@
           IMP.request_pay({
               pg : "html5_inicis", // KG이니시스 일반결제창 호출(상점아이디 MID-a 적용) // 카드, 페이 결제 다 되는데 나눌지 말지 고민중
               pay_method : pMethod,
-              merchant_uid: "[[${session.payment.pNo}]]", 
+              merchant_uid: "TI" + new Date().getTime(), // "[[${session.payment.pNo}]]", // 변경 TI20230427123122
               name : "[[${session.ticket.tiTitle}]]",
               amount : 100, // 테스트 용으로 100원만 결제 되게 해둠 
               buyer_email : "[[${session.loginUser.email}]]",
@@ -365,17 +397,14 @@
               buyer_addr : "[[${session.loginUser.address}]]",
           }, function (rsp) { // callback
         	  
-        	  console.log(rsp);
+     		  if(rsp.success && rsp.status == 'paid') {
+     		  	document.f.action='ticket-payment-complete-action';
+              	document.f.submit();
+     		  }
         	  
-              if (rsp.success) {
-                  document.f.action='ticket-payment-complete-action';
-                  document.f.submit();
-              } else {
-                  console.log(rsp);
-              }
           });
       }
-	
+      
 	
 	</script>
 

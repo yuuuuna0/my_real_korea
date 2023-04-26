@@ -8,7 +8,7 @@
 
 	<meta name="description" content="Citytours - Premium site template for city tours agencies, transfers and tickets.">
 	<meta name="author" content="Ansonika">
-	<title>CITY TOURS - City tours and travel site template by Ansonika</title>
+	<title>마이리얼코리아-예약확인</title>
 
 	<!-- Favicons-->
 	<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
@@ -183,7 +183,7 @@
 									<td>
 										<strong>총 결제 금액</strong>
 									</td>
-									<td th:text="${payment.pPrice}">
+									<td th:text="${#numbers.formatInteger(payment.pPrice, 3, 'COMMA')} + '원' ">
 										$154
 									</td>
 								</tr>

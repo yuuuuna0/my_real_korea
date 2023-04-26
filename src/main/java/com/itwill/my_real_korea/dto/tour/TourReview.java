@@ -34,6 +34,7 @@ public class TourReview {
 	private int toNo;	//FK
 	private User users;	//FK
 	private String toReviewUpload;
+	private Tour tour;
 	
 	public TourReview(int toReviewNo, Date toReviewDate, String toReviewTitle, String toReviewContent,
 			String toReviewImg, int toReviewStar, int toNo) {
@@ -45,6 +46,7 @@ public class TourReview {
 		this.toReviewStar = toReviewStar;
 		this.toNo = toNo;
 		this.users = new User();
+		this.tour=new Tour();
 	}
 	
 }

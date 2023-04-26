@@ -1,5 +1,6 @@
 package com.itwill.my_real_korea.controller;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -8,6 +9,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.itwill.my_real_korea.dto.freeboard.FreeBoard;
+import com.itwill.my_real_korea.dto.ticket.Ticket;
+import com.itwill.my_real_korea.dto.ticket.TicketImg;
+import com.itwill.my_real_korea.dto.ticket.TicketReview;
+import com.itwill.my_real_korea.dto.tour.Tour;
+import com.itwill.my_real_korea.dto.tour.TourReview;
+import com.itwill.my_real_korea.service.freeboard.FreeBoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,6 +38,11 @@ import com.itwill.my_real_korea.dto.user.User;
 import com.itwill.my_real_korea.service.city.CityService;
 import com.itwill.my_real_korea.service.freeboard.FreeBoardService;
 import com.itwill.my_real_korea.service.payment.PaymentService;
+import com.itwill.my_real_korea.service.ticket.TicketImgService;
+import com.itwill.my_real_korea.service.ticket.TicketReviewService;
+import com.itwill.my_real_korea.service.ticket.TicketService;
+import com.itwill.my_real_korea.service.tour.TourReviewService;
+import com.itwill.my_real_korea.service.tour.TourService;
 import com.itwill.my_real_korea.service.tripboard.TripBoardService;
 import com.itwill.my_real_korea.service.user.KaKaoService;
 import com.itwill.my_real_korea.service.user.UserService;
@@ -49,6 +62,16 @@ public class UserController {
 	private TripBoardService tripBoardService;
 	@Autowired
 	private FreeBoardService freeBoardService;
+	@Autowired
+	private TourReviewService tourReviewService;
+	@Autowired
+	private TicketReviewService ticketReviewService;
+	@Autowired
+	private TourService tourService;
+	@Autowired
+	private TicketService ticketService;
+	@Autowired
+	private TicketImgService ticketImgService;
 
 
 	//회원 가입 폼
@@ -311,7 +334,6 @@ public class UserController {
 		//1. 상세페이지 예약내역
 		List<Payment> paymentList=paymentService.selectAllUser(loginUser.getUserId());
 		request.setAttribute("paymentList", paymentList);
-		System.out.println(paymentList);
 
 		//2. 마이페이지 내가 쓴 동행게시판 게시글
 		List<TripBoard> tripBoardList = tripBoardService.selectAllUser(loginUser.getUserId());
@@ -321,6 +343,28 @@ public class UserController {
 		//3. 마이페이지 내가 쓴 자유게시판 게시글
 		List<FreeBoard> freeBoardList = freeBoardService.selectByUserId(loginUser.getUserId());
 		request.setAttribute("freeBoardList",freeBoardList);
+		
+		//4. 내 리뷰
+		List<TourReview> tempTourReviewList=tourReviewService.findByUserId(loginUser.getUserId());
+		List<TourReview> tourReviewList=new ArrayList<>();
+		for (TourReview tourReview : tempTourReviewList) {
+			Tour tour=tourService.findTourWithCityByToNo(tourReview.getToNo());
+			tourReview.setTour(tour);
+			tourReviewList.add(tourReview);
+		}
+		List<TicketReview> tempTicketReviewList=ticketReviewService.selectByTicketReviewUser(loginUser.getUserId());
+		List<TicketReview> ticketReviewList=new ArrayList<>();
+		for (TicketReview ticketReview : tempTicketReviewList) {
+			Ticket ticket=ticketService.selectTicketNo(ticketReview.getTiNo());
+			List<TicketImg> ticketImgList=ticketImgService.selectTicketImgList(ticketReview.getTiNo());
+			ticket.setTicketImgList(ticketImgList);
+			ticketReview.setTicket(ticket);
+			ticketReviewList.add(ticketReview);
+		}
+		System.out.println(tourReviewList);
+		System.out.println(ticketReviewList);
+		request.setAttribute("tourReviewList", tourReviewList);
+		request.setAttribute("ticketReviewList", ticketReviewList);
 
 		return "user-view";
 	}

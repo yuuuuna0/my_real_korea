@@ -479,6 +479,17 @@ $(document).on('click','#btn-user-modify-action',function(e) {
 		e.preventDefault();
 });
 
+//회원탈퇴
+$(document).on('click','#btn-user-remove',function() {
+	location.href="user-remove-action";
+});
+
+//프로필 수정 취소
+$(document).on('click','#btn-user-modify-cancle',function() {
+	location.href="user-view";
+});
+
+//첨부파일에 이름 나오게 
 $("#file").on('change',function(){
   var fileName = $("#file").val();
   $(".upload-name").val(fileName);

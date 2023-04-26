@@ -14,17 +14,24 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.itwill.my_real_korea.dto.Payment;
+import com.itwill.my_real_korea.dto.RsPInfo;
+import com.itwill.my_real_korea.dto.ticket.Ticket;
+import com.itwill.my_real_korea.dto.tour.Tour;
 import com.itwill.my_real_korea.dto.user.User;
 import com.itwill.my_real_korea.service.payment.PaymentService;
+import com.itwill.my_real_korea.service.rspinfo.RsPInfoService;
 
 @RestController
 public class PaymentRestController {
 	private PaymentService paymentService;
+	private RsPInfoService rsPInfoService;
 	
-	public PaymentRestController(PaymentService paymentService) {
+	public PaymentRestController(PaymentService paymentService,RsPInfoService rsPInfoService) {
 		this.paymentService=paymentService;
+		this.rsPInfoService=rsPInfoService;
 	}
 	
 	//1. 구매상품 삭제
@@ -53,4 +60,5 @@ public class PaymentRestController {
 		return resultMap;
 	}
 	
+
 }

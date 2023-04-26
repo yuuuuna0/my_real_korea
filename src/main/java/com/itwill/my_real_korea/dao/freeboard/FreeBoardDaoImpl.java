@@ -87,7 +87,21 @@ public class FreeBoardDaoImpl implements FreeBoardDao {
     public int selectSearchCount(String keyword) throws Exception {
         return freeBoardMapper.selectSearchCount(keyword);
     }
+    //키워드 검색시 게시글 갯수 조회
+    @Override
+    public int selectCityCount(int cityNo) throws Exception {
+    	return freeBoardMapper.selectCityCount(cityNo);
+    }
 
+    //시티 리스트 페이징 나누기
+    @Override
+    public List<FreeBoard> selectFreeBoardCityList(int pageStart, int pageEnd, int cityNo) throws Exception {
+    	Map<String, Object> pageMap = new HashMap<>();
+    	pageMap.put("pageStart", pageStart);
+    	pageMap.put("pageEnd", pageEnd);
+    	pageMap.put("cityNo", cityNo);
+    	return freeBoardMapper.selectFreeBoardCityList(pageMap);
+    }
     //키워드검색 리스트 페이징 나누기
     @Override
     public List<FreeBoard> selectSearchFreeBoardList(int pageStart, int pageEnd, String keyword) throws Exception {

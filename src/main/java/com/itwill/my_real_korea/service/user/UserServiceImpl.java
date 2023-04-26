@@ -187,6 +187,11 @@ public class UserServiceImpl implements UserService{
 	public int updateMailAuth(User user) throws Exception {
 		return userDao.updateMailAuth(user);
 	}
+	//24. 포인트 업데이트
+	@Override
+	public int updatePoint(User user) {
+		return userDao.updatePoint(user);
+	}
 
 
 	

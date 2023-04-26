@@ -20,9 +20,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.itwill.my_real_korea.dto.City;
 import com.itwill.my_real_korea.dto.Payment;
 import com.itwill.my_real_korea.dto.user.KakaoProfile;
 import com.itwill.my_real_korea.dto.user.User;
+import com.itwill.my_real_korea.service.city.CityService;
 import com.itwill.my_real_korea.service.payment.PaymentService;
 import com.itwill.my_real_korea.service.user.KaKaoService;
 import com.itwill.my_real_korea.service.user.UserService;
@@ -36,6 +38,8 @@ public class UserController {
 	private PaymentService paymentService;
 	@Autowired
 	private KaKaoService kakaoService; 
+	@Autowired
+	private CityService cityService;
 
 	
 	//회원 가입 폼
@@ -290,6 +294,10 @@ public class UserController {
 		loginUser = userService.findUser(loginUser.getUserId());
 		request.setAttribute("loginUser", loginUser);
 		System.out.println(loginUser);
+		
+		//도시리스트 붙이기
+		List<City> cityList=cityService.findAllCity();
+		request.setAttribute("cityList", cityList);
 		
 		//1. 상세페이지 예약내역
 		List<Payment> paymentList=paymentService.selectAllUser(loginUser.getUserId());

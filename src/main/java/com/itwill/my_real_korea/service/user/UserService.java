@@ -36,5 +36,7 @@ public interface UserService {
 	int updateMailKey(User user) throws Exception;
 	//23. 메일 인증여부 업데이트
 	int updateMailAuth(User user) throws Exception;
+	//24. 포인트 업데이트
+	public int updatePoint(User user);
 	
 }

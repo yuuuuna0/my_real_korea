@@ -111,5 +111,11 @@
 		SET mail_auth = 1
 		WHERE email = #{email} AND mail_key = #{mailKey}
 	</update>
+		<!-- 24. 포인트 업데이트 -->	
+	<update id="updatePoint" parameterType="com.itwill.my_real_korea.dto.user.User">
+		UPDATE  user_info 
+		SET point=#{point}
+		WHERE user_id = #{userId}
+	</update>
 	
 </mapper>

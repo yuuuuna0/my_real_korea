@@ -151,4 +151,17 @@ public class FreeBoardServiceImpl implements FreeBoardService {
         pageMakerBoardList.setPageMaker(pageMaker);
         return pageMakerBoardList;
     }
+    //자유게시판 키워드 검색으로 게시글 리스트 보기
+    @Override
+    public PageMakerDto<FreeBoard> selectFreeBoardCityList(int currentPage, int cityNo) throws Exception {
+    	int totalRecordCount = freeBoardDao.selectCityCount(cityNo);
+    	// paging 계산 (PageMaker)
+    	PageMaker pageMaker = new PageMaker(totalRecordCount, currentPage);
+    	// 게시글 데이터 얻기
+    	List<FreeBoard> freeboardList = freeBoardDao.selectFreeBoardCityList(pageMaker.getPageBegin(), pageMaker.getPageEnd(), cityNo);
+    	PageMakerDto<FreeBoard> pageMakerBoardList = new PageMakerDto();
+    	pageMakerBoardList.setItemList(freeboardList);
+    	pageMakerBoardList.setPageMaker(pageMaker);
+    	return pageMakerBoardList;
+    }
 }

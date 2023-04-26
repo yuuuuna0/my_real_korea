@@ -517,11 +517,6 @@ a.btn_1:hover, .btn_1:hover {
   border-color: white;
 }
 
-.btn-secondary:not(:disabled):not(.disabled).active, .btn-secondary:not(:disabled):not(.disabled):active, .show>.btn-secondary.dropdown-toggle {
-    color: #fff;
-    background-color: #e14d67;
-    border-color: white;
-}
 
 .form-group-tripboard {
 display: inline-block;

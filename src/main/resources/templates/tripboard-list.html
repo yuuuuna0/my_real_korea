@@ -111,7 +111,7 @@
 								<div class="inner-box">
 									<div class="image-box">
 										<figure class="image">
-											<a th:href="@{tripboard-detail(tBoNo=${tripBoard.tBoNo})}"><img src="img/tripboard/jeonju2.jpeg" alt="">
+											<a th:href="@{tripboard-detail(tBoNo=${tripBoard.tBoNo})}"><img th:src="@{img/tripboard/{tBoImg}(tBoImg=${tripBoard.tBoImg})}" alt="">
 											</a>
 										</figure>
 											<!-- 지역 보이게하기 -->

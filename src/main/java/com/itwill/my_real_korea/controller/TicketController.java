@@ -38,6 +38,7 @@ import com.itwill.my_real_korea.service.rspinfo.RsPInfoService;
 import com.itwill.my_real_korea.service.ticket.TicketImgService;
 import com.itwill.my_real_korea.service.ticket.TicketReviewService;
 import com.itwill.my_real_korea.service.ticket.TicketService;
+import com.itwill.my_real_korea.service.user.UserService;
 import com.itwill.my_real_korea.util.PageMakerDto;
 
 
@@ -50,6 +51,7 @@ public class TicketController {
     private final RsPInfoService rsPInfoService;
     private final TicketImgService ticketImgService;
     private final CityService cityService;
+    private final UserService userService;
     //private final Aws3UploadService aws3UploadService;
    
 
@@ -57,7 +59,7 @@ public class TicketController {
     public TicketController(TicketService ticketService, TicketReviewService ticketReviewService,
     						RsPInfoService rsPInfoService, PaymentService paymentService,
     						TicketImgService ticketImgService,
-    						CityService cityService/*,
+    						CityService cityService,UserService userService/*,
     						Aws3UploadService aws3UploadService*/) {
         this.ticketService = ticketService;
         this.ticketReviewService = ticketReviewService;
@@ -65,6 +67,7 @@ public class TicketController {
         this.rsPInfoService = rsPInfoService;
         this.ticketImgService = ticketImgService;
         this.cityService = cityService;
+        this.userService = userService;
        // this.aws3UploadService = aws3UploadService;
     }
     //티켓 리스트 - 페이지
@@ -132,6 +135,7 @@ public class TicketController {
             Ticket ticket = ticketList.get(0);
            
             // 세션에 티켓 정보 담기
+            session.setAttribute("ticketImgList", ticketImgList); // 굳이?
             session.setAttribute("ticket", ticket);
         	// System.out.println(ticket);
             forwardPath = "ticket-detail";
@@ -154,7 +158,6 @@ public class TicketController {
     	User loginUser = (User) session.getAttribute("loginUser");
 		session.setAttribute("loginUser", loginUser);
 		
-		
     	try {
     		//System.out.println(loginUser);
     		// 총 금액 = 수량 * 티켓 가격
@@ -168,9 +171,11 @@ public class TicketController {
     		payment.setPStartDate(date); // 예약날짜
     		payment.setUserId(loginUser.getUserId()); // user 담기
     		payment.setTicket(ticket); // 티켓 담기
+    		System.out.println(ticket.getTicketImgList());
     		//fail "F1002" 처리하기
-    		paymentService.insertTicketPayment(payment);
+    		//paymentService.insertTicketPayment(payment);
     		session.setAttribute("payment", payment);
+    		session.setAttribute("ticket", ticket);
     		//System.out.println(payment); 
     		forwardPath="ticket-payment";
     	} catch (Exception e) {
@@ -188,24 +193,30 @@ public class TicketController {
 										        @ModelAttribute RsPInfo rsPInfo,
 										        @RequestParam(required = false, defaultValue = "") String pMsg,
 										        @RequestParam int pMethod, // ?
+										        @RequestParam int pPoint, // ?
+										        @RequestParam int pPrice, // ?
 										        RedirectAttributes redirectAttributes) {
         String forwardPath = "";
         Payment payment = (Payment) session.getAttribute("payment");
         Ticket ticket = (Ticket) session.getAttribute("ticket");
         User loginUser = (User) session.getAttribute("loginUser");
-
+        
         try {
         	  if (pMethod==1) {
 	                payment.setPMethod(1);
 	            } else if (pMethod==2) {
 	            	 payment.setPMethod(2);
 	            }
-        	 // System.out.println(pMethodStr);
-        	 // System.out.println(pMethodStr);
-        	payment.setPMsg(pMsg);  
-        	//payment.setPMethod(Integer.parseInt(pMethodStr));
-        	paymentService.insertTicketPayment(payment);
-        	paymentService.updatePayment(payment);
+        	payment.setPMsg(pMsg); 
+        	payment.setPPoint(pPoint);
+        	payment.setPPoint(pPrice);
+        	//payment.setPNo(payment.getPNo());
+        	//System.out.println(payment.getPNo());
+        	int newPoint = loginUser.getPoint()+pPoint;
+        	loginUser.setPoint(newPoint);
+        	userService.update(loginUser);
+        	//paymentService.updatePayment(payment); // insert로 변경
+        	paymentService.insertTicketPayment(payment); // 확인하기!
             ticket.setTiCount(ticket.getTiCount() + payment.getPQty());
             ticketService.updateTicket(ticket);
 
@@ -239,7 +250,7 @@ public class TicketController {
     	model.addAttribute(payment);
     	model.addAttribute(rsPInfo);
     	
-    	System.out.println(payment.getPMethod());
+    	//System.out.println(payment.getPMethod());
     	return "ticket-payment-confirmation";
     }
 

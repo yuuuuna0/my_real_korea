@@ -6,6 +6,7 @@
         <association property="tour" javaType="com.itwill.my_real_korea.dto.tour.Tour" autoMapping="true"> </association>
     </resultMap>
 <!-- 1-1. 티켓주문하기 (예약하기)  -->
+	<!--
 	<insert id="insertTicketPayment" parameterType="com.itwill.my_real_korea.dto.Payment">
 		<selectKey resultType="java.lang.Integer" keyProperty="pNo" order="BEFORE">
 			select payment_p_no_seq.nextval from dual
@@ -13,7 +14,7 @@
 		insert into payment(p_no,p_price,p_qty,p_date,p_start_date,p_point,p_method,to_no,ti_no,user_id)
 		values(#{pNo},#{pPrice},#{pQty},sysdate,#{pStartDate},#{pPoint},0,null,#{ticket.tiNo},#{userId})
 	</insert>
-	<!-- 
+	-->
 	<insert id="insertTicketPayment" parameterType="com.itwill.my_real_korea.dto.Payment">
 		<selectKey resultType="java.lang.Integer" keyProperty="pNo" order="BEFORE">
 			select payment_p_no_seq.nextval from dual
@@ -21,7 +22,6 @@
 		insert into payment(p_no,p_price,p_qty,p_date,p_start_date,p_msg,p_point,p_method,to_no,ti_no,user_id)
 		values(#{pNo},#{pPrice},#{pQty},sysdate,#{pStartDate},#{pMsg},#{pPoint},#{pMethod},null,#{ticket.tiNo},#{userId})
 	</insert>
-	 -->
 	 <!-- 주문 수정 -->
 	 <update id="updatePayment" parameterType="com.itwill.my_real_korea.dto.Payment">
 	 	update payment

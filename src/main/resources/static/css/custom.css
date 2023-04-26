@@ -588,7 +588,7 @@ h2 {
 	
 }
 .room-name-about{
-	 font-size: 25px;
+	font-size: 25px;
     font-family: "MBC1961M";
 }
 .price_list {
@@ -598,4 +598,10 @@ h2 {
     color: #e74c3c;
     width: 100%;
     margin-left: -5px;
+}
+.category li{
+	font-family: "MBC1961M";
+	font-size: 22px;
+	margin-bottom: 10px;
+    margin-top: 10px;
 }

@@ -30,6 +30,7 @@
 	
 	<!-- CUSTOM CSS -->
 	<link href="css/custom.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
 <!-- ajax, handlebars 
 <script  defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
 <script  defer src="js/jquery.validate.js"></script>
@@ -80,8 +81,6 @@
 			document.i.action = "user-img-modify-action";
 			document.i.submit();
 		} 
-	 
-		
 		
 </script>
 <script th:inline="javascript">
@@ -306,8 +305,6 @@ Handlebars.registerHelper('ifEquals', function(arg1, arg2, options) {
  -->
 <script id="user-modify-form-template" type="text/x-handlebars-template">
 {{#each data}}
-
-
 <form method = "POST" name = "f" id = "user-modify-form">
 		<input type="hidden"  id="userId" value="{{userId}}" >
 		<div class="row" >
@@ -319,9 +316,8 @@ Handlebars.registerHelper('ifEquals', function(arg1, arg2, options) {
 				<li>이름
 				<span>{{name}}</span>
 				</li>
-
 				<li>비밀번호
-				<span><input type = "password" class ="form-control-user" name = "password" id = "password"></span>
+				<span><input type = "password" class ="form-control-user" name = "password" id = "password" placeholder="8 - 12글자의 영어, 숫자, 특수문자" ></span>
 				</li>
 				<li>비밀번호 확인
 				<span><input type = "password" class= "form-control-user" name = "password2" id = "password2"></span>
@@ -335,13 +331,9 @@ Handlebars.registerHelper('ifEquals', function(arg1, arg2, options) {
 				<li>이메일 
 				<span><input id="email" class=" form-control-user " type="text" required="required" value="{{email}}"></span>
 				</li>
-
 				<li>생일
-					<span>
-			<input class="start-date-pick form-control" data-date-format="yyyy-MM-dd" type="date" id="birth" name="birth" value="{{dateFormat3 birth}}" >
-					</span>
+				<span><input class="start-date-pick form-control-user" data-date-format="yyyy-MM-dd" type="date" id="birth" name="birth" value="{{dateFormat3 birth}}" ></span>
 				</li>
-
 				<div> 
 					<li>주소 
 						<span><input id="address" class=" form-control-user " type="text" required="required" value="{{address}}" disabled > 
@@ -350,10 +342,10 @@ Handlebars.registerHelper('ifEquals', function(arg1, arg2, options) {
 					</li>
 				</div>
 
-			<li>성별 <span th:text="*{gender == 1} ? '남' : '여'"></span></li>
+				<li>성별 <span th:text="*{gender == 1} ? '남' : '여'"></span></li>
 
-		    <li>포인트 <span>{{point}}p</span></li>
-		</ul>
+		    	<li>포인트 <span>{{point}}p</span></li>
+			</ul>
 	
 
 		<ul id="profile_summary_user">
@@ -419,6 +411,8 @@ Handlebars.registerHelper('ifEquals', function(arg1, arg2, options) {
 	<script src="js/tabs.js"></script>
 	<script src="js/app_user.js" type="module"></script>
 	<script src="js/view.js" type="module"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script> 
+	
 	
 	<script>
 		new CBPFWTabs(document.getElementById('tabs'));

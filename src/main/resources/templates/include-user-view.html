@@ -25,6 +25,7 @@
 								</div>
 							</div>
 						</div>
+						<br/>
 						<!--/tools -->
 						
 						<div class="strip_booking" th:each="payment:${paymentList}">
@@ -45,7 +46,7 @@
 									</h3>
 									<h3 class="tours_booking" th:if="${payment.Tour != null}">
 										 <th:block th:text="${payment.Tour.toName}"></th:block>
-										<span style="font-size:30px;" th:text="${payment.pMsg}">2 Adults / 2 Childs</span>
+										<span th:text="${payment.pMsg}">2 Adults / 2 Childs</span>
 									</h3>
 								</div>
 								<div class="col-lg-2 col-md-3">

@@ -153,4 +153,9 @@
 	select count(*) cnt from trip_board where t_bo_title like '%'||#{keyword}||'%' or t_bo_content like '%'||#{keyword}||'%'
 </select>
 
+<!-- 마이페이지에 사용할 내가 작성한 글 리스트 -->
+<select id="selectAllUser" parameterType="String" resultMap="CitywithTripBoardResultMap">
+	select * from trip_board where user_id=#{userId} order by t_bo_date desc
+</select>
+
 </mapper>

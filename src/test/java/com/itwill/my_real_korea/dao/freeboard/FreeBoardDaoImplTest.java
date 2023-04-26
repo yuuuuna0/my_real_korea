@@ -35,6 +35,13 @@ class FreeBoardDaoImplTest {
     }
 
     @Test
+    void selectByUserId() throws Exception {
+        List<FreeBoard> freeBoards = freeBoardDao.selectByUserId("myrealkorea2");
+        assertThat(freeBoards).isNotNull();
+        System.out.println(freeBoards);
+    }
+
+    @Test
     void selectAllOrderByFBoNoDesc() throws Exception {
         List<FreeBoard> freeBoardList = freeBoardDao.selectAllOrderByFBoNoDesc(1, 8);
         System.out.println(freeBoardList);

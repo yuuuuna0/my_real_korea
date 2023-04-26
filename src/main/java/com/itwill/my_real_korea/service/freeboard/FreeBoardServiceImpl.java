@@ -30,6 +30,10 @@ public class FreeBoardServiceImpl implements FreeBoardService {
     public FreeBoard selectByNo(int fBoNo) throws Exception {
         return freeBoardDao.selectByNo(fBoNo);
     }
+    @Override
+    public List<FreeBoard> selectByUserId(String userId) throws Exception {
+        return freeBoardDao.selectByUserId(userId);
+    }
 
     @Override
     public int updateFreeBoard(FreeBoard freeBoard) throws Exception {

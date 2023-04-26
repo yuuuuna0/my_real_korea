@@ -1,34 +1,26 @@
 --insert
-insert into free_board values (free_board_f_bo_no_seq.nextval,'서울 맛집 추천','위생깔끔한곳 선호합니다','2023-01-11',0,1,'user1');
-insert into free_board values (free_board_f_bo_no_seq.nextval,'경기 맛집 추천','클린한 음식으로 추천부탁합니다','2023-01-19',3,2,'user2');
-insert into free_board values (free_board_f_bo_no_seq.nextval,'강원 맛집 추천','면류 좋아합니다','2023-01-22',0,3,'user3');
-insert into free_board values (free_board_f_bo_no_seq.nextval,'부산 해운대 1박2일 추천','자연보는거 좋아합니다','2022-01-19',7,4,'user1');
-insert into free_board values (free_board_f_bo_no_seq.nextval,'대전 여행코스 추천해주세요','2박 3일 코스로 여행 예정입니다','2023-02-12',1,5,'user2');
-insert into free_board values (free_board_f_bo_no_seq.nextval,'서울 핫플 추천받습니다','사람많은곳 선호합니다','2023-03-19',9,1,'user3');
-insert into free_board values (free_board_f_bo_no_seq.nextval,'경기도 풍경 좋은곳 추천해주세요','1박2일 여행가려고요','2022-01-03',6,2,'user1');
-insert into free_board values (free_board_f_bo_no_seq.nextval,'경기도 파주쪽 어죽맛집 추천해주세요','파주여행갑니다','2022-07-03',6,2,'user1');
-insert into free_board values (free_board_f_bo_no_seq.nextval,'강원도 벚꽃축제 하나요?','벚꽃좀 보고 싶네요','2022-09-03',13,3,'user2');
-insert into free_board values (free_board_f_bo_no_seq.nextval,'부산 국밥집 어디가 잘하나요','근본있는곳으로 추천부탁합니다','2022-11-03',11,4,'user3');
-insert into free_board values (free_board_f_bo_no_seq.nextval,'대전 유성온천 어떤가요','가보신분 후기좀 남겨주세요',sysdate,4,5,'user1');
-insert into free_board values (free_board_f_bo_no_seq.nextval,'서울 맛집리스트 부탁해요','점심 때 불고기 백반 먹고싶어요.','2023-04-11',1,1,'user1');
-insert into free_board values (free_board_f_bo_no_seq.nextval,'제주 고기국수 추천','제주 고기국수 유명한 집이요.','2023-01-18',1,6,'user3');
-insert into free_board values (free_board_f_bo_no_seq.nextval,'서울말고 근교에서 괜찮은 고깃집 있나요.','웨이팅 있어도 괜찮아요. 고기면 다 좋습니다.','2023-01-20',1,2,'user1');
-insert into free_board values (free_board_f_bo_no_seq.nextval,'통영 여행 코스 추천','뚜벅이여행입니다.','2022-01-10',1,5,'minyoung1');
-insert into free_board values (free_board_f_bo_no_seq.nextval,'동백꽃 볼 수 있는 곳 추천이요','제주도 여행가서 시간 남으면 보러 가려고요','2023-02-25',1,6,'user3');
-insert into free_board values (free_board_f_bo_no_seq.nextval,'서울 인근 핫플 추천받습니다','개인적으로 곱창 선호합니다','2023-03-10',1,2,'user3');
-insert into free_board values (free_board_f_bo_no_seq.nextval,'서울에서 놀러 갈 수 있는 곳 추천','가족, 친구들과 여행 갈 때 갈 수 있는 곳으로 부탁해요.','2022-01-03',6,2,'user1');
-insert into free_board values (free_board_f_bo_no_seq.nextval,'국내 호텔 비수기와 성수기가 언제인지 궁금합니다.','국내 호텔 성수기, 비수기에 대해서 검색해봐도 말도 다 다르고 그마저도 거의 나오지 않아서 (해외 호텔이 아닌 국내 호텔의 비수기, 성수기가 궁금합니다)  정확한 날짜 (몇월인지 이왕이면 더 구체적으로)가 언제인지 궁금합니다. 언제인가요? 그리고 지금은 비수기인가요?','2022-07-03',1,0,'user1');
-insert into free_board values (free_board_f_bo_no_seq.nextval,'임산부 국내여행','전 여행은 좋아하는데 계획을 너무 못짜서 부탁드립니다 일정은 2박3일이나 3박4일로 생각중이예요',1,0,'user2');
-insert into free_board values (free_board_f_bo_no_seq.nextval,'혼자 갈 생각인데 (1인) 국내 일본 느낌 물씬 나는 료칸 (온천) 없을까요','지역 상관 없구요 너무 비싸지만 않았으면 좋겠는데 개인노천탕이나 방에 탕 있었으면 좋겠어요 (없어도 일단은 추천받습니다) 굳이 료칸이 아니더라도 뭐 일본식 느낌나는 호텔이나 숙박 업계 소개 부탁드립니다 ~!','2023-04-24',1,0,'user3');
-insert into free_board values (free_board_f_bo_no_seq.nextval,'국내 1박2일 여행갈만한곳 추천좀','참고로 강릉,속초,양양,태안,안동,서산은 다 가봐서 안가본곳쪽으로 경험자분들 추천.부탁드려요',sysdate,1,0,'user1');
+insert into free_board values (free_board_f_bo_no_seq.nextval,'서울 맛집 추천','위생깔끔한곳 선호합니다','2023-01-11',0,1,'test11');
+insert into free_board values (free_board_f_bo_no_seq.nextval,'경기 맛집 추천','클린한 음식으로 추천부탁합니다','2023-01-19',1,1,'test11');
+insert into free_board values (free_board_f_bo_no_seq.nextval,'강원 맛집 추천','면류 좋아합니다','2023-01-22',2,3,'aaa111');
+insert into free_board values (free_board_f_bo_no_seq.nextval,'부산 해운대 1박2일 추천','자연보는거 좋아합니다','2022-01-19',7,2,'bbb111');
+insert into free_board values (free_board_f_bo_no_seq.nextval,'전주 여행코스 추천해주세요','2박 3일 코스로 여행 예정입니다','2023-02-12',1,4,'qqqq1111');
+insert into free_board values (free_board_f_bo_no_seq.nextval,'서울 핫플 추천받습니다','사람많은곳 선호합니다','2023-03-19',9,1,'myrealkorea2');
+insert into free_board values (free_board_f_bo_no_seq.nextval,'경기도 풍경 좋은곳 추천해주세요','1박2일 여행가려고요','2022-01-03',6,1,'test11');
+insert into free_board values (free_board_f_bo_no_seq.nextval,'경기도 파주쪽 어죽맛집 추천해주세요','파주여행갑니다','2022-07-03',6,1,'aaa111');
+insert into free_board values (free_board_f_bo_no_seq.nextval,'강원도 벚꽃축제 하나요?','벚꽃좀 보고 싶네요','2022-09-03',13,3,'bbb111');
+insert into free_board values (free_board_f_bo_no_seq.nextval,'부산 국밥집 어디가 잘하나요','근본있는곳으로 추천부탁합니다','2022-11-03',11,2,'qqqq1111');
+insert into free_board values (free_board_f_bo_no_seq.nextval,'울릉도 여행 어떤가요','가보신분 후기좀 남겨주세요',sysdate,4,6,'myrealkorea3');
+insert into free_board values (free_board_f_bo_no_seq.nextval,'서울 맛집리스트 부탁해요','점심 때 불고기 백반 먹고싶어요.','2023-04-11',21,1,'user1');
+insert into free_board values (free_board_f_bo_no_seq.nextval,'제주 고기국수 추천','제주 고기국수 유명한 집이요.','2023-01-18',11,7,'aaa111');
+insert into free_board values (free_board_f_bo_no_seq.nextval,'서울말고 근교에서 괜찮은 고깃집 있나요.','웨이팅 있어도 괜찮아요. 고기면 다 좋습니다.','2023-01-20',1,1,'bbb111');
+insert into free_board values (free_board_f_bo_no_seq.nextval,'동백꽃 볼 수 있는 곳 추천이요','제주도 여행가서 시간 남으면 보러 가려고요','2023-02-25',1,7,'admin');
+insert into free_board values (free_board_f_bo_no_seq.nextval,'서울에서 놀러 갈 수 있는 곳 추천','가족, 친구들과 여행 갈 때 갈 수 있는 곳으로 부탁해요.','2022-01-03',6,1,'bbb111');
+insert into free_board values (free_board_f_bo_no_seq.nextval,'국내 호텔 비수기와 성수기가 언제인지 궁금합니다.','국내 호텔 성수기, 비수기에 대해서 검색해봐도 말도 다 다르고 그마저도 거의 나오지 않아서 (해외 호텔이 아닌 국내 호텔의 비수기, 성수기가 궁금합니다)  정확한 날짜 (몇월인지 이왕이면 더 구체적으로)가 언제인지 궁금합니다. 언제인가요? 그리고 지금은 비수기인가요?','2022-07-03',1,1,'qqqq1111');
+insert into free_board values (free_board_f_bo_no_seq.nextval,'임산부 국내여행','전 여행은 좋아하는데 계획을 너무 못짜서 부탁드립니다 일정은 2박3일이나 3박4일로 생각중이예요',1,4,'aaa111');
+insert into free_board values (free_board_f_bo_no_seq.nextval,'혼자 갈 생각인데 (1인) 국내 일본 느낌 물씬 나는 료칸 (온천) 없을까요','지역 상관 없구요 너무 비싸지만 않았으면 좋겠는데 개인노천탕이나 방에 탕 있었으면 좋겠어요 (없어도 일단은 추천받습니다) 굳이 료칸이 아니더라도 뭐 일본식 느낌나는 호텔이나 숙박 업계 소개 부탁드립니다 ~!','2023-03-24',1,0,'myrealkorea3');
+insert into free_board values (free_board_f_bo_no_seq.nextval,'국내 1박2일 여행갈만한곳 추천좀','참고로 강릉,속초,양양,태안,안동,서산은 다 가봐서 안가본곳쪽으로 경험자분들 추천.부탁드려요','2023.02.22',1,3,'myrealkorea2');
 
-
-
-
-
-
-
-    insert into free_board values (free_board_f_bo_no_seq.nextval,'서울 여행가는데 추천좀 해주세요',
+insert into free_board values (free_board_f_bo_no_seq.nextval,'서울 여행가는데 추천좀 해주세요',
                                '1박2일로 가는데 첫째날은 롯데월드가고 잠실쪽에 숙소 잡아놨는데 센트럴로 출발해야되서 지하철을 타도 오래걸리지 않는 지역주변으로 볼만한게 있을까요
                                 관심사가 헤어 인테리어 자동차라 박람회나 전시회장도 괜찮습니다','2023-01-11',10,1,'aaa111');
 insert into free_board values (free_board_f_bo_no_seq.nextval,'제주도 3박 4일 여행',

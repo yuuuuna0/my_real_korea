@@ -152,7 +152,7 @@
 										<li style="padding:5px 0px 5px 0px;" >
 											<i class="icon-users"></i>모집인원<span th:text="${tripBoard.tBoPerson}" style="padding:0px 10px 0px 10px;"></span>
 										   <i class="icon-calendar-empty"></i>여행일정<a th:text="${#dates.format(tripBoard.tBoStartDate, 'MM.dd')}" 
-										   style="padding:0px 10px 0px 10px; color:#ff6666;"></a><a> ~ </a><a th:text="${#dates.format(tripBoard.tBoEndDate, 'MM.dd')}" 
+										   style="padding:0px 10px 0px 10px; color:#ff6666;"></a><a style="color:#ff6666;"> ~ </a><a th:text="${#dates.format(tripBoard.tBoEndDate, 'MM.dd')}" 
 										   style="padding:0px 10px 0px 10px;color:#ff6666;"></a>
 										   <i class="icon-map"></i>지역<span th:text="${tripBoard.city.cityName}" style="padding:0px 10px 0px 10px;">12 Nov 2020</span>
 										</li>
@@ -162,7 +162,7 @@
 							<br>
 							<div> 
 								<ul>
-									<li style="padding:5px 0px; font-family: NotoSansKR, Noto Sans CJK KR, sans-serif; font-size:16px;">
+									<li style="padding:5px 0px; font-family: NotoSansKR, Noto Sans CJK KR, sans-serif; font-size:16px; font-weight:bold;">
 									<i class = "icon-ok" ></i>저는 <a th:text="${tripBoard.tBoStyle}" style="color:#ff6666; font-weight:600;"></a> 여행자 입니다.
 									</li>
 								</ul>
@@ -184,7 +184,7 @@
 							<div class="post-left" style="padding-bottom:20px;">
 									<ul>
 										<li style="padding:5px 0px;">
-										 <i class = "icon-tag"></i><a th:text="${tripBoard.hashtag}"></a>
+										 <i class = "icon-tag"></i><a style="color:#666;" th:text="${tripBoard.hashtag}"></a>
 										</li>
 										
 										<li style="padding:5px 0px;">
@@ -193,8 +193,8 @@
 									</ul>
 								</div>
 							<div th:if="${loginUser != null && loginUser.userId == tripBoard.userId}" style="text-align:right;" >
-							  	<a th:href="@{/tripboard-modify-form(tBoNo=${tripBoard.tBoNo})}" class="btn btn-primary">수정</a>
-							  	<a th:href="@{/tripboard_delete(tBoNo=${tripBoard.tBoNo})}" class="btn btn-danger" id="tripboard-delete-action-btn">삭제</a>
+							  	<a th:href="@{/tripboard-modify-form(tBoNo=${tripBoard.tBoNo})}" class="btn btn-secondary">수정</a>
+							  	<a th:href="@{/tripboard_delete(tBoNo=${tripBoard.tBoNo})}" class="btn btn-secondary" id="tripboard-delete-action-btn">삭제</a>
 								<input type="hidden" id="delete-tBoNo" th:value=${tripBoard.tBoNo}>
 							</div>
 							
@@ -273,16 +273,8 @@
 						</ul>
 					</div>
 					<hr>
-					<!-- Chat icon (민선) -->
-					<div id="chat-icon-top" class="chat-icon-top">
-						<div id="chat-img-top" class="chat-img-top" >
-							<input id="chat-tripboard-userId" type="hidden" th:value="${tripBoard.userId}">
-					   		<a href="#" id="chat-pop-up-click" >
-					   			<img src="img/messenger.png" id="messenger-icon"></a>
-						<span class="tooltiptext tooltip-left">1:1 채팅</span>
-						</div>
-					</div>
-					<!-- End Chat icon -->
+			
+					
 					<br>
 					<br>
 					<div class="widget tags">
@@ -294,6 +286,16 @@
 						<a href="user-view">마이페이지</a>
 					</div>
 					<hr>
+					<!-- Chat icon (민선) -->
+					<div id="chat-icon-top" class="chat-icon-top">
+						<div id="chat-img-top" class="chat-img-top" >
+							<input id="chat-tripboard-userId" type="hidden" th:value="${tripBoard.userId}">
+					   		<a href="#" id="chat-pop-up-click" >
+					   			<img src="img/messenger2.png" id="messenger-icon"></a>
+						<span class="tooltiptext tooltip-left">1:1 채팅</span>
+						</div>
+					</div>
+					<!-- End Chat icon -->
 					<!-- End widget -->
 
 				</aside>
@@ -301,22 +303,19 @@
 
 			</div>
 			<!-- End row-->
+			
 		</div>
 		<!-- End container -->
 	</main>
 	<!-- End main -->
+	
 	<!--========================= footer ========================-->
 	<footer class="revealed">
 		<div id="footer" th:include="include-common-bottom::include-common-bottom"></div>
 	</footer>
 		<!-- End container -->
 	<!--========================= End footer ========================-->
-
-	<div id="chat-icon">
-		<div id="chat-img">
-    		<img src="img/chat3_60.png">
-		</div>
-	</div>
+	
 	<div id="toTop"></div><!-- Back to top button -->
 	
 	<!-- Search Menu -->

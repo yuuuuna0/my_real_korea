@@ -440,7 +440,6 @@ $(document).on('click','#btn-user-modify-action',function(e) {
 	let url = 'user-modify-form-action';
 	let method = 'PUT';
 	let formData = new FormData();
-	let gender = $('input[name="gOptions"]:checked').val();
 	let alcohol = $('input[name="aOptions"]:checked').val();
 	let smoking = $('input[name="sOptions"]:checked').val();
 	
@@ -449,9 +448,8 @@ $(document).on('click','#btn-user-modify-action',function(e) {
 	formData.append('nickname', $('#nickname').val());
 	formData.append('phone', $('#phone').val());
 	formData.append('email', $('#email').val());
-	formData.append('brith', $('#brith').val());
+	formData.append('birth', $('#birth').val());
 	formData.append('address', $('#address').val());
-	formData.append('gender', gender);
 	formData.append('alcohol',alcohol);
 	formData.append('smoking',smoking);
 	formData.append('introduce', $('#introduce').val());

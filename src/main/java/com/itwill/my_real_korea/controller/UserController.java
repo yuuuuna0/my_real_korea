@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.itwill.my_real_korea.dto.freeboard.FreeBoard;
+import com.itwill.my_real_korea.service.freeboard.FreeBoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,32 +24,38 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.itwill.my_real_korea.dto.City;
 import com.itwill.my_real_korea.dto.Payment;
+import com.itwill.my_real_korea.dto.tripboard.TripBoard;
 import com.itwill.my_real_korea.dto.user.KakaoProfile;
 import com.itwill.my_real_korea.dto.user.User;
 import com.itwill.my_real_korea.service.city.CityService;
 import com.itwill.my_real_korea.service.payment.PaymentService;
+import com.itwill.my_real_korea.service.tripboard.TripBoardService;
 import com.itwill.my_real_korea.service.user.KaKaoService;
 import com.itwill.my_real_korea.service.user.UserService;
 
 @Controller
 public class UserController {
-	
+
 	@Autowired
 	private UserService userService;
 	@Autowired
 	private PaymentService paymentService;
 	@Autowired
-	private KaKaoService kakaoService; 
+	private KaKaoService kakaoService;
 	@Autowired
 	private CityService cityService;
+	@Autowired
+	private TripBoardService tripBoardService;
+	@Autowired
+	private FreeBoardService freeBoardService;
 
-	
+
 	//회원 가입 폼
 	@GetMapping(value = "/user-write", produces = "application/json;charset=UTF-8")
 	public String user_write() {
 		return "user-write";
 	}
-	
+
 	//아이디 중복 체크
 	@PostMapping("/idCheck")
 	@ResponseBody
@@ -55,71 +63,71 @@ public class UserController {
 		int existCount = userService.countExistId(userId);
 		return existCount;
 	}
-	
+
 	/***************************카카오 로그인*****************************/
-	
+
 	@ResponseBody
 	@GetMapping("/kakao_userinfo_with_token")
 	public KakaoProfile getKakaoUserInfoWithToken(String access_token, HttpSession session) throws Exception {
 		System.out.println(">>> getKakaoUserInfoWithToken access_token : "+access_token);
 		KakaoProfile kakaoProfile = kakaoService.getKakaoProfile(access_token);
 		System.out.println(">>> getKakaoUserInfoWithToken kakaoProfile : "+kakaoProfile);
-		
+
 		return kakaoProfile;
 	}
-	
+
 	@RequestMapping(value = "/kakao-login", method = RequestMethod.GET)
 	public String kakao_login_action(@RequestParam(value = "code", required = false) String code,
-	                                  HttpServletRequest request, HttpServletResponse response) throws Exception {
+									 HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-	    String access_token = kakaoService.getToken(code);
-	    System.out.println(">>> login_action access_token:"+access_token);
-	    KakaoProfile kakaoProfile = kakaoService.getKakaoProfile(access_token);
+		String access_token = kakaoService.getToken(code);
+		System.out.println(">>> login_action access_token:"+access_token);
+		KakaoProfile kakaoProfile = kakaoService.getKakaoProfile(access_token);
 
-	    // 로그인 처리 전에 데이터베이스에서 사용자 정보 조회
-	    String userId = "K_"+kakaoProfile.getId();
-	    String password = "k"+kakaoProfile.getId()+"!";
-	    String name = kakaoProfile.getProperties().getNickname();
-	    String nickname = "kakao_"+kakaoProfile.getProperties().getNickname();
-	    String email = kakaoProfile.getKakao_account().getEmail();
-	    int gender = 0;
-		    if(kakaoProfile.getKakao_account().getGender().equals("male")) {
-		        gender = 1;
-		    } else if(kakaoProfile.getKakao_account().getGender().equals("female")) {
-		        gender = 2;
-		    } else {
-		        gender = 0;
-		    }
-		
-	    
-	    System.out.println(">>> login_action userId : "+userId);
-	    User kakaoUser = userService.findUser(userId);
-	    System.out.println(">>> login_action kakaoUser : "+kakaoUser);
+		// 로그인 처리 전에 데이터베이스에서 사용자 정보 조회
+		String userId = "K_"+kakaoProfile.getId();
+		String password = "k"+kakaoProfile.getId()+"!";
+		String name = kakaoProfile.getProperties().getNickname();
+		String nickname = "kakao_"+kakaoProfile.getProperties().getNickname();
+		String email = kakaoProfile.getKakao_account().getEmail();
+		int gender = 0;
+		if(kakaoProfile.getKakao_account().getGender().equals("male")) {
+			gender = 1;
+		} else if(kakaoProfile.getKakao_account().getGender().equals("female")) {
+			gender = 2;
+		} else {
+			gender = 0;
+		}
 
-	    HttpSession session = request.getSession();
-	    session.invalidate();
 
-	    session = request.getSession();
-	    //회원으로 등록되어 있으면 로그인, 그렇지 않으면 회원 가입
-	    if (kakaoUser != null) {
-	        User loginUser = userService.findUser(kakaoUser.getUserId());
-	        session.setAttribute("loginUser", loginUser);
-	    } else {
-	    	User newUser = new User(userId, password, name, nickname, " ", email, new Date(), "제주", gender, 0, 1, 1, 0);
-	        userService.create(newUser);
-	        session.setAttribute("user_id", userId);
-	    }
+		System.out.println(">>> login_action userId : "+userId);
+		User kakaoUser = userService.findUser(userId);
+		System.out.println(">>> login_action kakaoUser : "+kakaoUser);
 
-	    request.setAttribute("kakaoProfile", kakaoProfile);
-	    Cookie authorize_access_token = new Cookie("authorize-access-token", access_token);
-	    response.addCookie(authorize_access_token);
+		HttpSession session = request.getSession();
+		session.invalidate();
 
-	    return "index";
+		session = request.getSession();
+		//회원으로 등록되어 있으면 로그인, 그렇지 않으면 회원 가입
+		if (kakaoUser != null) {
+			User loginUser = userService.findUser(kakaoUser.getUserId());
+			session.setAttribute("loginUser", loginUser);
+		} else {
+			User newUser = new User(userId, password, name, nickname, " ", email, new Date(), "제주", gender, 0, 1, 1, 0);
+			userService.create(newUser);
+			session.setAttribute("user_id", userId);
+		}
+
+		request.setAttribute("kakaoProfile", kakaoProfile);
+		Cookie authorize_access_token = new Cookie("authorize-access-token", access_token);
+		response.addCookie(authorize_access_token);
+
+		return "index";
 	}
-	
+
 	/******************************************************************************/
 
-	/*
+    /*
  * REST로 변경
  * 	
 	//회원 가입 액션
@@ -137,21 +145,21 @@ public class UserController {
 		return forward_path;
 	}
  */
-	
+
 	//로그인 폼
 	@GetMapping(value = "/user-login", produces = "application/json;charset=UTF-8")
 	public String user_login(HttpServletRequest request, Model model) {
-	    HttpSession session = request.getSession();
-	    
-	    String prevPage = request.getHeader("Referer");
-	    if (prevPage == null || prevPage.contains("/user-login") || prevPage.contains("/user-auth")) {
-	        prevPage = request.getContextPath() + "/index";
-	    }
-	    session.setAttribute("prevPage", prevPage);
-	    model.addAttribute("prevPage", prevPage);
-	    return "user-login";
+		HttpSession session = request.getSession();
+
+		String prevPage = request.getHeader("Referer");
+		if (prevPage == null || prevPage.contains("/user-login") || prevPage.contains("/user-auth")) {
+			prevPage = request.getContextPath() + "/index";
+		}
+		session.setAttribute("prevPage", prevPage);
+		model.addAttribute("prevPage", prevPage);
+		return "user-login";
 	}
-	
+
 /*
  * REST로 변경
  * 
@@ -190,9 +198,9 @@ public class UserController {
 	    }
 	    return forwardPath;
 	}
- */	
-	
-	
+ */
+
+
 /*
  * REST로 변경
  * 
@@ -208,8 +216,8 @@ public class UserController {
 		return "user-auth";
 	}
  */
-	
-	
+
+
 /*
  * REST
  * 
@@ -229,6 +237,7 @@ public class UserController {
 	}
 	
 */
+
 	/***************************ID, Password 찾기********************************/
 
 	//아이디, 비밀번호 찾기 폼
@@ -236,7 +245,7 @@ public class UserController {
 	public String user_find() {
 		return "user-find";
 	}
-	
+
 /*
  * REST
  * 
@@ -256,7 +265,7 @@ public class UserController {
 		return "user-find-id";
 	}
  */
-	
+
 
 /*
  * REST	
@@ -276,8 +285,8 @@ public class UserController {
 		}
 		return "user-find-pw";
 	}
- */	
-	
+ */
+
 	/*********************************************************/
 
 	//회원 정보 보기
@@ -294,21 +303,29 @@ public class UserController {
 		loginUser = userService.findUser(loginUser.getUserId());
 		request.setAttribute("loginUser", loginUser);
 		System.out.println(loginUser);
-		
+
 		//도시리스트 붙이기
 		List<City> cityList=cityService.findAllCity();
 		request.setAttribute("cityList", cityList);
-		
+
 		//1. 상세페이지 예약내역
 		List<Payment> paymentList=paymentService.selectAllUser(loginUser.getUserId());
 		request.setAttribute("paymentList", paymentList);
 		System.out.println(paymentList);
-		
-		
+
+		//2. 마이페이지 내가 쓴 동행게시판 게시글
+		List<TripBoard> tripBoardList = tripBoardService.selectAllUser(loginUser.getUserId());
+		request.setAttribute("tripBoardList", tripBoardList);
+		System.out.println(tripBoardList);
+
+		//3. 마이페이지 내가 쓴 자유게시판 게시글
+		List<FreeBoard> freeBoardList = freeBoardService.selectByUserId(loginUser.getUserId());
+		request.setAttribute("freeBoardList",freeBoardList);
+
 		return "user-view";
 	}
-	
-	
+
+
 	//회원 정보 수정 폼
 	@LoginCheck
 	@PostMapping("/user-modify-plain")
@@ -319,8 +336,8 @@ public class UserController {
 		request.setAttribute("loginUser", loginUser);
 		return "user-modify-plain";
 	}
-	 
-	
+
+
 	//회원 정보 수정 액션
 	@LoginCheck
 	@PostMapping("user-modify-action-plain")
@@ -333,7 +350,7 @@ public class UserController {
 //		System.out.println(">> loginUser : "+loginUser);
 		return "redirect:user-view";
 	}
-	
+
 	//회원 탈퇴 액션
 	@LoginCheck
 	@PostMapping("user-remove-action")
@@ -344,7 +361,7 @@ public class UserController {
 		request.getSession(false).invalidate();
 		return "redirect:index";
 	}
-	
+
 	//로그아웃 액션
 	@LoginCheck
 	@RequestMapping("user-logout-action")
@@ -352,19 +369,19 @@ public class UserController {
 		request.getSession(false).invalidate();
 		return "redirect:index";
 	}
-	
+
 	//GET 방식으로 요청시 index 화면으로
 	@GetMapping({
-				"user-write-action",
-				"user-login-action",
-				"user-modify",
-				"user-modify-action",
-				"user-remove-action"
-				})
+			"user-write-action",
+			"user-login-action",
+			"user-modify",
+			"user-modify-action",
+			"user-remove-action"
+	})
 	public String user_get() {
 		return "redirect:index";
 	}
-	
+
 	//error 발생시 error 화면으로
 	@ExceptionHandler(Exception.class)
 	public String user_exception_handler(Exception e) {

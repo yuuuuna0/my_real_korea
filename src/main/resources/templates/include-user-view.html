@@ -79,33 +79,49 @@
 							<h3> 동행찾기 </h3>
 							<br>
 						
-						<div class="strip_booking">
+						<div class="strip_booking" th:each="tripBoard:${tripBoardList}">
 							<div class="row">
 								<div class="col-lg-2 col-md-2">
 									<div class="date">
-										<span class="month">Dec</span>
-										<span class="day"><strong>27</strong>Fri</span>
+										<span class="month" th:text="${#dates.format(tripBoard.tBoDate,'MMM')}">Dec</span>
+										<span class="day">
+											<strong th:text="${#dates.format(tripBoard.tBoDate,'dd')}" style="padding-bottom:10px">27</strong>
+											<th:block th:text="${#dates.format(tripBoard.tBoDate,'EEE')}">Fri</th:block>
+										</span>
 									</div>
 								</div>
 								<div class="col-lg-6 col-md-5">
-									<h3 class="tours_booking">글 제목 <span> 내용</span></h3>
+									<h3 class="tours_booking" th:if = "${tripBoard.userId != null}" style="font-weight:bold; line-height:0px; font-size:21px;">
+										 <th:block th:text="${tripBoard.tBoTitle}"></th:block>
+									</h3>
+									<h3 th:if = "${tripBoard.userId != null}" style="font-size:15px;">
+										 <th:block th:text="${tripBoard.tBoContent}"></th:block>
+									</h3>
 								</div>
 									
 								<div class="col-lg-2 col-md-3">
 									
 									
-									<ul class="info_booking">
+									<ul class="info_booking" style="font-size:13px;">
 											
-										<li><strong>Booking id</strong> 23442</li>
-										<li><strong>Booked on</strong> Sat. 20 Dec. 2015 </li>
-										<li><span class="icon-comment"></span> </li>
+										<li>
+											<strong style="margin-bottom:3px;">여행시작일</strong>
+											<span th:text="${#dates.format(tripBoard.tBoStartDate, 'yyyy-MM-dd')}">23442</span>
+										</li>
+										<li>
+											<strong style="margin-bottom:3px;">여행종료일</strong>
+											<span th:text="${#dates.format(tripBoard.tBoEndDate, 'yyyy-MM-dd')}">23442</span>
+										</li>
 											
 									</ul>
 								</div>
 								<div class="col-lg-2 col-md-2">
-									<div class="booking_buttons">
-										<a href="#0" class="btn_2">보러가기</a>
+								<form>
+									<div class="booking_buttons" style="margin-top:30px;">
+										<a class="btn_2" th:href="@{tripboard-detail(tBoNo=${tripBoard.tBoNo})}" role="button">보러가기
+										</a>
 									</div>
+									</form>
 								</div>
 							</div>
 							<!-- End row -->
@@ -116,34 +132,32 @@
 						<br>
 						
 						<h3> 자유게시판 </h3>
-							<br>
-						
-						<div class="strip_booking">
+						<br>
+						<div class="strip_booking" th:each="freeBoard:${freeBoardList}">
 							<div class="row">
 								<div class="col-lg-2 col-md-2">
 									<div class="date">
-										<span class="month">Dec</span>
-										<span class="day"><strong>27</strong>Fri</span>
+										<span class="month" th:text="${#dates.format(freeBoard.fBoDate,'MMM')}">Dec</span>
+										<span class="day">
+											<strong th:text="${#dates.format(freeBoard.fBoDate,'dd')}" style="padding-bottom:10px">27</strong>
+											<th:block th:text="${#dates.format(freeBoard.fBoDate,'EEE')}">Fri</th:block>
+										</span>
 									</div>
 								</div>
 								<div class="col-lg-6 col-md-5">
-									<h3 class="tours_booking">글 제목 <span> 내용</span></h3>
+									<h3 class="tours_booking" th:if = "${freeBoard.userId != null}" style="font-weight:bold; line-height:0px; font-size:21px;">
+										<th:block th:text="${freeBoard.fBoTitle}"></th:block>
+									</h3>
+									<h3 th:if = "${freeBoard.userId != null}" style="font-size:15px;">
+										<th:block th:text="${freeBoard.fBoContent}"></th:block>
+									</h3>
 								</div>
-									
 								<div class="col-lg-2 col-md-3">
-									
-									
-									<ul class="info_booking">
-											
-										<li><strong>Booking id</strong> 23442</li>
-										<li><strong>Booked on</strong> Sat. 20 Dec. 2015 </li>
-										<li><span class="icon-comment"></span> </li>
-											
-									</ul>
+
 								</div>
 								<div class="col-lg-2 col-md-2">
 									<div class="booking_buttons">
-										<a href="#0" class="btn_2">보러가기</a>
+										<a th:href="@{freeboard-detail(fBoNo=${freeBoard.fBoNo})}" class="btn_2">보러가기</a>
 									</div>
 								</div>
 							</div>

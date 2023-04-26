@@ -3,10 +3,14 @@ package com.itwill.my_real_korea.service.freeboard;
 import com.itwill.my_real_korea.dto.freeboard.FreeBoard;
 import com.itwill.my_real_korea.util.PageMakerDto;
 
+import java.util.List;
+
 public interface FreeBoardService {
     int insertBoard(FreeBoard freeBoard) throws Exception;
 
     FreeBoard selectByNo(int fBoNo) throws Exception;
+
+    List<FreeBoard> selectByUserId(String userId) throws Exception;
 
     int updateFreeBoard(FreeBoard freeBoard) throws Exception;
 

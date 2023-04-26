@@ -554,10 +554,6 @@ ul.add_info li {
     color: #888;
     text-align: center;
 }
-a:not([href]):not([tabindex]) {
-    text-decoration: none;
-    color : #fff;
-}
 .main-menu ul li{
     position: relative;
     margin-bottom: 0;

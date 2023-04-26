@@ -19,7 +19,20 @@ import * as Request from "./request.js";
 
 
 /******** 공지사항 검색결과 리스트 notice-search-list **********/ 
+// 검색창 입력 후 엔터키 => 검색
+$("#notice-search-keyword").keyup(e => {
+	if (e.keyCode == 13) {
+		getSearchList();
+		e.preventDefault();
+	}
+});
+// 검색창 입력 후 직접 검색버튼 클릭 => 검색
 $(document).on('click','#notice-search-btn',function(e){
+	getSearchList();
+	e.preventDefault();
+});
+
+function getSearchList(){
 	// ajax로 리스트 부분만 검색된 리스트로 변경
 	let keyword = $('#notice-search-keyword').val();
 	let url = `notice-search/${keyword}`;
@@ -46,9 +59,9 @@ $(document).on('click','#notice-search-btn',function(e){
 								alert(resultJson.msg);
 							};
 						}, async);
-	
-	e.preventDefault();
-});
+}
+
+
 
 /******** 공지사항 정렬 : 최신순, 오래된순, 조회수 높은 순 **********/ 
 $(document).on('change','#sort-by',function(e){

@@ -37,9 +37,14 @@ public interface FreeBoardMapper {
   * 검색된 게시글 총 개수 조회
   */
  int selectSearchCount(String keyword) throws Exception;
+ /*
+  * cityNo 게시글 총 개수 조회
+  */
+ int selectCityCount(int cityNo) throws Exception;
 
  /*
   * 공지사항 게시판 title 키워드로 검색
   */
  List<FreeBoard> selectSearchFreeBoardList(Map<String, Object> keywordPageMap) throws Exception;
+ List<FreeBoard> selectFreeBoardCityList(Map<String, Object> cityPageMap) throws Exception;
 }

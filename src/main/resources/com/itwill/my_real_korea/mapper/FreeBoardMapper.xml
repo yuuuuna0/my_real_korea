@@ -119,6 +119,10 @@
     <select id="selectSearchCount" parameterType="String" resultType="java.lang.Integer">
         select count(*) cnt from free_board where f_bo_title like '%'||#{keyword}||'%'
     </select>
+    <!--  검색된 게시글 총 개수 조회 -->
+    <select id="selectCityCount" parameterType="String" resultType="java.lang.Integer">
+        select count(*) cnt from free_board where city_no like '%'||#{cityNo}||'%'
+    </select>
 
     <!--   자유게시판 title 키워드로 검색 -->
     <select id="selectSearchFreeBoardList" parameterType="map" resultMap="freeBoardResultMap">
@@ -129,6 +133,19 @@
                           join city c
                                on f.city_no = c.city_no
                  where f_bo_title like '%'||#{keyword}||'%'
+                 order by f_bo_no desc) s
+            )ss
+	<![CDATA[ where idx >= #{pageStart} and idx <= #{pageEnd} ]]>
+    </select>
+    <!--   자유게시판 title 키워드로 검색 -->
+    <select id="selectFreeBoardCityList" parameterType="map" resultMap="freeBoardResultMap">
+        select ss.* from
+            (select rownum idx, s.* from
+                (select f.f_bo_no,f.f_bo_title,f.f_bo_content,f.f_bo_date,f.f_bo_readcount,f.user_id, c.city_no,c.city_name
+                 from free_board f
+                          join city c
+                               on f.city_no = c.city_no
+                 where city_no like '%'||#{cityNo}||'%'
                  order by f_bo_no desc) s
             )ss
 	<![CDATA[ where idx >= #{pageStart} and idx <= #{pageEnd} ]]>

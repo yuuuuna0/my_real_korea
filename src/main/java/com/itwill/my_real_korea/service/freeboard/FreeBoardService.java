@@ -38,6 +38,8 @@ public interface FreeBoardService {
 
     //title 키워드로 검색
     PageMakerDto<FreeBoard> selectSearchFreeBoardList(int currentPage, String keyword) throws Exception;
+    //title 키워드로 검색
+    PageMakerDto<FreeBoard> selectFreeBoardCityList(int currentPage, int cityNo) throws Exception;
     //자유게시판 타이틀 14글자 제한
     String getTitleString(FreeBoard freeBoard) throws Exception;
 

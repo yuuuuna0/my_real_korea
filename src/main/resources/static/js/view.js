@@ -79,11 +79,11 @@ export function render(templateId, jsonResult={}, contentId){
 	});
 	
 	//for문
-	Handlebars.registerHelper('numSequence', function(start, end) {
+	Handlebars.registerHelper('numSequence', function(start, end,options) {
   		let result = '';
   		let divideEnd=Math.ceil(end/9);
 	  		for (let i = start; i <=divideEnd; i++) {
-	    		result += this.fn(i);
+	    		result += options.fn(i);
 	  		}
  		 return result;
 	});

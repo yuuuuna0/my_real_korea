@@ -685,3 +685,67 @@ a.btn_full_outline {
     background: none;
     border: 2px solid #e14d67;
 }
+.img_container {
+    position: relative;
+    overflow: hidden;
+    width: 254px;
+    height: 170px;
+}
+.hotel_container .hotel_title {
+    padding: 15px;
+    position: relative;
+    height: 100px;
+}
+.strip_booking .date .month {
+	font-family: 'Pretendard-Regular';
+    background-color: #e04f67;
+    font-size: 13x;
+    display: block;
+    color: #fff;
+    text-transform: uppercase;
+}
+
+.strip_booking .date .day strong {
+	
+	font-family: 'Pretendard-Regular';
+    font-size: 36px;
+    font-weight: normal;
+    display: block;
+    color: #e04f67;
+    margin-bottom: 15px;
+}
+
+.strip_booking .date .day {
+	font-family: 'Pretendard-Regular';
+    padding: 15px;
+    margin-top: 5px;
+    color: #999;
+    text-transform: uppercase;
+    display: block;
+}
+
+.chat-icon-top {
+  position: fixed;
+  right: 3%;
+  top: 85%;
+  transform: translate(50%, -50%);
+
+}
+
+.chat-icon-top img {
+  width: 80px;
+  height: 80px;
+}
+
+#hero_2 {
+    position: relative;
+    height: 470px;
+    background: #4d536d url(../img/payment_main.jpg) no-repeat center center;
+    background-size: cover;
+    color: #fff;
+    width: 100%;
+    font-size: 16px;
+    display: table;
+    text-align: center;
+    z-index: 1;
+}

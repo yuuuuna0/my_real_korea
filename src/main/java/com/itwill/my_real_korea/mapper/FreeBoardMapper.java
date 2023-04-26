@@ -14,6 +14,8 @@ public interface FreeBoardMapper {
  public int insertBoard(FreeBoard freeBoard) ;
 
  FreeBoard selectByNo(int fBoNo) ;
+ List<FreeBoard> selectByUserId(String userId) ;
+
 
  List<FreeBoard> selectAllOrderByFBoNoDesc (Map<String, Object> pageMap) ;
 

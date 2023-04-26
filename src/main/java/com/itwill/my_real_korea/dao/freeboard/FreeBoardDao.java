@@ -9,7 +9,7 @@ public interface FreeBoardDao {
     int insertBoard(FreeBoard freeBoard) throws Exception;
 
     FreeBoard selectByNo(int no) throws Exception;
-
+    List<FreeBoard> selectByUserId(String userId) throws Exception;
 
     //최신순 조회
     List<FreeBoard> selectAllOrderByFBoNoDesc(int pageStart, int pageEnd) throws Exception;

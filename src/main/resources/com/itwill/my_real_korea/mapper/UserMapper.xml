@@ -10,7 +10,7 @@
 	<!-- 1. 회원 가입 -->
 	<insert id="create" parameterType="com.itwill.my_real_korea.dto.user.User">
 		INSERT into user_info(user_id, password, name, nickname, phone, email, birth, address, gender, point, is_admin, mail_auth, mail_key) 
-		VALUES(#{userId},#{password},#{name},#{nickname},#{phone},#{email},#{birth},#{address},#{gender},0,1,0,#{mailKey})
+		VALUES(#{userId},#{password},#{name},#{nickname},#{phone},#{email},#{birth},#{address},#{gender},2000,1,0,#{mailKey})
 	</insert>
 	<!-- 2. 회원 정보 보기 -->
 	<select id="findUser" parameterType="java.lang.String" resultMap="userResultMap">

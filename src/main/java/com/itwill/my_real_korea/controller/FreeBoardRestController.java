@@ -3,6 +3,7 @@ package com.itwill.my_real_korea.controller;
 import com.itwill.my_real_korea.dto.City;
 import com.itwill.my_real_korea.dto.freeboard.FreeBoard;
 import com.itwill.my_real_korea.dto.freeboard.FreeBoardComment;
+import com.itwill.my_real_korea.dto.tripboard.TripBoard;
 import com.itwill.my_real_korea.service.city.CityService;
 import com.itwill.my_real_korea.service.freeboard.FreeBoardCommentService;
 import com.itwill.my_real_korea.service.freeboard.FreeBoardService;
@@ -39,6 +40,12 @@ public class FreeBoardRestController {
         PageMakerDto<FreeBoard> freeBoardList = null;
         try {
             freeBoardList = freeBoardService.selectAllOrderByFBoNoDesc(pageno);
+            List<FreeBoard> data = new ArrayList<FreeBoard>();
+            for (FreeBoard freeBoard : data) {
+            	int commentCount = freeBoardCommentService.selectByfBoNo(freeBoard.getFBoNo()).size();
+            	freeBoard.setCommentCount(commentCount);
+            	data.add(freeBoard);
+            }
             resultMap.put("errorCode", 1);
             resultMap.put("errorMsg", "성공");
             resultMap.put("data", freeBoardList);
@@ -98,9 +105,16 @@ public class FreeBoardRestController {
         int code = 1;
         String msg = "성공";
         PageMakerDto<FreeBoard> freeBoardList = null;
+        List<FreeBoard> freeBoard = new ArrayList<>();
         try {
             // 페이지 번호(default 값 1)와 검색 keyword로 자유게시판 검색결과 리스트 찾기, 성공시 code 1
             freeBoardList = freeBoardService.selectSearchFreeBoardList(pageNo, keyword);
+            List<FreeBoard> tempFreeBoardList = freeBoardList.getItemList();
+            for (FreeBoard freeboard : tempFreeBoardList) {
+                int commentCount = freeBoardCommentService.selectByfBoNo(freeboard.getFBoNo()).size();
+                freeboard.setCommentCount(commentCount);
+                freeBoard.add(freeboard);
+            }
             if (freeBoardList.getPageMaker().getTotCount() != 0 && freeBoardList != null) {
                 code = 1;
                 msg = "성공";

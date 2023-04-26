@@ -106,7 +106,6 @@
 									<div class="image-box">
 										<figure class="image">
 											<a th:href="@{notice-detail(nNo=${notice.nNo})}" href="shop-single.html">
-											<!-- <img class="notice-list-img" th:src="@{img/notice/{nImg}(nImg=${notice.nImg})}" alt="" width="320px" height="270px"></a> -->	
 										</figure>
 									</div>
 									<div class="product_description" id="notice-list-item">
@@ -226,10 +225,10 @@
 	<script id="notice-search-list-template" type="text/x-handlebars-template">
 	{{#each data.itemList}}
 	<div class="shop-item col-lg-6 col-md-6 col-sm-6" id="notice-list-items" >
-	<div class="inner-box">
+	<div class="inner-box notice-box">
 		<div class="image-box">
 			<figure class="image">
-				<a href="notice-detail?nNo={{nno}}"><img class="notice-list-img" src="img/notice/notice_list_pink.png" alt="" ></a>
+				<a href="notice-detail?nNo={{nno}}"></a>
 			</figure>
 		</div>
 		<div class="product_description" id="notice-list-item">

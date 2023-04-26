@@ -593,7 +593,7 @@ h2 {
     display: table;
     height: 220px;
     font-size: 38px;
-    color: #e74c3c;
+    color: #e14d67;
     width: 100%;
     margin-left: -5px;
 }
@@ -608,4 +608,20 @@ h2 {
     border: 2px solid;
     border-color: #e14d67;
     border-radius: 30px;
+}
+.wishlist:before {
+    color: #e14d67;
+}
+.btn_full {
+    background: #e14d67;
+}
+a.btn_full_outline {
+    border: none;
+    border: 2px solid #e14d67;
+}
+a.btn_full_outline {
+    border: none;
+    color: #e14d67;
+    background: none;
+    border: 2px solid #e14d67;
 }

@@ -127,7 +127,7 @@
 								</div>
 								<div th:if="${wishlist.ticket != null}" class="img_list">
 									<a th:href="@{ticket-detail(tiNo=${wishlist.ticket.tiNo})}" href="">
-										<img th:src="@{img/ticket/{tiImgUrl}(tiImgUrl=${wishlist.ticketImgList.get(0).tiImgUrl})}" alt="Image">
+										<img th:src="@{{tiImgUrl}(tiImgUrl=${wishlist.ticketImgList.get(0).tiImgUrl})}" alt="Image">
 									</a>
 								</div>
 							</div>
@@ -314,7 +314,7 @@
 	<div class="col-lg-4 col-md-4">
 		<div class="img_list">
 				<a href="ticket-detail?tiNo={{ticket.tiNo}}">
-				<img src="img/tour/{{ticketImgList.[0].tiImgUrl}}" alt="Image">
+				<img src="{{ticketImgList.[0].tiImgUrl}}" alt="Image">
 			</a>
 		</div>
 	</div>

@@ -42,7 +42,6 @@ public class FreeBoardRestController {
         PageMakerDto<FreeBoard> freeBoardListPage = null;
         List<FreeBoard> data1 = new ArrayList<FreeBoard>();
         try {
-           if(cityNo !=0) {
             freeBoardListPage=freeBoardService.selectFreeBoardCityList(pageNo,cityNo);
             System.out.println(freeBoardListPage);
             for (FreeBoard freeBoard : freeBoardListPage.getItemList()) {
@@ -58,9 +57,7 @@ public class FreeBoardRestController {
 				code = 2;
 				msg = "해당 지역과 일치하는 게시글이 없습니다.";
 			}
-        	}else {
-        		
-        	}
+        
         } catch (Exception e) {
             e.printStackTrace();
             resultMap.put("errorCode", -1);
@@ -70,47 +67,10 @@ public class FreeBoardRestController {
         resultMap.put("msg", msg);
         resultMap.put("data", data1);
         resultMap.put("freeBoardListPage", freeBoardListPage);
-        resultMap.put("cityNo", cityNo);
-        resultMap.put("pageNo", pageNo);
         return resultMap;
     }
 
-    @ApiOperation(value = "자유게시판 리스트 오래된순")
-    @GetMapping(value = "/fBoList-fBoNo-asc", produces = "application/json;charset=UTF-8")
-    public Map<String, Object> fBoListFBoNoAsc(@RequestParam(required = false, defaultValue = "1") Integer pageno) {
-        Map<String, Object> resultMap = new HashMap<>();
-        PageMakerDto<FreeBoard> freeBoardList = null;
-        try {
-            freeBoardList = freeBoardService.selectAllOrderByFBoNoAsc(pageno);
-            resultMap.put("errorCode", 1);
-            resultMap.put("errorMsg", "성공");
-            resultMap.put("data", freeBoardList);
-        } catch (Exception e) {
-            e.printStackTrace();
-            resultMap.put("errorCode", -1);
-            resultMap.put("errorMsg", "관리자에게 문의하세요");
-        }
-        return resultMap;
-    }
-
-    @ApiOperation(value = "자유게시판 조회수 많은순")
-    @GetMapping(value = "/fBoList-readcount-desc", produces = "application/json;charset=UTF-8")
-    public Map<String, Object> fBoListReadCountDesc(@RequestParam(required = false, defaultValue = "1") Integer pageno) {
-        Map<String, Object> resultMap = new HashMap<>();
-        PageMakerDto<FreeBoard> freeBoardList = null;
-        try {
-            freeBoardList = freeBoardService.selectAllOrderByReadCountDesc(pageno);
-            resultMap.put("errorCode", 1);
-            resultMap.put("errorMsg", "성공");
-            resultMap.put("data", freeBoardList);
-        } catch (Exception e) {
-            e.printStackTrace();
-            resultMap.put("errorCode", -1);
-            resultMap.put("errorMsg", "관리자에게 문의하세요");
-        }
-        return resultMap;
-    }
-
+   
     /*
      * 자유게시판 title 키워드로 검색
      */

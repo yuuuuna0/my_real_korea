@@ -224,6 +224,7 @@ header.sticky#colored #logo_home h1 a{
 }
 #notice-list-item a{
 	font-size: 18px;
+	font-weight: bold;
 }
 
 .items-sorting select {

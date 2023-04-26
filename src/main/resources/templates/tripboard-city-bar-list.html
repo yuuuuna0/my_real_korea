@@ -106,7 +106,16 @@
 								<div class="inner-box">
 									<div class="image-box">
 										<figure class="image">
-											<a th:href="@{tripboard-detail(tBoNo=${tripBoard.tBoNo})}"><img src="img/tripboard/jeonju2.jpeg" alt="">
+											<div th:if="${tripBoard.tBoImg}">
+												<a th:href="@{tripboard-detail(tBoNo=${tripBoard.tBoNo})}">
+													<img th:src="@{img/tripboard/{tBoImg}(tBoImg=${tripBoard.tBoImg})}"  alt="Image" class="img-fluid">
+												</a>
+											</div>
+											<div th:if="${tripBoard.tUploadFile}">
+												<a th:href="@{tripboard-detail(tBoNo=${tripBoard.tBoNo})}">
+													<img th:src="@{tripboardimages/{tUploadFile}(tUploadFile=${tripBoard.tUploadFile})}"  alt="Image" class="img-fluid">
+												</a>
+											</div>
 											</a>
 										</figure>
 											<!-- 지역 보이게하기 -->

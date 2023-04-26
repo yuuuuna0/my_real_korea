@@ -118,6 +118,13 @@
 				<div class="col-lg-9">
 					<div class="box_style_1">
 						<div class="post nopadding">
+							<div th:if="${tripBoard.tBoImg}">
+								<img th:src="@{img/tripboard/{tBoImg}(tBoImg=${tripBoard.tBoImg})}"  alt="Image" class="img-fluid">
+							</div>
+							<div th:if="${tripBoard.tUploadFile}">
+								<img th:src="@{tripboardimages/{tUploadFile}(tUploadFile=${tripBoard.tUploadFile})}"  alt="Image" class="img-fluid">
+							</div>
+							
 							<div class="post_info clearfix">
 								<div class="post-left">
 									<ul>

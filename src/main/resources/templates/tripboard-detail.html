@@ -127,12 +127,11 @@
 					<div class="box_style_1">
 						<div class="post nopadding">
 						<div th:if="${tripBoard.tBoImg}">
-						<img src="upload-dir/default_tBoImg.png"  alt="Image" class="img-fluid">
+							<img th:src="@{img/tripboard/{tBoImg}(tBoImg=${tripBoard.tBoImg})}"  alt="Image" class="img-fluid">
 						</div>
 						<div th:if="${tripBoard.tUploadFile}">
-						<img th:src="@{tripboardimages/{tUploadFile}(tUploadFile=${tripBoard.tUploadFile})}"  alt="Image" class="img-fluid">
-						
-								</div>
+							<img th:src="@{tripboardimages/{tUploadFile}(tUploadFile=${tripBoard.tUploadFile})}"  alt="Image" class="img-fluid">
+						</div>
 								<!-- 동행게시판 제목 들어가는 곳 -->
 								<ul>
 								<li><h2 th:text="${tripBoard.tBoTitle}"></h2></li>

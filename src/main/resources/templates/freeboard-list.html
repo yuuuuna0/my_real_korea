@@ -86,7 +86,6 @@
 								<div class="col-6">
 									<div id="page-info" class="results_shop" th:each="freeBoardList:${freeBoardListPage}">
 										<span id="cur-page" th:text="${freeBoardList.pageMaker.curPage}"></span> &nbsp;페이지 &nbsp;
-										<span id="tot-record-count"  th:unless="${freeBoardList.totRecordCount} &gt; ${freeBoardList.pageMaker.pageEnd} and ${freeBoardList.totRecordCount} > 0" th:text="${freeBoardList.pageMaker.totCount}"></span>
 										       | 전체 건수: <span id="tot-record-count"   th:text="${freeBoardList.pageMaker.totCount}"></span>
 										<br>
 										
@@ -96,11 +95,11 @@
 									<div class="form-group">
 										<select id="sort" name="sort" onchange="if(this.value) location.href=(this.value);">
 											<option value="">정렬</option>
-											<option value="freeboard-list-fBoNo-desc?pageNo=1" >최신순:1페이지</option>
+											<option value="freeboard-list-fBoNo-desc?pageNo=1" >최신순</option>
 											
-											<option value="freeboard-list-fBoNo-asc?pageNo=1">오래된순:1페이지</option>
+											<option value="freeboard-list-fBoNo-asc?pageNo=1">오래된순</option>
 											
-											<option value="freeboard-list-readCount-desc?pageNo=1">조회수높은순:1페이지</option>
+											<option value="freeboard-list-readCount-desc?pageNo=1">조회수높은순</option>
 								
 										</select>
 									</div>
@@ -119,9 +118,9 @@
 							<table id='boardlist'  cellpadding='5px' cellspacing='1' >
 								<tr id='boardlist_tr1'>
 									<td width="340px" align=center >제 목</td>
-									<td width=70 align=center >조회수</td>
-									<td width=120 align=center>작성일</td>
-									<td width=120 align=center >작성자</td>
+									<td width=100 align=right >조회수</td>
+									<td width=100 align=center>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;작성일</td>
+									<td width=100 align=center >&nbsp;작성자</td>
 								</tr>
 								
 								<tr id="boardlist_tr2"   th:each="freeBoard:${freeBoardList}">
@@ -132,9 +131,9 @@
 										<span class="icon-map"></span>
 										<span th:text="   ${freeBoard.getCity().cityName}"></span>
 									</td>
-									<td width=70   th:text="${freeBoard.fBoCount}"></td>
-									<td width=120  th:text="${#dates.format(freeBoard.fBoDate, 'yyyy.MM.dd')}"></td>
-									<td width=120  th:text="${freeBoard.userId}"></td>
+									<td width=20   th:text="'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+${freeBoard.fBoCount}"></td>
+									<td width=100  th:text="${#dates.format(freeBoard.fBoDate, 'yyyy.MM.dd')}"></td>
+									<td width=100  th:text="${freeBoard.userId}"></td>
 								
 
 								</tr>
@@ -191,20 +190,19 @@
 						<!-- End Search -->
 				
 							<!--Sidebar-->
-						<div class="widget " id="cat_shop">
+						<div class="widget " id="cat_shop" >
 							<h4>Categories</h4>
-							<ul >
-								<li><a id="freeboard-city1">전체보기</a></li>
-								<li><a id="freeboard-city2">서울</a></li>
-								<li><a id="freeboard-city3">경기</a></li>
-								<li><a id="freeboard-city4">강원</a></li>
-								<li><a id="freeboard-city5">부산</a></li>
-								<li><a id="freeboard-city6">제주</a>
-								<hr>
-									<a id="freeboard-write-form-btn" class="btn_1" style="color:white;" href="freeboard-write-form" role="button" >자유게시판 글쓰기</a>
-									<hr>
-						</li>
+							<ul>
+								<li>
+									<a id="all-city-list"  name="0">전체보기
+									</a>
+								</li>
+								<li th:each="city:${cityList}">
+									<a id="all-city-list" th:name="${city.cityNo}" th:text="${city.cityName}" href="#">서</a>
+								</li>
 							
+							<br>
+									<a id="freeboard-write-form-btn" class="btn_1" style="color:white;" href="freeboard-write-form" role="button" >자유게시판 글쓰기</a>
 							</ul>
 						</div>
 						<!-- End widget -->
@@ -254,12 +252,12 @@
 	<script id="freeboard-search-list-template" type="text/x-handlebars-template" >
 <form name='boardlistform' style='width:flex;  '>
 						<div class="row" style='color:grey; width:max-flex; margin-left:15px; margin-right:15px;'>
-							<table id='boardlist' cellpadding='5px' cellspacing='1px' style='width:max'>
+							<table id='boardlist' cellpadding='5px' cellspacing='1px'>
 								<tr height=15px width=1000 id='boardlist_tr1' >
                                   <td  width=340px align='center'><a>제 목 </a></td>
 									<td   width=70px align=center>조회수</td>
-									<td   width=120px align=center>작성일</td>
-									<td  width=120px align=left>작성자</td>
+									<td   width=120px align=center>&nbsp;&nbsp;&nbsp;작성일</td>
+									<td  width=120px align=left>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;작성자</td>
 								</tr>
 {{#each data.itemList}}
 								<tr id='boardlist_tr2'> 
@@ -269,8 +267,8 @@
 									<h class="icon-map"></h>
 									<h>{{city.cityName}}</h></td>
 									<td  width=80>{{fboCount}}</td>
-									<td  width=300>{{dateFormat fboDate}}</td>
-									<td  width=50>{{userId}}</td>
+									<td  width=200>{{dateFormat fboDate}}</td>
+									<td  width=150 align=center>{{userId}}</td>
 									</li><br>
 								</tr>
 <br>

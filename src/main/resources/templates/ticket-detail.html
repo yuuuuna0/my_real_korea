@@ -51,9 +51,6 @@
 	<div id="header" th:include="include-common-top::include-common-top"></div>
 	<!--======================== End Header======================== -->
 	
-	<!-- form (내꺼)                        ticket (버튼이 여러개 있으면 script로 나누기) -->
-	
-	<!-- 티켓 이미지 돌리기 -->
 	<section class="parallax-window" data-parallax="scroll" th:data-image-src="@{{tiImgUrl}(tiImgUrl=${ticketImgList[0].tiImgUrl})}" data-natural-width="1400" data-natural-height="470">
         <div class="parallax-content-2">
             <div class="container">
@@ -130,7 +127,11 @@
 		
 			<div class="row">
 				<div class="col-lg-8" id="single_tour_desc">
-
+					<th:block th:each="ticketImg, iterStat : ${ticketImgList}">
+  							 	 <th:block th:if="${!iterStat.first}">
+       								 <img alt="Image" style="width:100%" class="sp-thumbnail" th:src="@{{tiImgUrl}(tiImgUrl=${ticketImg.tiImgUrl})}">
+   								</th:block>
+							</th:block>
 					<!--<p class="d-none d-md-block d-block d-lg-none">
 					<a class="btn_map" data-toggle="collapse" href="#collapseMap" aria-expanded="false" aria-controls="collapseMap" 
 					data-text-swap="Hide map" data-text-original="View on map">View on map</a>
@@ -166,11 +167,11 @@
 							<p th:text="${session.ticket.tiInfo}">
 							</p>
 							<h4 th:text="${session.ticket.tiNotice}">어쩌구 저쩌구 저쩌구 </h4> 
-							<th:block th:each="ticketImg, iterStat : ${ticketImgList}">
+							<!-- <th:block th:each="ticketImg, iterStat : ${ticketImgList}">
   							 	 <th:block th:if="${!iterStat.first}">
        								 <img alt="Image" style="width:100%" class="sp-thumbnail" th:src="@{{tiImgUrl}(tiImgUrl=${ticketImg.tiImgUrl})}">
    								</th:block>
-							</th:block>
+							</th:block> -->
 
 							<p>
 				
@@ -279,8 +280,9 @@
 					</p>
 					<!-- detail - 여기서 티켓 정보 넘기기****************** 예약하기 FORM  ****************** -->
 					<form name="f" method="post" action="ticket-detail-aciton">
+					<!--  <div class="box_style_1 expose" style="position: fixed; width: 300px; height: 350px; overflow: auto;">-->
 					<div class="box_style_1 expose">
-						<h3 class="inner">Check Availability</h3>
+						<h3 class="inner">예약하기</h3>
 						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">

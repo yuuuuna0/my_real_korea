@@ -50,11 +50,11 @@
 	<!--======================== End Header======================== -->
 	<section id="hero_2">
 		<div class="intro_title">
-			<h1>Place your order</h1>
+			<h1>예약페이지</h1>
 			<div class="bs-wizard row">
 
 				<div class="col-4 bs-wizard-step complete">
-					<div class="text-center bs-wizard-stepnum">Your cart</div>
+					<div class="text-center bs-wizard-stepnum">상품상세페이지</div>
 					<div class="progress">
 						<div class="progress-bar"></div>
 					</div>
@@ -62,7 +62,7 @@
 				</div>
 
 				<div class="col-4 bs-wizard-step active">
-					<div class="text-center bs-wizard-stepnum">Your details</div>
+					<div class="text-center bs-wizard-stepnum">예약상세내용</div>
 					<div class="progress">
 						<div class="progress-bar"></div>
 					</div>
@@ -70,7 +70,7 @@
 				</div>
 
 				<div class="col-4 bs-wizard-step disabled">
-					<div class="text-center bs-wizard-stepnum">Finish!</div>
+					<div class="text-center bs-wizard-stepnum">결제완료</div>
 					<div class="progress">
 						<div class="progress-bar"></div>
 					</div>
@@ -187,7 +187,7 @@
 													<!--------------------------결제창 시작-------------------------------->
 			<aside class="col-lg-4">
 					<div class="box_style_1">
-						<h3 class="inner">- Summary -</h3>
+						<h3 class="inner">결제 예상 내역</h3>
 						<table class="table table_summary">
 							<tbody>
 								<tr>
@@ -203,7 +203,7 @@
 									<td>
 										티켓 가격 (개)
 									</td>
-									<td class="text-right" th:text="${session.ticket.tiPrice}">
+									<td class="text-right" data-th-text="${#numbers.formatInteger(session.ticket.tiPrice ,3, 'COMMA')} +'원'">
 										$34
 									</td>
 								</tr>
@@ -221,7 +221,7 @@
 									<td>
 										총 금액
 									</td>
-									<td class="text-right" th:text="${session.payment.pPrice}">
+									<td class="text-right" th:text="${#numbers.formatInteger(session.payment.pPrice,3, 'COMMA')} +'원'">
 										$154
 									</td>
 								</tr>

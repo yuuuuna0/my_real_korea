@@ -130,8 +130,6 @@ public class TicketController {
          //  System.out.println(">>>>>>>>"+ticketImgList);
             // 사진을 제외한 공통된 하나의 티켓 정보
             Ticket ticket = ticketList.get(0);
-          // String img = ticketImgList.get(0).getTiImgUrl();
-          // System.out.println("dgfasjgsdalkdajsgkla"+img);
            
             // 세션에 티켓 정보 담기
             session.setAttribute("ticket", ticket);
@@ -253,14 +251,14 @@ public class TicketController {
         int code = 1;
         String msg = "성공";
         List<Ticket> data = null;
-        int pageNo = Integer.parseInt(map.get("pageNo"));
+        int currentPage = Integer.parseInt(map.get("currentPage")); 
         int cityNo = Integer.parseInt(map.get("cityNo"));
         String keyword = map.get("keyword");
         String sortOrder = map.get("sortOrder");
 
         try {
             PageMakerDto<Ticket> ticketPage
-                    = ticketService.selectByTicketAllSort(pageNo,keyword, cityNo, sortOrder);
+                    = ticketService.selectByTicketAllSort(currentPage,keyword, cityNo, sortOrder);
             List<Ticket> tempTicketList = ticketPage.getItemList();
             List<Ticket> ticketList = new ArrayList<>();
             for(Ticket ticket : tempTicketList) {

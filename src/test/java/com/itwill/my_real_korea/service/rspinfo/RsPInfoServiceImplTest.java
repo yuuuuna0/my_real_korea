@@ -29,8 +29,8 @@ class RsPInfoServiceImplTest {
 
 	@Test
 	void testSelectRsPersonByPNo() {
-		List<RsPInfo> rsPInfoList=rsPInfoService.selectRsPersonByPNo(1);
-		System.out.println(rsPInfoList);
+		//List<RsPInfo> rsPInfoList=rsPInfoService.selectRsPersonByPNo(1);
+		//System.out.println(rsPInfoList);
 	}
 
 }

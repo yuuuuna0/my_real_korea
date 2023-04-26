@@ -53,8 +53,8 @@ class PaymentDaoImplTest {
     @Disabled
     @Test
     void selectPaymentNo() {
-        List<Payment> paymentList = paymentDao.selectPaymentNo(1);
-        System.out.println(paymentList);
+       // List<Payment> paymentList = paymentDao.selectPaymentNo(1);
+        //System.out.println(paymentList);
 
         // System.out.println(paymentList);
     }

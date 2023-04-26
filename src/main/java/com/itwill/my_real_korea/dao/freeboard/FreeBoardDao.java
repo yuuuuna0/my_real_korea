@@ -36,7 +36,7 @@ public interface FreeBoardDao {
     //검색된 게시글 총 개수 조회
     int selectSearchCount(String keyword) throws Exception;
     //검색된 게시글 총 개수 조회
-    int selectCityCount(int cityNo) throws Exception;
+    int selectCityNoCount(int cityNo) throws Exception;
 
 
     //자유게시판 title 키워드로 검색

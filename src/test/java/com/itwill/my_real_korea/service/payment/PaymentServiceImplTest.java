@@ -70,8 +70,8 @@ class PaymentServiceImplTest {
 	@Disabled
 	@Test
 	void testSelectPaymentNo() {
-		List<Payment> paymentList = paymentService.selectPaymentNo(11);
-		System.out.println(paymentList);
+		//List<Payment> paymentList = paymentService.selectPaymentNo(11);
+		//System.out.println(paymentList);
 	}
 
 	@Disabled

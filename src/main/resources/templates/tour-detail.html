@@ -139,12 +139,11 @@
 					<div id="Img_carousel" class="slider-pro">
 						<div class="sp-slides">
 							<!--투어 이미지 -->
-							<div class="sp-slide">
 							<th:block th:each="tourImg:${tour.tourImgList}">
+							<div class="sp-slide">
 								<img alt="Image" class="sp-image" style="width:100%" th:src="@{img/tour/{toImgUrl}(toImgUrl=${tourImg.toImgUrl})}" th:data-src="@{img/tour/{toImgUrl}(toImgUrl=${tourImg.toImgUrl})}" th:data-small="@{img/tour/{toImgUrl}(toImgUrl=${tourImg.toImgUrl})}" th:data-medium="@{img/tour/{toImgUrl}(toImgUrl=${tourImg.toImgUrl})}" th:data-large="@{img/tour/{toImgUrl}(toImgUrl=${tourImg.toImgUrl})}" th:data-retina="@{img/tour/{toImgUrl}(toImgUrl=${tourImg.toImgUrl})}">
-							</th:block>
 							</div>
-
+							</th:block>
 						</div>
 						<div class="sp-thumbnails">
 							<th:block th:each="tourImg:${tour.tourImgList}">
@@ -588,15 +587,18 @@
 				width: 960,
 				height: 500,
 				fade: true,
-				arrows: true,
-				buttons: false,
-				fullScreen: false,
 				smallSize: 500,
 				startSlide: 0,
 				mediumSize: 1000,
 				largeSize: 3000,
 				thumbnailArrows: true,
-				autoplay: false
+				//autoplay: true,
+				nav:true,
+				autoplayTimeout : 500,
+				interval: 1000,
+				loop:true,
+				touchSwipe:true,
+				arrows: true
 			});
 		});
 	</script>
@@ -610,10 +612,11 @@
 	<!-- Carousel -->
 	<script>
 		$('.carousel-thumbs-2').owlCarousel({
-		loop:false,
+		loop:true,
 		margin:5,
 		responsiveClass:true,
-		nav:false,
+		nav:true,
+		interval:2000,
 		responsive:{
 			0:{
 				items:1

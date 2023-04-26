@@ -17,7 +17,7 @@
         insert into FREE_BOARD (f_bo_no,f_bo_title,f_bo_content,f_bo_date,f_bo_readcount,city_no,user_id)
         values( #{fBoNo},#{fBoTitle},
         #{fBoContent},sysdate,
-        #{fBoCount},#{cityNo},
+        #{fBoCount},#{city.cityNo},
         #{userId})
     </insert>
 
@@ -109,7 +109,7 @@
         update FREE_BOARD
         set f_bo_title=#{fBoTitle},
             f_bo_content=#{fBoContent},
-            city_no=#{cityNo}
+            city_no=#{city.cityNo}
         where f_bo_no = #{fBoNo}
     </update>
 

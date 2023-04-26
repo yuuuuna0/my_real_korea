@@ -369,7 +369,7 @@
 				</div>-->
 				<div class="img_container">
 					<a href="ticket-detail?tiNo={{tiNo}}">
-						<img src="img/hotel_1.jpg" width="800" height="533" class="img-fluid" alt="Image">
+						<img src="@{{tiImgUrl}(tiImgUrl=${{ticket.ticketImgList.get(0).tiImgUrl}})}" width="800" height="533" class="img-fluid" alt="Image"/>
 						<div class="score" >
 						<span>
 							{{tiCount}}

@@ -63,14 +63,21 @@ public class WishlistRestController {
 			User loginUser = (User)session.getAttribute("loginUser");
 			String userId = loginUser.getUserId();
 			wishlist.setUserId(userId);
-			// 위시리스트에 티켓 상품추가, 성공시 code 1
-			wishlistService.insertTicketToWishlist(wishlist);
-			// 위시리스트에 투어 상품추가 후 그 위시리스트 데이터에 붙여줌
-			wishlist = wishlistService.selectByWishNo(wishlist.getWishNo());
 			
-			code = 1;
-			msg = "성공";
-			data.add(wishlist);
+			// 이미 담긴 티켓상품이면 위시리스트 중복 추가 불가능
+			int tourExist = wishlistService.selectWishlistTicketCount(userId, wishlist.getTicket().getTiNo());
+			if (tourExist > 0) {
+				code = 3;
+				msg = "이미 담긴 상품입니다.";
+			} else {
+				// 위시리스트에 티켓 상품추가, 성공시 code 1
+				wishlistService.insertTicketToWishlist(wishlist);
+				// 위시리스트에 투어 상품추가 후 그 위시리스트 데이터에 붙여줌
+				wishlist = wishlistService.selectByWishNo(wishlist.getWishNo());
+				code = 1;
+				msg = "성공";
+				data.add(wishlist);
+			}
 		} catch (Exception e) {
 			// 실패 시 code 2
 			e.printStackTrace();
@@ -100,13 +107,20 @@ public class WishlistRestController {
 			User loginUser = (User)session.getAttribute("loginUser");
 			String userId = loginUser.getUserId();
 			wishlist.setUserId(userId);
-			// 위시리스트에 투어 상품추가, 성공시 code 1
-			wishlistService.insertTourToWishlist(wishlist);
-			code = 1;
-			msg = "성공";
-			// 위시리스트에 투어 상품추가 후 그 위시리스트 데이터에 붙여줌
-			wishlist = wishlistService.selectByWishNo(wishlist.getWishNo());
-			data.add(wishlist);
+			// 이미 담긴 투어상품이면 위시리스트 중복 추가 불가능
+			int tourExist = wishlistService.selectWishlistTourCount(userId, wishlist.getTour().getToNo());
+			if (tourExist > 0) {
+				code = 3;
+				msg = "이미 담긴 상품입니다.";
+			} else {
+				// 위시리스트에 투어 상품추가, 성공시 code 1
+				wishlistService.insertTourToWishlist(wishlist);
+				// 위시리스트에 투어 상품추가 후 그 위시리스트 데이터에 붙여줌
+				wishlist = wishlistService.selectByWishNo(wishlist.getWishNo());
+				code = 1;
+				msg = "성공";
+				data.add(wishlist);
+			}
 		} catch (Exception e) {
 			// 실패 시 code 2
 			e.printStackTrace();

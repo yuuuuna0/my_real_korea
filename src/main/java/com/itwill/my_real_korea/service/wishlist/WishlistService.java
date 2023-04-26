@@ -23,6 +23,14 @@ public interface WishlistService {
 	 */
 	int selectWishlistCount(String userId);
 	/*
+	 * 위시리스트 투어 담긴 여부 확인
+	 */
+	int selectWishlistTourCount(String userId, int toNo);
+	/*
+	 * 위시리스트 티켓 담긴 여부 확인
+	 */
+	int selectWishlistTicketCount(String userId, int tiNo);
+	/*
 	 * 티켓 상품 위시리스트에 추가
 	 */
 	int insertTicketToWishlist(Wishlist wishlist);

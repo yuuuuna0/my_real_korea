@@ -273,16 +273,8 @@
 						</ul>
 					</div>
 					<hr>
-					<!-- Chat icon (민선) -->
-					<div id="chat-icon-top" class="chat-icon-top">
-						<div id="chat-img-top" class="chat-img-top" >
-							<input id="chat-tripboard-userId" type="hidden" th:value="${tripBoard.userId}">
-					   		<a href="#" id="chat-pop-up-click" >
-					   			<img src="img/messenger.png" id="messenger-icon"></a>
-						<span class="tooltiptext tooltip-left">1:1 채팅</span>
-						</div>
-					</div>
-					<!-- End Chat icon -->
+			
+					
 					<br>
 					<br>
 					<div class="widget tags">
@@ -294,6 +286,16 @@
 						<a href="user-view">마이페이지</a>
 					</div>
 					<hr>
+					<!-- Chat icon (민선) -->
+					<div id="chat-icon-top" class="chat-icon-top">
+						<div id="chat-img-top" class="chat-img-top" >
+							<input id="chat-tripboard-userId" type="hidden" th:value="${tripBoard.userId}">
+					   		<a href="#" id="chat-pop-up-click" >
+					   			<img src="img/messenger2.png" id="messenger-icon"></a>
+						<span class="tooltiptext tooltip-left">1:1 채팅</span>
+						</div>
+					</div>
+					<!-- End Chat icon -->
 					<!-- End widget -->
 
 				</aside>
@@ -301,22 +303,19 @@
 
 			</div>
 			<!-- End row-->
+			
 		</div>
 		<!-- End container -->
 	</main>
 	<!-- End main -->
+	
 	<!--========================= footer ========================-->
 	<footer class="revealed">
 		<div id="footer" th:include="include-common-bottom::include-common-bottom"></div>
 	</footer>
 		<!-- End container -->
 	<!--========================= End footer ========================-->
-
-	<div id="chat-icon">
-		<div id="chat-img">
-    		<img src="img/chat3_60.png">
-		</div>
-	</div>
+	
 	<div id="toTop"></div><!-- Back to top button -->
 	
 	<!-- Search Menu -->

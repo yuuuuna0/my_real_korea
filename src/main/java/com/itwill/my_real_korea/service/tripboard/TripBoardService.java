@@ -105,4 +105,9 @@ public interface TripBoardService {
 	 * 검색된 게시글 총 개수
 	 */
 	int selectTbSearchCount(String keyword) throws Exception;
+	
+	/*
+	 * 마이페이지에 사용할 내가 작성한 글 리스트
+	 */
+	List<TripBoard> selectAllUser(String UserId) throws Exception;
 }

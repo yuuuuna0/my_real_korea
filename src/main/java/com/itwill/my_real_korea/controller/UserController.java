@@ -22,10 +22,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.itwill.my_real_korea.dto.City;
 import com.itwill.my_real_korea.dto.Payment;
+import com.itwill.my_real_korea.dto.tripboard.TripBoard;
 import com.itwill.my_real_korea.dto.user.KakaoProfile;
 import com.itwill.my_real_korea.dto.user.User;
 import com.itwill.my_real_korea.service.city.CityService;
 import com.itwill.my_real_korea.service.payment.PaymentService;
+import com.itwill.my_real_korea.service.tripboard.TripBoardService;
 import com.itwill.my_real_korea.service.user.KaKaoService;
 import com.itwill.my_real_korea.service.user.UserService;
 
@@ -40,6 +42,8 @@ public class UserController {
 	private KaKaoService kakaoService; 
 	@Autowired
 	private CityService cityService;
+	@Autowired
+	private TripBoardService tripBoardService;
 
 	
 	//회원 가입 폼
@@ -304,6 +308,10 @@ public class UserController {
 		request.setAttribute("paymentList", paymentList);
 		System.out.println(paymentList);
 		
+		//2. 마이페이지 내가 쓴 동행게시판 게시글
+		List<TripBoard> tripBoardList = tripBoardService.selectAllUser(loginUser.getUserId());
+		request.setAttribute("tripBoardList", tripBoardList);
+		System.out.println(tripBoardList);
 		
 		return "user-view";
 	}

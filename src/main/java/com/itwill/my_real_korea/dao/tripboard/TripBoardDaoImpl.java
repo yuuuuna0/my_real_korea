@@ -220,4 +220,12 @@ public class TripBoardDaoImpl implements TripBoardDao{
 		return tripBoardMapper.selectTbSearchCount(keyword);
 	}
 	
+	/*
+	 * 마이페이지에 사용할 내가 작성한 글 리스트
+	 */
+	@Override
+	public List<TripBoard> selectAllUser(String userId) throws Exception {
+		return tripBoardMapper.selectAllUser(userId);
+	}
+	
 }

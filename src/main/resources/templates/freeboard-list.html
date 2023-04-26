@@ -84,9 +84,9 @@
 						<div class="items-sorting">
 							<div class="row">
 								<div class="col-6">
-									<div id="page-info" class="results_shop" th:each="freeBoardList:${freeBoardListPage}">
-										<span id="cur-page" th:text="${freeBoardList.pageMaker.curPage}"></span> &nbsp;페이지 &nbsp;
-										       | 전체 건수: <span id="tot-record-count"   th:text="${freeBoardList.pageMaker.totCount}"></span>
+									<div id="page-info" class="results_shop" >
+										<span id="cur-page" th:text="${freeBoardListPage.pageMaker.curPage}"></span> &nbsp;페이지 &nbsp;
+										       | 전체 건수: <span id="tot-record-count"   th:text="${freeBoardListPage.pageMaker.totCount}"></span>
 										<br>
 										
 									</div>
@@ -194,11 +194,11 @@
 							<h4>Categories</h4>
 							<ul>
 								<li>
-									<a id="all-city-list"  name="0">전체보기
+									<a  href="freeboard-list">전체보기
 									</a>
 								</li>
 								<li th:each="city:${cityList}">
-									<a id="all-city-list" th:name="${city.cityNo}" th:text="${city.cityName}" href="#">서</a>
+									<a id="all-city-list" th:name="${city.cityNo}" th:text="${city.cityName}" ></a>
 								</li>
 							
 							<br>

@@ -1,7 +1,27 @@
 import * as View from "./view.js";
 import * as Request from "./request.js";
 
-
+//동행게시판 필터(사이드바 전체보기, 지역별 보기)
+$(document).on('click', '#all-city-list', function(e) {
+	let cityNo=$(this).attr('name');
+		let url=`fBoList?cityNo=${cityNo}`;
+		let method = 'GET';
+		let contentType = 'application/json;charset=UTF-8';
+		let sendData;
+		let async = true;
+		let curPage=1;
+		
+		Request.ajaxRequest(url, method, contentType, 
+							sendData,
+							function(resultJson){
+								if(resultJson.code == 1){
+									View.render('#freeboard-search-list-template', resultJson, '#freeboard-list');
+								}else {
+									alert(resultJson.msg);
+								}
+							}, async);
+		e.preventDefault();
+});
 
 $("#freeboard-search-keyword").keyup(e => {
 	if (e.keyCode == 13) {

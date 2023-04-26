@@ -194,13 +194,13 @@
 									<div class="col-md-6">
 										<div class="form-group">
 											<label><i class="icon-calendar-7"></i> 여행 시작일</label>
-											<input class="start-date-pick form-control" data-date-format="yyyy-MM-dd" type="date" id="tBoStartDate" name="tBoStartDate" th:value="${#dates.format(tripBoard.tBoStartDate, 'yyyy-MM-dd')}" >
+											<input class="start-date-pick form-control" data-date-format="yyyy-MM-dd" type="date" id="tBoStartDate" name="tBoStartDate" th:value="${#dates.format(tripBoard.tBoStartDate, 'yyyy-MM-dd')}" required="required">
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
 											<label><i class="icon-calendar-7"></i> 여행 종료일</label>
-											<input class="end-date-pick form-control" data-date-format="yyyy-MM-dd" type="date" id="tBoEndDate" name="tBoEndDate" th:value="${#dates.format(tripBoard.tBoEndDate, 'yyyy-MM-dd')}">
+											<input class="end-date-pick form-control" data-date-format="yyyy-MM-dd" type="date" id="tBoEndDate" name="tBoEndDate" th:value="${#dates.format(tripBoard.tBoEndDate, 'yyyy-MM-dd')}" required="required">
 										</div>
 									</div>
 								</div>

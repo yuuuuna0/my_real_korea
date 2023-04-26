@@ -173,9 +173,8 @@
 								<div class="row">
 									<div class="col-6">
 										<div id="page-info" class="results_shop">
-											전체 &nbsp;:&nbsp;<span th:text="${tourListPage.totRecordCount}"></span>&nbsp;건 중&nbsp;&nbsp;||
-											&nbsp;&nbsp;<span id="tot-record-count" th:text="${tourListPage.pageMaker.pageBegin}"></span> >>
-											<span id="tot-record-count" th:text="${tourListPage.itemList.size()+9*tourListPage.pageMaker.prevPage}"></span>
+											전체 &nbsp;&nbsp;<span th:text="${tourListPage.pageMaker.totPage}"></span>&nbsp;페이지 중&nbsp;&nbsp;>>
+											&nbsp;&nbsp;<span id="tot-record-count" th:text="${tourListPage.pageMaker.curPage}"></span> &nbsp; 페이지  
 										</div>
 									</div>
 									<div class="col-6">
@@ -216,7 +215,7 @@
 								</div>
 								<div class="hotel_title row">
 								<div class="col-md-9" style="padding:1px 1px 1px 15px">
-									<h3><strong  th:text="${tour.toName}">Park Hyatt</strong></h3>
+									<h3><strong style="width:90%"  th:text="${tour.toName}">Park Hyatt</strong></h3>
 										<div class="rating" th:switch="${tour.toScore}">
 											<div th:case="0">
 												<i class="icon-star-empty"></i>							
@@ -416,9 +415,10 @@
 					</div>
 				</a>
 			</div>
-			<div class="hotel_title">
+			<div class="hotel_title row" >
+			<div class="col-md-9" style="padding:1px 1px 1px 15px">
 				<h3>
-					<strong>
+					<strong style="width:90%">
 						{{toName}}
 					</strong>
 				</h3>
@@ -426,9 +426,10 @@
 	 					{{#generateStarHtml toScore}}
 						{{/generateStarHtml}}
 				</div>
+				</div>
 				<!-- end rating -->
-				{{#if userId}}
-				<div class="wishlist">
+				{{#if loginUser}}
+				<div class="wishlist col-md-3" style="top:40px; right:25px;">
 					<a class="tooltip_flip tooltip-effect-1" id="tour-add-to-wishlist-btn" href="#" 
 					data-toNo="{{toNo}}" data-toName="{{toName}}" data-toTime="{{toTime}}"
 					data-toPerson="{{toPerson}}" data-toMeet="{{toMeet}}" data-toPrice="{{toPrice}}"
@@ -438,8 +439,8 @@
 					<span class="tooltip-content-flip"><span class="tooltip-back">위시리스트<br>추가</span></span></a>
 				</div>
 				{{/if}}
-				{{#unless userId}}
-				<div class="wishlist">
+				{{#unless loginUser}}
+				<div class="wishlist col-md-3"  style="top:40px; right:25px;">
 					<a class="tooltip_flip tooltip-effect-1" id="tour-add-to-wishlist-btn" href="user-login">+
 					<span class="tooltip-content-flip"><span class="tooltip-back">위시리스트<br>추가</span></span></a>
 				</div>

@@ -224,6 +224,8 @@ public class TourController {
 		}
 		return forwardPath;
 	}
+ 	
+ 	
 	//4. 예약한 투어상품 상세 확인
  	@LoginCheck
 	@RequestMapping(value="tour-payment-confirmation")
@@ -239,17 +241,48 @@ public class TourController {
 		forwardPath="tour-payment-confirmation";
 		return forwardPath;
 	}
- 	
- 	//5. 예약상품 삭제하기
- 	@LoginCheck
- 	@RequestMapping(value="payment-delete")
- 	public String paymentDelete(@RequestParam int pNo) {
- 		System.out.println("!!!!!!!!!!!!!!!!!!!!!1 "+pNo);
- 		String forwardPath="";
-		paymentService.deletePayment(pNo);
-		forwardPath="redirect:/user-view";
- 		return forwardPath;
- 	}
+// 	//4. 예약한 투어상품 상세 확인
+// 	@LoginCheck
+// 	@RequestMapping(value="tour-payment-confirmation")
+// 	public String tourPaymentConfirmation(@ModelAttribute Payment payment,
+// 			@ModelAttribute RsPInfo rsPInfo,
+// 			@ModelAttribute Tour tour,
+// 			Model model) {
+// 		String forwardPath="";
+// 		
+// 		model.addAttribute(payment);
+// 		model.addAttribute(rsPInfo);
+// 		model.addAttribute(tour);
+// 		forwardPath="tour-payment-confirmation";
+// 		return forwardPath;
+// 	}
+	//2. 구매내역 보기
+	@LoginCheck
+	@GetMapping(value="payment-detail")
+	public String paymentDetail(@RequestParam int pNo,RedirectAttributes redirectAttributes){
+		String forwardPath="";
+		try {
+			Payment payment=paymentService.selectPaymentNo(pNo);
+			RsPInfo rsPInfo=rsPInfoService.selectRsPersonByPNo(pNo);
+			redirectAttributes.addFlashAttribute("RsPInfo",rsPInfo);
+			redirectAttributes.addFlashAttribute("payment",payment);
+			if(payment.getTour()!=null) {
+				//투어예약 상세보기
+				Tour tour=payment.getTour();
+				redirectAttributes.addFlashAttribute("tour",tour);
+				forwardPath="redirect:tour-payment-confirmation";
+			} else if(payment.getTicket()!=null){
+				//티켓예약 상세보기
+				Ticket ticket=payment.getTicket();
+				redirectAttributes.addFlashAttribute("ticket",ticket);
+				forwardPath="ticket-payment-confirmation";
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return forwardPath;
+	}
+	
   	
 }
 

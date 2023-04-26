@@ -89,7 +89,7 @@ public class FreeBoardDaoImpl implements FreeBoardDao {
     }
     //키워드 검색시 게시글 갯수 조회
     @Override
-    public int selectCityCount(int cityNo) throws Exception {
+    public int selectCityNoCount(int cityNo) throws Exception {
     	return freeBoardMapper.selectCityCount(cityNo);
     }
 

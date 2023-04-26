@@ -46,7 +46,7 @@ public class PaymentServiceImpl implements PaymentService{
 	}
 
 	@Override
-	public List<Payment> selectPaymentNo(int pNo) {
+	public Payment selectPaymentNo(int pNo) {
 		return paymentDao.selectPaymentNo(pNo);
 	}
 

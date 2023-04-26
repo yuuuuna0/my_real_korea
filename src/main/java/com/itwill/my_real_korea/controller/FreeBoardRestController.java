@@ -35,28 +35,43 @@ public class FreeBoardRestController {
 
     @ApiOperation(value = "자유게시판 리스트 최신순")
     @GetMapping(value = "/fBoList", produces = "application/json;charset=UTF-8")
-    public Map<String, Object> fBoListFBoNoDesc(@RequestParam(required = false, defaultValue = "1") Integer pageno, @RequestParam(required = true, defaultValue = "1")Integer cityNo) throws Exception {
+    public Map<String, Object> fBoListFBoNoDesc(@RequestParam(required = false, defaultValue = "1") Integer pageNo, @RequestParam(required = true)Integer cityNo) throws Exception {
         Map<String, Object> resultMap = new HashMap<>();
-        PageMakerDto<FreeBoard> freeBoardList = null;
+        int code = 1;
+		String msg = "성공";
+        PageMakerDto<FreeBoard> freeBoardListPage = null;
+        List<FreeBoard> data1 = new ArrayList<FreeBoard>();
         try {
-            freeBoardList = freeBoardService.selectFreeBoardCityList(pageno,cityNo);
-            List<FreeBoard> data = new ArrayList<FreeBoard>();
-           
-            for (FreeBoard freeBoard : data) {
+           if(cityNo !=0) {
+            freeBoardListPage=freeBoardService.selectFreeBoardCityList(pageNo,cityNo);
+            System.out.println(freeBoardListPage);
+            for (FreeBoard freeBoard : freeBoardListPage.getItemList()) {
             	int commentCount = freeBoardCommentService.selectByfBoNo(freeBoard.getFBoNo()).size();
             	freeBoard.setCommentCount(commentCount);
-            	cityNo=freeBoard.getCity().getCityNo();
-            	data.add(freeBoard);
+            	data1.add(freeBoard);
+            	
             }
-            resultMap.put("errorCode", 1);
-            resultMap.put("errorMsg", "성공");
-            resultMap.put("data", freeBoardList);
-            resultMap.put("cityNo", cityNo);
+        	if(freeBoardListPage.getPageMaker().getTotCount() != 0 && freeBoardListPage != null) {
+				code = 1;
+				msg = "성공";
+			}else {
+				code = 2;
+				msg = "해당 지역과 일치하는 게시글이 없습니다.";
+			}
+        	}else {
+        		
+        	}
         } catch (Exception e) {
             e.printStackTrace();
             resultMap.put("errorCode", -1);
             resultMap.put("errorMsg", "관리자에게 문의하세요");
         }
+        resultMap.put("code", code);
+        resultMap.put("msg", msg);
+        resultMap.put("data", data1);
+        resultMap.put("freeBoardListPage", freeBoardListPage);
+        resultMap.put("cityNo", cityNo);
+        resultMap.put("pageNo", pageNo);
         return resultMap;
     }
 
@@ -135,54 +150,11 @@ public class FreeBoardRestController {
         resultMap.put("code", code);
         resultMap.put("msg", msg);
         resultMap.put("data", freeBoardList);
+        resultMap.put("freeBoard", freeBoard);
         return resultMap;
     }
 
 
-	/*
-	 * 동행 게시글 지역별로 보기(cityNo) - 페이징 처리
-	 */
-	@ApiOperation(value = "동행 게시글 지역별로 보기(cityNo)")
-	@GetMapping(value = "/freeBoard-city", produces = "application/json;charset=UTF-8")
-	public Map<String, Object> freeBoard_city_list(@RequestParam(required = false, defaultValue = "1")int fBoNo, City city,
-													 @RequestParam(required = true) int cityNo){
-		
-		Map<String, Object> resultMap = new HashMap<>();
-		int code = 1;
-		String msg = "성공";
-		PageMakerDto<FreeBoard> freeBoardList = null;
-		List<FreeBoard> freeBoardf = new ArrayList<>();
-		try {
-			//페이지 번호(default 값 1)와 검색 cityNo로 동행 게시글 키워드로 찾기. 성공시 code 1
-		      List<FreeBoard> data = new ArrayList<FreeBoard>();
-	            for (FreeBoard freeBoard : data) {
-	            	int commentCount = freeBoardCommentService.selectByfBoNo(freeBoard.getFBoNo()).size();
-	            	freeBoard.setCommentCount(commentCount);
-	            	cityNo=freeBoard.getCity().getCityNo();
-	            	freeBoard.setCity(cityService.findByCityNo(cityNo));
-	            	data.add(freeBoard);
-	            	freeBoardList = freeBoardService.selectFreeBoardCityList(fBoNo,freeBoard.getCity().getCityNo());
-	            }
-			
-			if(freeBoardList.getTotRecordCount() != 0 && freeBoardList != null) {
-				code = 1;
-				msg = "성공";
-			}else {
-				code = 2;
-				msg = "해당 지역과 일치하는 게시글이 없습니다.";
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			code = 3;
-			msg = "관리자에게 문의하세요.";
-		}
-		resultMap.put("code", code);
-		resultMap.put("msg", msg);
-		resultMap.put("data", freeBoardList);
-		resultMap.put("cityNo", cityNo);
-		return resultMap;
-	}
-	
     //상세보기
     @ApiOperation(value = "자유게시판 상세보기")
     @ApiImplicitParam(name = "fBoNo", value = "자유게시판 번호")

@@ -4647,14 +4647,69 @@ ul.plan-features {
 	-webkit-transform: rotate(-45deg);
 	width: 100px;
 	display: block;
-	background: #79A70A;
-	background: linear-gradient(#9BC90D 0%, #79A70A 100%);
+	background: #F87878;
+	background: linear-gradient(#F98787 0%, #F87878 100%);
 	box-shadow: 0 3px 10px -5px rgba(0, 0, 0, 1);
 	text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.25);
 	position: absolute;
 	top: 19px;
 	left: -21px;
 }
+.ribbon_4 {
+	position: absolute;
+	left: 10px;
+	top: -5px;
+	z-index: 1;
+	overflow: hidden;
+	width: 75px;
+	height: 75px;
+	text-align: right;
+}
+
+.ribbon_4 span {
+	font-size: 10px;
+	font-weight: bold;
+	color: #FFF;
+	text-transform: uppercase;
+	text-align: center;
+	line-height: 20px;
+	transform: rotate(-45deg);
+	-webkit-transform: rotate(-45deg);
+	width: 100px;
+	display: block;
+	background: #F87878;
+	background: linear-gradient(#F98787 0%, #F87878 100%);
+	box-shadow: 0 3px 10px -5px rgba(0, 0, 0, 1);
+	text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.25);
+	position: absolute;
+	top: 19px;
+	left: -21px;
+}
+
+.ribbon_4 span::before {
+	content: "";
+	position: absolute;
+	left: 0px;
+	top: 100%;
+	z-index: -1;
+	border-left: 3px solid #F87878;
+	border-right: 3px solid transparent;
+	border-bottom: 3px solid transparent;
+	border-top: 3px solid #F87878;
+}
+
+.ribbon_4 span::after {
+	content: "";
+	position: absolute;
+	right: 0px;
+	top: 100%;
+	z-index: -1;
+	border-left: 3px solid transparent;
+	border-right: 3px solid #F87878;
+	border-bottom: 3px solid transparent;
+	border-top: 3px solid #F87878;
+}
+
 
 .ribbon_3 span::before {
 	content: "";
@@ -4682,6 +4737,25 @@ ul.plan-features {
 
 .ribbon_3.popular span {
 	background: linear-gradient(#f14f3f 0%, #cb4335 100%);
+}
+
+.ribbon_3.popular2 span {
+	background: #7D7C7C;
+	background: linear-gradient(#929090 0%, #7D7C7C 100%);
+}
+
+.ribbon_3.popular2 span::before {
+	border-left: 3px solid #7D7C7C;
+	border-right: 3px solid transparent;
+	border-bottom: 3px solid transparent;
+	border-top: 3px solid #7D7C7C;
+}
+
+.ribbon_3.popular2 span::after {
+	border-left: 3px solid transparent;
+	border-right: 3px solid #7D7C7C;
+	border-bottom: 3px solid transparent;
+	border-top: 3px solid #7D7C7C;
 }
 
 .ribbon_3.popular span::before {

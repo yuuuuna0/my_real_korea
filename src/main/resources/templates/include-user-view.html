@@ -64,7 +64,7 @@
 								<div class="col-lg-2 col-md-2">
 								<form name="paymentF">
 									<div class="booking_buttons">
-										<button th:value="${payment.pNo}" name="paymentDetail" class="btn_2">상세보기</button>
+										<button th:value="${payment.pNo}" th:onclick="|location.href='payment-detail?pNo=${payment.pNo}'|" class="btn_2">상세보기</button>
 										<button th:value="${payment.pNo}" name="deletePayement" class="btn_3">취소하기</button>
 									</div>
 								</form>

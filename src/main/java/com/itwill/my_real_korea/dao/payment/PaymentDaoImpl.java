@@ -36,7 +36,7 @@ public class PaymentDaoImpl implements PaymentDao{
 
     // 결제(예약) 상세보기
     @Override
-    public List<Payment> selectPaymentNo(int pNo) {
+    public Payment selectPaymentNo(int pNo) {
         return paymentMapper.selectPaymentNo(pNo);
     }
 

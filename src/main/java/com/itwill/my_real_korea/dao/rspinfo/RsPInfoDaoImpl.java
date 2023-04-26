@@ -21,7 +21,7 @@ public class RsPInfoDaoImpl implements RsPInfoDao {
 	}
 
 	@Override
-	public List<RsPInfo> selectRsPersonByPNo(int pNo) {
+	public RsPInfo selectRsPersonByPNo(int pNo) {
 		return rsPInfoMapper.selectRsPersonByPNo(pNo);
 	}
 

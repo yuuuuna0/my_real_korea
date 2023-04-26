@@ -116,7 +116,7 @@
 											<!-- 지역 보이게하기 -->
 											<div class="item-options clearfix"  style="top:10px; color:#e04f67; opacity:100; visibility:visible; background-color:white; border-radius: 5px; width:auto; height:28px; font-weight:bold; line-height:29px; padding-right:4px;">
 											<span class="icon-location"></span>
-											<a th:text="${tripBoard.city.cityName}" class="AccompanyWebCard__LocationText-sc-ws5mjw-18 bFxAPJ">
+											<a style="color:#e04f67;" th:text="${tripBoard.city.cityName}" class="AccompanyWebCard__LocationText-sc-ws5mjw-18 bFxAPJ">
                                             </a>
 										   </div> 
 									</div>
@@ -125,7 +125,7 @@
 											<h3><a th:text="${tripBoard.tBoTitle}" th:href="@{tripboard-detail(tBoNo=${tripBoard.tBoNo})}">Travel Book</a></h3>
 										</div>
 										<div class="trip-date">
-											<h3><a th:text="${#dates.format(tripBoard.tBoStartDate, 'MM.dd')}"></a><a> ~ </a><a th:text="${#dates.format(tripBoard.tBoEndDate, 'MM.dd')}"></a></h3>
+											<h3><a style="color:#666;" th:text="${#dates.format(tripBoard.tBoStartDate, 'MM.dd')}"></a><a style="color:#666;"> ~ </a><a style="color:#666;" th:text="${#dates.format(tripBoard.tBoEndDate, 'MM.dd')}"></a></h3>
 										</div>
 										<div class="icons">
 											<span class="icon-eye"></span>

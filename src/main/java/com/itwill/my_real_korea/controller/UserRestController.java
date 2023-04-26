@@ -52,6 +52,7 @@ public class UserRestController {
 	        	response.setMessage("비밀번호 형식을 확인해주세요.");
 	            return response;
 	        } else {
+	        	user.setPoint(2000);
 	            userService.create(user);
 	            userService.updateMailKey(user);
 	            response.setStatus(0);

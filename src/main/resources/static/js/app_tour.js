@@ -215,13 +215,13 @@ $(document).on('click','#usePointBtn',function(e){
 	let totPrice=$('#totPrice').val();
 	let nowPoint2=nowPoint-usedPoint;
 	let totPrice2=totPrice-usedPoint;
-	let savePoint2=totPrice2*0.01;
+	let savePoint2=(totPrice2*0.01);
 	document.getElementById('nowPoint2').innerHTML=nowPoint2;
 	document.getElementById('usingPoint2').innerHTML=usedPoint;
 	document.getElementById('totPrice2').innerHTML=totPrice2;
 	document.getElementById('savePoint2').innerHTML=savePoint2;
 	$('#pPrice').val(totPrice2);
-	$('#pPoint').val(savePoint2);
+	$('#pPoint').val(savePoint2-usedPoint);
 	e.preventDefault();
 });
 

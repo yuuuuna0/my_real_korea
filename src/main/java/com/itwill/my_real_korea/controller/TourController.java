@@ -212,6 +212,7 @@ public class TourController {
 			//redirect하는 곳으로 붙여줄 객체 --> 객체 붙일깨는 FlashAttribute
 			redirectAttributes.addFlashAttribute("payment",findPayment);
 			redirectAttributes.addFlashAttribute("rsPInfo",rsPInfo);
+			redirectAttributes.addFlashAttribute("tour",tour);
 			
 			session.removeAttribute("payment");
 			session.removeAttribute("tour");
@@ -228,11 +229,13 @@ public class TourController {
 	@RequestMapping(value="tour-payment-confirmation")
 	public String tourPaymentConfirmation(@ModelAttribute Payment payment,
 										  @ModelAttribute RsPInfo rsPInfo,
+										  @ModelAttribute Tour tour,
 										  Model model) {
 		String forwardPath="";
 		
 		model.addAttribute(payment);
 		model.addAttribute(rsPInfo);
+		model.addAttribute(tour);
 		forwardPath="tour-payment-confirmation";
 		return forwardPath;
 	}

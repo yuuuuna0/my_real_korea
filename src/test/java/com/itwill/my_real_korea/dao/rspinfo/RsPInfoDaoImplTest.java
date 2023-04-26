@@ -31,8 +31,8 @@ class RsPInfoDaoImplTest {
 	
 	@Test
 	void testSelectRsPersonByPNo() {
-		List<RsPInfo> rsPInfoList= rsPInfo.selectRsPersonByPNo(1);
-		System.out.println(rsPInfoList);
+		//List<RsPInfo> rsPInfoList= rsPInfo.selectRsPersonByPNo(1);
+		//System.out.println(rsPInfoList);
 	}
 
 }

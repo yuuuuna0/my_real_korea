@@ -16,7 +16,7 @@ public interface PaymentMapper {
     // 내 결제 전체 보기
     List<Payment> selectAllUser(String userId);
     // 결제 상세 보기
-    List<Payment> selectPaymentNo(int pNo);
+    Payment selectPaymentNo(int pNo);
 
     //결제 수정
     int updatePayment(Payment payment);

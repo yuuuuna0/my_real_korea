@@ -10,6 +10,6 @@ public interface RsPInfoMapper {
 	//1. 예약자 정보 입력
 		int insertRsPerson(RsPInfo rsPInfo);
 		//2. 상품예약자 정보 전체 보기
-		List<RsPInfo> selectRsPersonByPNo(int pNo);
+		RsPInfo selectRsPersonByPNo(int pNo);
 
 }

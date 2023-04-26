@@ -16,16 +16,39 @@ $(document).on('click',"button[name='deletePayement']",function(e){
 							//code=1 성공 -> render , 아닐때 msg
 							if(resultJson.code==1){
 								$('.content-current').find("#"+pNo).parent().remove();
-								e.target.closest('#paymentD'+pNo).parent().remove();
+								//e.target.closest('#paymentD'+pNo).parent().remove();
 							} else{
 								alert(resultJson.msg);
 							}
 						},async);
 	e.preventDefault();
 });
-
-
-
+/*
+//2. 예약 상세보기
+$(document).on('click',"button[name='paymentDetail']",function(e){
+	let pNo=e.target.value;
+	console.log(pNo);
+		let url= 'payment-detail?pNo='+pNo;
+	let method='GET';
+	let contentType='application/json;charset=UTF-8';
+	let sendData={};
+	let async=true;
+	Request.ajaxRequest(url,method,contentType,
+						sendData,
+						function(resultJson){
+							//code=1 성공 -> render , 아닐때 msg
+							alert('막');
+							if(resultJson.code==1){
+								window.location.href="tour-payment-confirmation";
+							}else if(resultJson.code==2){
+								window.location.href="ticket-payment-confirmation";
+							}else{
+								alert(resultJson.msg);
+							}
+						},async);
+	e.preventDefault();
+});
+*/
 
 
 

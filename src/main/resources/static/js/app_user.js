@@ -1,6 +1,34 @@
 import * as View from "./view.js";
 import * as Request from "./request.js";
 
+/******마이페이지*******8 */
+//1. 예약 삭제
+$(document).on('click',"button[name='deletePayement']",function(e){
+	let pNo=e.target.value;
+	let url= `payment-delete/${pNo}`;
+	let method='DELETE';
+	let contentType='application/json;charset=UTF-8';
+	let sendData={};
+	let async=true;
+	Request.ajaxRequest(url,method,contentType,
+						JSON.stringify(sendData),	//json으로 보낼 때 전부 string화 해 줘야 한다.
+						function(resultJson){
+							//code=1 성공 -> render , 아닐때 msg
+							if(resultJson.code==1){
+								$('.content-current').find("#"+pNo).parent().remove();
+								e.target.closest('#paymentD'+pNo).parent().remove();
+							} else{
+								alert(resultJson.msg);
+							}
+						},async);
+	e.preventDefault();
+});
+
+
+
+
+
+
 /************************* login *************************/
 
 //토스트

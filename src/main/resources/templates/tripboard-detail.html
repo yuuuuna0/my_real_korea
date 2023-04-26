@@ -126,10 +126,10 @@
 				<div class="col-lg-9">
 					<div class="box_style_1">
 						<div class="post nopadding">
-						<div th:if=${tripBoard.tBoImg}>
-						<img th:src="default_tBoImg.png"  alt="Image" class="img-fluid">
+						<div th:if="${tripBoard.tBoImg}">
+						<img src="upload-dir/default_tBoImg.png"  alt="Image" class="img-fluid">
 						</div>
-						<div th:if=${tripBoard.tUploadFile}>
+						<div th:if="${tripBoard.tUploadFile}">
 						<img th:src="@{tripboardimages/{tUploadFile}(tUploadFile=${tripBoard.tUploadFile})}"  alt="Image" class="img-fluid">
 						
 								</div>

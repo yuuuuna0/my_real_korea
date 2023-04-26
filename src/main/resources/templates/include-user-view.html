@@ -28,8 +28,8 @@
 						<br/>
 						<!--/tools -->
 						
-						<div class="strip_booking" th:each="payment:${paymentList}">
-							<div class="row">
+						<div class="strip_booking"  th:each="payment:${paymentList}">
+							<div class="row" th:id="|paymentD+${payment.pNo}|">
 								<div class="col-lg-2 col-md-2">
 									<div class="date">
 										<span class="month" th:text="${#dates.format(payment.pStartDate,'yyyy년 MMM')}">Dec</span>
@@ -62,10 +62,10 @@
 									</ul>
 								</div>
 								<div class="col-lg-2 col-md-2">
-								<form>
+								<form name="paymentF">
 									<div class="booking_buttons">
-										<button th:value="${payment.pNo}" onclick="location.href='our-payment-confirmation'"class="btn_2">상세보기</button>
-										<button th:value="${payment.pNo}" onclick="location.href='payment-delete'"  class="btn_3">취소하기</button>
+										<button th:value="${payment.pNo}" name="paymentDetail" class="btn_2">상세보기</button>
+										<button th:value="${payment.pNo}" name="deletePayement" class="btn_3">취소하기</button>
 									</div>
 								</form>
 								</div>
@@ -73,7 +73,6 @@
 							<!-- End row -->
 						</div>
 						<!-- End strip booking -->
-												
 					</section>
 <!-- End section 2 -->
 <!-- Start section 3 -->
@@ -134,34 +133,32 @@
 						<br>
 						
 						<h3> 자유게시판 </h3>
-							<br>
-						
-						<div class="strip_booking">
+						<br>
+						<div class="strip_booking" th:each="freeBoard:${freeBoardList}">
 							<div class="row">
 								<div class="col-lg-2 col-md-2">
 									<div class="date">
-										<span class="month">Dec</span>
-										<span class="day"><strong>27</strong>Fri</span>
+										<span class="month" th:text="${#dates.format(freeBoard.fBoDate,'MMM')}">Dec</span>
+										<span class="day">
+											<strong th:text="${#dates.format(freeBoard.fBoDate,'dd')}" style="padding-bottom:10px">27</strong>
+											<th:block th:text="${#dates.format(freeBoard.fBoDate,'EEE')}">Fri</th:block>
+										</span>
 									</div>
 								</div>
 								<div class="col-lg-6 col-md-5">
-									<h3 class="tours_booking">글 제목 <span> 내용</span></h3>
+									<h3 class="tours_booking" th:if = "${freeBoard.userId != null}" style="font-weight:bold; line-height:0px; font-size:21px;">
+										<th:block th:text="${freeBoard.fBoTitle}"></th:block>
+									</h3>
+									<h3 th:if = "${freeBoard.userId != null}" style="font-size:15px;">
+										<th:block th:text="${freeBoard.fBoContent}"></th:block>
+									</h3>
 								</div>
-									
 								<div class="col-lg-2 col-md-3">
-									
-									
-									<ul class="info_booking">
-											
-										<li><strong>Booking id</strong> 23442</li>
-										<li><strong>Booked on</strong> Sat. 20 Dec. 2015 </li>
-										<li><span class="icon-comment"></span> </li>
-											
-									</ul>
+
 								</div>
 								<div class="col-lg-2 col-md-2">
 									<div class="booking_buttons">
-										<a href="#0" class="btn_2">보러가기</a>
+										<a th:href="@{freeboard-detail(fBoNo=${freeBoard.fBoNo})}" class="btn_2">보러가기</a>
 									</div>
 								</div>
 							</div>

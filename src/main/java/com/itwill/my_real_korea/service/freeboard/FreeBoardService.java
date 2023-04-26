@@ -3,10 +3,14 @@ package com.itwill.my_real_korea.service.freeboard;
 import com.itwill.my_real_korea.dto.freeboard.FreeBoard;
 import com.itwill.my_real_korea.util.PageMakerDto;
 
+import java.util.List;
+
 public interface FreeBoardService {
     int insertBoard(FreeBoard freeBoard) throws Exception;
 
     FreeBoard selectByNo(int fBoNo) throws Exception;
+
+    List<FreeBoard> selectByUserId(String userId) throws Exception;
 
     int updateFreeBoard(FreeBoard freeBoard) throws Exception;
 
@@ -34,6 +38,8 @@ public interface FreeBoardService {
 
     //title 키워드로 검색
     PageMakerDto<FreeBoard> selectSearchFreeBoardList(int currentPage, String keyword) throws Exception;
+    //title 키워드로 검색
+    PageMakerDto<FreeBoard> selectFreeBoardCityList(int currentPage, int cityNo) throws Exception;
     //자유게시판 타이틀 14글자 제한
     String getTitleString(FreeBoard freeBoard) throws Exception;
 

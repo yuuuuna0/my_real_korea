@@ -224,6 +224,7 @@ header.sticky#colored #logo_home h1 a{
 }
 #notice-list-item a{
 	font-size: 18px;
+	font-weight: bold;
 }
 
 .items-sorting select {
@@ -684,7 +685,17 @@ a.btn_full_outline {
     background: none;
     border: 2px solid #e14d67;
 }
-
+.img_container {
+    position: relative;
+    overflow: hidden;
+    width: 254px;
+    height: 170px;
+}
+.hotel_container .hotel_title {
+    padding: 15px;
+    position: relative;
+    height: 100px;
+}
 .strip_booking .date .month {
 	font-family: 'Pretendard-Regular';
     background-color: #e04f67;
@@ -827,4 +838,19 @@ a.btn_3, .btn_3 {
     text-align: center;
     margin-top: 3px;
     font-size: 13px;
+ 	width: 80px;
+  	height: 80px;
+}
+
+#hero_2 {
+    position: relative;
+    height: 470px;
+    background: #4d536d url(../img/payment_main.jpg) no-repeat center center;
+    background-size: cover;
+    color: #fff;
+    width: 100%;
+    font-size: 16px;
+    display: table;
+    text-align: center;
+    z-index: 1;
 }

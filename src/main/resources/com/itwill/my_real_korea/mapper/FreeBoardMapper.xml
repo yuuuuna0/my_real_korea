@@ -81,6 +81,15 @@
             on f.city_no =c.city_no where f.f_bo_no=#{fBoNo}
     </select>
 
+    <select id="selectByUserId"
+            parameterType="java.lang.String"
+            resultMap="freeBoardResultMap">
+        select f.* , c.*
+        from free_board f
+                 join city c
+                      on f.city_no =c.city_no where f.user_id=#{userId}
+    </select>
+
 
     <update id="increaseReadCount" parameterType="java.lang.Integer">
         update free_board set f_bo_readcount=f_bo_readcount+1 where f_bo_no=#{fBoNo}

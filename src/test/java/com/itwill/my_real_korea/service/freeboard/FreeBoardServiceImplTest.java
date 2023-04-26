@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.ComponentScan;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest(classes = FinalProjectTeam2MyRealKoreaApplication.class)
@@ -57,6 +59,13 @@ class FreeBoardServiceImplTest {
     void selectByNo() throws Exception {
         FreeBoard freeBoard = freeBoardService.selectByNo(3);
         System.out.println(freeBoard);
+    }
+
+    @Test
+    void selectByUserId() throws Exception {
+        List<FreeBoard> freeBoards = freeBoardService.selectByUserId("aaa111");
+        assertThat(freeBoards).isNotNull();
+        System.out.println(freeBoards);
     }
 
     @Test

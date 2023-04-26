@@ -127,18 +127,18 @@
                                     </ul>
                                 </div>
                             </div>
-
                             <p style="white-space:pre-line;" th:text="${freeBoard.fBoContent}">
                             </p>
 
 
                             <blockquote class="styled">
                             </blockquote>
-                            <div th:if="${loginUser != null && loginUser.userId == freeBoard.userId}" style="text-align:right;">
+                            <div th:if="${loginUser != null && loginUser.userId == freeBoard.userId}"
+                                 style="text-align:right;">
                                 <input type="hidden" id="fBoNo-hidden"
                                        th:value="${freeBoard.fBoNo}"/>
-                                <a class="btn_1" type="button" onclick="fBoModify();">수정</a>
-                                <a class="btn_1" type="button" onclick="fBoDelete();">삭제</a>
+                                <a class="btn btn-secondary" type="button" onclick="fBoModify();">수정</a>
+                                <a class="btn btn-secondary" type="button" onclick="fBoDelete();">삭제</a>
                             </div>
                         </div>
                     </form>
@@ -152,15 +152,14 @@
                 <div id="comments">
                     <ol>
                         <div class="review_strip_single" th:each="freeBoardComment:${freeBoardCommentList}">
-                            <div class="avatar">
-                                <a href="#"><img src="img/avatar1.jpg" alt="Image"></a>
-                            </div>
-
+                            <img src="upload-dir/defaultImg.png" alt="Image" class="rounded-circle" width="70"
+                                 height=80>
                             <div>
                                 <small name="fCoDate"
                                        th:text="${#dates.format(freeBoardComment.fCommentDate, 'yyyy-MM-dd')}"></small>
                                 <h4 name="fCoUserId" th:text="${freeBoardComment.userId}"></h4>
-                                <p name="fCoContent" style="white-space:pre-line;" th:text="${freeBoardComment.getFCommentContent()}"></p>
+                                <p name="fCoContent" style="white-space:pre-line;"
+                                   th:text="${freeBoardComment.getFCommentContent()}"></p>
                                 <div th:if="${loginUser != null && loginUser.userId == freeBoardComment.userId}">
                                     <a class="btn_1" href="" role="button" th:data-value="${freeBoardComment.fCoNo}"
                                        id="freeboardcomment-modify-form-btn">수정</a>
@@ -168,7 +167,6 @@
                                            th:value="${freeBoardComment.fCoNo}"/>
                                     <a class="btn_1" href="" role="button" th:data-value="${freeBoardComment.fCoNo}"
                                        id="comment_btn_delete">삭제</a>
-                                    <!--                                </div>-->
                                     <input type="hidden" id="fBoNo-hidden-value"
                                            th:value="${freeBoard.fBoNo}"/>
                                 </div>
@@ -303,19 +301,18 @@
     <div>
         <ol>
             <div class="review_strip_single">
-                <div class="avatar">
-                    <a href="#"><img src="img/avatar1.jpg" alt="Image"></a>
-                </div>
+                <img src="upload-dir/defaultImg.png" alt="Image" class="rounded-circle" width="70"
+                     height=80>
 
                 <div>
                     <small name="fCoDate2"
                     >{{dateFormat fcommentDate}}</small>
                     <h4 name="fCoUserId2">{{userId}}</h4>
-                    <textarea name="fCoContent2">{{fcommentContent}}</textarea>
-
+                    <textarea class="form-control style_2" style="margin-bottom: 10px; height: 95px;" name="fCoContent2">{{fcommentContent}}</textarea>
 
                     <a class="btn_1" href="" role="button" data-value={{fcoNo}}
                        id="freeboardcomment-modify-action-btn">수정완료</a>
+                    <a href="freeboard-detail?fBoNo={{fboNo}}" class="btn_1">취소</a>
 
                     <input type="hidden" id="fBoNo-hidden-value2"
                            value="{{fboNo}}"/>

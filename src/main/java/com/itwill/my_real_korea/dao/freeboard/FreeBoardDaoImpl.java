@@ -31,6 +31,11 @@ public class FreeBoardDaoImpl implements FreeBoardDao {
         return freeBoardMapper.selectByNo(fBoNo);
     }
 
+    @Override
+    public List<FreeBoard> selectByUserId(String userId) throws Exception {
+        return freeBoardMapper.selectByUserId(userId);
+    }
+
     //최신순 정렬
     @Override
     public List<FreeBoard> selectAllOrderByFBoNoDesc(int pageStart, int pageEnd) throws Exception {

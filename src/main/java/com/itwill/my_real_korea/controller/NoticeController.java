@@ -79,6 +79,8 @@ public class NoticeController {
 			noticeService.increaseReadCount(nNo);
 			model.addAttribute("notice", notice);
 			model.addAttribute("nNo", nNo);
+			List<City> cityList = cityService.findAllCity();
+			model.addAttribute("cityList", cityList);
 		} catch (NoticeNotFoundException e) {
 			model.addAttribute("msg", e.getMessage());
 			return "redirect:notice-list";

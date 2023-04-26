@@ -118,6 +118,11 @@ public class UserDaoImpl implements UserDao {
 	public int updateMailAuth(User user) throws Exception {
 		return userMapper.updateMailAuth(user);
 	}
+	//24. 포인트 업데이트
+	@Override
+	public int updatePoint(User user) {
+		return userMapper.updatePoint(user);
+	}
 
 
 }

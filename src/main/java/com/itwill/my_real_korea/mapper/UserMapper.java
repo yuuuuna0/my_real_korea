@@ -38,5 +38,7 @@ public interface UserMapper {
 	public int updateMailKey(User user);
 	//23. 메일 인증여부 업데이트
 	public int updateMailAuth(User user);
+	//24. 포인트 업데이트
+	public int updatePoint(User user);
 	
 }

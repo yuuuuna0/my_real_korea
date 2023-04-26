@@ -220,9 +220,11 @@ header.sticky#colored #logo_home h1 a{
 
 #notice-list-item {
     position: relative;
-    padding: 0 20px 3px 20px;
+    padding: 10px 20px 3px 20px;
 }
-
+#notice-list-item a{
+	font-size: 18px;
+}
 
 .items-sorting select {
     display: block;
@@ -262,7 +264,7 @@ header.sticky#colored #logo_home h1 a{
 }
 
 .form-control-user {
-	font-size: 13px;
+	font-size: 15px;
     color: #333;
     height: 35px;
     width: 180px;
@@ -271,6 +273,29 @@ header.sticky#colored #logo_home h1 a{
     border: 1px solid #ced4da;
  	padding: 5px 5px;
 
+}
+ul#profile_summary_userf{
+	margin:50px 0 20px 0;
+	padding:0;
+	list-style:none;
+	text-transform:uppercase;
+	font-weight:600;
+	margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+ul#profile_summary_userf li{
+	padding:4px 0;
+	position:relative;
+	margin-top: 15px;
+    margin-bottom: 10px;
+}
+
+ul#profile_summary_userf li span{
+	text-transform: none;
+	font-weight: normal;
+	position:absolute;
+	left:200px;
 }
 
 ul#profile_summary_user{
@@ -287,8 +312,9 @@ ul#profile_summary_user li{
 	padding:4px 0;
 	position:relative;
 	margin-top: 15px;
-    margin-bottom: 10px;
+    margin-bottom: 25px;
 }
+
 ul#profile_summary_user li span{
 	text-transform: none;
 	font-weight: normal;
@@ -519,7 +545,7 @@ display: inline-block;
 	margin-bottom: 30px;
 }
 #wishlist_name h3{
-	font-size: 22px;
+	font-size: 20px;
 }
 #rating_blank{
     margin: 40px 0 3px -3px;
@@ -554,10 +580,6 @@ ul.add_info li {
     color: #888;
     text-align: center;
 }
-a:not([href]):not([tabindex]) {
-    text-decoration: none;
-    color : #fff;
-}
 .main-menu ul li{
     position: relative;
     margin-bottom: 0;
@@ -586,4 +608,80 @@ h2 {
 #fbo-category{
 	margin-top: 50px;
 	
+}
+.tabs nav a {
+    color: #999;
+    display: block;
+    font-size: 18px;
+    font-family: "MBC1961M";
+    font: bold;
+    text-transform: uppercase;
+    line-height: 3.5;
+    padding: 0 1.25em;
+    white-space: nowrap;
+    background-color: #fff;
+    -webkit-border-top-left-radius: 3px;
+    -webkit-border-top-right-radius: 3px;
+    -moz-border-radius-topleft: 3px;
+    -moz-border-radius-topright: 3px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+}
+
+.tabs nav a:before {
+    display: inline-block;
+    vertical-align: middle;
+    text-transform: none;
+    font-size: 25px; 
+    font-weight: normal;
+    font-variant: normal;
+    font-family: 'fontello';
+    color: #f37287;
+    line-height: 1;
+    speak: none;
+    -webkit-font-smoothing: antialiased;
+    margin: -0.25em 0.4em 0 0;
+
+}
+
+.room-name-about{
+	font-size: 25px;
+    font-family: "MBC1961M";
+}
+
+.price_list {
+    display: table;
+    height: 220px;
+    font-size: 38px;
+    color: #e14d67;
+    width: 100%;
+    margin-left: -5px;
+}
+.category li{
+	font-family: "MBC1961M";
+	font-size: 22px;
+	margin-bottom: 10px;
+    margin-top: 10px;
+}
+.shop-item .notice-box {
+    height: 140px;
+    border: 2px solid;
+    border-color: #e14d67;
+    border-radius: 30px;
+}
+.wishlist:before {
+    color: #e14d67;
+}
+.btn_full {
+    background: #e14d67;
+}
+a.btn_full_outline {
+    border: none;
+    border: 2px solid #e14d67;
+}
+a.btn_full_outline {
+    border: none;
+    color: #e14d67;
+    background: none;
+    border: 2px solid #e14d67;
 }

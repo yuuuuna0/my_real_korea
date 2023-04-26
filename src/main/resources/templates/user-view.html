@@ -80,7 +80,12 @@
 			document.i.action = "user-img-modify-action";
 			document.i.submit();
 		} 
-	  
+	 
+		
+		
+</script>
+<script th:inline="javascript">
+	let now=new Date().getTime();
 </script>
 </head>
 
@@ -150,31 +155,28 @@
 			
 				<img th:src="@{upload-dir/{userImgUrl}(userImgUrl=${loginUser.userImg.userImgUrl})}" 
 					 alt="Image" class="img-fluid styled profile_pic rounded-circle"  width = "200px" >
-				<div style="text-align: center; font-weight: bold;">
+				<div style="text-align: center; font-weight: bold; font-family: MBC1961M; ">
 					<h3><a th:text="${session.loginUser.userId}"></a></h3>
-			
+			    </div>
+				<br>
 			
 				<form method="POST" enctype="multipart/form-data" name="i">
-				
-				<div class="filebox">
+				<div style="text-align: center;" class="filebox">
 				    <input class="upload-name" value="첨부파일" placeholder="첨부파일" disabled="disabled">
-			
 				    <label class="btn_1 green" for="file"> 파일 찾기</label> 
 				    <input type="file" id="file"  name="file" >
 					<button type="submit" class="btn_1 green" id="js-upload-submit" onclick="modifyImg();">수정 완료</button>
 				    	</div>
-			
 				</form>
-		</div>
 		<div class="divider"></div>
-	<br/><br/>
+	<br/>
 						<form method="post" name="f" id="user-detail-form">
 							<div class="row" >
 							<div class="col-md-12"> </div>
 								<input type="hidden"  id="userId" th:value = "${session.loginUser.userId}">
 							<div class="col-md-3"> </div>
 							<div class="col-md-6"> 
-							<ul id="profile_summary" th:object="${loginUser}">
+							<ul id="profile_summary_userf" th:object="${loginUser}">
 								<li>이름 <span th:text="*{name}"></span>
 								</li>
 								<li>닉네임 <span th:text="*{nickname}"></span>
@@ -192,7 +194,10 @@
 								<li>포인트 <span th:text="*{point}+'p'"></span>
 								</li>
 							</ul>
-							<ul id="profile_summary" th:object="${loginUser.userAddInfo}">
+								<br><br>
+	<h3 style ="margin-left:120px; font-family: MBC1961M;" class = "icon-vcard" > 나를 표현 해주세요 ! </h3>
+	<br>
+							<ul id="profile_summary_userf" th:object="${loginUser.userAddInfo}">
 								<li>음주 여부 
 								<span th:text="*{alcohol == 1} ? '선호함' : (*{alcohol == 2} ? '음주 선호하지 않음' : null)"></span>
 								</li>
@@ -205,90 +210,21 @@
 							</ul>
 							</div>
 							</div>
-						
+							<br><br><br>
 					<div style="text-align: center;">
 					<input id="btn-user-modify-form" value="프로필 수정" class="btn_1 green" type="button"> 
 					<button class="btn_1 green" type="button" onclick="userRemove();">회원 탈퇴</button>	
 					</div>
 			</form>
-					
-<!-- 페이지 로드 하는 폼  
-<div class="row">
-
-<div class="col-md-6">
-	<form method="post" name="f" id="user-detail-form">
-	<h3>회원 정보</h3>
-		<ul id="profile_summary" th:object="${loginUser}">
-			<li>아이디 <span th:text="*{userId}"></span>
-			</li>
-			<li>이름 <span th:text="*{name}"></span>
-			</li>
-			<li>닉네임 <span th:text="*{nickname}"></span>
-			</li>
-			<li>휴대폰 <span th:text="*{phone}"></span>
-			</li>
-			<li>이메일 <span th:text="*{email}"></span>
-			</li>
-			<li>생일 <span th:text="*{birth}"></span>
-			</li>
-			<li>주소 <span th:text="*{address}"></span>
-			</li>
-			<li>성별 <span th:text="*{gender == 1} ? '남' : '여'"></span>
-			</li>
-			<li>포인트 <span th:text="*{point}"></span>
-			</li>
-		</ul>
-		
-			
-
-		<ul id="profile_summary" th:object="${loginUser.userAddInfo}">
-			<li>자기 소개 
-			<span th:text="*{introduce}"></span>
-			</li>
-			<li>음주 여부 
-			<span th:text="*{alcohol == 1} ? '음주 선호' : (*{alcohol == 2} ? '음주 선호하지 않음' : null)"></span>
-			</li>
-			<li>흡연 여부 
-			<span th:text="*{smoking == 1} ? '흡연' : (*{smoking == 2} ? '비흡연' :  null)"></span>
-			</li>
-		</ul>
-		<ul id="profile_summary" th:object="${loginUser.userImg}">
-			<li>프로필 이미지 <span th:text="*{userImgUrl}"></span></li>
-		</ul>
-	</form>
-</div>
-
-						<div class="col-md-6">
-							<p>
-							<img src="img/tourist_guide_pic.jpg" alt="Image" class="img-fluid styled profile_pic">
-							</p>
-						</div>
-</div>
-<button class="btn_1 green" type="button" onclick="userModify();">프로필 수정</button>
-<button class="btn_1 green" type="button" onclick="userRemove();">회원 탈퇴</button>
-
-	<input id="btn-user-modify-form" value="프로필 수정" class="btn_1 green" type="button"> 
-	
-	-->
-	
-		
-						<!-- End row -->
-
 </section>
 <!-- End section 1 -->
-
-
 <!--========================= include-user-view ========================-->
 <section th:replace="include-user-view::section-2"></section>
 <section th:replace="include-user-view::section-3"></section>
 <section th:replace="include-user-view::section-4"></section>
 <!--======================= End include-user-view ========================-->
-
 					</div>
 					<!-- End content -->
-					
-					
-					
 				</div>
 				<!-- End tabs -->
 			</div>
@@ -399,8 +335,11 @@ Handlebars.registerHelper('ifEquals', function(arg1, arg2, options) {
 				<li>이메일 
 				<span><input id="email" class=" form-control-user " type="text" required="required" value="{{email}}"></span>
 				</li>
+
 				<li>생일
-				<span><input class="start-date-pick form-control-user" type="date" id="birth" name="birth" min="1950-01-01" max="2007-12-31" required="required"></span>
+					<span>
+			<input class="start-date-pick form-control" data-date-format="yyyy-MM-dd" type="date" id="birth" name="birth" value="{{dateFormat3 birth}}" >
+					</span>
 				</li>
 
 				<div> 
@@ -411,32 +350,20 @@ Handlebars.registerHelper('ifEquals', function(arg1, arg2, options) {
 					</li>
 				</div>
 
-			<li>성별 
-			<span> 
-				<div class="btn-group btn-group-toggle" data-toggle="buttons">
-					<label class="btn btn-secondary active">
-						<input type="radio" name="gOptions" id="gender1" checked value="1"> 남
-					</label>
-
-					<label class="btn btn-secondary">
-						<input type="radio" name="gOptions" id="gender2" value="2"> 여
-					</label>
-				</div>						
-			</span>
-			</li>
-
+			<li>성별 <span th:text="*{gender == 1} ? '남' : '여'"></span></li>
 
 		    <li>포인트 <span>{{point}}p</span></li>
 		</ul>
 	
 
 		<ul id="profile_summary_user">
-	<br><br><br>
-	<h5 style ="margin-left:160px;" class = "icon-vcard" > 나를 표현 해주세요 ! </h5>
+	<br><br>
+	<h3 style ="margin-left:120px; font-family: MBC1961M;" class = "icon-vcard" > 나를 표현 해주세요 ! </h3>
 	<br>	
 			<li>음주 여부 
 			<span> 
 				<div class="btn-group btn-group-toggle" data-toggle="buttons">
+
 					<label class="btn btn-secondary active">
 						<input type="radio" name="aOptions" id="alcohol1" checked value="1"> O
 					</label>
@@ -503,9 +430,30 @@ Handlebars.registerHelper('ifEquals', function(arg1, arg2, options) {
 
 	</script>
 	
-		<!-- Date and time pickers -->
+	<!-- Date and time pickers -->
+	<script src="js/jquery.sliderPro.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function ($) {
+			$('#Img_carousel').sliderPro({
+				width: 960,
+				height: 500,
+				fade: true,
+				arrows: true,
+				buttons: false,
+				fullScreen: false,
+				smallSize: 500,
+				startSlide: 0,
+				mediumSize: 1000,
+				largeSize: 3000,
+				thumbnailArrows: true,
+				autoplay: false
+			});
+		});
+	</script>
+
+	<!-- Date and time pickers -->
 	<script>
-		$('input.date-pick').datepicker('setDate', 'birth');
+		$('input.date-pick').datepicker('birth');
 	</script>
 	
 	
@@ -529,7 +477,7 @@ Handlebars.registerHelper('ifEquals', function(arg1, arg2, options) {
 			});
 		});
 	</script>
-	
+
 </body>
 
 </html>

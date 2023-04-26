@@ -52,11 +52,11 @@
 
 	<section id="hero_2">
 		<div class="intro_title">
-			<h1>Place your order</h1>
+			<h1>투어 예약완료!!</h1>
 			<div class="bs-wizard row">
 
 				<div class="col-4 bs-wizard-step complete">
-					<div class="text-center bs-wizard-stepnum">Your cart</div>
+					<div class="text-center bs-wizard-stepnum">투어 상세보기</div>
 					<div class="progress">
 						<div class="progress-bar"></div>
 					</div>
@@ -64,7 +64,7 @@
 				</div>
 
 				<div class="col-4 bs-wizard-step complete">
-					<div class="text-center bs-wizard-stepnum">Your details</div>
+					<div class="text-center bs-wizard-stepnum">투어 예약하기</div>
 					<div class="progress">
 						<div class="progress-bar"></div>
 					</div>
@@ -72,7 +72,7 @@
 				</div>
 
 				<div class="col-4 bs-wizard-step complete">
-					<div class="text-center bs-wizard-stepnum">Finish!</div>
+					<div class="text-center bs-wizard-stepnum">투어 예약완료!!</div>
 					<div class="progress">
 						<div class="progress-bar"></div>
 					</div>
@@ -90,11 +90,15 @@
 		<div id="position">
 			<div class="container">
 				<ul>
-					<li><a href="#">Home</a>
+					<li><a href="./">메인페이지</a>
 					</li>
-					<li><a href="#">Category</a>
+					<li><a href="tour-list./">투어리스트</a>
 					</li>
-					<li>Page active</li>
+					<li><a th:href="@{tour-detail(toNo=${tour.toNo})}">투어상세보기</a>
+					</li>
+					<li><a href="./">투어예약하기</a>
+					</li>
+					<li>투어예약확인</li>
 				</ul>
 			</div>
 		</div>
@@ -143,7 +147,7 @@
 									</td>
 								</tr>
 								<tr>
-									<td><strong>여행종료일</strong>
+									<td><strong>여행 종료일</strong>
 									</td>
 									<td  th:text="${#dates.format(payment.pStartDate,'yyyy-MM-dd')}">
 										12 April 2015
@@ -151,7 +155,7 @@
 									</td>
 								</tr>
 								<tr>
-									<td><strong>예약 인원</strong>
+									<td><strong>예약 인원 수</strong>
 									</td>
 									<td th:text="${payment.pQty}">2</td>
 								</tr>
@@ -169,9 +173,40 @@
 								</tr>
 								<tr>
 									<td>
-										<strong>총 금액</strong>
+										<strong>금액</strong>
+									</td>
+									<td th:text="${tour.toPrice*payment.pQty}">
+										$154
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<strong>사용포인트</strong>
+									</td>
+									<td th:text="${(tour.toPrice*payment.pQty)-payment.pPrice}">
+										$154
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<strong></strong>
+									</td>
+									<td >
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<strong style="color:#e04f67;">결제 금액</strong>
 									</td>
 									<td th:text="${payment.pPrice}">
+										$154
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<strong>적립 포인트</strong>
+									</td>
+									<td th:text="${payment.pPoint}">
 										$154
 									</td>
 								</tr>

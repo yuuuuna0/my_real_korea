@@ -78,17 +78,17 @@
 					<div id="filters_col_wishlist">
 						<div class="collapse show" id="collapseFilters">
 						<div class="filter_type">
-						<div class="widget" id="cat_shop">
+						<div class="widget category" id="cat_shop">
 							<h4>TYPE</h4>
 							<p></p>
 							<ul>
-								<li><a href="" id="type-tour">위시리스트 - 투어</a>
+								<li><a href="" id="type-tour">투어</a>
 								<input type="hidden" id="wishlist-id" th:value=${loginUser.userId}>
 								</li><hr>
-								<li><a href="" id="type-ticket">위시리스트 - 티켓</a>
+								<li><a href="" id="type-ticket">티켓</a>
 								<input type="hidden" id="wishlist-id" th:value=${loginUser.userId}>
 								</li><hr>
-								<li><a href="wishlist" >위시리스트 전체보기</a>
+								<li><a href="wishlist" >전체보기</a>
 								</li>
 							</ul>
 						</div>
@@ -127,7 +127,7 @@
 								</div>
 								<div th:if="${wishlist.ticket != null}" class="img_list">
 									<a th:href="@{ticket-detail(tiNo=${wishlist.ticket.tiNo})}" href="">
-										<img th:src="@{img/ticket/{tiImgUrl}(tiImgUrl=${wishlist.ticketImgList.get(0).tiImgUrl})}" alt="Image">
+										<img th:src="@{{tiImgUrl}(tiImgUrl=${wishlist.ticketImgList.get(0).tiImgUrl})}" alt="Image">
 									</a>
 								</div>
 							</div>
@@ -314,7 +314,7 @@
 	<div class="col-lg-4 col-md-4">
 		<div class="img_list">
 				<a href="ticket-detail?tiNo={{ticket.tiNo}}">
-				<img src="img/tour/{{ticketImgList.[0].tiImgUrl}}" alt="Image">
+				<img src="{{ticketImgList.[0].tiImgUrl}}" alt="Image">
 			</a>
 		</div>
 	</div>

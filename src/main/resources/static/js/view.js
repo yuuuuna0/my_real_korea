@@ -23,12 +23,12 @@ export function render(templateId, jsonResult={}, contentId){
 	  return date.toLocaleDateString('ko-KR', { month: '2-digit', day: '2-digit' });
 	});
 	Handlebars.registerHelper('dateFormat3', function(dateString) {
- 	  var date = new Date(dateString);
-	  var year = date.getFullYear();
-	  var month = ('0' + (date.getMonth() + 1)).slice(-2);
-	  var day = ('0' + date.getDate()).slice(-2);
-	  return year + '년 ' + month + '월 ' + day + '일';
-});
+	 	  var date = new Date(dateString);
+		  var year = date.getFullYear();
+		  var month = ('0' + (date.getMonth() + 1)).slice(-2);
+		  var day = ('0' + date.getDate()).slice(-2);
+		  return year + '-' + month + '-' + day;
+	});
 
 	
 	//if함수 (if else 아님)
@@ -77,6 +77,17 @@ export function render(templateId, jsonResult={}, contentId){
 		}
 		return new Handlebars.SafeString(html);
 	});
+	
+	//for문
+	Handlebars.registerHelper('numSequence', function(start, end) {
+  		let result = '';
+  		let divideEnd=Math.ceil(end/9);
+	  		for (let i = start; i <=divideEnd; i++) {
+	    		result += this.fn(i);
+	  		}
+ 		 return result;
+	});
+	
 	let resultTemplate = bindTemplate(jsonResult); // {}에 JSON객체/JSON Array 넣어줌 => 메인페이지 화면 + JSON 데이터 합친 결과 = resultTemplate
 	$(contentId).html(resultTemplate); // content 부분에 resultTemplate 넣기
 	

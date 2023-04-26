@@ -10,7 +10,7 @@
 	<!-- 1. 회원 가입 -->
 	<insert id="create" parameterType="com.itwill.my_real_korea.dto.user.User">
 		INSERT into user_info(user_id, password, name, nickname, phone, email, birth, address, gender, point, is_admin, mail_auth, mail_key) 
-		VALUES(#{userId},#{password},#{name},#{nickname},#{phone},#{email},#{birth},#{address},#{gender},0,1,0,#{mailKey})
+		VALUES(#{userId},#{password},#{name},#{nickname},#{phone},#{email},#{birth},#{address},#{gender},2000,1,0,#{mailKey})
 	</insert>
 	<!-- 2. 회원 정보 보기 -->
 	<select id="findUser" parameterType="java.lang.String" resultMap="userResultMap">
@@ -34,7 +34,7 @@
 	<!-- 4. 회원 정보 수정 -->	
 	<update id="update" parameterType="com.itwill.my_real_korea.dto.user.User">
 		UPDATE  user_info 
-		SET password=  #{password}, nickname = #{nickname}, phone = #{phone}, email = #{email}, address = #{address} , gender = #{gender}, point=#{point}
+		SET password=  #{password}, nickname = #{nickname}, phone = #{phone}, email = #{email}, address = #{address} , gender = #{gender}, point=#{point} , birth = #{birth}
 		WHERE user_id = #{userId}
 	</update>
 	<!-- 4. 회원 정보 수정 조인 -->	
@@ -110,6 +110,12 @@
 		UPDATE  user_info 
 		SET mail_auth = 1
 		WHERE email = #{email} AND mail_key = #{mailKey}
+	</update>
+		<!-- 24. 포인트 업데이트 -->	
+	<update id="updatePoint" parameterType="com.itwill.my_real_korea.dto.user.User">
+		UPDATE  user_info 
+		SET point=#{point}
+		WHERE user_id = #{userId}
 	</update>
 	
 </mapper>

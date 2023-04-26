@@ -64,5 +64,21 @@ public class WishlistDaoImpl implements WishlistDao{
 		return wishlistMapper.deleteWishlistByNoAndId(wishMap);
 	}
 
+	@Override
+	public int selectWishlistTourCount(String userId, int toNo) {
+		Map<String, Object> wishMap = new HashMap<>();
+		wishMap.put("userId", userId);
+		wishMap.put("toNo", toNo);
+		return wishlistMapper.selectWishlistTourCount(wishMap);
+	}
+
+	@Override
+	public int selectWishlistTicketCount(String userId, int tiNo) {
+		Map<String, Object> wishMap = new HashMap<>();
+		wishMap.put("userId", userId);
+		wishMap.put("tiNo", tiNo);
+		return wishlistMapper.selectWishlistTicketCount(wishMap);
+	}
+
 
 }

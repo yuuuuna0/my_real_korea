@@ -12,10 +12,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.itwill.my_real_korea.dto.City;
 import com.itwill.my_real_korea.dto.ticket.TicketImg;
 import com.itwill.my_real_korea.dto.tour.TourImg;
 import com.itwill.my_real_korea.dto.user.User;
 import com.itwill.my_real_korea.dto.wishlist.Wishlist;
+import com.itwill.my_real_korea.service.city.CityService;
 import com.itwill.my_real_korea.service.ticket.TicketImgService;
 import com.itwill.my_real_korea.service.tour.TourImgService;
 import com.itwill.my_real_korea.service.wishlist.WishlistService;
@@ -29,6 +31,8 @@ public class WishlistController {
 	private TourImgService  tourImgService;
 	@Autowired
 	private TicketImgService ticketImgService;
+	@Autowired
+	private CityService cityService;
 	
 	
 	// 위시리스트 리스트 + 티켓상품 + 투어상품 전체 보기 (위시리스트 첫화면) 
@@ -72,7 +76,12 @@ public class WishlistController {
 				ticketWishList.add(wishlist);
 			}
 		}
-		
+		try {
+		List<City> cityList=cityService.findAllCity();
+			model.addAttribute("cityList", cityList);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		model.addAttribute("wishlistList", wishlistList);
 		model.addAttribute("tourWishList", tourWishList);
 		model.addAttribute("ticketWishList", ticketWishList);

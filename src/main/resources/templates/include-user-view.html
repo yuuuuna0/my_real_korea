@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"  xmlns:th-temporals="http://www.thymeleaf.org/extras/temporals">
 <!-- Start section 2 -->
 					<section th:fragment="section-2">
 							<div id="tools">
@@ -31,7 +31,7 @@
 							<div class="row">
 								<div class="col-lg-2 col-md-2">
 									<div class="date">
-										<span class="month" th:text="${#dates.format(payment.pStartDate,'MMM')}">Dec</span>
+										<span class="month" th:text="${#dates.format(payment.pStartDate,'yyyy년 MMM')}">Dec</span>
 										<span class="day">
 											<strong th:text="${#dates.format(payment.pStartDate,'dd')}">27</strong>
 											<th:block th:text="${#dates.format(payment.pStartDate,'EEE')}">Fri</th:block>
@@ -45,7 +45,7 @@
 									</h3>
 									<h3 class="tours_booking" th:if="${payment.Tour != null}">
 										 <th:block th:text="${payment.Tour.toName}"></th:block>
-										<span th:text="${payment.pQty}">2 Adults / 2 Childs</span>
+										<span style="font-size:30px;" th:text="${payment.pMsg}">2 Adults / 2 Childs</span>
 									</h3>
 								</div>
 								<div class="col-lg-2 col-md-3">

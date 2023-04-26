@@ -287,6 +287,9 @@ const $owlCarousel = $("#carousel-home .owl-carousel").owlCarousel({
     loop: true,
     nav: false,
     dots: true,
+    autoplay : true,
+    autoplayTimeout : 2000,
+    animateOut : 'fadeOut', 
     responsive: {
         0: {
             dots: false

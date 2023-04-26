@@ -80,9 +80,10 @@
 								<div class="col-6">
 										<!-- 지역 페이징 갯수 보이게 하기 -->
 										<div id="page-info" class="results_shop" th:each="tripBoardPage:${tripBoardListPage}">
-										Showing 
-										<span id="cur-page" th:text="${tripBoardPage.pageMaker.curPage}"></span> of 
-										<span id="tot-record-count" th:text="${tripBoardPage.totRecordCount}"></span> results
+										<span id="cur-page" th:text="${tripBoardPage.pageMaker.curPage}"></span> 페이지
+										<span id="tot-record-count"  th:unless="${tripBoardPage.totRecordCount} &gt; ${tripBoardPage.pageMaker.pageEnd} 
+										and ${tripBoardPage.totRecordCount} > 0" th:text="'|'+${tripBoardPage.pageMaker.totCount}"></span>
+										       | 전체 건수: <span id="tot-record-count"   th:text="${tripBoardPage.pageMaker.totCount}"></span>
 									    </div>
 								</div>
 								<div class="col-6">

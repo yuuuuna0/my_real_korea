@@ -294,13 +294,13 @@ $(document).ready(function() {
 });*/
 
 $(document).on('click', '#usePointBtn', function(e) {
-  let usedPoint = $('#usedPoint').val();
-  let nowPoint = $('#nowPoint').val();
-  let totPrice = $('#totPrice').val();
+  let usedPoint = $('#usedPoint').val(); // 사용할 포인트 입력값
+  let nowPoint = $('#nowPoint').val(); // 세션에 담긴 현재 로그인유저 포인트
+  let totPrice = $('#totPrice').val(); // 총 금액
   
-  let nowPoint2 = nowPoint - usedPoint;
-  let totPrice2 = totPrice - usedPoint;
-  let savePoint2 = totPrice2 * 0.01;
+  let nowPoint2 = nowPoint - usedPoint; // 유저포인트 - 사용포인트
+  let totPrice2 = totPrice - usedPoint; // 총 금액 - 사용포인트
+  let savePoint2 = totPrice2 * 0.01; // 적립 포인트
 
   // 현재 포인트가 1000 미만인 경우 버튼을 비활성화 합니다.
   if (nowPoint < 1000) {

@@ -31,6 +31,7 @@ import com.itwill.my_real_korea.dto.RsPInfo;
 import com.itwill.my_real_korea.dto.ticket.Ticket;
 import com.itwill.my_real_korea.dto.ticket.TicketImg;
 import com.itwill.my_real_korea.dto.ticket.TicketReview;
+import com.itwill.my_real_korea.dto.tour.Tour;
 import com.itwill.my_real_korea.dto.user.User;
 import com.itwill.my_real_korea.service.city.CityService;
 import com.itwill.my_real_korea.service.payment.PaymentService;
@@ -167,7 +168,7 @@ public class TicketController {
     		Payment payment = new Payment();
     		payment.setPPrice(price); // 총금액
     		payment.setPQty(pQty); // 수량
-    		payment.setPPoint((int)(pQty * price * 0.1)); // 포인트 
+    		payment.setPPoint((int)(price * 0.01)); // 포인트 
     		payment.setPStartDate(date); // 예약날짜
     		payment.setUserId(loginUser.getUserId()); // user 담기
     		payment.setTicket(ticket); // 티켓 담기
@@ -176,7 +177,7 @@ public class TicketController {
     		//paymentService.insertTicketPayment(payment);
     		session.setAttribute("payment", payment);
     		session.setAttribute("ticket", ticket);
-    		//System.out.println(payment); 
+    		// System.out.println(payment); 
     		forwardPath="ticket-payment";
     	} catch (Exception e) {
     		e.printStackTrace();
@@ -214,7 +215,7 @@ public class TicketController {
         	//System.out.println(payment.getPNo());
         	int newPoint = loginUser.getPoint()+pPoint;
         	loginUser.setPoint(newPoint);
-        	userService.update(loginUser);
+        	userService.updatePoint(loginUser);
         	//paymentService.updatePayment(payment); // insert로 변경
         	paymentService.insertTicketPayment(payment); // 확인하기!
             ticket.setTiCount(ticket.getTiCount() + payment.getPQty());
@@ -354,7 +355,7 @@ public class TicketController {
     		data.add(ticketReview);
     	}else {
     		code=2;
-    		msg = "게시물 존재 X";
+    		msg = "게시물 존재이 존재하지 않습니다.";
     	}
     	resultMap.put("code", code);
     	resultMap.put("msg", msg);
@@ -431,6 +432,25 @@ public class TicketController {
 		resultMap.put("data", data);
 		
 		return resultMap;
+	}
+	
+	
+	@GetMapping(value="payment-detail")
+	public String paymentConfirmationTicketTour(@RequestParam int pNo, Model model, HttpSession session) {
+		
+		try {
+			if(session != null) {
+				User loginUser = (User)session.getAttribute("loginUser");
+				model.addAttribute("loginUser",loginUser);
+			}
+			Payment payment = paymentService.selectPaymentNo(pNo);
+			RsPInfo rsPInfo = rsPInfoService.selectRsPersonByPNo(pNo);
+			model.addAttribute("payment",payment);
+			model.addAttribute("rsPInfo",rsPInfo);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return "payment-confirmation-ticket-tour";
 	}
 	
 	

@@ -250,6 +250,10 @@
 									<td class="text-right" th:text="${#dates.format(session.payment.pStartDate,'yyyy-MM-dd')}"></td>
 								</tr>
 								<tr>
+									<td>티켓 가격 (개)</td>
+									<td class="text-right" th:text="${session.payment.pQty}">0</td>
+								</tr>
+								<tr>
 									<td>금액</td>
 									<td class="text-right" th:text="${#numbers.formatInteger(session.payment.pPrice,3,'COMMA')} + '원' "></td>
 								</tr>

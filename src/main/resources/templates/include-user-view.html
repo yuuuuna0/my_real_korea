@@ -27,8 +27,8 @@
 						</div>
 						<!--/tools -->
 						
-						<div class="strip_booking" th:each="payment:${paymentList}">
-							<div class="row">
+						<div class="strip_booking"  th:each="payment:${paymentList}">
+							<div class="row" th:id="|paymentD+${payment.pNo}|">
 								<div class="col-lg-2 col-md-2">
 									<div class="date">
 										<span class="month" th:text="${#dates.format(payment.pStartDate,'yyyy년 MMM')}">Dec</span>
@@ -61,10 +61,10 @@
 									</ul>
 								</div>
 								<div class="col-lg-2 col-md-2">
-								<form>
+								<form name="paymentF">
 									<div class="booking_buttons">
-										<button th:value="${payment.pNo}" onclick="location.href='our-payment-confirmation'"class="btn_2">상세보기</button>
-										<button th:value="${payment.pNo}" onclick="location.href='payment-delete'"  class="btn_3">취소하기</button>
+										<button th:value="${payment.pNo}" name="paymentDetail" class="btn_2">상세보기</button>
+										<button th:value="${payment.pNo}" name="deletePayement" class="btn_3">취소하기</button>
 									</div>
 								</form>
 								</div>
@@ -72,7 +72,6 @@
 							<!-- End row -->
 						</div>
 						<!-- End strip booking -->
-												
 					</section>
 <!-- End section 2 -->
 <!-- Start section 3 -->

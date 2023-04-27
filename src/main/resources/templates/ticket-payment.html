@@ -170,6 +170,7 @@
 								<div class="form-group">
 									<label> 이메일 확인 </label>
 									<input type="email" id="email_booking_2" name="email_booking_2" class="form-control"placeholder="이메일을 입력해주세요" required>
+									<div class="form-text confirm-message"></div>
 								</div>
 							</div>
 						</div>
@@ -413,6 +414,24 @@
         	  
           });
       }
+      
+      
+      $('#email_booking, #email_booking_2').on('keyup', function(){
+
+          $('.confirm-message').removeClass('success-message').removeClass('error-message');
+
+          let email_booking=$('#email_booking').val();
+          let email_booking_2=$('#email_booking_2').val();
+
+          if(email_booking===email_booking_2)
+          {
+              $('.confirm-message').text('이메일 확인이 완료되었습니다.').addClass('success-message');
+          }
+          else{
+              $('.confirm-message').text("이메일이 일치하지 않습니다.").addClass('error-message');
+          }
+
+      });
       
 	
 	</script>

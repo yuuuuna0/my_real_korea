@@ -114,11 +114,10 @@ $(document).ready(function() {
 
 const Toast = Swal.mixin({
   toast: true,
-  position: 'top-right',
+  position: 'bottom-right',
   iconColor: 'white',
   customClass: {
     popup: 'colored-toast',
-    content: 'user-font'
   },
   showConfirmButton: false,
   timer: 1500,
@@ -165,7 +164,7 @@ $(document).on('click','#btn-user-login',function(e) {
         if (data.status == 0) {
 /*쓸까말까 고민중*/	
 		    const toast = Swal.fire({
-		      position: 'top-end',
+		      position: 'bottom-end',
 		      icon: 'success',
 		      text: '로그인 성공! 이전 페이지로 이동합니다.',
 		      showConfirmButton: false
@@ -474,6 +473,19 @@ function validatePassword(password1, password2, passwordsInfo){
 	return isValidPassword;
 };
 
+const Toast1 = Swal.mixin({
+  toast: true,
+  position: 'top-right',
+  iconColor: 'white',
+  customClass: {
+    popup: 'colored-toast'
+  },
+  showConfirmButton: false,
+  timer: 1500,
+  timerProgressBar: true
+})
+
+
 //회원 가입
 $(document).on('click','#btn-user-create',function(e) {
     	
@@ -496,7 +508,7 @@ $(document).on('click','#btn-user-create',function(e) {
 //		toastr.error("이용 약관에 모두 동의해주세요.");
 		Toast.fire({
 		  icon: 'error',
-		  title: '이용 약관에 모두 동의해주세요.'
+		  title: '아이디를 입력하세요.'
 		})
 		return false;
 	}
@@ -506,7 +518,7 @@ $(document).on('click','#btn-user-create',function(e) {
 		  icon: 'error',
 		  title: '아이디를 입력하세요.'
 		})
-	    $("#userId").focus();
+	    //$("#userId").focus();
 	    return false;
 	}
 	if (!isIdChecked) {
@@ -684,10 +696,6 @@ $(document).on('click','#btn-user-modify-action',function(e) {
 		e.preventDefault();
 });
 
-//회원탈퇴
-$(document).on('click','#btn-user-remove',function() {
-	location.href="user-remove-action";
-});
 
 //프로필 수정 취소
 $(document).on('click','#btn-user-modify-cancle',function() {

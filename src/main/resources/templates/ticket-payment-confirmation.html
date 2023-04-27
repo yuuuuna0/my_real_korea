@@ -40,11 +40,11 @@
 	<!--======================== End Header======================== -->
 	<section id="hero_2">
 		<div class="intro_title">
-			<h1>예약 완료 - 상세페이지</h1>
+			<h1>티켓 예약 완료</h1>
 			<div class="bs-wizard row">
 
 				<div class="col-4 bs-wizard-step complete">
-					<div class="text-center bs-wizard-stepnum">Your cart</div>
+					<div class="text-center bs-wizard-stepnum">티켓 상세보기</div>
 					<div class="progress">
 						<div class="progress-bar"></div>
 					</div>
@@ -52,7 +52,7 @@
 				</div>
 
 				<div class="col-4 bs-wizard-step complete">
-					<div class="text-center bs-wizard-stepnum">Your details</div>
+					<div class="text-center bs-wizard-stepnum">티켓 예약하기</div>
 					<div class="progress">
 						<div class="progress-bar"></div>
 					</div>
@@ -60,7 +60,7 @@
 				</div>
 
 				<div class="col-4 bs-wizard-step complete">
-					<div class="text-center bs-wizard-stepnum">Finish!</div>
+					<div class="text-center bs-wizard-stepnum">티켓 예약완료</div>
 					<div class="progress">
 						<div class="progress-bar"></div>
 					</div>
@@ -97,14 +97,11 @@
 				<div class="col-lg-8 add_bottom_15">
 
 					<div class="form_title">
-						<h3><strong><i class="icon-ok"></i></strong>결제 완료</h3>
-						<p>
-							Mussum ipsum cacilds, vidis litro abertis.
-						</p>
+						<h3><strong><i class="icon-ok"></i></strong>감사합니다!</h3>
 					</div>
 					<div class="step">
 						<p>
-							결제가 완료 됐습니다. ----여기에 대충 안내? 환불? 사항 같은 거 넣기 ---
+							저희 마이리얼코리아의 상품을 구매 해 주신것에 감사드립니다. 앞으로도 마이리얼코리아와 함께하는 국내여행 많은 관심 부탁드립니다.
 						</p>
 					</div>
 					<!--End step -->
@@ -112,79 +109,162 @@
 					
 					<div class="form_title">
 						<h3><strong><i class="icon-tag-1"></i></strong>예약 확인 정보</h3>
-						<p>
-							Mussum ipsum cacilds, vidis litro abertis.
-						</p>
 					</div>
 					<div class="step">
 						<table class="table table-striped confirm">
 							<tbody>
-								<tr>
-									<td><strong>티켓 상품</strong>
+							<!-- 예약상품명 -->
+								<tr th:if="${payment.tour != null or payment.ticket != null}">
+										<td>
+										<strong>예약상품명</strong>
 									</td>
-									<td th:text="${payment.ticket.tiTitle}">0</td>
+								  <td th:if="${payment.tour != null}">
+								      <span th:text="${payment.tour.toName}"></span>
+								  </td>    
+								    <td th:if="${payment.ticket != null}">
+								      <span th:text="${payment.ticket.tiTitle}"></span>
+								  </td>
 								</tr>
-								<tr>
-									<td>
-										<strong>예약자</strong>
+							<!-- 예약상품명 -->
+							
+							<!-- 여행 시작일 -->
+							<tr th:if="${payment.tour != null or payment.ticket != null}">
+									<td th:if="${payment.tour != null}">
+										<strong>여행 시작일</strong>
 									</td>
-									<td th:text="${session.loginUser.name}">
-										Jhon Doe
-									</td>
-								</tr>
-								<tr>
-									<td>
+									<td th:if="${payment.ticket != null}">
 										<strong>예약 날짜</strong>
 									</td>
-									<td th:text="${#dates.format(payment.pStartDate, 'yyyy-MM-dd')}">
-										10 April 2015
-									</td>
-								</tr>
-							<!-- 	<tr>
-									<td><strong>Check out</strong>
-									</td>
+								  <td th:if="${payment.tour != null}">
+								      <span th:text="${#dates.format(payment.pStartDate,'yyyy-MM-dd')}"></span>
+								  </td>    
+								    <td th:if="${payment.ticket != null}">
+								      <span th:text="${#dates.format(payment.pStartDate,'yyyy-MM-dd')}"></span>
+								  </td>
+							</tr>
+							<!-- 여행 시작일 -->
+							
+							<!-- 여행 종료일 (투어만) -->
+							<tr th:if="${payment.tour != null}">
+							  <td>
+							    <strong>여행 종료일</strong>
+							  </td>
+							  <td>
+							    <span th:text="${#dates.format(payment.pStartDate,'yyyy-MM-dd')}"></span>
+							  </td>
+							</tr>
+
+							<!--여행 종료일 (투어만) -->	
+							
+							<!--  예약 인원 수 -->
+							<tr th:if="${payment.tour != null or payment.ticket != null}">
 									<td>
-										12 April 2015
-										<br>
+										<strong>예약 인원수</strong>
 									</td>
-								</tr>
-								<tr>
-									<td><strong>rooms</strong>
-									</td>
-									<td>1 double room</td>
-								</tr>
-								<tr>
-									<td><strong>Nights</strong>
-									</td>
-									<td>2</td>
-								</tr>
-								<tr>
-									<td><strong>Adults</strong>
-									</td>
-									<td>2</td>
-								</tr> -->
-								<tr>
-									<td><strong>결제 수량</strong>
-									</td>
-									<td th:text="${payment.pQty}">0</td>
-								</tr>
-								<tr>
+								  <td th:if="${payment.tour != null}">
+								      <span th:text="${payment.pQty}"></span>
+								  </td>    
+								    <td th:if="${payment.ticket != null}">
+								      <span th:text="${payment.pQty}"></span>
+								  </td>
+							</tr> 
+							
+							<!--  예약 인원 수 -->
+							
+							<tr th:if="${payment.tour != null or payment.ticket != null}">
 									<td>
-										<strong>결제 수단</strong>
+										<strong>결제 </strong>
 									</td>
-									<!-- 현장결제?? . . . -_-  -->
-									<td th:text="${payment.pMethod == 1 ? '현장결제' : payment.pMethod == 2 ? '카드결제' : payment.pMethod}">
-										Credit card
-									</td>
-								</tr>
-								<tr>
+								  <td th:if="${payment.tour != null}">
+								      <span th:text="${payment.pQty}"></span>
+								  </td>    
+								    <td th:if="${payment.ticket != null}">
+								      <span th:text="${payment.pQty}"></span>
+								  </td>
+							</tr>
+						<!-- 예약 인원 수  -->		
+							
+							<!-- 결제방법 -->
+							<tr th:if="${payment.tour != null or payment.ticket != null}">
 									<td>
-										<strong>총 결제 금액</strong>
+										<strong>결제방법</strong>
 									</td>
-									<td th:text="${#numbers.formatInteger(payment.pPrice, 3, 'COMMA')} + '원' ">
-										$154
+								  <td th:if="${payment.tour != null}">
+								      <th:block th:if="${payment.pMethod==1}">
+								      		현금결제
+								      </th:block>
+								   <th:block th:if="${payment.pMethod==2}">
+											카드결제
+									</th:block>
 									</td>
+								  <td th:if="${payment.ticket != null}">
+								      <th:block th:if="${payment.pMethod==1}">
+								      		현금결제
+								      </th:block>
+								   <th:block th:if="${payment.pMethod==2}">
+											카드결제
+									</th:block>
+								  </td>
+							</tr>
+								
+								<!-- 금액 -->
+								
+								<tr th:if="${payment.tour != null or payment.ticket != null}">
+								  <td>
+								    <strong>금액</strong>
+								  </td>
+								  <td th:if="${payment.tour != null}">
+								    <span th:text="${#numbers.formatInteger(payment.tour.toPrice*payment.pQty,3,'COMMA')} + '원'}"></span>
+								  </td>    
+								  <td th:if="${payment.ticket != null}">
+								    <span th:text="${#numbers.formatInteger(payment.ticket.tiPrice*payment.pQty, 3 , 'COMMA')} + '원' "></span>
+								  </td>
 								</tr>
+								 <!--  금액 -->
+								
+								<!-- 사용포인트 -->
+								<tr th:if="${payment.tour != null or payment.ticket != null}">
+								  <td>
+								    <strong>사용포인트</strong>
+								  </td>
+								  <td th:if="${payment.tour != null}">
+								    <span th:text="${(payment.tour.toPrice * payment.pQty) - payment.pPrice}"></span>
+								  </td>    
+								  <td th:if="${payment.ticket != null}">
+								    <span th:text="${(payment.ticket.tiPrice * payment.pQty) - payment.pPrice}"></span>
+								  </td>
+								</tr>
+
+							 <!--  사용포인트 -->
+								
+								<!-- 결제금액 -->
+								<tr th:if="${payment.tour != null or payment.ticket != null}">
+								  <td>
+								    <strong>결제 금액</strong>
+								  </td>
+								  <td th:if="${payment.tour != null}">
+								    <span th:text="${#numbers.formatInteger(payment.pPrice, 3, 'COMMA')} + '원' "></span>
+								  </td>    
+								  <td th:if="${payment.ticket != null}">
+								    <span th:text="${#numbers.formatInteger(payment.pPrice, 3, 'COMMA')} + '원' "></span>
+								  </td>
+								</tr>
+								<!-- 결제금액 -->
+								
+								<!-- 적립포인트 -->			
+								
+								<tr th:if="${payment.tour != null or payment.ticket != null}">
+								  <td>
+								    <strong>적립 포인트</strong>
+								  </td>
+								  <td th:if="${payment.tour != null}">
+								    <span th:text="${payment.pPoint}"></span>
+								  </td>    
+								  <td th:if="${payment.ticket != null}">
+								    <span th:text="${payment.pPoint}"></span>
+								  </td>
+								</tr>
+								<!-- 적립포인트 -->								
 							</tbody>
 						</table>
 					</div>
@@ -193,16 +273,7 @@
 					my form -->
 				</div>
 				<!--End col -->
-
 				<aside class="col-lg-4">
-					<div class="box_style_1">
-						<h3 class="inner">감사합니다.</h3>
-						<p>
-							저희 마이리얼코리아의 상품을 구매 해 주신것에 감사드립니다. 앞으로도 마이리얼코리아와 함께하는 국내여행 많은 관심 부탁드립니다.
-						</p>
-						<hr>
-						<a class="btn_full_outline" href="invoice.html" target="_blank">View your invoice</a>
-					</div>
 					<div class="box_style_2">
 						<i class="icon_set_1_icon-57"></i>
 						<br>

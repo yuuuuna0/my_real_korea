@@ -100,7 +100,7 @@ public class TicketController {
             		ticketList.add(ticket);
             	} else {
             		int ticketScore = ticketReviewService.calculateTourScore(ticket.getTiNo());
-            		ticket.setTiCount(ticketScore);
+            		ticket.setTiScore(ticketScore);
             		ticketList.add(ticket);
             	}
             }
@@ -167,6 +167,7 @@ public class TicketController {
     }
    
     //티켓 상세 페이지에서 수량, 예약하기
+    @LoginCheck
     @PostMapping("/ticket-detail-aciton") 
     public String ticketDetailPayment(@RequestParam String pStartDate,
     									@RequestParam int pQty, HttpSession session) throws Exception{
@@ -191,7 +192,7 @@ public class TicketController {
     		payment.setPStartDate(date); // 예약날짜
     		payment.setUserId(loginUser.getUserId()); // user 담기
     		payment.setTicket(ticket); // 티켓 담기
-    		System.out.println(ticket.getTicketImgList());
+    		//System.out.println(ticket.getTicketImgList());
     		//fail "F1002" 처리하기
     		//paymentService.insertTicketPayment(payment);
     		session.setAttribute("payment", payment);
@@ -207,14 +208,14 @@ public class TicketController {
     }
     
     //결제 상세 페이지 - action
-    //@LoginCheck
+    @LoginCheck
     @PostMapping("/ticket-payment-complete-action") // 결제 성공  //default값 설정
     public String ticketPaymentCompleteAction(HttpSession session, 
 										        @ModelAttribute RsPInfo rsPInfo,
 										        @RequestParam(required = false, defaultValue = "") String pMsg,
 										        @RequestParam int pMethod, // ?
-										        @RequestParam int pPoint, // ?
-										        @RequestParam int pPrice, // ?
+										        //@RequestParam int pPoint, // ?
+										        //@RequestParam int pPrice, // ?
 										        RedirectAttributes redirectAttributes) {
         String forwardPath = "";
         Payment payment = (Payment) session.getAttribute("payment");
@@ -228,11 +229,11 @@ public class TicketController {
 	            	 payment.setPMethod(2);
 	            }
         	payment.setPMsg(pMsg); 
-        	payment.setPPoint(pPoint);
-        	payment.setPPoint(pPrice);
+        	//payment.setPPoint(pPoint);
+        	//payment.setPPrice(pPrice);
         	//payment.setPNo(payment.getPNo());
         	//System.out.println(payment.getPNo());
-        	int newPoint = loginUser.getPoint()+pPoint;
+        	int newPoint = loginUser.getPoint()+payment.getPPoint();
         	loginUser.setPoint(newPoint);
         	userService.updatePoint(loginUser);
         	//paymentService.updatePayment(payment); // insert로 변경
@@ -275,7 +276,7 @@ public class TicketController {
     	return forwardPath;
     }
 
-
+    
     @PostMapping(value = "/ticket-list-sort", produces = "application/json;charset=UTF-8") //rest ? 
     @ResponseBody
     public Map<String, Object> ticketList(@RequestBody Map<String,String> map){
@@ -326,7 +327,7 @@ public class TicketController {
     
     
     
-	
+    @LoginCheck
     @PostMapping(value="/ticket-review-action",  produces ="application/json;charset=UTF-8")
 	@ResponseBody
 	public Map<String, Object> ticketReviewAction(@RequestBody TicketReview ticketReview, HttpSession session) {
@@ -383,6 +384,7 @@ public class TicketController {
     	return resultMap;
     }	
     
+    @LoginCheck
 	@ResponseBody
 	//@LoginCheck 내가 써야 수정되게해야함
 	@PutMapping(value="/ticketReview/{tiReviewNo}", produces = "application/json;charset=UTF-8")
@@ -419,7 +421,8 @@ public class TicketController {
 			
 			return resultMap;
 	}
-	
+    
+    @LoginCheck
 	@ResponseBody
 	//@LoginCheck // 내가 써야 삭제
 	@DeleteMapping(value="/ticketReview/{tiReviewNo}", produces = "application/json;charset=UTF-8")

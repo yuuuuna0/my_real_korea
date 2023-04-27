@@ -95,6 +95,8 @@
 		<input type="hidden" name="userId" th:value="${session.loginUser.userId}">
 		<input type="hidden" name="pPrice" th:value="${session.payment.pPrice}">
 		<input type="hidden" name="pPoint" th:value="${session.payment.pPoint}">
+		<input type="hidden" name="amount" id="amount" value="">
+		<input type="hidden" name="newPoint" id="newPoint" value="">
 		<div class="container margin_60">
 						<div class="row" >
 				<div class="col-lg-8 add_bottom_15">
@@ -370,7 +372,7 @@
 	<!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script> -->
 	<script>
 		console.log("[[${session.payment}]]");
-	
+		
       function ticket_payment_complete_action() {
     	  let IMP = window.IMP; 
           IMP.init("imp43548145"); 
@@ -380,13 +382,17 @@
         	  pMethod = "card";
           }
           
+          // 결제 금액
+          let amount = $("#totPrice2").text();
+          $("#amount").val(amount);
+          
     	  /*[[${session.payment.pPrice}]]", */
           IMP.request_pay({
               pg : "html5_inicis", // KG이니시스 일반결제창 호출(상점아이디 MID-a 적용) // 카드, 페이 결제 다 되는데 나눌지 말지 고민중
               pay_method : pMethod,
               merchant_uid: "TI" + new Date().getTime(), // "[[${session.payment.pNo}]]", // 변경 TI20230427123122
               name : "[[${session.ticket.tiTitle}]]",
-              amount : 100, // 테스트 용으로 100원만 결제 되게 해둠 
+              amount : 100, // 테스트 용으로 100원만 결제 되게 해둠, 
               buyer_email : "[[${session.loginUser.email}]]",
               buyer_name : "[[${session.loginUser.name}]]",
               buyer_tel : "[[${session.loginUser.phone}]]",
@@ -394,6 +400,13 @@
           }, function (rsp) { // callback
         	  
      		  if(rsp.success && rsp.status == 'paid') {
+     			let usedPoint = $('#usedPoint').val(); // 사용할 포인트 입력값
+				let nowPoint = $('#nowPoint').val(); // 세션에 담긴 현재 로그인유저 포인트
+				let savePoint = parseInt(($("#savePoint2").text()));
+				
+				let newPoint = nowPoint - usedPoint + savePoint;
+				$("#newPoint").val(newPoint);
+				
      		  	document.f.action='ticket-payment-complete-action';
               	document.f.submit();
      		  }

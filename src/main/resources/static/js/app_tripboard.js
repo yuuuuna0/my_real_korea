@@ -4,6 +4,20 @@ import * as Request from "./request.js";
 
 //동행게시판 검색
 $(document).on('click','#tripboard-search-btn',function(e){
+	getSearchList();
+	e.preventDefault();
+});
+// 검색창 입력 후 엔터키 => 검색
+$("#tripboard-search-keyword").keyup(e => {
+	if (e.keyCode == 13) {
+		getSearchList();
+		e.preventDefault();
+	}
+});
+
+
+function getSearchList() {
+	
 	let keyword = $('#tripboard-search-keyword').val();
 	let url = `tripboard-search/${keyword}`;
 	console.log(keyword);
@@ -26,8 +40,8 @@ $(document).on('click','#tripboard-search-btn',function(e){
 								alert(resultJson.msg);
 							}
 						}, async);
-	e.preventDefault();
-});
+	
+}
 
 //동행게시판 정렬(최신순, 조회수높은순)
 $(document).on('change', '#sort-by', function(e) {

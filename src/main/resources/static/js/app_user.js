@@ -600,11 +600,11 @@ $(document).on('click','#btn-user-create',function(e) {
 	    success: function (data) {
 	        if (data.status == 0) {
 //	            alert(data.message);
-//	            window.location.href = "./index";
 				Swal.fire({
 					icon: 'success',
 					text: data.message
 				})
+	            window.location.href = "./index";
 	        } else {
 //	            alert(data.message);
 				Swal.fire({

@@ -34,9 +34,14 @@
 </head>
 
 <body>
-<input type="hidden" id="lat" th:value="${tour.location.lat}" value="37.5400456">
-<input type="hidden" id="lng" th:value="${tour.location.lng}" value="126.9921017">
-
+<th:block th:if="${tour.location!=null}">
+	<input type="hidden" id="lat" th:value="${tour.location.lat}">
+	<input type="hidden" id="lng" th:value="${tour.location.lng}">
+</th:block>
+<th:block th:if="${tour.location==null}">
+	<input type="hidden" id="lat"  value="37.5400456">
+	<input type="hidden" id="lng"  value="126.9921017">
+</th:block>
 	<div class="layer"></div>
 	<!-- Mobile menu overlay mask -->
 
@@ -341,7 +346,13 @@
 						<div id="map" class="map" style="width:100%;height:500px;">
 						</div>
 					</div>
-
+					<div class="box_style_2">
+						<i class="icon_set_1_icon-57"></i>
+						<br>
+						<h6>도움이 필요하신가요?</h6>
+						<a href="tel://004542344599" class="phone">+82 423 445 99</a>
+						<small>월 ~ 금 9.00am - 7.30pm</small>
+					</div>
 				</aside>        
         <div id="overlay">
         </div>
@@ -637,9 +648,9 @@
 	<script>
 	window.initMap=function(){
 		let lat=Number(document.getElementById('lat').value);
-		let lng=Number(document.getElementById('lng').value);
-		console.log(typeof lat);
-		console.log(typeof lng);
+		let	lng=Number(document.getElementById('lng').value);
+			console.log(typeof lat);
+			console.log(typeof lng);
 		//구글 지도 보여주기
 		let mapContainer = document.getElementById("map");
 		let mapOption = {

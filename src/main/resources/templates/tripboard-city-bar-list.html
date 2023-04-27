@@ -130,7 +130,7 @@
                                             </a>
 										   </div>
 									</div>
-									<div class="product_description">
+									<div class="tripboard_product_description">
 										<div class="trip-title tripboard-trip-title">
 											<h3><a th:text="${tripBoard.tBoTitle}" href="">Travel Book</a></h3>
 										</div>
@@ -294,7 +294,7 @@
 	<!-- ##################### template ###################### -->
 	<script id="tripboard-search-list-template" type="text/x-handlebars-template">
 	{{#each data.itemList}}
-	<div class="shop-item col-lg-4 col-md-6 col-sm-6" style="margin-bottom:280px">
+	<div class="shop-item col-lg-4 col-md-6 col-sm-6" style="margin-bottom:200px">
 		{{#ifCond tboStatus '==' 0}}
 			<div class="ribbon_4">
 				<span>모집중</span>
@@ -329,7 +329,7 @@
 				<a href ="tripboard-detail?tBoNo={{tboNo}}" class="AccompanyWebCard__LocationText-sc-ws5mjw-18 bFxAPJ">{{city.cityName}}</a>
 			</div>   
 			</div>
-			<div class="product_description">
+			<div class="tripboard_product_description">
 				<div class="trip-title tripboard-trip-title">
 					<h3><a href="tripboard-detail?tBoNo={{tboNo}}">{{tboTitle}}</a></h3>
 				</div>

@@ -134,7 +134,7 @@ public class TripBoardRestController {
 		String msg = "성공";
 		List<TripBoard> data = new ArrayList<TripBoard>();
 		try {
-			tripBoard.setTBoImg("gyeonggi.jpg");
+			tripBoard.getTBoImg();
 			// tBoNo로 동행 게시글 1개 찾기, 수정 성공시 code 1
 			City city=cityService.findByCityNo(cityNo);
 			tripBoard.setCity(city);

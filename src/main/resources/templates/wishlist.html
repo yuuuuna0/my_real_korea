@@ -290,7 +290,7 @@
 		<div class="price_list" id="wishlist-detail-btn">
 				<div><sup>{{tour.toPrice}}</sup><small>* 1인 기준</small>
 					<p><a href="tour-detail?toNo={{tour.toNo}}" class="btn_1">상세보기</a></p>
-					<a href="#"><i class="icon-trash" id="wishlist-delete-action-btn"></i></a>
+					<a href="#"><i class="icon-trash" id="wishlist-delete-action-btn" data-wishno="{{wishNo}}"></i></a>
 					<input type="hidden" id="wishlist-userId" value="{{userId}}">
 					<input type="hidden" id="wishlist-wishNo" value="{{wishNo}}">
 				</div>
@@ -349,7 +349,7 @@
 		<div class="price_list" id="wishlist-detail-btn">
 				<div><sup>{{ticket.tiPrice}}</sup><small>*Per person</small>
 					<p><a href="ticket-detail?tiNo={{ticket.tiNo}}" class="btn_1">상세보기</a></p>
-					<a href="#"><i class="icon-trash" id="wishlist-delete-action-btn"></i></a>
+					<a href="#"><i class="icon-trash" id="wishlist-delete-action-btn" data-wishno="{{wishNo}}"></i></a>
 					<input type="hidden" id="wishlist-userId" value="{{userId}}">
 					<input type="hidden" id="wishlist-wishNo" value="{{wishNo}}">
 				</div>

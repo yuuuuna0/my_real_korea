@@ -243,16 +243,17 @@ public class TicketController {
 
         return forwardPath;
     }
-
-    @RequestMapping("/ticket-payment-confirmation")
+    @LoginCheck
+    @RequestMapping(value="ticket-payment-confirmation")
     public String ticketPaymentRemove (@ModelAttribute Payment payment,
     									@ModelAttribute RsPInfo rsPInfo, 
     									Model model){
+    	String forwardPath="";
     	model.addAttribute(payment);
     	model.addAttribute(rsPInfo);
-    	
+    	forwardPath="ticket-payment-confirmation";
     	//System.out.println(payment.getPMethod());
-    	return "ticket-payment-confirmation";
+    	return forwardPath;
     }
 
 
@@ -434,7 +435,7 @@ public class TicketController {
 		return resultMap;
 	}
 	
-	
+	/*
 	@GetMapping(value="payment-detail")
 	public String paymentConfirmationTicketTour(@RequestParam int pNo, Model model, HttpSession session) {
 		
@@ -452,7 +453,7 @@ public class TicketController {
 		}
 		return "payment-confirmation-ticket-tour";
 	}
-	
+	*/
 	
 }
 

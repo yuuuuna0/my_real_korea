@@ -64,7 +64,7 @@
 								<div class="col-lg-2 col-md-2">
 								<form name="paymentF">
 									<div class="booking_buttons">
-										<button class="btn_2" th:value="${payment.pNo}" th:onclick="|location.href='@{payment-detail(pNo=${payment.pNo})}'|" type="button">상세보기</button>
+										<a th:href="@{payment-detail(pNo=${payment.pNo})}" class="btn_2">보러가기</a>
 										<button th:value="${payment.pNo}" name="deletePayement" class="btn_3">취소하기</button>
 									</div>
 								</form>
@@ -197,7 +197,7 @@
 								</div>
 								<div class="col-lg-2 col-md-2">
 									<div class="booking_buttons">
-										<a href="#0" class="btn_2">보러가기</a>
+										<a th:href="@{tour-detail(tNo=${tourReview.toNo})}" class="btn_2">보러가기</a>
 									</div>
 								</div>
 							</div>
@@ -234,7 +234,7 @@
 								</div>
 								<div class="col-lg-2 col-md-2">
 									<div class="booking_buttons">
-										<a href="#0" class="btn_2">보러가기</a>
+										<a th:href="@{ticket-detail(tiNo=${ticketReview.tiNo})}" class="btn_2">보러가기</a>
 									</div>
 								</div>
 							</div>

@@ -478,17 +478,17 @@ $(document).on('click', '#btn-user-modify-form', function(e) {
 $(document).on('click','#btn-user-modify-action',function(e) {
 	
 	
-	if (document.f.password.value == "") {
-		 toastr.error('비밀번호를 입력하십시오.');
+	if (document.f.password1.value == "") {
+		toastr.error('비밀번호를 입력하십시오.');
 		f.password.focus();
 		return false;
 	}
 	if (document.f.password2.value == "") {
-		 toastr.error('비밀번호 확인을 입력하십시오.');
+		toastr.error('비밀번호 확인을 입력하십시오.');
 		f.password2.focus();
 		return false;
 	} 
-	if (document.getElementsByName("password")[0].value !== document.getElementsByName("password2")[0].value) {
+	if (document.getElementsByName("password1")[0].value !== document.getElementsByName("password2")[0].value) {
 	    toastr.error('비밀번호와 비밀번호 확인이 일치하지 않습니다.');
 	    return;
 	  }
@@ -500,7 +500,7 @@ $(document).on('click','#btn-user-modify-action',function(e) {
 	let smoking = $('input[name="sOptions"]:checked').val();
 	
 	formData.append('userId', $('#userId').val());
-	formData.append('password', $('#password').val());
+	formData.append('password', $('#password1').val());
 	formData.append('nickname', $('#nickname').val());
 	formData.append('phone', $('#phone').val());
 	formData.append('email', $('#email').val());

@@ -886,3 +886,8 @@ a.btn_3, .btn_3 {
     padding: 5px;
     position: relative;
 }
+
+.mypage-title h3 {
+    font-size: 30px;
+    font-family: 'MBC1961M';
+}

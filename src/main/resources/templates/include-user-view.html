@@ -77,7 +77,11 @@
 <!-- End section 2 -->
 <!-- Start section 3 -->
 					<section th:fragment="section-3">
+					
+							<div class="mypage-title">
 							<h3> 동행찾기 </h3>
+							</div>
+							<hr>
 							<br>
 						
 						<div class="strip_booking" th:each="tripBoard:${tripBoardList}">
@@ -119,8 +123,8 @@
 								<div class="col-lg-2 col-md-2">
 								<form>
 									<div class="booking_buttons" style="margin-top:30px;">
-										<a class="btn_2" th:href="@{tripboard-detail(tBoNo=${tripBoard.tBoNo})}" role="button">보러가기
-										</a>
+										<a class="btn_2" th:href="@{tripboard-detail(tBoNo=${tripBoard.tBoNo})}" role="button">보러가기</a>
+										<button class="btn_3">삭제하기</button>
 									</div>
 									</form>
 								</div>
@@ -129,11 +133,14 @@
 						</div>
 						<!-- End strip booking -->
 						<br>
-						<hr>
+					
 						<br>
 						
-						<h3> 자유게시판 </h3>
-						<br>
+						<div class="mypage-title">
+							<h3> 자유게시판 </h3>
+							</div>
+							<hr>
+							<br>
 						<div class="strip_booking" th:each="freeBoard:${freeBoardList}">
 							<div class="row">
 								<div class="col-lg-2 col-md-2">
@@ -159,6 +166,7 @@
 								<div class="col-lg-2 col-md-2">
 									<div class="booking_buttons">
 										<a th:href="@{freeboard-detail(fBoNo=${freeBoard.fBoNo})}" class="btn_2">보러가기</a>
+										<button class="btn_3">삭제하기</button>
 									</div>
 								</div>
 							</div>
@@ -198,6 +206,7 @@
 								<div class="col-lg-2 col-md-2">
 									<div class="booking_buttons">
 										<a href="#0" class="btn_2">보러가기</a>
+										<button class="btn_3">삭제하기</button>
 									</div>
 								</div>
 							</div>
@@ -235,6 +244,7 @@
 								<div class="col-lg-2 col-md-2">
 									<div class="booking_buttons">
 										<a href="#0" class="btn_2">보러가기</a>
+										<button class="btn_3">삭제하기</button>
 									</div>
 								</div>
 							</div>

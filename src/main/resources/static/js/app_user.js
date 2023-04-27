@@ -114,11 +114,10 @@ $(document).ready(function() {
 
 const Toast = Swal.mixin({
   toast: true,
-  position: 'top-right',
+  position: 'bottom-right',
   iconColor: 'white',
   customClass: {
     popup: 'colored-toast',
-    content: 'user-font'
   },
   showConfirmButton: false,
   timer: 1500,
@@ -165,7 +164,7 @@ $(document).on('click','#btn-user-login',function(e) {
         if (data.status == 0) {
 /*쓸까말까 고민중*/	
 		    const toast = Swal.fire({
-		      position: 'top-end',
+		      position: 'bottom-end',
 		      icon: 'success',
 		      text: '로그인 성공! 이전 페이지로 이동합니다.',
 		      showConfirmButton: false
@@ -474,19 +473,6 @@ function validatePassword(password1, password2, passwordsInfo){
 	return isValidPassword;
 };
 
-const Toast1 = Swal.mixin({
-  toast: true,
-  position: 'top-right',
-  iconColor: 'white',
-  customClass: {
-    popup: 'colored-toast'
-  },
-  showConfirmButton: false,
-  timer: 1500,
-  timerProgressBar: true
-})
-
-
 //회원 가입
 $(document).on('click','#btn-user-create',function(e) {
     	
@@ -507,13 +493,10 @@ $(document).on('click','#btn-user-create',function(e) {
 		  
 	if (!termsService.checked || !termsPrivacy.checked) {
 //		toastr.error("이용 약관에 모두 동의해주세요.");
-	Swal.fire({
-	  position: 'top-end',
-	  icon: 'error',
-	  title: "이용 약관에 모두 동의해주세요.",
-	  showConfirmButton: false,
-	  timer: 1500
-	})
+		Toast.fire({
+		  icon: 'error',
+		  title: '이용 약관에 모두 동의해주세요.'
+		})
 		return false;
 	}
 	if (user.userId === "") {
@@ -616,15 +599,27 @@ $(document).on('click','#btn-user-create',function(e) {
 	    contentType: "application/json;charset=UTF-8",
 	    success: function (data) {
 	        if (data.status == 0) {
-	            alert(data.message);
-	            window.location.href = "./index";
+//	            alert(data.message);
+//	            window.location.href = "./index";
+				Swal.fire({
+					icon: 'success',
+					text: data.message
+				})
 	        } else {
-	            alert(data.message);
+//	            alert(data.message);
+				Swal.fire({
+					icon: 'error',
+					text: data.message
+				})
 	        }
 	    },
 	    error: function (xhr, status, error) {
 	        console.error(error);
-	        alert("회원가입에 실패했습니다.");
+//	        alert("회원가입에 실패했습니다.");
+			Swal.fire({
+				icon: 'error',
+				text: "회원가입에 실패했습니다."
+			})
 	    }
 	}); 
 });
@@ -653,10 +648,31 @@ $(document).on('click', '#btn-user-modify-form', function(e) {
 
 $(document).on('click','#btn-user-modify-action',function(e) {
 	
-	if (document.getElementsByName("password3")[0].value !== document.getElementsByName("password4")[0].value) {
-	    toastr.error('비밀번호와 비밀번호 확인이 일치하지 않습니다.');
+	if (document.getElementsByName("password")[0].value == "") {
+		Toast.fire({
+		  icon: 'error',
+		  title: '비밀번호를 입력하세요.'
+		})
+      document.getElementsByName("password")[0].focus();
+      return false;
+    }
+    
+    if (document.getElementsByName("password2")[0].value == "") {
+		Toast.fire({
+		  icon: 'error',
+		  title: '비밀번호 확인을 입력하세요.'
+		})
+      document.getElementsByName("password2")[0].focus();
+      return false;
+    }
+	  
+	if (document.getElementsByName("password")[0].value !== document.getElementsByName("password2")[0].value) {
+	   Toast.fire({
+		  icon: 'error',
+		  title: '비밀번호와 비밀번호 확인이 일치하지 않습니다.'
+	  })
 	    return;
-	  }
+	}
 	
 	let url = 'user-modify-form-action';
 	let method = 'PUT';

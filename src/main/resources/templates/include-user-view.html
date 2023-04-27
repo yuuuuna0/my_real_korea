@@ -217,7 +217,7 @@
 						<!--/tools -->
 						
 						<div class="strip_booking"  th:each="payment:${paymentList}">
-							<div class="row" th:id="|paymentD+${payment.pNo}|">
+							<div class="row" th:id="${payment.pNo}">
 								<div class="col-lg-2 col-md-2">
 									<div class="date">
 										<span class="month" th:text="${#dates.format(payment.pStartDate,'MMM')}">Dec</span>

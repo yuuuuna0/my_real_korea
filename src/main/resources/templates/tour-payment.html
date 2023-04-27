@@ -79,13 +79,13 @@
 		<div id="position">
 			<div class="container">
 				<ul>
-					<li><a href="./">메인페이지</a>
+					<li><i class="icon-home" onclick="location.href='index'"></i><a href="index"></a>
+                </li>
+                <li><a href="tour-list">투어리스트</a>
+                </li>
+					<li><a th:href="@{tour-detail(toNo=${session.tour.toNo})}">상세보기</a>
 					</li>
-					<li><a href="./tour-list">투어리스트</a>
-					</li>
-					<li><a th:href="@{tour-detail(toNo=${session.tour.toNo})}">투어상세보기</a>
-					</li>
-					<li>투어예약하기</li>
+					<li>예약하기</li>
 				</ul>
 			</div>
 		</div>
@@ -216,8 +216,8 @@
 							</div>
 							<div class="col-lg-4" >
 								<div class="form-group">
-										<select class="form-control" name="pMethod" id="pMethod" required>
-											<option value="" selected disabled hidden>결제방법</option>
+										<select class="form-control" name="pMethod"  id="pMethod" required>
+											<option  value="" selected disabled>결제방법</option>
 											<option value="1">계좌이체</option>
 											<option value="2">카드결제</option>
 										</select>
@@ -242,8 +242,8 @@
 				<aside class="col-lg-4">
 					<div class="box_style_1">
 						<h3 class="inner">- 상세보기 -</h3>
-						<table class="table table_summary"  id="tableSummaryH">
-							<tbody>
+						<table class="table table_summary">
+							<tbody id="tableSummaryH">
 								<tr>
 									<td>여행 시작일</td>
 									<td class="text-right" th:text="${#dates.format(session.payment.pStartDate,'yyyy-MM-dd')}"></td>
@@ -344,49 +344,52 @@
 	<script type="text/javascript">
 		function tourPaymentAction(e){
 			let form=$('#f');
-			console.log(form);
-			console.log($('#pPoint').val());
-			console.log($('#pPrice').val());
-			document.f.action='tour-payment-action';
-			document.f.submit();
-/*			
+			let totPrice=100;
+			//let totPrice=document.getElementById('tableSummaryH').getElementsByTagName("td")[17].fistElementChild.data;
+			//let totPrice2 = document.getElementById("totPrice2");
+
+			alert(totPrice);
+			alert(typeof totPrice);
+			let pMethod=$('#pMethod option:selected').val();
 			if(form.get(0).checkValidity()===false){
 				form.find(':invalid').first().focus();
 				e.preventDefault();
 				e.stopPropagation();
 			}else{
-				let IMP = window.IMP; // 생략 가능
-				IMP.init("imp43548145"); // 예: imp00000000a
+				if(pMethod==1){
+					alert(pMethod);
+					document.f.action='tour-payment-action';
+					document.f.submit();
+				}else if(pMethod==2){
+					let IMP = window.IMP; // 생략 가능
+					IMP.init("imp43548145"); // 예: imp00000000a
+					/********* 자바스크립트에서 세션 값 가져오는거 먼저 해야 함!!  *****/ 
+				    IMP.request_pay({
+				      pg: "html5_inicis",
+				      pay_method: 'card',
+				      merchant_uid: 'MRK_'+new Date().getTime(),   // 주문번호 -> insert 전이라서 번호가 0번으로 생성됨,,, 개짱난다
+				      name: "[[${session.tour.toName}]]",
+				      //amount: "[[${{session.payment.pPrice}}]]",                         // 숫자 타입
+				      amount: totPrice,                        // 숫자 타입
+				      buyer_email: "[[${session.loginUser.email}]]",
+				      buyer_name: "[[${session.loginUser.name}]]",
+				      buyer_tel: "[[${session.loginUser.phone}]]",
+				      buyer_addr: "[[${session.loginUser.address}]]"
+				    }, function (rsp) { // callback
+				    	console.log(rsp);
+				      	if (rsp.success) {
+				        // 결제 성공 시 로직
+							document.f.action='tour-payment-action';
+							document.f.submit();
+				      	} else {
+				        // 결제 실패 시 로직
+				        	console.log(rsp);
+				      	}
+						});
+				}
 				
-				let pMethod;
-				if('#pMethod'.val==2){
-					pMethod='card';
+				
 				}
-				********* 자바스크립트에서 세션 값 가져오는거 먼저 해야 함!!  ***** 
-			    IMP.request_pay({
-			      pg: "html5_inicis",
-			      pay_method: pMethod,
-			      merchant_uid: 'MRK_'+new Date().getTime(),   // 주문번호 -> insert 전이라서 번호가 0번으로 생성됨,,, 개짱난다
-			      name: "[[${session.tour.toName}]]",
-			      //amount: "[[${{session.payment.pPrice}}]]",                         // 숫자 타입
-			      amount: 100,                        // 숫자 타입
-			      buyer_email: "[[${session.loginUser.email}]]",
-			      buyer_name: "[[${session.loginUser.name}]]",
-			      buyer_tel: "[[${session.loginUser.phone}]]",
-			      buyer_addr: "[[${session.loginUser.address}]]"
-			    }, function (rsp) { // callback
-			    	console.log(rsp);
-			      	if (rsp.success) {
-			        // 결제 성공 시 로직
-						document.f.action='tour-payment-action';
-						document.f.submit();
-			      	} else {
-			        // 결제 실패 시 로직
-			        	console.log(rsp);
-			      	}
-					});
-				}
-*/
 			}
 	</script>
 

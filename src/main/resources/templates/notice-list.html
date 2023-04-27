@@ -59,11 +59,9 @@
 		<div id="position">
 			<div class="container">
 				<ul>
-					<li><a href="index">Home</a>
+					<li><i class="icon-home" onclick="location.href='index'"></i><a href="index"></a>
 					</li>
-					<li><a href="notice-list">공지사항</a>
-					</li>
-					<li>Now</li>
+					<li>공지사항</li>
 				</ul>
 			</div>
 		</div>
@@ -78,10 +76,11 @@
 						<div class="items-sorting">
 							<div class="row">
 								<div class="col-6">
-									<div id="page-info" class="results_shop" th:each="noticePage:${noticeListPage}">
-										<span id="cur-page" th:text="${noticePage.pageMaker.curPage}"></span>
-										&nbsp;페이지&nbsp;&nbsp;|&nbsp;&nbsp;총
-										<span id="tot-record-count" th:text="${noticePage.totRecordCount}"></span>&nbsp;&nbsp;개
+									<div id="page-info" class="results_shop" >
+										<span id="cur-page" th:text="${noticeListPage.pageMaker.curPage}"></span> &nbsp;페이지 &nbsp;
+										       | 전체 건수: <span id="tot-record-count"   th:text="${noticeListPage.pageMaker.totCount}"></span>
+										<br>
+										
 									</div>
 								</div>
 								<div class="col-6">

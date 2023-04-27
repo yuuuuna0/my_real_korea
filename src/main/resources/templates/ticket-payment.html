@@ -77,11 +77,13 @@
 		<div id="position">
 			<div class="container">
 				<ul>
-					<li><a href="#">Home</a>
+					<li><i class="icon-home" onclick="location.href='index'"></i><a href="index"></a>
+                </li>
+                <li><a href="ticket-list">티켓리스트</a>
+                </li>
+					<li><a th:href="@{ticket-detail(tiNo=${session.ticket.tiNo})}">상세보기</a>
 					</li>
-					<li><a href="#">Category</a>
-					</li>
-					<li>Page active</li>
+					<li>예약하기</li>
 				</ul>
 			</div>
 		</div>

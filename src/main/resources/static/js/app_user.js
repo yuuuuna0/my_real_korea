@@ -473,7 +473,6 @@ function validatePassword(password1, password2, passwordsInfo){
 	return isValidPassword;
 };
 
-
 //회원 가입
 $(document).on('click','#btn-user-create',function(e) {
     	

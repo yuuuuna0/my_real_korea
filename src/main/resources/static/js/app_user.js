@@ -507,13 +507,13 @@ $(document).on('click','#btn-user-create',function(e) {
 		  
 	if (!termsService.checked || !termsPrivacy.checked) {
 //		toastr.error("이용 약관에 모두 동의해주세요.");
-Swal.fire({
-  position: 'top-end',
-  icon: 'error',
-  title: "이용 약관에 모두 동의해주세요.",
-  showConfirmButton: false,
-  timer: 1500
-})
+	Swal.fire({
+	  position: 'top-end',
+	  icon: 'error',
+	  title: "이용 약관에 모두 동의해주세요.",
+	  showConfirmButton: false,
+	  timer: 1500
+	})
 		return false;
 	}
 	if (user.userId === "") {

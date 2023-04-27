@@ -860,6 +860,8 @@ a.btn_3, .btn_3 {
 	background: #ffffff;
 }
 .tripboard-list-image {
+	width:256px;
+	height:256px;
 	margin-bottom:10px;
 }
 .tripboard-image-box{

@@ -332,13 +332,23 @@ $(document).on('click','#btn-user-auth',function(e) {
         data: { mailAuthKey: mailAuthKey },
         success: function(response) {
             if (response.status === 0) {
-                toastr.success("인증 성공! 로그인 페이지로 이동합니다.")
-                window.location.replace(response.data);
+ //               toastr.success("인증 성공! 로그인 페이지로 이동합니다.")
+ //               window.location.replace(response.data);
+	 		    const toast = Swal.fire({
+			      position: 'top-end',
+			      icon: 'success',
+			      text: '인증 성공! 로그인 페이지로 이동합니다.',
+			      showConfirmButton: false
+			    });
+			    setTimeout(() => {
+			      toast.close();
+			      window.location.replace(response.data);
+			    }, 1000);
             } else {
 //                toastr.error("인증 코드가 일치하지 않습니다.");
 			Toast.fire({
 			  icon: 'error',
-			  title: '인증 코드가 일치하지 않습니다..'
+			  title: '인증 코드가 일치하지 않습니다.'
 			})
             }
         },
@@ -387,18 +397,26 @@ $(document).on('click','#btn-user-id-check',function(e) {
     	    data: { userId: userId },
     	    success: function(cnt) {
 				if (cnt == 0) {
-					alert('사용 가능한 아이디입니다.');
+//					alert('사용 가능한 아이디입니다.');
+					Swal.fire({
+						icon: 'success',
+						text: '사용 가능한 아이디입니다.'
+					})
 					isIdChecked = true;
 				} else {
-					alert('이미 사용중인 아이디입니다.');
+//					alert('이미 사용중인 아이디입니다.');
+					Swal.fire({
+						icon: 'error',
+						text: '이미 사용중인 아이디입니다.'
+					})
 					$('#userId').val('');
 				}
 			},
 			error: function() {
-		Toast.fire({
-		  icon: 'error',
-		  title: '오류가 발생했습니다.'
-		})
+				Toast.fire({
+				  icon: 'error',
+				  title: '오류가 발생했습니다.'
+				})
     	    }
 		});
 		e.preventDefault();	

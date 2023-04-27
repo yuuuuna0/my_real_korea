@@ -474,6 +474,19 @@ function validatePassword(password1, password2, passwordsInfo){
 	return isValidPassword;
 };
 
+const Toast1 = Swal.mixin({
+  toast: true,
+  position: 'top-right',
+  iconColor: 'white',
+  customClass: {
+    popup: 'colored-toast'
+  },
+  showConfirmButton: false,
+  timer: 1500,
+  timerProgressBar: true
+})
+
+
 //회원 가입
 $(document).on('click','#btn-user-create',function(e) {
     	
@@ -494,10 +507,13 @@ $(document).on('click','#btn-user-create',function(e) {
 		  
 	if (!termsService.checked || !termsPrivacy.checked) {
 //		toastr.error("이용 약관에 모두 동의해주세요.");
-		Toast.fire({
-		  icon: 'error',
-		  title: '이용 약관에 모두 동의해주세요.'
-		})
+Swal.fire({
+  position: 'top-end',
+  icon: 'error',
+  title: "이용 약관에 모두 동의해주세요.",
+  showConfirmButton: false,
+  timer: 1500
+})
 		return false;
 	}
 	if (user.userId === "") {

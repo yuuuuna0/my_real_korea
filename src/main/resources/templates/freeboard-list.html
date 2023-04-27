@@ -117,7 +117,7 @@
 								<tr id='boardlist_tr1'>
 									<td width="340px" align=center >제 목</td>
 									<td width=100 align=right >조회수</td>
-									<!--<td width=100 align=center>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;작성일</td>-->
+									<td width=100 align=center>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;작성일</td>
 									<td width=100 align=center >&nbsp;작성자</td>
 								</tr>
 								
@@ -129,9 +129,9 @@
 										<span class="icon-map"></span>
 										<span th:text="   ${freeBoard.getCity().cityName}"></span>
 									</td>
-									<!--<td width=y   th:text="${freeBoard.fBoCount}"></td>-->
-									<td width=100  th:text="${#dates.format(freeBoard.fBoDate, 'yyyy.MM.dd')}"></td>
-									<td width=100  th:text="${freeBoard.userId}"></td>
+									<td style="width:100;"   th:text="${freeBoard.fBoCount}"></td>
+									<td style="width:100;" th:text="${#dates.format(freeBoard.fBoDate, 'yyyy.MM.dd')}"></td>
+									<td style="width:100;"  th:text="${freeBoard.userId}"></td>
 								
 
 								</tr>

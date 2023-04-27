@@ -23,15 +23,21 @@ import com.itwill.my_real_korea.dto.tour.Tour;
 import com.itwill.my_real_korea.dto.user.User;
 import com.itwill.my_real_korea.service.payment.PaymentService;
 import com.itwill.my_real_korea.service.rspinfo.RsPInfoService;
+import com.itwill.my_real_korea.service.ticket.TicketService;
+import com.itwill.my_real_korea.service.tour.TourService;
 
 @RestController
 public class PaymentRestController {
 	private PaymentService paymentService;
 	private RsPInfoService rsPInfoService;
+	private TourService tourService;
+	private TicketService ticketService;
 	
-	public PaymentRestController(PaymentService paymentService,RsPInfoService rsPInfoService) {
+	public PaymentRestController(PaymentService paymentService,RsPInfoService rsPInfoService,TourService tourService,TicketService ticketService) {
 		this.paymentService=paymentService;
 		this.rsPInfoService=rsPInfoService;
+		this.tourService=tourService;
+		this.ticketService=ticketService;
 	}
 	
 	//1. 구매상품 삭제
@@ -44,7 +50,19 @@ public class PaymentRestController {
 		List<Payment> data=new ArrayList<>();
 		User loginUser=(User)session.getAttribute("loginUser");
 		try {
+			Payment payment=paymentService.selectPaymentNo(pNo);
+			Tour tour=payment.getTour();
+			Ticket ticket=payment.getTicket();
 			paymentService.deletePayment(pNo);
+			//삭제하면 구매갯수 날리기
+			if(tour!=null) {
+				tour.setToCount(tour.getToCount()-payment.getPQty());
+				tourService.updateTour(tour);
+				
+			} else if(payment.getTicket()!=null) {
+				ticket.setTiCount(ticket.getTiCount()-payment.getPQty());
+				ticketService.updateTicket(ticket);
+			}
 			List<Payment> paymentList=paymentService.selectAllUser(loginUser.getUserId());
 			data=paymentList;
 			code=1;

@@ -249,12 +249,7 @@
 							<hr>
 							<div class="review_strip_single"  th:each="ticketReview:${ticketReviewList}">
 							<form th:name="f+${ticketReview.tiReviewNo}" id=ticketReviewForm>
-								<th:block th:if="${ticketReview.users.userImg != null}">
-								<img th:src="@{upload-dir/{userImgUrl}(userImgUrl=${ticketReview.users.userImg.userImgUrl})}" alt="Image" class="rounded-circle" width="15%" height="35%">
-								</th:block>
-								<th:block th:if="${ticketReview.users.userImg == null}">
-								<img src="upload-dir/defaultImg.png" alt="Image" class="rounded-circle" width="15%" height="35%">
-								</th:block>
+								<img src="upload-dir/defaultImg.png" alt="Image" class="rounded-circle" width="80px" height="80px">
 								<div th:if="${session.loginUser!=null && session.loginUser.userId == ticketReview.user.userId}" style="float: right;"> 
 								 <!-- <button th:value="${ticketReview.tiReviewNo}" id="modifyTiReviewBtn" name="modifyTiReviewNo">수정</button>  -->
 								 <button type="button" th:value="${ticketReview.tiReviewNo}" th:tiReviewNo="${ticketReview.tiReviewNo}" class="modifyTiReviewBtn btn btn-primary btn-sm" >수정</button>
@@ -265,12 +260,9 @@
 								<small th:text="${#dates.format(ticketReview.tiReviewDate, 'yyyy-MM-dd')}"> - 10 March 2015 -</small>
 								
 								<!-- 타이틀 추가 -->
-								<h6>
-									<strong id="tiReviewTitle" th:text="${ticketReview.tiReviewTitle}"></strong>
-											
-								</h6>
+								<h5 th:text="${ticketReview.tiReviewTitle}" name="tiReviewTitle"></h5>
 								<div th:if="${ticketReview.tiReviewImg}">
-  								  <img th:src="${ticketReview.tiReviewImg}" width="20%" height="30%" style="position: sticky;">
+  								  <img th:src="${ticketReview.tiReviewImg}" width="30%" height="40%" style="position: sticky;">
 								</div>
 								<br>
 								<p th:text="${ticketReview.tiReviewContent}" th:name="tiReviewContent">

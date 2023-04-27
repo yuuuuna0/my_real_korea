@@ -116,12 +116,7 @@
 				<div class="col-lg-9">
 					<div class="box_style_1">
 						<div class="post nopadding">
-						<div th:if="${tripBoard.tBoImg}">
-							<img th:src="@{img/tripboard/{tBoImg}(tBoImg=${tripBoard.tBoImg})}"  alt="Image" class="img-fluid">
-						</div>
-						<div th:if="${tripBoard.tUploadFile}">
-							<img th:src="@{tripboardimages/{tUploadFile}(tUploadFile=${tripBoard.tUploadFile})}"  alt="Image" class="img-fluid">
-						</div>
+						
 								<!-- 동행게시판 제목 들어가는 곳 -->
 								<ul>
 								<li><h2 th:text="${tripBoard.tBoTitle}"></h2></li>
@@ -169,6 +164,12 @@
 							</div>
 							<br>
 							<br>
+							<div th:if="${tripBoard.tBoImg}">
+							<img th:src="@{img/tripboard/{tBoImg}(tBoImg=${tripBoard.tBoImg})}"  alt="Image" class="img-fluid">
+						</div>
+						<div th:if="${tripBoard.tUploadFile}">
+							<img th:src="@{tripboardimages/{tUploadFile}(tUploadFile=${tripBoard.tUploadFile})}"  alt="Image" class="img-fluid">
+						</div>
 							<br>
 							<div class="post-left" style="padding-bottom:20px;">
 									<ul>
@@ -424,6 +425,44 @@
 	<script src="js/functions.js"></script>
 	<script src="js/app_tripboard.js" type="module"></script>
 	<script src="js/app_chat_tripboard.js" type="module"></script>
+
+ <script>
+  
+    const modal = document.getElementById("modal")
+    
+    function modalOn() {
+        modal.style.display = "flex"
+    }
+    function isModalOn() {
+        return modal.style.display === "flex"
+    }
+    function modalOff() {
+        modal.style.display = "none"
+    }
+    
+    const btnModal = document.getElementById("btn-modal")
+    btnModal.addEventListener("click", e => {
+        modalOn()
+    })
+    
+    /*
+    const closeBtn = modal.querySelector(".close-area")
+    closeBtn.addEventListener("click", e => {
+        modalOff()
+    })
+    modal.addEventListener("click", e => {
+        const evTarget = e.target
+        if(evTarget.classList.contains("modal-overlay")) {
+            modalOff()
+        }
+    })
+    window.addEventListener("keyup", e => {
+        if(isModalOn() && e.key === "Escape") {
+            modalOff()
+        }
+    })
+    */
+    </script>
 
 </body>
 

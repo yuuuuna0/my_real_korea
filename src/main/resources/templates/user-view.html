@@ -221,26 +221,35 @@ const phoneNumber = (target) => {
 {{#each data}}
 <form method = "POST" name = "f" id = "user-modify-form">
 		<input type="hidden"  id="userId" value="{{userId}}" >
-		<div class="row" >
-		<div class="col-md-12"> </div>
-		<div class="col-md-3"> </div>
-		<div class="col-md-8"> 
+			<div class="row" >
+			<div class="col-md-12"> </div>
+			<div class="col-md-3"> </div>
+			<div class="col-md-8"> 
 
-			<ul id="profile_summary_user">	
-				<li>이름
-				<span>{{name}}</span>
-				</li>
-	<div class="form-group">
+				<ul id="profile_summary_user">	
+					<li>이름
+					<span>{{name}}</span>
+					</li>
+
+			<div class="form-group">
 				<li>비밀번호
-				<span><input type = "password" class ="form-control-user" name = "password1" id = "password1" placeholder="8 - 12글자의 영어, 숫자, 특수문자" ></span>
+				<span><input type = "password" class ="form-control-user" name = "password3" id = "password3" placeholder="8 - 12글자의 영어, 숫자, 특수문자" ></span>
 				</li>
-</div>
-	<div class="form-group">
+			</div>
+			<div class="form-group">
 				<li>비밀번호 확인
-				<span><input type = "password" class= "form-control-user" name = "password2" id = "password2"></span>
+				<span><input type = "password" class= "form-control-user" name = "password4" id = "password4"></span>
 				</li>
-</div>
+			</div>
+
 				<div id="pass-info" class="clearfix"></div>
+
+			{{#with passwordValidation}}
+				{{#if isActive}}
+					{{safeJS this.jsCode}}
+				{{/if}}
+			{{/with}}
+
 				<li>닉네임 
 				<span><input class = "form-control-user" type = "text" required="required" value="{{nickname}}" id = "nickname"></span>
 				</li>
@@ -267,47 +276,44 @@ const phoneNumber = (target) => {
 			</ul>
 	
 
-		<ul id="profile_summary_user">
-	<br><br>
-	<h3 style ="margin-left:120px; font-family: MBC1961M;" class = "icon-vcard" > 나를 표현 해주세요 ! </h3>
-	<br>	
-			<li>음주 여부 
-			<span> 
-				<div class="btn-group btn-group-toggle" data-toggle="buttons">
+				<ul id="profile_summary_user">
+				<br><br>
+					<h3 style ="margin-left:120px; font-family: MBC1961M;" class = "icon-vcard" > 나를 표현 해주세요 ! </h3>
+				<br>	
+			
+				<li>음주 여부 
+					<span> 
+						<div class="btn-group btn-group-toggle" data-toggle="buttons">
+							<label class="btn btn-secondary active">
+								<input type="radio" name="aOptions" id="alcohol1" checked value="1"> O
+							</label>
 
-					<label class="btn btn-secondary active">
-						<input type="radio" name="aOptions" id="alcohol1" checked value="1"> O
-					</label>
+							<label class="btn btn-secondary">
+								<input type="radio" name="aOptions" id="alcohol2" value="2"> X
+							</label>
+						</div>						
+					</span>
+				</li>
 
-					<label class="btn btn-secondary">
-						<input type="radio" name="aOptions" id="alcohol2" value="2"> X
-					</label>
-				</div>						
-			</span>
-			</li>
+				<li>흡연 여부 
+					<span> 
+						<div class="btn-group btn-group-toggle" data-toggle="buttons">
+							<label class="btn btn-secondary active">
+								<input type="radio" name="sOptions" id="smoking1" checked value="1"> O
+							</label>
+							<label class="btn btn-secondary">
+								<input type="radio" name="sOptions" id="smoking2" value="2"> X
+							</label>
+						</div>						
+					</span>
+				</li>	
 
-			<li style="margin-top: 20px;" >흡연 여부 
-			<span> 
-				<div class="btn-group btn-group-toggle" data-toggle="buttons">
-					<label class="btn btn-secondary active">
-						<input type="radio" name="sOptions" id="smoking1" checked value="1"> O
-					</label>
+				<li>소개글<span><textarea id="introduce" class="form-control" rows="4" cols="40" required="required">{{userAddInfo.introduce}}</textarea></span></li>
 
-					<label class="btn btn-secondary">
-						<input type="radio" name="sOptions" id="smoking2" value="2"> X
-					</label>
-				</div>						
-			</span>
-			</li>	
-
-			<li style="margin-top: 30px;">소개글 
-	<span><textarea id="introduce" class="form-control" rows="4" cols="40" required="required">{{userAddInfo.introduce}}</textarea></span>
-</li>
-
-</div>
-	</div>
-		</ul>
-		<br><br><br><br>
+		</div>
+			</div>
+				</ul>
+			<br><br><br><br>
 
 	<div style="text-align: center;">
 	<input id="btn-user-modify-action" value="수정 완료" class="btn_1 green" type="button"> 
@@ -318,7 +324,65 @@ const phoneNumber = (target) => {
 			
 </form>
 {{/each}}
-</script>
+
+	 
+	<script>
+
+	let isValidPassword = false;
+
+	$(document).ready(function() {
+		let password3 		= $('#password3');
+		let password4		= $('#password4');
+		let passwordsInfo2 	= $('#pass-info');
+		
+		validatePassword2(password3,password4, passwordsInfo2);
+	});
+
+	function validatePassword2(password3, password4, passwordsInfo2){
+
+
+		$(password3).on('keyup', function(e) {
+			let password3 = document.getElementById("password3").value;
+			
+			if(/[^a-zA-Z0-9~!@#$%^&*()_+,.?]/.test(password3)) {
+				const invalidChar = password3.match(/([^a-zA-Z0-9~!@#$%^&*()_+,.?])/)[1];
+				passwordsInfo2.removeClass().addClass('stillweakpass')
+				.html("허용되지 않는 문자 "+invalidChar+" 가 포함되어 있습니다.");
+			}	
+			else if(/(.)\1\1/.test(password3)) {
+				passwordsInfo2.removeClass().addClass('stillweakpass')
+				.html("같은 문자를 연속으로 3개 이상 사용할 수 없습니다.");
+			}	
+			else if(password3.length < 8 || password3.length > 12) {
+				passwordsInfo2.removeClass().addClass('weakpass')
+				.html("비밀번호는 8글자 이상 12글자 이하여야 합니다.");
+			}
+			else if(!/^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[~!@#$%^&*()_+,.?])/.test(password3)) {
+				passwordsInfo2.removeClass().addClass('stillweakpass')
+				.html("영어, 숫자, 특수문자를 모두 포함해야 합니다.");
+			}
+			else {
+				passwordsInfo2.removeClass().addClass('goodpass')
+				.html("사용 가능한 비밀번호 입니다.");
+			    isValidPassword = true;
+			}
+			e.preventDefault();	
+		});
+		
+		$(password4).on('keyup', function(e) {
+			if(password3.val() !== password4.val()) {
+				passwordsInfo2.removeClass().addClass('weakpass').html("비밀번호 확인이 일치하지 않습니다.");	
+			}else{
+				passwordsInfo2.removeClass().addClass('goodpass').html("비밀번호 확인이 일치합니다.");
+				isValidPassword = true;	
+			}
+			e.preventDefault();	
+		});
+		return isValidPassword;
+	};
+		</script>
+	
+	</script>
 
 <script id="user-admin-template" type="text/x-handlebars-template">
 <table class="table table-striped">

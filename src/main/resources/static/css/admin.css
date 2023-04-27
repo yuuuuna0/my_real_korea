@@ -244,7 +244,6 @@ ul#profile_summary li:nth-child(odd) {
 
 /* Booking */
 .strip_booking{
-	border-bottom:1px solid #ededed;
 	padding-bottom:15px;
 	margin-bottom:15px;
 }
@@ -317,10 +316,12 @@ ul.info_booking li{
 	margin-bottom:5px;
 }
 ul.info_booking li strong{
+	font-size:13px;
 	text-transform:uppercase;
 	display:block;
 	color:#555;
 }
+
 .booking_buttons{
 	margin-top:20px;
 }

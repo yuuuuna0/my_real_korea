@@ -720,6 +720,13 @@ a.btn_full_outline {
     display: block;
 }
 
+.strip_booking .divider {
+    background-color: #ededed;
+    height: 2px;
+    width: 100%;
+    margin-top: 5px;
+}
+
 .chat-icon-top {
   position: fixed;
   right: 18%;
@@ -763,6 +770,13 @@ a.btn_full_outline {
     padding-left: 15px;
     margin-top: 5px;
 }
+
+.strip_booking strong {
+	font-size: 20px;
+    line-height: 1.2;
+     color: #555;
+}
+
 .strip_booking h3 span {
     margin-top: 15px;
     color: #999;
@@ -771,8 +785,8 @@ a.btn_full_outline {
 }
 
 .strip_booking img {
-   width: 170px;
-   height: 150px;
+   width: 160px;
+   height: 145px;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
   
 }
@@ -780,14 +794,15 @@ a.btn_full_outline {
 
 ul.info_booking {
     list-style: none;
-    margin: 0;
-    padding: 15px 25px 15px 0;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    padding: 25px 25px 25px 25px;
     line-height: 2;
     font-size: 12px;
     color: #999;
-    /* line-height: 10; */
     border-right: 1px solid #ededed;
     text-align: right;
+    
 }
 
 .strip_booking .date {
@@ -871,6 +886,7 @@ a.btn_3, .btn_3 {
 .tripboard-trip-title h3{
 	height:37px;
 	font-weight:bold;
+	margin-top:0px;
 }
 
 .tripboard-trip-date {
@@ -880,7 +896,7 @@ a.btn_3, .btn_3 {
 .btn-secondary:not(:disabled):not(.disabled).active, .btn-secondary:not(:disabled):not(.disabled):active, .show>.btn-secondary.dropdown-toggle {
     color: #fff;
     background-color: #e04f67;
-    border-color: #4e555b;
+    border-color: #fff;
 }
 
 
@@ -921,3 +937,11 @@ a.btn_3, .btn_3 {
     font-size: 30px;
     font-family: 'MBC1961M';
 }
+
+#tools {
+    background: #fff;
+    padding: 5px;
+    margin-bottom: 15px;
+}
+
+

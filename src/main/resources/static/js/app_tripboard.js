@@ -97,6 +97,36 @@ $(document).on('change', '#sort-by', function(e) {
 	}
 });
 
+//동행게시판 모집상태별 정렬(모집중, 모집완료)
+$(document).on('change', '#sort-by-status', function(e) {
+	let selectedValue = $(this).val();
+	console.log(selectedValue);
+	
+		let url = 'tripboard-status-list';
+		let method = 'GET';
+		let contentType = 'application/json;charset=UTF-8';
+		let sendData = {tBoStatus:selectedValue};
+		
+		let async = true;
+		
+		let curPage = $('#cur-page');
+		let totRecordCount = $('#tot-record-count');
+		
+		Request.ajaxRequest(url, method, contentType, sendData,
+							function(resultJson){
+								curPage.text(resultJson.data.pageMaker.curPage);
+								totRecordCount.text(resultJson.data.pageMaker.totCount);
+								
+								if(resultJson.code == 1){
+									View.render('#tripboard-search-list-template', resultJson, '#tripboard-list');
+								}else {
+									alert(resultJson.msg);
+								}
+							}, async);
+		e.preventDefault();
+});
+
+
 //동행게시판 필터(사이드바 전체보기, 지역별 보기)
 $(document).on('click', '#all-city-list', function(e) {
 	let cityNo=$(this).attr('name');

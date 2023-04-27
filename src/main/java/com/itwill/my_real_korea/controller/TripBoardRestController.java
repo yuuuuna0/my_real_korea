@@ -266,7 +266,7 @@ public class TripBoardRestController {
 				msg = "성공";
 			}else {
 				code = 2;
-				msg = "해당 키워드 결과 값이 없습니다.";
+				msg = "일치하는 게시물이 없습니다.";
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

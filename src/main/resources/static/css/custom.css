@@ -221,6 +221,7 @@ header.sticky#colored #logo_home h1 a{
 #notice-list-item {
     position: relative;
     padding: 10px 20px 3px 20px;
+    border-radius: 40px;
 }
 #notice-list-item a{
 	font-size: 18px;
@@ -759,31 +760,23 @@ a.btn_full_outline {
     font-size: 18px;
     text-transform: uppercase;
     position: relative;
-    top: 10px;
-    padding-left: 65px;
+    padding-left: 15px;
+    margin-top: 5px;
 }
-
 .strip_booking h3 span {
+    margin-top: 15px;
     color: #999;
     display: block;
     font-size: 13px !important;
 }
 
-.strip_booking h3.hotel_booking:before, .strip_booking h3.tours_booking:before, .strip_booking h3.transfers_booking:before {
-    font-style: normal;
-    font-weight: normal;
-    font-family: "icon_set_1";
-    font-size: 30px;
-    color: #e04f67;
-    position: absolute;
-    border: 1px solid #ededed;
-    -webkit-border-radius: 50%;
-    -moz-border-radius: 50%;
-    border-radius: 50%;
-    left: 0;
-    text-align: center;
-    line-height: 50px;
+.strip_booking img {
+   width: 170px;
+   height: 150px;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  
 }
+
 
 ul.info_booking {
     list-style: none;
@@ -913,6 +906,7 @@ a.btn_3, .btn_3 {
     color: #fff;
     opacity: 0;
     margin-bottom: 0px;
+    cursor: pointer;
 }
 
 .tooltip-content-flip > span {

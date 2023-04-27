@@ -2,6 +2,14 @@ import * as View from "./view.js";
 import * as Request from "./request.js";
 // JSON.stringify() => 객체를 string 으로, JSON.parse() => string 을 객체로 만듦 
 
+// 검색창 입력 후 엔터키 => 검색
+$("#tour-search-keyword").keyup(e => {
+	if (e.keyCode == 13) {
+		selectedTourList();
+		e.preventDefault();
+	}
+});
+
 /********* function ********/
 //조건 넣어서 리스트 출력하기
 function selectedTourList(){

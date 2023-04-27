@@ -233,6 +233,8 @@ $(document).on('click', '#tripboard-modify-action', function(e){
 		let tBoStyle = $('input[name="sOoptions"]:checked').val();
 		let tBoStatus;
 		
+		console.log('>>>>>>>'+tBoImg);
+		
 		if(document.getElementById("tBoStatus").checked) {
 			tBoStatus = '0';
 		}else {

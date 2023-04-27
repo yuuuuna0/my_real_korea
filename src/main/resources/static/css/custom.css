@@ -848,8 +848,25 @@ a.btn_3, .btn_3 {
 	margin-bottom:10px;
 }
 .tripboard-image-box{
+	display: inline-block;
 	width:256px;
 	height:256px;
+    overflow:hidden;
+    margin:0 auto;
+}
+
+.tripboard-img-div{
+	display: inline-block;
+	width:256px;
+	height:256px;
+    overflow:hidden;
+    margin:0 auto;
+}
+
+.tripboard-img{
+	width:100%;
+    height:100%;
+    object-fit:cover;
 }
 
 .shop-item .tripboard_product_description h3 {

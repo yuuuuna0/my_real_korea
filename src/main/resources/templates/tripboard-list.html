@@ -119,14 +119,14 @@
 								<div class="tripboard-inner-box">
 									<div class="image-box tripboard-image-box">
 										<figure class="image tripboard-list-image">
-											<div th:if="${tripBoard.tBoImg}">
+											<div th:if="${tripBoard.tBoImg}" class="tripboard-img-div">
 												<a th:href="@{tripboard-detail(tBoNo=${tripBoard.tBoNo})}">
-													<img th:src="@{img/tripboard/{tBoImg}(tBoImg=${tripBoard.tBoImg})}"  alt="Image" class="img-fluid">
+													<img th:src="@{img/tripboard/{tBoImg}(tBoImg=${tripBoard.tBoImg})}"  alt="Image" class="tripboard-img">
 												</a>
 											</div>
-											<div th:if="${tripBoard.tUploadFile}">
+											<div th:if="${tripBoard.tUploadFile}" class="tripboard-img-div">
 												<a th:href="@{tripboard-detail(tBoNo=${tripBoard.tBoNo})}">
-													<img th:src="@{tripboardimages/{tUploadFile}(tUploadFile=${tripBoard.tUploadFile})}"  alt="Image" class="img-fluid">
+													<img th:src="@{tripboardimages/{tUploadFile}(tUploadFile=${tripBoard.tUploadFile})}"  alt="Image" class="tripboard-img">
 												</a>
 											</div>
 										</figure>

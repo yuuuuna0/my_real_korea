@@ -118,12 +118,7 @@
 				<div class="col-lg-9">
 					<div class="box_style_1">
 						<div class="post nopadding">
-							<div th:if="${tripBoard.tBoImg}">
-								<img th:src="@{img/tripboard/{tBoImg}(tBoImg=${tripBoard.tBoImg})}"  alt="Image" class="img-fluid">
-							</div>
-							<div th:if="${tripBoard.tUploadFile}">
-								<img th:src="@{tripboardimages/{tUploadFile}(tUploadFile=${tripBoard.tUploadFile})}"  alt="Image" class="img-fluid">
-							</div>
+							
 							
 							<div class="post_info clearfix">
 								<div class="post-left">
@@ -255,6 +250,13 @@
 									<textarea class="form-control style_2" name="tBoContent" id="tBoContent" style="height:150px;" th:text="${tripBoard.tBoContent}" required></textarea>
 								</div>
 								<br>
+								<div th:if="${tripBoard.tBoImg}">
+								<img th:src="@{img/tripboard/{tBoImg}(tBoImg=${tripBoard.tBoImg})}"  alt="Image" class="img-fluid">
+							</div>
+							<div th:if="${tripBoard.tUploadFile}">
+								<img th:src="@{tripboardimages/{tUploadFile}(tUploadFile=${tripBoard.tUploadFile})}"  alt="Image" class="img-fluid">
+							</div>
+							<br>
 								<div class="form-group">
 									<label><i class="icon-tag"></i> 해시태그</label>
 									<input class="form-control style_2" type="text" name="hashtag" id="hashtag" th:value="${tripBoard.hashtag}">
@@ -273,6 +275,7 @@
 							<div class="form-group">
 								<button type="submit" class="btn_1 green" id="tripboard-modify-action">수정</button>
 								<input type="hidden" id="modify-tBoNo" th:value=${tripBoard.tBoNo}>
+								<input type="hidden" id="modify-tBoImg" th:value=${tripBoard.tBoImg}>
 								<a th:href=@{tripboard-detail(tBoNo=${tripBoard.tBoNo})} class="btn_1 green">취소</a>
 							</div>
 							

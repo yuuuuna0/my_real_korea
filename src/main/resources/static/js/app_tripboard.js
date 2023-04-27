@@ -228,10 +228,12 @@ $(document).on('click', '#tripboard-modify-action', function(e){
 		let url = `tripboard/${tBoNo}`;
 		let method = 'PUT';
 		let formData = new FormData();
-		let tBoImg = null;
+		let tBoImg = $('#modify-tBoImg').val();
 		let cityNo = $('input[name="cOptions"]:checked').val();
 		let tBoStyle = $('input[name="sOoptions"]:checked').val();
 		let tBoStatus;
+		
+		console.log('>>>>>>>'+tBoImg);
 		
 		if(document.getElementById("tBoStatus").checked) {
 			tBoStatus = '0';
@@ -259,7 +261,6 @@ $(document).on('click', '#tripboard-modify-action', function(e){
 			console.log(inputFileName);
 		}else {
 			//파일 선택이 안 되면 hidden으로 넣어 놓은 tBoImg 이미지로 선택
-			tBoImg = $('#tBoImg').val();
 			formData.append('tBoImg', tBoImg);
 		}
 		

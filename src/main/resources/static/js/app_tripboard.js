@@ -97,6 +97,36 @@ $(document).on('change', '#sort-by', function(e) {
 	}
 });
 
+//동행게시판 모집상태별 정렬(모집중, 모집완료)
+$(document).on('change', '#sort-by-status', function(e) {
+	let selectedValue = $(this).val();
+	console.log(selectedValue);
+	
+		let url = 'tripboard-status-list';
+		let method = 'GET';
+		let contentType = 'application/json;charset=UTF-8';
+		let sendData = {tBoStatus:selectedValue};
+		
+		let async = true;
+		
+		let curPage = $('#cur-page');
+		let totRecordCount = $('#tot-record-count');
+		
+		Request.ajaxRequest(url, method, contentType, sendData,
+							function(resultJson){
+								curPage.text(resultJson.data.pageMaker.curPage);
+								totRecordCount.text(resultJson.data.pageMaker.totCount);
+								
+								if(resultJson.code == 1){
+									View.render('#tripboard-search-list-template', resultJson, '#tripboard-list');
+								}else {
+									alert(resultJson.msg);
+								}
+							}, async);
+		e.preventDefault();
+});
+
+
 //동행게시판 필터(사이드바 전체보기, 지역별 보기)
 $(document).on('click', '#all-city-list', function(e) {
 	let cityNo=$(this).attr('name');
@@ -228,10 +258,12 @@ $(document).on('click', '#tripboard-modify-action', function(e){
 		let url = `tripboard/${tBoNo}`;
 		let method = 'PUT';
 		let formData = new FormData();
-		let tBoImg = null;
+		let tBoImg = $('#modify-tBoImg').val();
 		let cityNo = $('input[name="cOptions"]:checked').val();
 		let tBoStyle = $('input[name="sOoptions"]:checked').val();
 		let tBoStatus;
+		
+		console.log('>>>>>>>'+tBoImg);
 		
 		if(document.getElementById("tBoStatus").checked) {
 			tBoStatus = '0';
@@ -259,7 +291,6 @@ $(document).on('click', '#tripboard-modify-action', function(e){
 			console.log(inputFileName);
 		}else {
 			//파일 선택이 안 되면 hidden으로 넣어 놓은 tBoImg 이미지로 선택
-			tBoImg = $('#tBoImg').val();
 			formData.append('tBoImg', tBoImg);
 		}
 		

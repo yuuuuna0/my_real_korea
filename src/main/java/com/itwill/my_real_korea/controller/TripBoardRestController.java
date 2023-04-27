@@ -134,7 +134,8 @@ public class TripBoardRestController {
 		String msg = "성공";
 		List<TripBoard> data = new ArrayList<TripBoard>();
 		try {
-			tripBoard.getTBoImg();
+			//String getTBoImg = tripBoard.getTBoImg();
+			
 			// tBoNo로 동행 게시글 1개 찾기, 수정 성공시 code 1
 			City city=cityService.findByCityNo(cityNo);
 			tripBoard.setCity(city);
@@ -142,6 +143,7 @@ public class TripBoardRestController {
 			TripBoard findTripBoard = tripBoardService.selectByTbNo(tBoNo);
 			if(findTripBoard != null) {
 				tripBoard.setTBoNo(tBoNo);
+				//tripBoard.setTBoImg(getTBoImg);
 				//파일업로드
 				if(file != null) {
 					//선택된 파일이 있다며, 파일 저장
@@ -152,6 +154,7 @@ public class TripBoardRestController {
 					System.out.println(">>>>>>>>>>>>" + file.getOriginalFilename());
 				}
 				tripBoardService.updateTripBoard(tripBoard);
+				System.out.println(">>>>>>>>>>>>>>>>>>>" + tripBoard.getTBoImg());
 				code = 1;
 				msg = "성공";
 				// 수정 성공한 동행 게시판 객체 데이터 붙임
@@ -263,7 +266,7 @@ public class TripBoardRestController {
 				msg = "성공";
 			}else {
 				code = 2;
-				msg = "해당 키워드 결과 값이 없습니다.";
+				msg = "일치하는 게시물이 없습니다.";
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

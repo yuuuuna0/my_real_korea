@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.itwill.my_real_korea.dto.City;
+import com.itwill.my_real_korea.dto.Location;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -27,6 +28,7 @@ public class Ticket {
 
     private City city;
     private List<TicketImg> ticketImgList;
+    private Location location;
 
     private int tiScore;
 
@@ -40,5 +42,6 @@ public class Ticket {
         this.tiCount = tiCount;
         this.city = city;
         this.ticketImgList = new ArrayList<>();
+        this.location=new Location();
     }
 }

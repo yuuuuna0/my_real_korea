@@ -112,6 +112,21 @@ $(document).ready(function() {
   }
 });
 
+const Toast = Swal.mixin({
+  toast: true,
+  position: 'top-right',
+  iconColor: 'white',
+  customClass: {
+    popup: 'colored-toast',
+    content: 'user-font'
+  },
+  showConfirmButton: false,
+  timer: 1500,
+  timerProgressBar: true
+})
+
+
+
 //회원 가입 폼
 $(document).on('click','#btn-user-join',function() {
 	location.href="user-write";
@@ -120,12 +135,20 @@ $(document).on('click','#btn-user-join',function() {
 //로그인 액션
 $(document).on('click','#btn-user-login',function(e) {
     if (document.f.userId.value == "") {
-      toastr.error('아이디를 입력하십시오.');
+//      toastr.error('아이디를 입력하십시오.');
+		Toast.fire({
+		  icon: 'error',
+		  title: '아이디를 입력하세요.'
+		})
       document.f.userId.focus();
       return false;
     }
     if (document.f.password.value == "") {
-      toastr.error('비밀번호를 입력하십시오.');
+//      toastr.error('비밀번호를 입력하십시오.');
+		Toast.fire({
+		  icon: 'error',
+		  title: '비밀번호를 입력하세요.'
+		})
       document.f.password.focus();
       return false;
     }
@@ -140,16 +163,35 @@ $(document).on('click','#btn-user-login',function(e) {
       contentType: 'application/json',
       success: function(data) {
         if (data.status == 0) {
-          window.location.replace(data.data); //이전 페이지로 이동
+/*쓸까말까 고민중*/	
+		    const toast = Swal.fire({
+		      position: 'top-end',
+		      icon: 'success',
+		      text: '로그인 성공! 이전 페이지로 이동합니다.',
+		      showConfirmButton: false
+		    });
+		    setTimeout(() => {
+		      toast.close();
+		      window.location.replace(data.data);
+		    }, 1000);
+ //         window.location.replace(data.data); //이전 페이지로 이동
         } else if (data.status == 1) {
           View.render('#user-auth-template', {}, '#user-login');
         } else {
-          toastr.error(data.message);
+//          toastr.error(data.message);
+		Toast.fire({
+		  icon: 'error',
+		  title: data.message
+		})      
         }
       },
       error: function(xhr, status, error) {
         console.error(error);
-        toastr.error('로그인에 실패했습니다.');
+        //toastr.error('로그인에 실패했습니다.');
+		Toast.fire({
+		  icon: 'error',
+		  title: '로그인에 실패했습니다.'
+		})
       }
     });
     e.preventDefault();	
@@ -168,12 +210,20 @@ $(document).on('click','#btn-user-find-id',function(e) {
     let email = $('#email').val();
     
     if (name == "") {
-    	toastr.error("이름을 입력하세요.");
+//    	toastr.error("이름을 입력하세요.");
+		Toast.fire({
+		  icon: 'error',
+		  title: '이름을 입력하세요.'
+		})
         document.i.name.focus();
         return false;
     }
     if (email == "") {
-    	toastr.error("이메일을 입력하세요.");
+//    	toastr.error("이메일을 입력하세요.");
+		Toast.fire({
+		  icon: 'error',
+		  title: '이메일을 입력하세요.'
+		})
         document.i.email.focus();
         return false;
     }
@@ -187,9 +237,15 @@ $(document).on('click','#btn-user-find-id',function(e) {
         },
         success: function(response) {
             if (response.status == 1) {
-            	toastr.success(response.message);
+			    Swal.fire({
+					icon: 'success',
+					text: response.message
+				})
             } else if (response.status == 2) {
-            	alert(response.message);
+			    Swal.fire({
+					icon: 'error',
+					text: response.message
+				})
             }
         },
         error: function(jqXHR, textStatus, errorThrown) {
@@ -205,12 +261,20 @@ $(document).on('click','#btn-user-find-pw',function(e) {
   const email = document.p.email.value;
 
   if (userId === "") {
-	  toastr.error("아이디를 입력하십시오.");
+//	  toastr.error("아이디를 입력하십시오.");
+		Toast.fire({
+		  icon: 'error',
+		  title: '아이디를 입력하세요.'
+		})
     document.p.name.focus();
     return false;
   }
   if (email === "") {
-	  toastr.error("이메일을 입력하십시오.");
+//	  toastr.error("이메일을 입력하십시오.");
+		Toast.fire({
+		  icon: 'error',
+		  title: '이메일을 입력하세요.'
+		})
     document.p.email.focus();
     return false;
   }
@@ -227,15 +291,33 @@ $(document).on('click','#btn-user-find-pw',function(e) {
     dataType: "json",
     success: function (response) {
       if (response.status == 1) {
-        toastr.success(response.message);
-        window.location.replace("user-login");
+//        toastr.success(response.message);
+//        window.location.replace("user-login");
+		    const toast = Swal.fire({
+		      position: 'top-end',
+		      icon: 'success',
+		      text: '이메일로 임시 비밀번호가 발송되었습니다. <br/>로그인 페이지로 이동합니다.',
+		      showConfirmButton: false
+		    });
+		    setTimeout(() => {
+		      toast.close();
+		      window.location.replace('user-login');
+		    }, 1000);
       } else {
-        alert(response.message);
+//        alert(response.message);
+		    Swal.fire({
+				icon: 'error',
+				text: response.message
+			})
       }
     },
     error: function (xhr, status, error) {
       console.error(error);
-      alert("오류가 발생했습니다.");
+ //     alert("오류가 발생했습니다.");
+		Toast.fire({
+		  icon: 'error',
+		  title: '오류가 발생했습니다.'
+		})     
     },
   });
   e.preventDefault();
@@ -250,14 +332,31 @@ $(document).on('click','#btn-user-auth',function(e) {
         data: { mailAuthKey: mailAuthKey },
         success: function(response) {
             if (response.status === 0) {
-                toastr.success("인증 성공! 로그인 페이지로 이동합니다.")
-                window.location.replace(response.data);
+ //               toastr.success("인증 성공! 로그인 페이지로 이동합니다.")
+ //               window.location.replace(response.data);
+	 		    const toast = Swal.fire({
+			      position: 'top-end',
+			      icon: 'success',
+			      text: '인증 성공! 로그인 페이지로 이동합니다.',
+			      showConfirmButton: false
+			    });
+			    setTimeout(() => {
+			      toast.close();
+			      window.location.replace(response.data);
+			    }, 1000);
             } else {
-                toastr.error("인증 코드가 일치하지 않습니다.");
+//                toastr.error("인증 코드가 일치하지 않습니다.");
+			Toast.fire({
+			  icon: 'error',
+			  title: '인증 코드가 일치하지 않습니다.'
+			})
             }
         },
         error: function(xhr) {
-            alert("서버 오류가 발생했습니다.");
+		Toast.fire({
+		  icon: 'error',
+		  title: '서버 오류가 발생했습니다.'
+		})
         }
     });
       e.preventDefault();
@@ -278,11 +377,17 @@ $(document).on('click','#btn-user-id-check',function(e) {
 	const userId = $('#userId').val().trim();
 
 	if (!idValidate.test(userId)) {
-		toastr.error('사용 불가능한 아이디 형식입니다.');
+		Toast.fire({
+		  icon: 'error',
+		  title: '사용 불가능한 아이디 형식입니다.'
+		})
 		return $('#userId').val('');
 	}
 	if (userId === '') {
-		toastr.error('아이디를 입력해주세요.');
+		Toast.fire({
+		  icon: 'error',
+		  title: '아이디를 입력하세요.'
+		})
 		return;
 	}
 
@@ -292,15 +397,26 @@ $(document).on('click','#btn-user-id-check',function(e) {
     	    data: { userId: userId },
     	    success: function(cnt) {
 				if (cnt == 0) {
-					alert('사용 가능한 아이디입니다.');
+//					alert('사용 가능한 아이디입니다.');
+					Swal.fire({
+						icon: 'success',
+						text: '사용 가능한 아이디입니다.'
+					})
 					isIdChecked = true;
 				} else {
-					alert('이미 사용중인 아이디입니다.');
+//					alert('이미 사용중인 아이디입니다.');
+					Swal.fire({
+						icon: 'error',
+						text: '이미 사용중인 아이디입니다.'
+					})
 					$('#userId').val('');
 				}
 			},
 			error: function() {
-				alert('에러입니다.');
+				Toast.fire({
+				  icon: 'error',
+				  title: '오류가 발생했습니다.'
+				})
     	    }
 		});
 		e.preventDefault();	
@@ -377,20 +493,36 @@ $(document).on('click','#btn-user-create',function(e) {
 	const termsPrivacy = document.getElementById("termsPrivacy");
 		  
 	if (!termsService.checked || !termsPrivacy.checked) {
-		toastr.error("이용 약관에 모두 동의해주세요.");
+//		toastr.error("이용 약관에 모두 동의해주세요.");
+		Toast.fire({
+		  icon: 'error',
+		  title: '이용 약관에 모두 동의해주세요.'
+		})
 		return false;
 	}
 	if (user.userId === "") {
-		toastr.error("사용자 아이디를 입력하세요.");
+//		toastr.error("사용자 아이디를 입력하세요.");
+		Toast.fire({
+		  icon: 'error',
+		  title: '아이디를 입력하세요.'
+		})
 	    $("#userId").focus();
 	    return false;
 	}
 	if (!isIdChecked) {
-		toastr.error("아이디 중복 확인 버튼을 클릭해주세요.");
+//		toastr.error("아이디 중복 확인 버튼을 클릭해주세요.");
+		Toast.fire({
+		  icon: 'error',
+		  title: '아이디 중복 확인 버튼을 클릭해주세요.'
+		})
 	    return false;
 	}
 	if (user.password !== user.password2) {
-		toastr.error("비밀번호와 비밀번호 확인은 일치해야 합니다.");
+//		toastr.error("비밀번호와 비밀번호 확인은 일치해야 합니다.");
+		Toast.fire({
+		  icon: 'error',
+		  title: '비밀번호와 비밀번호 확인은 일치해야 합니다.'
+		})
 	    $("#password2").focus().select();
 	    return false;
 	}
@@ -398,37 +530,65 @@ $(document).on('click','#btn-user-create',function(e) {
 		return false;
 	}
 	if (user.name === "") {
-		toastr.error("이름을 입력하세요.");
+//		toastr.error("이름을 입력하세요.");
+		Toast.fire({
+		  icon: 'error',
+		  title: '이름을 입력하세요.'
+		})
 	    $("#name").focus();
 	    return false;
 	}
 	if (user.nickname === "") {
-		toastr.error("닉네임을 입력하세요.");
+//		toastr.error("닉네임을 입력하세요.");
+		Toast.fire({
+		  icon: 'error',
+		  title: '닉네임을 입력하세요.'
+		})
 	    $("#nickname").focus();
 	    return false;
 	}
 	if (user.phone === "") {
-		toastr.error("휴대폰 번호를 입력하세요.");
+//		toastr.error("휴대폰 번호를 입력하세요.");
+		Toast.fire({
+		  icon: 'error',
+		  title: '휴대폰 번호를 입력하세요.'
+		})
 	    $("#phone").focus();
 		return false;
 	}
 	if (user.email === "") {
-		alert("이메일 주소를 입력하세요.");
+//		alert("이메일 주소를 입력하세요.");
+		Toast.fire({
+		  icon: 'error',
+		  title: '이메일 주소를 입력하세요.'
+		})
 	    $("#email").focus();
 		return false;
 	}
 	if (user.birth === "") {
-		toastr.error("생년월일을 입력하세요.");
+//		toastr.error("생년월일을 입력하세요.");
+		Toast.fire({
+		  icon: 'error',
+		  title: '생년월일을 입력하세요.'
+		})
 	    $("#birth").focus();
 		return false;
 	}
 	if (user.address === "") {
-		toastr.error("주소를 입력하세요.");
+//		toastr.error("주소를 입력하세요.");
+		Toast.fire({
+		  icon: 'error',
+		  title: '주소를 입력하세요.'
+		})
 	    $("#address").focus();
 		return false;
 	}
 	if (user.gender === "") {
-		toastr.error("성별을 선택하세요.");
+//		toastr.error("성별을 선택하세요.");
+		Toast.fire({
+		  icon: 'error',
+		  title: '성별을 선택하세요.'
+		})
 	    $("input[name=gender]").focus();
 		return false;
 	}

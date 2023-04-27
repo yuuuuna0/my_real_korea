@@ -221,6 +221,7 @@ header.sticky#colored #logo_home h1 a{
 #notice-list-item {
     position: relative;
     padding: 10px 20px 3px 20px;
+    border-radius: 40px;
 }
 #notice-list-item a{
 	font-size: 18px;
@@ -885,6 +886,7 @@ a.btn_3, .btn_3 {
 .tripboard-trip-title h3{
 	height:37px;
 	font-weight:bold;
+	margin-top:0px;
 }
 
 .tripboard-trip-date {
@@ -920,6 +922,7 @@ a.btn_3, .btn_3 {
     color: #fff;
     opacity: 0;
     margin-bottom: 0px;
+    cursor: pointer;
 }
 
 .tooltip-content-flip > span {

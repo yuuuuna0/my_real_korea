@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.itwill.my_real_korea.dto.City;
+import com.itwill.my_real_korea.dto.Location;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -44,6 +45,7 @@ public class Tour {
 	
 	private List<TourImg> tourImgList;
 	private int toScore;	//투어의 평점 평균
+	private Location location;
 
 	public Tour(int toNo, String toName, int toType, int toTime, int toPerson, String toMeet, int toPrice,
 			String toInfo, String toNotice, int toCount,City city) {
@@ -60,6 +62,7 @@ public class Tour {
 		this.toCount = toCount;
 		this.city = city;
 		this.tourImgList=new ArrayList<TourImg>();
+		this.location=new Location();
 	}
 	
 	

@@ -474,6 +474,19 @@ function validatePassword(password1, password2, passwordsInfo){
 	return isValidPassword;
 };
 
+const Toast1 = Swal.mixin({
+  toast: true,
+  position: 'top-right',
+  iconColor: 'white',
+  customClass: {
+    popup: 'colored-toast'
+  },
+  showConfirmButton: false,
+  timer: 1500,
+  timerProgressBar: true
+})
+
+
 //회원 가입
 $(document).on('click','#btn-user-create',function(e) {
     	
@@ -494,10 +507,13 @@ $(document).on('click','#btn-user-create',function(e) {
 		  
 	if (!termsService.checked || !termsPrivacy.checked) {
 //		toastr.error("이용 약관에 모두 동의해주세요.");
-		Toast.fire({
-		  icon: 'error',
-		  title: '이용 약관에 모두 동의해주세요.'
-		})
+	Swal.fire({
+	  position: 'top-end',
+	  icon: 'error',
+	  title: "이용 약관에 모두 동의해주세요.",
+	  showConfirmButton: false,
+	  timer: 1500
+	})
 		return false;
 	}
 	if (user.userId === "") {
@@ -637,18 +653,7 @@ $(document).on('click', '#btn-user-modify-form', function(e) {
 
 $(document).on('click','#btn-user-modify-action',function(e) {
 	
-	
-	if (document.f.password1.value == "") {
-		toastr.error('비밀번호를 입력하십시오.');
-		f.password.focus();
-		return false;
-	}
-	if (document.f.password2.value == "") {
-		toastr.error('비밀번호 확인을 입력하십시오.');
-		f.password2.focus();
-		return false;
-	} 
-	if (document.getElementsByName("password1")[0].value !== document.getElementsByName("password2")[0].value) {
+	if (document.getElementsByName("password3")[0].value !== document.getElementsByName("password4")[0].value) {
 	    toastr.error('비밀번호와 비밀번호 확인이 일치하지 않습니다.');
 	    return;
 	  }
@@ -660,7 +665,7 @@ $(document).on('click','#btn-user-modify-action',function(e) {
 	let smoking = $('input[name="sOptions"]:checked').val();
 	
 	formData.append('userId', $('#userId').val());
-	formData.append('password', $('#password1').val());
+	formData.append('password', $('#password3').val());
 	formData.append('nickname', $('#nickname').val());
 	formData.append('phone', $('#phone').val());
 	formData.append('email', $('#email').val());
@@ -695,10 +700,6 @@ $(document).on('click','#btn-user-modify-action',function(e) {
 		e.preventDefault();
 });
 
-//회원탈퇴
-$(document).on('click','#btn-user-remove',function() {
-	location.href="user-remove-action";
-});
 
 //프로필 수정 취소
 $(document).on('click','#btn-user-modify-cancle',function() {
@@ -710,3 +711,5 @@ $("#file").on('change',function(){
   var fileName = $("#file").val();
   $(".upload-name").val(fileName);
 });
+
+

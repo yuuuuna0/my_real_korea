@@ -59,12 +59,9 @@
 		<div id="position">
 			<div class="container">
 				<ul>
-					<li><a href="index">Home</a>
+					<li><i class="icon-home" onclick="location.href='index'"></i><a href="index"></a>
 					</li>
-					<li><a href="#">동행</a>
-					</li>
-					<li><a href="tripboard-list">동행찾기</a>
-					</li>
+					<li>동행찾기</li>
 				</ul>
 			</div>
 		</div>
@@ -79,12 +76,12 @@
 							<div class="row">
 								<div class="col-6">
 										<!-- 지역 페이징 갯수 보이게 하기 -->
-										<div id="page-info" class="results_shop" th:each="tripBoardPage:${tripBoardListPage}">
-										<span id="cur-page" th:text="${tripBoardPage.pageMaker.curPage}"></span> 페이지
-										<span id="tot-record-count"  th:unless="${tripBoardPage.totRecordCount} &gt; ${tripBoardPage.pageMaker.pageEnd} 
-										and ${tripBoardPage.totRecordCount} > 0" th:text="'|'+${tripBoardPage.pageMaker.totCount}"></span>
-										       | 전체 건수: <span id="tot-record-count"   th:text="${tripBoardPage.pageMaker.totCount}"></span>
-									    </div>
+									    <div id="page-info" class="results_shop" >
+										<span id="cur-page" th:text="${tripBoardListPage.pageMaker.curPage}"></span> &nbsp;페이지 &nbsp;
+										       | 전체 건수: <span id="tot-record-count"   th:text="${tripBoardListPage.pageMaker.totCount}"></span>
+										<br>
+										
+									</div>
 								</div>
 								<div class="col-6">
 									<div class="form-group" style="margin-left:10px">
@@ -198,7 +195,7 @@
 					<aside class="sidebar">
 						<div class="widget">
 							<div class="input-group">
-								<input id="tripboard-search-keyword" type="text" class="form-control" placeholder="Search...">
+								<input id="tripboard-search-keyword" type="text" class="form-control" placeholder="검색">
 								<span class="input-group-btn">
 		                        <button id="tripboard-search-btn" class="btn btn-default" type="button" style="margin-left:0;"><i class="icon-search"></i></button>
 		                        </span>

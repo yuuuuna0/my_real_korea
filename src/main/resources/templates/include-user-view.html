@@ -16,11 +16,12 @@
 								</div>
 								<div class="col-lg-6 col-md-5">
 								<div class="col-md-12">
-								 &nbsp;<strong th:text="${tourReview.tour.toName}"></strong>
+								 <strong th:text="${tourReview.tour.toName}"></strong>
 								</div>
+							
 								<div class="col-md-12">
-									<h3 class="tours_booking">
-										<span> <th:block th:text="${tourReview.toReviewContent}"></th:block></span>
+									<h3 class="strip_booking">
+										<th:block th:text="${tourReview.toReviewContent}"></th:block>
 										<span th:text="${tourReview.toReviewTitle}">2 Adults / 2 Childs</span>
 									</h3>
 								</div>
@@ -56,10 +57,11 @@
 								</div>
 								<div class="col-lg-6 col-md-5">
 								<div class="col-md-12">
-								>> &nbsp;<strong th:text="${ticketReview.ticket.tiTitle}"></strong>
+								<strong th:text="${ticketReview.ticket.tiTitle}"></strong>
+							
 								</div>
 								<div class="col-md-12">
-									<h3 class="tours_booking">
+									<h3 class="strip_booking">
 										 <th:block th:text="${ticketReview.tiReviewContent}"></th:block>
 										<span th:text="${ticketReview.tiReviewTitle}">2 Adults / 2 Childs</span>
 									</h3>
@@ -104,9 +106,10 @@
 									</div>
 								</div>
 								<div class="col-lg-6 col-md-5">
-									<h3 class="tours_booking" th:if = "${tripBoard.userId != null}" >
-										 <th:block th:text="${tripBoard.tBoTitle}"></th:block>
+									<h3 class="strip_booking" th:if = "${tripBoard.userId != null}" >
+										 <strong th:block th:text="${tripBoard.tBoTitle}"></th:block> </strong>
 									</h3>
+									
 									<h3 th:if = "${tripBoard.userId != null}">
 										<span><th:block th:text="${tripBoard.tBoContent}"></th:block></span>
 									</h3>
@@ -161,15 +164,15 @@
 									</div>
 								</div>
 								<div class="col-lg-6 col-md-5">
-									<h3 class="tours_booking" th:if = "${freeBoard.userId != null}" >
-										<th:block th:text="${freeBoard.fBoTitle}"></th:block>
+									<h3 class="strip_booking" th:if = "${freeBoard.userId != null}" >
+										<strong th:block th:text="${freeBoard.fBoTitle}"></th:block> </strong>
 									</h3>
+									
 									<h3 th:if = "${freeBoard.userId != null}" >
 										<span><th:block th:text="${freeBoard.fBoContent}"></th:block></span>
 									</h3>
 								</div>
 								<div class="col-lg-2 col-md-3">
-
 								</div>
 								<div class="col-lg-2 col-md-2">
 									<div class="booking_buttons">
@@ -224,24 +227,31 @@
 										</span>
 									</div>
 								</div>
+								
+					
+								
 								<div class="col-lg-6 col-md-5">
-									<h3 class="tours_booking" th:if="${payment.Ticket != null}">
-										 <th:block th:text="${payment.Ticket.tiTitle}"></th:block>
-										<span th:text="${payment.pMsg}">2 Adults / 2 Childs</span>
+									<h3 class="strip_booking" th:if="${payment.Ticket != null}">
+										 <strong th:block th:text="${payment.Ticket.tiTitle}"></th:block></strong>
+										 <span th:text="${payment.pMsg}">2 Adults / 2 Childs</span>
 									</h3>
-									<h3 class="tours_booking" th:if="${payment.Tour != null}">
-										 <th:block th:text="${payment.Tour.toName}"></th:block>
-										<span th:text="${payment.pMsg}">2 Adults / 2 Childs</span>
-									</h3>
+									<h3 class="strip_booking" th:if="${payment.Tour != null}">
+										 <strong th:block th:text="${payment.Tour.toName}"></th:block></strong>
+										<span th:text="${payment.pMsg}">2 Adults / 2 Childs</span> 
+									</h3>		
 								</div>
+								
+								
+								
+								
 								<div class="col-lg-2 col-md-3">
 									<ul class="info_booking">
 										<li>
-											<strong>Booking id</strong> 
+											<strong>예약번호</strong> 
 											<span th:text="${#dates.format(payment.pDate, 'yyyyMMdd')+''+payment.pNo}">23442</span>
 										</li>
 										<li>
-											<strong>Booked on</strong> 
+											<strong>예약일자</strong> 
 											<span th:text="${#dates.format(payment.pDate,'yyyy MM dd . EEE')}">Sat. 20 Dec. 2015</span>
 										</li>
 									</ul>

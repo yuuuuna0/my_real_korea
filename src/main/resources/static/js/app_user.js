@@ -684,10 +684,6 @@ $(document).on('click','#btn-user-modify-action',function(e) {
 		e.preventDefault();
 });
 
-//회원탈퇴
-$(document).on('click','#btn-user-remove',function() {
-	location.href="user-remove-action";
-});
 
 //프로필 수정 취소
 $(document).on('click','#btn-user-modify-cancle',function() {

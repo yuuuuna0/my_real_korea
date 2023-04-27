@@ -160,11 +160,11 @@ const phoneNumber = (target) => {
 								</li>
 							</ul>
 								<br><br>
-	<h3 style ="margin-left:120px; font-family: MBC1961M;" class = "icon-vcard" > 나를 표현 해주세요 ! </h3>
-	<br>
+									<h3 style ="margin-left:120px; font-family: MBC1961M;" class = "icon-vcard" > 나를 표현 해주세요 ! </h3>
+									<br>
 							<ul id="profile_summary_userf" th:object="${loginUser.userAddInfo}">
 								<li>음주 여부 
-								<span th:text="*{alcohol == 1} ? '선호함' : (*{alcohol == 2} ? '음주 선호하지 않음' : null)"></span>
+								<span th:text="*{alcohol == 1} ? '선호함' : (*{alcohol == 2} ? '선호하지 않음' : null)"></span>
 								</li>
 								<li>흡연 여부 
 								<span th:text="*{smoking == 1} ? '흡연' : (*{smoking == 2} ? '비흡연' :  null)"></span>
@@ -179,9 +179,7 @@ const phoneNumber = (target) => {
 					<div style="text-align: center;">
 					<input id="btn-user-modify-form" value="프로필 수정" class="btn_1 green" type="button"> 
 					<input id="btn-user-remove" value="회원 탈퇴" class="btn_1 green" type="button"> 
-					<!-- 
-					<button class="btn_1 green" type="button" onclick="userRemove();">회원 탈퇴</button>
-					 -->
+				
                     	<th:block th:if="${session.loginUser.isAdmin==0}">
                             <input id="btn-user-admin" value="관리자 페이지" class="btn_1 green" type="button">
                         </th:block>

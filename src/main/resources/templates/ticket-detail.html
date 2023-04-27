@@ -201,13 +201,13 @@
 					<br><br>
 					<div class="row" id="ticketReviewDiv">
 						<div class="col-lg-3">
-							<h3>Reviews</h3>
+							<h3>티켓 리뷰</h3>
 							<div th:if="${session.loginUser!=null}">
 								<a href="#" class="btn_1 add_bottom_30" id="myReviewBtn" data-toggle="modal" data-target="#myReview" 
-								th:data-id="${session.loginUser.userId}" th:data-tino="${session.ticket.tiNo}">Leave a review</a>
+								th:data-id="${session.loginUser.userId}" th:data-tino="${session.ticket.tiNo}">리뷰 남기기</a>
 							</div>
 							<div th:if="${session.loginUser==null}">
-								<a href="#" class="btn_1 add_bottom_30" onclick="location.href='./user-login'">Leave a review</a>
+								<a href="#" class="btn_1 add_bottom_30" onclick="location.href='./user-login'">리뷰 남기기</a>
 							</div>
 						</div>
 						<div class="col-lg-9">
@@ -295,7 +295,7 @@
 					<div class="box_style_1 expose">
 						<h3 class="inner">예약하기</h3>
 						<div class="row">
-							<div class="col-md-6">
+							<div class="col-md-12">
 								<div class="form-group">
 									<label><i class="icon-calendar-7"></i> 예약 날짜</label>
 									<input class="form-control" data-date-format="yyyy-MM-dd" type="date" id="pStartDate" name="pStartDate" required>
@@ -303,7 +303,7 @@
 							</div>
 						</div>
 						<div class="row">
-							<div class="col-6">
+							<div class="col-12">
 								<div class="form-group">
 									<label>수량</label>
 									<div class="numbers-row">
@@ -485,12 +485,12 @@
 								<div class="form-group">
 									<label>평점</label>
 									<select class="form-control" name="tiReviewStar" id="tiReviewStar">
-										<option value="0">Please review</option>
-										<option value="1">Low</option>
-										<option value="2">Sufficient</option>
-										<option value="3">Good</option>
-										<option value="4">Excellent</option>
-										<option value="5">Super</option>
+										<option value="0">평점을 남겨주세요</option>
+										<option value="1">1점</option>
+										<option value="2">2점</option>
+										<option value="3">3점</option>
+										<option value="4">4점</option>
+										<option value="5">5점</option>
 									</select>
 								</div>
 							</div>

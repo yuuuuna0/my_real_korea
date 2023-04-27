@@ -53,15 +53,6 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-8">
-                        <span class="rating"><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class=" icon-star-empty"></i></span>
-                        <h1 th:text="${session.ticket.tiTitle}"></h1>
-                        <span th:text="${session.ticket.city.cityName}"></span>
-                    </div>
-                    <div class="col-md-4">
-                        <div id="price_single_main" class="hotel">
-                            <span data-th-text="${#numbers.formatInteger(session.ticket.tiPrice ,3, 'COMMA')} +'원' "></span>
-                        </div>
-                    </div>
                     <span class="rating" id="tiScoreDiv" >
 							<input type="hidden" id="tiScore" th:value="${session.ticket.tiScore}">
 							<i class="icon-star voted"></i>
@@ -70,6 +61,14 @@
 							<i class="icon-star voted"></i>
 							<i class="icon-star-empty"></i>
 						</span>
+                        <h1 th:text="${session.ticket.tiTitle}"></h1>
+                        <span th:text="${session.ticket.city.cityName}"></span>
+                    </div>
+                    <div class="col-md-4">
+                        <div id="price_single_main" class="hotel">
+                            <span data-th-text="${#numbers.formatInteger(session.ticket.tiPrice ,3, 'COMMA')} +'원' "></span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -261,32 +260,6 @@
 								<!-- DB -->
 
 								<!-- <p> <img src="" id="result-image"> </p> -->
-
-								<div class="rating" th:switch=${ticketReview.tiReviewStar}>
-									<input type="hidden" id="tiReviewStar" th:value="${ticketReview.tiReviewStar}">
-									<div th:case="0">
-										<i class="icon-star-empty"></i>							
-										<i class="icon-star-empty"></i>							
-										<i class="icon-star-empty"></i>							
-										<i class="icon-star-empty"></i>							
-										<i class="icon-star-empty"></i>							
-									</div>
-									<div th:case="5">
-											<i class="icon-star voted"></i>
-											<i class="icon-star voted"></i>
-											<i class="icon-star voted"></i>
-											<i class="icon-star voted"></i>
-											<i class="icon-star voted"></i>
-									</div>
-									<div th:case="*">
-										<span th:each="i:${#numbers.sequence(0,ticketReview.tiReviewStar-1)}">
-												<i class="icon-star voted"></i>
-										</span>
-										<span th:each="i:${#numbers.sequence(ticketReview.tiReviewStar,4)}">
-												<i class="icon-star-empty"></i>
-										</span>
-									</div>
-									</div>
 								</form>
 							</div>
 							<!-- End review strip -->
@@ -295,8 +268,9 @@
 				</div>
 			</div>
 				<!--End  single_tour_desc-->
+				</div>
 
-				<aside class="col-lg-4 row">
+				<aside class="col-lg-4">
 					<p class="d-none d-xl-block d-lg-block d-xl-none">
 					<!--  	<a class="btn_map" data-toggle="collapse" href="#collapseMap" aria-expanded="false" aria-controls="collapseMap" data-text-swap="Hide map" data-text-original="View on map">View on map</a> -->
 					</p>

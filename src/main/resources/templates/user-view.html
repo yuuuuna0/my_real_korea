@@ -38,9 +38,9 @@
 	<!-- Daumpost -->
 	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	
-<script type="text/javascript">
+	<script type="text/javascript">
 
-const phoneNumber = (target) => {
+	const phoneNumber = (target) => {
 	 target.value = target.value
 	   .replace(/[^0-9]/g, '')
 	   .replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`);
@@ -58,9 +58,15 @@ const phoneNumber = (target) => {
 		document.i.action = "user-img-modify-action";
 		document.i.submit();
 	} 
-		
+	
+	function userRemove() {
+		if (confirm("정말 탈퇴하시겠습니까?")) {
+			document.f.action = "user-remove-action";
+			document.f.submit();
+		}
+	}
+	
 </script>
-
 
 </head>
 
@@ -176,7 +182,7 @@ const phoneNumber = (target) => {
 							<br><br><br>
 					<div style="text-align: center;">
 					<input id="btn-user-modify-form" value="프로필 수정" class="btn_1 green" type="button"> 
-					<input id="btn-user-remove" value="회원 탈퇴" class="btn_1 green" type="button"> 
+					<button class="btn_1 green" type="button" onclick="userRemove();">회원 탈퇴</button>
 				
                     	<th:block th:if="${session.loginUser.isAdmin==0}">
                             <input id="btn-user-admin" value="관리자 페이지" class="btn_1 green" type="button">
@@ -231,16 +237,17 @@ const phoneNumber = (target) => {
 
 			<div class="form-group">
 				<li>비밀번호
-				<span><input type = "password" class ="form-control-user" name = "password3" id = "password3" placeholder="8 - 12글자의 영어, 숫자, 특수문자" ></span>
+				<span><input type = "password" class ="form-control-user" name = "password" id = "password3" placeholder="8 - 12글자의 영어, 숫자, 특수문자" ></span>
 				</li>
 			</div>
 			<div class="form-group">
 				<li>비밀번호 확인
-				<span><input type = "password" class= "form-control-user" name = "password4" id = "password4"></span>
+				<span><input type = "password" class= "form-control-user" name = "password2" id = "password4"></span>
 				</li>
 			</div>
 
-				<div id="pass-info" class="clearfix"></div>
+				<div style="width: 63%;" id="pass-info" class="clearfix"></div>
+
 
 			{{#with passwordValidation}}
 				{{#if isActive}}

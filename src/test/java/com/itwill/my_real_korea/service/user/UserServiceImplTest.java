@@ -32,7 +32,7 @@ class UserServiceImplTest {
 	}
 	
 	//3. 전체 회원 정보 보기 (관리자 페이지)
-	//@Test
+	@Test
 	void testFindUserList() throws Exception {
 		System.out.println(">> findUserList :"+userService.findUserList());
 	}
@@ -40,8 +40,8 @@ class UserServiceImplTest {
 	//4. 회원 정보 수정
 	@Test
 	void testUpdate() throws Exception {
-		User user = userService.findUser("admin");
-		user.setPassword("admin0000");
+		User user = userService.findUser("qqqq1111");
+		user.setPassword("q1q1q1q1!");
 		System.out.println(">> updated :"+userService.update(user));
 	}
 	

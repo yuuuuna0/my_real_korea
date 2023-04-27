@@ -1,7 +1,7 @@
 import * as View from "./view.js";
 import * as Request from "./request.js";
 
-/******마이페이지*******8 */
+/************** 마이페이지 ************/
 //1. 예약 삭제
 $(document).on('click',"button[name='deletePayement']",function(e){
 	let pNo=e.target.value;
@@ -50,6 +50,47 @@ $(document).on('click',"button[name='paymentDetail']",function(e){
 });
 */
 
+/************************* admin *************************/
+
+$(document).on('click', '#btn-user-admin', function(e) {
+	Request.ajaxRequest('user-admin',
+						'GET',
+						'application/json;charset=UTF-8',
+						{},
+						function(response) {
+							if(response.status == 1){
+								View.render('#user-admin-template', response, '#tabs');
+							} else {
+								alert(response.message);
+							}
+						},
+						true);
+	e.preventDefault();
+});
+
+
+$(document).on('click', '.btn-admin-remove.btn_1.outline', function(e) {
+    var userId = $(this).data('user-id');
+    if (confirm("정말 회원을 탈퇴시키겠습니까?")) {
+        $.ajax({
+            url: "./user-admin/remove",
+            type: "POST",
+            data: { userId: userId },
+            success: function(response) {
+                if (response.status === 1) {
+                    alert("회원 탈퇴가 완료되었습니다.");
+                    location.reload();
+                } else {
+                    alert("회원 탈퇴에 실패하였습니다.");
+                }
+            },
+            error: function(xhr) {
+                alert("서버 오류가 발생했습니다.");
+            }
+        });
+    }
+    e.preventDefault();
+});
 
 
 /************************* login *************************/
@@ -123,10 +164,8 @@ $('#menu-user-find').click(function(e){
 
 //아이디 찾기 액션
 $(document).on('click','#btn-user-find-id',function(e) {
-
     let name = $('#name').val();
     let email = $('#email').val();
-    
     
     if (name == "") {
     	toastr.error("이름을 입력하세요.");
@@ -138,7 +177,6 @@ $(document).on('click','#btn-user-find-id',function(e) {
         document.i.email.focus();
         return false;
     }
-
     $.ajax({
         type: "POST",
         url: "./user-find-id-action",
@@ -171,7 +209,6 @@ $(document).on('click','#btn-user-find-pw',function(e) {
     document.p.name.focus();
     return false;
   }
-
   if (email === "") {
 	  toastr.error("이메일을 입력하십시오.");
     document.p.email.focus();
@@ -213,18 +250,15 @@ $(document).on('click','#btn-user-auth',function(e) {
         data: { mailAuthKey: mailAuthKey },
         success: function(response) {
             if (response.status === 0) {
-                // 인증 성공
                 toastr.success("인증 성공! 로그인 페이지로 이동합니다.")
                 window.location.replace(response.data);
             } else {
-                // 인증 실패
                 toastr.error("인증 코드가 일치하지 않습니다.");
             }
         },
         error: function(xhr) {
             alert("서버 오류가 발생했습니다.");
         }
-
     });
       e.preventDefault();
 });
@@ -279,7 +313,6 @@ $(document).ready(function() {
 	let passwordsInfo 	= $('#pass-info');
 	
 	validatePassword(password1,password2,passwordsInfo);
-	
 });
 
 function validatePassword(password1, password2, passwordsInfo){
@@ -339,7 +372,6 @@ $(document).on('click','#btn-user-create',function(e) {
 	  user.birth = $("#birth").val();
 	  user.address = $("#address").val();
 	  user.gender = $("input[name=gender]:checked").val();
-	  
 	  
 	const termsService = document.getElementById("termsService");
 	const termsPrivacy = document.getElementById("termsPrivacy");
@@ -420,6 +452,7 @@ $(document).on('click','#btn-user-create',function(e) {
 	    }
 	}); 
 });
+
 /******************************************************************/
 
 
@@ -502,6 +535,17 @@ $(document).on('click','#btn-user-modify-action',function(e) {
 		e.preventDefault();
 });
 
+//회원탈퇴
+$(document).on('click','#btn-user-remove',function() {
+	location.href="user-remove-action";
+});
+
+//프로필 수정 취소
+$(document).on('click','#btn-user-modify-cancle',function() {
+	location.href="user-view";
+});
+
+//첨부파일에 이름 나오게 
 $("#file").on('change',function(){
   var fileName = $("#file").val();
   $(".upload-name").val(fileName);

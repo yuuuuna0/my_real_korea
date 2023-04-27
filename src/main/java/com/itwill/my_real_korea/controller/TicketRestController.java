@@ -83,8 +83,6 @@ public class TicketRestController {
 
 
 
-
-
     /*티켓 리스트 - 정렬 -> rest
     키워드, 지역별 - 필터 + 가격순, 날짜별 정렬 - 화면에 어떻게 넘길 지 생각하기 ㅠ
     @ApiOperation(value = "티켓-필터-정렬")

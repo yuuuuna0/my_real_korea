@@ -31,6 +31,7 @@ import com.itwill.my_real_korea.dto.RsPInfo;
 import com.itwill.my_real_korea.dto.ticket.Ticket;
 import com.itwill.my_real_korea.dto.ticket.TicketImg;
 import com.itwill.my_real_korea.dto.ticket.TicketReview;
+import com.itwill.my_real_korea.dto.tour.Tour;
 import com.itwill.my_real_korea.dto.user.User;
 import com.itwill.my_real_korea.service.city.CityService;
 import com.itwill.my_real_korea.service.payment.PaymentService;
@@ -38,6 +39,7 @@ import com.itwill.my_real_korea.service.rspinfo.RsPInfoService;
 import com.itwill.my_real_korea.service.ticket.TicketImgService;
 import com.itwill.my_real_korea.service.ticket.TicketReviewService;
 import com.itwill.my_real_korea.service.ticket.TicketService;
+import com.itwill.my_real_korea.service.user.UserService;
 import com.itwill.my_real_korea.util.PageMakerDto;
 
 
@@ -50,6 +52,7 @@ public class TicketController {
     private final RsPInfoService rsPInfoService;
     private final TicketImgService ticketImgService;
     private final CityService cityService;
+    private final UserService userService;
     //private final Aws3UploadService aws3UploadService;
    
 
@@ -57,7 +60,7 @@ public class TicketController {
     public TicketController(TicketService ticketService, TicketReviewService ticketReviewService,
     						RsPInfoService rsPInfoService, PaymentService paymentService,
     						TicketImgService ticketImgService,
-    						CityService cityService/*,
+    						CityService cityService,UserService userService/*,
     						Aws3UploadService aws3UploadService*/) {
         this.ticketService = ticketService;
         this.ticketReviewService = ticketReviewService;
@@ -65,6 +68,7 @@ public class TicketController {
         this.rsPInfoService = rsPInfoService;
         this.ticketImgService = ticketImgService;
         this.cityService = cityService;
+        this.userService = userService;
        // this.aws3UploadService = aws3UploadService;
     }
     //티켓 리스트 - 페이지
@@ -132,6 +136,7 @@ public class TicketController {
             Ticket ticket = ticketList.get(0);
            
             // 세션에 티켓 정보 담기
+            session.setAttribute("ticketImgList", ticketImgList); // 굳이?
             session.setAttribute("ticket", ticket);
         	// System.out.println(ticket);
             forwardPath = "ticket-detail";
@@ -154,7 +159,6 @@ public class TicketController {
     	User loginUser = (User) session.getAttribute("loginUser");
 		session.setAttribute("loginUser", loginUser);
 		
-		
     	try {
     		//System.out.println(loginUser);
     		// 총 금액 = 수량 * 티켓 가격
@@ -164,14 +168,16 @@ public class TicketController {
     		Payment payment = new Payment();
     		payment.setPPrice(price); // 총금액
     		payment.setPQty(pQty); // 수량
-    		payment.setPPoint((int)(pQty * price * 0.1)); // 포인트 
+    		payment.setPPoint((int)(price * 0.01)); // 포인트 
     		payment.setPStartDate(date); // 예약날짜
     		payment.setUserId(loginUser.getUserId()); // user 담기
     		payment.setTicket(ticket); // 티켓 담기
+    		System.out.println(ticket.getTicketImgList());
     		//fail "F1002" 처리하기
-    		paymentService.insertTicketPayment(payment);
+    		//paymentService.insertTicketPayment(payment);
     		session.setAttribute("payment", payment);
-    		//System.out.println(payment); 
+    		session.setAttribute("ticket", ticket);
+    		// System.out.println(payment); 
     		forwardPath="ticket-payment";
     	} catch (Exception e) {
     		e.printStackTrace();
@@ -188,24 +194,30 @@ public class TicketController {
 										        @ModelAttribute RsPInfo rsPInfo,
 										        @RequestParam(required = false, defaultValue = "") String pMsg,
 										        @RequestParam int pMethod, // ?
+										        @RequestParam int pPoint, // ?
+										        @RequestParam int pPrice, // ?
 										        RedirectAttributes redirectAttributes) {
         String forwardPath = "";
         Payment payment = (Payment) session.getAttribute("payment");
         Ticket ticket = (Ticket) session.getAttribute("ticket");
         User loginUser = (User) session.getAttribute("loginUser");
-
+        
         try {
         	  if (pMethod==1) {
 	                payment.setPMethod(1);
 	            } else if (pMethod==2) {
 	            	 payment.setPMethod(2);
 	            }
-        	 // System.out.println(pMethodStr);
-        	 // System.out.println(pMethodStr);
-        	payment.setPMsg(pMsg);  
-        	//payment.setPMethod(Integer.parseInt(pMethodStr));
-        	paymentService.insertTicketPayment(payment);
-        	paymentService.updatePayment(payment);
+        	payment.setPMsg(pMsg); 
+        	payment.setPPoint(pPoint);
+        	payment.setPPoint(pPrice);
+        	//payment.setPNo(payment.getPNo());
+        	//System.out.println(payment.getPNo());
+        	int newPoint = loginUser.getPoint()+pPoint;
+        	loginUser.setPoint(newPoint);
+        	userService.updatePoint(loginUser);
+        	//paymentService.updatePayment(payment); // insert로 변경
+        	paymentService.insertTicketPayment(payment); // 확인하기!
             ticket.setTiCount(ticket.getTiCount() + payment.getPQty());
             ticketService.updateTicket(ticket);
 
@@ -239,7 +251,7 @@ public class TicketController {
     	model.addAttribute(payment);
     	model.addAttribute(rsPInfo);
     	
-    	System.out.println(payment.getPMethod());
+    	//System.out.println(payment.getPMethod());
     	return "ticket-payment-confirmation";
     }
 
@@ -343,7 +355,7 @@ public class TicketController {
     		data.add(ticketReview);
     	}else {
     		code=2;
-    		msg = "게시물 존재 X";
+    		msg = "게시물 존재이 존재하지 않습니다.";
     	}
     	resultMap.put("code", code);
     	resultMap.put("msg", msg);
@@ -420,6 +432,25 @@ public class TicketController {
 		resultMap.put("data", data);
 		
 		return resultMap;
+	}
+	
+	
+	@GetMapping(value="payment-detail")
+	public String paymentConfirmationTicketTour(@RequestParam int pNo, Model model, HttpSession session) {
+		
+		try {
+			if(session != null) {
+				User loginUser = (User)session.getAttribute("loginUser");
+				model.addAttribute("loginUser",loginUser);
+			}
+			Payment payment = paymentService.selectPaymentNo(pNo);
+			RsPInfo rsPInfo = rsPInfoService.selectRsPersonByPNo(pNo);
+			model.addAttribute("payment",payment);
+			model.addAttribute("rsPInfo",rsPInfo);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return "payment-confirmation-ticket-tour";
 	}
 	
 	

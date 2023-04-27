@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -38,6 +39,45 @@ public class UserRestController {
 	@Autowired
 	private UserAddInfoService userAddInfoService;
 	
+	
+	//관리자 페이지 회원 목록
+	@AdminCheck
+	@LoginCheck
+	@GetMapping(value = "user-admin", produces = "application/json;charset=UTF-8")
+	public Response user_admin() throws Exception {
+	    Response response = new Response();
+	    try {
+	        List<User> userList = userService.findUserList();
+	        response.setStatus(1);
+	        response.setMessage("성공");
+	        response.setData(userList);
+	    } catch (Exception e) {
+	        response.setStatus(0);
+	        response.setMessage(e.getMessage());
+	        response.setData(null);
+	    }
+	    return response;
+	}
+	
+	//관리자 페이지 회원 탈퇴
+	@AdminCheck
+	@ResponseBody
+	@PostMapping(value="/user-admin/remove", produces = "application/json;charset=UTF-8")
+	public Response removeUser(@RequestParam("userId") String userId) {
+	    Response response = new Response();
+	    try {
+	        userService.remove(userId);
+	        System.out.println(">>> remove userId : "+userId);
+	        response.setStatus(1);
+	        response.setMessage("성공");
+	        response.setData(null);
+	    } catch (Exception e) {
+	        response.setStatus(0);
+	        response.setMessage("실패");
+	        response.setData(null);
+	    }
+	    return response;
+	}
 	
 	
 	//회원 가입 액션
@@ -214,7 +254,6 @@ public class UserRestController {
 	}
 	
 	/*********************************************************/
-
 	
 /*
  * 보류
@@ -309,12 +348,6 @@ public class UserRestController {
 	}
 	
 	
-
+	
 }
-
-
-
-
-
-
 

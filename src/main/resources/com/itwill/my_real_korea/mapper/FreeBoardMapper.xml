@@ -17,7 +17,7 @@
         insert into FREE_BOARD (f_bo_no,f_bo_title,f_bo_content,f_bo_date,f_bo_readcount,city_no,user_id)
         values( #{fBoNo},#{fBoTitle},
         #{fBoContent},sysdate,
-        #{fBoCount},#{cityNo},
+        #{fBoCount},#{city.cityNo},
         #{userId})
     </insert>
 
@@ -101,7 +101,7 @@
 
 
     <delete id="deleteBoard" parameterType="java.lang.Integer">
-    delete from FREE_BOARD where f_bo_no = #{freeBoardNo}
+    delete from FREE_BOARD where f_bo_no = #{fBoNo}
     </delete>
 
 
@@ -109,7 +109,7 @@
         update FREE_BOARD
         set f_bo_title=#{fBoTitle},
             f_bo_content=#{fBoContent},
-            city_no=#{cityNo}
+            city_no=#{city.cityNo}
         where f_bo_no = #{fBoNo}
     </update>
 
@@ -144,7 +144,7 @@
     <select id="selectFreeBoardCityList" parameterType="map" resultMap="CitywithFreeBoardResultMap">
         select ss.* from
             (select rownum idx, s.* from
-                (select *
+                (select f.f_bo_no,f.f_bo_title,f.f_bo_content,f.f_bo_date,f.f_bo_readcount,f.user_id, c.city_no,c.city_name
                  from free_board f
                           join city c
                                on f.city_no = c.city_no

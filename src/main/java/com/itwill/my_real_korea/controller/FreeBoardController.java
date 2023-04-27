@@ -60,7 +60,7 @@ public class FreeBoardController {
         return "freeboard-list";
     }
     @GetMapping(value = "/freeboard-city-list")
-    public String freeBoardList(@RequestParam(required = false, defaultValue = "1") int pageNo,  Model model, @RequestParam(required=true,defaultValue="2")int cityNo) throws Exception {
+    public String freeBoardList(@RequestParam(required = false, defaultValue = "1") int pageNo,  Model model, @RequestParam(required=true)int cityNo) throws Exception {
     	
     	try {
     		PageMakerDto<FreeBoard> freeBoardListPage = freeBoardService.selectFreeBoardCityList(pageNo,cityNo);
@@ -75,7 +75,6 @@ public class FreeBoardController {
     		model.addAttribute("cityList", cityList);
     		model.addAttribute("freeBoardListPage", freeBoardListPage);
     		model.addAttribute("freeBoardList", freeBoardList);
-    		model.addAttribute("pageNo", pageNo);
     	} catch (Exception e) {
     		e.printStackTrace();
     		return "error";

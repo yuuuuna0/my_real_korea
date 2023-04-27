@@ -192,17 +192,16 @@
 										<div><sup th:text="${wishlist.tour.toPrice}"></sup>
 												<small>* 1인 기준</small>
 											<p><a th:href="@{tour-detail(toNo=${wishlist.tour.toNo})}" href="" class="btn_1">상세보기</a></p>
-											<a href="#"><i class="icon-trash" id="wishlist-delete-action-btn"></i></a>
+											<a href="#"><i class="icon-trash" id="wishlist-delete-action-btn" th:data-wishNo="${wishlist.wishNo}"></i></a>
 											<input type="hidden" id="wishlist-userId" th:value="${wishlist.userId}">
-											<input type="hidden" id="wishlist-wishNo" th:value="${wishlist.wishNo}">
 										</div>
 									</div>
 									<div th:if="${wishlist.ticket != null}">
 										<div><sup th:text="${wishlist.ticket.tiPrice}"></sup><small>* 1인 기준</small>
 											<p><a th:href="@{ticket-detail(tiNo=${wishlist.ticket.tiNo})}" href="" class="btn_1">상세보기</a></p>
-											<a href="#"><i class="icon-trash" id="wishlist-delete-action-btn"></i></a>
+											<a href="#">
+												<i class="icon-trash" id="wishlist-delete-action-btn" th:data-wishNo="${wishlist.wishNo}"></i></a>
 											<input type="hidden" id="wishlist-userId" th:value="${wishlist.userId}">
-											<input type="hidden" id="wishlist-wishNo" th:value="${wishlist.wishNo}">
 										</div>
 									</div>
 							</div>

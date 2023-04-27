@@ -146,13 +146,12 @@
 					<div class="row">
 						<div class="col-lg-3">
 						
-							<h3>상세보기</h3>
+						<!--  <h3>상세보기</h3>-->	
 						</div>
 						<div class="col-lg-9">
-							<p th:text="${session.ticket.tiInfo}">
+						<!--	<p th:text="${session.ticket.tiInfo}">
 							</p>
-							<h4 th:text="${session.ticket.tiNotice}">어쩌구 저쩌구 저쩌구 </h4> 
-							<!-- <th:block th:each="ticketImg, iterStat : ${ticketImgList}">
+							 <th:block th:each="ticketImg, iterStat : ${ticketImgList}">
   							 	 <th:block th:if="${!iterStat.first}">
        								 <img alt="Image" style="width:100%" class="sp-thumbnail" th:src="@{{tiImgUrl}(tiImgUrl=${ticketImg.tiImgUrl})}">
    								</th:block>
@@ -174,15 +173,15 @@
 					</div>
 					<!-- End row  -->
 
-
+<!-- 
 					<div class="row">
 						<div class="col-lg-3">
 							
 						</div>
 						
-					</div>
+					</div> -->
 					<!-- End row  -->
-
+					<hr>
 					<!-- 리뷰 화면 -->
 					<div class="row" id="ticketReviewDiv">
 						<div class="col-lg-12">

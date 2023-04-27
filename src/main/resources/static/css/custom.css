@@ -906,6 +906,7 @@ a.btn_3, .btn_3 {
     color: #fff;
     opacity: 0;
     margin-bottom: 0px;
+    cursor: pointer;
 }
 
 .tooltip-content-flip > span {

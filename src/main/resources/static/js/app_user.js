@@ -649,10 +649,31 @@ $(document).on('click', '#btn-user-modify-form', function(e) {
 
 $(document).on('click','#btn-user-modify-action',function(e) {
 	
-	if (document.getElementsByName("password3")[0].value !== document.getElementsByName("password4")[0].value) {
-	    toastr.error('비밀번호와 비밀번호 확인이 일치하지 않습니다.');
+	if (document.getElementsByName("password")[0].value == "") {
+		Toast.fire({
+		  icon: 'error',
+		  title: '비밀번호를 입력하세요.'
+		})
+      document.getElementsByName("password")[0].focus();
+      return false;
+    }
+    
+    if (document.getElementsByName("password2")[0].value == "") {
+		Toast.fire({
+		  icon: 'error',
+		  title: '비밀번호 확인을 입력하세요.'
+		})
+      document.getElementsByName("password2")[0].focus();
+      return false;
+    }
+	  
+	if (document.getElementsByName("password")[0].value !== document.getElementsByName("password2")[0].value) {
+	   Toast.fire({
+		  icon: 'error',
+		  title: '비밀번호와 비밀번호 확인이 일치하지 않습니다.'
+	  })
 	    return;
-	  }
+	}
 	
 	let url = 'user-modify-form-action';
 	let method = 'PUT';

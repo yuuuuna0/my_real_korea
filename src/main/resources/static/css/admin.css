@@ -278,15 +278,7 @@ ul#profile_summary li:nth-child(odd) {
   text-align:center;
   line-height:50px;
 }
-.strip_booking h3.hotel_booking:before{
-  content: "\26";
-}
-.strip_booking h3.tours_booking:before{
-  content: "\3e";
-}
-.strip_booking h3.transfers_booking:before{
-  content: "\39";
-}
+
 .strip_booking .date{
 	background-color:#f8f8f8;
 	text-align:center;

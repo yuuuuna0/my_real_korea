@@ -1,7 +1,192 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"  xmlns:th-temporals="http://www.thymeleaf.org/extras/temporals">
 <!-- Start section 2 -->
-					<section th:fragment="section-2">
+						<section th:fragment="section-2">
+					
+					<div class="mypage-title">
+							<h3> 투어 </h3>
+							</div>
+							<hr>
+							<br>
+						
+						<div class="strip_booking" th:each="tourReview:${tourReviewList}">
+							<div class="row">
+								<div class="col-lg-2 col-md-2">
+									<img th:src="@{img/tour/{toImgUrl}(toImgUrl=${tourReview.tour.tourImgList.get(0).toImgUrl})}">
+								</div>
+								<div class="col-lg-6 col-md-5">
+								<div class="col-md-12">
+								 &nbsp;<strong th:text="${tourReview.tour.toName}"></strong>
+								</div>
+								<div class="col-md-12">
+									<h3 class="tours_booking">
+										<span> <th:block th:text="${tourReview.toReviewContent}"></th:block></span>
+										<span th:text="${tourReview.toReviewTitle}">2 Adults / 2 Childs</span>
+									</h3>
+								</div>
+								</div>
+								<div class="col-lg-2 col-md-3">
+									<ul class="info_booking">
+										<li><strong>리뷰작성일</strong><th:block th:text="${#dates.format(tourReview.toReviewDate,'yyyy MM dd, EEE')}"></th:block></li>
+									</ul>
+								</div>
+								<div class="col-lg-2 col-md-2">
+									<div class="booking_buttons">
+										<span><a th:href="@{tour-detail(tNo=${tourReview.toNo})}" class="btn_2">보러가기</a></span>
+										<button class="btn_3">삭제하기</button>
+									</div>
+								</div>
+							</div>
+							<!-- End row -->
+						</div>
+						<!-- End strip booking -->
+						<br>
+						<br>
+						
+						<div class="mypage-title">
+							<h3> 티켓 </h3>
+							</div>
+							<hr>
+							<br>
+						
+						<div class="strip_booking" th:each="ticketReview:${ticketReviewList}">
+							<div class="row">
+								<div class="col-lg-2 col-md-2">
+									<img th:src="${ticketReview.ticket.ticketImgList.get(0).tiImgUrl}">
+								</div>
+								<div class="col-lg-6 col-md-5">
+								<div class="col-md-12">
+								>> &nbsp;<strong th:text="${ticketReview.ticket.tiTitle}"></strong>
+								</div>
+								<div class="col-md-12">
+									<h3 class="tours_booking">
+										 <th:block th:text="${ticketReview.tiReviewContent}"></th:block>
+										<span th:text="${ticketReview.tiReviewTitle}">2 Adults / 2 Childs</span>
+									</h3>
+								</div>
+								</div>
+								<div class="col-lg-2 col-md-3">
+									<ul class="info_booking">
+										<li><strong>리뷰작성일</strong><th:block th:text="${#dates.format(ticketReview.tiReviewDate,'yyyy MM dd, EEE')}"></th:block></li>
+									</ul>
+								</div>
+								<div class="col-lg-2 col-md-2">
+									<div class="booking_buttons">
+										<a th:href="@{ticket-detail(tiNo=${ticketReview.tiNo})}" class="btn_2">보러가기</a>
+										<button class="btn_3">삭제하기</button>
+									</div>
+								</div>
+							</div>
+							<!-- End row -->
+						</div>
+						<!-- End strip booking -->
+					</section>
+					
+<!-- End section 2 -->
+<!-- Start section 3 -->
+					<section th:fragment="section-3">
+					
+							<div class="mypage-title">
+							<h3> 동행찾기 </h3>
+							</div>
+							<hr>
+							<br>
+						
+						<div class="strip_booking" th:each="tripBoard:${tripBoardList}">
+							<div class="row">
+								<div class="col-lg-2 col-md-2">
+									<div class="date">
+										<span class="month" th:text="${#dates.format(tripBoard.tBoDate,'MMM')}">Dec</span>
+										<span class="day">
+											<strong th:text="${#dates.format(tripBoard.tBoDate,'dd')}">27</strong>
+											<th:block th:text="${#dates.format(tripBoard.tBoDate,'EEE')}">Fri</th:block>
+										</span>
+									</div>
+								</div>
+								<div class="col-lg-6 col-md-5">
+									<h3 class="tours_booking" th:if = "${tripBoard.userId != null}" >
+										 <th:block th:text="${tripBoard.tBoTitle}"></th:block>
+									</h3>
+									<h3 th:if = "${tripBoard.userId != null}">
+										<span><th:block th:text="${tripBoard.tBoContent}"></th:block></span>
+									</h3>
+								</div>
+									
+								<div class="col-lg-2 col-md-3">
+									
+									
+									<ul class="info_booking" >
+											
+										<li>
+											<strong>여행시작일</strong>
+											<span th:text="${#dates.format(tripBoard.tBoStartDate, 'yyyy-MM-dd')}">23442</span>
+										</li>
+										<li>
+											<strong>여행종료일</strong>
+											<span th:text="${#dates.format(tripBoard.tBoEndDate, 'yyyy-MM-dd')}">23442</span>
+										</li>
+											
+									</ul>
+								</div>
+								<div class="col-lg-2 col-md-2">
+								<form>
+									<div class="booking_buttons">
+										<a class="btn_2" th:href="@{tripboard-detail(tBoNo=${tripBoard.tBoNo})}" role="button">보러가기</a>
+										<button class="btn_3">삭제하기</button>
+									</div>
+									</form>
+								</div>
+							</div>
+							<!-- End row -->
+						</div>
+						<!-- End strip booking -->
+						<br>
+					
+						<br>
+						
+						<div class="mypage-title">
+							<h3> 자유게시판 </h3>
+							</div>
+							<hr>
+							<br>
+						<div class="strip_booking" th:each="freeBoard:${freeBoardList}">
+							<div class="row">
+								<div class="col-lg-2 col-md-2">
+									<div class="date">
+										<span class="month" th:text="${#dates.format(freeBoard.fBoDate,'MMM')}">Dec</span>
+										<span class="day">
+											<strong th:text="${#dates.format(freeBoard.fBoDate,'dd')}" >27</strong>
+											<th:block th:text="${#dates.format(freeBoard.fBoDate,'EEE')}">Fri</th:block>
+										</span>
+									</div>
+								</div>
+								<div class="col-lg-6 col-md-5">
+									<h3 class="tours_booking" th:if = "${freeBoard.userId != null}" >
+										<th:block th:text="${freeBoard.fBoTitle}"></th:block>
+									</h3>
+									<h3 th:if = "${freeBoard.userId != null}" >
+										<span><th:block th:text="${freeBoard.fBoContent}"></th:block></span>
+									</h3>
+								</div>
+								<div class="col-lg-2 col-md-3">
+
+								</div>
+								<div class="col-lg-2 col-md-2">
+									<div class="booking_buttons">
+										<a th:href="@{freeboard-detail(fBoNo=${freeBoard.fBoNo})}" class="btn_2">보러가기</a>
+										<button class="btn_3">삭제하기</button>
+									</div>
+								</div>
+							</div>
+							<!-- End row -->
+						</div>
+						<!-- End strip booking -->	
+					</section>	
+				
+<!-- End section 3 -->
+
+<!-- Start section 4 -->
+					<section th:fragment="section-4">
 							<div id="tools">
 							<div class="row">
 								<div class="col-lg-2 col-md-3 col-6">
@@ -32,7 +217,7 @@
 							<div class="row" th:id="|paymentD+${payment.pNo}|">
 								<div class="col-lg-2 col-md-2">
 									<div class="date">
-										<span class="month" th:text="${#dates.format(payment.pStartDate,'yyyy년 MMM')}">Dec</span>
+										<span class="month" th:text="${#dates.format(payment.pStartDate,'MMM')}">Dec</span>
 										<span class="day">
 											<strong th:text="${#dates.format(payment.pStartDate,'dd')}">27</strong>
 											<th:block th:text="${#dates.format(payment.pStartDate,'EEE')}">Fri</th:block>
@@ -68,186 +253,6 @@
 										<button th:value="${payment.pNo}" name="deletePayement" class="btn_3">취소하기</button>
 									</div>
 								</form>
-								</div>
-							</div>
-							<!-- End row -->
-						</div>
-						<!-- End strip booking -->
-					</section>
-<!-- End section 2 -->
-<!-- Start section 3 -->
-					<section th:fragment="section-3">
-					
-							<div class="mypage-title">
-							<h3> 동행찾기 </h3>
-							</div>
-							<hr>
-							<br>
-						
-						<div class="strip_booking" th:each="tripBoard:${tripBoardList}">
-							<div class="row">
-								<div class="col-lg-2 col-md-2">
-									<div class="date">
-										<span class="month" th:text="${#dates.format(tripBoard.tBoDate,'MMM')}">Dec</span>
-										<span class="day">
-											<strong th:text="${#dates.format(tripBoard.tBoDate,'dd')}" style="padding-bottom:10px">27</strong>
-											<th:block th:text="${#dates.format(tripBoard.tBoDate,'EEE')}">Fri</th:block>
-										</span>
-									</div>
-								</div>
-								<div class="col-lg-6 col-md-5">
-									<h3 class="tours_booking" th:if = "${tripBoard.userId != null}" style="font-weight:bold; line-height:0px; font-size:21px;">
-										 <th:block th:text="${tripBoard.tBoTitle}"></th:block>
-									</h3>
-									<h3 th:if = "${tripBoard.userId != null}" style="font-size:15px;">
-										 <th:block th:text="${tripBoard.tBoContent}"></th:block>
-									</h3>
-								</div>
-									
-								<div class="col-lg-2 col-md-3">
-									
-									
-									<ul class="info_booking" style="font-size:13px;">
-											
-										<li>
-											<strong style="margin-bottom:3px;">여행시작일</strong>
-											<span th:text="${#dates.format(tripBoard.tBoStartDate, 'yyyy-MM-dd')}">23442</span>
-										</li>
-										<li>
-											<strong style="margin-bottom:3px;">여행종료일</strong>
-											<span th:text="${#dates.format(tripBoard.tBoEndDate, 'yyyy-MM-dd')}">23442</span>
-										</li>
-											
-									</ul>
-								</div>
-								<div class="col-lg-2 col-md-2">
-								<form>
-									<div class="booking_buttons" style="margin-top:30px;">
-										<a class="btn_2" th:href="@{tripboard-detail(tBoNo=${tripBoard.tBoNo})}" role="button">보러가기</a>
-										<button class="btn_3">삭제하기</button>
-									</div>
-									</form>
-								</div>
-							</div>
-							<!-- End row -->
-						</div>
-						<!-- End strip booking -->
-						<br>
-					
-						<br>
-						
-						<div class="mypage-title">
-							<h3> 자유게시판 </h3>
-							</div>
-							<hr>
-							<br>
-						<div class="strip_booking" th:each="freeBoard:${freeBoardList}">
-							<div class="row">
-								<div class="col-lg-2 col-md-2">
-									<div class="date">
-										<span class="month" th:text="${#dates.format(freeBoard.fBoDate,'MMM')}">Dec</span>
-										<span class="day">
-											<strong th:text="${#dates.format(freeBoard.fBoDate,'dd')}" style="padding-bottom:10px">27</strong>
-											<th:block th:text="${#dates.format(freeBoard.fBoDate,'EEE')}">Fri</th:block>
-										</span>
-									</div>
-								</div>
-								<div class="col-lg-6 col-md-5">
-									<h3 class="tours_booking" th:if = "${freeBoard.userId != null}" style="font-weight:bold; line-height:0px; font-size:21px;">
-										<th:block th:text="${freeBoard.fBoTitle}"></th:block>
-									</h3>
-									<h3 th:if = "${freeBoard.userId != null}" style="font-size:15px;">
-										<th:block th:text="${freeBoard.fBoContent}"></th:block>
-									</h3>
-								</div>
-								<div class="col-lg-2 col-md-3">
-
-								</div>
-								<div class="col-lg-2 col-md-2">
-									<div class="booking_buttons">
-										<a th:href="@{freeboard-detail(fBoNo=${freeBoard.fBoNo})}" class="btn_2">보러가기</a>
-										<button class="btn_3">삭제하기</button>
-									</div>
-								</div>
-							</div>
-							<!-- End row -->
-						</div>
-						<!-- End strip booking -->	
-						
-								
-					</section>
-<!-- End section 3 -->
-<!-- Start section 4 -->
-					<section th:fragment="section-4">
-					<h3> 투어 </h3>
-					<br>
-						
-						<div class="strip_booking" th:each="tourReview:${tourReviewList}">
-							<div class="row">
-								<div class="col-lg-2 col-md-2">
-									<img th:src="@{img/tour/{toImgUrl}(toImgUrl=${tourReview.tour.tourImgList.get(0).toImgUrl})}" style="width:100%; height:100%;">
-								</div>
-								<div class="col-lg-6 col-md-5">
-								<div class="col-md-12">
-								>> &nbsp;<strong th:text="${tourReview.tour.toName}"></strong>
-								</div>
-								<div class="col-md-12">
-									<h3 class="tours_booking">
-										 <th:block th:text="${tourReview.toReviewContent}"></th:block>
-										<span th:text="${tourReview.toReviewTitle}">2 Adults / 2 Childs</span>
-									</h3>
-								</div>
-								</div>
-								<div class="col-lg-2 col-md-3">
-									<ul class="info_booking">
-										<li><strong>리뷰작성일</strong><th:block th:text="${#dates.format(tourReview.toReviewDate,'yyyy MM dd, EEE')}"></th:block></li>
-									</ul>
-								</div>
-								<div class="col-lg-2 col-md-2">
-									<div class="booking_buttons">
-										<a href="#0" class="btn_2">보러가기</a>
-										<button class="btn_3">삭제하기</button>
-										<a th:href="@{tour-detail(tNo=${tourReview.toNo})}" class="btn_2">보러가기</a>
-									</div>
-								</div>
-							</div>
-							<!-- End row -->
-						</div>
-						<!-- End strip booking -->
-						<br>
-						<hr>
-						<br>
-						
-						<h3> 티켓 </h3>
-							<br>
-						
-						<div class="strip_booking" th:each="ticketReview:${ticketReviewList}">
-							<div class="row">
-								<div class="col-lg-2 col-md-2">
-									<img th:src="${ticketReview.ticket.ticketImgList.get(0).tiImgUrl}" style="width:100%; height:100%;">
-								</div>
-								<div class="col-lg-6 col-md-5">
-								<div class="col-md-12">
-								>> &nbsp;<strong th:text="${ticketReview.ticket.tiTitle}"></strong>
-								</div>
-								<div class="col-md-12">
-									<h3 class="tours_booking">
-										 <th:block th:text="${ticketReview.tiReviewContent}"></th:block>
-										<span th:text="${ticketReview.tiReviewTitle}">2 Adults / 2 Childs</span>
-									</h3>
-								</div>
-								</div>
-								<div class="col-lg-2 col-md-3">
-									<ul class="info_booking">
-										<li><strong>리뷰작성일</strong><th:block th:text="${#dates.format(ticketReview.tiReviewDate,'yyyy MM dd, EEE')}"></th:block></li>
-									</ul>
-								</div>
-								<div class="col-lg-2 col-md-2">
-									<div class="booking_buttons">
-										<a href="#0" class="btn_2">보러가기</a>
-										<button class="btn_3">삭제하기</button>
-										<a th:href="@{ticket-detail(tiNo=${ticketReview.tiNo})}" class="btn_2">보러가기</a>
-									</div>
 								</div>
 							</div>
 							<!-- End row -->

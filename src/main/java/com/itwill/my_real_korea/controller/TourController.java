@@ -256,32 +256,7 @@ public class TourController {
 // 		forwardPath="tour-payment-confirmation";
 // 		return forwardPath;
 // 	}
-	//2. 구매내역 보기
-	@LoginCheck
-	@GetMapping(value="payment-deta")
-	public String paymentDetail(@RequestParam int pNo,RedirectAttributes redirectAttributes){
-		String forwardPath="";
-		try {
-			Payment payment=paymentService.selectPaymentNo(pNo);
-			RsPInfo rsPInfo=rsPInfoService.selectRsPersonByPNo(pNo);
-			redirectAttributes.addFlashAttribute("RsPInfo",rsPInfo);
-			redirectAttributes.addFlashAttribute("payment",payment);
-			if(payment.getTour()!=null) {
-				//투어예약 상세보기
-				Tour tour=payment.getTour();
-				redirectAttributes.addFlashAttribute("tour",tour);
-				forwardPath="redirect:payment-confirmation-ticket-tour";
-			} else if(payment.getTicket()!=null){
-				//티켓예약 상세보기
-				Ticket ticket=payment.getTicket();
-				redirectAttributes.addFlashAttribute("ticket",ticket);
-				forwardPath="redirect:payment-confirmation-ticket-tour";
-			}
-		}catch (Exception e) {
-			e.printStackTrace();
-		}
-		return forwardPath;
-	}
+
 	
   	
 }

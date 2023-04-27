@@ -48,7 +48,7 @@
 	<section class="parallax-window" data-parallax="scroll" data-image-src="img/tripboard/tripboard_big.png"  data-natural-width="1400" data-natural-height="470">
 		<div class="parallax-content-1">
 			<div class="animated fadeInDown">
-				<h1>동행찾기</h1>
+				<h1><a href="tripboard-list">동행찾기</a></h1>
 				<p>즐거운 여행을 함께 할 일행을 찾아보아요~</p>
 			</div>
 		</div>
@@ -101,16 +101,16 @@
 
 						<div class="row" id="tripboard-list">
 						
-							<div class="shop-item col-lg-4 col-md-6 col-sm-6" th:each="tripBoard:${tripBoardList}" style="margin-bottom:280px">
+							<div class="shop-item col-lg-4 col-md-6 col-sm-6" th:each="tripBoard:${tripBoardList}" style="margin-bottom:200px">
 								<div class="ribbon_4" th:if="${tripBoard.tBoStatus == 0}">
 									<span>모집중</span>
 								</div>
 								<div class="ribbon_3 popular2" th:if="${tripBoard.tBoStatus == 1}">
 									<span>모집완료</span>
 								</div>
-								<div class="inner-box">
-									<div class="image-box">
-										<figure class="image">
+								<div class="tripboard-inner-box">
+									<div class="image-box tripboard-image-box">
+										<figure class="image tripboard-list-image">
 											<div th:if="${tripBoard.tBoImg}">
 												<a th:href="@{tripboard-detail(tBoNo=${tripBoard.tBoNo})}">
 													<img th:src="@{img/tripboard/{tBoImg}(tBoImg=${tripBoard.tBoImg})}"  alt="Image" class="img-fluid">
@@ -130,10 +130,10 @@
 										   </div> 
 									</div>
 									<div class="product_description">
-										<div class="trip-title">
+										<div class="trip-title tripboard-trip-title">
 											<h3><a th:text="${tripBoard.tBoTitle}" th:href="@{tripboard-detail(tBoNo=${tripBoard.tBoNo})}">Travel Book</a></h3>
 										</div>
-										<div class="trip-date">
+										<div class="trip-date tripboard-trip-date">
 											<h3><a style="color:#666;" th:text="${#dates.format(tripBoard.tBoStartDate, 'MM.dd')}"></a><a style="color:#666;"> ~ </a><a style="color:#666;" th:text="${#dates.format(tripBoard.tBoEndDate, 'MM.dd')}"></a></h3>
 										</div>
 										<div class="icons">
@@ -303,9 +303,9 @@
 				<span>모집완료</span>
 			</div>
 		{{/ifCond}}
-		<div class="inner-box">
-			<div class="image-box">
-				<figure class="image">
+		<div class="tripboard-inner-box">
+			<div class="image-box tripboard-image-box">
+				<figure class="image tripboard-list-image">
 				{{#if tboImg}}
 					<div>
 						<a href="tripboard-detail?tBoNo={{tboNo}}">
@@ -328,10 +328,10 @@
 			</div>   
 			</div>
 			<div class="product_description">
-				<div class="trip-title">
+				<div class="trip-title tripboard-trip-title">
 					<h3><a href="tripboard-detail?tBoNo={{tboNo}}">{{tboTitle}}</a></h3>
 				</div>
-				<div class="trip-date">
+				<div class="trip-date tripboard-trip-date">
 					<h3><a>{{dateFormat2 tboStartDate}}</a><a> ~ </a><a>{{dateFormat2 tboEndDate}}</a></h3>
 				</div>
 				<div class="icons">

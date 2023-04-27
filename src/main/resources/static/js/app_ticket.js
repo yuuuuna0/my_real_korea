@@ -3,6 +3,14 @@ import * as Request from "./request.js";
 // JSON.stringify() => 객체를 string 으로, JSON.parse() => string 을 객체로 만듦
 
 
+// 검색창 입력 후 엔터키 => 검색
+$("#ticket-search-keyword").keyup(e => {
+	if (e.keyCode == 13) {
+		selectedTicketList();
+		e.preventDefault();
+	}
+});
+
 /********* function ********/
 function selectedTicketList(){
     let keyword=$('#ticket-search-keyword').val();

@@ -473,18 +473,6 @@ function validatePassword(password1, password2, passwordsInfo){
 	return isValidPassword;
 };
 
-const Toast1 = Swal.mixin({
-  toast: true,
-  position: 'top-right',
-  iconColor: 'white',
-  customClass: {
-    popup: 'colored-toast'
-  },
-  showConfirmButton: false,
-  timer: 1500,
-  timerProgressBar: true
-})
-
 
 //회원 가입
 $(document).on('click','#btn-user-create',function(e) {
@@ -508,7 +496,7 @@ $(document).on('click','#btn-user-create',function(e) {
 //		toastr.error("이용 약관에 모두 동의해주세요.");
 		Toast.fire({
 		  icon: 'error',
-		  title: '아이디를 입력하세요.'
+		  title: '이용 약관에 모두 동의해주세요.'
 		})
 		return false;
 	}
@@ -518,7 +506,7 @@ $(document).on('click','#btn-user-create',function(e) {
 		  icon: 'error',
 		  title: '아이디를 입력하세요.'
 		})
-	    //$("#userId").focus();
+	    $("#userId").focus();
 	    return false;
 	}
 	if (!isIdChecked) {
@@ -612,15 +600,27 @@ $(document).on('click','#btn-user-create',function(e) {
 	    contentType: "application/json;charset=UTF-8",
 	    success: function (data) {
 	        if (data.status == 0) {
-	            alert(data.message);
-	            window.location.href = "./index";
+//	            alert(data.message);
+//	            window.location.href = "./index";
+				Swal.fire({
+					icon: 'success',
+					text: data.message
+				})
 	        } else {
-	            alert(data.message);
+//	            alert(data.message);
+				Swal.fire({
+					icon: 'error',
+					text: data.message
+				})
 	        }
 	    },
 	    error: function (xhr, status, error) {
 	        console.error(error);
-	        alert("회원가입에 실패했습니다.");
+//	        alert("회원가입에 실패했습니다.");
+			Swal.fire({
+				icon: 'error',
+				text: "회원가입에 실패했습니다."
+			})
 	    }
 	}); 
 });

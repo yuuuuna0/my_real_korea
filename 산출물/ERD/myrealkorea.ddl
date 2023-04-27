@@ -20,6 +20,14 @@ DROP TABLE trip_board CASCADE CONSTRAINTS;
 DROP TABLE user_info CASCADE CONSTRAINTS;
 DROP TABLE city CASCADE CONSTRAINTS;
 DROP TABLE ticket_img CASCADE CONSTRAINTS;
+DROP TABLE tour_loc CASCADE CONSTRAINTS;
+
+
+CREATE TABLE tour_loc(
+		lat                           		VARCHAR2(50)		 NULL ,
+		lang                          		VARCHAR2(50)		 NULL ,
+		to_no                         		NUMBER		 NULL 
+);
 
 
 CREATE TABLE city(

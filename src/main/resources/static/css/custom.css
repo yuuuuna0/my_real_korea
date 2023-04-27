@@ -883,3 +883,42 @@ a.btn_3, .btn_3 {
 .tripboard-trip-date {
 	margin-top:20px;
 }
+
+.btn-secondary:not(:disabled):not(.disabled).active, .btn-secondary:not(:disabled):not(.disabled):active, .show>.btn-secondary.dropdown-toggle {
+    color: #fff;
+    background-color: #e04f67;
+    border-color: #4e555b;
+}
+
+
+.tooltip-back {
+    background: #e04f67;
+    font-size: 12px;
+    line-height: 14px;
+    -webkit-transform-origin: 0% 50%;
+    transform-origin: 0% 50%;
+    -webkit-transform: perspective(1000px) rotate3d(0, 1, 0, 90deg);
+    transform: perspective(1000px) rotate3d(0, 1, 0, 90deg);
+    border-radius: 10px; 
+}
+
+.tooltip-content-flip {
+    position: absolute;
+    z-index: 9999;
+    width: 80px;
+    height: 80px;
+    left: -40%;
+    bottom: 40%;
+    text-align: center;
+    color: #fff;
+    opacity: 0;
+    margin-bottom: 0px;
+}
+
+.tooltip-content-flip > span {
+    float: left;
+    width: 80px;
+    height: 40px;
+    padding: 5px;
+    position: relative;
+}

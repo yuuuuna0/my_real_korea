@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itwill.my_real_korea.mapper.LocationMapper">
+
+	<!-- 1. 투어번호로 위치 찾기 -->
+	<select id="findByToNo" parameterType="java.lang.Integer" resultType="com.itwill.my_real_korea.dto.Location">
+		select * from location where to_no=#{toNo}
+	</select>
+	<!-- 2. 티켓번호로 위치 찾기 -->
+	<select id="findByTiNo" resultType="com.itwill.my_real_korea.dto.Location">
+		select * from location where ti_no=#{tiNo}
+	</select>
+</mapper>

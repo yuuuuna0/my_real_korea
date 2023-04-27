@@ -33,7 +33,14 @@
 </head>
 
 <body>
-
+<th:block th:if="${session.ticket.location!=null}">
+	<input type="hidden" id="lat" th:value="${session.ticket.location.lat}">
+	<input type="hidden" id="lng" th:value="${session.ticket.location.lng}">
+</th:block>
+<th:block th:if="${session.ticket.location==null}">
+	<input type="hidden" id="lat"  value="37.5400456">
+	<input type="hidden" id="lng"  value="126.9921017">
+</th:block>
 	<div class="layer"></div>
 	<!-- Mobile menu overlay mask -->
 
@@ -55,6 +62,14 @@
                             <span data-th-text="${#numbers.formatInteger(session.ticket.tiPrice ,3, 'COMMA')} +'원' "></span>
                         </div>
                     </div>
+                    <span class="rating" id="tiScoreDiv" >
+							<input type="hidden" id="tiScore" th:value="${session.ticket.tiScore}">
+							<i class="icon-star voted"></i>
+							<i class="icon-star voted"></i>
+							<i class="icon-star voted"></i>
+							<i class="icon-star voted"></i>
+							<i class="icon-star-empty"></i>
+						</span>
                 </div>
             </div>
         </div>
@@ -65,11 +80,11 @@
 		<div id="position">
 			<div class="container">
 				<ul>
-					<li><a href="#">Home</a>
+					<li><a href="./">Home</a>
 					</li>
-					<li><a href="#">Category</a>
+					<li><a href="./ticket-list">티켓</a>
 					</li>
-					<li>Page active</li>
+					<li>티켓 상세보기</li>
 				</ul>
 			</div>
 		</div>
@@ -186,16 +201,34 @@
 							</div>
 							<!-- End general_rating -->
 							<div class="row" id="rating_summary">
-								<div class="col-md-6">
-										<div class="rating">
-											<i class="icon-star voted"></i>
-											<i class="icon-star voted"></i>
-											<i class="icon-star voted"></i>
-											<i class="icon-star"></i>
-											<i class="icon-star"></i>
+								<div class="col-md-12">
+									<div class="rating" th:switch=${session.ticket.tiScore}>
+										<div th:case="0">
+											<i class="icon-star-empty"></i>							
+											<i class="icon-star-empty"></i>							
+											<i class="icon-star-empty"></i>							
+											<i class="icon-star-empty"></i>							
+											<i class="icon-star-empty"></i>							
 										</div>
-									</div>
-								<div class="col-md-6"></div>
+										<div th:case="5">
+												<i class="icon-star voted"></i>
+												<i class="icon-star voted"></i>
+												<i class="icon-star voted"></i>
+												<i class="icon-star voted"></i>
+												<i class="icon-star voted"></i>
+										</div>
+										<div th:case="*">
+											<span th:each="i:${#numbers.sequence(0,session.ticket.tiScore-1)}">
+													<i class="icon-star voted"></i>
+											</span>
+											<span th:each="i:${#numbers.sequence(session.ticket.tiScore,4)}">
+													<i class="icon-star-empty"></i>
+											</span>
+										</div>
+										<small th:text="${ticketReviewList.size()}+'개의 후기가 작성되었습니다.'"></small>
+									<div>
+								</div>
+							</div>
 							</div>
 							<!-- End row -->
 							<hr>
@@ -229,13 +262,31 @@
 
 								<!-- <p> <img src="" id="result-image"> </p> -->
 
-								<div class="rating">
-									<i class="icon-star voted"></i>
-									<i class="icon-star voted"></i>
-									<i class="icon-star voted"></i>
-									<i class="icon-star"></i>
-									<i class="icon-star"></i>
-								</div>
+								<div class="rating" th:switch=${ticketReview.tiReviewStar}>
+									<input type="hidden" id="tiReviewStar" th:value="${ticketReview.tiReviewStar}">
+									<div th:case="0">
+										<i class="icon-star-empty"></i>							
+										<i class="icon-star-empty"></i>							
+										<i class="icon-star-empty"></i>							
+										<i class="icon-star-empty"></i>							
+										<i class="icon-star-empty"></i>							
+									</div>
+									<div th:case="5">
+											<i class="icon-star voted"></i>
+											<i class="icon-star voted"></i>
+											<i class="icon-star voted"></i>
+											<i class="icon-star voted"></i>
+											<i class="icon-star voted"></i>
+									</div>
+									<div th:case="*">
+										<span th:each="i:${#numbers.sequence(0,ticketReview.tiReviewStar-1)}">
+												<i class="icon-star voted"></i>
+										</span>
+										<span th:each="i:${#numbers.sequence(ticketReview.tiReviewStar,4)}">
+												<i class="icon-star-empty"></i>
+										</span>
+									</div>
+									</div>
 								</form>
 							</div>
 							<!-- End review strip -->
@@ -245,7 +296,7 @@
 			</div>
 				<!--End  single_tour_desc-->
 
-				<aside class="col-lg-4">
+				<aside class="col-lg-4 row">
 					<p class="d-none d-xl-block d-lg-block d-xl-none">
 					<!--  	<a class="btn_map" data-toggle="collapse" href="#collapseMap" aria-expanded="false" aria-controls="collapseMap" data-text-swap="Hide map" data-text-original="View on map">View on map</a> -->
 					</p>
@@ -311,7 +362,13 @@
 						<div id="map" class="map" style="width:100%;height:500px;">
 						</div>
 					</div>
-
+					<div class="box_style_2">
+						<i class="icon_set_1_icon-57"></i>
+						<br>
+						<h6>도움이 필요하신가요?</h6>
+						<a href="tel://004542344599" class="phone">+82 423 445 99</a>
+						<small>월 ~ 금 9.00am - 7.30pm</small>
+					</div>
 				</aside>
 			</div>
 			<!--End row -->
@@ -536,8 +593,27 @@
 	<script src="assets/validate.js"></script>
 	<!-- 리뷰 템플릿 handlebar -->
 	 <script id="ticketReview-template" type="text/x-handlebars-template">
+	<div id="score_detail">
+		<span>
+			{{tiCount}}
+		</span>명이 구매했습니다.
+	</div>
+	<!-- End general_rating -->
+	<div class="row" id="rating_summary">
+		<div class="col-md-12">
+			<div class="rating" value="{{tiScore}}">
+				{{#generateStarHtml tiScore}}
+				{{/generateStarHtml}}
+			</div>
+			<small>
+				(Based on {{tiReviewCount}} reviews)
+			</small>
+		</div>
+	</div>
+	<hr>
+
 	
-	{{#each data}}
+{{#each data}}
 		<div class="modal fade" id="myReview" tabindex="1" role="dialog" aria-labelledby="myReviewLabel" aria-hidden="true" style="z-index:100000;">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -610,26 +686,26 @@
 	<script defer src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDaZG7q63JktxVWQ7LM9Fnc_JJXbt8QKAY&callback=initMap"></script>
 	<script>
 	window.initMap=function(){
+		let lat=Number(document.getElementById('lat').value);
+		let lng=Number(document.getElementById('lng').value);
 		//구글 지도 보여주기
 		let mapContainer = document.getElementById("map");
 		let mapOption = {
-			    center: { lat: 37.5400456, lng: 126.9921017 },
-			    zoom: 13
+			    center: { 
+			    	lat: lat, 
+			    	lng: lng },
+			    zoom: 14
 			  };
 		let map=new google.maps.Map(mapContainer,mapOption);
 		// 마커로 위치 표시하기 
 		let malls = [
-		    { label: "C", name: "코엑스몰", lat: 37.5115557, lng: 127.0595261 },
-		    { label: "G", name: "고투몰", lat: 37.5062379, lng: 127.0050378 },
-		    { label: "D", name: "동대문시장", lat: 37.566596, lng: 127.007702 },
-		    { label: "I", name: "IFC몰", lat: 37.5251644, lng: 126.9255491 },
-		    { label: "L", name: "롯데월드타워몰", lat: 37.5125585, lng: 127.1025353 },
-		    { label: "M", name: "명동지하상가", lat: 37.563692, lng: 126.9822107 },
-		    { label: "T", name: "타임스퀘어", lat: 37.5173108, lng: 126.9033793 },
+		    { label: "", name: "롯데월드타워몰", lat: 37.5125585, lng: 127.1025353 },
+		    { label: "", name: "강릉아르떼뮤지엄", lat: 37.7916986, lng: 128.9075057 }
+		  //위도 위(+) 아래(-)               경도 우(+) 좌(-)
 	  	];
 		
 	  	//지도 경계 조정하기
-/* 	  	let bounds=new google.maps.LatLngBounds(); */
+ 	  	//let bounds=new google.maps.LatLngBounds(); 
 	  	//클릭시 정보 보여주기
 	  	let infowindow=new google.maps.InfoWindow();
 		

@@ -343,7 +343,8 @@ $(document).on('click','#type-ticket',function(e){
 $(document).on('click', '#wishlist-delete-action-btn', function(event) {
 	event.preventDefault(); 
 	let userId = $('#wishlist-userId').val();
-	let wishNo = $('#wishlist-wishNo').val();
+	//let wishNo = $('#wishlist-wishNo').val();
+	let wishNo = $(this).attr('data-wishNo');
 	console.log(userId);
 	console.log(wishNo);
 	$.ajax({

@@ -14,6 +14,7 @@ function selectedTicketList(){
     } else{
         cityNo=0;
     }
+    console.log(cityNo);
 
     let url= 'ticket-list-sort';
     let method='POST';
@@ -40,14 +41,18 @@ function selectedTicketList(){
 $(document).on('change','#ticket-sort,#city-checkbox',selectedTicketList);
 $(document).on('click',"#ticket-search-btn",selectedTicketList);
 
-
 $('input[type="checkbox"][name="city-checkbox"]').click(function(){
+	$(".pagination").show();
     if($(this).prop('checked')){
         $('input[type="checkbox"][name="city-checkbox"]').prop('checked',false);
         $(this).prop('checked',true);
+        $(".pagination").hide();
     }
 });
 
+$('input[type="checkbox"]').on('click', function() {
+	
+})
 
 $(document).on('show.bs.modal','#myReview',function(){
     let loginUser=$('#myReviewBtn').data('id');
@@ -154,9 +159,10 @@ $('#ticket-review-action').click(function(e){
                             'application/json;charset=UTF-8', 
                             JSON.stringify(sendData), 
                             function(resultJson) {
-            let tiNo = $('#hiddenTiNo').val();
+           // let tiNo = $('#hiddenTiNo').val();
             if(resultJson.code==1){
-                window.location.href=`ticket-detail?tiNo=${tiNo}`;
+               // window.location.href=`ticket-detail?tiNo=${tiNo}`;
+               View.render("#ticketReview-template", resultJson,'#ticketReviewDiv')
             } else {
                 alert(resultJson.msg);
             }
@@ -170,7 +176,6 @@ $('#ticket-review-action').click(function(e){
     })
     e.preventDefault();
 });
-
 
 
 /*티켓 리뷰 삭제 삭제*/
@@ -282,11 +287,35 @@ $('#ticket-review-modify-action').click(function(e){
     
     
     
-/* test */
+/* test 
 $(document).ready(function() {
 	
   $('.box_style_1 expose').after('<script>$("#ticketReviewDiv").hide();</script>');
+});*/
+
+$(document).on('click', '#usePointBtn', function(e) {
+  let usedPoint = $('#usedPoint').val(); // 사용할 포인트 입력값
+  let nowPoint = $('#nowPoint').val(); // 세션에 담긴 현재 로그인유저 포인트
+  let totPrice = $('#totPrice').val(); // 총 금액
+  
+  let nowPoint2 = nowPoint - usedPoint; // 유저포인트 - 사용포인트
+  let totPrice2 = totPrice - usedPoint; // 총 금액 - 사용포인트
+  let savePoint2 = totPrice2 * 0.01; // 적립 포인트
+
+  // 현재 포인트가 1000 미만인 경우 버튼을 비활성화 합니다.
+  if (nowPoint < 1000) {
+    $('#usePointBtn').prop('disabled', true);
+  }
+  
+  document.getElementById('nowPoint2').innerHTML = nowPoint2;
+  document.getElementById('usingPoint2').innerHTML = usedPoint;
+  document.getElementById('totPrice2').innerHTML = totPrice2;
+  document.getElementById('savePoint2').innerHTML = savePoint2;
+  $('#pPrice').val(totPrice2);
+  $('#pPoint').val(savePoint2 - usedPoint);
+  e.preventDefault();
 });
+
 
 
 

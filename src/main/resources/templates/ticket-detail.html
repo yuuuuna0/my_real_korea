@@ -7,7 +7,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Citytours - Premium site template for city tours agencies, transfers and tickets.">
     <meta name="author" content="Ansonika">
-    <title>마이리얼코리아-티켓 상세</title>
+    <title>마이리얼코리아 MY REAL KOREA</title>
 
     <!-- Favicons-->
     <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
@@ -84,25 +84,6 @@
 			</div>
 		</div>
 		<!-- End Position -->
-  <!---------------------START KAKAO MAP   일단 넣음 (느람) -> 파일 분리?해야겠음.. ㅠ --------------------->
-	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=34fb8be020c4d96a5450f8ad5dd1e744"></script>
-			<div class="collapse" id="collapseMap">
-				<div id="map" style="width:100%;height:350px;"></div>
-				
-		<script>
-			var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-			    mapOption = { 
-			        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-			        level: 3 // 지도의 확대 레벨
-			    };
-			
-			// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
-			var map = new kakao.maps.Map(mapContainer, mapOption); 
-		</script>
-	</div>
-	
-  <!--------------------- END KAKAO MAP--------------------->
-		<!-- End Map -->
 
 		<div class="container margin_60">
 		<div>
@@ -332,23 +313,20 @@
 								<i class=" icon-heart"></i>위시리스트 담기</a>
 						</div>
 						<!-- End wish list-->
-						
 					</div>
+					
 				</form>
 					<!--/box_style_1 -->
-	
-					<!-- <div class="box_style_4">
-						<i class="icon_set_1_icon-90"></i>
-						<h4><span>Book</span> by phone</h4>
-						<a href="tel://004542344599" class="phone">+45 423 445 99</a>
-						<small>Monday to Friday 9.00am - 7.30pm</small>
-					</div> -->
+					<div class="box_style_4" style="padding:0px">
+						<div id="map" class="map" style="width:100%;height:500px;">
+						</div>
+					</div>
 
 				</aside>
 			</div>
 			<!--End row -->
 		</div>
-		
+		</div>
 		
 		<!--End container -->
 
@@ -638,7 +616,52 @@
 		</div>
 {{/each}}
 	</script>
-	
+			<!-- Map -->
+	<script defer src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDaZG7q63JktxVWQ7LM9Fnc_JJXbt8QKAY&callback=initMap"></script>
+	<script>
+	window.initMap=function(){
+		//구글 지도 보여주기
+		let mapContainer = document.getElementById("map");
+		let mapOption = {
+			    center: { lat: 37.5400456, lng: 126.9921017 },
+			    zoom: 13
+			  };
+		let map=new google.maps.Map(mapContainer,mapOption);
+		// 마커로 위치 표시하기 
+		let malls = [
+		    { label: "C", name: "코엑스몰", lat: 37.5115557, lng: 127.0595261 },
+		    { label: "G", name: "고투몰", lat: 37.5062379, lng: 127.0050378 },
+		    { label: "D", name: "동대문시장", lat: 37.566596, lng: 127.007702 },
+		    { label: "I", name: "IFC몰", lat: 37.5251644, lng: 126.9255491 },
+		    { label: "L", name: "롯데월드타워몰", lat: 37.5125585, lng: 127.1025353 },
+		    { label: "M", name: "명동지하상가", lat: 37.563692, lng: 126.9822107 },
+		    { label: "T", name: "타임스퀘어", lat: 37.5173108, lng: 126.9033793 },
+	  	];
+		
+	  	//지도 경계 조정하기
+/* 	  	let bounds=new google.maps.LatLngBounds(); */
+	  	//클릭시 정보 보여주기
+	  	let infowindow=new google.maps.InfoWindow();
+		
+	  	malls.forEach(({ label, name, lat, lng }) => {
+	    	let marker = new google.maps.Marker({
+	      		position: { lat, lng },
+	      		label,
+	      		map
+	      	});
+	    	/* bounds.extend(marker.position); */
+	    	marker.addListener('click',() => {
+	    		map.panTo(marker.position);
+	    		infowindow.setContent(name);
+	    		infowindow.open({
+	    			anchor:marker,
+	    			map
+	    		});
+	    	});
+	  	});
+	  	/* map.fitBounds(bounds); */
+	};
+	</script>   
 	
 	
 </body>

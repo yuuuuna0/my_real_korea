@@ -34,7 +34,8 @@
 </head>
 
 <body>
-
+<input type="hidden" id="lat" th:value="${tour.location.lat}" value="37.5400456">
+<input type="hidden" id="lng" th:value="${tour.location.lng}" value="126.9921017">
 
 	<div class="layer"></div>
 	<!-- Mobile menu overlay mask -->
@@ -635,26 +636,27 @@
 	<script defer src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDaZG7q63JktxVWQ7LM9Fnc_JJXbt8QKAY&callback=initMap"></script>
 	<script>
 	window.initMap=function(){
+		let lat=Number(document.getElementById('lat').value);
+		let lng=Number(document.getElementById('lng').value);
+		console.log(typeof lat);
+		console.log(typeof lng);
 		//구글 지도 보여주기
 		let mapContainer = document.getElementById("map");
 		let mapOption = {
-			    center: { lat: 37.6800456, lng: 128.7021017 },
-			    zoom: 13
+				//위도 위(+) 아래(-)               경도 우(+) 좌(-)
+			    center: { 
+			    	lat: lat, 
+			    	lng: lng },
+			    zoom: 14
 			  };
 		let map=new google.maps.Map(mapContainer,mapOption);
 		// 마커로 위치 표시하기 
 		let malls = [
-		    { label: "C", name: "코엑스몰", lat: 37.5115557, lng: 127.0595261 },
-		    { label: "G", name: "고투몰", lat: 37.5062379, lng: 127.0050378 },
-		    { label: "D", name: "동대문시장", lat: 37.566596, lng: 127.007702 },
-		    { label: "I", name: "IFC몰", lat: 37.5251644, lng: 126.9255491 },
-		    { label: "L", name: "롯데월드타워몰", lat: 37.5125585, lng: 127.1025353 },
-		    { label: "M", name: "명동지하상가", lat: 37.563692, lng: 126.9822107 },
-		    { label: "T", name: "타임스퀘어", lat: 37.5173108, lng: 126.9033793 },
+		    { label: "A", name: "롯데월드타워몰", lat: 37.5125585, lng: 127.1025353 },
+		    { label: "B", name: "강릉아르떼뮤지엄", lat: 37.7929456, lng: 128.9050017 },
 	  	];
-		
 	  	//지도 경계 조정하기
-/* 	  	let bounds=new google.maps.LatLngBounds(); */
+ 	  	//let bounds=new google.maps.LatLngBounds(); 
 	  	//클릭시 정보 보여주기
 	  	let infowindow=new google.maps.InfoWindow();
 		
@@ -664,7 +666,7 @@
 	      		label,
 	      		map
 	      	});
-	    	/* bounds.extend(marker.position); */
+	    	 //bounds.extend(marker.position); 
 	    	marker.addListener('click',() => {
 	    		map.panTo(marker.position);
 	    		infowindow.setContent(name);
@@ -674,7 +676,7 @@
 	    		});
 	    	});
 	  	});
-	  	/* map.fitBounds(bounds); */
+	  	 map.fitBounds(bounds); 
 	};
 	</script>   
 </body>

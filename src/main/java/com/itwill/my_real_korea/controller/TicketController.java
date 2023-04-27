@@ -34,6 +34,7 @@ import com.itwill.my_real_korea.dto.ticket.TicketReview;
 import com.itwill.my_real_korea.dto.tour.Tour;
 import com.itwill.my_real_korea.dto.user.User;
 import com.itwill.my_real_korea.service.city.CityService;
+import com.itwill.my_real_korea.service.location.LocationService;
 import com.itwill.my_real_korea.service.payment.PaymentService;
 import com.itwill.my_real_korea.service.rspinfo.RsPInfoService;
 import com.itwill.my_real_korea.service.ticket.TicketImgService;
@@ -53,6 +54,7 @@ public class TicketController {
     private final TicketImgService ticketImgService;
     private final CityService cityService;
     private final UserService userService;
+    private final LocationService locationService;
     //private final Aws3UploadService aws3UploadService;
    
 
@@ -60,7 +62,7 @@ public class TicketController {
     public TicketController(TicketService ticketService, TicketReviewService ticketReviewService,
     						RsPInfoService rsPInfoService, PaymentService paymentService,
     						TicketImgService ticketImgService,
-    						CityService cityService,UserService userService/*,
+    						CityService cityService,UserService userService,LocationService locationService/*,
     						Aws3UploadService aws3UploadService*/) {
         this.ticketService = ticketService;
         this.ticketReviewService = ticketReviewService;
@@ -69,6 +71,7 @@ public class TicketController {
         this.ticketImgService = ticketImgService;
         this.cityService = cityService;
         this.userService = userService;
+        this.locationService=locationService;
        // this.aws3UploadService = aws3UploadService;
     }
     //티켓 리스트 - 페이지
@@ -134,6 +137,7 @@ public class TicketController {
          //  System.out.println(">>>>>>>>"+ticketImgList);
             // 사진을 제외한 공통된 하나의 티켓 정보
             Ticket ticket = ticketList.get(0);
+            ticket.setLocation(locationService.findByTiNo(tiNo));
            
             // 세션에 티켓 정보 담기
             session.setAttribute("ticketImgList", ticketImgList); // 굳이?

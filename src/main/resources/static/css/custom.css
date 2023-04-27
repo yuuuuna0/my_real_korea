@@ -871,6 +871,7 @@ a.btn_3, .btn_3 {
 .tripboard-trip-title h3{
 	height:37px;
 	font-weight:bold;
+	margin-top:0px;
 }
 
 .tripboard-trip-date {

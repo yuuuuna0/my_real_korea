@@ -79,15 +79,15 @@
 		<div id="position">
 			<div class="container">
 				<ul>
-					<li><a href="./">메인페이지</a>
+					<li><i class="icon-home" onclick="location.href='index'"></i><a href="index"></a>
+                	</li>
+                	<li><a href="tour-list">투어리스트</a>
+                	</li>
+					<li><a th:href="@{tour-detail(toNo=${tour.toNo})}">상세보기</a>
 					</li>
-					<li><a href="tour-list./">투어리스트</a>
+					<li><a href="javascript:window.history.go(-1);">예약하기</a>
 					</li>
-					<li><a th:href="@{tour-detail(toNo=${tour.toNo})}">투어상세보기</a>
-					</li>
-					<li><a href="./">투어예약하기</a>
-					</li>
-					<li>투어예약확인</li>
+					<li>예약확인</li>
 				</ul>
 			</div>
 		</div>
@@ -98,23 +98,17 @@
 				<div class="col-lg-8 add_bottom_15">
 
 					<div class="form_title">
-						<h3><strong><i class="icon-ok"></i></strong>Thank you!</h3>
-						<p>
-							Mussum ipsum cacilds, vidis litro abertis.
-						</p>
+						<h3><strong><i class="icon-ok"></i></strong>감사합니다!</h3>
 					</div>
 					<div class="step">
 						<p>
-							Lorem ipsum dolor sit amet, nostrud nominati vis ex, essent conceptam eam ad. Cu etiam comprehensam nec. Cibo delicata mei an, eum porro legere no. Te usu decore omnium, quem brute vis at, ius esse officiis legendos cu. Dicunt voluptatum at cum. Vel et facete equidem deterruisset, mei graeco cetero labores et. Accusamus inciderint eu mea.
+							저희 마이리얼코리아의 상품을 구매 해 주신것에 감사드립니다. 앞으로도 마이리얼코리아와 함께하는 국내여행 많은 관심 부탁드립니다.
 						</p>
 					</div>
 					<!--End step -->
 
 					<div class="form_title">
-						<h3><strong><i class="icon-tag-1"></i></strong>Booking summary</h3>
-						<p>
-							Mussum ipsum cacilds, vidis litro abertis.
-						</p>
+						<h3><strong><i class="icon-tag-1"></i></strong>예약 상세내역</h3>
 					</div>
 					<div class="step">
 						<table class="table table-striped confirm">
@@ -154,7 +148,10 @@
 										<strong>결제방법</strong>
 									</td>
 									<th:block th:if="${payment.pMethod==1}">
-										<td>현금결제</td>
+										<td>계좌이체
+											<br>
+											(신한은행 : 110-123-456789)
+										</td>
 									</th:block>
 									<th:block th:if="${payment.pMethod==2}">
 										<td>카드결제</td>
@@ -207,14 +204,6 @@
 				<!--End col -->
 
 				<aside class="col-lg-4">
-					<div class="box_style_1">
-						<h3 class="inner">감사합니다.</h3>
-							<p>
-								저희 마이리얼코리아의 상품을 구매 해 주신것에 감사드립니다. 앞으로도 마이리얼코리아와 함께하는 국내여행 많은 관심 부탁드립니다.
-							</p>
-						<hr>
-						<a class="btn_full_outline" href="invoice.html" target="_blank">View your invoice</a>
-					</div>
 					<div class="box_style_2">
 						<i class="icon_set_1_icon-57"></i>
 						<br>

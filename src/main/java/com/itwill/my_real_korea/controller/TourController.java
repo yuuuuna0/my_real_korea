@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.itwill.my_real_korea.service.city.CityService;
+import com.itwill.my_real_korea.service.location.LocationService;
 import com.itwill.my_real_korea.service.payment.PaymentService;
 import com.itwill.my_real_korea.service.rspinfo.RsPInfoService;
 import com.itwill.my_real_korea.service.tour.TourImgService;
@@ -49,10 +50,12 @@ public class TourController {
 	private PaymentService paymentService;
 	private RsPInfoService rsPInfoService;
 	private UserService userService;
+	private LocationService locationService;
 
 	@Autowired
 	public TourController(TourService tourService, TourImgService tourImgService, CityService cityService,TourReviewService tourReviewService,
-						  PaymentService payService,RsPInfoService rsPInfoService, UserService userService) {
+						  PaymentService payService,RsPInfoService rsPInfoService, UserService userService,
+						  LocationService locationService) {
 		this.tourService=tourService;
 		this.tourImgService=tourImgService;
 		this.cityService=cityService;
@@ -60,6 +63,7 @@ public class TourController {
 		this.paymentService=payService;
 		this.rsPInfoService=rsPInfoService;
 		this.userService=userService;
+		this.locationService=locationService;
 	}
 
 	//1. 투어상품 전체 리스트 보기
@@ -113,6 +117,7 @@ public class TourController {
 			if(tour!=null){
 				int tourScore=tourReviewService.calculateTourScore(toNo);
 				tour.setToScore(tourScore);
+				tour.setLocation(locationService.findByToNo(toNo));
 				model.addAttribute("tour",tour);
 				forwardPath="tour-detail";
 			} else{

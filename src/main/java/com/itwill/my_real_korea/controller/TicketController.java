@@ -214,8 +214,9 @@ public class TicketController {
 										        @ModelAttribute RsPInfo rsPInfo,
 										        @RequestParam(required = false, defaultValue = "") String pMsg,
 										        @RequestParam int pMethod, // ?
-										        //@RequestParam int pPoint, // ?
-										        //@RequestParam int pPrice, // ?
+										        @RequestParam int pPoint, // ?
+										        @RequestParam int pPrice, // ?
+										        @RequestParam int amount,
 										        RedirectAttributes redirectAttributes) {
         String forwardPath = "";
         Payment payment = (Payment) session.getAttribute("payment");
@@ -229,11 +230,11 @@ public class TicketController {
 	            	 payment.setPMethod(2);
 	            }
         	payment.setPMsg(pMsg); 
-        	//payment.setPPoint(pPoint);
-        	//payment.setPPrice(pPrice);
-        	//payment.setPNo(payment.getPNo());
+        	payment.setPPoint(pPoint);
+        	payment.setPPrice(amount);
+        	payment.setPNo(payment.getPNo());
         	//System.out.println(payment.getPNo());
-        	int newPoint = loginUser.getPoint()+payment.getPPoint();
+        	int newPoint = loginUser.getPoint()+pPoint;
         	loginUser.setPoint(newPoint);
         	userService.updatePoint(loginUser);
         	//paymentService.updatePayment(payment); // insert로 변경

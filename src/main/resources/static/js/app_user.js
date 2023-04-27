@@ -94,7 +94,7 @@ $(document).on('click', '.btn-admin-remove.btn_1.outline', function(e) {
 
 
 /************************* login *************************/
-
+ 
 //토스트
 $(document).ready(function() {
   toastr.options = {

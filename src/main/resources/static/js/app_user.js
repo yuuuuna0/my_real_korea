@@ -295,7 +295,7 @@ $(document).on('click','#btn-user-find-pw',function(e) {
 		    const toast = Swal.fire({
 		      position: 'top-end',
 		      icon: 'success',
-		      text: '이메일로 임시 비밀번호가 발송되었습니다. <br/>로그인 페이지로 이동합니다.',
+		      text: '이메일로 임시 비밀번호가 발송되었습니다. 로그인 페이지로 이동합니다.',
 		      showConfirmButton: false
 		    });
 		    setTimeout(() => {

@@ -212,4 +212,11 @@ input[id='termsPrivacy'] + label:before {
 }
 
 
-
+#clearfix_modify {
+    width: 63%;
+    margin-bottom: 15px;
+    color: #829CBD;
+    text-align: center;
+    font-family: S-CoreDream-5Medium;
+    font-size: 12px;
+}

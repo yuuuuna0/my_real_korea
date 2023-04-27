@@ -55,6 +55,14 @@
                             <span data-th-text="${#numbers.formatInteger(session.ticket.tiPrice ,3, 'COMMA')} +'원' "></span>
                         </div>
                     </div>
+                    <span class="rating" id="tiScoreDiv" >
+							<input type="hidden" id="tiScore" th:value="${session.ticket.tiScore}">
+							<i class="icon-star voted"></i>
+							<i class="icon-star voted"></i>
+							<i class="icon-star voted"></i>
+							<i class="icon-star voted"></i>
+							<i class="icon-star-empty"></i>
+						</span>
                 </div>
             </div>
         </div>
@@ -65,11 +73,11 @@
 		<div id="position">
 			<div class="container">
 				<ul>
-					<li><a href="#">Home</a>
+					<li><a href="./">Home</a>
 					</li>
-					<li><a href="#">Category</a>
+					<li><a href="./ticket-list">티켓</a>
 					</li>
-					<li>Page active</li>
+					<li>티켓 상세보기</li>
 				</ul>
 			</div>
 		</div>
@@ -186,16 +194,34 @@
 							</div>
 							<!-- End general_rating -->
 							<div class="row" id="rating_summary">
-								<div class="col-md-6">
-										<div class="rating">
-											<i class="icon-star voted"></i>
-											<i class="icon-star voted"></i>
-											<i class="icon-star voted"></i>
-											<i class="icon-star"></i>
-											<i class="icon-star"></i>
+								<div class="col-md-12">
+									<div class="rating" th:switch=${session.ticket.tiScore}>
+										<div th:case="0">
+											<i class="icon-star-empty"></i>							
+											<i class="icon-star-empty"></i>							
+											<i class="icon-star-empty"></i>							
+											<i class="icon-star-empty"></i>							
+											<i class="icon-star-empty"></i>							
 										</div>
-									</div>
-								<div class="col-md-6"></div>
+										<div th:case="5">
+												<i class="icon-star voted"></i>
+												<i class="icon-star voted"></i>
+												<i class="icon-star voted"></i>
+												<i class="icon-star voted"></i>
+												<i class="icon-star voted"></i>
+										</div>
+										<div th:case="*">
+											<span th:each="i:${#numbers.sequence(0,session.ticket.tiScore-1)}">
+													<i class="icon-star voted"></i>
+											</span>
+											<span th:each="i:${#numbers.sequence(session.ticket.tiScore,4)}">
+													<i class="icon-star-empty"></i>
+											</span>
+										</div>
+										<small th:text="${ticketReviewList.size()}+'개의 후기가 작성되었습니다.'"></small>
+									<div>
+								</div>
+							</div>
 							</div>
 							<!-- End row -->
 							<hr>
@@ -229,13 +255,31 @@
 
 								<!-- <p> <img src="" id="result-image"> </p> -->
 
-								<div class="rating">
-									<i class="icon-star voted"></i>
-									<i class="icon-star voted"></i>
-									<i class="icon-star voted"></i>
-									<i class="icon-star"></i>
-									<i class="icon-star"></i>
-								</div>
+								<div class="rating" th:switch=${ticketReview.tiReviewStar}>
+									<input type="hidden" id="tiReviewStar" th:value="${ticketReview.tiReviewStar}">
+									<div th:case="0">
+										<i class="icon-star-empty"></i>							
+										<i class="icon-star-empty"></i>							
+										<i class="icon-star-empty"></i>							
+										<i class="icon-star-empty"></i>							
+										<i class="icon-star-empty"></i>							
+									</div>
+									<div th:case="5">
+											<i class="icon-star voted"></i>
+											<i class="icon-star voted"></i>
+											<i class="icon-star voted"></i>
+											<i class="icon-star voted"></i>
+											<i class="icon-star voted"></i>
+									</div>
+									<div th:case="*">
+										<span th:each="i:${#numbers.sequence(0,ticketReview.tiReviewStar-1)}">
+												<i class="icon-star voted"></i>
+										</span>
+										<span th:each="i:${#numbers.sequence(ticketReview.tiReviewStar,4)}">
+												<i class="icon-star-empty"></i>
+										</span>
+									</div>
+									</div>
 								</form>
 							</div>
 							<!-- End review strip -->
@@ -245,7 +289,7 @@
 			</div>
 				<!--End  single_tour_desc-->
 
-				<aside class="col-lg-4">
+				<aside class="col-lg-4 row">
 					<p class="d-none d-xl-block d-lg-block d-xl-none">
 					<!--  	<a class="btn_map" data-toggle="collapse" href="#collapseMap" aria-expanded="false" aria-controls="collapseMap" data-text-swap="Hide map" data-text-original="View on map">View on map</a> -->
 					</p>
@@ -536,8 +580,27 @@
 	<script src="assets/validate.js"></script>
 	<!-- 리뷰 템플릿 handlebar -->
 	 <script id="ticketReview-template" type="text/x-handlebars-template">
+	<div id="score_detail">
+		<span>
+			{{tiCount}}
+		</span>명이 구매했습니다.
+	</div>
+	<!-- End general_rating -->
+	<div class="row" id="rating_summary">
+		<div class="col-md-12">
+			<div class="rating" value="{{tiScore}}">
+				{{#generateStarHtml tiScore}}
+				{{/generateStarHtml}}
+			</div>
+			<small>
+				(Based on {{tiReviewCount}} reviews)
+			</small>
+		</div>
+	</div>
+	<hr>
+
 	
-	{{#each data}}
+{{#each data}}
 		<div class="modal fade" id="myReview" tabindex="1" role="dialog" aria-labelledby="myReviewLabel" aria-hidden="true" style="z-index:100000;">
 		<div class="modal-dialog">
 			<div class="modal-content">

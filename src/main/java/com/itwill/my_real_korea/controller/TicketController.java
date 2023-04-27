@@ -88,7 +88,20 @@ public class TicketController {
  			}
  			// 위시리스트 추가 코드 끝
         	
+ 			
             PageMakerDto<Ticket> ticketPage = ticketService.selectByTicketAllSort(currentPage,keyword,cityNo,sortOrder);
+            List <Ticket> ticketList = new ArrayList<>();
+            for(Ticket ticket : ticketPage.getItemList()) {
+            	if(ticketReviewService.selectByTicketReviewNo(ticket.getTiNo()).size()==0) {
+            		ticket.setTiScore(0);
+            		ticketList.add(ticket);
+            	} else {
+            		int ticketScore = ticketReviewService.calculateTourScore(ticket.getTiNo());
+            		ticket.setTiCount(ticketScore);
+            		ticketList.add(ticket);
+            	}
+            }
+            ticketPage.setItemList(ticketList);
             List<City> cityList=cityService.findAllCity();
             model.addAttribute("ticketPage", ticketPage);
             model.addAttribute("cityList", cityList);
@@ -110,11 +123,6 @@ public class TicketController {
             List<Ticket> ticketList = ticketService.selectByTicketNoCityWithImg(tiNo); // 이미지 list로
             List<TicketImg> ticketImgList = ticketImgService.selectTicketImgList(tiNo);
             List<TicketReview> ticketReviewList = ticketReviewService.selectByTicketReviewNo(tiNo);
-//            User loginUser = (User)session.getAttribute("loginUser");
-//			if(loginUser!=null) {
-//				model.addAttribute("loginUser",loginUser);
-//				model.addAttribute("userId", loginUser.getUserId());
-//			}
             // 위시리스트 추가 코드 시작
             // 로그인 한 유저면 userId model에 붙이기
  			User loginUser = (User)session.getAttribute("loginUser");
@@ -123,6 +131,12 @@ public class TicketController {
  				model.addAttribute("userId", userId);
  			}
  			// 위시리스트 추가 코드 끝
+ 			Ticket ticket = ticketService.selectTicketNo(tiNo);
+ 			if(ticket!=null) {
+ 				int ticketScore = ticketReviewService.calculateTourScore(tiNo);
+ 				ticket.setTiScore(ticketScore);
+ 				model.addAttribute("ticket",ticket);
+ 			}
             
            model.addAttribute("ticketList", ticketList); // 티켓
            model.addAttribute("ticketImgList", ticketImgList); // 티켓이미지
@@ -133,8 +147,7 @@ public class TicketController {
 			model.addAttribute("cityList", cityList);
          //  System.out.println(">>>>>>>>"+ticketImgList);
             // 사진을 제외한 공통된 하나의 티켓 정보
-            Ticket ticket = ticketList.get(0);
-           
+			ticket = ticketList.get(0);
             // 세션에 티켓 정보 담기
             session.setAttribute("ticketImgList", ticketImgList); // 굳이?
             session.setAttribute("ticket", ticket);

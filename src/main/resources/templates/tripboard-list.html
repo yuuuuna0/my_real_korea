@@ -303,9 +303,9 @@
 				<span>모집완료</span>
 			</div>
 		{{/ifCond}}
-		<div class="inner-box">
-			<div class="image-box">
-				<figure class="image">
+		<div class="tripboard-inner-box">
+			<div class="image-box tripboard-image-box">
+				<figure class="image tripboard-list-image">
 				{{#if tboImg}}
 					<div>
 						<a href="tripboard-detail?tBoNo={{tboNo}}">
@@ -328,10 +328,10 @@
 			</div>   
 			</div>
 			<div class="product_description">
-				<div class="trip-title">
+				<div class="trip-title tripboard-trip-title">
 					<h3><a href="tripboard-detail?tBoNo={{tboNo}}">{{tboTitle}}</a></h3>
 				</div>
-				<div class="trip-date">
+				<div class="trip-date tripboard-trip-date">
 					<h3><a>{{dateFormat2 tboStartDate}}</a><a> ~ </a><a>{{dateFormat2 tboEndDate}}</a></h3>
 				</div>
 				<div class="icons">

@@ -852,17 +852,17 @@ a.btn_3, .btn_3 {
 	background: #ffffff;
 }
 .tripboard-list-image {
-	margin:0;
+	margin-bottom:10px;
 }
 .tripboard-image-box{
 	width:256px;
 	height:256px;
 }
 
-.shop-item .product_description h3 {
+.shop-item .tripboard_product_description h3 {
     padding-top: 10px;
 }
-.product_description {
+.tripboard_product_description {
 	width:256px;
 	height:140px;
 	webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3);

@@ -169,8 +169,8 @@ $('#ticket-review-action').click(function(e){
                             function(resultJson) {
            // let tiNo = $('#hiddenTiNo').val();
             if(resultJson.code==1){
-               // window.location.href=`ticket-detail?tiNo=${tiNo}`;
-               View.render("#ticketReview-template", resultJson,'#ticketReviewDiv')
+              	window.location.href=`ticket-detail?tiNo=${tiNo}`;
+               //View.render("#ticketReview-template", resultJson,'#ticketReviewDiv')
             } else {
                 alert(resultJson.msg);
             }

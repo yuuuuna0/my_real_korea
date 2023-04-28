@@ -58,11 +58,13 @@ public class PaymentRestController {
 			if(tour!=null) {
 				tour.setToCount(tour.getToCount()-payment.getPQty());
 				tourService.updateTour(tour);
-				
-			} else if(payment.getTicket()!=null) {
+			}
+			/*
+			else if(payment.getTicket()!=null) {
 				ticket.setTiCount(ticket.getTiCount()-payment.getPQty());
 				ticketService.updateTicket(ticket);
 			}
+			*/
 			List<Payment> paymentList=paymentService.selectAllUser(loginUser.getUserId());
 			data=paymentList;
 			code=1;

@@ -94,7 +94,7 @@ $(document).on('click', '.btn-admin-remove.btn_1.outline', function(e) {
 
 
 /************************* login *************************/
-
+ 
 //토스트
 $(document).ready(function() {
   toastr.options = {
@@ -295,7 +295,7 @@ $(document).on('click','#btn-user-find-pw',function(e) {
 		    const toast = Swal.fire({
 		      position: 'top-end',
 		      icon: 'success',
-		      text: '이메일로 임시 비밀번호가 발송되었습니다. <br/>로그인 페이지로 이동합니다.',
+		      text: '이메일로 임시 비밀번호가 발송되었습니다. 로그인 페이지로 이동합니다.',
 		      showConfirmButton: false
 		    });
 		    setTimeout(() => {
@@ -600,11 +600,11 @@ $(document).on('click','#btn-user-create',function(e) {
 	    success: function (data) {
 	        if (data.status == 0) {
 //	            alert(data.message);
-//	            window.location.href = "./index";
 				Swal.fire({
 					icon: 'success',
 					text: data.message
 				})
+	            window.location.href = "./index";
 	        } else {
 //	            alert(data.message);
 				Swal.fire({

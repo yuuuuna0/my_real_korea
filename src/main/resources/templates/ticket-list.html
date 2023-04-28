@@ -106,13 +106,7 @@
 					<br>
 				<!-- END TICKET SEARCH-->
 					<div id="filters_col">
-						<a data-toggle="collapse" href="#collapseFilters" aria-expanded="false" aria-controls="collapseFilters" id="filters_col_bt"><i class="icon_set_1_icon-65"></i>Filters</a>
 						<div class="collapse show" id="collapseFilters">
-							<div class="filter_type">
-								<h6>Price</h6>
-								<input type="text" id="range" name="range" value="">
-							</div>
-							
 							<div class="filter_type" id="cityListDiv">
 								<h6>여행 도시</h6>
 								<ul>
@@ -160,9 +154,9 @@
 									<!-- sort -->
 							<div class="col-md-3 col-sm-4 col-6">
 								<div class="styled-select-filters">
-								<!--  <when test="sortOrder == 'tiNoDESC'"> ORDER BY T.TI_NO DESC </when>
-						<when test="sortOrder == 'tiPriASC'"> ORDER BY T.TI_PRICE ASC</when>
-						<when test="sortOrder == 'tiPriDESC'"> ORDER BY T.TI_PRICE DESC</when> -->
+								<!-- 	<when test="sortOrder == 'tiNoDESC'"> ORDER BY T.TI_NO DESC </when>
+										<when test="sortOrder == 'tiPriASC'"> ORDER BY T.TI_PRICE ASC</when>
+										<when test="sortOrder == 'tiPriDESC'"> ORDER BY T.TI_PRICE DESC</when> -->
 									<select name="ticket-sort" id="ticket-sort">
 										<option value="" selected>정렬</option>
 										<option value="tiNoDESC">최신순</option>
@@ -201,7 +195,34 @@
 												<i class="icon-star-empty"></i>
 												<i class="icon-star-empty"></i>
 											</div>
-
+											<div th:case="1">
+												<i class="icon-star voted"></i>
+												<i class="icon-star-empty"></i>
+												<i class="icon-star-empty"></i>
+												<i class="icon-star-empty"></i>
+												<i class="icon-star-empty"></i>
+											</div>
+											<div th:case="2">
+												<i class="icon-star voted"></i>
+												<i class="icon-star voted"></i>
+												<i class="icon-star-empty"></i>
+												<i class="icon-star-empty"></i>
+												<i class="icon-star-empty"></i>
+											</div>
+											<div th:case="3">
+												<i class="icon-star voted"></i>
+												<i class="icon-star voted"></i>
+												<i class="icon-star voted"></i>
+												<i class="icon-star-empty"></i>
+												<i class="icon-star-empty"></i>
+											</div>
+											<div th:case="4">
+												<i class="icon-star voted"></i>
+												<i class="icon-star voted"></i>
+												<i class="icon-star voted"></i>
+												<i class="icon-star voted"></i>
+												<i class="icon-star-empty"></i>
+											</div>
 											<div th:case="5">
 												<i class="icon-star voted"></i>
 												<i class="icon-star voted"></i>
@@ -209,15 +230,7 @@
 												<i class="icon-star voted"></i>
 												<i class="icon-star voted"></i>
 											</div>
-									<div th:case="*">
-										<span th:each="i:${#numbers.sequence(0,ticket.tiScore-1)}">
-											<i class="icon-star voted"></i>
-										</span>
-										<span th:each="i.${#numbers.sequence(ticket.tiScore,4)}">
-											<i class="icon-star-empty"></i>
-										</span>
 									</div>
-								</div>
 								</div>
 									<!-- end rating -->
 									<!-- 위시리스트 추가 작업 (민선) -->
@@ -364,6 +377,8 @@
 	<!-- /Sign In Popup -->
 	<!-- ticket template -->
 	<script id="ticket-search-list-template" type="text/x-handlebars-template">
+
+
 {{#each data}}
 		<div class="col-md-4 wow zoomIn" data-wow-delay="0.1s">
 			<div class="hotel_container">
@@ -393,14 +408,10 @@
 						</strong>
 					</h3>
 					</div>
-					<div class="rating">
-						<i class="icon-star voted"></i>
-						<i class="icon-star voted"></i>
-						<i class="icon-star voted"></i>
-						<i class="icon-star voted"></i>
-						<i class="icon-star-empty"></i>
+					<div class="rating" value={{tiScore}}>
+	 					{{#generateStarHtml tiScore}}
+						{{/generateStarHtml}}
 					</div>
-
 					<!-- end rating -->
 					{{#if userId}}
 					<div class="wishlist">

@@ -72,39 +72,39 @@ $(document).on('click', '#btn-user-admin', function(e) {
 $(document).on('click', '.btn-admin-remove.btn_1.outline', function() {
     var userId = $(this).data('user-id');
 	Swal.fire({
-	  text: "정말 회원을 탈퇴시키겠습니까?",
-	  icon: "warning",
-	  showCancelButton: true,
-	  confirmButtonColor: "#3085d6",
-	  cancelButtonColor: "#d33",
-	  confirmButtonText: "확인",
-	  cancelButtonText: "취소"
+		text: "정말 회원을 탈퇴시키겠습니까?",
+		icon: "warning",
+		showCancelButton: true,
+		confirmButtonColor: "#3085d6",
+		cancelButtonColor: "#d33",
+		confirmButtonText: "확인",
+		cancelButtonText: "취소"
 	}).then((result) => {
-	  if (result.isConfirmed) {
+		if (result.isConfirmed) {
 	    $.ajax({
-	      url: "./user-admin/remove",
-	      type: "POST",
-	      data: { userId: userId },
-	      success: function(response) {
+			url: "./user-admin/remove",
+			type: "POST",
+			data: { userId: userId },
+			success: function(response) {
 	        if (response.status === 1) {
-	          Swal.fire({
-				  position: 'center',
-				  icon: 'success',
-				  text: '회원 탈퇴가 완료되었습니다.',
-				  showConfirmButton: false,
-				  timer: 1000
+				Swal.fire({
+					position: 'center',
+					icon: 'success',
+					text: '회원 탈퇴가 완료되었습니다.',
+					showConfirmButton: false,
+					timer: 1000
 				})
 				setTimeout(() => {
-				Swal.close();
-	          location.reload();
-		    }, 1000);
+					Swal.close();
+					location.reload();
+		    	}, 1000);
 	        } else {
 	          Swal.fire("회원 탈퇴에 실패하였습니다.", "", "error");
 	        }
-	      },
-	      error: function(xhr) {
-	        Swal.fire("서버 오류가 발생했습니다.", "", "error");
-	      }
+			},
+			error: function(xhr) {
+	        	Swal.fire("서버 오류가 발생했습니다.", "", "error");
+	     	}
 	    });
 	  }
 });
@@ -114,15 +114,15 @@ $(document).on('click', '.btn-admin-remove.btn_1.outline', function() {
 /************************* login *************************/
  
 const Toast = Swal.mixin({
-  toast: true,
-  position: 'bottom-right',
-  iconColor: 'white',
-  customClass: {
-    popup: 'colored-toast',
-  },
-  showConfirmButton: false,
-  timer: 1500,
-  timerProgressBar: true
+	toast: true,
+	position: 'bottom-right',
+	iconColor: 'white',
+	customClass: {
+	    popup: 'colored-toast',
+	},
+		showConfirmButton: false,
+		timer: 1500,
+		timerProgressBar: true
 })
 
 
@@ -249,65 +249,65 @@ $(document).on('click','#btn-user-find-id',function(e) {
 
 //비밀번호 찾기 액션
 $(document).on('click','#btn-user-find-pw',function(e) {
-  const userId = document.p.userId.value;
-  const email = document.p.email.value;
+	const userId = document.p.userId.value;
+	const email = document.p.email.value;
 
-  if (userId === "") {
+	if (userId === "") {
 		Toast.fire({
-		  icon: 'error',
-		  title: '아이디를 입력하세요.'
+			icon: 'error',
+			title: '아이디를 입력하세요.'
 		})
-    document.p.name.focus();
+	document.p.name.focus();
     return false;
-  }
-  if (email === "") {
+	}
+	if (email === "") {
 		Toast.fire({
 		  icon: 'error',
 		  title: '이메일을 입력하세요.'
-		})
+	})
     document.p.email.focus();
     return false;
-  }
+	}
 
-  const data = {
-    userId: userId,
-    email: email,
-  };
+	const data = {
+	    userId: userId,
+	    email: email,
+	};
 
-  $.ajax({
-    type: "POST",
-    url: "./user-find-pw-action",
-    data: data,
-    dataType: "json",
-    success: function (response) {
-      if (response.status == 1) {
-		    const toast = Swal.fire({
-		      position: 'center',
-		      icon: 'success',
-		      text: '이메일로 임시 비밀번호가 발송되었습니다. 로그인 페이지로 이동합니다.',
-		      showConfirmButton: false
+	$.ajax({
+	    type: "POST",
+	    url: "./user-find-pw-action",
+	    data: data,
+	    dataType: "json",
+	    success: function (response) {
+		if (response.status == 1) {
+			const toast = Swal.fire({
+				position: 'center',
+				icon: 'success',
+				text: '이메일로 임시 비밀번호가 발송되었습니다. 로그인 페이지로 이동합니다.',
+				showConfirmButton: false
 		    });
-		    setTimeout(() => {
-		      toast.close();
-		      window.location.replace('user-login');
+			setTimeout(() => {
+				toast.close();
+				window.location.replace('user-login');
 		    }, 1000);
-      } else {
-		    Swal.fire({
+		} else {
+			Swal.fire({
 				icon: 'error',
 				text: response.message
 			})
-      }
+		}
     },
-    error: function (xhr, status, error) {
-      console.error(error);
+	error: function (xhr, status, error) {
+		console.error(error);
 		Toast.fire({
-		  icon: 'error',
-		  title: '오류가 발생했습니다.'
+			icon: 'error',
+			title: '오류가 발생했습니다.'
 		})     
-    },
-  });
-  e.preventDefault();
-  return true;
+	},
+	});
+	e.preventDefault();
+	return true;
 });
 
 //이메일 인증 액션
@@ -323,22 +323,22 @@ $(document).on('click','#btn-user-auth',function(e) {
 			      icon: 'success',
 			      text: '인증 성공! 로그인 페이지로 이동합니다.',
 			      showConfirmButton: false
-			    });
-			    setTimeout(() => {
-			      toast.close();
-			      window.location.replace(response.data);
+			});
+				setTimeout(() => {
+					toast.close();
+					window.location.replace(response.data);
 			    }, 1000);
             } else {
 			Toast.fire({
-			  icon: 'error',
-			  title: '인증 코드가 일치하지 않습니다.'
+				icon: 'error',
+				title: '인증 코드가 일치하지 않습니다.'
 			})
             }
         },
-        error: function(xhr) {
+		error: function(xhr) {
 		Toast.fire({
-		  icon: 'error',
-		  title: '서버 오류가 발생했습니다.'
+			icon: 'error',
+			title: '서버 오류가 발생했습니다.'
 		})
         }
     });
@@ -361,15 +361,15 @@ $(document).on('click','#btn-user-id-check',function(e) {
 
 	if (!idValidate.test(userId)) {
 		Toast.fire({
-		  icon: 'error',
-		  title: '사용 불가능한 아이디 형식입니다.'
+			icon: 'error',
+			title: '사용 불가능한 아이디 형식입니다.'
 		})
 		return $('#userId').val('');
 	}
 	if (userId === '') {
 		Toast.fire({
-		  icon: 'error',
-		  title: '아이디를 입력하세요.'
+			icon: 'error',
+			title: '아이디를 입력하세요.'
 		})
 		return;
 	}
@@ -395,8 +395,8 @@ $(document).on('click','#btn-user-id-check',function(e) {
 			},
 			error: function() {
 				Toast.fire({
-				  icon: 'error',
-				  title: '오류가 발생했습니다.'
+					icon: 'error',
+					title: '오류가 발생했습니다.'
 				})
     	    }
 		});

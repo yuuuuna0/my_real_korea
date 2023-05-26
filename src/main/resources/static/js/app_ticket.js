@@ -331,6 +331,3 @@ $(document).on('click', '#usePointBtn', function(e) {
 
 
 
-
-
-

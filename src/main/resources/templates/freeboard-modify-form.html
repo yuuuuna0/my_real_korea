@@ -113,13 +113,11 @@
 	<div id="position">
 		<div class="container">
 			<ul>
-				 <li><i class="icon-home" onclick="location.href='index'"></i><a href="index"></a>
-                </li>
-                <li><a href="freeboard-list">자유게시판</a>
-                </li>
-                <li><a th:href="@{freeboard-detail(fBoNo=${freeBoard.fBoNo})}">상세보기</a>
-                </li>
-                <li>수정하기</li>
+				<li><i class="icon-home" onclick="location.href='index'"></i><a href="index"></a>
+				</li>
+				<li><a href="freeboard-list">게시판</a>
+				</li>
+				<li>자유게시판</li>
 			</ul>
 		</div>
 	</div>
@@ -138,7 +136,7 @@
 							</ul>
 						</div>
 					</div>
-					<form id="freeboardWriteForm" name="freeboardWriteForm" action="#" enctype="multipart/form-data" class="was-validated" >
+					<form id="freeboardModifyForm" name="freeboardModifyForm" enctype="multipart/form-data" class="was-validated" >
 
 
 						<!--						<div th:each="city:${cityList}" th:inline="text">-->
@@ -237,14 +235,14 @@
 
 
 				<!-- End widget -->
-<br>
-					<div class="box_style_2">
-						<i class="icon_set_1_icon-57"></i>
-						<br>
-						<h6>도움이 필요하신가요?</h6>
-						<a href="tel://004542344599" class="phone">+82 423 445 99</a>
-						<small>월 ~ 금 9.00am - 7.30pm</small>
-					</div>
+				<br>
+				<div class="box_style_2">
+					<i class="icon_set_1_icon-57"></i>
+					<br>
+					<h6>도움이 필요하신가요?</h6>
+					<a href="tel://004542344599" class="phone">+82 423 445 99</a>
+					<small>월 ~ 금 9.00am - 7.30pm</small>
+				</div>
 			</aside>
 			<!-- End aside -->
 

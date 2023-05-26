@@ -53,14 +53,30 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-8">
-                    <span class="rating" id="tiScoreDiv" >
-							<input type="hidden" id="tiScore" th:value="${session.ticket.tiScore}">
+                    <div class="rating" th:switch="${ticket.tiScore}" >
+							<div th:case="0">
+								<i class="icon-star-empty"></i>							
+								<i class="icon-star-empty"></i>							
+								<i class="icon-star-empty"></i>							
+								<i class="icon-star-empty"></i>							
+								<i class="icon-star-empty"></i>							
+							</div>
+						<div th:case="5">
 							<i class="icon-star voted"></i>
 							<i class="icon-star voted"></i>
 							<i class="icon-star voted"></i>
 							<i class="icon-star voted"></i>
+							<i class="icon-star voted"></i>
+						</div>
+					<div th:case="*">
+						<span th:each="i:${#numbers.sequence(0,ticket.tiScore-1)}">
+							<i class="icon-star voted"></i>
+						</span>
+						<span th:each="i:${#numbers.sequence(ticket.tiScore,4)}">
 							<i class="icon-star-empty"></i>
 						</span>
+					</div>
+					</div>
                         <h1 th:text="${session.ticket.tiTitle}"></h1>
                         <span th:text="${session.ticket.city.cityName}"></span>
                     </div>
@@ -181,26 +197,27 @@
 						
 					</div> -->
 					<!-- End row  -->
-					<hr>
 					<!-- 리뷰 화면 -->
+					<br><br>
 					<div class="row" id="ticketReviewDiv">
-						<div class="col-lg-12">
-							<h3>Reviews</h3>
+						<div class="col-lg-3">
+							<h3>티켓 리뷰</h3>
 							<div th:if="${session.loginUser!=null}">
 								<a href="#" class="btn_1 add_bottom_30" id="myReviewBtn" data-toggle="modal" data-target="#myReview" 
-								th:data-id="${session.loginUser.userId}" th:data-tino="${session.ticket.tiNo}">Leave a review</a>
+								th:data-id="${session.loginUser.userId}" th:data-tino="${session.ticket.tiNo}">리뷰 남기기</a>
 							</div>
 							<div th:if="${session.loginUser==null}">
-								<a href="#" class="btn_1 add_bottom_30" onclick="location.href='./user-login'">Leave a review</a>
+								<a href="#" class="btn_1 add_bottom_30" onclick="location.href='./user-login'">리뷰 남기기</a>
 							</div>
-						<div class="col-lg-12">
+						</div>
+						<div class="col-lg-9">
 							<div id="score_detail"><span th:text="${ticketReviewList.size()}"></span>명이 구매했습니다.
 								
 							</div>
 							<!-- End general_rating -->
-							<div class="row" id="rating_summary">
+							<div id="rating_summary">
 								<div class="col-md-12">
-									<div class="rating" th:switch=${session.ticket.tiScore}>
+									<div class="rating" th:switch=${ticket.tiScore}>
 										<div th:case="0">
 											<i class="icon-star-empty"></i>							
 											<i class="icon-star-empty"></i>							
@@ -216,10 +233,10 @@
 												<i class="icon-star voted"></i>
 										</div>
 										<div th:case="*">
-											<span th:each="i:${#numbers.sequence(0,session.ticket.tiScore-1)}">
+											<span th:each="i:${#numbers.sequence(0,ticket.tiScore-1)}">
 													<i class="icon-star voted"></i>
 											</span>
-											<span th:each="i:${#numbers.sequence(session.ticket.tiScore,4)}">
+											<span th:each="i:${#numbers.sequence(ticket.tiScore,4)}">
 													<i class="icon-star-empty"></i>
 											</span>
 										</div>
@@ -232,7 +249,7 @@
 							<hr>
 							<div class="review_strip_single"  th:each="ticketReview:${ticketReviewList}">
 							<form th:name="f+${ticketReview.tiReviewNo}" id=ticketReviewForm>
-								<img src="img/avatar1.jpg" alt="Image" class="rounded-circle">
+								<img src="upload-dir/defaultImg.png" alt="Image" class="rounded-circle" width="80px" height="80px">
 								<div th:if="${session.loginUser!=null && session.loginUser.userId == ticketReview.user.userId}" style="float: right;"> 
 								 <!-- <button th:value="${ticketReview.tiReviewNo}" id="modifyTiReviewBtn" name="modifyTiReviewNo">수정</button>  -->
 								 <button type="button" th:value="${ticketReview.tiReviewNo}" th:tiReviewNo="${ticketReview.tiReviewNo}" class="modifyTiReviewBtn btn btn-primary btn-sm" >수정</button>
@@ -245,7 +262,7 @@
 								<!-- 타이틀 추가 -->
 								<h5 th:text="${ticketReview.tiReviewTitle}" name="tiReviewTitle"></h5>
 								<div th:if="${ticketReview.tiReviewImg}">
-  								  <img th:src="${ticketReview.tiReviewImg}" width="20%" height="30%" style="position: sticky;">
+  								  <img th:src="${ticketReview.tiReviewImg}" width="30%" height="40%" style="position: sticky;">
 								</div>
 								<br>
 								<p th:text="${ticketReview.tiReviewContent}" th:name="tiReviewContent">
@@ -264,7 +281,6 @@
 							<!-- End review strip -->
 						</div>
 					</div>
-				</div>
 			</div>
 				<!--End  single_tour_desc-->
 				</div>
@@ -279,7 +295,7 @@
 					<div class="box_style_1 expose">
 						<h3 class="inner">예약하기</h3>
 						<div class="row">
-							<div class="col-md-6">
+							<div class="col-md-12">
 								<div class="form-group">
 									<label><i class="icon-calendar-7"></i> 예약 날짜</label>
 									<input class="form-control" data-date-format="yyyy-MM-dd" type="date" id="pStartDate" name="pStartDate" required>
@@ -287,7 +303,7 @@
 							</div>
 						</div>
 						<div class="row">
-							<div class="col-6">
+							<div class="col-12">
 								<div class="form-group">
 									<label>수량</label>
 									<div class="numbers-row">
@@ -469,12 +485,12 @@
 								<div class="form-group">
 									<label>평점</label>
 									<select class="form-control" name="tiReviewStar" id="tiReviewStar">
-										<option value="0">Please review</option>
-										<option value="1">Low</option>
-										<option value="2">Sufficient</option>
-										<option value="3">Good</option>
-										<option value="4">Excellent</option>
-										<option value="5">Super</option>
+										<option value="0">평점을 남겨주세요</option>
+										<option value="1">1점</option>
+										<option value="2">2점</option>
+										<option value="3">3점</option>
+										<option value="4">4점</option>
+										<option value="5">5점</option>
 									</select>
 								</div>
 							</div>
@@ -633,11 +649,11 @@
 									<label>평점</label>
 									<select class="form-control" name="tiReviewStar" id="tiReviewStar">
 										<option value="0">평점을 남겨주세요</option>
-										<option value="1">Low</option>
-										<option value="2">Sufficient</option>
-										<option value="3">Good</option>
-										<option value="4">Excellent</option>
-										<option value="5">Super</option>
+										<option value="1">1점</option>
+										<option value="2">2점</option>
+										<option value="3">3점</option>
+										<option value="4">4점</option>
+										<option value="5">5점</option>
 									</select>
 								</div>
 							</div>

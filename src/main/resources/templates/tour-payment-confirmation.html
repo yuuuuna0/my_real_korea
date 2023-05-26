@@ -129,6 +129,7 @@
 										10 April 2015
 									</td>
 								</tr>
+								<!-- 
 								<tr>
 									<td><strong>여행 종료일</strong>
 									</td>
@@ -137,12 +138,27 @@
 										<br>
 									</td>
 								</tr>
+								-->
+								<tr>
+									<td><strong>예약자명</strong>
+									</td>
+									<td th:text="${rsPInfo.rsPName}">2</td>
+								</tr>
+								<tr>
+									<td><strong>연락처</strong>
+									</td>
+									<td th:text="${rsPInfo.rsPPhone}">2</td>
+								</tr>
+								<tr>
+									<td><strong>이메일</strong>
+									</td>
+									<td th:text="${rsPInfo.rsPEmail}">2</td>
+								</tr>
 								<tr>
 									<td><strong>예약 인원 수</strong>
 									</td>
 									<td th:text="${payment.pQty}">2</td>
 								</tr>
-								
 								<tr>
 									<td>
 										<strong>결제방법</strong>

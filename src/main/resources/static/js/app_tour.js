@@ -211,7 +211,7 @@ $(document).on('click',"button[name='updateToReview']",function(e){
 	$('#toReviewStarM').val(toReviewStar);
 	$('#toReviewContentM').text(toReviewContent);
 	$('#toReviewNoM').val(e.target.value);
-	
+	$('#toReviewUploadM').val("");
 	e.preventDefault();
 });
 

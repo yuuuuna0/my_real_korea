@@ -161,7 +161,7 @@
 							<div class="col-sm-8">
 								<div class="form-group">
 									<label> 성함 </label>
-									<input type="text" class="form-control" name="rsPName" placeholder="이름을 입력해주세요" required>
+									<input type="text" th:value="${session.loginUser.name}" class="form-control" name="rsPName" placeholder="이름을 입력해주세요" required>
 								</div>
 							</div>
 						</div>
@@ -169,13 +169,13 @@
 							<div class="col-sm-6">
 								<div class="form-group">
 									<label> 이메일 </label>
-									<input type="email" id="email_booking" name="rsPEmail" class="form-control" placeholder="이메일을 입력해주세요" required>
+									<input type="email" th:value="${session.loginUser.email}" id="email_booking" name="rsPEmail" class="form-control" placeholder="이메일을 입력해주세요" required>
 								</div>
 							</div>
 							<div class="col-sm-6">
 								<div class="form-group">
 									<label> 이메일 확인 </label>
-									<input type="email" id="email_booking_2" name="email_booking_2" class="form-control"placeholder="이메일을 입력해주세요" required>
+									<input type="email" th:value="${session.loginUser.email}" id="email_booking_2" name="email_booking_2" class="form-control"placeholder="이메일을 입력해주세요" required>
 								</div>
 							</div>
 						</div>
@@ -183,7 +183,7 @@
 							<div class="col-sm-6">
 								<div class="form-group">
 									<label> 전화번호 </label>
-									<input type="text" id="telephone_booking" name="rsPPhone" class="form-control" placeholder="전화번호를 입력해주세요" required>
+									<input type="text" th:value="${session.loginUser.phone}" id="telephone_booking" name="rsPPhone" class="form-control" placeholder="전화번호를 입력해주세요" required>
 								</div>
 							</div>
 						</div>
@@ -234,6 +234,9 @@
 							<label>
 								<input type="checkbox" name="policy_terms" id="policy_terms" required>아래의 취소 및 환불 규정을 확인 후 동의하였습니다.
 							</label>
+							<div>
+							<img src="img/tour/policy.png" style="width:100%;height:100%;">
+							</div>
 						</div>
 					</div>
 					</div>
@@ -248,10 +251,12 @@
 									<td>여행 시작일</td>
 									<td class="text-right" th:text="${#dates.format(session.payment.pStartDate,'yyyy-MM-dd')}"></td>
 								</tr>
+								<!-- 
 								<tr>
 									<td>여행 종료</td> 
 									<td class="text-right" text="출력안되어서 개짱남">출력안되어서 개짱남</td>
 								</tr>
+								-->
 								<tr>
 									<td>여행일수</td>
 									<td class="text-right" th:text="${session.payment.tour.toTime}">1 double room</td>
@@ -344,12 +349,10 @@
 	<script type="text/javascript">
 		function tourPaymentAction(e){
 			let form=$('#f');
-			let totPrice=100;
-			let totPrice=document.getElementById('tableSummaryH').getElementsByTagName("td")[17];
-			let totPrice2 = document.getElementById("totPrice2");
+			let totPrice=1137000;
+			//let totPrice=document.getElementById('tableSummaryH').getElementsByTagName("td")[17];
+			//let totPrice2 = document.getElementById("totPrice2");
 
-			alert(totPrice);
-			alert(typeof totPrice);
 			let pMethod=$('#pMethod option:selected').val();
 			if(form.get(0).checkValidity()===false){
 				form.find(':invalid').first().focus();
@@ -357,7 +360,6 @@
 				e.stopPropagation();
 			}else{
 				if(pMethod==1){
-					alert(pMethod);
 					document.f.action='tour-payment-action';
 					document.f.submit();
 				}else if(pMethod==2){

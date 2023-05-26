@@ -285,8 +285,8 @@
 									</div>
 								<div class="col-md-12 text-center">
 									<th:block th:if="${loginUser!=null && loginUser.userId == tourReview.users.userId}">
-									<button class="btn_1" style="width:30%; font-size:13px; padding:5px;" th:value="${tourReview.toReviewNo}" name="updateToReview">수정</button>
-									<button class="btn_1" style="width:30%; font-size:13px; padding:5px;" th:value="${tourReview.toReviewNo}" name="deleteToReview">삭제</button>
+									<button class="btn_1" style="width:40%; font-size:13px; padding:5px;" th:value="${tourReview.toReviewNo}" name="updateToReview">수정</button>
+									<button class="btn_1" style="width:40%; font-size:13px; padding:5px;" th:value="${tourReview.toReviewNo}" name="deleteToReview">삭제</button>
 									</th:block>
 								</div>
 								</div>
@@ -499,11 +499,11 @@
 						<!-- End row -->
 						<div class="form-group">
 							<textarea name="toReviewContent" id="toReviewContentM" class="form-control" style="height:100px" 
-							placeholder="10자 이상 50자 이내의 내용을 적어주세요" required ></textarea>
+							placeholder="10자 이상 50자 이내의 내용을 적어주세요" minlength="10" maxlength="50" required ></textarea>
 						</div>
 						<!--minlength="10" maxlength="50"-->
 						<!--리뷰 버튼-->
-						<button type="button" class="btn_1" id="submitReviewBtn" >submit</button>
+						<button type="button" class="btn_1" id="submitReviewBtn" >남기기</button>
 					</form>
 				</div>
 			</div>
@@ -561,7 +561,7 @@
 					<p id="toReviewContent">
 						{{toReviewContent}}
 					</p>
-					<div class="rating" id="toReviewStar" value="{{toReviewStar}}">
+					<div class="rating" value="{{toReviewStar}}">
 						<input type="hidden" id="toReviewStar" value="{{toReviewStar}}">
 	 					{{#generateStarHtml toReviewStar}}
 						{{/generateStarHtml}}
@@ -579,8 +579,8 @@
 					<div class="col-md-12 text-center">
 					{{#if @root.loginUser}}
 						{{#ifCond @root.loginUser.userId '==' users.userId}}
-							<button class="btn_1" style="width:30%; font-size:13px; padding:5px;" value="{{toReviewNo}}" name="updateToReview">수정</button>
-							<button class="btn_1" style="width:30%; font-size:13px; padding:5px;" value="{{toReviewNo}}" name="deleteToReview">삭제</button>	
+							<button class="btn_1" style="width:40%; font-size:13px; padding:5px;" value="{{toReviewNo}}" name="updateToReview">수정</button>
+							<button class="btn_1" style="width:40%; font-size:13px; padding:5px;" value="{{toReviewNo}}" name="deleteToReview">삭제</button>	
 						{{/ifCond}}
 					{{/if}}
 					</div>

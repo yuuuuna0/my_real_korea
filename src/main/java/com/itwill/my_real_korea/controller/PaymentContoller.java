@@ -32,7 +32,7 @@ public class PaymentContoller {
 		try {
 			Payment payment=paymentService.selectPaymentNo(pNo);
 			RsPInfo rsPInfo=rsPInfoService.selectRsPersonByPNo(pNo);
-			model.addAttribute("RsPInfo",rsPInfo);
+			model.addAttribute("rsPInfo",rsPInfo);
 			model.addAttribute("payment",payment);
 			if(payment.getTour()!=null) {
 				//투어예약 상세보기

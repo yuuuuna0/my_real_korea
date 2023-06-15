@@ -30,11 +30,11 @@ public class CommonController {
 		
 		return "index";
 	}
-	
+/*
 	// 에러 페이지 
 	@GetMapping("/error")
 	public String error() {
 		return "error";
 	}
-
+*/
 }

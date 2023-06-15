@@ -15,3 +15,6 @@ logging:
       resultset: off
       connection: off
       
+server:
+   port: 8080
+   servlet:    context-path: /my_real_korea   
